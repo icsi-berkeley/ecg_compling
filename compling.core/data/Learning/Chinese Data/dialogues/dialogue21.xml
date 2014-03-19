@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHAT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talkbank.org/ns/talkbank" xsi:schemaLocation="http://www.talkbank.org/ns/talkbank talkbank.xsd" Version="1.1.3" Lang="zh" Corpus="beijing" Id="hy2" Date="1984-01-01">
+	
+	<Participants><participant id="CHI" name="HaoYu" role="Target_Child" language="zh" />
+		<participant id="MOT" role="Mother" language="zh" />
+		<participant id="INV" name="XiaLing" role="Investigator" language="zh" />
+		<participant id="FAT" role="Father" language="zh" />
+		<participant id="OFF" role="Father" language="zh" />
+		<participant id="OMM" role="Mother" language="zh" />
+		<participant id="JJJ" role="Unidentified" language="zh" />
+		<participant id="CH2" role="Child" language="zh" />
+	</Participants>
+	
+	<Setting>
+		<entity cat="Child" id="QianQian"/>
+		<entity cat="Diningroom" id="diningroom"/>
+		<entity cat="Soup" id="soup"/>
+		<entity cat="Rice" id="rice"/>
+	</Setting>
+	
+	<Setup>
+		<binding field="location" source_ref="MOT" ref="diningtable(diningroom)"/>
+		<binding field="location" source_ref="INV" ref="diningtable(diningroom)"/>
+		<binding field="location" source_ref="FAT" ref="diningtable(diningroom)"/>
+		<binding field="location" source_ref="CHI" ref="sidetable(diningroom)"/>
+	</Setup>
+
+	
+	<u who="MOT" id="664">
+		<clause>
+			<wn><w>hao2</w><wk type="cmp" /><w>yu3</w></wn><w>lai2</w><t type="p" />
+			<a type="speech act">
+				<sa cat="calling" id="u664sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">豪宇來</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="2" right="3" cat="Come" id="u664te1">
+						<binding field="comer" ref="CHI"/>
+					</temporal_element>
+					<temporal_structure left="0" right="3" cat="Self_Motion" profiled="u664te1">
+						<binding field="mover" ref="CHI"/>
+					</temporal_structure>				
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<event cat="Go" id="go01">
+		<binding field="goer" ref="CHI"/>
+		<binding field="goal" ref="MOT"/>
+	</event>
+	
+	<event cat="Eat" id="eat01">
+		<binding field="eater" ref="CHI"/>
+		<binding field="food" ref="rice"/>
+	</event>
+	
+	<u who="MOT" id="666">
+		<clause>
+			<w>hai2</w><w>chi1</w><w>ma</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-answer" id="u666sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular">還吃嗎</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="1" right="2" cat="Eat" id="u666te1">
+						<binding field="eater" ref="CHI"/>
+						<binding field="food" ref="rice"/>
+					</temporal_element>
+					<temporal_structure left="0" right="2" cat="Transitive_Action" profiled="u666te1">
+						<binding field="agent" ref="CHI"/>
+						<binding field="patient" ref="rice"/>
+						<binding field="modifier" subcat="Occurrence" left="0" right="1" modified="u666te1"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<event cat="Eat" id="eat02">
+		<binding field="eater" ref="CHI"/>
+		<binding field="food" ref="rice"/>
+	</event>
+	
+	<u who="MOT" id="667">
+		<clause>
+			<w>kuai4</w><w>chi1</w><pause fluency="fluent" symbolic-length="simple" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u667sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">快吃 </a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="1" right="2" cat="Eat" id="u666te1">
+						<binding field="eater" ref="CHI"/>
+						<binding field="food" ref="rice"/>
+					</temporal_element>
+					<temporal_structure left="1" right="2" cat="Transitive_Action" profiled="u667te1">
+						<binding field="agent" ref="CHI"/>
+						<binding field="patient" ref="rice"/>
+						<binding field="modifier" subcat="Manner" left="0" right="1" modified="u667te1"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+		<clause>
+			<w>chi1</w><w>wan2</w><wn><w>zan2</w><wk type="cmp" /><w>men</w></wn><w>zhao3</w><wn><w>qian4</w><wk type="cmp" /><w>qian4</w></wn><w>wanr2</w><w>qu4</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u667sa2">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">吃完咱們找倩倩玩去</a>
+			<a type="gold standard">
+				<semantic>
+					<!-- ISSUE: don't know how to do multiple agents.  -->
+					<!-- ISSUE: serial process is somewhat unsatisfactory in capturing the relation between finding and playing  -->
+					
+					<temporal_element left="0" right="1" cat="Eat" id="u667te2">
+						<binding field="eater" ref="CHI"/>
+						<binding field="food" ref="rice"/>
+					</temporal_element>
+					<temporal_structure left="0" right="2" cat="Transitive_Action" profiled="u667te2" id="u667ts2">
+						<binding field="agent" ref="CHI"/>
+						<binding field="patient" ref="rice"/>
+						<binding field="resultative" left="1" right="2" modified="u667te2"/>
+					</temporal_structure>
+					
+					<temporal_element left="4" right="5" cat="Find" id="u667te3">
+						<binding field="finder" left="2" right="4" ref="MOTandCHI"/>
+						<binding field="target" left="5" right="7" ref="QianQian"/>
+					</temporal_element>
+
+					<temporal_structure left="2" right="7" cat="Transitive_Action" profiled="u667te3" id="u667ts3">
+						<binding field="agent" left="2" right="4" ref="MOTandCHI"/>
+						<binding field="patient" left="5" right="7" ref="QianQian"/>
+					</temporal_structure>
+					
+					<temporal_element left="7" right="8" cat="Play" id="u667te4">
+						<binding field="player" left="2" right="4" ref="MOTandCHI"/>
+						<binding field="player" left="5" right="7" ref="QianQian"/>
+					</temporal_element>
+					<temporal_structure left="7" right="8" cat="Intransitive_Action" profiled="u667te4" id="u667ts4">
+						<binding field="agent" left="2" right="4" ref="MOTandCHI"/>
+						<binding field="agent" left="5" right="7" ref="QianQian"/>						
+					</temporal_structure>
+					
+					<image_schema cat="SPG" id="u667img1">
+						<binding field="trajector" left="2" right="4" ref="MOTandCHI"/>
+						<binding field="deixis" left="8" right="9" value="Away"/>
+					</image_schema>
+					<temporal_structure left="2" right="9" cat="Serial_Processes" id="u667ts5" >
+						<binding field="agent" left="2" right="4" ref="MOTandCHI"/>
+						<binding field="process1" left="1" right="3" ref="u667ts3"/>
+						<binding field="process2" left="3" right="4" ref="u667ts4"/>
+						<binding field="spg" left="8" right="9" ref="u667img1"/>
+					</temporal_structure>
+					
+					<temporal_ordering>
+						<binding field="earlier_process" left="0" right="2" ref="u667ts2"/>
+						<binding field="later_process" left="2" right="9" ref="u667ts5"/>
+					</temporal_ordering>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="668">
+		<clause>
+			<w>xiang3</w><w>bu4</w><w>xiang3</w><wn><w>qian4</w><wk type="cmp" /><w>qian4</w></wn><w>le</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-answer" id="u668sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">想不想倩倩了</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="2" right="3" cat="Miss" id="u668te1">
+						<binding field="experiencer" ref="CHI"/>
+						<binding field="percept" left="3" right="5" ref="QianQian"/>				
+					</temporal_element>
+					<temporal_structure left="0" right="5" cat="Two_Participant_State" profiled="u668te1">
+						<binding field="experiencer" ref="CHI"/>
+						<binding field="percept" left="3" right="5" ref="QianQian"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<event cat="Grasp" id="grasp03">
+		<binding field="grasper" ref="MOT"/>
+		<binding field="grasped" ref="rice"/>
+	</event>
+	
+	<event cat="Offer" id="offer04">
+		<binding field="offerer" ref="MOT"/>
+		<binding field="offeree" ref="CHI"/>
+		<binding field="offered" ref="rice"/>
+	</event>
+	
+	<u who="MOT" id="675">
+		<clause>
+			<w>zhei4</w><w>dou1</w><w>shi4</w><w>shei2</w><w>de</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-answer" id="u675sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">這都是誰的</a>
+			<a type="gold standard">
+				<!-- ISSUE: associative / posession -->
+				<semantic>
+					<temporal_element left="2" right="3" cat="Copula" id="u675te1">
+						<binding field="protagonist" left="0" right="1" ref="rice"/>
+						<binding field="equal" left="3" right="5" ref="rice"/>
+					</temporal_element>
+					<temporal_structure left="0" right="5" cat="Copula" profiled="u675te1">
+						<binding field="protagonist" left="0" right="1" ref="rice"/>
+						<binding field="equal" left="3" right="5" ref="rice"/>
+						<binding field="modifier" subcat="Inclusion" left="1" right="2" modified="u675te1"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="676">
+		<clause>
+			<w>dou1</w><w>shi4</w><wn><w>hao2</w><wk type="cmp" /><w>yu3</w></wn><w>de</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u676sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">都是豪宇的</a>
+			<a type="gold standard">
+				<!-- ISSUE: associative / posession -->
+				<semantic>
+					<temporal_element left="1" right="2" cat="Copula" id="u676te1">
+						<binding field="protagonist" ref="rice"/>
+						<binding field="equal" left="2" right="5" ref="rice"/>
+					</temporal_element>
+					<temporal_structure left="1" right="5" cat="Copula" profiled="u676te1" id="u676ts1">
+						<binding field="protagonist" ref="rice"/>
+						<binding field="equal" left="2" right="5" ref="rice"/>
+						<binding field="modifier" subcat="Inclusion" left="0" right="1" modified="u676te1"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="677">
+		<clause>
+			<w>shi4</w><w>bu2</w><w>shi4</w><w>a</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-answer" id="u677sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular">是不是啊</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="2" right="3" cat="Copula" id="u677te1">
+						<binding field="protagonist" ref="u676ts1"/>
+					</temporal_element>
+					<temporal_structure left="0" right="3" cat="Copula" profiled="u677te1">
+						<binding field="protagonist" ref="u676ts1"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	
+	
+</CHAT>

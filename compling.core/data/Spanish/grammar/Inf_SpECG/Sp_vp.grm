@@ -1,0 +1,38 @@
+
+
+general construction VP
+ subcase of HasVerbFeatures
+  meaning: Process 
+    evokes EventDescriptor as ed
+    constraints
+      self.m <--> ed.eventType
+
+
+general construction ArgumentStructure
+  subcase of VP
+  constructional
+    constituents
+      v : Verb 
+    constraints
+      self.features <--> v.features
+   meaning
+     constraints
+       v.m  <--> ed.profiledProcess 
+
+
+//construction ToPlusVP
+//  subcase of VP
+//  constructional  
+//    constituents
+//      to:TO-Infinitive-Marker
+//      vp:VP
+//    constraints
+//      vp.features.verbform <-- Base
+//  form
+//    constraints
+//      to.f meets vp.f
+//  meaning
+//    constraints
+//      self.m <--> vp.m
+      //what other semantic stuff goes here?
+

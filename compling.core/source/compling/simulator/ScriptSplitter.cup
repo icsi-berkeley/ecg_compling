@@ -1,0 +1,32 @@
+package compling.simulator;
+
+parser code {:
+	protected Simulator s;
+
+	public void setSimulator (Simulator simulator) {
+		s = simulator;
+	}
+
+	public void report_error(String message, Object info){
+		super.report_error("Error at line number "+((ScriptSplitterLexer) getScanner()).getLineNumber() + ":\n"+ message, null);
+	}	
+
+:}
+
+/* Terminals (tokens returned by the scanner). */
+terminal SCRIPT;
+terminal String IDENTIFIER, CONTENT;
+
+
+/* Non terminals */
+non terminal script, file;
+
+file ::= file script | script;
+
+script ::= SCRIPT IDENTIFIER:scriptname CONTENT:content
+	{: 
+		//System.out.println(scriptname + ":\n" + content);
+		parser.s.addScript(scriptname, content);
+	:}
+;
+	

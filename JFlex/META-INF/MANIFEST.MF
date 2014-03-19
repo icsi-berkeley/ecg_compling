@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: JFlex Plug-In
+Bundle-SymbolicName: JFlex
+Bundle-Version: 1.4.1.qualifier
+Bundle-Vendor: ICSI Berkeley
+Export-Package: JFlex,
+ JFlex.anttask,
+ JFlex.gui,
+ JFlex.tests
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: java_cup;bundle-version="1.0.0"
+Bundle-ClassPath: .

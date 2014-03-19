@@ -1,0 +1,58 @@
+
+### Cached Sentence ###
+
+na2 wanr3 he1 ba
+na4 ni3 jiu4 yong4 ping2+zi he1 ba
+yong4 ping2+zi he1 ya
+yong4 ping2+zi he1 ya
+zhei4 hai2 he1 ma
+hai2 he1 bu4 he1 le
+
+### Generalizations Made ###
+
+genCxn014:	genCxn011 ni3_chi1-Cxn013 
+genCxn030:	jiao2-Cxn027 chi1_fan4-Cxn008 
+genCxn153:	genCxn011 ni3_chi1-Cxn013 genCxn014 
+genCxn164:	he1-Cxn163 genCxn158 
+genCxn173:	genCxn169 genCxn139 
+genCxn182:	genCxn125 genCxn149 
+genCxn198:	wan2-Cxn197 genCxn145 
+genCxn211:	genCxn162 na2_wanr3-Cxn209 
+
+
+### Revision Watchlist ###
+
+chi1_fan4-Cxn070: xi1xi1-Cmp_chi1-Cxn001
+genCxn014: chi1_fan4-Cxn062 chi1_fan4-Cxn131
+chi1_fan4-Cxn119: genCxn089 genCxn094
+chi1_fan4-Cxn062: genCxn055 xi1xi1-Cmp_chi1-Cxn001 genCxn014 fan4_chi1-Cxn016 wo3_chi1-Cxn002
+chi1_fan4-Cxn131: genCxn076 genCxn014 genCxn089
+ni3_chi1-Cxn013: chi1_fan4-Cxn008
+genCxn007: chi1_fan4-Cxn008
+genCxn055: chi1_fan4-Cxn062
+fan4_chi1-Cxn190: chi1_fan4-Cxn189
+xi1xi1-Cmp_chi1-Cxn001: chi1_fan4-Cxn070 chi1_fan4-Cxn062
+hao2yu3-Cmp_chi1-Cxn009: chi1_fan4-Cxn008
+genCxn076: chi1_fan4-Cxn131
+genCxn153: chi1_fan4-Cxn189
+genCxn089: chi1_fan4-Cxn119 chi1_fan4-Cxn131
+fan4_chi1-Cxn016: chi1_fan4-Cxn062 chi1_fan4-Cxn008
+genCxn094: chi1_fan4-Cxn119
+wo3_chi1-Cxn002: chi1_fan4-Cxn062
+chi1_fan4-Cxn008: hao2yu3-Cmp_chi1-Cxn009 fan4_chi1-Cxn016 ni3_chi1-Cxn013 genCxn007
+chi1_fan4-Cxn189: fan4_chi1-Cxn190 genCxn153
+
+### Omission Watchlist ###
+
+chi1-Cxn068: hao2yu3-Cmp_chi1-Cxn009
+chi1-Cxn033: fan4_chi1-Cxn016
+ge1-Cxn084: zui3_ge1-Cxn031
+chi1-Cxn022: xi1xi1-Cmp_chi1-Cxn001 hao2yu3-Cmp_chi1-Cxn009 genCxn014 ni3_chi1-Cxn005 fan4_chi1-Cxn016 wo3_chi1-Cxn002 chi1_fan4-Cxn008
+chi1-Cxn060: genCxn055 xi1xi1-Cmp_chi1-Cxn001 hao2yu3-Cmp_chi1-Cxn009 genCxn014 fan4_chi1-Cxn016 wo3_chi1-Cxn002
+chi1-Cxn036: hao2yu3-Cmp_chi1-Cxn009 genCxn014
+chi1-Cxn025: xi1xi1-Cmp_chi1-Cxn001 hao2yu3-Cmp_chi1-Cxn009 genCxn014 ni3_chi1-Cxn005 fan4_chi1-Cxn016 wo3_chi1-Cxn002 chi1_fan4-Cxn008
+he1-Cxn052: zhei4_he1-Cxn039
+chi1-Cxn057: genCxn014
+
+### Chainable Watchlist ###
+

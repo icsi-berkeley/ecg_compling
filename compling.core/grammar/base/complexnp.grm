@@ -1,0 +1,54 @@
+//
+// complexnp.grm
+//
+
+schema ComplexRD
+   subcase of RD
+
+schema ConjRD
+   subcase of ComplexRD
+   roles
+   		connective   // and or etc.
+      	rd1: RD
+     	rd2: RD
+
+
+// TODO: Promte features on ComplexNP	
+general construction ComplexNP
+   subcase of NP
+
+construction ConjNP
+	subcase of ComplexNP
+	constructional
+	    constituents   
+		 	connective: LogicalConjunction   // and or etc.
+	        first: NP
+		    second: NP
+   	form
+		constraints		
+	      	first.f meets connective.f
+	      	connective.f meets second.f
+	meaning: ConjRD
+		constraints		
+			first.m <-> m.rd1
+        	second.m <-> m.rd2
+       		connective.m <-> m.connective
+
+
+construction DisjNP
+	subcase of ComplexNP
+	constructional
+	    constituents   
+		 	connective: Or // and or etc.
+	        first: NP
+		    second: NP
+   	form
+		constraints		
+	      	first.f meets connective.f
+	      	connective.f meets second.f
+	meaning: ConjRD
+		constraints		
+			first.m <-> m.rd1
+        	second.m <-> m.rd2
+       		connective.m <-> m.connective
+

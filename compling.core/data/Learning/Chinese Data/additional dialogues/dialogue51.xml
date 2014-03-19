@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHAT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.talkbank.org/ns/talkbank talkbank.xsd" xmlns="http://www.talkbank.org/ns/talkbank" Version="1.1.3" Lang="zh" Corpus="beijing" Id="lxb2" Date="1984-01-01">
+	
+	<Participants>
+		<participant id="CHI" name="BingBing" role="Target_Child" language="zh" />
+		<participant id="MOT" role="Mother" language="zh" />
+		<participant id="INV" role="Investigator" language="zh" />
+	</Participants>
+	
+	<!-- Child and mother are dancing -->
+	
+	<Setting>
+		<entity cat="Livingroom" id="livingroom"/>
+	</Setting>
+	
+	<Setup>
+		<binding field="location" source_ref="CHI" ref="livingroom"/>
+		<binding field="location" source_ref="MOT" ref="livingroom"/>
+	</Setup>
+	
+	<event cat="Dance" id="dance01">
+		<binding field="dancer" ref="CHI"/>
+	</event>
+	
+	<event cat="Dance" id="dance02">
+		<binding field="dancer" ref="MOT"/>
+	</event>
+	
+	<u who="MOT" id="574">
+		<clause>
+			<g><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>tiao4</w><w>ba</w><overlap type="overlap precedes" /></g><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u574sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+		
+	</u>
+	
+	<u who="CHI" id="576">
+		<clause>
+			<g><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>tiao4</w><w>bu4</w><overlap type="overlap precedes" /></g><t type="p" />
+			<a type="speech act">
+				<sa cat="answering" id="u576sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+		
+	</u>
+	
+	<u who="CHI" id="580">
+		<clause>
+			<g><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>tiao4</w><w>ba</w><overlap type="overlap precedes" /></g><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u580sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+		
+	</u>
+	
+	<u who="CHI" id="585">
+		<clause>
+			<g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a>
+			<a type="speech act">
+				<sa cat="" id="u585sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+		
+	</u>
+	
+	<u who="MOT" id="586">
+		<clause>
+			<g><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>tiao4</w><w>ba</w><overlap type="overlap precedes" /></g><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u586sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+		
+	</u>
+	
+</CHAT>

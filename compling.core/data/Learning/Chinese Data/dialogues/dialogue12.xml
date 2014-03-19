@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHAT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talkbank.org/ns/talkbank" xsi:schemaLocation="http://www.talkbank.org/ns/talkbank talkbank.xsd" Version="1.1.3" Lang="zh" Corpus="beijing" Id="cx2" Date="1984-01-01">
+	
+	<Participants>
+		<participant id="MOT" role="Mother" language="zh" />
+		<participant id="CHI" role="Target_Child" language="zh" />
+		<participant id="INV" role="Investigator" language="zh" />
+		<participant id="UNC" name="Unclear" role="Unidentified" language="zh" />
+	</Participants>
+	
+	<Setting>
+		<entity cat="Livingroom" id="livingroom"/>
+		<entity cat="Pear" id="pear1"/>
+		<entity cat="Pear" id="pear2"/>
+		<entity cat="Pear" id="pears"/>
+		<entity cat="Multitude" id="pearGroup"/>
+		<binding source_ref="pear1" field="size" value="Size_Big"/>
+		<binding source_ref="pear2" field="size" value="Size_Small"/>
+		<binding source_ref="pearGroup" field="member" ref="pear1"/>
+		<binding source_ref="pearGroup" field="member" ref="pear2"/>
+		<binding source_ref="pears" field="set_size" ref="pearGroup"/>
+	</Setting>
+	
+	<Setup>
+		<binding source_ref="MOT" field="location" ref="sofa(livingroom)"/>
+		<binding source_ref="INV" field="location" ref="sofa(livingroom)"/>
+		<binding source_ref="CHI" field="location" ref="coffeetable(livingroom)"/>
+		
+		<binding source_ref="pear1" field="location" ref="coffeetable(livingroom)"/>
+		<binding source_ref="pear2" field="location" ref="coffeetable(livingroom)"/>
+	</Setup>
+	
+	<event cat="Carry" id="carry01">
+		<binding field="carrier" ref="CHI"/>
+		<binding field="carried" ref="pears"/>
+		<binding field="goal" ref="sofa(livingroom)"/>
+	</event>
+	
+	<u who="MOT" id="521">
+		<clause>
+			<w>ni3</w><w>rang4</w><wn><w>a1</w><wk type="cmp" /><w>yi2</w></wn><w>chi1</w><pause fluency="fluent" symbolic-length="simple" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u521sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">你讓阿姨吃 </a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="1" right="2" cat="Permit" id="u521te1">
+						<binding field="permiter" left="0" right="1" ref="CHI"/>
+						<binding field="permitee" left="2" right="4" ref="INV"/>
+						<binding field="permitted" left="4" right="5" ref="u521ts2"/>
+					</temporal_element>
+					<temporal_structure left="0" right="5"  cat="Ditransitive_Action" profiled="u521te1" id="u521ts1">
+						<binding field="giver" left="0" right="1" ref="CHI"/>
+						<binding field="recipient" left="2" right="4" ref="INV"/>
+						<binding field="theme" left="4" right="5" ref="u521ts2"/>
+					</temporal_structure>
+					
+					<temporal_element left="4" right="5" cat="Eat" id="u521te2">
+						<binding field="eater" left="2" right="4" ref="INV"/>
+						<binding field="food" ref="pears"/>
+					</temporal_element>
+					<temporal_structure left="2" right="5" cat="Transitive_Action" profiled="u521te2" id="u521ts2">
+						<binding field="agent" left="2" right="4" ref="INV"/>
+						<binding field="patient" ref="pears"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+		<clause>
+			<w>ni3</w><w>dou1</w><w>na2</w><w>guo4</w><w>lai2</w><w>le</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u521sa2">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">你都拿過來了</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="2" right="3" cat="Fetch" id="u521te2">
+						<binding field="fetcher" left="0" right="1" ref="CHI"/>
+						<binding field="fetched" ref="pears"/>
+					</temporal_element>
+					<image_schema cat="SPG" id="u521img1">
+						<binding field="trajector" left="0" right="1" ref="CHI"/>
+						<binding field="trajector" ref="pears"/>
+						<binding field="path" left="3" right="4" value="Across_Path"/>
+						<binding field="deixis" left="4" right="5" value="Towards"/>
+					</image_schema>
+					<temporal_structure left="0" right="6" cat="Joint_Motion" profiled="u521te2">
+						<binding field="principle_mover" left="0" right="1" ref="CHI"/>
+						<binding field="other_mover" ref="pears"/>
+						<binding field="spg" left="3" right="5" ref="u521img1"/>
+						<binding field="aspect" subcat="Perfective" left="5" right="6" modified="u521te2"/>
+						<binding field="modifier" subcat="Inclusion" left="1" right="2" modified="u521te2"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="CHI" id="522">
+		<clause>
+			<w>en</w><t type="p" />
+			<a type="speech act">
+				<sa cat="answering" id="u522sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">嗯</a>
+			<a type="gold standard">
+				<semantic>				
+					<temporal_structure cat="None"/>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="523">
+		<clause>
+			<w>ni3</w><w>ba3</w><w>zhe4</w><w>da4</w><w>de</w><w>gei3</w><wn><w>a1</w><wk type="cmp" /><w>yi2</w></wn><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u523sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">你把這大的給阿姨</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="5" right="6" cat="Give" id="u523te1">
+						<binding field="giver" left="0" right="1" ref="CHI"/>
+						<binding field="recipient" left="6" right="8" ref="INV"/>
+						<binding field="theme" left="2" right="5" ref="pear1"/>
+						<binding field="modifier" subcat="Size" left="3" right="5" modified="pear1"/>
+					</temporal_element>
+					<temporal_structure left="1" right="6"  cat="Ditransitive_Action" profiled="u523te1">
+						<binding field="giver" left="0" right="1" ref="CHI"/>
+						<binding field="recipient" left="6" right="8" ref="INV"/>
+						<binding field="theme" left="2" right="5" ref="pear1"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<event cat="Offer" id="offer02">
+		<binding field="offerer" ref="CHI"/>
+		<binding field="offeree" ref="INV"/>
+		<binding field="offered" ref="pear2"/>
+	</event>
+	
+	<u who="MOT" id="524">
+		<clause>
+			<w>da4</w><w>ge4</w><w>de</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u524sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">大個的</a>
+			<a type="gold standard">
+				<semantic>				
+					<topic left="0" right="3" ref="pear1">
+						<binding field="modifier" subcat="Size" left="0" right="3" modified="pear1"/>
+					</topic>
+					<temporal_structure cat="None"/>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="525">
+		<clause>
+			<w>da4</w><w>ge4</w><w>de</w><w>gei3</w><wn><w>a1</w><wk type="cmp" /><w>yi2</w></wn><w>ge1</w><w>shou3</w><w>li3</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u525sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">大個的給阿姨擱手裡</a>
+			<a type="gold standard">
+				<semantic>
+					<topic left="0" right="3" ref="pear1"/>
+					<comment left="3" right="9" ref="u525ts3"/>
+					<temporal_element left="3" right="4" cat="Give" id="u525te1">
+						<binding field="giver" ref="CHI"/>
+						<binding field="recipient" left="4" right="6" ref="INV"/>
+						<binding field="theme" left="0" right="3" ref="pear1"/>
+						<binding field="modifier" subcat="Size" left="0" right="3" modified="smallshoes"/>
+					</temporal_element>
+					<temporal_structure left="3" right="6"  cat="Ditransitive_Action" profiled="u525te1" id="u525ts1">
+						<binding field="giver" ref="CHI"/>
+						<binding field="recipient" left="4" right="6" ref="INV"/>
+						<binding field="theme" left="0" right="3" ref="pear1"/>
+					</temporal_structure>
+					
+					<temporal_element left="6" right="7" cat="Put" id="u525te2">
+						<binding field="putter" left="4" right="6" ref="INV"/>
+						<binding field="puttee" left="0" right="3" ref="pear1"/>							
+					</temporal_element>
+					<image_schema cat="Container" id="u525img1">
+						<binding field="container" ref="hand(INV)"/>
+					</image_schema>
+					<image_schema cat="SPG" id="u525img2">
+						<binding field="trajector" left="0" right="3" ref="pear1"/>	
+						<binding field="goal" ref="hand(INV)"/>
+					</image_schema>
+					<temporal_structure left="4" right="9" cat="Caused_Motion" profiled="u525te2" id="u525ts2">
+						<binding field="causer" left="4" right="6" ref="INV"/>
+						<binding field="mover" left="0" right="3" ref="pear1"/>	
+						<binding field="spg" left="2" right="4" ref="u525img2"/>
+					</temporal_structure>
+					
+					<temporal_structure left="3" right="9" cat="Serial_Processes" id="u525ts3" >
+						<binding field="agent" ref="CHI"/>
+						<binding field="process1" left="0" right="6" ref="u525ts1"/>
+						<binding field="process2" left="4" right="9" ref="u525ts2"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+
+	<event cat="Offer" id="offer03">
+		<binding field="offerer" ref="CHI"/>
+		<binding field="offeree" ref="INV"/>
+		<binding field="offered" ref="pear1"/>
+	</event>
+
+	<u who="MOT" id="526">
+		<clause>
+			<w>en</w><w>hao3</w><wn><w>bao3</w><wk type="cmp" /><w>bao3</w></wn><t type="p" />
+			<a type="speech act">
+				<sa cat="approving" id="u526sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">嗯好寶寶</a>
+			<a type="gold standard">
+				<semantic>				
+					<topic left="1" right="4" ref="CHI"/>
+					<temporal_structure cat="None"/>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="CHI" id="527">
+		<clause>
+			<w>en</w><w>en</w><w>da4</w><t type="p" />
+			<a type="speech act">
+				<sa cat="answering" id="u527sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">嗯嗯大</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="2" right="3" cat="Big" id="u527te1">
+						<binding field="protagonist" ref="pear1"/>				
+					</temporal_element>
+					<temporal_structure left="2" right="3" cat="Intransitive_State" profiled="u527te1">
+						<binding field="protagonist" ref="pear1"/>
+					</temporal_structure>
+				</semantic>
+			</a>	
+		</clause>
+	</u>
+	
+	<u who="MOT" id="531">
+		<clause>
+			<w>gei3</w><wn><w>a1</w><wk type="cmp" /><w>yi2</w></wn><w>chi1</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u531sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">給阿姨吃</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="0" right="1" cat="Give" id="u531te1">
+						<binding field="giver" ref="CHI"/>
+						<binding field="recipient" left="1" right="3" ref="INV"/>
+						<binding field="theme" ref="pear1"/>
+					</temporal_element>
+					<temporal_structure left="0" right="3"  cat="Ditransitive_Action" profiled="u531te1" id="u531ts1">
+						<binding field="giver" ref="CHI"/>
+						<binding field="recipient" left="1" right="3" ref="INV"/>
+						<binding field="theme" ref="pear1"/>
+					</temporal_structure>
+					
+					<temporal_element left="3" right="4" cat="Eat" id="u531te2">
+						<binding field="eater" left="1" right="3" ref="INV"/>
+						<binding field="food" ref="pear1"/>							
+					</temporal_element>
+					<temporal_structure left="1" right="4" cat="Transitive_Action" profiled="u531te2" id="u531ts2">
+						<binding field="agent" left="1" right="3" ref="INV"/>
+						<binding field="patient" ref="pear1"/>	
+					</temporal_structure>
+					
+					<temporal_structure left="0" right="4" cat="Serial_Processes" id="u525ts3" >
+						<binding field="agent" ref="CHI"/>
+						<binding field="process1" left="0" right="3" ref="u531ts1"/>
+						<binding field="process2" left="1" right="4" ref="u531ts2"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+
+	<event cat="Give" id="give04">
+		<binding field="giver" ref="CHI"/>
+		<binding field="recipient" ref="INV"/>
+		<binding field="theme" ref="pear1"/>
+	</event>
+	
+	<u who="CHI" id="532">
+		<clause>
+			<precode>INV</precode><w>en</w><w>chi<p type="drawl" />1</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u532sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="INV"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">嗯吃</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="1" right="2" cat="Eat" id="u532te1">
+						<binding field="eater" ref="INV"/>
+						<binding field="food" ref="pear1"/>							
+					</temporal_element>
+					<temporal_structure left="0" right="2" cat="Transitive_Action" profiled="u532te1">
+						<binding field="agent" ref="INV"/>
+						<binding field="patient" ref="pear1"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	
+</CHAT>

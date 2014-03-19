@@ -1,0 +1,478 @@
+package compling.grammar.ecg.ecgreader;
+
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+
+import java_cup.runtime.Symbol;
+
+import compling.grammar.ecg.ECGConstants;
+import compling.grammar.ecg.Grammar;
+import compling.grammar.ecg.Grammar.Block;
+import compling.grammar.ecg.Grammar.Construction;
+import compling.grammar.ecg.Grammar.ECGSlotChain;
+import compling.grammar.ecg.Grammar.MapPrimitive;
+import compling.grammar.ecg.Grammar.Schema;
+import compling.grammar.ecg.Grammar.Situation;
+import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
+import compling.grammar.unificationgrammar.UnificationGrammar.Role;
+import compling.grammar.unificationgrammar.UnificationGrammar.TypeConstraint;
+
+parser code {:
+
+  public Grammar grammar = new Grammar();
+  public String file = "unknown";
+  public StringBuffer errorLog = new StringBuffer();
+  
+  public String getErrorLog() { return errorLog.toString(); }
+  
+  public void setGrammar(Grammar g) { grammar = g; }
+  
+  public Grammar getGrammar() { return grammar; }
+  
+  //public Location getLocation() { return ((Yylex) getScanner()).getLocation(); }
+  
+  public int getLineNumber() { return ((Yylex) getScanner()).getLineNumber(); }
+  
+  @Override 
+  public void syntax_error(Symbol cur_token) {
+    errorLog.append("\nIn file " +file+",\t"); 
+    String yyt = ((Yylex) getScanner()).yytext().trim();
+    if (! yyt.equalsIgnoreCase("construction") && ! yyt.equalsIgnoreCase("schema")) {
+        errorLog.append("Syntax error at line number "+((Yylex) getScanner()).getLineNumber()); 
+        errorLog.append(";   Text of error: "+yyt+"\n");
+    } else {
+      errorLog.append("Syntax error before line number "+((Yylex) getScanner()).getLineNumber()); 
+      errorLog.append("\n");  
+    }
+  } 
+  
+  public void structural_error(String message){
+    errorLog.append("\t( "+message+" )\n");
+  } 
+
+:}
+
+/* Terminals (tokens returned by the scanner). */
+terminal  CONSTRUCTION, SUBCASE, CONSTRUCTIONAL, SCHEMA, ABSTRACT;
+terminal  FORM, MEANING, BEFORE, MEETS, COLON, COMMA, OPENBRACKET, CLOSEBRACKET, OPTIONAL, EXTRAPOSED;
+terminal  ASSIGN, IDENTIFY, EVOKES, AS, OF, ROLES;
+terminal  CONSTITUENTS, CONSTRAINTS, FEATURE, SEMANTIC, IGNORE;
+
+terminal  MAP, SITUATION;
+
+terminal String IDENTIFIER, STR, EXTERNALTYPE, PROB, SLOTCHAIN;
+
+
+/* Non terminals */
+
+non terminal subcase_of_keyword;
+non terminal Grammar ecg_list;
+non terminal HashSet<String> parent_list_opt, parent_list;
+non terminal Role evoked_element, role, constituent;
+non terminal Constraint constraint;
+non terminal LinkedHashSet<Role> evoked_list_opt, roles_list_opt, constituents_list_opt, roles_list, constituents_list;
+non terminal LinkedHashSet<Constraint> constraint_list, constraint_list_opt;
+non terminal Construction  cxn;
+non terminal Schema schema;
+non terminal Block cxn_block, form_block, meaning_block;
+non terminal String cxn_kind, block_type, schema_kinds, not_assign_operator, typespec, opt_constituent_annotation, ident_or_str, slot_chain;
+non terminal TypeConstraint opt_type;
+non terminal Boolean opt_ignore;
+non terminal StringBuffer prob_list;
+
+/* New additions (lucag) */
+non terminal MapPrimitive map;
+non terminal String map_kinds;
+non terminal Situation situation;
+non terminal String situation_kinds;
+
+ecg_list ::=
+  ecg_list:el schema:s {: 
+    if (s != null){el.addSchema(s);} 
+    RESULT = el;
+  :}
+  | ecg_list:el cxn:c {: 
+    if (c != null) {
+        el.addConstruction(c);
+    } 
+    RESULT = el;
+  :}
+  | ecg_list:el map:m {: 
+    if (m != null) { 
+      el.addMap(m); 
+    } 
+    RESULT = el; 
+  :}
+  | ecg_list:el situation:s {: 
+    if (s != null) { 
+      el.addSituation(s); 
+    } 
+    RESULT = el; 
+  :}
+  | /* epsilon */ {: 
+    RESULT = parser.grammar; 
+  :}
+  | error {: 
+    /* I'm hoping that the syntax error function covers this case. */ 
+  :}
+  ;
+
+cxn_kind ::=
+  ABSTRACT CONSTRUCTION {: RESULT = ECGConstants.ABSTRACT; :}
+  | CONSTRUCTION {: RESULT = ECGConstants.CONCRETE; :}
+  ;
+
+cxn ::=
+  cxn_kind:k IDENTIFIER:n parent_list_opt:p cxn_block:c form_block:f meaning_block:m {:
+    if (c == null) {
+      parser.structural_error("Construction "+n+" has an error in its constructional block");
+    }
+
+    if (f == null) {
+      parser.structural_error("Construction "+n+" has an error in its form block");
+    }
+
+    if (m == null) {
+      parser.structural_error("Construction "+n+" has an error in its meaning block");
+    }
+    
+    RESULT = parser.grammar.new Construction(n, k, p, f, m, c); 
+    RESULT.setLocation(new Location(n, parser.file, nleft, nright));
+  :}
+  | cxn_kind IDENTIFIER:n error {: 
+    parser.structural_error("Construction "+n+" has an error"); 
+    RESULT = null; 
+  :}
+  ;
+
+block_type ::= 
+  COLON typespec:t {: 
+    RESULT= t; 
+  :} 
+  | {: 
+    RESULT=ECGConstants.UNTYPED; 
+  :}
+  ;
+
+cxn_block ::=
+  CONSTRUCTIONAL block_type:t evoked_list_opt:e constituents_list_opt:c1 
+      constraint_list_opt:c2 {:
+    RESULT = parser.grammar.new Block(ECGConstants.CONSTRUCTIONAL, t);
+    RESULT.setEvokedElements(e);
+    RESULT.setElements(c1);
+    RESULT.setConstraints(c2);
+  :}
+  | CONSTRUCTIONAL error {: 
+    /*parser.report_error("constructional block has an error", null);*/ 
+    RESULT = null; 
+  :}
+  | {: 
+    RESULT = parser.grammar.new Block(ECGConstants.CONSTRUCTIONAL, ECGConstants.UNTYPED);
+  :}
+  ;
+
+form_block ::=
+  FORM block_type:t constraint_list_opt:c {: 
+    RESULT = parser.grammar.new Block(ECGConstants.FORM, t);
+    RESULT.setConstraints(c);
+  :}
+  | FORM error {:
+    /* parser.report_error("form block has an error", null);*/ 
+    RESULT = null; 
+  :}
+  | {: 
+    RESULT = parser.grammar.new Block(ECGConstants.FORM, ECGConstants.UNTYPED); 
+  :}
+  ;
+
+meaning_block ::=
+  MEANING block_type:t evoked_list_opt:e roles_list_opt:r constraint_list_opt:c {: 
+    RESULT = parser.grammar.new Block(ECGConstants.MEANING, t);
+    RESULT.setEvokedElements(e);
+    RESULT.setElements(r);
+    RESULT.setConstraints(c);
+  :}
+  | MEANING error {: 
+    /* parser.report_error("meaning block has an error", null);*/  
+    RESULT = null; 
+  :}
+  | {: 
+    RESULT = parser.grammar.new Block(ECGConstants.MEANING, ECGConstants.UNTYPED);
+  :}
+  ;
+
+schema_kinds ::= FEATURE SCHEMA {: RESULT= ECGConstants.FEATURE; :}
+    | SEMANTIC SCHEMA {: RESULT=ECGConstants.SEMANTIC; :}
+    | SCHEMA {: RESULT=ECGConstants.SEMANTIC; :}
+;
+
+schema ::=
+  schema_kinds:k IDENTIFIER:n parent_list_opt:p evoked_list_opt:e
+      roles_list_opt:r constraint_list_opt:c {: 
+    Block block = parser.grammar.new Block(ECGConstants.CONTENTS, n);
+    block.setEvokedElements(e);
+    block.setElements(r);
+    block.setConstraints(c);
+    RESULT = parser.grammar.new Schema(n, k, p, block); 
+    RESULT.setLocation(new Location(n, parser.file, nleft, nright));
+  :}
+  | schema_kinds IDENTIFIER:n error {: 
+     parser.report_error("schema " + n + " has an error", null); 
+     RESULT = null; 
+  :}
+;
+
+/* MAP */
+
+map_kinds ::=
+  ABSTRACT MAP {:
+    RESULT = ECGConstants.ABSTRACT;
+  :}
+  | MAP {:
+    RESULT = ECGConstants.CONCRETE;
+  :}
+  ;    
+
+map ::=
+  map_kinds: k IDENTIFIER: n parent_list_opt: p evoked_list_opt: e
+      roles_list_opt: r constraint_list_opt: c {:
+    Block block = parser.grammar.new Block(ECGConstants.CONTENTS, n);
+    block.setEvokedElements(e);
+    block.setElements(r);
+    block.setConstraints(c);
+    RESULT = parser.grammar.new MapPrimitive(n, k, p, block); 
+    RESULT.setLocation(new Location(n, parser.file, nleft, nright));
+  :}
+  | map_kinds IDENTIFIER:n error {: 
+     parser.report_error("map " + n + " has an error", null); 
+     RESULT = null; 
+  :}
+  ;
+  
+/* SITUATION */
+
+/* Unnecessary */
+situation_kinds ::=
+  ABSTRACT SITUATION {:
+    RESULT = ECGConstants.ABSTRACT;
+  :}
+  | SITUATION {:
+    RESULT = ECGConstants.CONCRETE;
+  :}
+  ;    
+
+situation ::=
+  situation_kinds: k IDENTIFIER: n parent_list_opt: p evoked_list_opt: e
+      roles_list_opt: r constraint_list_opt: c {:
+    Block block = parser.grammar.new Block(ECGConstants.CONTENTS, n);
+    block.setEvokedElements(e);
+    block.setElements(r);
+    block.setConstraints(c);
+    RESULT = parser.grammar.new Situation(n, k, p, block); 
+    RESULT.setLocation(new Location(n, parser.file, nleft, nright));
+  :}
+  | situation_kinds IDENTIFIER:n error {: 
+     parser.report_error("map " + n + " has an error", null); 
+     RESULT = null; 
+  :}
+  ;
+  
+   
+/* PARENT LISTS */
+
+parent_list_opt ::= 
+  parent_list:pl  {: RESULT = pl; :}
+  | {: RESULT = new HashSet<String>(); :}
+  ;
+
+subcase_of_keyword ::= SUBCASE | SUBCASE OF;
+
+parent_list ::=
+  parent_list:pl COMMA IDENTIFIER:i {: 
+    pl.add(i); 
+    RESULT = pl;
+  :}
+  | subcase_of_keyword IDENTIFIER:i {: 
+    RESULT = new HashSet<String>(); 
+    RESULT.add(i); 
+  :}
+  ;
+
+/*EVOKED */
+
+typespec ::= 
+  IDENTIFIER:t {: RESULT=t; :} 
+  | EXTERNALTYPE:t {: RESULT = t; :} 
+  ;
+
+evoked_element ::= 
+  EVOKES typespec:t AS IDENTIFIER:n  {: 
+    RESULT=new Role(n); 
+    RESULT.setTypeConstraint(new TypeConstraint(t, null)); 
+  :} 
+  ;
+
+evoked_list_opt ::=
+  evoked_list_opt:e evoked_element:ee {:  
+    e.add(ee); 
+    RESULT = e; 
+  :}
+  |
+  {: RESULT = new LinkedHashSet<Role>(); :}
+  ;
+
+/* ROLES*/
+
+role ::= 
+  IDENTIFIER:i opt_type:t {: 
+    RESULT= new Role(i); 
+    if (t != null) { 
+      RESULT.setTypeConstraint(t);
+    } 
+  :} 
+  ;
+
+
+opt_type ::= 
+  COLON typespec:t {: RESULT = new TypeConstraint(t, null); :}
+  | /* nothing*/
+  {: RESULT = null; :}
+  ;
+
+roles_list_opt ::= 
+  roles_list:cl {: RESULT = cl; :} 
+  | {: RESULT = new LinkedHashSet<Role>(); :} 
+  ;
+
+roles_list ::=
+  roles_list:rl role:r {: 
+    rl.add(r); RESULT = rl; 
+  :}
+  | ROLES {: 
+    RESULT = new LinkedHashSet<Role>(); 
+  :}
+  ;
+
+
+/* CONSTITUENTS */
+
+constituent ::= 
+  OPTIONAL IDENTIFIER:i COLON IDENTIFIER:t opt_constituent_annotation:a {: 
+    RESULT= new Role(i); 
+    RESULT.setTypeConstraint(new TypeConstraint(t, null)); 
+    RESULT.setSpecialField(ECGConstants.OPTIONAL+a); 
+  :}
+  | EXTRAPOSED IDENTIFIER:i COLON IDENTIFIER:t opt_constituent_annotation:a {: 
+    RESULT= new Role(i); 
+    RESULT.setTypeConstraint(new TypeConstraint(t, null)); 
+    RESULT.setSpecialField(ECGConstants.EXTRAPOSED+a); 
+  :}
+  | IDENTIFIER:i COLON IDENTIFIER:t opt_constituent_annotation:a {: 
+    RESULT= new Role(i); 
+    RESULT.setTypeConstraint(new TypeConstraint(t, null)); 
+    RESULT.setSpecialField(a); 
+  :}
+  ;
+
+opt_constituent_annotation ::= 
+  OPENBRACKET prob_list:pl CLOSEBRACKET {: 
+    pl.insert(0, " [ ").append(" ] "); 
+    RESULT= pl.toString(); 
+  :}
+  | /* nothing */ {: 
+    RESULT = ""; 
+  :}
+  ;
+
+prob_list ::= PROB:p {: RESULT = new StringBuffer(p); :}
+  | PROB:p1 COMMA PROB:p2 {: 
+    RESULT = new StringBuffer(p1); 
+    RESULT.append(" "); 
+    RESULT.append(p2); 
+  :}
+  | PROB:p1 COMMA PROB:p2 COMMA PROB:p3 {: 
+    RESULT = new StringBuffer(p1); 
+    RESULT.append(" "); 
+    RESULT.append(p2); 
+    RESULT.append(" "); 
+    RESULT.append(p3); 
+  :}
+  ;
+
+constituents_list_opt ::= 
+  constituents_list:cl {: RESULT = cl; :} 
+  | {: RESULT = new LinkedHashSet<Role>(); :} 
+  ;
+
+constituents_list ::=
+  constituents_list:cl constituent:c {: 
+    cl.add(c); 
+    RESULT = cl; 
+  :}
+  | CONSTITUENTS {: 
+    RESULT = new LinkedHashSet<Role>(); 
+  :}
+  ;
+
+
+/* CONSTRAINTS */
+
+constraint_list_opt ::= constraint_list:cl {: RESULT = cl; :} 
+  | {: 
+    RESULT = new LinkedHashSet<Constraint>(); 
+  :} 
+  ;
+
+constraint_list::=
+  constraint_list:cl opt_ignore:i constraint:c {: 
+    c.setOverridden(i); cl.add(c); RESULT = cl; 
+  :}
+  | CONSTRAINTS {: 
+    RESULT = new LinkedHashSet<Constraint>(); 
+  :}
+  ;
+
+not_assign_operator ::= 
+  IDENTIFY {: RESULT=ECGConstants.IDENTIFY; :} 
+  | BEFORE {: RESULT=ECGConstants.BEFORE; :}
+  | MEETS {: RESULT=ECGConstants.MEETS; :} 
+  ;
+
+opt_ignore ::= IGNORE {: RESULT= true; :} | {: RESULT=false; :};
+
+slot_chain ::= 
+  IDENTIFIER:i {: RESULT = i; :}
+  | SLOTCHAIN:i {: RESULT = i; :}
+  ;
+    
+/*     
+constraint ::=
+  slot_chain:arg1 not_assign_operator:op slot_chain:arg2 {: 
+    RESULT = new Constraint(op, new ECGSlotChain(arg1), new ECGSlotChain(arg2)); 
+  :}
+  | slot_chain:arg1 ASSIGN:op ident_or_str:arg2 {: 
+    RESULT = new Constraint(ECGConstants.ASSIGN, new ECGSlotChain(arg1), arg2); 
+  :}
+  ;
+*/
+
+/* ADDED */
+constraint ::=
+  slot_chain:arg1 not_assign_operator:op slot_chain:arg2 {: 
+    RESULT = new Constraint(op, new ECGSlotChain(arg1), new ECGSlotChain(arg2)); 
+  :}
+  | slot_chain:arg1 ASSIGN:op ident_or_str:arg2 {: 
+    RESULT = new Constraint(ECGConstants.ASSIGN, new ECGSlotChain(arg1), arg2); 
+  :}
+  | slot_chain:arg1 ASSIGN:op slot_chain:arg2 {: 
+    if (arg2.indexOf(".") == -1)
+      RESULT = new Constraint(ECGConstants.ASSIGN, new ECGSlotChain(arg1), arg2);
+    else
+      RESULT = new Constraint(ECGConstants.ASSIGN, new ECGSlotChain(arg1), new ECGSlotChain(arg2)); 
+  :}
+  ;
+
+ident_or_str ::= EXTERNALTYPE:i {: RESULT = i; :}
+ /* | IDENTIFIER:i {: RESULT = i; :} */
+    |  STR:s {: RESULT = s; :} 
+    ;

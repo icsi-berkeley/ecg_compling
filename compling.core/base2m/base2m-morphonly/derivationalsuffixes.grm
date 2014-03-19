@@ -1,0 +1,101 @@
+/*********************
+ Derivational suffixes
+ *********************
+ nschneid
+ 2009-05-12
+*/
+
+general construction DerivationalMorpheme
+  subcase of Morph
+  constructional
+    constituents
+      stem: Morph
+    constraints
+      stem.atWordLevel <-- "no"
+      
+
+construction SuffixAgentiveER
+  subcase of RegularInflectedNoun, CommonNoun, DerivationalMorpheme
+  constructional
+    constituents
+      stem: Verb
+  form: WLSuffixForm
+    constraints
+      self.f.orth <-- "er"
+      self.f.stem <-- ""
+      stem.f meets self.f.orth
+      self.f.orth meets self.f.stem
+  meaning: RD
+    constraints
+      self.m.referent <--> stem.m.protagonist
+      stem.m.protagonist <-- @animate
+
+
+construction SuffixAgentiveEE
+  subcase of RegularInflectedNoun, CommonNoun, DerivationalMorpheme
+  constructional
+    constituents
+      stem: Verb
+  form: WLSuffixForm
+    constraints
+      self.f.orth <-- "ee"
+      self.f.stem <-- ""
+      stem.f meets self.f.orth
+      self.f.orth meets self.f.stem
+  meaning: RD
+    evokes ForceApplication as fa
+    constraints
+      self.m.referent <--> fa.actedUpon	// not sure how to connect this explicitly to the stem's event--add a new subtype under Process?
+
+
+construction SuffixATION
+  subcase of RegularInflectedNoun, CommonNoun, DerivationalMorpheme
+  constructional
+    constituents
+      stem: CausativeSuffixIZE
+  form: WLSuffixForm
+    constraints
+      self.f.orth <-- "ation"
+      self.f.stem <-- ""
+      stem.f meets self.f.orth
+      self.f.orth meets self.f.stem
+  meaning
+    constraints
+      self.m.referent <--> stem.m	// here, the referent is a process
+
+general construction CausativeSuffixIZE
+  subcase of RegularFinalEVerb, CausativeVerb, DerivationalMorpheme
+  constructional constituents
+    stem: WLMorph
+  form constraints
+    self.f.stem <-- "iz"
+    stem.f meets self.f.stem
+
+construction CausativeSuffixIZEAdj
+  subcase of CausativeSuffixIZE
+    constructional constituents
+      stem: Adj
+    meaning: CauseStateChange
+      evokes Negation as neg
+      constraints
+        neg.modifiedEntity <--> stem.m
+        self.m.process2.initialState <--> neg
+        self.m.process2.finalState <--> stem.m
+
+construction CausativeSuffixIZENoun
+  subcase of CausativeSuffixIZE
+    constructional
+      constituents
+        stem: Noun
+      constraints
+		stem.features.number <-- Sg
+        // self.m.process2 <<< stem.m.referent	// the frame of the resulting state somehow involves the referent of the stem
+
+
+construction HOSPITALIZE
+  subcase of CausativeSuffixIZENoun
+  constructional constituents
+    stem: Hospital
+  meaning: Institutionalization
+    constraints
+      self.m.facility <--> stem.m.referent	// more specific than the purely compositional meaning

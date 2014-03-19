@@ -1,0 +1,49 @@
+/********************
+ Some general morphological constructions
+ 
+ Due to weirdnesses in the original version of the phrasal parser, 
+ this file will be slightly different for that vs. the morphological parser.
+ *********************
+ nschneid
+ 2009-05-13
+*/
+
+/*
+construction WROOT	// for morphological parser only
+	constructional constituents
+		word: WLMorph
+	form: MorphForm
+		constraints
+			self.f.orth <-- ""
+			self.f.orth meets word.f
+*/
+		
+general construction Morph
+	form: MorphForm
+
+general construction WLMorph	// Word-Level
+	subcase of Morph
+	
+
+general construction Affix
+	subcase of Morph
+	constructional constituents
+		stem: Morph
+	form: AffixForm
+	
+general construction Suffix
+	subcase of Affix
+	form: SuffixForm
+	constraints
+		stem.f meets self.f.suffix
+			
+general construction WLAffix
+	subcase of WLMorph, Affix
+	form: WLAffixForm
+	
+general construction WLSuffix
+	subcase of WLAffix, Suffix
+	form: WLSuffixForm
+	
+	
+

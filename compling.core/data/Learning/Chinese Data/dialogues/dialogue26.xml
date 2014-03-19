@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHAT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talkbank.org/ns/talkbank" xsi:schemaLocation="http://www.talkbank.org/ns/talkbank talkbank.xsd" Version="1.1.3" Lang="zh" Corpus="beijing" Id="cx1" Date="1984-01-01">
+	
+	<Participants>
+		<participant id="CHI" name="XiXi" role="Target_Child" language="zh" age="P1Y9M25D" />
+		<participant id="MOT" role="Mother" language="zh" SES="Worker" />
+		<participant id="INV" name="XiaLing_and_Niu" role="Investigator" language="zh" />
+	</Participants>
+	
+	<Setting>
+		<entity cat="Livingroom" id="livingroom"/>
+		<entity cat="Box" id="box"/>
+	</Setting>
+	
+	<Setup>
+		<binding field="location" source_ref="MOT" ref="livingroom"/>
+		<binding field="location" source_ref="CHI" ref="livingroom"/>
+		<binding field="location" source_ref="box" ref="ground(livingroom)"/>
+		<binding field="state" source_ref="box" value="Closed_State"/>
+	</Setup>
+	
+	<event cat="Take" id="take01">
+		<binding field="taker" ref="CHI"/>
+		<binding field="taken" ref="box"/>
+	</event>
+	
+	<event cat="Offer" id="offer02">
+		<binding field="offerer" ref="CHI"/>
+		<binding field="offeree" ref="MOT"/>
+		<binding field="offered" ref="box"/>
+	</event>
+	
+	<u who="CHI" id="730">
+		<clause>
+			<w>gei3</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u730sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">給</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="0" right="1" cat="Give" id="u730te1">
+						<binding field="giver" ref="CHI"/>
+						<binding field="recipient" ref="MOT"/>
+						<binding field="theme" ref="box"/>
+					</temporal_element>
+					<temporal_structure left="0" right="1"  cat="Ditransitive_Action" profiled="u730te1">
+						<binding field="giver" ref="CHI"/>
+						<binding field="recipient" ref="MOT"/>
+						<binding field="theme" ref="box"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<event cat="Give" id="give03">
+		<binding field="giver" ref="CHI"/>
+		<binding field="recipient" ref="MOT"/>
+		<binding field="theme" ref="box"/>
+	</event>
+	
+	<u who="MOT" id="731">
+		<clause>
+			<w>en</w><pause fluency="fluent" symbolic-length="simple" />
+			<a type="speech act">
+				<sa cat="approving" id="u731sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">嗯 </a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_structure cat="None"/>
+				</semantic>
+			</a>
+		</clause>
+		<clause>
+			<w>a</w><t type="p" /><a type="extension" flavor="cod">$INTERJ</a>
+			<a type="speech act">
+				<sa cat="exclaiming" id="u731sa2">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">啊</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_structure cat="none"/>
+				</semantic>
+			</a>	
+		</clause>
+	</u>
+	
+	<u who="MOT" id="732">
+		<clause>
+			<w>gei3</w><pause fluency="fluent" symbolic-length="simple" length="7" />
+			<a type="speech act">
+				<sa cat="approving" id="u732sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">給</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="0" right="1" cat="Give" id="u732te1">
+						<binding field="giver" ref="CHI"/>
+						<binding field="recipient" ref="MOT"/>
+						<binding field="theme" ref="box"/>
+					</temporal_element>
+					<temporal_structure left="0" right="1"  cat="Ditransitive_Action" profiled="u732te1">
+						<binding field="giver" ref="CHI"/>
+						<binding field="recipient" ref="MOT"/>
+						<binding field="theme" ref="box"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+		<clause>
+			<t type="p" /><a type="comments">outside noise</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="734">
+		<clause>
+			<w>zhei4</w><w>zhuang1</w><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>ya<p type="drawl" /></w><t type="q" /><a type="extension" flavor="cod">$Q:QW</a>
+			<a type="speech act">
+				<sa cat="requesting-answer" id="u734sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular">這裝甚麼呀?</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="1" right="2" cat="Contain" id="u734te1">
+						<binding field="container" left="0" right="1" ref="box"/>
+						<binding field="contained" left="2" right="4" value="What"/>
+					</temporal_element>
+					<temporal_structure left="0" right="4" cat="Two_Participant_State" profiled="u734te1">
+						<binding field="agent" left="0" right="1" ref="box"/>
+						<binding field="patient" left="2" right="4" value="What"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="735">
+		<clause>
+			<w>ni3</w><w>gao4</w><w>wo3</w><w>zhuang1</w><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>de</w><w>ya<p type="drawl" /></w><t type="q" /><a type="extension" flavor="cod">$Q:QW</a>
+			<a type="speech act">
+				<sa cat="requesting-answer" id="u735sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular">你告我裝甚麼呀?</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="1" right="2" cat="Tell" id="u735te1">
+						<binding field="speaker" left="0" right="1" ref="CHI"/>
+						<binding field="hearer" left="2" right="3" ref="MOT"/>
+						<binding field="content" left="3" right="6" ref="u735ts2"/>
+					</temporal_element>
+					<temporal_structure left="0" right="2" cat="Ditransitive_Action" profiled="u735te1" id="u735ts1">
+						<binding field="giver" left="0" right="1" ref="CHI"/>
+						<binding field="recipient" left="2" right="3" ref="MOT"/>
+						<binding field="theme" left="3" right="6" ref="u735ts2"/>
+					</temporal_structure>
+					
+					<temporal_element left="3" right="4" cat="Contain" id="u735te2">
+						<binding field="container" ref="box"/>
+						<binding field="contained" left="4" right="6" value="What"/>
+					</temporal_element>
+					<temporal_structure left="3" right="6" cat="Two_Participant_State" profiled="u735te2" id="u735ts2">
+						<binding field="agent" ref="box"/>
+						<binding field="patient" left="4" right="6" value="What"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="CHI" id="736">
+		<clause>
+			<linker type="quick uptake" /><w>enna<p type="drawl" /></w><t type="p" /><a type="extension" flavor="cod">$INTERJ</a>
+			<a type="speech act">
+				<sa cat="answering" id="u736sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">嗯哪</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_structure cat="none"/>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<event cat="Open" id="open03">
+		<binding field="opener" ref="MOT"/>
+		<binding field="opened" ref="box"/>
+	</event>
+	
+	<u who="MOT" id="737">
+		<clause>
+			<precode>half-whisper</precode><w>jiu4</w><w>zhei4</w><w>yangr4</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u737sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">就這樣</a>
+			<a type="gold standard">
+				<semantic>
+					<topic left="1" right="3" ref="open03"/>
+					<temporal_structure cat="none"/>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="738">
+		<clause>
+			<w>zhei4</w><w>yangr4</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u738sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">這樣</a>
+			<a type="gold standard">
+				<semantic>
+					<topic left="0" right="2" ref="open03"/>
+					<temporal_structure cat="none"/>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="739">
+		<clause>
+			<w>zhuang1</w><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>de</w><w>ya<p type="drawl" /></w><pause fluency="fluent" symbolic-length="simple" length="4" />
+			<a type="speech act">
+				<sa cat="requesting-answer" id="u739sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular">裝甚麼的呀?</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="0" right="1" cat="Contain" id="u739te1">
+						<binding field="container" ref="box"/>
+						<binding field="contained" left="1" right="3" value="What"/>
+					</temporal_element>
+					<temporal_structure left="0" right="4" cat="Two_Participant_State" profiled="u739te1">
+						<binding field="agent" ref="box"/>
+						<binding field="patient" left="1" right="3" value="What"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+		<clause>
+			<t type="q" /><a type="extension" flavor="cod">$Q:QW</a>
+		</clause>
+	</u>
+	
+	
+</CHAT>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.dltk.core.sdk"
+      label="%featureName"
+      version="4.0.0.201201070225"
+      provider-name="%providerName"
+      image="eclipse_update_120.jpg">
+
+   <description>
+      %description
+   </description>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.dltk.core" version="4.0.0" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.dltk.core.source"
+         download-size="1610"
+         install-size="3283"
+         version="4.0.0.201201070225"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.ui.source"
+         download-size="4013"
+         install-size="8115"
+         version="4.0.0.201201070225"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.debug.source"
+         download-size="282"
+         install-size="530"
+         version="4.0.0.201201070225"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.debug.ui.source"
+         download-size="581"
+         install-size="1118"
+         version="4.0.0.201201070225"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.launching.source"
+         download-size="259"
+         install-size="566"
+         version="4.0.0.201201070225"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.console.source"
+         download-size="22"
+         install-size="34"
+         version="4.0.0.201201070225"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.console.ui.source"
+         download-size="79"
+         install-size="151"
+         version="4.0.0.201201070225"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.validators.core.source"
+         download-size="72"
+         install-size="140"
+         version="4.0.0.201201070225"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.validators.ui.source"
+         download-size="69"
+         install-size="129"
+         version="4.0.0.201201070225"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.source"
+         download-size="9"
+         install-size="9"
+         version="4.0.0.201201070225"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.testing.source"
+         download-size="357"
+         install-size="678"
+         version="4.0.0.201201070225"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.validators.externalchecker.source"
+         download-size="64"
+         install-size="122"
+         version="4.0.0.201201070225"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.formatter.source"
+         download-size="54"
+         install-size="100"
+         version="4.0.0.201201070225"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.core.manipulation.source"
+         download-size="120"
+         install-size="334"
+         version="4.0.0.201201070225"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.logconsole.source"
+         download-size="15"
+         install-size="22"
+         version="4.0.0.201201070225"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.logconsole.ui.source"
+         download-size="13"
+         install-size="21"
+         version="4.0.0.201201070225"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.core.doc.isv"
+         download-size="26"
+         install-size="42"
+         version="4.0.0.201201070225"
+         unpack="false"/>
+
+</feature>

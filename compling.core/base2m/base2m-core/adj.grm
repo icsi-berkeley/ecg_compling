@@ -1,0 +1,84 @@
+/***
+ ***
+ *** Adjectives
+ ***
+ *** This file has constructions for abstract adjectives and adjectival phrases
+ *** As well as example lexical adjectives.
+ ***
+ *** The file also contains a construction for building a simple list of adjectives
+ *** which is the only concrete construction for building adjectival phrases of 
+ *** more than one word. More adjectival phrases need to be written, obviously.
+ ***
+ ***/
+
+// This is a recursive version of adj e.g. 'big, red', 'very big', 
+// 'very big and red'
+//
+general construction AdjectivalPhrase 
+  meaning: Modifier
+
+general construction Adj
+   subcase of Word, AdjectivalPhrase, SimpleAdjectiveList
+
+
+/***
+ ***
+ *** Building Adjectival Phrases
+ ***
+ *** Currently just supporting simple adjective lists e.g. 'the big green apple' 
+ *** Represented as left recursive trees
+ ***
+ ***/
+
+general construction SimpleAdjectiveList
+  subcase of AdjectivalPhrase
+     
+construction SimpleAdjectiveListRecursive
+  subcase of SimpleAdjectiveList
+  constructional
+    constituents
+     list: SimpleAdjectiveList
+     adj: Adj
+  form
+   constraints
+     list.f meets adj.f
+  meaning
+   constraints
+     self.m.modifiedEntity <--> list.m.modifiedEntity
+     self.m.modifiedEntity <--> adj.m.modifiedEntity
+
+
+/***
+ ***
+ *** Example Adjectives
+ *** I need help for the meaning of these...
+ ***
+ ***/
+
+construction Red
+  subcase of Adj
+   form
+      constraints
+         self.f.orth <-- "red"
+   meaning: ScalarModifier
+    constraints
+      self.m.scalarValue <-- "red"  // central red?, red hair?
+      self.m.scale <-- "colorSpace" // multi-dimensional scale???
+
+
+construction Big
+  subcase of Adj
+   form
+      constraints
+         self.f.orth <-- "big"
+   meaning: ScalarModifier
+    constraints
+      self.m.scalarValue <-- "big" 
+      self.m.scale <-- "size" 
+      
+construction LEGAL	// nschneid
+  subcase of Adj
+  form constraints
+    self.f.orth <-- "legal"
+  meaning: Legal
+

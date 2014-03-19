@@ -1,0 +1,53 @@
+digraph types {
+	size="11,8.5";
+	node [fontname="Arial", fontcolor=black, color="#aaff88", fillcolor="#aaff88"];
+	node [style="solid"]; NounInflection RegularSimpleInflectedNoun RegularInflectedNoun PluralNounInflection RegularFinalYNounInflection SingularNounInflection InflectedNoun RegularFinalSibilantPlural RegularNounInflection RegularFinalSibInflectedNoun RegularFinalYNoun RegularSimpleNounInflection;
+	node [style="filled"];
+	
+	// Omits several noun cxns which behave just like 'Apple' and 'Hospital'
+	// Also omits FinalCHPlural and FinalSHPlural, which are siblings of FinalSPlural, FinalZPlural, and FinalXPlural
+
+	InflectedNoun -> NounInflection [label="infl", style="dotted"]
+	InflectedNoun -> RegularInflectedNoun
+	RegularInflectedNoun -> RegularNounInflection [label="infl", style="dotted"]
+	RegularInflectedNoun -> SuffixAgentiveEE
+	SuffixAgentiveEE -> Verb [label="stem", style="dotted"]
+	SuffixAgentiveEE -> RegularNounInflection [label="infl", style="dotted"]
+	RegularInflectedNoun -> RegularFinalYNoun
+	RegularFinalYNoun -> RegularFinalYNounInflection [label="infl", style="dotted"]
+	RegularFinalYNoun -> Berry
+	Berry -> RegularFinalYNounInflection [label="infl", style="dotted"]
+	RegularInflectedNoun -> SuffixAgentiveER
+	SuffixAgentiveER -> Verb [label="stem", style="dotted"]
+	SuffixAgentiveER -> RegularNounInflection [label="infl", style="dotted"]
+	RegularInflectedNoun -> RegularFinalSibInflectedNoun
+	RegularFinalSibInflectedNoun -> RegularNounInflection [label="infl", style="dotted"]
+	RegularFinalSibInflectedNoun -> Box
+	Box -> RegularNounInflection [label="infl", style="dotted"]
+	RegularInflectedNoun -> SuffixATION
+	SuffixATION -> CausativeSuffixIZE [label="stem", style="dotted"]
+	SuffixATION -> RegularNounInflection [label="infl", style="dotted"]
+	RegularInflectedNoun -> RegularSimpleInflectedNoun
+	RegularSimpleInflectedNoun -> RegularSimpleNounInflection [label="infl", style="dotted"]
+	RegularSimpleInflectedNoun -> Apple
+	Apple -> RegularSimpleNounInflection [label="infl", style="dotted"]
+	RegularSimpleInflectedNoun -> Hospital
+	Hospital -> RegularSimpleNounInflection [label="infl", style="dotted"]
+	NounInflection -> RegularNounInflection
+	RegularNounInflection -> RegularFinalSibilantPlural
+	RegularFinalSibilantPlural -> FinalXPlural
+	RegularFinalSibilantPlural -> FinalSPlural
+	RegularFinalSibilantPlural -> FinalZPlural
+	RegularNounInflection -> RegularSimpleNounInflection
+	PluralNounInflection -> RegularSimpleNounPlural
+	RegularSimpleNounInflection -> RegularSimpleNounPlural
+	RegularFinalYNounInflection -> RegularNounSingular
+	SingularNounInflection -> RegularNounSingular
+	RegularSimpleNounInflection -> RegularNounSingular
+	RegularFinalYNounInflection -> InternalNounInflection
+	RegularSimpleNounInflection -> InternalNounInflection
+	RegularNounInflection -> RegularFinalYNounInflection
+	RegularFinalYNounInflection -> RegularFinalYNounPlural
+	NounInflection -> PluralNounInflection
+	NounInflection -> SingularNounInflection
+}

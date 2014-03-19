@@ -1,0 +1,109 @@
+DEFS:
+
+(type entity)
+
+(type instrument sub entity)
+
+(type animate sub entity)
+
+(type generic-person sub animate)
+
+(type person sub animate)
+
+(type player sub person)
+
+(type maleAnimate sub generic-person)
+
+(type male-person sub person)
+
+(type femaleAnimate sub generic-person)
+
+(type female-person sub person)
+
+(type chic sub animate)
+
+(type container sub entity)
+
+(type clase sub container)
+
+// (type clase sub room) ME dixit if I want to be more precise!
+
+// (type room sub container) ME dixit if I want to be more precise!
+
+//(type hand sub instrument)
+
+//(type box sub entity)
+
+//(type table sub entity)
+
+//(type hammer sub instrument)
+
+//(type house sub entity)
+
+//(type room sub entity)
+
+//(type cake sub entity)
+
+//(type apple sub entity)
+
+//(type tree sub entity)
+
+(type milk sub entity)
+
+
+//==================
+
+(type region)
+
+(type closedCurve sub region)
+
+//==================
+
+
+(type process)
+
+//(type complexxnet sub process)
+
+(type routine sub process)
+
+(type motion sub process)
+
+//(type changeoflocationalstate sub changeofstate)
+
+//(type changeofstate sub process)
+
+//(type effectormotion sub complexxnet)
+
+//(type forceapplication sub routine)
+
+//(type forcefulmotionaction sub complexxnet)
+
+//(type agentiveimpactaction sub forcefulmotionaction)
+
+//(type causeeffect sub complexxnet)
+
+//(type slap sub agentiveimpactaction)
+
+//(type hit sub agentiveimpactaction)
+
+//(type slide sub motion)
+
+//(type walk sub motion)
+
+(type salir sub motion)
+
+(type llegar sub motion)
+
+//(type objecttransfer sub complexxnet)
+
+//(type releasehold sub forceapplication)
+
+//(type establishhold sub forceapplication)
+
+//(type throw sub complexxnet)
+
+//(type give sub objecttransfer)
+
+//(type bake sub process)
+
+INSTS:

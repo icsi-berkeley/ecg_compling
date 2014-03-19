@@ -1,0 +1,320 @@
+package compling.context;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+parser code {:
+	
+	public MiniOntology m = new MiniOntology(false);
+	
+	public String file="unknown";
+	
+	public MiniOntology  getMiniOntology() { return m; }	
+	
+	public void setMiniOntology(MiniOntology mo) { this.m = mo; }
+	
+	public void report_error(String message, Object info) {
+	   super.report_error("In file "	 + file + ": " + message 
+	       + " around line number " + ((Yylex) getScanner()).getLineNumber() 
+	       + " near the line \""  + ((Yylex) getScanner()).getMatchedText() 
+	       + "\"", null);
+	}	
+	
+	public int counter = 0;
+	
+:}
+
+/* `
+ * Terminals (tokens returned by the scanner). 
+ */
+terminal OPENPAREN, CLOSEPAREN, SUB, REL, FUN, IND, FIL, EQ, PERSISTENT, 
+         NONBLOCKING, DEFS, INSTS, TYPE, INST, CURRENTINTERVAL, REM;
+//terminal TRANSIENT;
+terminal String IDENTIFIER, STR;
+
+/* 
+ * Non terminals 
+ */
+
+non terminal fun_prim, rel_prim, ind_prim, fil_prim, sub_prim, eq_prim, 
+             type_prim, update_interval_prim, interval_prim, rem_prim, 
+             rem_all_prim;
+non terminal ont_list, defs_list, insts_list, def_prim, inst_prim;
+non terminal List<String> parent_list, opt_parent_list, opt_rels_list, 
+             rel_pair_list, opt_bindings_list, binding_pair_list, opt_fil_list, 
+             fil_pair_list;
+non terminal String instance_prim, inst_name;
+
+ont_list ::= 
+  DEFS defs_list INSTS insts_list ;
+
+defs_list ::= 
+	defs_list OPENPAREN def_prim CLOSEPAREN
+	| /*NOTHING*/ {: parser.m.initRecentlyAccessedIndividuals(); :}
+  ;
+
+def_prim ::= 
+  fun_prim | rel_prim | sub_prim | eq_prim | type_prim;
+
+insts_list ::=
+	insts_list OPENPAREN inst_prim CLOSEPAREN
+	| /*NOTHING*/ {: parser.m.build(); :}
+  ;
+
+inst_prim ::= 
+  ind_prim | fil_prim | instance_prim | interval_prim | update_interval_prim 
+  | rem_prim | rem_all_prim;
+
+type_prim ::=
+	TYPE IDENTIFIER:name opt_parent_list:pl opt_rels_list:rl opt_bindings_list:bl {:
+		parser.m.addType(name, pl); 
+		for (String relpair : rl) {
+			String[] pair = relpair.split(":");
+			boolean persistent = true;
+			boolean blocking = true;
+			if (pair[0].indexOf("%") != -1) { 
+			     persistent = false; pair[0] = pair[0].substring(1); 
+		    }
+			if (pair[0].indexOf("$") != -1) { 
+			     blocking = false; pair[0] = pair[0].substring(1); 
+		    }
+			parser.m.addRelation(pair[0], name, pair[1], persistent, blocking); 
+		}	
+		for (String eqpair : bl) {
+			String[] pair = eqpair.split(":");
+			if (pair[0].indexOf("%") != -1) { pair[0] = pair[0].substring(1); }
+			if (pair[0].indexOf("$") != -1) { pair[0] = pair[0].substring(1); }		
+			parser.m.addCoindexation(name, pair[0], pair[1]); 
+		}	
+  :}
+  ;
+
+opt_parent_list ::=
+	SUB parent_list:pl {: RESULT = pl; :}
+	| /*NOTHING*/ {: RESULT = new ArrayList<String>(); :}
+  ;
+
+opt_rels_list ::=
+	REL rel_pair_list:rpl {: RESULT = rpl; :}
+	| /*NOTHING*/ {: RESULT = new ArrayList<String>(); :}
+  ;
+
+rel_pair_list ::=
+	rel_pair_list:rpl OPENPAREN IDENTIFIER:name IDENTIFIER:range CLOSEPAREN {:
+    rpl.add("%" + name + ":" + range); RESULT = rpl; 
+	:}
+	| rel_pair_list:rpl OPENPAREN PERSISTENT IDENTIFIER:name IDENTIFIER:range 
+      CLOSEPAREN {:
+    rpl.add(name+":" + range); RESULT = rpl; 
+  :}
+	| rel_pair_list:rpl OPENPAREN NONBLOCKING IDENTIFIER:name IDENTIFIER:range 
+      CLOSEPAREN {:
+    rpl.add("%$" + name + ":" + range); RESULT = rpl;
+	:}
+	| rel_pair_list:rpl OPENPAREN PERSISTENT NONBLOCKING IDENTIFIER:name 
+      IDENTIFIER:range CLOSEPAREN {:
+    rpl.add("$" + name + ":" + range); RESULT = rpl; 
+  :}
+	| rel_pair_list:rpl OPENPAREN NONBLOCKING PERSISTENT IDENTIFIER:name 
+	    IDENTIFIER:range CLOSEPAREN {:
+    rpl.add("$" + name + ":" + range); RESULT = rpl; 
+  :}
+	| /*NOTHING*/ {: RESULT = new ArrayList<String>(); :}
+  ;
+
+/*******************************************************************************
+rel_pair_list ::=
+	rel_pair_list:rpl OPENPAREN IDENTIFIER:name IDENTIFIER:range CLOSEPAREN
+	{: rpl.add(name+":"+range); RESULT = rpl; :}
+	| rel_pair_list:rpl OPENPAREN TRANSIENT IDENTIFIER:name IDENTIFIER:range CLOSEPAREN
+	{: rpl.add("%"+name+":"+range); RESULT = rpl; :}
+	| rel_pair_list:rpl OPENPAREN NONBLOCKING IDENTIFIER:name IDENTIFIER:range CLOSEPAREN
+	{: rpl.add("$"+name+":"+range); RESULT = rpl; :}
+	| rel_pair_list:rpl OPENPAREN TRANSIENT NONBLOCKING IDENTIFIER:name IDENTIFIER:range 
+	     CLOSEPAREN
+	{: rpl.add("%$"+name+":"+range); RESULT = rpl; :}
+	| rel_pair_list:rpl OPENPAREN NONBLOCKING TRANSIENT IDENTIFIER:name IDENTIFIER:range 
+	     CLOSEPAREN
+	{: rpl.add("%$"+name+":"+range); RESULT = rpl; :}
+	| 
+	{: RESULT = new ArrayList<String>(); :}	
+;
+*******************************************************************************/
+
+opt_bindings_list ::=
+	EQ binding_pair_list:rpl {: RESULT = rpl; :}
+	| /*NOTHING*/ {: RESULT = new ArrayList<String>(); :}
+  ;
+
+binding_pair_list ::=
+	rel_pair_list:rpl OPENPAREN IDENTIFIER:name1 IDENTIFIER:name2 CLOSEPAREN {: 
+    rpl.add(name1+":"+name2); RESULT = rpl; 
+  :}
+	| /*NOTHING*/ {: RESULT = new ArrayList<String>(); :}
+  ;
+
+fun_prim ::=
+  FUN IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range  {: 
+    parser.m.addFunction(name, domain, range, false, true); 
+  :}
+	| PERSISTENT FUN IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range {:
+    parser.m.addFunction(name, domain, range, true, true); 
+  :}
+	| NONBLOCKING FUN IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range {: 
+    parser.m.addFunction(name, domain, range, false, false); 
+	:}
+	| NONBLOCKING PERSISTENT FUN IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range {: 
+    parser.m.addFunction(name, domain, range, true, false); 
+  :}
+	| PERSISTENT NONBLOCKING FUN IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range {: 
+    parser.m.addFunction(name, domain, range, true, false); 
+  :}
+  ;
+
+rel_prim ::=
+  REL IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range {: 
+    parser.m.addFunction(name, domain, range, false, true); 
+  :}
+	| PERSISTENT REL IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range {: 
+    parser.m.addFunction(name, domain, range, true, true); 
+  :}
+	| NONBLOCKING REL IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range {:
+    parser.m.addFunction(name, domain, range, false, false); 
+  :}
+	| NONBLOCKING PERSISTENT REL IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range {: 
+    parser.m.addFunction(name, domain, range, true, false); 
+  :}
+	| PERSISTENT NONBLOCKING REL IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range {:
+    parser.m.addFunction(name, domain, range, true, false); 
+  :}
+  ;
+
+/*******************************************************************************
+fun_prim ::=
+	 FUN IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range 
+	{: parser.m.addFunction(name, domain, range, true, true); :}
+	|  TRANSIENT FUN IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range 
+	{: parser.m.addFunction(name, domain, range, false, true); :}
+	|  NONBLOCKING FUN IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range 
+	{: parser.m.addFunction(name, domain, range, true, false); :}
+	|  NONBLOCKING TRANSIENT FUN IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range 
+	{: parser.m.addFunction(name, domain, range, false, false); :}
+	|  TRANSIENT NONBLOCKING FUN IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range 
+	{: parser.m.addFunction(name, domain, range, false, false); :}
+;
+
+rel_prim ::=
+	 REL IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range 
+	{: parser.m.addFunction(name, domain, range, true, true); :}
+	|  TRANSIENT REL IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range 
+	{: parser.m.addFunction(name, domain, range, false, true); :}
+	|  NONBLOCKING REL IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range 
+	{: parser.m.addFunction(name, domain, range, true, false); :}
+	|  NONBLOCKING TRANSIENT REL IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range 
+	{: parser.m.addFunction(name, domain, range, false, false); :}
+	|  TRANSIENT NONBLOCKING REL IDENTIFIER:name IDENTIFIER:domain IDENTIFIER:range 
+	{: parser.m.addFunction(name, domain, range, false, false); :}
+;
+*******************************************************************************/
+
+
+sub_prim ::= 
+  SUB IDENTIFIER:new_type parent_list:pl {: 
+    parser.m.addType(new_type, pl); 
+  :}
+  ;
+
+parent_list ::=
+	parent_list:pl IDENTIFIER:p {: 
+    pl.add(p); 
+    RESULT=pl; 
+  :}
+	| /*NOTHING*/ {: RESULT = new ArrayList<String>(); :}
+  ;
+
+eq_prim ::=
+  EQ IDENTIFIER:cat IDENTIFIER:r1 IDENTIFIER:r2 {: 
+    parser.m.addCoindexation(cat, r1, r2); 
+  :}
+  ;
+
+ind_prim ::=
+	IND IDENTIFIER:name IDENTIFIER:cat {: 
+	   parser.m.addIndividual(name, cat); 
+  :}
+  ;
+
+fil_prim ::=
+  FIL IDENTIFIER:relname IDENTIFIER:holder inst_name:value {:
+    parser.m.addRelationFiller(relname, holder, value); 
+	:}
+  ;
+
+rem_prim ::=
+  REM IDENTIFIER:relname IDENTIFIER:holder IDENTIFIER:value {: 
+    parser.m.removeRelationFiller(relname, holder, value); 
+  :}
+	| REM IDENTIFIER:relname IDENTIFIER:holder STR:value {: 
+    parser.m.removeRelationFiller(relname, holder, value); 
+  :}
+  ;
+
+rem_all_prim ::=
+	REM IDENTIFIER:relname IDENTIFIER:holder {: 
+	 parser.m.removeAllRelationFillers(relname, holder); 
+	:}
+  ;
+
+instance_prim ::=
+	INST IDENTIFIER:name IDENTIFIER:type IDENTIFIER:parent IDENTIFIER:preceding 
+	   opt_fil_list:ofl {: 
+  	parser.m.defineNewInterval(name, type, parent, preceding);
+  	for (String filpair : ofl){
+  		String pair[] = filpair.split(":");
+  		parser.m.addRelationFiller(pair[0], name, pair[1]);
+  	}
+  	RESULT = name;
+  :}
+	| INST IDENTIFIER:name IDENTIFIER:type opt_fil_list:ofl {:
+		parser.m.addIndividual(name, type);
+		for (String filpair : ofl){
+			String pair[] = filpair.split(":");
+			parser.m.addRelationFiller(pair[0], name, pair[1]);
+		}
+		RESULT = name;
+	:}
+	| INST IDENTIFIER:type opt_fil_list:ofl {:
+		String name = type + parser.counter;
+		parser.counter++;
+		parser.m.addIndividual(name, type);
+		for (String filpair : ofl) {
+			String pair[] = filpair.split(":");
+			parser.m.addRelationFiller(pair[0], name, pair[1]);
+		}
+		RESULT = name;
+  :}
+  ;
+
+opt_fil_list ::=
+	FIL fil_pair_list:rpl {: RESULT = rpl; :}
+	| /* NOTHING */ {: RESULT = new ArrayList<String>(); :}
+  ;
+
+fil_pair_list ::=
+	fil_pair_list:rpl OPENPAREN IDENTIFIER:relname inst_name:instname CLOSEPAREN {: 
+    rpl.add(relname + ":" + instname); RESULT = rpl; 
+  :}
+	| /*NOTHING*/ {: RESULT = new ArrayList<String>(); :}
+  ;
+
+inst_name ::=
+	IDENTIFIER:i {: RESULT = i; :}
+	| OPENPAREN instance_prim:i CLOSEPAREN {: RESULT = i; :}
+	| STR:s {: RESULT = s; :}
+  ;
+
+update_interval_prim ::= CURRENTINTERVAL IDENTIFIER:name {: 
+  parser.m.setCurrentInterval(name); 
+  :}
+  ;

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHAT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.talkbank.org/ns/talkbank talkbank.xsd" xmlns="http://www.talkbank.org/ns/talkbank" Version="1.1.3" Lang="zh" Corpus="beijing" Id="cx4" Date="1984-01-01">
+	
+	<Participants>
+		<participant id="MOT" role="Mother" language="zh" />
+		<participant id="CHI" role="Target_Child" language="zh" />
+		<participant id="INV" role="Investigator" language="zh" />
+	</Participants>
+	
+	<!-- With child grabbing onto a flower, mother intends to pick it for her -->
+	
+	<Setting>
+		<entity cat="Yard" id="yard"/>
+		<entity cat="Flower" id="flower"/>
+	</Setting>
+	
+	<Setup>
+		<binding field="location" source_ref="CHI" ref="yard"/>
+		<binding field="location" source_ref="MOT" ref="yard"/>
+		<binding field="location" source_ref="flower" ref="yard"/>
+	</Setup>
+	
+	<event cat="Grasp" id="grasp01">
+		<binding field="grasper" ref="CHI"/>
+		<binding field="grasped" ref="flower"/>
+	</event>
+	
+	<u who="MOT" id="638">
+		<clause>
+			<w>na4</w><w>ma1</w><w>gei3</w><w>zhai1</w><t type="p" />
+			<a type="speech act">
+				<sa cat="answering" id="u638sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">那媽給摘</a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="639">
+		<clause>
+			<w>ma1</w><w>gei3</w><w>zhai1</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u639sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="640">
+		<clause>
+			<w>qi3</w><w>lai2</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u640sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="641">
+		<clause>
+			<w>ma1</w><w>zhai1</w><w>ni3</w><w>bie2</w><w>dong4</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u641sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<event cat="Pick" id="pick02">
+		<binding field="picker" ref="MOT"/>
+		<binding field="picked" ref="flower"/>
+	</event>
+	
+	<u who="MOT" id="642">
+		<clause>
+			<w>ma1</w><w>gei3</w><w>zhai1</w><w>le</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u642sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="643">
+		<clause>
+			<w>ei<p type="drawl" /></w><w>ma1</w><w>gei3</w><w>ni3</w><w>zhai1</w><w>ao</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u643sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="CHI" id="644">
+		<clause>
+			<w>en</w><t type="p" />
+			<a type="speech act">
+				<sa cat="answering" id="u644sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="645">
+		<clause>
+			<w>ma1</w><w>gei3</w><w>ni3</w><w>zhai1</w><w>le</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u645sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="646">
+		<clause>
+			<w>bie2</w><w>dong4</w><w>wo3</w><w>gei3</w><w>ni3</w><w>zhai1</w><w>ao</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u646sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+</CHAT>

@@ -1,0 +1,121 @@
+//============================================================
+// Everything in this section is assumed as prior knowledge
+//============================================================
+
+//============================================================
+// Constructions: Abstract constructions
+//============================================================
+
+Abstract Construction Important_Type
+
+Construction ROOT
+	constructional
+		constituents
+			s: Important_Type
+	meaning
+		constraints
+			self.m <--> s.m
+
+
+Construction Leftover_Morpheme
+	subcase of Important_Type
+	constructional
+		constituents
+			w: Morpheme
+	meaning
+		constraints
+			self.m <--> w.m	
+
+
+Abstract Construction Morpheme
+	constructional: Morpheme_Features
+	form: Morpheme_Form
+
+
+Construction Leftover_Word
+	subcase of Important_Type
+	constructional
+		constituents
+			w: Word
+	meaning
+		constraints
+			self.m <--> w.m	
+
+
+Construction Unknown_Morpheme
+	subcase of Morpheme
+	form 
+		constraints
+			self.f.orth <-- "UNKNOWN-ITEM"
+
+
+Construction Reduplication_Noun_Root
+	subcase of Noun_Root
+	constructional
+		constituents
+			i1: Noun_Root
+			i2: Noun_Root
+	form
+		constraints
+			i1.f meets i2.f
+	meaning: @Element
+		constraints
+			self.m <--> i1.m
+			self.m <--> i2.m
+
+
+Construction Reduplication_Verb_Root
+	subcase of Verb_Root
+	constructional
+		constituents
+			i1: Verb_Root
+			i2: Verb_Root
+	form
+		constraints
+			i1.f meets i2.f
+	meaning: Process
+		constraints
+			self.m <--> i1.m
+			self.m <--> i2.m
+
+
+Construction Reduplication_Interjection
+	subcase of Interjection
+	constructional
+		constituents
+			i1: Interjection
+			i2: Interjection		
+	form
+		constraints
+			i1.f meets i2.f
+
+
+Construction Reduplication_Unknown
+	subcase of Important_Type
+	constructional
+		constituents
+			u1: Unknown_Morpheme
+			u2: Unknown_Morpheme		
+	form
+		constraints
+			u1.f meets u2.f
+
+
+Construction Counting
+	subcase of Number
+	constructional
+		constituents
+			i1: Digit
+			i2: Number		
+	form
+		constraints
+			i1.f meets i2.f
+
+
+Abstract Construction Word
+	constructional: Word_Features	
+
+
+Abstract Construction Digit
+	subcase of Morpheme, Number
+	meaning: Numerical_Value

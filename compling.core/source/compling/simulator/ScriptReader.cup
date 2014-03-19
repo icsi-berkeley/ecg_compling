@@ -1,0 +1,995 @@
+package compling.simulator;
+
+import java.util.*;
+import java.util.logging.*;
+import java_cup.runtime.Symbol;
+import compling.simulator.Simulator.*;
+import compling.simulator.SimulationParameters.*;
+import compling.context.*;
+import compling.context.ContextException.*;
+import compling.context.MiniOntologyQueryAPI.*;
+import compling.context.ContextUtilities.QueryResultPrinter;
+import compling.util.MapSet;
+import compling.simulator.ScriptReader.IDorVAR;
+
+parser code {:
+
+	static int counter = 1;
+	boolean isSuccessful = true;
+	protected static Logger logger = Logger.getLogger(ScriptReader.class.getName());
+	protected SimulationParameters parameters = new SimulationParameters();
+	protected Simulator simulator = null;
+	protected MiniOntology miniOntology = null;
+	String scriptName = "";
+	
+	protected SimulatorMode mode = SimulatorMode.CONTEXTMODEL_UPDATE;
+	
+    public void user_init() {
+//    	logger.setUseParentHandlers(false);
+//    	logger.addHandler(new LoggingHandler());
+    }
+	
+	public boolean isSuccessful() {
+		return isSuccessful;
+	}
+	
+	public boolean run(String scriptName, SimulatorMode mode) throws Exception {
+		isSuccessful = true;
+		this.scriptName = scriptName;
+		this.mode = mode;
+		parse();
+		return isSuccessful;
+	}
+	
+	public void setMiniOntology(MiniOntology miniOntology) {
+		this.miniOntology = miniOntology;
+	}
+	
+	public void setSimulator(Simulator simulator) {
+		this.simulator = simulator;
+	}
+
+	public void setParameters(SimulationParameters parameters) {
+		if (parameters != null) {
+			this.parameters = parameters;
+		}
+	}
+	
+	public Set<Value> resolveValue(Value value) {
+	   String function = value.getFiller();
+	   Stack<String> funcs = new Stack<String>();
+	   int nextP = function.indexOf('(');
+	   int lastP = 0;
+	   while (nextP != -1) {
+	      funcs.push(function.substring(lastP, nextP));
+	      lastP = nextP+1;
+	      nextP = function.indexOf('(', lastP); 
+	   }
+
+	   PriorityQueue<String> oldDomains;
+	   PriorityQueue<String> newDomains = new PriorityQueue<String>();
+	   newDomains.add(function.substring(lastP, function.indexOf(')', lastP)));
+
+	   String func, domain;
+
+	   while(!funcs.isEmpty()) {
+	      oldDomains = newDomains;
+	      newDomains = new PriorityQueue<String>();
+	      func = funcs.pop();
+	      while ((domain = oldDomains.poll()) != null) {
+	         List<SimpleQuery> simpleQueries = new ArrayList<SimpleQuery>();
+	         simpleQueries.add(new SimpleQuery(func, domain, "?x"));
+	         List<HashMap<String, String>> queryResults = MiniOntologyQueryAPI.ask(miniOntology, simpleQueries);
+
+	         for (HashMap<String, String> map : queryResults) {
+	         	for (String val : map.values()) {
+		           	newDomains.add(QueryResultPrinter.getIndividualName(val));
+		        }
+	         }
+	      }           
+	   }
+       Set<Value> newFillers = new HashSet<Value>();
+	   for (String result : newDomains) {
+          newFillers.add(new Value(result, false));
+       }
+	   return newFillers;
+	}
+
+	public void groundOutVariable(String variable, boolean allowAnonymous) {
+		Set<Value> params = parameters.getParameter(variable);
+		Set<Value> toRemove = new HashSet<Value>();
+		Set<Value> toAdd = new HashSet<Value>();
+		
+		if (params == null) return;
+		
+		for (Value param : params) {
+		   if (param.isFunc()) {
+		      Set<Value> evaluatedVal = resolveValue(param);
+		      toRemove.add(param);
+		      toAdd.addAll(evaluatedVal);
+		   } else if (param.isValue() && allowAnonymous) {
+		      String type = param.getFiller();
+		      String name = type.substring(0, 1).toLowerCase() + type.substring(1) + String.valueOf(counter);
+		      counter++;
+              toRemove.add(param);
+              toAdd.add(new Value(name, false));
+              miniOntology.addIndividual(name, type);
+		   }
+		}
+		parameters.getParameter(variable).removeAll(toRemove);
+		parameters.getParameter(variable).addAll(toAdd);	
+	}
+	
+   public List<String> addNewIntervals(String name, String type, String parent, String preceding, List<String> ofl) {
+
+      List<String> names = new ArrayList<String>(); 
+      BindingSet bindingset = generateBindingSetFromOFL(ofl);
+      
+      if (bindingset.size() > 1 && name != null) {
+         throw new SimulatorException("incompatible sets of fillers supplied for one new interval instance");
+      }
+      
+      if (name != null) {
+         names.add(name);
+         miniOntology.defineNewInterval(name, type, parent, preceding);
+         logger.finest("(INST " + name + " " + type + " " + parent + " " + preceding + ")");
+         if (bindingset.isEmpty()) {
+            addRelationFillers(name, ofl, null);
+         } else {
+            addRelationFillers(name, ofl, bindingset.get(0));
+		 }
+      } else {
+         if (bindingset.isEmpty()) {
+         	name = type.substring(0, 1).toLowerCase() + type.substring(1) + String.valueOf(counter);
+         	counter++;
+            miniOntology.defineNewInterval(name, type, parent, preceding);
+            logger.finest("(INST " + name + " " + type + " " + parent + " " + preceding + ")");
+            names.add(name);
+         } else {
+         	for (MapSet<String, Value> instantiation : bindingset) {
+            	name = type.substring(0, 1).toLowerCase() + type.substring(1) + String.valueOf(counter);
+            	counter++;
+            	miniOntology.defineNewInterval(name, type, parent, preceding);
+            	logger.finest("(INST " + name + " " + type + " " + parent + " " + preceding + ")");            
+            	addRelationFillers(name, ofl, instantiation);
+            	names.add(name);
+            }
+         }
+      }
+      return names;
+   }
+   
+   protected BindingSet generateBindingSetFromOFL(List<String> ofl) {
+      List<String> variables = new ArrayList<String>();
+      for (String fil : ofl){
+         String triplet[] = fil.split(":");
+         if (triplet[2].equals("true")) {
+            groundOutVariable(triplet[1], true);
+            variables.add(triplet[1]);
+         }
+      }
+      if (variables.size() == 0) {
+      	return new BindingSet();
+      } else {
+      	return parameters.generateInstantiations(variables);
+      }
+   }
+   
+   protected void addRelationFillers(String name, List<String> ofl, MapSet<String, Value> instantiation) {
+      
+      for (String fil : ofl){
+         String triplet[] = fil.split(":");
+         if (triplet[2].equals("false")) { // is not a variable       
+            miniOntology.addRelationFiller(triplet[0], name, triplet[1]);
+            logger.finest("(FIL " + triplet[0] + " " + name + " " + triplet[1] + ")");
+         } else if (triplet[2].equals("true")) {
+         	if (instantiation != null && instantiation.get(triplet[1]) != null) {
+               for (Value value : instantiation.get(triplet[1])) {
+                  miniOntology.addRelationFiller(triplet[0], name, value.getFiller());
+                  logger.finest("(FIL " + triplet[0] + " " + name + " " + value.getFiller() + ")");
+               }
+            }
+         }
+      }      
+   }
+   
+   public List<String> addNewIndividuals(String name, String type, List<String> ofl) {
+      List<String> names = new ArrayList<String>(); 
+      BindingSet bindingset = generateBindingSetFromOFL(ofl);
+      
+      if (bindingset.size() > 1 && name != null) {
+         throw new SimulatorException("incompatible sets of fillers supplied for one new interval instance");
+      }
+      
+      if (name != null) {
+         names.add(name);
+         miniOntology.addIndividual(name, type);
+         logger.finest("(INST " + name + " " + type + ")");
+         if (bindingset.isEmpty()) {
+            addRelationFillers(name, ofl, null);
+         } else {
+            addRelationFillers(name, ofl, bindingset.get(0));
+		 }
+      } else {
+      	 if (bindingset.isEmpty()) {
+      	 	name = type.substring(0, 1).toLowerCase() + type.substring(1) + String.valueOf(counter);
+      	 	counter++;
+      	 	miniOntology.addIndividual(name, type);
+      	 	logger.finest("(INST " + name + " " + type + ")");
+      	 	names.add(name);
+      	 } else {
+         	for (MapSet<String, Value> instantiation : bindingset) {
+            	name = type.substring(0, 1).toLowerCase() + type.substring(1) + String.valueOf(counter);
+            	counter++;
+            	miniOntology.addIndividual(name, type);
+            	addRelationFillers(name, ofl, instantiation);
+            	logger.finest("(INST " + name + " " + type + ")");
+            	names.add(name);
+         	}
+         }
+      }
+      return names;
+	}
+	
+	public boolean runScript(String scriptName, List<String> parameterList) {
+		BindingSet bindingset = generateBindingSetFromOFL(parameterList);
+		if (bindingset.size() > 1) {
+			throw new SimulatorException("incompatible sets of parameters supplied for running the script " + scriptName);
+		}
+		
+		SimulationParameters newParameters = new SimulationParameters();
+        
+        for (String newParameter : parameterList){
+             String triplet[] = newParameter.split(":");
+             String newP = triplet[0];
+             String oldP = triplet[1];
+             if (bindingset.get(0).get(oldP) != null) {
+                for (Value newV : bindingset.get(0).get(oldP)) {
+                   newParameters.addParameter(newP, newV);
+                }
+             }
+        }
+        
+		return simulator.updateContextModel(scriptName, newParameters);	
+	}
+	
+	public void syntax_error(Symbol cur_token) {
+		isSuccessful = false;
+		report_error("Syntax error at SYM (" + cur_token + ")", null);
+	}
+	
+	public void unrecovered_syntax_error(Symbol cur_token) {
+		isSuccessful = false;
+		report_error("Fatal error at SYM (" + cur_token + ")", null);
+	}
+    
+
+	public void report_error(String message, Object info){
+		ScriptReaderLexer scanner = (ScriptReaderLexer) getScanner();
+		super.report_error("Error at " + scanner.getLineNumber()  + ":" + scanner.getColumn() + " of " + scriptName + ":\n"+ message, null);
+	}
+	
+	public static class IDorVAR extends ArrayList<String> {
+		protected String varName;
+		
+		public IDorVAR(String IDs, String varName) {
+			super();
+			this.add(IDs);
+			this.varName = varName;
+		}
+		
+		public IDorVAR(List<String> IDs, String varName) {
+			super();
+			this.addAll(IDs);
+			this.varName = varName;
+		}
+		
+		public String getVarName() {
+			return varName;
+		}
+	}
+:}
+
+/* Terminals (tokens returned by the scanner). */
+terminal EXEC, TEST, TESTEXIST, QUERY, DEFAULT, RUN, SEMICOLON, OPENBRACKET, CLOSEBRACKET, OPENPAREN, CLOSEPAREN, NEGATION;
+terminal String IDENTIFIER, VARIABLE, QUERYVAR, STR;
+terminal IND, FIL, INST, CURRENTINTERVAL, REM;
+
+/* Non terminals */
+non terminal IDorVAR id_or_var;
+non terminal script, command_list, command;
+non terminal exec_prim, exec_command_prim, test_prim, query_prim, default_prim, run_prim;
+non terminal ind_prim, fil_prim, update_interval_prim, rem_prim, rem_all_prim;
+non terminal List<String> opt_fil_list, fil_pair_list, inst_name, inst_prim;
+non terminal List<SimpleQuery> test_command_list, test_command_prim, testexist_prim, query_command_list, query_command_prim;
+
+script ::= OPENBRACKET command_list CLOSEBRACKET;
+
+command_list ::= command_list command | command;
+
+command ::= exec_prim | test_prim | testexist_prim | query_prim | default_prim | run_prim;
+
+exec_prim ::= EXEC OPENPAREN exec_command_prim CLOSEPAREN SEMICOLON;
+
+exec_command_prim ::= ind_prim | fil_prim | inst_prim | rem_prim | rem_all_prim | update_interval_prim;
+
+id_or_var ::= IDENTIFIER:id 
+	{:
+		RESULT = new IDorVAR(id, null);
+	:}
+	| VARIABLE:var
+	{:
+		List<String> names = new ArrayList<String>(); 
+		parser.groundOutVariable(var, false);  // should new instances be allowed?
+		Set<Value> params = parser.parameters.getParameter(var);
+		if (params != null) {
+			for (Value param : params) {
+				names.add(param.getFiller());
+			}
+		}
+		RESULT = new IDorVAR(names, var);
+	:}
+;
+
+ind_prim ::=
+	IND id_or_var:names IDENTIFIER:type 
+	{: 
+		if (parser.isSuccessful && parser.mode != SimulatorMode.TEST_PRECONDITION) {
+			if (names.isEmpty()) {
+				String name = type.substring(0, 1).toLowerCase() + type.substring(1) + String.valueOf(parser.counter);
+				names.add(name);
+				parser.parameters.addParameter(names.getVarName(), new Value(name, false));
+			}
+			for (String name : names) {
+				parser.miniOntology.addIndividual(name, type);
+				parser.logger.finest("(IND " + name + " " + type + ")");
+			}
+		}
+	:}
+;
+
+
+fil_prim ::=
+	FIL IDENTIFIER:relname id_or_var:names inst_name:values
+	{: 
+		if (parser.isSuccessful && parser.mode != SimulatorMode.TEST_PRECONDITION) {
+			for (String holder : names) {
+				for (String value : values) {
+					parser.miniOntology.addRelationFiller(relname, holder, value);
+					parser.logger.finest("(FIL " + relname + " " + holder + " " + value + ")");
+				}
+			}
+		}
+	:}
+	| FIL IDENTIFIER:relname IDENTIFIER:holder VARIABLE:var
+	{: 
+		if (parser.isSuccessful && parser.mode != SimulatorMode.TEST_PRECONDITION) {
+			parser.groundOutVariable(var, true);
+			Set<Value> params = parser.parameters.getParameter(var);
+			for (Value param : params) {
+				parser.miniOntology.addRelationFiller(relname, holder, param.getFiller());
+				parser.logger.finest("(FIL " + relname + " " + holder + " " + param.getFiller() + ")");
+			}
+		}
+	:}
+	| FIL IDENTIFIER:relname VARIABLE:var1 VARIABLE:var2
+	{: 
+		if (parser.isSuccessful && parser.mode != SimulatorMode.TEST_PRECONDITION) {
+			parser.groundOutVariable(var1, false);
+			parser.groundOutVariable(var2, true);
+			
+			List<String> variables = new ArrayList<String>();
+			variables.add(var1);
+			variables.add(var2);
+			
+			BindingSet bindingSet = parser.parameters.generateInstantiations(variables);
+			if (bindingSet.isEmpty() || !bindingSet.get(0).containsKey(var1) || !bindingSet.get(0).containsKey(var2)) {
+				parser.logger.finest(relname + " not filled because one or more arguments do not have parameters supplied");
+			} else {
+				for (MapSet<String, Value> instantiation : bindingSet) {
+		           for (Value v1 : instantiation.get(var1)) {
+		              for (Value v2 : instantiation.get(var2)) {
+		                 parser.miniOntology.addRelationFiller(relname, v1.getFiller(), v2.getFiller());
+		                 parser.logger.finest("(FIL " + relname + " " + v1.getFiller() + " " + v2.getFiller() + ")");
+		              }
+		           }
+				}
+			}
+		}
+	:}
+	| FIL VARIABLE:relname VARIABLE:var1 VARIABLE:var2
+	{: 
+		if (parser.isSuccessful && parser.mode != SimulatorMode.TEST_PRECONDITION) {
+			parser.groundOutVariable(relname, false);
+			parser.groundOutVariable(var1, false);
+			parser.groundOutVariable(var2, true);
+			
+			List<String> variables = new ArrayList<String>();
+			variables.add(relname);
+			variables.add(var1);
+			variables.add(var2);
+			
+			BindingSet bindingSet = parser.parameters.generateInstantiations(variables);
+			if (bindingSet.isEmpty() || !bindingSet.get(0).containsKey(var1) || !bindingSet.get(0).containsKey(var2)) {
+				parser.logger.finest(relname + " not filled because one or more arguments do not have parameters supplied");
+			} else {
+				for (MapSet<String, Value> instantiation : bindingSet) {
+		           for (Value vRel : instantiation.get(relname)) {		
+		              for (Value v1 : instantiation.get(var1)) {
+		                 for (Value v2 : instantiation.get(var2)) {
+		                    parser.miniOntology.addRelationFiller(vRel.getFiller(), v1.getFiller(), v2.getFiller());
+		                    parser.logger.finest("(FIL " + vRel.getFiller() + " " + v1.getFiller() + " " + v2.getFiller() + ")");
+		                 }
+		              }
+		           }
+				}
+			}
+		}
+	:}
+;
+
+inst_prim ::=
+	INST id_or_var:names IDENTIFIER:type id_or_var:parent id_or_var:preceding opt_fil_list:ofl
+	{: 
+		if (parser.isSuccessful && parser.mode != SimulatorMode.TEST_PRECONDITION) {
+			if (parent.size() > 1 || preceding.size() > 1) {
+				throw new SimulatorException("multiple parent and/or preceding intervals supplied for a new interval");
+			}
+			if (names.isEmpty()) {
+				List<String> ids = parser.addNewIntervals(null, type, parent.get(0), preceding.get(0), ofl);
+				for (String id : ids) {
+					parser.parameters.addParameter(names.getVarName(), new Value(id, false));
+				}
+				RESULT = ids;
+			} else if (names.size() == 1) {
+				RESULT = parser.addNewIntervals(names.get(0), type, parent.get(0), preceding.get(0), ofl);
+			} else {
+				// would not know how to match up the multiple names with the different sets of parameters
+				parser.isSuccessful = false;
+				throw new SimulatorException("more than one instance name supplied for a new interval");
+			}
+		}
+	:}
+	| INST id_or_var:names IDENTIFIER:type opt_fil_list:ofl
+	{: 
+		if (parser.isSuccessful && parser.mode != SimulatorMode.TEST_PRECONDITION) {
+			if (names.isEmpty()) {
+				List<String> ids = parser.addNewIndividuals(null, type, ofl);
+				for (String id : ids) {
+					parser.parameters.addParameter(names.getVarName(), new Value(id, false));
+				}
+				RESULT = ids;
+			} else if (names.size() == 1) {
+				RESULT = parser.addNewIndividuals(names.get(0), type, ofl);
+			} else {
+				// would not know how to match up the multiple names with the different sets of parameters
+				parser.isSuccessful = false;
+				throw new SimulatorException("more than one instance name supplied for a new instance");
+			}
+		}
+	:}
+	| INST IDENTIFIER:type opt_fil_list:ofl
+	{:
+		if (parser.isSuccessful && parser.mode != SimulatorMode.TEST_PRECONDITION) {
+			RESULT = parser.addNewIndividuals(null, type, ofl);
+		}
+	:}
+;
+
+
+opt_fil_list ::=
+	FIL fil_pair_list:rpl
+	{: 
+		RESULT = rpl; 
+	:}
+	| 
+	{: 
+		RESULT = new ArrayList<String>(); 
+	:}
+;
+
+
+fil_pair_list ::=
+	fil_pair_list:rpl OPENPAREN IDENTIFIER:relname inst_name:instname CLOSEPAREN
+	{: 
+		if (parser.isSuccessful) {
+			for (String name : instname) {
+				rpl.add(relname + ":" + name + ":false"); 
+			}
+			RESULT = rpl; 
+		}
+	:}
+	| fil_pair_list:rpl OPENPAREN IDENTIFIER:relname VARIABLE:var CLOSEPAREN
+	{: 
+		if (parser.isSuccessful) {
+			rpl.add(relname + ":" + var + ":true"); 
+			RESULT = rpl; 
+		}
+	:}
+	|
+	{: 
+		if (parser.isSuccessful) {
+			RESULT = new ArrayList<String>(); 
+		}
+	:}
+;
+
+inst_name ::=
+	IDENTIFIER:i 
+	{: 
+		List<String> names = new ArrayList<String>(); 
+		names.add(i);
+		RESULT = names; 
+	:}
+	| OPENPAREN inst_prim:names CLOSEPAREN 
+	{: 
+		RESULT = names; 
+	:}
+	| STR:s 
+	{: 
+		List<String> names = new ArrayList<String>(); 
+		names.add(s);
+		RESULT = names; 
+	:}
+;
+
+rem_prim ::=
+	REM IDENTIFIER:relname id_or_var:names IDENTIFIER:value 
+	{: 
+		if (parser.isSuccessful && parser.mode != SimulatorMode.TEST_PRECONDITION) {
+			for (String holder : names) {
+				try {
+					parser.miniOntology.removeRelationFiller(relname, holder, value); 
+					parser.logger.finest("(REM " + relname + " " + holder + " " + value + ")");
+				} catch (NoInstanceFoundException nife) {
+					parser.logger.warning("no instance found: " + nife.getMessage());
+				}
+			}
+		}
+	:}
+	| REM IDENTIFIER:relname id_or_var:names STR:value 
+	{: 
+		if (parser.isSuccessful && parser.mode != SimulatorMode.TEST_PRECONDITION) {
+			for (String holder : names) {
+				try {
+					parser.miniOntology.removeRelationFiller(relname, holder, value); 
+					parser.logger.finest("(REM " + relname + " " + holder + " " + value + ")");
+				} catch (NoInstanceFoundException nife) {
+					parser.logger.warning("no instance found: " + nife.getMessage());
+				}
+			}
+		}
+	:}
+	| REM IDENTIFIER:relname IDENTIFIER:holder VARIABLE:var
+	{: 
+		if (parser.isSuccessful && parser.mode != SimulatorMode.TEST_PRECONDITION) {
+			parser.groundOutVariable(var, false);		
+			Set<Value> params = parser.parameters.getParameter(var);
+			if (params != null) {
+				for (Value param : params) {
+					try {
+						parser.miniOntology.removeRelationFiller(relname, holder, param.getFiller()); 
+						parser.logger.finest("(REM " + relname + " " + holder + " " + param.getFiller() + ")");
+					} catch (NoInstanceFoundException nife) {
+						parser.logger.warning("no instance found: " + nife.getMessage());
+					}
+				}
+			}
+		}
+	:}
+
+	| REM IDENTIFIER:relname VARIABLE:var1 VARIABLE:var2
+	{: 
+		if (parser.isSuccessful && parser.mode != SimulatorMode.TEST_PRECONDITION) {
+			parser.groundOutVariable(var1, false);
+			parser.groundOutVariable(var2, false);
+		
+			List<String> variables = new ArrayList<String>();
+			variables.add(var1);
+			variables.add(var2);
+		
+			BindingSet bindingSet = parser.parameters.generateInstantiations(variables);
+			if (bindingSet.isEmpty() || !bindingSet.get(0).containsKey(var1) || !bindingSet.get(0).containsKey(var2)) {
+				parser.logger.finest(relname + " not filled because one or more arguments do not have parameters supplied");
+			} else {
+				for (MapSet<String, Value> instantiation : bindingSet) {
+		           for (Value v1 : instantiation.get(var1)) {
+	    	          for (Value v2 : instantiation.get(var2)) {
+	    	             try {
+	        	            parser.miniOntology.removeRelationFiller(relname, v1.getFiller(), v2.getFiller());
+	        	            parser.logger.finest("(REM " + relname + " " + v1.getFiller() + " " + v2.getFiller() + ")");
+	        	         } catch (NoInstanceFoundException nife) {
+	    	                parser.logger.warning("no instance found: " + nife.getMessage());
+	    	             }
+	            	  }
+	           		}
+				}
+			}
+		}
+			
+	:}
+;
+
+rem_all_prim ::=
+	REM IDENTIFIER:relname id_or_var:names
+	{: 
+		if (parser.isSuccessful && parser.mode != SimulatorMode.TEST_PRECONDITION) {
+			for (String holder : names) {
+				try {
+					parser.miniOntology.removeAllRelationFillers(relname, holder); 
+					parser.logger.finest("(REM " + relname + " " + holder + ")");
+				} catch (NoInstanceFoundException nife) {
+						parser.logger.warning("no instance found: " + nife.getMessage());
+				}
+			}
+		}
+	:}
+;
+
+update_interval_prim ::= 
+	CURRENTINTERVAL id_or_var:names
+	{: 
+		if (parser.isSuccessful && parser.mode == SimulatorMode.CONTEXTMODEL_UPDATE) {
+			if (names.isEmpty()) {
+				parser.isSuccessful = false;
+				throw new SimulatorException("trying to set an invalid interval " + names.getVarName() + " as the current one in the " + parser.scriptName + " script.");
+			} else if (names.size() == 1) {
+				parser.miniOntology.setCurrentInterval(names.get(0)); 
+			} else {
+				parser.isSuccessful = false;
+				throw new SimulatorException("trying to set multiple intervals as the current one");
+			}
+		}
+	:}
+;
+
+
+test_prim ::= 
+	TEST NEGATION test_command_list:tcl SEMICOLON
+	{: 
+		if (parser.isSuccessful) {
+			boolean result = true;
+			for (SimpleQuery s : tcl) {
+				boolean currentResult = MiniOntologyQueryAPI.holds(parser.miniOntology, s);
+				result = result && currentResult;
+				parser.logger.finest("test: !" + s + ": " + result);
+				if (currentResult) {
+					parser.logger.warning("test failed on " + s);
+				}
+			}
+			parser.isSuccessful = !result;
+		}
+	:}
+	|
+	TEST test_command_list:tcl SEMICOLON
+	{: 
+		if (parser.isSuccessful) {
+			boolean result = true;
+			for (SimpleQuery s : tcl) {
+				boolean currentResult = MiniOntologyQueryAPI.holds(parser.miniOntology, s);
+				result = result && currentResult;
+				parser.logger.finest("test: " + s + ": " + result);
+				if (!currentResult) {
+					parser.logger.warning("test failed on " + s);
+				}
+			}
+			parser.isSuccessful = result;
+		}
+	:}
+;
+
+test_command_list ::= 
+	test_command_list:tcl OPENPAREN test_command_prim:test CLOSEPAREN
+	{: 
+		tcl.addAll(test);
+		RESULT = tcl;
+	:}
+	| 
+	{: 
+		RESULT = new ArrayList<SimpleQuery>();
+	:}
+;	
+
+test_command_prim ::= 
+	id_or_var:names IDENTIFIER:type
+	{:  
+		List<SimpleQuery> queries = new ArrayList<SimpleQuery>();
+		for (String name : names) {
+			queries.add(new SimpleQuery(name, type));
+		}
+     	RESULT = queries;
+	:}
+	| id_or_var:relnames id_or_var:names IDENTIFIER:value 
+	{:  
+		List<SimpleQuery> queries = new ArrayList<SimpleQuery>();
+		if (relnames.getVarName() != null && names.getVarName() != null) {
+			String var1 = relnames.getVarName();
+			String var2 = names.getVarName();
+			parser.groundOutVariable(var1, false);
+			parser.groundOutVariable(var2, false);
+
+			List<String> variables = new ArrayList<String>();
+			variables.add(var1);
+			variables.add(var2);
+
+			BindingSet bindingSet = parser.parameters.generateInstantiations(variables);
+			if (bindingSet.isEmpty() || !bindingSet.get(0).containsKey(var1) || !bindingSet.get(0).containsKey(var2)) {
+				parser.logger.finest("test not carried out because one or more arguments do not have parameters supplied");
+			} else {
+				for (MapSet<String, Value> instantiation : bindingSet) {
+					for (Value v1 : instantiation.get(var1)) {
+				    	for (Value v2 : instantiation.get(var2)) {
+							queries.add(new SimpleQuery(v1.getFiller(), v2.getFiller(), value));
+						}
+					}
+				}
+			}
+        } else {
+			for (String relname : relnames) {
+				for (String holder : names) {
+					queries.add(new SimpleQuery(relname, holder, value));
+				}
+			}
+		}
+     	RESULT = queries;
+	:}
+	| id_or_var:relnames id_or_var:names STR:value 
+	{: 
+		List<SimpleQuery> queries = new ArrayList<SimpleQuery>();
+		if (relnames.getVarName() != null && names.getVarName() != null) {
+			String var1 = relnames.getVarName();
+			String var2 = names.getVarName();
+			parser.groundOutVariable(var1, false);
+			parser.groundOutVariable(var2, false);
+
+			List<String> variables = new ArrayList<String>();
+			variables.add(var1);
+			variables.add(var2);
+
+			BindingSet bindingSet = parser.parameters.generateInstantiations(variables);
+			if (bindingSet.isEmpty() || !bindingSet.get(0).containsKey(var1) || !bindingSet.get(0).containsKey(var2)) {
+				parser.logger.finest("test not carried out because one or more arguments do not have parameters supplied");
+			} else {
+				for (MapSet<String, Value> instantiation : bindingSet) {
+					for (Value v1 : instantiation.get(var1)) {
+				    	for (Value v2 : instantiation.get(var2)) {
+							queries.add(new SimpleQuery(v1.getFiller(), v2.getFiller(), value));
+						}
+					}
+				}
+			}
+        } else {
+			for (String relname : relnames) {
+				for (String holder : names) {
+					queries.add(new SimpleQuery(relname, holder, value));
+				}
+			}
+		}
+     	RESULT = queries;
+	:}	
+	| id_or_var:relnames IDENTIFIER:holder VARIABLE:var2
+	{: 
+		List<SimpleQuery> queries = new ArrayList<SimpleQuery>();
+		if (relnames.getVarName() != null) {
+			String var1 = relnames.getVarName();
+			parser.groundOutVariable(var1, false);
+			parser.groundOutVariable(var2, false);
+
+			List<String> variables = new ArrayList<String>();
+			variables.add(var1);
+			variables.add(var2);
+
+			BindingSet bindingSet = parser.parameters.generateInstantiations(variables);
+			if (bindingSet.isEmpty() || !bindingSet.get(0).containsKey(var1) || !bindingSet.get(0).containsKey(var2)) {
+				parser.logger.finest("test not carried out because one or more arguments do not have parameters supplied");
+			} else {
+				for (MapSet<String, Value> instantiation : bindingSet) {
+					for (Value v1 : instantiation.get(var1)) {
+				    	for (Value v2 : instantiation.get(var2)) {
+							queries.add(new SimpleQuery(v1.getFiller(), holder, v2.getFiller()));
+						}
+					}
+				}
+			}
+		} else {
+			parser.groundOutVariable(var2, false);		
+			Set<Value> params = parser.parameters.getParameter(var2);
+			for (String relname : relnames) {
+				for (Value param : params) {
+					queries.add(new SimpleQuery(relname, holder, param.getFiller())); 
+				}
+			}
+		}
+		RESULT = queries;
+	:}
+	| id_or_var:relnames VARIABLE:var1 VARIABLE:var2
+	{: 
+		List<SimpleQuery> queries = new ArrayList<SimpleQuery>();
+		if (relnames.getVarName() != null) {
+			String var0 = relnames.getVarName();
+			parser.groundOutVariable(var0, false);
+			parser.groundOutVariable(var1, false);
+			parser.groundOutVariable(var2, false);
+		
+			List<String> variables = new ArrayList<String>();
+			variables.add(var0);
+			variables.add(var1);
+			variables.add(var2);
+		
+			BindingSet bindingSet = parser.parameters.generateInstantiations(variables);
+			if (bindingSet.isEmpty() || !bindingSet.get(0).containsKey(var0) || !bindingSet.get(0).containsKey(var1) || !bindingSet.get(0).containsKey(var2)) {
+				parser.logger.finest("test not carried out because one or more arguments do not have parameters supplied");
+			} else {
+				for (MapSet<String, Value> instantiation : bindingSet) {
+					for (Value v0 : instantiation.get(var0)) {
+						for (Value v1 : instantiation.get(var1)) {
+							for (Value v2 : instantiation.get(var2)) {
+								queries.add(new SimpleQuery(v0.getFiller(), v1.getFiller(), v2.getFiller()));
+							}
+	             		}
+	          		}
+          		}
+			}
+		} else {
+			parser.groundOutVariable(var1, false);
+			parser.groundOutVariable(var2, false);
+		
+			List<String> variables = new ArrayList<String>();
+			variables.add(var1);
+			variables.add(var2);
+		
+			for (String relname : relnames) {
+			
+				BindingSet bindingSet = parser.parameters.generateInstantiations(variables);
+				if (bindingSet.isEmpty() || !bindingSet.get(0).containsKey(var1) || !bindingSet.get(0).containsKey(var2)) {
+					parser.logger.finest(relname + " not filled because one or more arguments do not have parameters supplied");
+				} else {
+					for (MapSet<String, Value> instantiation : bindingSet) {
+						for (Value v1 : instantiation.get(var1)) {
+							for (Value v2 : instantiation.get(var2)) {
+								queries.add(new SimpleQuery(relname, v1.getFiller(), v2.getFiller()));
+	         	     		}
+	         	  		}
+					}
+				}
+			}
+		}
+		RESULT = queries;
+	:}
+;
+
+testexist_prim ::= 
+	TESTEXIST NEGATION query_command_list:qcl SEMICOLON
+	{: 
+		if (parser.isSuccessful) {
+			parser.logger.finest("testexist: !" + qcl);
+			List<HashMap<String, String>> results = MiniOntologyQueryAPI.ask(parser.miniOntology, qcl);
+			parser.logger.finest(results == null ? "null" : results.toString());
+			parser.isSuccessful = (results == null || results.isEmpty());
+		}
+	:}
+	|
+	TESTEXIST query_command_list:qcl SEMICOLON
+	{: 
+		if (parser.isSuccessful) {
+			parser.logger.finest("testexist: " + qcl);
+			List<HashMap<String, String>> results = MiniOntologyQueryAPI.ask(parser.miniOntology, qcl);
+			parser.logger.finest(results == null ? "null" : results.toString());
+			parser.isSuccessful = (results != null && !results.isEmpty());
+		}
+	:}
+;
+
+query_prim ::= QUERY query_command_list:qcl SEMICOLON
+{:
+	if (parser.isSuccessful) {
+		parser.logger.finest("query: " + qcl);
+		List<HashMap<String, String>> results = MiniOntologyQueryAPI.ask(parser.miniOntology, qcl);
+		parser.logger.finest(results == null ? "null" : results.toString());
+		
+		if (results != null && !results.isEmpty()) {
+			List<HashMap<String, Value>> bindingSet = new ArrayList<HashMap<String, Value>>();
+			for (HashMap<String, String> result : results) {
+				HashMap<String, Value> assignment = new HashMap<String, Value>(); 
+				for (String key : result.keySet()) {
+		
+					String value = result.get(key);
+					//System.out.println(value);
+					if (QueryResultPrinter.isTypedFiller(value)) {
+						value = QueryResultPrinter.getIndividualName(value);
+					}
+					assignment.put(key.substring(1), new Value(value, false));
+				}
+				bindingSet.add(assignment);
+			}
+			parser.parameters.addAssignmentConstraint(new BindingSet(bindingSet));
+		}
+	}
+:}
+;
+
+query_command_list ::= 
+	query_command_list:qcl OPENPAREN query_command_prim:query CLOSEPAREN
+	{: 
+		qcl.addAll(query);
+		RESULT = qcl;
+	:}
+	| 
+	{: 
+		RESULT = new ArrayList<SimpleQuery>();
+	:}
+;	
+
+
+query_command_prim ::=
+	QUERYVAR:queryVar IDENTIFIER:type
+	{:  
+		List<SimpleQuery> queries = new ArrayList<SimpleQuery>();
+		queries.add(new SimpleQuery(queryVar, type));
+     	RESULT = queries;
+	:}
+	| IDENTIFIER:relname id_or_var:names QUERYVAR:queryVar
+	{:  
+		List<SimpleQuery> queries = new ArrayList<SimpleQuery>();
+		for (String holder : names) {
+			queries.add(new SimpleQuery(relname, holder, queryVar));
+		}
+     	RESULT = queries;
+	:}
+	| IDENTIFIER:relname QUERYVAR:queryVar id_or_var:values
+	{:  
+		List<SimpleQuery> queries = new ArrayList<SimpleQuery>();
+		for (String value : values) {
+			queries.add(new SimpleQuery(relname, queryVar, value));
+		}
+     	RESULT = queries;
+	:}
+	| IDENTIFIER:relname QUERYVAR:queryVar1 QUERYVAR:queryVar2
+	{:  
+		List<SimpleQuery> queries = new ArrayList<SimpleQuery>();
+		queries.add(new SimpleQuery(relname, queryVar1, queryVar2));
+     	RESULT = queries;
+	:}
+	| QUERYVAR:queryVar1 id_or_var:names QUERYVAR:queryVar2
+	{:  
+		List<SimpleQuery> queries = new ArrayList<SimpleQuery>();
+		for (String holder : names) {
+			queries.add(new SimpleQuery(queryVar1, holder, queryVar2));
+		}
+     	RESULT = queries;
+	:}
+	| QUERYVAR:queryVar1 QUERYVAR:queryVar2 id_or_var:values
+	{:  
+		List<SimpleQuery> queries = new ArrayList<SimpleQuery>();
+		for (String value : values) {
+			queries.add(new SimpleQuery(queryVar1, queryVar2, value));
+		}
+     	RESULT = queries;
+	:}
+	| QUERYVAR:queryVar1 QUERYVAR:queryVar2 QUERYVAR:queryVar3
+	{:  
+		List<SimpleQuery> queries = new ArrayList<SimpleQuery>();
+		queries.add(new SimpleQuery(queryVar1, queryVar2, queryVar3));
+     	RESULT = queries;
+	:}
+;
+
+default_prim ::= DEFAULT OPENPAREN VARIABLE:var id_or_var:fillers CLOSEPAREN SEMICOLON
+	{:
+		Set<Value> params = parser.parameters.getParameter(var);
+		if (params == null) {
+			for (String filler : fillers) {
+				parser.parameters.addParameter(var, new Value(filler, false));
+			}
+		}
+	:}
+;
+
+run_prim ::= RUN OPENPAREN IDENTIFIER:scriptName fil_pair_list:fpl CLOSEPAREN SEMICOLON
+	{:
+		if (parser.isSuccessful) {
+			parser.isSuccessful = parser.runScript(scriptName, fpl);
+		}
+	:}
+;
+

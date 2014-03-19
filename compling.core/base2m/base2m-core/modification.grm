@@ -1,0 +1,44 @@
+/****
+***
+*** Modifier Schemas
+***
+****/
+
+
+// A simple modifier schema which is the root of the modifier schema hierarchy
+
+schema Modifier
+   roles
+     modifiedEntity
+
+// A simple modifier schema for scalars like "big" or "red"
+
+schema ScalarModifier
+   subcase of Modifier
+   roles
+     scale
+     scalarValue
+
+
+// A simple (atomic) attribute-filler modifier (e.g. someone's name)
+
+schema AttributeFiller
+   subcase of Modifier
+   roles
+     relationName
+     filler
+
+
+// For noun noun compounds, we need a way to underspecify the
+//relation between the two entities, so this one will leave the "relationName" role blank
+//and just specify the two entities that are in relation two each other
+
+schema NounNounModifier
+  subcase of Modifier
+  roles
+    modifierEntity
+
+
+// Of course, frame based modifiers will also have to be a subcase of Modifier,
+// but I'm not sure how to proceed with them. 
+

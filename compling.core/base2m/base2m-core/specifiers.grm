@@ -1,0 +1,103 @@
+/*
+ *  Specifiers (Determiners, Possessive Pronouns, wh-words)
+ *
+ */
+
+general construction NPSpecifier
+  subcase of Word, HasNominalFeatures
+  meaning: RD
+
+
+general construction Determiner
+   subcase of NPSpecifier
+
+
+construction The
+   subcase of Determiner
+   form
+      constraints
+         self.f.orth <-- "the"
+   meaning
+      constraints
+         self.m.givenness <-- "uniquely-identifiable"
+
+
+construction A
+   subcase of Determiner, Singular
+   constructional
+     constraints
+       self.features.massOrPlural <-- "no"  
+   form
+      constraints
+         self.f.orth <-- "a"
+   meaning
+      constraints
+         self.m.givenness <-- "type-identifiable"
+         self.m.number <-- "1"
+
+
+construction An
+   subcase of Determiner, Singular
+   constructional
+     constraints
+       self.features.massOrPlural <-- "no"  
+   form
+      constraints
+         self.f.orth <-- "an"
+   meaning
+      constraints
+         self.m.givenness <-- "type-identifiable"
+         self.m.number <-- "1"
+   
+   
+general construction PossessivePronoun
+   subcase of Word, NPSpecifier
+   meaning
+     evokes Possession as possession
+     evokes RD as possessor
+     constraints
+       self.m.referent <--> possession.possessed
+       possessor.referent <--> possession.possessor
+       possessor.givenness <-- "in-focus"
+
+
+construction His
+   subcase of PossessivePronoun
+   form
+      constraints
+         self.f.orth <-- "his"
+   meaning
+      constraints
+         possessor.ontological-category <-- @male-person
+
+
+construction HerPoss
+   subcase of PossessivePronoun
+   form
+      constraints
+         self.f.orth <-- "her"
+   meaning
+      constraints
+         possessor.ontological-category <-- @female-person
+
+
+general construction WH-Specifier
+   subcase of NPSpecifier
+
+construction What
+   subcase of WH-Specifier, WH-NP
+   form
+      constraints
+         self.f.orth <-- "what"
+   meaning
+      constraints
+         self.m.givenness <-- "???"
+
+construction Which
+   subcase of WH-Specifier, WH-NP
+   form
+      constraints
+         self.f.orth <-- "which"
+   meaning
+      constraints
+         self.m.givenness <-- "???"

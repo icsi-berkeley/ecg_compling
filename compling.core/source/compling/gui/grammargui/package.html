@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html><head></head>
+<body bgcolor="white">
+
+<h2>Package Specification</h2>
+
+ <p>
+ This package defines a simple GUI to to load a .pref file, to show
+ its contents, and to analyze a sentence using the loaded grammar.
+
+ <p>
+ The main GUI class is <a href="#GrammarBrowser">GrammarBrowser</a>. It extends 
+ a jface <a href="org.eclipse.jface#ApplicationWindow">ApplicationWindow</a>. 
+ Two methods are crucial for the initialization (they override the analogous 
+ ApplicationWindow's methods):
+ <ul>
+  <li>
+  <a href="#GrammarBrowser.createMenuManager">GrammarBrowser.createMenuManager</a>: 
+    main menu creation</li>
+  <li>
+  <a href="#GrammarBrowser.createContent">GrammarBrowser.createContent</a>: 
+    actual content of the ApplicationWindow</li></ul>
+
+<p> 
+Menu actions are implemented in the 
+<a href="#GrammarBrowserAction">GrammarBrowserAction</a> class, which defines 
+all the application's menus. Each Action subclass represents one. 
+The run() method implementation is straightforward: it calls a
+suitable method defined by the GrammarBrowser class.
+All menu action handlers in GrammarBroser are of the form 
+handle&lt;ActionName&gt;.
+
+<p>
+The application window content is made of two SashForms. One is horizontal
+and divides the interactive area from the bottom part that contains the output
+from the sentence parsing process. The other is contained in the former's upper
+section and contains the left and right parts, both of the implemented using
+CTabFolders.
+
+<p>
+The class <a href="#TypeSystemHtmlPanel">TypeSystemHtmlPanel</a> displays
+the actual content of the Schema/Construction/Ontology. The model is 
+implemented mostly using Eva's code for the corresponding Swing tree model
+with a few modifications. 
+
+<p>
+The Schema/Construcion/Ontology hierarchies are shown in a tree. 
+Events (mouse clicks) originating from the tree elements are captured in 
+TypeSystemHtmlPanel's constructor. There, a reference to a
+IGrammarBrowserController is used to notify selections to the main application 
+window.
+
+<p>
+The ModelChangedEvent, ModelChangedEventManager classes, and the 
+IModelChangeListener interfaces define data types used for changes in a generic
+data model. Used in GrammarBrowser to notify menus that the a new grammar has
+been loaded. Clients register and unregister themselves with GrammarBrowser 
+object using 
+<a href="#GrammarBrowser.addModelChangeListener">GrammarBrowser.addModelChangeListener</a>
+and 
+<a href="#GrammarBrowser.removeModelChangeListener">GrammarBrowser.removeModelChangeListener</a>.
+
+<p>
+The <a href="#Util">Util</a> class defines various utility methods. It probably
+belongs to some other package, for I left it here for simplicity.
+
+<p>
+The <a href="#WindowList">WindowList</a> class defines a window showing the list
+of the external output window. Not yet implemented/used.
+
+</body>
+</html>

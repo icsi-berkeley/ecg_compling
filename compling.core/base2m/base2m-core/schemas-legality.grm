@@ -1,0 +1,95 @@
+/*********************
+ Schemas for the Legality frame
+ *********************
+ nschneid
+ 2009-05-12
+*/
+
+// Adapted from FrameNet: http://framenet.icsi.berkeley.edu/index.php?option=com_wrapper&Itemid=118&frame=Legality
+
+// The main frame: positive or negative legality
+
+schema Legality
+  roles
+    entity
+    code	// The Code is the set of rules, laws or regulations that determine whether the Action is allowed or prohibited.
+    islegal	// "yes" (for legality) or "no" (for illegality)
+
+schema ObjectLegality
+  subcase of Legality
+  roles
+    object: @entity	// The Object complies with or violates the Code by virtue of its existence, location or possession.
+  
+schema ActionLegality
+  subcase of Legality
+  roles
+	action: Process	// The Action is the behavior which complies with or violates the Code.
+
+// Modifiers
+
+// Legal
+
+schema Legal
+  subcase of Modifier, Legality
+  constraints
+    islegal <-- "yes"
+    // self << modifiedEntity	// some role of Legality is filled by modifiedEntry: action ('legal action') or object ('legal drug'). Cannot be the code; 'legal document/requirement' is a different sense of 'legal'
+
+schema LegalObject
+  subcase of Legal, ObjectLegality
+  constraints
+    object <--> modifiedEntity
+    
+schema LegalAction
+  subcase of Legal, ActionLegality
+  constraints
+    action <--> modifiedEntity
+
+// Illegal
+
+schema Illegal
+  subcase of Modifier, Legality
+  constraints
+    islegal <-- "no"
+    // self << modifiedEntity	// some role of Legality is filled by modifiedEntry: action ('illegal action') or object ('illegal drug'). Cannot be the code (*'illegal code').
+
+schema IllegalObject
+  subcase of Illegal, ObjectLegality
+  constraints
+    object <--> modifiedEntity
+    
+schema IllegalAction
+  subcase of Illegal, ActionLegality
+  constraints
+    action <--> modifiedEntity
+
+// Verb: Legalize (use productive -ize suffix instead)
+/*
+schema Legalize
+  subcase of CauseStateChange
+  evokes Illegal as illeg
+  evokes Legal as leg
+  constraints
+  	process2.initialState <--> illeg
+  	process2.finalState <--> leg
+  	
+schema LegalizeObject
+  subcase of Legalize
+  evokes IllegalObject as oilleg
+  evokes LegalObject as oleg
+  constraints
+    illeg <--> oilleg
+    leg <--> oleg
+    oilleg.object <--> affected
+  	oleg.object <--> affected
+  	
+schema LegalizeAction
+  subcase of Legalize
+  evokes IllegalAction as ailleg
+  evokes LegalAction as aleg
+  constraints
+    illeg <--> ailleg
+    leg <--> aleg
+    ailleg.action <--> affected
+  	aleg.action <--> affected
+*/

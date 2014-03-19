@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHAT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.talkbank.org/ns/talkbank talkbank.xsd" xmlns="http://www.talkbank.org/ns/talkbank" Version="1.1.3" Lang="zh" Corpus="beijing" Id="cx4" Date="1984-01-01">
+	
+	<Participants>
+		<participant id="MOT" role="Mother" language="zh" />
+		<participant id="CHI" role="Target_Child" language="zh" />
+		<participant id="INV" role="Investigator" language="zh" />
+	</Participants>
+	
+	<!-- Child is fussing and kicking a box(?) (from underneath a table?). mother threatens with no trips and tries to distract with crayons -->
+	
+	<Setting>
+		<entity cat="Livingroom" id="livingroom"/>
+		<entity cat="Pen" id="pen"/>
+		<entity cat="Box" id="box"/>
+	</Setting>
+	
+	<Setup>
+		<binding field="location" source_ref="CHI" ref="livingroom"/>
+		<binding field="location" source_ref="MOT" ref="livingroom"/>
+		<binding field="location" source_ref="box" ref="ground(livingroom)"/>
+	</Setup>
+
+	<event cat="Kick" id="kick01">
+		<binding field="kicker" ref="CHI"/>
+		<binding field="kickee" ref="box"/>
+	</event>
+	
+	
+	<u who="MOT" id="765">
+		<clause>
+			<w>yao4</w><w>bu4</w><w>wo3</w><w>bu2</w><w>dai4</w><w>ni3</w><w>wanr2</w><w>qu4</w><w>le</w><t type="p" />
+			<a type="speech act">
+				<sa cat="admonishing" id="u765sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">要不我不帶你玩去了</a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="766">
+		<clause>
+			<w>you4</w><w>gei3</w><w>wo3</w><w>deng4</w><w>chu1</w><w>lai2</w><w>le<overlap type="overlap follows" /></w><t type="p" />
+			<a type="speech act">
+				<sa cat="admonishing" id="u766sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">又給我蹬出來了</a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="CHI" id="767">
+		<clause>
+			<w>en<overlap type="overlap precedes" /></w><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><t type="p" />
+			<a type="speech act">
+				<sa cat="answering" id="u767sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="768">
+		<clause>
+			<w>gao4</w><w>wo3</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u768sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="770">
+		<clause>
+			<w>ei</w><w>ni3</w><w>mei2</w><w>bi3</w><w>ne</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u770sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="771">
+		<clause>
+			<w>ma1</w><w>gei3</w><w>ni3</w><w>mai3</w><w>de</w><w>nei4</w><w>yi2</w><w>tao4</w><w>bi3</w><w>ne</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-answer" id="u771sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">媽給你買的那一套筆呢</a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="772">
+		<clause>
+			<w>hai2</w><w>you3</w><w>ma</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-answer" id="u772sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">還有嗎</a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="773">
+		<clause>
+			<w>a</w><w>wo3</w><w>gei3</w><w>ni3</w><w>mai3</w><w>de</w><w>nei4</w><w>yi2</w><w>tao4</w><w>bi3</w><g><w>hai2</w><w>you3</w><w>ma</w><overlap type="overlap follows" /></g><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-answer" id="u773sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="CHI" id="774">
+		<clause>
+			<g><wn><w>ma1</w><wk type="cmp" /><w>ma<p type="drawl" /></w></wn><overlap type="overlap precedes" /></g><t type="p" />
+			<a type="speech act">
+				<sa cat="answering" id="u774sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+</CHAT>

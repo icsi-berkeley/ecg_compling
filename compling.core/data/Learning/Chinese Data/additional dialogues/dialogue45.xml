@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHAT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.talkbank.org/ns/talkbank talkbank.xsd" xmlns="http://www.talkbank.org/ns/talkbank" Version="1.1.3" Lang="zh" Corpus="beijing" Id="cx4" Date="1984-01-01">
+	
+	<Participants>
+		<participant id="MOT" role="Mother" language="zh" />
+		<participant id="CHI" role="Target_Child" language="zh" />
+		<participant id="INV" role="Investigator" language="zh" />
+	</Participants>
+	
+	<!-- Child tries to feed toy some food. Mother tries to stop her. -->
+	
+	<Setting>
+		<entity cat="Diningroom" id="diningroom"/>
+		<entity cat="Potato" id="potato"/>
+		<entity cat="Bear" id="bear"/>
+	</Setting>
+	
+	<Setup>
+		<binding field="location" source_ref="CHI" ref="highchair(diningroom)"/>
+		<binding field="location" source_ref="MOT" ref="table(diningroom)"/>
+		<binding field="location" source_ref="bear" ref="table(diningroom)"/>
+		<binding field="location" source_ref="potato" ref="table(diningroom)"/>
+	</Setup>
+	
+	<event cat="Take" id="take01">
+		<binding field="taker" ref="CHI"/>
+		<binding field="taken" ref="potato"/>
+	</event>
+	
+	<event cat="Feed" id="feed02">
+		<binding field="feeder" ref="CHI"/>
+		<binding field="eater" ref="bear"/>
+		<binding field="food" ref="potato"/>
+	</event>
+	
+	
+	<u who="MOT" id="1616">
+		<clause>
+			<w>ta1</w><w>nar3</w><w>hui4</w><w>chi1</w><w>a</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u1616sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="1618">
+		<clause>
+			<w>ta1</w><w>hui4</w><w>chi1</w><w>ma</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-answer" id="u1618sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="CHI" id="1620">
+		<clause>
+			<w>wu1<a type="replacement">wo3</a><error /></w><w>wai4<a type="replacement">wei4</a><error /></w><w>ya</w><t type="p" />
+			<a type="speech act">
+				<sa cat="answering" id="u1620sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="CHI" id="1622">
+		<clause>
+			<w>wo3</w><w>wei4</w><w>ya</w><t type="p" />
+			<a type="speech act">
+				<sa cat="practicing" id="u1622sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="1623">
+		<clause>
+			<w>wei4</w><w>ta1</w><w>ya</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-answer" id="u1623sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="1624">
+		<clause>
+			<w>bu2</w><w>hui4</w><w>chi1</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u1624sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="1625">
+		<clause>
+			<w>ta1</w><wn><w>mei2</w><wk type="cmp" /><w>you3</w></wn><w>zui3</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u1625sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+</CHAT>

@@ -1,0 +1,268 @@
+//////////////////////////////////////////////////////////////////////////////// 
+// 
+//	metapthor.grm: A test for the new map primitive
+//
+//////////////////////////////////////////////////////////////////////////////// 
+
+
+//
+// Some structures that are redefined wrt the ones in base2. The original ones
+// (in the indicated files) are commented out.
+//
+
+
+// from frames.grm
+//
+schema Process
+   roles
+      protagonist: @concrete-entity
+      //protagonist: @entity
+      x-net: @process
+
+
+// from imageschemas.grm
+//
+schema BoundedObject
+    subcase of BoundedRegion
+    roles
+        boundedObject: @concrete-entity 
+
+// 
+// Auxiliaries
+//
+construction BePresentSing
+   subcase of BeAux, PresentTense, Singular
+   form
+      constraints
+         self.f.orth <-- "is"
+
+
+
+
+construction Dire
+  subcase of Adj
+   form
+      constraints
+         self.f.orth <-- "dire"
+   meaning: ScalarModifier
+    constraints
+      self.m.scalarValue <-- "bad"  
+      self.m.scale <-- "judgmentScale"
+
+
+// Recession1, Depression2, Prosperity moved to massnouns.grm (nschneid)
+// Recession2, Depression1 moved to singularnouns.grm (nschneid)
+
+
+			
+
+      		
+			
+//
+// Intitutions as Persons               
+//
+
+			
+schema InstitutionAsPersonPair
+    subcase of Pair
+    roles
+        first: @institution
+        second: @generic-person
+
+
+map InstitutionAsPerson
+    subcase of Metaphor
+    roles
+        //target: Institution
+        //source: Person
+        target: RD
+        source: RD
+        // Let the Pair determine the exact types
+        institutionToPerson: InstitutionAsPersonPair  
+    constraints
+        institutionToPerson.first <--> target.ontological-category
+        institutionToPerson.second <--> source.ontological-category
+            
+
+// XXX: These 3 are not used
+/*
+schema Institution
+    subcase of RD
+    constraints
+        self.ontological-category <-- @institution
+        
+
+schema Person
+    subcase of RD
+    constraints
+        self.ontological-category <-- @generic-person
+
+
+schema NationState
+	subcase of Institution
+*/
+
+
+//
+// Metaphor proper
+//
+	
+schema Pair
+	roles
+		first
+		second
+		
+
+general map Metaphor
+	roles
+		target
+		source
+
+//
+// States as Locations
+//		
+
+schema ConcreteSPG
+	subcase of SPG
+	roles
+		trajector: @concrete-entity
+		landmark: @concrete-entity
+		source: @concrete-entity
+		goal: @concrete-entity
+		
+		
+schema AbstractSPG
+	subcase of SPG
+	roles
+		trajector: @abstract-entity
+		landmark: @abstract-entity
+		source: @abstract-entity
+		goal: @abstract-entity
+		
+		
+schema StateAsLocationPair
+	subcase of Pair
+	roles
+		first: @state
+		second: @location
+		
+
+map StateAsLocation
+	subcase of Metaphor
+	roles
+	    target: RD
+	    source: RD
+		stateAsLocation: StateAsLocationPair
+	constraints
+		stateAsLocation.first <--> target.ontological-category
+		stateAsLocation.second <--> source.ontological-category
+		
+		
+map DifficultyAsHole
+    subcase of StateAsLocation
+    constraints
+        stateAsLocation.first <-- @predicament	
+        stateAsLocation.second <-- @generic-hole	
+        // stateAsLocation.first <--> target.referent // Useless
+        	
+	
+schema Change
+    subcase of AbstractSPG
+
+
+map ChangeAsMotion
+	subcase of Metaphor
+	roles
+		target: Change
+		source: MotionPath
+		stateAsLocation: StateAsLocationPair
+		institutionAsPerson: InstitutionAsPersonPair
+	constraints
+		stateAsLocation.first <--> target.goal	
+		stateAsLocation.second <--> source.spg.goal	
+		
+		institutionAsPerson.first <--> target.trajector
+		institutionAsPerson.second <--> source.mover  
+		
+
+construction EventDescriptorActiveDeclarative   
+    subcase of Declarative
+    constructional
+        constituents
+            fin: MetaphoricalActiveMotionPath1
+    meaning // this is an ED
+		evokes InstitutionAsPerson as metaphor
+		//evokes Metaphor as metaphor
+        constraints
+            ignore subj.m.referent <--> self.m.profiledParticipant
+            ignore subj.m.ontological-category <-- @concrete-entity
+            subj.m.ontological-category <-- @abstract-entity
+	  		metaphor.target <--> subj.m
+      		metaphor.source.referent <--> self.m.profiledParticipant
+
+
+construction StateAsLocationPathPrepPhrase
+	subcase of PathPrepPhrase1
+	meaning 
+		//evokes DifficultyAsHole as stateAsLocation
+		evokes StateAsLocation as stateAsLocation
+		constraints 
+			ignore self.m.landmark <--> np.m.referent		
+			stateAsLocation.source.referent <--> self.m.landmark
+			stateAsLocation.target <--> np.m
+            //stateAsLocation.target.referent <--> np.m.referent
+            ignore np.m.ontological-category <-- @concrete-entity
+            np.m.ontological-category <-- @abstract-entity
+
+
+// e.g.  France walked into recession
+//
+construction MetaphoricalActiveMotionPath1   
+ 	subcase of ActiveMotionPath1
+  	constructional
+  		constituents
+  			pp: StateAsLocationPathPrepPhrase 
+  	meaning 
+        evokes ChangeAsMotion as changeAsMotion
+    	constraints
+	  		ignore pp.np.m.ontological-category <-- @concrete-entity
+	  		pp.np.m.ontological-category <-- @abstract-entity
+            changeAsMotion.source.mover <--> self.m.mover
+            changeAsMotion.target.goal <--> pp.np.m.referent
+	  		
+	  		
+construction ON1
+   subcase of LocativePreposition 
+   form
+      constraints
+         self.f.orth <-- "on"
+   meaning: TrajectorLandmark 
+      evokes BoundedObject as bo
+      constraints
+         self.m.landmark <--> bo.boundedObject
+         self.m.profiledArea <--> bo.boundary	// surface         
+
+
+construction IN1
+   subcase of LocativePreposition 
+   form
+      constraints
+         self.f.orth <-- "in"
+   meaning: TrajectorLandmark 
+      evokes BoundedObject as bo
+      constraints
+         self.m.landmark <--> bo.boundedObject
+         self.m.profiledArea <--> bo.interior	// inside         
+
+
+construction INTO2 
+   subcase of PathPreposition
+   form
+      constraints
+         self.f.orth <-- "into"
+   meaning: ConcreteSPG  
+      evokes BoundedObject as bo
+      constraints 
+         self.m.landmark <--> bo.boundedObject
+         self.m.goal <--> bo.interior
+         self.m.source <--> bo.exterior

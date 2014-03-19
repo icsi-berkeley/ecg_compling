@@ -1,0 +1,2239 @@
+//============================================================
+// Everything in this section is assumed as prior knowledge
+//============================================================
+
+//============================================================
+// Word Roots
+//============================================================
+
+//===================================
+// Intransitive States
+//===================================
+
+Construction bao3-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "bao3"
+	meaning : Full
+
+Construction ben4-V
+	subcase of Verb_Root
+	form
+		constraints
+			self.f.orth <-- "ben4"
+	meaning: Stupid
+
+Construction chou3-V
+	subcase of Verb_Root
+	form
+		constraints
+			self.f.orth <-- "chou3"
+	meaning: Ugly
+
+Abstract Construction da4_variant-V
+	subcase of Verb_Root
+	meaning: Big
+
+Construction da1-V
+	subcase of da4_variant-V
+	form
+		constraints
+			self.f.orth <-- "da1"
+
+Construction da4-V
+	subcase of da4_variant-V 
+	form
+		constraints
+			self.f.orth <-- "da4"
+
+Construction dao4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "dao4"
+	meaning : Achieved
+
+Construction dui4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "dui4"
+	meaning : Correct
+
+Construction duo1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "duo1"
+	meaning : Abundant
+
+Construction e4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "e4"
+	meaning : Hungry
+
+Construction gao1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "gao1"
+	meaning : High
+
+Construction gou4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "gou4"
+	meaning : Enough
+
+Construction guai1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "guai1"
+	meaning : Well_Behaved
+
+Construction guang1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "guang1"
+	meaning : Bared
+
+
+Abstract Construction hao3_variant-V
+	subcase of Verb_Root 
+	meaning : Good
+
+Construction hao-V
+	subcase of hao3_variant-V 
+	form
+		constraints
+			self.f.orth <-- "hao"
+
+Construction hao1-V
+	subcase of hao3_variant-V 
+	form
+		constraints
+			self.f.orth <-- "hao1"
+
+Construction hao3-V
+	subcase of hao3_variant-V 
+	form
+		constraints
+			self.f.orth <-- "hao3"
+
+Construction haor-V
+	subcase of hao3_variant-V 
+	form
+		constraints
+			self.f.orth <-- "haor"
+
+Construction hao3chi1-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "hao3+chi1"
+	meaning : Tasty
+
+
+Construction hao3wanr2-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "hao3+wanr2"
+	meaning : Amusing
+
+Construction hao3kan4-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "hao3+kan4"
+	meaning : Pretty
+
+Construction hong2-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "hong2"
+	meaning : Red
+
+Construction huai4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "huai4"
+	meaning : Broken
+
+Construction jian4-V1
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "jian4"
+	meaning : Perceived
+
+Construction lao3-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "lao3"
+
+Construction luu4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "luu4"
+	meaning : Green
+
+Construction po4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "po4"
+	meaning : Broken
+
+Construction lao3shi2-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "lao3+shi2"
+	meaning : Well_Behaved
+
+Construction lei4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "lei4"
+	meaning : Tired
+
+Construction mei3-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "mei3"
+	meaning : Pretty
+
+Construction shang4-V1
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "shang4"
+	meaning : Up
+
+Construction tao3yan4-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "tao3+yan4"
+	meaning : Annoying
+
+Construction teng2-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "teng2"
+	meaning : Painful
+
+Construction wan2-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "wan2"
+	meaning : Finished
+
+Construction xi4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "xi4"
+	meaning : Fine
+
+Construction xian2-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "xian2"
+	meaning : Idle
+
+Construction xiang1-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "xiang1+xiang1"
+	meaning : Fragrant
+
+Construction xiao3-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "xiao3"
+	meaning : Small
+
+Construction xing2-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "xing2"
+	meaning : Good_Enough
+
+Construction yao4jin3-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "yao4+jin3"
+	meaning : Matter
+
+Construction yun1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "yun1"
+	meaning : Faint
+
+Construction zang1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "zang1"
+	meaning : Dirty
+
+Construction zhao2-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "zhao2"
+	meaning : Achieved
+
+//===================================
+// Mental States
+//===================================
+
+Construction ai4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "ai4"
+	meaning : Love
+
+Construction guan3-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "guan3"
+	meaning : Be_Concerned_With
+
+Construction pa4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "pa4"
+	meaning : Afraid
+
+Construction tao2qi4-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "tao2+qi4"
+	meaning : Naughty
+
+Construction ting1hua4-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "ting1+hua4"
+	meaning : Obedient
+
+Construction xiang3-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "xiang3"
+	meaning : Miss
+
+Construction yao4-V2
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "yao4"
+	meaning : Required_to
+
+Construction yao4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "yao4"
+	meaning : Want
+
+Construction yuan4yi4-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "yuan4+yi4"
+	meaning : Willing
+
+Construction xi3huan1-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "xi3+huan1"
+	meaning : Like
+
+
+//===================================
+// Intransitive Actions
+//===================================
+
+Abstract Construction wanr2_variant-V
+	subcase of Verb_Root
+	meaning : Play
+
+Construction wanr-V
+	subcase of wanr2_variant-V
+	form
+		constraints
+			self.f.orth <-- "wanr"
+
+Construction wanr2-V
+	subcase of wanr2_variant-V
+	form
+		constraints
+			self.f.orth <-- "wanr2"
+
+Construction suan4zhang4-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "suan4+zhang4"
+	meaning : Get_Even
+
+
+Construction shu3shu3-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "shu3+shu3"
+	meaning : Count
+
+//===================================
+// Expression
+//===================================
+
+Construction ku1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "ku1"
+	meaning : Cry
+
+Construction heng1heng1-Cmp-V
+	subcase of Verb_Root
+	form
+		constraints
+			self.f.orth <-- "heng1+heng1"
+	meaning : Fuss
+
+Construction lie1ber-Cmp-V
+	subcase of Verb_Root
+	form
+		constraints
+			self.f.orth <-- "lie1+ber"
+	meaning : Fuss
+
+Construction nao4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "nao4"
+	meaning : Cry
+
+Construction xiao4-V
+	subcase of Verb_Root
+	form
+		constraints
+			self.f.orth <-- "xiao4"
+	meaning: Smile
+
+//===================================
+// Self Motion
+//===================================
+
+Construction diao4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "diao4"
+	meaning : Fall
+
+Construction qi3-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "qi3"
+	meaning : Rise
+
+Construction shuai1gen1tou-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "shuai1+gen1+tou"
+	meaning : Trip
+
+Construction shuai1jiao1-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "shuai1+jiao1"
+	meaning : Trip
+
+Construction tiao4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "tiao4"
+	meaning : Dance
+
+Construction zhuan4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "zhuan4"
+	meaning : Spin
+
+Construction zuo4-V
+subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "zuo4"
+	meaning : Sit
+
+//===================================
+// Translational Self Motion
+//===================================
+
+Construction cang2-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "cang2"
+	meaning : Hide
+
+Construction chu1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "chu1"
+	meaning : Exit
+
+Construction lai2-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "lai2"
+	meaning : Come
+
+Construction pao3-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "pao3"
+	meaning : Run
+
+Abstract Construction qu4_variant-V
+	subcase of Verb_Root 
+	meaning : Go
+
+Construction qie-V
+	subcase of qu4_variant-V 
+	form
+		constraints
+			self.f.orth <-- "qie"
+
+Construction qu4-V
+	subcase of qu4_variant-V 
+	form
+		constraints
+			self.f.orth <-- "qu4"
+
+Construction shang4-V2
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "shang4"
+	meaning : Ascend
+
+Construction xia4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "xia4"
+	meaning : Descend
+
+Construction zou3-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "zou3"
+	meaning : Go
+
+//===================================
+// Continuous Force Application
+//===================================
+
+Construction ban1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "ban1"
+	meaning : Carry
+
+Construction bao4-V
+	subcase of Verb_Root
+	form
+		constraints
+			self.f.orth <-- "bao4"
+	meaning : Hug
+
+Construction bao4bao4-Cmp-V
+	subcase of Verb_Root
+	form
+		constraints
+			self.f.orth <-- "bao4+bao4"
+	meaning : Hug
+
+Construction bei1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "bei1"
+	meaning : Carry_On_Back
+
+Construction cheng2-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "cheng2"
+	meaning : Load
+
+Construction dai4-V
+	subcase of Verb_Root
+	form
+		constraints
+			self.f.orth <-- "dai4"
+	meaning: Bring
+
+Construction duan1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "duan1"
+	meaning : Carry
+
+Construction na2-V1
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "na2"
+	meaning : Grasp
+
+Construction jiu1-V1
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "jiu1"
+	meaning : Grasp
+
+Construction ti2-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "ti2+ti2"
+	meaning : Lift
+
+Construction zhuang1-V1
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "zhuang1"
+	meaning : Contain
+
+Construction zhuang4-V
+	subcase of Verb_Root
+	form
+		constraints
+			self.f.orth <-- "zhuang4"
+	meaning: Slam
+
+//===================================
+// Agentive Impact
+//===================================
+
+Construction cuo1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "cuo1"
+	meaning : Mash
+
+Construction da3-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "da3"
+	meaning : Beat
+
+Construction deng4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "deng4"
+	meaning : Kick
+
+Construction ding3-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "ding3"
+	meaning : Throw
+
+Construction nie1-V
+	subcase of Verb_Root
+	form
+		constraints
+			self.f.orth <-- "nie1"
+	meaning: Mash
+
+Construction pai1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "pai1"
+	meaning : Slap
+
+Construction reng1-V1
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "reng1"
+	meaning : Throw
+
+Construction ti1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "ti1"
+	meaning : Kick
+
+//===================================
+// Forceful Motion
+//===================================
+
+Construction bie2-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "bie2"
+	meaning : Pin
+
+Construction ba1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "ba1"
+	meaning : Sweep
+
+Construction ca1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "ca1"
+	meaning : Wipe
+
+Construction ca1ca1-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "ca1+ca1"
+	meaning : Wipe
+
+Construction diao4-V2
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "diao4"
+	meaning : Drop
+
+Construction dong4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "dong4"
+	meaning : Move
+
+Construction ge1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "ge1"
+	meaning : Put
+
+Construction jia1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "jia1"
+	meaning : Pick
+
+Construction la1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "la1"
+	meaning : Pull
+
+Construction mo3-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "mo3"
+	meaning : Apply
+
+Construction fang4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "fang4"
+	meaning : Put
+
+Construction song4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "song4"
+	meaning : Escort
+
+Construction tiao1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "tiao1"
+	meaning : Pick
+
+Construction tu4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "tu4"
+	meaning : Spit
+
+Construction tui1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "tui1"
+	meaning : Push
+
+Construction zha1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "zha1"
+	meaning : Prick
+
+Construction zhai1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "zhai1"
+	meaning : Pick
+
+Construction zhuang1-V2
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "zhuang1"
+	meaning : Load
+
+//===================================
+// Cause Change
+//===================================
+
+Construction bai1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "bai1"
+	meaning : Rip_Open
+
+Construction hui3-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "hui3"
+	meaning : Damage
+
+Construction kai1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "kai1"
+	meaning : Open
+
+Construction kai1shi3-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "kai1+shi3"
+	meaning : Start
+
+Construction liang4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "liang4"
+	meaning : Switch_On
+
+Construction nong4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "nong4"
+	meaning : Fix
+
+Construction nong4nong-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "nong4+nong4"
+	meaning : Fix
+
+
+Construction reng1-V2
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "reng1"
+	meaning : Discard
+
+
+Construction xi3-V2
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "xi3"
+	meaning : Wash
+
+//===================================
+// Obtainment
+//===================================
+
+Construction liu2-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "liu2"
+	meaning : Reserve
+
+Construction na2-V2
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "na2"
+	meaning : Fetch
+
+Construction zhao3-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "zhao3"
+	meaning : Find
+
+//===================================
+// Ingestion
+//===================================
+
+Construction chi1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "chi1"
+	meaning : Eat
+
+Construction he1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "he1"
+	meaning : Drink
+
+Construction jiao2-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "jiao2"
+	meaning : Chew
+
+//===================================
+// Perception
+//===================================
+
+Construction jian4-V2
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "jian4"
+	meaning : Perceive_Visual
+
+Construction kan4-V1
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "kan4"
+	meaning : Perceive_Visual
+
+Construction kan4-V2
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "kan4"
+	meaning : Observe
+
+Construction qiao2-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "qiao2"
+	meaning : Perceive_Visual
+
+Construction ting1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "ting1"
+	meaning : Perceive_Audio
+
+
+Construction wang4-V
+	subcase of Verb_Root
+	form
+		constraints
+			self.f.orth <-- "wang4"
+	meaning: Perceive_Visual
+
+Construction wen2-Cmp-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "wen2+wen2"
+	meaning : Perceive_Olfactory
+
+//===================================
+// Uncategorized Transitive Action
+//===================================
+
+Construction chuan1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "chuan1"
+	meaning : Wear
+
+Construction hua4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "hua4"
+	meaning : Draw
+
+
+Construction huan4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "huan4"
+	meaning : Switch
+
+
+Construction kai1-V3
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "kai1"
+	meaning : Drive
+
+
+Construction mo1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "mo1"
+	meaning : Touch
+
+
+Construction song1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "song1"
+	meaning : Release_Grasp
+
+
+Construction tuo1-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "tuo1"
+	meaning : Take_Off
+
+
+Construction xie3-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "xie3"
+	meaning : Write
+
+
+//===================================
+// Communication
+//===================================
+
+Construction gao4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "gao4"
+	meaning : Tell
+
+Construction jiao4-V
+	subcase of Verb_Root
+	form
+		constraints
+			self.f.orth <-- "jiao4"
+	meaning: Beckon
+
+Construction rang4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "rang4"
+	meaning : Permit
+
+Construction shuo1-V1
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "shuo1"
+	meaning : Accuse
+
+Construction shuo1-V2
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "shuo1"
+	meaning : Say
+
+Construction wen4-V
+	subcase of Verb_Root 
+	form
+		constraints
+			self.f.orth <-- "wen4"
+	meaning : Ask
+
+
+//===================================
+// Transfer
+//===================================
+
+Abstract Construction gei3_variant-V
+	subcase of Verb_Root
+	meaning : Give
+
+Construction gei3-V
+	subcase of gei3_variant-V 
+	form
+		constraints
+			self.f.orth <-- "gei3"
+
+Construction gei2-V
+	subcase of gei3_variant-V
+	form
+		constraints
+			self.f.orth <-- "gei2"
+
+Construction huan2-V
+	subcase of Verb_Root
+	form
+		constraints
+			self.f.orth <-- "huan2"
+	meaning: Return
+
+Construction mai3-V
+	subcase of Verb_Root
+	form
+		constraints
+			self.f.orth <-- "mai3"
+	meaning: Buy
+
+Abstract Construction wei4_variant-V
+	subcase of Verb_Root
+	meaning : Feed
+
+Construction wei1-V
+	subcase of wei4_variant-V
+	form
+		constraints
+			self.f.orth <-- "wei1"
+
+Construction wei4-V
+	subcase of wei4_variant-V 
+	form
+		constraints
+			self.f.orth <-- "wei4"
+
+Construction wi2-V
+	subcase of wei4_variant-V
+	form
+		constraints
+			self.f.orth <-- "wi2"
+
+//============================================================
+// Noun Roots
+//============================================================
+
+//===================================
+// Proper Names and Relational Terms
+//===================================
+
+Construction xixi-N
+	subcase of Proper_Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "xixi"
+	meaning : @Child
+		evokes RD as rd
+		constraints
+			rd.referent <--> self.m
+			rd.ontological_category <--> self.m
+
+Construction xi1xi1-Cmp-N
+	subcase of Proper_Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "xi1+xi1"
+	meaning: @Child
+		evokes RD as rd
+		constraints
+			rd.referent <--> self.m
+			rd.ontological_category <--> self.m
+
+Construction hao2yu3-Cmp-N
+	subcase of Proper_Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "hao2+yu3"
+	meaning : @Child
+		evokes RD as rd
+		constraints
+			rd.referent <--> self.m
+			rd.ontological_category <--> self.m
+
+Construction wei2wei-Cmp-N
+	subcase of Proper_Noun_Root
+	form
+		constraints
+			self.f.orth <-- "wei2+wei"
+	meaning : @Child
+		evokes RD as rd
+		constraints
+			rd.referent <--> self.m
+			rd.ontological_category <--> self.m
+
+Construction bao3bao3-Cmp-N
+	subcase of Proper_Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "bao3+bao3"
+	meaning : @Child
+		evokes RD as rd
+		constraints
+			rd.referent <--> self.m
+			rd.ontological_category <--> self.m
+
+Construction bing1bing1-Cmp-N
+	subcase of Proper_Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "bing1+bing1"
+	meaning : @Child
+		evokes RD as rd
+		constraints
+			rd.referent <--> self.m
+			rd.ontological_category <--> self.m
+
+Construction bing1Bing-N
+	subcase of Proper_Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "bing1Bing"
+	meaning : @Child
+		evokes RD as rd
+		constraints
+			rd.referent <--> self.m
+			rd.ontological_category <--> self.m
+
+Construction di-N
+	subcase of Proper_Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "di"
+	meaning : @Child
+		evokes RD as rd
+		constraints
+			rd.referent <--> self.m
+			rd.ontological_category <--> self.m
+
+Construction qian4qian4-Cmp-N
+	subcase of Proper_Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "qian4+qian4"
+	meaning : @QianQian
+		evokes RD as rd
+		constraints
+			rd.referent <--> self.m
+			rd.ontological_category <--> self.m
+
+Abstract Construction ma1ma-variant-N
+	subcase of Proper_Noun_Root
+	meaning : @Mother
+		evokes RD as rd
+		constraints
+			rd.referent <--> self.m
+			rd.ontological_category <--> self.m
+
+Construction ma1-N
+	subcase of ma1ma-variant-N
+	form
+		constraints
+			self.f.orth <-- "ma1"
+	meaning : @Mother
+
+Construction ma1ma-Cmp-N
+	subcase of ma1ma-variant-N
+	form
+		constraints
+			self.f.orth <-- "ma1+ma"
+
+Construction ma1ma1-Cmp-N
+	subcase of ma1ma-variant-N
+	form
+		constraints
+			self.f.orth <-- "ma1+ma1"
+
+Abstract Construction ba4ba-variant-N
+	subcase of Proper_Noun_Root 
+	meaning : @Father
+		evokes RD as rd
+		constraints
+			rd.referent <--> self.m
+			rd.ontological_category <--> self.m
+
+Construction ba4-N
+	subcase of ba4ba-variant-N 
+	form
+		constraints
+			self.f.orth <-- "ba4"
+
+Construction ba4ba-Cmp-N
+	subcase of ba4ba-variant-N 
+	form
+		constraints
+			self.f.orth <-- "ba4+ba"
+
+Construction yi2-N
+	subcase of Proper_Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "yi2"
+	meaning : @Aunt
+		evokes RD as rd
+		constraints
+			rd.referent <--> self.m
+			rd.ontological_category <--> self.m
+
+Construction a1yi2-Cmp-N
+	subcase of Proper_Noun_Root
+	form
+		constraints
+			self.f.orth <-- "a1+yi2"
+	meaning: @Aunt
+		evokes RD as rd
+		constraints
+			rd.referent <--> self.m
+			rd.ontological_category <--> self.m
+
+Construction mei4mei-Cmp-N
+	subcase of Proper_Noun_Root
+	form
+		constraints
+			self.f.orth <-- "mei4+mei"
+	meaning: @Sister
+		evokes RD as rd
+		constraints
+			rd.referent <--> self.m
+			rd.ontological_category <--> self.m
+
+Construction nai3nai-Cmp-N
+	subcase of Proper_Noun_Root
+	form
+		constraints
+			self.f.orth <-- "nai3+nai"
+	meaning: @Grandma
+		evokes RD as rd
+		constraints
+			rd.referent <--> self.m
+			rd.ontological_category <--> self.m
+
+Construction ye2-N
+	subcase of Proper_Noun_Root
+	form
+		constraints
+			self.f.orth <-- "ye2"
+	meaning: @Grandpa
+		evokes RD as rd
+		constraints
+			rd.referent <--> self.m
+			rd.ontological_category <--> self.m
+
+Construction lao3shi-Cmp-N
+	subcase of Proper_Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "lao3+shi"
+	meaning : @Teacher
+		evokes RD as rd
+		constraints
+			rd.referent <--> self.m
+			rd.ontological_category <--> self.m
+
+//===================================
+// Common Nouns
+//===================================
+
+Abstract Construction ren2_variant-N
+	subcase of Noun_Root
+	meaning: @Human
+
+Construction ren2-N
+	subcase of ren2_variant-N
+	form
+		constraints
+			self.f.orth <-- "ren2"
+
+Construction renr2-N
+	subcase of ren2_variant-N
+	form
+		constraints
+			self.f.orth <-- "renr2"
+
+Construction wa-N2
+	subcase of Noun_Root
+	form
+		constraints
+			self.f.orth <-- "wa"
+	meaning: @Child
+
+Construction har-N2
+	subcase of Noun_Root
+	form
+		constraints
+			self.f.orth <-- "har"
+	meaning: @Child
+
+Construction hai2zi-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "hai2+zi"
+	meaning : @Child
+
+Construction ge1bo1-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "ge1+bo1"
+	meaning : @Shoulder
+
+Abstract Construction tou2_variant-N
+	subcase of Noun_Root 
+	meaning : @Head
+
+Construction tou-N
+	subcase of tou2_variant-N
+	form
+		constraints
+			self.f.orth <-- "tou"
+
+Construction tou2-N
+	subcase of tou2_variant-N
+	form
+		constraints
+			self.f.orth <-- "tou2"
+
+Construction tour2-N
+	subcase of tou2_variant-N
+	form
+		constraints
+			self.f.orth <-- "tour2"
+
+Construction wai4tou2-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "wai4+tou2"
+	meaning : @Forehead
+
+Construction lian3-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "lian3"
+	meaning : @Face
+
+Construction jiao3-N
+	subcase of Noun_Root
+	form
+		constraints	
+			self.f.orth <-- "jiao3"
+	meaning: @Foot
+
+Construction guang1jiao3ya1zi-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "guang1+jiao3+ya1+zi"
+	meaning: @Human
+
+Construction zui3-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "zui3"
+	meaning : @Mouth
+
+Construction zui3ba-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "zui3+ba"
+	meaning : @Mouth
+
+Construction ku4zi-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "ku4+zi"
+	meaning : @Pants
+
+Construction shu1-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "shu1"
+	meaning : @Book
+
+Abstract Construction shu1bao1_variant-N
+	subcase of Noun_Root
+	meaning : @Backpack
+
+Construction shu1baor1-Cmp-N
+	subcase of shu1bao1_variant-N 
+	form
+		constraints
+			self.f.orth <-- "shu1+baor1"
+
+Construction shu1bao1-Cmp-N
+	subcase of shu1bao1_variant-N 
+	form
+		constraints
+			self.f.orth <-- "shu1+bao1"
+
+Abstract Construction zi4_variant-N
+	subcase of Noun_Root 
+	meaning: @Character
+
+Construction zi4-N
+	subcase of zi4_variant-N
+	form
+		constraints
+			self.f.orth <-- "zi4"
+
+Construction zir4-N
+	subcase of zi4_variant-N 
+	form
+		constraints
+			self.f.orth <-- "zir4"
+
+Construction nian2ji4-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "nian2+ji4"
+	meaning : @Age
+
+Construction sui4-N
+	subcase of Noun_Root
+	form
+		constraints
+			self.f.orth <-- "sui4"
+	meaning: @Age_Year
+
+Construction guo1-N
+	subcase of Noun_Root
+	form
+		constraints
+			self.f.orth <-- "guo1"
+	meaning: @Frying_Pan
+
+Construction ping2zi-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "ping2+zi"
+	meaning : @Bottle
+
+Construction shao2-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "shao2"
+	meaning : @Ladle_Utensil
+
+Abstract Construction wan3_variant-N
+	subcase of Noun_Root 
+	meaning : @Bowl
+
+Construction wan3-N
+	subcase of wan3_variant-N 
+	form
+		constraints
+			self.f.orth <-- "wan3"
+
+Construction wanr3-N
+	subcase of wan3_variant-N 
+	form
+		constraints
+			self.f.orth <-- "wanr3"
+
+Construction cir4-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "cir4"
+	meaning : @Bone
+
+Abstract Construction fanr4_variant-N
+	subcase of Noun_Root 
+	meaning : @Rice
+
+Construction fan4-N
+	subcase of fanr4_variant-N 
+	form
+		constraints
+			self.f.orth <-- "fan4"
+
+Construction fanr4-N
+	subcase of fanr4_variant-N 
+	form
+		constraints
+			self.f.orth <-- "fanr4"
+
+Construction hur2-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "hur2"
+	meaning : @Seed
+
+Construction xi1gua1-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "xi1+gua1"
+	meaning : @Watermelon
+
+Construction ping2guo3-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "ping2+guo3"
+	meaning : @Apple
+
+Construction rou4-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "rou4"
+	meaning : @Meat
+
+Construction rou4rou4-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "rou4+rou4"
+	meaning : @Meat
+
+Construction shui3-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "shui3"
+	meaning : @Water
+
+Construction tao2-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "tao2"
+	meaning : @Peach
+
+Construction tu3dou4-Cmp-N
+	subcase of Noun_Root
+	form
+		constraints
+			self.f.orth <-- "tu3+dou4"
+	meaning : @Potato
+
+Construction yao4-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "yao4"
+	meaning : @Medicine
+
+Construction che1-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "che1"
+	meaning : @Car
+
+Construction che1che1-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "che1+che1"
+	meaning : @Car
+
+Construction qi4che1-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "qi4+che1"
+	meaning : @Car
+
+Construction ma3che1-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "ma3+che1"
+	meaning : @Trolley
+
+Construction ka3che1-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "ka3+che1"
+	meaning : @Truck
+
+Construction tu3-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "tu3"
+	meaning : @Bulldozer
+
+Construction tui1tu3che1-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "tui1+tu3+che1"
+	meaning : @Bulldozer
+
+Abstract Construction chang2lu4lu-variant-N
+	subcase of Noun_Root 
+
+Construction chang2lu4lu4-Cmp-N
+	subcase of chang2lu4lu-variant-N
+	form
+		constraints
+			self.f.orth <-- "chang2+lu4+lu4"
+	meaning : @Giraffe
+
+Construction chang2lu4lu-Cmp-N
+	subcase of chang2lu4lu-variant-N
+	form
+		constraints
+			self.f.orth <-- "chang2+lu4+lu"
+	meaning : @Giraffe
+
+Construction chang2lu4-Cmp-N
+	subcase of chang2lu4lu-variant-N
+	form
+		constraints
+			self.f.orth <-- "chang2+lu4"
+	meaning : @Giraffe
+
+Construction lu4lu-Cmp-N
+	subcase of chang2lu4lu-variant-N
+	form
+		constraints
+			self.f.orth <-- "lu4+lu4"
+	meaning : @Giraffe
+
+Construction ma3-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "ma3"
+	meaning : @Horse
+
+Construction mao1mao-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "mao1+mao1"
+	meaning : @Cat
+
+Construction ya1zi-Cmp-N
+	subcase of Noun_Root
+	form
+		constraints
+			self.f.orth <-- "ya1+zi"
+	meaning: @Duck
+
+Construction yang2-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "yang2"
+	meaning : @Goat
+
+Construction xing1xing1-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "xing1+xing1"
+	meaning : @Star
+
+Construction bi3-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "bi3"
+	meaning : @Pen
+
+Construction cai3bi3-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "cai3+bi3"
+	meaning : @Crayon
+
+Construction chuang2-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "chuang2"
+	meaning : @Bed
+
+Construction dengr4-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "dengr4"
+	meaning : @Stool
+
+Construction ban3dengr4-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "ban3+dengr4"
+	meaning : @Stool
+
+Construction fang2ding3-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "fang2+ding3"
+	meaning : @Roof
+
+Construction kou3dai4-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "kou3+dai4"
+	meaning : @Bib
+
+Abstract Construction lou3_variant-N
+	subcase of Noun_Root
+	meaning: @Storey
+
+Construction lou2-N
+	subcase of lou3_variant-N
+	form
+		constraints
+			self.f.orth <-- "lou2"
+
+Construction lou3-N
+	subcase of lou3_variant-N
+	form
+		constraints
+			self.f.orth <-- "lou3"
+
+Abstract Construction men2_variant-N
+	subcase of Noun_Root
+	meaning: @Door
+
+Construction men2-N
+	subcase of men2_variant-N
+	form
+		constraints
+			self.f.orth <-- "men2"
+
+Construction menr2-N
+	subcase of men2_variant-N
+	form
+		constraints
+			self.f.orth <-- "menr2"
+
+Abstract Construction hua1hua1-variant-N
+	subcase of Noun_Root
+	meaning : @Flower
+
+Construction huar1huar-Cmp-N
+	subcase of hua1hua1-variant-N 
+	form
+		constraints
+			self.f.orth <-- "huar1+huar"
+
+Construction hua1hua1-Cmp-N
+	subcase of hua1hua1-variant-N 
+	form
+		constraints
+			self.f.orth <-- "hua1+hua1"
+
+Construction sheng2zi-Cmp-N
+	subcase of Noun_Root
+	form
+		constraints
+			self.f.orth <-- "sheng2+zi"
+	meaning: @Rope
+
+Construction xiang1-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "xiang1"
+	meaning : @Storagebin
+
+Construction xie2-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "xie2"
+	meaning : @Shoe
+
+Construction deng4zi-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "deng4+zi"
+	meaning : @Chair
+
+Construction yi3-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "yi3"
+	meaning : @Chair
+
+Construction yi3zi-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "yi3+zi"
+	meaning : @Chair
+
+Construction dong1xi1-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "dong1+xi1"
+	meaning : @Inanimate
+
+Construction lao3ya1-Cmp-N
+	subcase of Noun_Root
+	form
+		constraints
+			self.f.orth <-- "lao3+ya1"
+	meaning: @Duck
+
+Construction tang2lao3ya1-Cmp-N
+	subcase of Noun_Root
+	form
+		constraints
+			self.f.orth <-- "tang2+lao3+ya1"
+	meaning: @Duck
+
+Construction gou3gou3-Cmp-N
+	subcase of Noun_Root
+	form
+		constraints
+			self.f.orth <-- "gou3+gou3"
+	meaning: @Dog
+
+Construction xiao3hei1xiong2-N
+	subcase of Noun_Root
+	form
+		constraints
+			self.f.orth <-- "xiao3+hei1+xiong2"
+	meaning: @Bear
+
+Construction xiao3bai2tu4-Cmp-N
+	subcase of Noun_Root
+	form
+		constraints
+			self.f.orth <-- "xiao3+bai2+tu4"
+	meaning : @Rabbit
+
+Construction wa-N1
+	subcase of Noun_Root
+	form
+		constraints
+			self.f.orth <-- "wa"
+	meaning: @Doll
+
+Construction wan2yir4-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "wan2+yir4"
+	meaning : @Toy
+
+Construction qiu2-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "qiu2"
+	meaning : @Ball
+
+Construction qi4qiu2-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "qi4+qiu2"
+	meaning : @Balloon
+
+Construction tuo1er2suo3-N
+	subcase of Noun_Root
+	form
+		constraints
+			self.f.orth <-- "tuo1+er2+suo3"
+	meaning : @Daycare
+
+Construction xue2-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "xue2"
+	meaning : @School
+
+Construction you2-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "you2"
+	meaning : @Lotion
+
+Construction di4-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "di4"
+	meaning : @Ground
+
+Construction di4xia4-Cmp-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "di4+xia4"
+	meaning : @Ground
+
+Construction pi2-N
+	subcase of Noun_Root 
+	form
+		constraints
+			self.f.orth <-- "pi2"
+	meaning : @Peel
+
+Abstract Construction deng1-variant-N
+	subcase of Noun_Root 
+	meaning : @Desklamp
+
+Construction deng1-N
+	subcase of deng1-variant-N 
+	form
+		constraints
+			self.f.orth <-- "deng1"
+
+Construction dian4deng1-Cmp-N
+	subcase of deng1-variant-N 
+	form
+		constraints
+			self.f.orth <-- "dian4+deng1"
+
+Construction deng1zi-N
+	subcase of deng1-variant-N 
+	form
+		constraints
+			self.f.orth <-- "deng1+zi"
+
+Construction ni3pai1yi1wo3pai1yi1-N
+	subcase of Word 
+	constructional
+		constituents
+			n1 : ni3
+			p1 : pai1-V
+			y1 : yi1_variant-Digit
+			w2 : wo3
+			p2 : pai1-V
+			y2 : yi1_variant-Digit
+	form
+		constraints
+			n1.f meets p1.f
+			p1.f meets y1.f
+			y1.f meets w2.f
+			w2.f meets p2.f
+			p2.f meets y2.f
+	meaning : @Game
+
+//============================================================
+// Modifiers
+//============================================================
+
+Construction duo2-M
+	subcase of Preverbal_Adverbial_Root 
+	form
+		constraints
+			self.f.orth <-- "duo2"
+	meaning : Modification
+		constraints
+			self.m.category <-- @Degree
+
+Construction lao3-M1
+	subcase of Preverbal_Adverbial_Root 
+	form
+		constraints
+			self.f.orth <-- "lao3"
+	meaning : Modification
+		constraints
+			self.m.category <-- @Degree
+
+Construction tai4-M
+	subcase of Preverbal_Adverbial_Root 
+	form
+		constraints
+			self.f.orth <-- "tai4"
+	meaning : Modification
+		constraints
+			self.m.category <-- @Degree
+
+Construction zhen1-M
+	subcase of Preverbal_Adverbial_Root 
+	form
+		constraints
+			self.f.orth <-- "zhen1"
+	meaning : Modification
+		constraints
+			self.m.category <-- @Degree
+
+Construction zui4-M
+	subcase of Preverbal_Adverbial_Root 
+	form
+		constraints
+			self.f.orth <-- "zui4"
+	meaning : Modification
+		constraints
+			self.m.category <-- @Degree
+
+Construction huir3-M
+	subcase of Preverbal_Adverbial_Root 
+	form
+		constraints
+			self.f.orth <-- "huir3"
+	meaning : Modification
+		constraints
+			self.m.category <-- @Duration
+
+Construction hu2-M
+	subcase of Preverbal_Adverbial_Root 
+	form
+		constraints
+			self.f.orth <-- "hu2"
+	meaning : Modification
+		constraints
+			self.m.category <-- @Manner
+
+Construction kuai4-M
+	subcase of Preverbal_Adverbial_Root 
+	form
+		constraints
+			self.f.orth <-- "kuai4"
+	meaning : Modification
+		constraints
+			self.m.category <-- @Manner
+
+Construction luan4-M
+	subcase of Preverbal_Adverbial_Root 
+	form
+		constraints
+			self.f.orth <-- "luan4"
+	meaning : Modification
+		constraints
+			self.m.category <-- @Manner
+
+Construction shao3-M
+	subcase of Preverbal_Adverbial_Root 
+	form
+		constraints
+			self.f.orth <-- "shao3"
+	meaning : Modification
+		constraints
+			self.m.category <-- @Manner
+
+Construction xia1-M
+	subcase of Preverbal_Adverbial_Root 
+	form
+		constraints
+			self.f.orth <-- "xia1"
+	meaning : Modification
+		constraints
+			self.m.category <-- @Manner
+
+Construction yi1dian3-M
+	subcase of Preverbal_Adverbial_Root 
+	form
+		constraints
+			self.f.orth <-- "yi4+dianr3"
+	meaning : Modification
+		evokes @Element as ce				//inherited from Word
+		constraints
+			self.m.category <-- @Quantity
+
+//============================================================
+// Constructions: Unknown lexical items
+//============================================================

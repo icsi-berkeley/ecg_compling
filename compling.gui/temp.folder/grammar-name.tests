@@ -1,0 +1,40 @@
+# Comment
+
+
+# Probably I don't need this
+[meta]
+sentence.count = 3
+group.count = 2
+
+[group.1]
+name = root
+parent = none
+
+[group.2]
+name = Proper Nouns
+parent = group.1
+
+[group.3]
+name = Aspect
+parent = group.1
+
+[group.4]
+name = Passive
+parent = group.1
+
+[sentence.1]
+text = John has moved
+parent = group.1, group.2
+
+[sentence.2]
+text = John has been moved
+parent = group.1, group.2
+
+[sentence.3]
+text = John has been moving
+parent = group.1, group.2
+
+[sentence.4]
+text = John moves
+parent = group.1
+

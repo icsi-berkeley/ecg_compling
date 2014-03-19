@@ -1,0 +1,21 @@
+/**********
+***
+*** Mass Nouns
+***
+***********/
+
+general construction MassNoun
+  subcase of Word, Nominal, Singular
+   constructional
+     constraints
+       self.features.massOrPlural <-- "yes"  
+
+construction Leche
+  subcase of MassNoun, Feminine
+   form
+      constraints
+         self.f.orth <-- "leche"
+   meaning
+    constraints
+      self.m.ontological-category <-- @milk
+

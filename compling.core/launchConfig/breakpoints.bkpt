@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<breakpoints>
+<breakpoint enabled="false" persistant="true" registered="true">
+<resource path="/" type="8"/>
+<marker type="org.eclipse.jdt.debug.javaExceptionBreakpointMarker">
+<attrib name="message" value="Breakpoint:ArrayIndexOutOfBoundsException: caught and uncaught"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.checked" value="false"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.core.uncaught" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.jdt.debug.core.caught" value="true"/>
+<attrib name="org.eclipse.debug.core.enabled" value="false"/>
+<attrib name="org.eclipse.debug.core.registered" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="java.lang.ArrayIndexOutOfBoundsException"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/" type="8"/>
+<marker type="org.eclipse.jdt.debug.javaExceptionBreakpointMarker">
+<attrib name="message" value="Breakpoint:ClassCastException: caught and uncaught"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.checked" value="false"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.jdt.debug.core.uncaught" value="true"/>
+<attrib name="org.eclipse.debug.core.registered" value="true"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.caught" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="java.lang.ClassCastException"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="false" persistant="true" registered="true">
+<resource path="/compling/source/compling/context/ContextException.java" type="1"/>
+<marker type="org.eclipse.jdt.debug.javaExceptionBreakpointMarker">
+<attrib name="message" value="Breakpoint:ContextException$NoInstanceFoundException: caught and uncaught"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.checked" value="false"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=compling/source&lt;compling.context{ContextException.java[ContextException[NoInstanceFoundException"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.core.uncaught" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.jdt.debug.core.caught" value="true"/>
+<attrib name="org.eclipse.debug.core.enabled" value="false"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.context.ContextException$NoInstanceFoundException"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/compling/source/compling/context/ContextException.java" type="1"/>
+<marker type="org.eclipse.jdt.debug.javaExceptionBreakpointMarker">
+<attrib name="message" value="Breakpoint:ContextException: caught and uncaught"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.checked" value="false"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.core.uncaught" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.jdt.debug.core.caught" value="true"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.debug.core.registered" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.context.ContextException"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/compling/source/compling/gui/GUIException.java" type="1"/>
+<marker type="org.eclipse.jdt.debug.javaExceptionBreakpointMarker">
+<attrib name="message" value="Breakpoint:GUIException: caught and uncaught"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.checked" value="false"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=compling/source&lt;compling.gui{GUIException.java[GUIException"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.core.uncaught" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.jdt.debug.core.caught" value="true"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.gui.GUIException"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/compling/source/compling/grammar/GrammarException.java" type="1"/>
+<marker type="org.eclipse.jdt.debug.javaExceptionBreakpointMarker">
+<attrib name="message" value="Breakpoint:GrammarException: caught and uncaught"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.checked" value="false"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.core.uncaught" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.jdt.debug.core.caught" value="true"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.debug.core.registered" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.grammar.GrammarException"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/" type="8"/>
+<marker type="org.eclipse.jdt.debug.javaExceptionBreakpointMarker">
+<attrib name="message" value="Breakpoint:IndexOutOfBoundsException: caught and uncaught"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.checked" value="false"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.core.uncaught" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.jdt.debug.core.caught" value="true"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.debug.core.registered" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="java.lang.IndexOutOfBoundsException"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/compling/source/compling/learner/LearnerException.java" type="1"/>
+<marker type="org.eclipse.jdt.debug.javaExceptionBreakpointMarker">
+<attrib name="message" value="Breakpoint:LearnerException: caught and uncaught"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.checked" value="false"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.jdt.debug.core.uncaught" value="true"/>
+<attrib name="org.eclipse.debug.core.registered" value="true"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.caught" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.learner.LearnerException"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/" type="8"/>
+<marker type="org.eclipse.jdt.debug.javaExceptionBreakpointMarker">
+<attrib name="message" value="Breakpoint:NullPointerException: caught and uncaught"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.checked" value="false"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.core.uncaught" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.jdt.debug.core.caught" value="true"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.debug.core.registered" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="java.lang.NullPointerException"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/compling/source/compling/parser/ParserException.java" type="1"/>
+<marker type="org.eclipse.jdt.debug.javaExceptionBreakpointMarker">
+<attrib name="message" value="Breakpoint:ParserException: caught and uncaught"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.checked" value="false"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=compling/source&lt;compling.parser{ParserException.java[ParserException"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.core.uncaught" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.jdt.debug.core.caught" value="true"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.parser.ParserException"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/compling/source/compling/simulator/SimulatorException.java" type="1"/>
+<marker type="org.eclipse.jdt.debug.javaExceptionBreakpointMarker">
+<attrib name="message" value="Breakpoint:SimulatorException: caught and uncaught"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.core.checked" value="false"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.jdt.debug.core.uncaught" value="true"/>
+<attrib name="org.eclipse.debug.core.registered" value="true"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.caught" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.simulator.SimulatorException"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="false" persistant="true" registered="true">
+<resource path="/compling/source/compling/learner/candidates/CompositionFinder.java" type="1"/>
+<marker charStart="-1" lineNumber="335" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=compling/source&lt;compling.learner.candidates{CompositionFinder.java[CompositionFinder"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="message" value="Line breakpoint:CompositionFinder [line: 335] [conditional] - findConnected(CompositionCandidate, LookupTable&lt;CompositionCandidate, CompositionCandidate&gt;, int)"/>
+<attrib name="org.eclipse.jdt.debug.core.conditionEnabled" value="true"/>
+<attrib name="charStart" value="-1"/>
+<attrib name="charEnd" value="-1"/>
+<attrib name="org.eclipse.jdt.debug.core.condition" value="graph.get(next) == null"/>
+<attrib name="org.eclipse.debug.core.enabled" value="false"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_end" value="16589"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_start" value="16520"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.learner.candidates.CompositionFinder"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="false" persistant="true" registered="true">
+<resource path="/compling/source/compling/learner/candidates/CompositionFinder.java" type="1"/>
+<marker charStart="-1" lineNumber="400" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=compling/source&lt;compling.learner.candidates{CompositionFinder.java[CompositionFinder"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="message" value="Line breakpoint:CompositionFinder [line: 400] [conditional] - generateSingleUnificationCandidatesOp1(ContextualFit, boolean)"/>
+<attrib name="org.eclipse.jdt.debug.core.conditionEnabled" value="true"/>
+<attrib name="charStart" value="-1"/>
+<attrib name="charEnd" value="-1"/>
+<attrib name="org.eclipse.jdt.debug.core.condition" value="span == null"/>
+<attrib name="org.eclipse.debug.core.enabled" value="false"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_end" value="20121"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_start" value="19960"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.learner.candidates.CompositionFinder"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="false" persistant="true" registered="true">
+<resource path="/compling/source/compling/learner/candidates/CompositionFinder.java" type="1"/>
+<marker charStart="-1" lineNumber="455" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="message" value="Line breakpoint:CompositionFinder [line: 455] - cleanupConstraint(List&lt;Pair&lt;CxnalSpan, ECGSlotChain&gt;&gt;)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=compling/source&lt;compling.learner.candidates{CompositionFinder.java[CompositionFinder"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="charStart" value="-1"/>
+<attrib name="charEnd" value="-1"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.debug.core.enabled" value="false"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_end" value="22335"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_start" value="22262"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.learner.candidates.CompositionFinder"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/compling/source/compling/context/ContextModel.java" type="1"/>
+<marker charStart="-1" lineNumber="164" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="message" value="Line breakpoint:ContextModel [line: 164] - updateRecentDiscourseEntities(List&lt;String&gt;)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=compling/source&lt;compling.context{ContextModel.java[ContextModel"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="charStart" value="-1"/>
+<attrib name="charEnd" value="-1"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_end" value="6669"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_start" value="6523"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.context.ContextModel"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/compling/source/compling/learner/ECGLearner.java" type="1"/>
+<marker charStart="-1" lineNumber="287" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="message" value="Line breakpoint:ECGLearner [line: 287] - getNextLCA()"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=compling/source&lt;compling.learner{ECGLearner.java[ECGLearner"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="charStart" value="-1"/>
+<attrib name="charEnd" value="-1"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_end" value="11794"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_start" value="11706"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.learner.ECGLearner"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/compling/source/compling/learner/ECGLearner.java" type="1"/>
+<marker charStart="-1" lineNumber="393" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="message" value="Line breakpoint:ECGLearner [line: 393] - chooseBestAnalysis(PriorityQueue&lt;LearnerCentricAnalysis&gt;)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=compling/source&lt;compling.learner{ECGLearner.java[ECGLearner"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="charStart" value="-1"/>
+<attrib name="charEnd" value="-1"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_end" value="16758"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_start" value="16699"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.learner.ECGLearner"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="false" persistant="true" registered="true">
+<resource path="/compling/source/compling/learner/candidates/GeneralizationFinder.java" type="1"/>
+<marker charStart="-1" lineNumber="266" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="message" value="Line breakpoint:GeneralizationFinder [line: 266] - main(String[])"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=compling/source&lt;compling.learner.candidates{GeneralizationFinder.java[GeneralizationFinder"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="charStart" value="-1"/>
+<attrib name="charEnd" value="-1"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.debug.core.enabled" value="false"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_end" value="10468"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_start" value="10410"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.learner.candidates.GeneralizationFinder"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="false" persistant="true" registered="true">
+<resource path="/compling/source/compling/learner/candidates/GeneralizationFinder.java" type="1"/>
+<marker charStart="-1" lineNumber="92" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="message" value="Line breakpoint:GeneralizationFinder$GeneralizationBySharedConstituents [line: 92] - generatePairwiseCandidates(Construction, boolean)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=compling/source&lt;compling.learner.candidates{GeneralizationFinder.java[GeneralizationFinder[GeneralizationBySharedConstituents"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="charStart" value="-1"/>
+<attrib name="charEnd" value="-1"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.debug.core.enabled" value="false"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_end" value="3975"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_start" value="3808"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.learner.candidates.GeneralizationFinder$GeneralizationBySharedConstituents"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/compling/source/compling/learner/GoldStandardFitter.java" type="1"/>
+<marker charStart="-1" lineNumber="170" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=compling/source&lt;compling.learner{GoldStandardFitter.java[GoldStandardFitter"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="message" value="Line breakpoint:GoldStandardFitter [line: 170] [conditional] - findContextElements(Slot, String, Role, Integer)"/>
+<attrib name="org.eclipse.jdt.debug.core.conditionEnabled" value="true"/>
+<attrib name="charStart" value="-1"/>
+<attrib name="charEnd" value="-1"/>
+<attrib name="org.eclipse.jdt.debug.core.condition" value="contextElementNames == null"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_end" value="8316"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_start" value="8240"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.learner.GoldStandardFitter"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="false" persistant="true" registered="true">
+<resource path="/compling/source/compling/gui/grammargui/GrammarBrowser.java" type="1"/>
+<marker charStart="-1" lineNumber="883" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="message" value="Line breakpoint:GrammarBrowser [line: 883] - parseSentence(String)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=compling/source&lt;compling.gui.grammargui{GrammarBrowser.java[GrammarBrowser"/>
+<attrib name="charStart" value="-1"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="charEnd" value="-1"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_start" value="27582"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_end" value="27604"/>
+<attrib name="org.eclipse.debug.core.enabled" value="false"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.gui.grammargui.GrammarBrowser"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/compling/source/compling/parser/ecgparser/RobustECGLeftCornerParser.java" type="1"/>
+<marker charStart="-1" lineNumber="162" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="message" value="Line breakpoint:RobustECGLeftCornerParser [line: 162] - getBestPartialParses(Utterance&lt;Word, String&gt;)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=compling/source&lt;compling.parser.ecgparser{RobustECGLeftCornerParser.java[RobustECGLeftCornerParser"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="charStart" value="-1"/>
+<attrib name="charEnd" value="-1"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_end" value="7375"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_start" value="7350"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.parser.ecgparser.RobustECGLeftCornerParser"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/compling/source/compling/parser/ecgparser/RobustECGLeftCornerParser.java" type="1"/>
+<marker charStart="-1" lineNumber="327" type="org.eclipse.jdt.debug.javaLineBreakpointMarker">
+<attrib name="message" value="Line breakpoint:RobustECGLeftCornerParser [line: 327] - attachCompleteStateToAncestorState(RobustParserState, int)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=compling/source&lt;compling.parser.ecgparser{RobustECGLeftCornerParser.java[RobustECGLeftCornerParser"/>
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="charStart" value="-1"/>
+<attrib name="charEnd" value="-1"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_end" value="15584"/>
+<attrib name="org.eclipse.jdt.debug.ui.member_start" value="15534"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="compling.parser.ecgparser.RobustECGLeftCornerParser"/>
+</marker>
+</breakpoint>
+</breakpoints>

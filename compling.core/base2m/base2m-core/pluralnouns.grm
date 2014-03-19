@@ -1,0 +1,25 @@
+/**********
+***
+*** Plural Nouns
+***
+***********/
+/*
+general construction PluralNoun
+  subcase of Noun, Plural
+   constructional
+     constraints
+       self.features.massOrPlural <-- "yes"  
+   meaning
+    constraints
+      self.m.number <-- ">1"
+
+
+construction Apples
+  subcase of PluralNoun
+   form
+      constraints
+         self.f.orth <-- "apples"
+   meaning
+    constraints
+      self.m.ontological-category <-- @apple
+*/

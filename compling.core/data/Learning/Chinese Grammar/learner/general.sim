@@ -1,0 +1,2284 @@
+//===============================================
+// "Constructors"
+//===============================================
+
+//===============================================
+// Constructors for Participants
+//===============================================
+
+SCRIPT CHI {
+	exec (inst childHead Head);
+	exec (inst childHair Hair);
+	exec (inst childForehead Forehead);
+	exec (inst childFace Face);
+	exec (inst childMouth Mouth);
+	exec (inst childShoulder Shoulder);
+	exec (inst childLeftHand Hand);
+	exec (inst childRightHand Hand);
+	exec (inst childLeg Leg);
+	exec (inst childFeet Foot);
+	
+	exec (inst CHI Child fil (name "CHI") (gender (inst Female)) 
+		(head childHead) (forehead childForehead) (face childFace) (mouth childMouth)
+		(shoulder childShoulder) 
+		(lefthand childLeftHand) (righthand childRightHand) (hand childLeftHand) (hand childRightHand) (foot childFeet)
+		(physical_component childHead) (physical_component childForehead) (physical_component childFace)
+		(physical_component childShoulder) 
+		(physical_component childLeftHand) (physical_component childRightHand) (physical_component childFeet));
+}
+
+SCRIPT MOT {
+	exec (inst motherHead Head);
+	exec (inst motherHair Hair);
+	exec (inst motherForehead Forehead);
+	exec (inst motherFace Face);
+	exec (inst motherMouth Mouth);
+	exec (inst motherShoulder Shoulder);
+	exec (inst motherLeftHand Hand);
+	exec (inst motherRightHand Hand);
+	exec (inst motherLeg Leg);
+	exec (inst motherFeet Foot);
+	
+	exec (inst MOT Mother fil (name "MOT") (gender (inst Female)) 
+		(head motherHead) (forehead motherForehead) (face motherFace) (mouth motherMouth)
+		(shoulder motherShoulder) 
+		(lefthand motherLeftHand) (righthand motherRightHand) (hand motherLeftHand) (hand motherRightHand) (foot motherFeet)
+		(physical_component motherHead) (physical_component motherForehead) (physical_component motherFace)
+		(physical_component motherShoulder) 
+		(physical_component motherLeftHand) (physical_component motherRightHand) (physical_component motherFeet));
+}
+
+SCRIPT FAT {
+	exec (inst fatherHead Head);
+	exec (inst fatherHair Hair);
+	exec (inst fatherForehead Forehead);
+	exec (inst fatherFace Face);
+	exec (inst fatherMouth Mouth);	
+	exec (inst fatherShoulder Shoulder);
+	exec (inst fatherLeftHand Hand);
+	exec (inst fatherRightHand Hand);
+	exec (inst fatherLeg Leg);
+	exec (inst fatherFeet Foot);
+	
+	exec (inst FAT Father fil (name "FAT") (gender (inst Male)) 
+		(head fatherHead) (forehead fatherForehead) (face fatherFace) (mouth fatherMouth)
+		(shoulder fatherShoulder) 
+		(lefthand fatherLeftHand) (righthand fatherRightHand) (hand fatherLeftHand) (hand fatherRightHand) (foot fatherFeet)
+		(physical_component fatherHead) (physical_component fatherForehead) (physical_component fatherFace)
+		(physical_component fatherShoulder) 
+		(physical_component fatherLeftHand) (physical_component fatherRightHand) (physical_component fatherFeet));
+}
+
+SCRIPT ONN {
+	exec (inst grannyHead Head);
+	exec (inst grannyHair Hair);
+	exec (inst grannyForehead Forehead);
+	exec (inst grannyFace Face);
+	exec (inst grannyMouth Mouth);
+	exec (inst grannyShoulder Shoulder);
+	exec (inst grannyLeftHand Hand);
+	exec (inst grannyRightHand Hand);
+	exec (inst grannyLeg Leg);
+	exec (inst grannyFeet Foot);
+	
+	exec (inst ONN Mother fil (name "ONN") (gender (inst Female)) 
+		(head grannyHead) (forehead grannyForehead) (face grannyFace) (mouth grannyMouth)
+		(shoulder grannyShoulder) 
+		(lefthand grannyLeftHand) (righthand grannyRightHand) (hand grannyLeftHand) (hand grannyRightHand) (foot grannyFeet)
+		(physical_component grannyHead) (physical_component grannyForehead) (physical_component grannyFace)
+		(physical_component grannyShoulder) 
+		(physical_component grannyLeftHand) (physical_component grannyRightHand) (physical_component grannyFeet));
+}
+
+SCRIPT UNC {
+	exec (inst uncleHead Head);
+	exec (inst uncleHair Hair);
+	exec (inst uncleForehead Forehead);
+	exec (inst uncleFace Face);
+	exec (inst uncleMouth Mouth);	
+	exec (inst uncleShoulder Shoulder);
+	exec (inst uncleLeftHand Hand);
+	exec (inst uncleRightHand Hand);
+	exec (inst uncleLeg Leg);
+	exec (inst uncleFeet Foot);
+	
+	exec (inst UNC Uncle fil (name "FAT") (gender (inst Male)) 
+		(head uncleHead) (forehead uncleForehead) (face uncleFace) (mouth uncleMouth)
+		(shoulder uncleShoulder) 
+		(lefthand uncleLeftHand) (righthand uncleRightHand) (hand uncleLeftHand) (hand uncleRightHand) (foot uncleFeet)
+		(physical_component uncleHead) (physical_component uncleForehead) (physical_component uncleFace)
+		(physical_component uncleShoulder) 
+		(physical_component uncleLeftHand) (physical_component uncleRightHand) (physical_component uncleFeet));
+}
+
+
+SCRIPT MOTandCHI {
+	exec (inst MOTandCHI Human fil (set_size (inst Pair fil (member MOT) (member CHI))));
+}
+
+SCRIPT FATandCHI {
+	exec (inst FATandCHI Human fil (set_size (inst Pair fil (member FAT) (member CHI))));
+}
+
+SCRIPT MOTandFAT {
+	exec (inst MOTandFAT Parent fil (set_size (inst Pair fil (member MOT) (member FAT))));
+}
+
+SCRIPT MOTandFATandCHI {
+	exec (inst MOTandFATandCHI Human fil (set_size (inst Multitude fil (member MOT) (member FAT) (member CHI))));
+}
+
+SCRIPT INV {
+	exec (inst invHead Head);
+	exec (inst invHair Hair);
+	exec (inst invForehead Forehead);
+	exec (inst invFace Face);
+	exec (inst invMouth Mouth);	
+	exec (inst invShoulder Shoulder);
+	exec (inst invLeftHand Hand);
+	exec (inst invRightHand Hand);
+	exec (inst invLeg Leg);
+	exec (inst invFeet Foot);
+	
+	exec (inst INV Aunt fil (name "INV") (gender (inst Female)) 
+		(head invHead) (forehead invForehead) (face invFace) (mouth invMouth)
+		(shoulder invShoulder) 
+		(lefthand invLeftHand) (righthand invRightHand) (hand invLeftHand) (hand invRightHand) (foot invFeet)
+		(physical_component invHead) (physical_component invForehead) (physical_component invFace)
+		(physical_component invShoulder) 
+		(physical_component invLeftHand) (physical_component invRightHand) (physical_component invFeet));
+}
+
+SCRIPT INVandCHI {
+	exec (inst INVandCHI Human fil (set_size (inst Pair fil (member CHI) (member INV))));
+}
+
+SCRIPT MOTandINV {
+	exec (inst MOTandINV Human fil (set_size (inst Pair fil (member MOT) (member INV))));
+}
+
+SCRIPT FATandINV {
+	exec (inst FATandINV Human fil (set_size (inst Pair fil (member FAT) (member INV))));
+}
+
+SCRIPT MOTandCHIandINV {
+	exec (inst MOTandCHIandINV Human fil (set_size (inst Multitude fil (member MOT) (member CHI) (member INV))));
+}
+
+SCRIPT FATandCHIandINV {
+	exec (inst FATandCHIandINV Human fil (set_size (inst Multitude fil (member FAT) (member CHI) (member INV))));
+}
+
+SCRIPT MOTandFATandINV {
+	exec (inst MOTandFATandINV Parent fil (set_size (inst Multitude fil (member MOT) (member FAT) (member INV))));
+}
+
+SCRIPT MOTandFATandCHIandINV {
+	exec (inst MOTandFATandINVandCHI Parent fil (set_size (inst Multitude fil (member MOT) (member FAT) (member CHI) (member INV))));
+}
+
+SCRIPT QQ {
+	exec (inst qqHead Head);
+	exec (inst qqHair Hair);
+	exec (inst qqForehead Forehead);
+	exec (inst qqFace Face);
+	exec (inst qqMouth Mouth);	
+	exec (inst qqShoulder Shoulder);
+	exec (inst qqLeftHand Hand);
+	exec (inst qqRightHand Hand);
+	exec (inst qqLeg Leg);
+	exec (inst qqFeet Foot);
+	
+	exec (inst QQ QianQian fil (name "QianQian") (gender (inst Female)) 
+		(head qqHead) (forehead qqForehead) (face qqFace) (mouth qqMouth)
+		(shoulder qqShoulder) 
+		(lefthand qqLeftHand) (righthand qqRightHand) (hand qqLeftHand) (hand qqRightHand) (foot qqFeet)
+		(physical_component qqHead) (physical_component qqForehead) (physical_component qqFace)
+		(physical_component qqShoulder) 
+		(physical_component qqLeftHand) (physical_component qqRightHand) (physical_component qqFeet));
+}
+
+//===============================================
+// Constructors for Settings
+//===============================================
+
+SCRIPT Building {
+	exec (inst buildingGround Ground);
+	exec (inst buildingRoof Roof);
+	exec (inst buildingHallway Hallway);
+	exec (inst buildingStorey Storey);
+	exec (inst buildingDoor Door);
+	exec (inst _id Building fil 
+		(ground buildingGround) (roof buildingRoof) (hallway buildingHallway) (storey buildingStorey) (door buildingDoor));
+}
+
+SCRIPT Apartment {
+	exec (inst apartmentGround Ground);
+	exec (inst apartmentHallway Hallway);
+	exec (inst apartmentDoor Door);
+	exec (inst _id Apartment fil (ground apartmentGround) (hallway apartmentHallway) (door apartmentDoor));
+}
+
+SCRIPT Hallway {
+	exec (inst hallwayGround Hallway);
+	exec (inst _id Hallway fil (ground hallwayGround));
+}
+
+SCRIPT Room {
+	exec (inst rground Ground);
+	exec (inst rceiling Ceiling);
+	exec (inst rdoor Door);
+	exec (inst rtable Table)
+	exec (inst rchair Chair);
+	exec (inst _id Room fil 
+		(ground rground) (ceiling rceiling) (door rdoor) (table rtable) (chair rchair));
+}
+
+SCRIPT Livingroom {
+	exec (inst lrground Ground);
+	exec (inst lrceiling Ceiling);
+	exec (inst lrdoor Door);
+	exec (inst lrwindow Window);
+	exec (inst lrchair Chair);
+	exec (inst lrcoffeetable Coffeetable);	
+	exec (inst lrsofa Sofa);
+	exec (inst _id Livingroom fil 
+		(ground lrground) (ceiling lrceiling) (door lrdoor) (window lrwindow) (chair lrchair) 
+		(coffeetable lrcoffeetable) (sofa lrsofa));
+}
+
+SCRIPT Diningroom {
+	exec (inst drground Ground);
+	exec (inst drceiling Ceiling);
+	exec (inst drdoor Door);
+	exec (inst drdiningtable Diningtable);
+	exec (inst drchair Chair);
+	exec (inst drsidetable Sidetable);
+	exec (inst drhighchair Highchair);
+	exec (inst _id Diningroom fil 
+		(ground drground) (ceiling drceiling) (door drdoor) (chair drchair) 
+		(diningtable drdiningtable) (sidetable drsidetable) (highchair drhighchair));
+}
+
+SCRIPT Kitchen {
+	exec (inst ktground Ground);
+	exec (inst ktceiling Ceiling);
+	exec (inst ktdoor Door);
+	exec (inst ktchair Chair);
+	exec (inst ktcounter Table);
+	exec (inst ktsink Sink);
+	exec (inst _id Kitchen fil 
+		(ground ktground) (ceiling ktceiling) (door ktdoor) (chair ktchair) 
+		(counter ktcounter) (sink ktsink));
+}
+
+SCRIPT Bedroom {
+	exec (inst brground Ground);
+	exec (inst brceiling Ceiling);
+	exec (inst brdoor Door);
+	exec (inst brchair Chair);
+	exec (inst brvanitytable Table);
+	exec (inst brbed Bed);	
+	exec (inst _id Bedroom fil 
+		(ground brground) (ceiling brceiling) (door brdoor) (chair brchair) 
+		(vanitytable brvanitytable) (bed brbed));
+}
+
+//===============================================
+// Constructors for Objects
+//===============================================
+
+SCRIPT Peach {
+	exec (inst _id Peach fil(flesh (inst Flesh)) (peel (inst Peel)) (physical_component _peachFlesh) (physical_component _peachPeel));
+}
+
+SCRIPT Orange {
+	exec (inst _id Orange fil (flesh (inst Flesh)) (seed (inst Seed)) (physical_component _orangeFlesh) (physical_component _orangeSeed));
+}
+
+SCRIPT Fish {
+	exec (inst _id Fish fil(meat (inst Meat)) (bone (inst Bone)) (physical_component _fishmeat) (physical_component _fishbone));
+}
+
+SCRIPT Carriage {
+	exec (inst _id Carriage fil (horse (inst Horse)) (physical_component _carriageHorse));
+}
+
+SCRIPT Truck {
+	exec (inst _id Truck fil (headlight (inst Light)) (horn (inst Horn)) (ignition (inst Portal)) (key (inst Toy_Key)) (physical_component _headlight));
+}
+
+
+//===============================================
+// Speech Acts
+//===============================================
+
+SCRIPT Explaining {
+	exec (inst _Discourse_Segment Discourse_Segment Setting CURRENTINTERVAL 
+		fil (speaker _speaker) (addressee _addressee) (attentional_focus _attentional_focus));
+	exec (setcurrentinterval _Discourse_Segment);
+	exec (inst _id Explaining 
+		fil (speaker _speaker) (addressee _addressee) (text _text) (forcefulness _forcefulness) 
+		(DS _Discourse_Segment));
+	exec (fil speech_act _Discourse_Segment _id);
+}
+
+SCRIPT Answering {
+	exec (inst _Discourse_Segment Discourse_Segment Setting CURRENTINTERVAL 
+		fil (speaker _speaker) (addressee _addressee) (attentional_focus _attentional_focus));
+	exec (setcurrentinterval _Discourse_Segment);
+	exec (inst _id Answering 
+		fil (speaker _speaker) (addressee _addressee) (text _text) (forcefulness _forcefulness) 
+		(original_prompt _original_prompt) (DS _Discourse_Segment));
+	exec (fil speech_act _Discourse_Segment _id);
+}
+
+SCRIPT Approving {
+	exec (inst _Discourse_Segment Discourse_Segment Setting CURRENTINTERVAL 
+		fil (speaker _speaker) (addressee _addressee) (attentional_focus _attentional_focus));
+	exec (setcurrentinterval _Discourse_Segment);
+	exec (inst _id Approving 
+		fil (speaker _speaker) (addressee _addressee) (text _text) (forcefulness _forcefulness) 
+		(action _action) (DS _Discourse_Segment));
+	exec (fil speech_act _Discourse_Segment _id);
+}
+
+SCRIPT Admonishing {
+	exec (inst _Discourse_Segment Discourse_Segment Setting CURRENTINTERVAL 
+		fil (speaker _speaker) (addressee _addressee) (attentional_focus _attentional_focus));
+	exec (setcurrentinterval _Discourse_Segment);
+	exec (inst _id Admonishing 
+		fil (speaker _speaker) (addressee _addressee) (text _text) (forcefulness _forcefulness) 
+		(fault _fault) (actual_response _actual_response) (DS _Discourse_Segment));
+	exec (fil speech_act _Discourse_Segment _id);
+}
+
+SCRIPT Requesting_Action {
+	exec (inst _Discourse_Segment Discourse_Segment Setting CURRENTINTERVAL 
+		fil (speaker _speaker) (addressee _addressee) (attentional_focus _attentional_focus));
+	exec (setcurrentinterval _Discourse_Segment);
+	exec (inst _id Requesting_Action 
+		fil (speaker _speaker) (addressee _addressee) (text _text) (forcefulness _forcefulness) 
+		(DS _Discourse_Segment));
+	exec (fil speech_act _Discourse_Segment _id);
+}
+
+SCRIPT Requesting_Answer {
+	exec (inst _Discourse_Segment Discourse_Segment Setting CURRENTINTERVAL 
+		fil (speaker _speaker) (addressee _addressee) (attentional_focus _attentional_focus));
+	exec (setcurrentinterval _Discourse_Segment);
+	exec (inst _id Requesting_Answer 
+		fil (speaker _speaker) (addressee _addressee) (text _text) (forcefulness _forcefulness) 
+		(DS _Discourse_Segment));
+	exec (fil speech_act _Discourse_Segment _id);
+}
+
+SCRIPT Calling {
+	exec (inst _Discourse_Segment Discourse_Segment Setting CURRENTINTERVAL 
+		fil (speaker _speaker) (addressee _addressee) (attentional_focus _attentional_focus));
+	exec (setcurrentinterval _Discourse_Segment);
+	exec (inst _id Calling 
+		fil (speaker _speaker) (addressee _addressee) (text _text) (forcefulness _forcefulness) 
+		(DS _Discourse_Segment));
+	exec (fil speech_act _Discourse_Segment _id);
+}
+
+SCRIPT Exclaiming {
+	exec (inst _Discourse_Segment Discourse_Segment Setting CURRENTINTERVAL 
+		fil (speaker _speaker) (addressee _addressee) (attentional_focus _attentional_focus));
+	exec (setcurrentinterval _Discourse_Segment);
+	exec (inst _id Exclaiming 
+		fil (speaker _speaker) (addressee _addressee) (text _text) (forcefulness _forcefulness) 
+		(DS _Discourse_Segment));
+	exec (fil speech_act _Discourse_Segment _id);
+}
+
+SCRIPT Practicing {
+	exec (inst _Discourse_Segment Discourse_Segment Setting CURRENTINTERVAL 
+		fil (speaker _speaker) (addressee _addressee) (attentional_focus _attentional_focus));
+	exec (setcurrentinterval _Discourse_Segment);
+	exec (inst _id Practicing 
+		fil (speaker _speaker) (addressee _addressee) (text _text) (forcefulness _forcefulness) 
+		(DS _Discourse_Segment));
+	exec (fil speech_act _Discourse_Segment _id);
+}
+
+
+//===============================================
+// Processes
+//===============================================
+
+SCRIPT State {
+	exec (inst _id State Setting CURRENTINTERVAL fil
+		(property _property) (category _category) (inherent_aspect (inst Inherent_State)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT State_Change {
+	exec (inst _State_Change State_Change Setting CURRENTINTERVAL fil (means _means) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _State_Change);
+	exec (inst _State State _State_Change PRIORINTERVAL fil 
+		(property _priorproperty) (category _priorcategory) (inherent_aspect (inst Inherent_State)));
+	exec (inst _id State _State_Change _State fil 
+		(property _property) (category _category) (inherent_aspect (inst Inherent_State)));
+	exec (fil initial_state _State) (resulting_state _id));
+}
+
+
+SCRIPT Intransitive_State {
+	exec (inst _id State Setting CURRENTINTERVAL fil
+		(property _property) (category _category)  (inherent_aspect (inst Inherent_State)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Two_Participant_State {
+	exec (inst _id Two_Participant_State Setting CURRENTINTERVAL fil
+		(experiencer _experiencer) (percept _percept) (inherent_aspect (inst Inherent_State)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Mental_State {
+	test (_experiencer Human);
+
+	exec (inst _id Mental_State Setting CURRENTINTERVAL fil
+		(experiencer _experiencer) (percept _percept) (inherent_aspect (inst Inherent_State)));
+	exec (setcurrentinterval _id);
+}
+
+SCRIPT Want {
+	test (_wanter Human);
+	exec (inst _id Mental_State Setting CURRENTINTERVAL fil
+		(experiencer _wanter) (percept _wanted) (inherent_aspect (inst Inherent_State)));
+	exec (setcurrentinterval _id);
+}
+
+//============================================================
+// Active X-schemas
+//============================================================
+
+//===================================
+// Intransitive Actions
+//===================================
+
+SCRIPT Count {
+	test (_counter Animate);
+	
+	exec (inst _id Count Setting CURRENTINTERVAL fil
+			(counter _counter) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Estimate {
+	test (_estimator Animate);
+	
+	exec (inst _id Estimate Setting CURRENTINTERVAL fil
+			(estimator _estimator) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Get_Even {
+	test (_disputant Animate);
+	
+	exec (inst _id Get_Even Setting CURRENTINTERVAL fil
+			(disputant _disputant) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Play {
+	test (_player Animate);
+	
+	exec (inst _id Play Setting CURRENTINTERVAL fil
+		(player _player) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Practice {
+	test (_practicer Animate);
+	
+	exec (inst _id Practice Setting CURRENTINTERVAL fil
+		(practicer _practicer) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Proceed {
+	test (_proceeder Animate);
+	
+	exec (inst _id Proceed Setting CURRENTINTERVAL fil
+		(proceeder _proceeder) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Think {
+	test (_disputant Animate);
+	
+	exec (inst _id Think Setting CURRENTINTERVAL fil
+			(thinker _thinker) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Thunder {
+	test (_nature Animate);
+	
+	exec (inst _id Thunder Setting CURRENTINTERVAL fil
+		(nature _nature) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Sing {
+	test (_singer Animate);
+	
+	exec (inst _id Sing Setting CURRENTINTERVAL fil
+		(singer _singer) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Sneeze {
+	test (_sneezer Animate);
+	
+	exec (inst _id Sing Setting CURRENTINTERVAL fil
+		(sneezer _sneezer) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+//===================================
+// Expressions
+//===================================
+
+SCRIPT Cry {
+	test (_cryer Animate);
+	
+	exec (inst _id Cry Setting CURRENTINTERVAL fil
+		(cryer _cryer) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+SCRIPT Fuss {
+	test (_fusser Animate);
+	
+	exec (inst _id Fuss Setting CURRENTINTERVAL fil
+		(fusser _fusser) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+SCRIPT Smile {
+	test (_smiler Animate);
+	
+	exec (inst _id Smile Setting CURRENTINTERVAL fil
+		(smiler _smiler) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+//===================================
+// Self Motion
+//===================================
+
+
+SCRIPT Dance {
+	test (_dancer Animate);
+	
+	exec (inst _id Dance Setting CURRENTINTERVAL fil
+		(dancer _dancer) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Kneel {
+	test (_kneeler Animate);
+	
+	query (posture _kneeler ?p);
+	test !(_p Crouched);
+	exec (inst _id Kneel Setting CURRENTINTERVAL fil
+		(kneeler _kneeler) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+	exec (rem posture _kneeler);
+	exec (fil posture _kneeler (inst Crouched));
+}
+
+
+SCRIPT Lean {
+	test (_leaner Animate);
+	
+	exec (inst _id Lean Setting CURRENTINTERVAL fil
+		(leaner _leaner) (inherent_aspect (inst Inherent_Semelfactive)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Lie_Down {
+	test (_lyer Animate);
+	
+	query (posture _lyer ?p);
+	test !(_p Lyingdown);
+	exec (inst _id Lie_Down Setting CURRENTINTERVAL fil
+		(lyer _lyer) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+	exec (rem posture _lyer);
+	exec (fil posture _lyer (inst Lyingdown));	
+}
+
+
+SCRIPT Rise {
+	test (_riser Animate);
+	
+	query (posture _riser ?p);
+	test !(_p Upright);
+	exec (inst _id Rise Setting CURRENTINTERVAL fil
+		(riser _riser) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+	exec (rem posture _riser);
+	exec (fil posture _riser (inst Upright));	
+}
+
+
+SCRIPT Sit {
+	test (_sitter Animate);
+	
+	query (posture _sitter ?p);
+	test !(_p Seated);
+	exec (inst _id Sit Setting CURRENTINTERVAL fil
+		(sitter _sitter) (seat _seat) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+	exec (fil location _sitter _seat);
+	exec (rem posture _sitter);
+	exec (fil posture _sitter (inst Seated));
+}
+
+
+SCRIPT Spin {
+	test (_spinner Animate);
+	
+	exec (inst _id Spin Setting CURRENTINTERVAL fil
+		(spinner _spinner) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Tumble {
+	test (_tumbler Concrete_Entity);
+	exec (inst _id Tumble Setting CURRENTINTERVAL fil
+		(tumbler _tumbler) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Trip {
+	test (_tripper Animate);
+	
+	query (posture _tripper ?p);
+	test (_p Upright);
+	exec (inst _id Trip Setting CURRENTINTERVAL fil
+		(tripper _tripper) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+	exec (fil posture _tripper (inst Fallen));
+}
+
+
+//===================================
+// Helper Scripts
+//===================================
+
+
+SCRIPT ChangeLoc {
+	exec (rem location _mover);
+	exec (fil location _mover _newloc);
+	query (physical_component _mover ?p);
+	exec (rem location _p);
+	exec (fil location _p _newloc);	
+	query (member ?s ?m) (set_size _mover ?s);
+	exec (rem location _m);
+	exec (fil location _m _newloc);	
+}
+
+SCRIPT EstablishPossession {
+	query (relations CURRENTINTERVAL ?p) (?p Possession) (possessed ?p _possessed);
+	exec (rem relations CURRENTINTERVAL _p);	
+	exec (inst _Possession Possession fil (possessor _possessor) (possessed _possessed));
+	exec (fil relations CURRENTINTERVAL _Possession);
+	
+	runscript (EstablishMemberPossession (possessor _possessor) (possessed _possessed));	
+}
+
+SCRIPT EstablishMemberPossession {
+	query (member ?s ?m) (set_size _possessed ?s);
+	query (relations CURRENTINTERVAL ?p) (?p Possession) (possessed ?p _m);
+	exec (rem relations CURRENTINTERVAL _p);	
+	exec (inst _Possession Possession fil (possessor _possessor) (possessed _m));
+	exec (fil relations CURRENTINTERVAL _Possession);
+}
+
+//===================================
+// Translational Self Motion
+//===================================
+
+
+SCRIPT Ascend {
+	test (_ascender Animate);
+	
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _ascender) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _id Ascend Setting CURRENTINTERVAL fil 
+		(ascender _ascender) (spg _Source_Path_Goal) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+	
+	runscript (ChangeLoc (mover _ascender) (newloc _goal));
+}
+
+
+SCRIPT Climb {
+	test (_climber Animate);
+	default (_goal _climbed);
+
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _climber) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _id Climb Setting CURRENTINTERVAL fil 
+		(climber _climber) (spg _Source_Path_Goal) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+	
+	runscript (ChangeLoc (mover _climber) (newloc _goal));
+}
+
+
+SCRIPT Come {
+	test (_comer Animate);
+	test (CURRENTINTERVAL Discourse_Segment);	// FIXME
+	query (speaker CURRENTINTERVAL ?spk) (location ?spk ?loc);
+	default (_goal _loc);
+
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _comer) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _id Come Setting CURRENTINTERVAL fil 
+		(comer _comer) (spg _Source_Path_Goal) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+
+	runscript (ChangeLoc (mover _comer) (newloc _goal));
+}
+
+
+SCRIPT Descend {
+	test (_descender Animate);
+	
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _descender) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _id Descend Setting CURRENTINTERVAL fil 
+		(descender _descender) (spg _Source_Path_Goal) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+
+	runscript (ChangeLoc (mover _descender) (newloc _goal));
+}
+
+
+SCRIPT Exit {
+	test (_exiter Animate);
+	
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _exiter) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _id Exit Setting CURRENTINTERVAL fil 
+		(exiter _exiter) (spg _Source_Path_Goal) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+
+	runscript (ChangeLoc (mover _exiter) (newloc _goal));
+}
+
+
+SCRIPT Fall {
+	test (_faller Entity);
+	query (ground ?r ?g) (?r Room);
+	default (_goal _g);
+	query (location _faller ?s);
+	default (_source _s);
+
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _faller) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _id Fall Setting CURRENTINTERVAL fil 
+		(faller _faller) (spg _Source_Path_Goal) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+
+	runscript (ChangeLoc (mover _faller) (newloc _goal));
+}
+
+
+SCRIPT Go {
+	test (_goer Animate);
+	
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _goer) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _id Go Setting CURRENTINTERVAL fil 
+		(goer _goer) (spg _Source_Path_Goal) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+
+	runscript (ChangeLoc (mover _goer) (newloc _goal));
+}
+
+
+SCRIPT Hide {
+	test (_hider Animate);
+	
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _hider) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _id Hide Setting CURRENTINTERVAL fil 
+		(hider _hider) (spg _Source_Path_Goal) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+
+	runscript (ChangeLoc (mover _hider) (newloc _goal));
+}
+
+
+SCRIPT Run {
+	test (_runner Animate);
+	
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _runner) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _id Run Setting CURRENTINTERVAL fil (runner _runner) (spg _Source_Path_Goal) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+	
+	runscript (ChangeLoc (mover _runner) (newloc _goal));
+}
+
+
+SCRIPT Walk {
+	test (_walker Animate);
+	
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _walker) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _id Walk Setting CURRENTINTERVAL fil 
+		(walker _walker) (spg _Source_Path_Goal) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+
+	runscript (ChangeLoc (mover _walker) (newloc _goal));
+}
+
+
+//===================================
+// Continuous Force Application
+//===================================
+
+SCRIPT Bring {
+	test (_bringer Animate);
+	
+	default (_goal _bringer);
+	query (location _brought ?s);
+	default (_source _s);
+	query (hand _bringer ?hand);
+	default (_effector _hand);
+	
+	exec (inst _Joint_Motion Joint_Motion Setting CURRENTINTERVAL fil (protagonist _bringer) (principle_mover _bringer) (other_mover _brought));
+	exec (setcurrentinterval _Joint_Motion);
+	exec (inst _id Bring _Joint_Motion PRIORINTERVAL fil (bringer _bringer) (brought _brought) (effector _effector) (inherent_aspect (inst Inherent_Activity)));
+	exec (fil cfa _Joint_Motion _id);
+	exec (inst _Translational_Motion1 Translational_Motion _Joint_Motion _id fil (mover _bringer) (spg (inst _Source_Path_Goal Source_Path_Goal fil (trajector _bringer) (source _source) (path _path) (goal _goal) (deixis _deixis))));		exec (fil propelling_motion _Joint_Motion _Translational_Motion1);
+	exec (inst _Translational_Motion2 Translational_Motion _Joint_Motion _id fil (mover _brought) (spg (inst Source_Path_Goal fil (trajector _brought) (source _source) (path _path) (goal _goal) (deixis _deixis))));
+	exec (fil secondary_motion _Joint_Motion _Translational_Motion2);
+	
+	runscript (ChangeLoc (mover _bringer) (newloc _goal));
+	runscript (ChangeLoc (mover _brought) (newloc _goal));
+	exec (fil location _brought _effector);
+	runscript (EstablishPossession (possessor _bringer) (possessed _brought));
+}
+
+
+SCRIPT Carry {
+	test (_carrier Animate);
+	
+	default (_goal _carrier);
+	query (location _carried ?s);
+	default (_source _s);
+	query (hand _carrier ?hand);
+	default (_effector _hand);
+
+	
+	exec (inst _Joint_Motion Joint_Motion Setting CURRENTINTERVAL fil (protagonist _carrier) (principle_mover _carrier) (other_mover _carried));
+	exec (setcurrentinterval _Joint_Motion);
+	exec (inst _id Carry _Joint_Motion PRIORINTERVAL fil (carrier _carrier) (carried _carried) (effector _effector) (inherent_aspect (inst Inherent_Activity)));
+	exec (fil cfa _Joint_Motion _id);
+	exec (inst _Translational_Motion1 Translational_Motion _Joint_Motion _id fil (mover _carrier) (spg (inst _Source_Path_Goal Source_Path_Goal fil (trajector _carrier) (source _source) (path _path) (goal _goal) (deixis _deixis))));		exec (fil propelling_motion _Joint_Motion _Translational_Motion1);
+	exec (inst _Translational_Motion2 Translational_Motion _Joint_Motion _id fil (mover _carried) (spg (inst Source_Path_Goal fil (trajector _carried) (source _source) (path _path) (goal _goal) (deixis _deixis))));
+	exec (fil secondary_motion _Joint_Motion _Translational_Motion2);
+	
+	runscript (ChangeLoc (mover _carrier) (newloc _goal));
+	runscript (ChangeLoc (mover _carried) (newloc _goal));
+	exec (fil location _carried _effector);
+	runscript (EstablishPossession (possessor _carrier) (possessed _carried));
+}
+
+
+SCRIPT Carry_On_Back {
+	test (_carrier Animate);
+	
+	default (_goal _carrier);
+	query (location _carried ?s);
+	default (_source _s);
+	query (shoulder _carrier ?shoulder);
+	default (_effector _shoulder);
+	
+	exec (inst _Joint_Motion Joint_Motion Setting CURRENTINTERVAL fil (protagonist _carrier) (principle_mover _carrier) (other_mover _carried));
+	exec (setcurrentinterval _Joint_Motion);
+	exec (inst _id Carry_On_Back _Joint_Motion PRIORINTERVAL fil (carrier _carrier) (carried _carried) (effector _effector) (inherent_aspect (inst Inherent_Activity)));
+	exec (fil cfa _Joint_Motion _id);
+	exec (inst _Translational_Motion1 Translational_Motion _Joint_Motion _id fil (mover _carrier) (spg (inst _Source_Path_Goal Source_Path_Goal fil (trajector _carrier) (source _source) (path _path) (goal _goal) (deixis _deixis))));		exec (fil propelling_motion _Joint_Motion _Translational_Motion1);
+	exec (inst _Translational_Motion2 Translational_Motion _Joint_Motion _id fil (mover _carried) (spg (inst Source_Path_Goal fil (trajector _carried) (source _source) (path _path) (goal _goal) (deixis _deixis))));
+	exec (fil secondary_motion _Joint_Motion _Translational_Motion2);
+	
+	runscript (ChangeLoc (mover _carrier) (newloc _goal));
+	runscript (ChangeLoc (mover _carried) (newloc _goal));
+	exec (fil location _carried _effector);
+	runscript (EstablishPossession (possessor _carrier) (possessed _carried));
+}
+
+
+SCRIPT Contain {
+	exec (inst _id Contain Setting CURRENTINTERVAL fil (container _container) (contained _contained) (inherent_aspect (inst Inherent_Activity)));
+}
+
+
+SCRIPT Drive {
+	test (_driver Animate);
+	test (_driven Car);
+	
+	query (location _driven ?s);
+	default (_source _s);
+
+	exec (inst _Joint_Motion Joint_Motion Setting CURRENTINTERVAL fil (protagonist _driver) (principle_mover _driver) (other_mover _driven));
+	exec (setcurrentinterval _Joint_Motion);
+	exec (inst _id Drive _Joint_Motion PRIORINTERVAL fil (driver _driver) (driven _driven) (inherent_aspect (inst Inherent_Activity)));
+	exec (fil cfa _Joint_Motion _id);
+	exec (inst _Translational_Motion1 Translational_Motion _Joint_Motion _id fil (mover _driver) (spg (inst _Source_Path_Goal Source_Path_Goal fil (trajector _driver) (source _source) (path _path) (goal _goal) (deixis _deixis))));		exec (fil propelling_motion _Joint_Motion _Translational_Motion1);
+	exec (inst _Translational_Motion2 Translational_Motion _Joint_Motion _id fil (mover _driven) (spg (inst Source_Path_Goal fil (trajector _driven) (source _source) (path _path) (goal _goal) (deixis _deixis))));
+	exec (fil secondary_motion _Joint_Motion _Translational_Motion2);
+	
+	runscript (ChangeLoc (mover _driver) (newloc _goal));
+	runscript (ChangeLoc (mover _driven) (newloc _goal));
+}
+
+
+SCRIPT Escort {
+	test (_escort Animate);
+	test (_escorted Animate);
+	
+	query (location _escorted ?s);
+	default (_source _s);
+	
+	exec (inst _Joint_Motion Joint_Motion Setting CURRENTINTERVAL fil (protagonist _escort) (principle_mover _escort) (other_mover _escorted));
+	exec (setcurrentinterval _Joint_Motion);
+	exec (inst _id Escort _Joint_Motion PRIORINTERVAL fil (escort _escort) (escorted _escorted) (inherent_aspect (inst Inherent_Activity)));
+	exec (fil cfa _Joint_Motion _id);
+	exec (inst _Translational_Motion1 Translational_Motion _Joint_Motion _id fil (mover _escort) (spg (inst _Source_Path_Goal Source_Path_Goal fil (trajector _escort) (source _source) (path _path) (goal _goal) (deixis _deixis))));		exec (fil propelling_motion _Joint_Motion _Translational_Motion1);
+	exec (inst _Translational_Motion2 Translational_Motion _Joint_Motion _id fil (mover _escorted) (spg (inst Source_Path_Goal fil (trajector _escorted) (source _source) (path _path) (goal _goal) (deixis _deixis))));
+	exec (fil secondary_motion _Joint_Motion _Translational_Motion2);
+	
+	runscript (ChangeLoc (mover _escort) (newloc _goal));
+	runscript (ChangeLoc (mover _escorted) (newloc _goal));
+}
+
+
+SCRIPT Grasp {
+	test (_grasper Animate);
+	
+	default (_goal _grasper);
+	query (location _grasped ?s);
+	default (_source _s);
+	query (hand _grasper ?hand);
+	default (_effector _hand);
+	
+	exec (inst _Joint_Motion Joint_Motion Setting CURRENTINTERVAL fil (protagonist _grasper) (principle_mover _grasper) (other_mover _grasped));
+	exec (setcurrentinterval _Joint_Motion);
+	exec (inst _id Grasp _Joint_Motion PRIORINTERVAL fil (grasper _grasper) (grasped _grasped) (effector _effector) (inherent_aspect (inst Inherent_Activity)));
+	exec (fil cfa _Joint_Motion _id);
+	exec (inst _Translational_Motion1 Translational_Motion _Joint_Motion _id fil (mover _grasper) (spg (inst _Source_Path_Goal Source_Path_Goal fil (trajector _grasper) (source _source) (path _path) (goal _goal) (deixis _deixis))));		exec (fil propelling_motion _Joint_Motion _Translational_Motion1);
+	exec (inst _Translational_Motion2 Translational_Motion _Joint_Motion _id fil (mover _grasped) (spg (inst Source_Path_Goal fil (trajector _grasped) (source _source) (path _path) (goal _goal) (deixis _deixis))));
+	exec (fil secondary_motion _Joint_Motion _Translational_Motion2);
+	
+	runscript (ChangeLoc (mover _grasper) (newloc _goal));
+	runscript (ChangeLoc (mover _grasped) (newloc _goal));
+	exec (fil location _grasped _effector);
+	runscript (EstablishPossession (possessor _grasper) (possessed _grasped));
+}
+
+
+SCRIPT Hug {
+	test (_hugger Animate);
+	test (_hugged Concrete_Entity);
+	
+	exec (inst _id Hug Setting CURRENTINTERVAL fil 
+		(hugger _hugger) (hugged _hugged) (effector _effector) (inherent_aspect (inst Inherent_Semelfactive)));
+}
+
+
+SCRIPT Lift {
+	test (_lifter Animate);
+	
+	default (_goal _lifter);
+	query (location _liftee ?s);
+	default (_source _s);
+	query (hand _lifter ?hand);
+	default (_effector _hand);
+		
+	exec (inst _Joint_Motion Joint_Motion Setting CURRENTINTERVAL fil (protagonist _lifter) (principle_mover _lifter) (other_mover _liftee));
+	exec (setcurrentinterval _Joint_Motion);
+	exec (inst _id Lift _Joint_Motion PRIORINTERVAL fil (lifter _lifter) (liftee _liftee) (effector _effector) (inherent_aspect (inst Inherent_Activity)));
+	exec (fil cfa _Joint_Motion _id);
+	exec (inst _Translational_Motion1 Translational_Motion _Joint_Motion _id fil (mover _lifter) (spg (inst _Source_Path_Goal Source_Path_Goal fil (trajector _lifter) (source _source) (path _path) (goal _goal) (deixis _deixis))));		exec (fil propelling_motion _Joint_Motion _Translational_Motion1);
+	exec (inst _Translational_Motion2 Translational_Motion _Joint_Motion _id fil (mover _liftee) (spg (inst Source_Path_Goal fil (trajector _liftee) (source _source) (path _path) (goal _goal) (deixis _deixis))));
+	exec (fil secondary_motion _Joint_Motion _Translational_Motion2);
+	
+	runscript (ChangeLoc (mover _lifter) (newloc _goal));
+	runscript (ChangeLoc (mover _liftee) (newloc _goal));
+	exec (fil location _liftee _effector);
+	runscript (EstablishPossession (possessor _lifter) (possessed _liftee));	
+}
+
+
+SCRIPT Ride {
+	test (_rider Animate);
+	test (_rode Manipulable_Inanimate_Object);
+
+	query (location _rode ?s);
+	default (_source _s);
+	
+	exec (inst _Joint_Motion Joint_Motion Setting CURRENTINTERVAL fil (protagonist _rider) (principle_mover _rider) (other_mover _rode));
+	exec (setcurrentinterval _Joint_Motion);
+	exec (inst _id Ride _Joint_Motion PRIORINTERVAL fil (rider _rider) (rode _rode) (effector _effector) (inherent_aspect (inst Inherent_Activity)));
+	exec (fil cfa _Joint_Motion _id);
+	exec (inst _Translational_Motion1 Translational_Motion _Joint_Motion _id fil (mover _rider) (spg (inst _Source_Path_Goal Source_Path_Goal fil (trajector _rider) (source _source) (path _path) (goal _goal) (deixis _deixis))));		exec (fil propelling_motion _Joint_Motion _Translational_Motion1);
+	exec (inst _Translational_Motion2 Translational_Motion _Joint_Motion _id fil (mover _rode) (spg (inst Source_Path_Goal fil (trajector _rode) (source _source) (path _path) (goal _goal) (deixis _deixis))));
+	exec (fil secondary_motion _Joint_Motion _Translational_Motion2);
+	
+	runscript (ChangeLoc (mover _rider) (newloc _goal));
+	runscript (ChangeLoc (mover _rode) (newloc _goal));
+}
+
+
+SCRIPT Steady {
+	test (_support Concrete_Entity);
+	test (_steadied Concrete_Entity);
+	
+	exec (inst _id Steady Setting CURRENTINTERVAL fil 
+		(support _support) (steadied _steadied) (effector _effector) (inherent_aspect (inst Inherent_Semelfactive)));
+}
+
+
+SCRIPT Steer {
+	test (_steerer Animate);
+	test (_steered Manipulable_Inanimate_Object);
+
+	query (location _steered ?s);
+	default (_source _s);
+	
+	exec (inst _Joint_Motion Joint_Motion Setting CURRENTINTERVAL fil (protagonist _steerer) (principle_mover _steerer) (other_mover _steered));
+	exec (setcurrentinterval _Joint_Motion);
+	exec (inst _id Steer _Joint_Motion PRIORINTERVAL fil (steerer _steerer) (steered _steered) (effector _effector) (inherent_aspect (inst Inherent_Activity)));
+	exec (fil cfa _Joint_Motion _id);
+	exec (inst _Translational_Motion1 Translational_Motion _Joint_Motion _id fil (mover _steerer) (spg (inst _Source_Path_Goal Source_Path_Goal fil (trajector _steerer) (source _source) (path _path) (goal _goal) (deixis _deixis))));		exec (fil propelling_motion _Joint_Motion _Translational_Motion1);
+	exec (inst _Translational_Motion2 Translational_Motion _Joint_Motion _id fil (mover _steered) (spg (inst Source_Path_Goal fil (trajector _steered) (source _source) (path _path) (goal _goal) (deixis _deixis))));
+	exec (fil secondary_motion _Joint_Motion _Translational_Motion2);
+	
+	runscript (ChangeLoc (mover _steerer) (newloc _goal));
+	runscript (ChangeLoc (mover _steered) (newloc _goal));
+}
+
+//===================================
+// Forceful Motion
+//===================================
+
+
+SCRIPT Drop {
+	test (_dropper Animate);
+	test (_dropped Manipulable_Inanimate_Object);
+
+	query (location _dropped ?s);
+	default (_source _s);
+	query (ground ?r ?g) (?r Room);
+	default (_goal _g);
+	
+	exec (inst _Caused_Motion Caused_Motion Setting CURRENTINTERVAL fil (protagonist _dropper));
+	exec (setcurrentinterval _Caused_Motion);
+	exec (inst _id Drop _Caused_Motion PRIORINTERVAL fil 
+		(dropper _dropper) (dropped _dropped) (effector _effector) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _dropped) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _Translational_Motion Translational_Motion _Caused_Motion _id fil 
+		(mover _dropped) (spg _Source_Path_Goal));
+	exec (fil forceful_motion _Caused_Motion _id);
+	exec (fil motion _Caused_Motion _Translational_Motion);
+
+	runscript (ChangeLoc (mover _dropped) (newloc _goal));
+	query (relations CURRENTINTERVAL ?p) (?p Possession) (possessed ?p _dropped) (possesser ?p _dropper);
+	exec (rem relations CURRENTINTERVAL _p);
+}
+
+
+SCRIPT Pick {
+	test (_picker Animate);
+	test (_picked Manipulable_Inanimate_Object);
+
+	query (location _picked ?s);
+	default (_source _s);
+	default (_goal _picker);
+	query (hand _picker ?hand);
+	default (_effector _hand);
+	
+	exec (inst _Caused_Motion Caused_Motion Setting CURRENTINTERVAL fil (protagonist _picker));
+	exec (setcurrentinterval _Caused_Motion);
+	exec (inst _id Pick _Caused_Motion PRIORINTERVAL fil 
+		(picker _picker) (picked _picked) (effector _effector) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _picked) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _Translational_Motion Translational_Motion _Caused_Motion _id fil 
+		(mover _picked) (spg _Source_Path_Goal));
+	exec (fil forceful_motion _Caused_Motion _id);
+	exec (fil motion _Caused_Motion _Translational_Motion);
+
+	runscript (ChangeLoc (mover _picked) (newloc _goal));
+	exec (fil location _picked _effector);
+	runscript (EstablishPossession (possessor _picker) (possessed _picked));	
+}
+
+
+SCRIPT Pin {
+	test (_pinner Animate);
+	test (_pinned Manipulable_Inanimate_Object);
+
+	query (location _pinned ?s);
+	default (_source _s);
+	
+	exec (inst _Caused_Motion Caused_Motion Setting CURRENTINTERVAL fil (protagonist _pinner));
+	exec (setcurrentinterval _Caused_Motion);
+	exec (inst _id Pin _Caused_Motion PRIORINTERVAL fil 
+		(pinner _pinner) (pinned _pinned) (effector _effector) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _pinned) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _Translational_Motion Translational_Motion _Caused_Motion _id fil 
+		(mover _pinned) (spg _Source_Path_Goal));
+	exec (fil forceful_motion _Caused_Motion _id);
+	exec (fil motion _Caused_Motion _Translational_Motion);
+
+	runscript (ChangeLoc (mover _pinned) (newloc _goal));
+}
+
+
+SCRIPT Press {
+	test (_press Sharp_Object);
+	test (_pressed Concrete_Entity);
+
+	exec (inst _id Press Setting CURRENTINTERVAL fil 
+		(press _press) (pressed _pressed) (effector _effector) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Prick {
+	test (_prick Sharp_Object);
+	test (_pricked Concrete_Entity);
+
+	exec (inst _id Prick Setting CURRENTINTERVAL fil 
+		(prick _prick) (pricked _pricked) (effector _effector) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Pull {
+	test (_puller Animate);
+	test (_pulled Concrete_Entity);
+
+	exec (inst _id Pull Setting CURRENTINTERVAL fil 
+		(puller _puller) (pulled _pulled) (effector _effector) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Push {
+	test (_pusher Animate);
+	test (_pushed Concrete_Entity);
+
+	exec (inst _id Push Setting CURRENTINTERVAL fil 
+		(pusher _pusher) (pushed _pushed) (effector _effector) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Slam {
+	test (_slammer Animate);
+	test (_slammed Concrete_Entity);
+
+	exec (inst _id Slam Setting CURRENTINTERVAL fil 
+		(slammer _slammer) (slammed _slammed) (effector _effector) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Spit {
+	test (_spitter Animate);
+	test (_spitted Manipulable_Inanimate_Object);
+
+	query (location _spitted ?s);
+	default (_source _s);	
+	query (table ?t ?r) (?r Room);
+	default (_goal _t);
+	
+	exec (inst _Caused_Motion Caused_Motion Setting CURRENTINTERVAL fil (protagonist _spitter));
+	exec (setcurrentinterval _Caused_Motion);
+	exec (inst _id Spit _Caused_Motion PRIORINTERVAL fil 
+		(spitter _spitter) (spitted _spitted) (effector _effector) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _spitted) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _Translational_Motion Translational_Motion _Caused_Motion _id fil 
+		(mover _spitted) (spg _Source_Path_Goal));
+	exec (fil forceful_motion _Caused_Motion _id);
+	exec (fil motion _Caused_Motion _Translational_Motion);
+
+	runscript (ChangeLoc (mover _spitted) (newloc _goal));
+}
+
+
+SCRIPT Sweep {
+	test (_sweeper Animate);
+	test (_swept Manipulable_Inanimate_Object);
+
+	query (location _swept ?s);
+	default (_source _s);	
+	query (ground ?r ?g) (?r Room);
+	default (_goal _g);
+	
+	exec (inst _Caused_Motion Caused_Motion Setting CURRENTINTERVAL fil (protagonist _sweeper));
+	exec (setcurrentinterval _Caused_Motion);
+	exec (inst _id Spit _Caused_Motion PRIORINTERVAL fil 
+		(sweeper _sweeper) (swept _swept) (effector _effector) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _swept) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _Translational_Motion Translational_Motion _Caused_Motion _id fil 
+		(mover _swept) (spg _Source_Path_Goal));
+	exec (fil forceful_motion _Caused_Motion _id);
+	exec (fil motion _Caused_Motion _Translational_Motion);
+
+	runscript (ChangeLoc (mover _swept) (newloc _goal));
+}
+
+
+SCRIPT Wipe {
+	test (_wiper Animate);
+	test (_wiped Concrete_Entity);
+	test (_mop Manipulable_Inanimate_Object);
+
+	// a wipe event involves also moving a mop around concurrently
+	exec (inst _id Wipe Setting CURRENTINTERVAL fil 
+		(wiper _wiper) (wiped _wiped) (effector _effector) (inherent_aspect (inst Inherent_Activity)));
+	runscript(Move (mover _wiper) (moved _mop) (goal _wiped));
+	exec (setcurrentinterval _id);
+	exec (inst _Dirty Dirty Setting CURRENTINTERVAL fil (protagonist _mop));
+	exec (setcurrentinterval _Dirty);
+}
+
+
+SCRIPT Stir {
+	test (_stirrer Animate);
+	test (_stirred Substance);
+
+	exec (inst _id Stir Setting CURRENTINTERVAL fil 
+		(stirrer _stirrer) (stirred _stirred) (effector _effector) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+//===================================
+// Translational Forceful Motion
+//===================================
+
+
+SCRIPT Apply {
+	test (_applier Animate);
+	test (_substance Substance);
+	
+	query (location _substance ?s);
+	default (_source _s);
+	default (_goal _surface);
+	
+	exec (inst _Caused_Motion Caused_Motion Setting CURRENTINTERVAL fil (protagonist _applier));
+	exec (setcurrentinterval _Caused_Motion);
+	exec (inst _id Apply _Caused_Motion PRIORINTERVAL fil 
+		(applier _applier) (substance _substance) (effector _effector) (inherent_aspect (inst Inherent_Semelfactive)));
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _substance) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _Translational_Motion Translational_Motion _Caused_Motion _id fil 
+		(mover _substance) (spg _Source_Path_Goal));
+	exec (fil forceful_motion _Caused_Motion _id);
+	exec (fil motion _Caused_Motion _Translational_Motion);
+
+	runscript (ChangeLoc (mover _substance) (newloc _goal));
+}
+
+
+SCRIPT Fetch {
+	test (_fetcher Animate);
+	test (_fetched Manipulable_Inanimate_Object);
+	test !(location _fetched _fetcher);
+	testExist! (relations CURRENTINTERVAL ?p) (?p Possession) (possessor ?p _fetcher) (possessed ?p _fetched);
+	query (hand _fetcher ?hand);
+	default (_effector _hand);
+
+	exec (inst _Caused_Motion Caused_Motion Setting CURRENTINTERVAL fil (protagonist _fetcher));
+	exec (setcurrentinterval _Caused_Motion);
+	exec (inst _id Fetch _Caused_Motion PRIORINTERVAL fil 
+		(fetcher _fetcher) (fetched _fetched) (effector _effector) (inherent_aspect (inst Inherent_Semelfactive)));
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _fetched) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _Translational_Motion Translational_Motion _Caused_Motion _id fil 
+		(mover _fetched) (spg _Source_Path_Goal));
+	exec (fil forceful_motion _Caused_Motion _id);
+	exec (fil motion _Caused_Motion _Translational_Motion);
+
+	runscript (ChangeLoc (mover _fetched) (newloc _fetcher));
+	exec (fil location _fetched _effector);	
+	runscript (EstablishPossession (possessor _fetcher) (possessed _fetched));
+}
+
+
+SCRIPT Ladle {
+	test (_ladler Animate);
+	test (_ladled Manipulable_Inanimate_Object);
+
+	query (location _ladled ?s);
+	default (_source _s);
+	default (_goal _container);
+	
+	exec (inst _Caused_Motion Caused_Motion Setting CURRENTINTERVAL fil (protagonist _ladler));
+	exec (setcurrentinterval _Caused_Motion);
+	exec (inst _id Ladle _Caused_Motion PRIORINTERVAL fil 
+		(ladler _ladler) (ladled _ladled) (effector _effector) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _ladled) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _Translational_Motion Translational_Motion _Caused_Motion _id fil 
+		(mover _ladled) (spg _Source_Path_Goal));
+	exec (fil forceful_motion _Caused_Motion _id);
+	exec (fil motion _Caused_Motion _Translational_Motion);
+
+	runscript (ChangeLoc (mover _ladled) (newloc _goal));
+}
+
+
+SCRIPT Load {
+	test (_loader Animate);
+	test (_goods Manipulable_Inanimate_Object);
+
+	query (location _goods ?s);
+	default (_source _s);
+	default (_goal _container);
+	
+	exec (inst _Caused_Motion Caused_Motion Setting CURRENTINTERVAL fil (protagonist _loader));
+	exec (setcurrentinterval _Caused_Motion);
+	exec (inst _id Load _Caused_Motion PRIORINTERVAL fil 
+		(loader _loader) (goods _goods) (effector _effector) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _goods) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _Translational_Motion Translational_Motion _Caused_Motion _id fil 
+		(mover _goods) (spg _Source_Path_Goal));
+	exec (fil forceful_motion _Caused_Motion _id);
+	exec (fil motion _Caused_Motion _Translational_Motion);
+
+	runscript (ChangeLoc (mover _goods) (newloc _goal));
+}
+
+
+SCRIPT Move {
+	test (_mover Animate);
+	test (_moved Manipulable_Inanimate_Object);
+
+	query (location _moved ?s);
+	default (_source _s);
+	
+	exec (inst _Caused_Motion Caused_Motion Setting CURRENTINTERVAL fil (protagonist _mover));
+	exec (setcurrentinterval _Caused_Motion);
+	exec (inst _id Move _Caused_Motion PRIORINTERVAL fil 
+		(mover _mover) (moved _moved) (effector _effector) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _moved) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _Translational_Motion Translational_Motion _Caused_Motion _id fil 
+		(mover _moved) (spg _Source_Path_Goal));
+	exec (fil forceful_motion _Caused_Motion _id);
+	exec (fil motion _Caused_Motion _Translational_Motion);
+
+	runscript (ChangeLoc (mover _mover) (newloc _goal));
+}
+
+
+SCRIPT Plug {
+	test (_plugger Animate);
+	test (_plug Manipulable_Inanimate_Object);
+	test (_opening Portal);
+
+	query (location _plug ?s);
+	default (_source _s);
+	default (_goal _opening);
+	
+	exec (inst _Caused_Motion Caused_Motion Setting CURRENTINTERVAL fil (protagonist _plugger));
+	exec (setcurrentinterval _Caused_Motion);
+	exec (inst _id Plug _Caused_Motion PRIORINTERVAL fil 
+		(plugger _plugger) (plug _plug) (effector _effector) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _plug) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _Translational_Motion Translational_Motion _Caused_Motion _id fil 
+		(mover _plug) (spg _Source_Path_Goal));
+	exec (fil forceful_motion _Caused_Motion _id);
+	exec (fil motion _Caused_Motion _Translational_Motion);
+
+	runscript (ChangeLoc (mover _plug) (newloc _goal));
+}
+
+
+SCRIPT Put {
+	test (_putter Animate);
+	test (_puttee Manipulable_Inanimate_Object);
+
+	query (location _puttee ?s);
+	default (_source _s);
+	
+	exec (inst _Caused_Motion Caused_Motion Setting CURRENTINTERVAL fil (protagonist _putter));
+	exec (setcurrentinterval _Caused_Motion);
+	exec (inst _id Put _Caused_Motion PRIORINTERVAL fil 
+		(putter _putter) (puttee _puttee) (effector _effector) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _puttee) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _Translational_Motion Translational_Motion _Caused_Motion _id fil 
+		(mover _puttee) (spg _Source_Path_Goal));
+	exec (fil forceful_motion _Caused_Motion _id);
+	exec (fil motion _Caused_Motion _Translational_Motion);
+
+	runscript (ChangeLoc (mover _puttee) (newloc _goal));
+}
+
+
+SCRIPT Scatter {
+	test (_scatterer Animate);
+	test (_scattered Manipulable_Inanimate_Object);
+
+	query (location _scattered ?s);
+	default (_source _s);
+	query (ground ?r ?g) (location _thrower ?r) (?r Room);
+	default (_goal _g);	
+	
+	exec (inst _Caused_Motion Caused_Motion Setting CURRENTINTERVAL fil (protagonist _scatterer));
+	exec (setcurrentinterval _Caused_Motion);
+	exec (inst _id Scatter _Caused_Motion PRIORINTERVAL fil 
+		(scatterer _scatterer) (scattered _scattered) (effector _effector) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _scattered) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _Translational_Motion Translational_Motion _Caused_Motion _id fil 
+		(mover _scattered) (spg _Source_Path_Goal));
+	exec (fil forceful_motion _Caused_Motion _id);
+	exec (fil motion _Caused_Motion _Translational_Motion);
+
+	runscript (ChangeLoc (mover _scattered) (newloc _goal));
+}
+
+
+SCRIPT Stash_Away {
+	test (_stasher Animate);
+	test (_stash Manipulable_Inanimate_Object);
+
+	query (location _stash ?s);
+	default (_source _s);
+	
+	exec (inst _Caused_Motion Caused_Motion Setting CURRENTINTERVAL fil (protagonist _stasher));
+	exec (setcurrentinterval _Caused_Motion);
+	exec (inst _id Stash_Away _Caused_Motion PRIORINTERVAL fil 
+		(stasher _stasher) (stash _stash) (effector _effector) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _stash) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _Translational_Motion Translational_Motion _Caused_Motion _id fil 
+		(mover _stash) (spg _Source_Path_Goal));
+	exec (fil forceful_motion _Caused_Motion _id);
+	exec (fil motion _Caused_Motion _Translational_Motion);
+
+	runscript (ChangeLoc (mover _stash) (newloc _goal));
+}
+
+SCRIPT Take {
+	test (_taker Animate);
+	test (_taken Manipulable_Inanimate_Object);
+
+	query (location _taken ?s);
+	default (_source _s);
+	default (_goal _taker);
+	query (hand _taker ?hand);
+	default (_effector _hand);
+	
+	testExist! (relations CURRENTINTERVAL ?p) (?p Possession) (possessor ?p _taker) (possessed ?p _taken);
+
+	exec (inst _Caused_Motion Caused_Motion Setting CURRENTINTERVAL fil (protagonist _taker));
+	exec (setcurrentinterval _Caused_Motion);
+	exec (inst _id Take _Caused_Motion PRIORINTERVAL fil 
+		(taker _taker) (taken _taken) (effector _effector) (inherent_aspect (inst Inherent_Achievement)));
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _taken) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _Translational_Motion Translational_Motion _Caused_Motion _id fil 
+		(mover _taken) (spg _Source_Path_Goal));
+	exec (fil forceful_motion _Caused_Motion _id);
+	exec (fil motion _Caused_Motion _Translational_Motion);
+
+	runscript (ChangeLoc (mover _taken) (newloc _goal));
+	exec (fil location _taken _effector);	
+	runscript (EstablishPossession (possessor _taker) (possessed _taken));
+}
+
+//===================================
+// Agentive Impact
+//===================================
+
+
+SCRIPT Beat {
+	test (_beater Animate);
+	test (_beaten Concrete_Entity);
+
+	exec (inst _id Beat Setting CURRENTINTERVAL fil 
+		(beater _beater) (beaten _beaten) (effector _effector) (inherent_aspect (inst Inherent_Semelfactive)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Kick {
+	test (_kicker Animate);
+	test (_kickee Concrete_Entity);
+
+	query (location _kickee ?s);
+	default (_source _s);
+	
+	exec (inst _Caused_Motion Caused_Motion Setting CURRENTINTERVAL fil (protagonist _kicker));
+	exec (setcurrentinterval _Caused_Motion);
+	exec (inst _id Kick _Caused_Motion PRIORINTERVAL fil 
+		(kicker _kicker) (kickee _kickee) (effector _effector) (inherent_aspect (inst Inherent_Semelfactive)));
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _kickee) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _Translational_Motion Translational_Motion _Caused_Motion _id fil 
+		(mover _kickee) (spg _Source_Path_Goal));
+	exec (fil forceful_motion _Caused_Motion _id);
+	exec (fil motion _Caused_Motion _Translational_Motion);
+	
+	runscript (ChangeLoc (mover _kickee) (newloc _goal));
+}
+
+
+SCRIPT Mash {
+	test (_masher Animate);
+	test (_mashed Concrete_Entity);
+
+	exec (inst _id Mash Setting CURRENTINTERVAL fil 
+		(masher _masher) (mashed _mashed) (effector _effector) (inherent_aspect (inst Inherent_Semelfactive)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Pound {
+	test (_pounder Animate);
+	test (_pounded Concrete_Entity);
+
+	exec (inst _id Pound Setting CURRENTINTERVAL fil 
+		(pounder _pounder) (pounded _pounded) (effector _effector) (inherent_aspect (inst Inherent_Semelfactive)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Slap {
+	test (_slapper Animate);
+	test (_slapped Concrete_Entity);
+
+	exec (inst _id Slap Setting CURRENTINTERVAL fil 
+		(slapper _slapper) (slapped _slapped) (effector _effector) (inherent_aspect (inst Inherent_Semelfactive)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Throw {
+	test (_thrower Animate);
+	test (_throwee Manipulable_Inanimate_Object);
+
+	query (ground ?r ?g) (location _thrower ?r) (?r Room);
+	default (_goal _g);
+	query (location _throwee ?s);
+	default (_source _s);
+	
+	exec (inst _Caused_Motion Caused_Motion Setting CURRENTINTERVAL fil (protagonist _thrower));
+	exec (setcurrentinterval _Caused_Motion);
+	exec (inst _id Throw _Caused_Motion PRIORINTERVAL fil 
+		(thrower _thrower) (throwee _throwee) (effector _effector) (inherent_aspect (inst Inherent_Achievement)));
+	exec (inst _Source_Path_Goal Source_Path_Goal fil (trajector _throwee) (source _source) (path _path) (goal _goal) (deixis _deixis));
+	exec (inst _Translational_Motion Translational_Motion _Caused_Motion _id fil 
+		(mover _throwee) (spg _Source_Path_Goal));
+	exec (fil forceful_motion _Caused_Motion _id);
+	exec (fil motion _Caused_Motion _Translational_Motion);
+	
+	runscript (ChangeLoc (mover _throwee) (newloc _goal));
+}
+
+
+//===================================
+// Cause Change
+//===================================
+
+SCRIPT Cut {
+	test (_cutter Animate);
+	test (_cut Manipulable_Inanimate_Object);
+
+	exec (inst _id Cut Setting CURRENTINTERVAL fil 
+		(cutter _cutter) (cut _cut) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Close {
+	test (_closer Animate);
+	test (_closed Openable);
+
+	exec (inst _id Close Setting CURRENTINTERVAL fil 
+		(closer _closer) (closed _closed) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Damage {
+	test (_damager Animate);
+	test (_damaged Manipulable_Inanimate_Object);
+
+	exec (inst _id Damage Setting CURRENTINTERVAL fil 
+		(damager _damager) (damaged _damaged) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Discard {
+	test (_discarder Animate);
+	test (_discarded Manipulable_Inanimate_Object);
+
+	exec (inst _id Discard Setting CURRENTINTERVAL fil 
+		(discarder _discarder) (discarded _discarded) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Fix {
+	test (_fixer Animate);
+	test (_fixed Manipulable_Inanimate_Object);
+
+	exec (inst _id Fix Setting CURRENTINTERVAL fil 
+		(fixer _fixer) (fixed _fixed) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Open {
+	test (_opener Animate);
+	test (_opened Openable);
+
+	exec (inst _id Open Setting CURRENTINTERVAL fil 
+		(opener _opener) (opened _opened) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+	
+	exec (rem state _opened);
+	exec (fil state _opened (inst Open_State));
+}
+
+
+SCRIPT Pare {
+	test (_parer Animate);
+	test (_pared Manipulable_Inanimate_Object);
+
+	exec (inst _id Pare Setting CURRENTINTERVAL fil 
+		(parer _parer) (pared _pared) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Rip_Open {
+	test (_ripper Animate);
+	test (_ripped Manipulable_Inanimate_Object);
+
+	exec (inst _id Rip_Open Setting CURRENTINTERVAL fil 
+		(ripper _ripper) (ripped _ripped) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Start {
+	test (_actor Animate);
+	test (_started Process);
+
+	exec (inst _id Start Setting CURRENTINTERVAL fil 
+		(actor _actor) (started _started) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Switch_On {
+	test (_actor Animate);
+	test (_appliance Electrical_Appliance);
+	query (state _appliance ?p);
+	test (_p Power_Off);
+
+	exec (inst _id Switch_On Setting CURRENTINTERVAL fil 
+		(actor _actor) (appliance _appliance) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+	
+	exec (rem state _appliance);
+	exec (fil state _appliance (inst Power_On));
+}
+
+
+SCRIPT Switch_Off {
+	test (_actor Animate);
+	test (_appliance Electrical_Appliance);
+	query (state _appliance ?p);
+	test (_p Power_On);
+
+	exec (inst _id Switch_Off Setting CURRENTINTERVAL fil 
+		(actor _actor) (appliance _appliance) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+	
+	exec (rem state _appliance);
+	exec (fil state _appliance (inst Power_Off));
+}
+
+
+SCRIPT Tear {
+	test (_tearer Animate);
+	test (_torn Concrete_Entity);
+	
+	exec (inst _id Tear Setting CURRENTINTERVAL fil
+		(tearer _tearer) (torn _torn) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Wash {
+	test (_washer Animate);
+	test (_washed Concrete_Entity);
+	
+	exec (inst _id Wash Setting CURRENTINTERVAL fil
+		(washer _washer) (washed _washed) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+//===================================
+// Ingestion
+//===================================
+
+SCRIPT Eat {
+	test (_eater Animate);
+	test (_food Manipulable_Inanimate_Object);
+
+	exec (inst _id Eat Setting CURRENTINTERVAL fil 
+		(eater _eater) (food _food) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+	exec (inst _Chew Chew _id PRIORINTERVAL fil 
+		(chewer _eater) (chewed _food) (inherent_aspect (inst Inherent_Activity)));
+	exec (inst _Swallow Swallow _id _Chew fil 
+		(swallower _eater) (swallowed _food) (inherent_aspect (inst Inherent_Achievement)));
+	exec (fil chew _id _Chew) ;
+	exec (fil swallow _id _Swallow);
+}
+
+
+SCRIPT Chew {
+	test (_chewer Animate);
+	test (_chewed Manipulable_Inanimate_Object);
+
+	exec (inst _id Chew Setting CURRENTINTERVAL fil 
+		(chewer _chewer) (chewed _chewed) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Drink {
+	test (_drinker Animate);
+	test (_beverage Liquid);
+
+	exec (inst _id Drink Setting CURRENTINTERVAL fil 
+		(drinker _drinker) (beverage _beverage) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Swallow {
+	test (_swallower Animate);
+	test (_swallowed Manipulable_Inanimate_Object);
+
+	exec (inst _id Swallow Setting CURRENTINTERVAL fil 
+		(swallower _swallower) (swallowed _swallowed) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+//===================================
+// Perception
+//===================================
+
+
+SCRIPT Perceive_Audio {
+	exec (inst _id Perceive_Audio Setting CURRENTINTERVAL fil 
+		(perceiver _perceiver) (percept _percept) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Perceive_Visual {
+	exec (inst _id Perceive_Visual Setting CURRENTINTERVAL fil 
+		(perceiver _perceiver) (percept _percept) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Perceive_Olfactory {
+	exec (inst _id Perceive_Olfactory Setting CURRENTINTERVAL fil 
+		(perceiver _perceiver) (percept _percept) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Observe {
+	exec (inst _id Perceive_Audio Setting CURRENTINTERVAL fil 
+		(observer _observer) (observed _observed) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+//===================================
+// Other Transitive Actions
+//===================================
+
+
+SCRIPT Attend {
+	test (_attender Human);
+	test (_attended School);
+
+	exec (inst _id Attend Setting CURRENTINTERVAL fil 
+		(attender _attender) (attended _attended) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Bite {
+	test (_biter Human);
+	test (_bitten School);
+
+	exec (inst _id Bite Setting CURRENTINTERVAL fil 
+		(biter _biter) (bitten _bitten) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Divvy_Up {
+	test (_divvier Human);
+	test (_divvied School);
+
+	exec (inst _id Divvy_Up Setting CURRENTINTERVAL fil 
+		(divvier _divvier) (divvied _divvied) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+SCRIPT Cook {
+	test (_cook Human);
+	test (_food School);
+
+	exec (inst _id Bite Setting CURRENTINTERVAL fil 
+		(cook _cook) (food _food) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Draw {
+	test (_drawer Animate);
+	test (_drawn Element);
+
+	exec (inst _id Draw Setting CURRENTINTERVAL fil 
+		(drawer _drawer) (drawn _drawn) (drawn_on _drawn_on) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Find {
+	test (_finder Animate);
+	test (_target Element);
+	test !(location _target _finder);
+
+	exec (inst _id Find Setting CURRENTINTERVAL fil 
+		(finder _finder) (target _target) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Mimic {
+	test (_mimicker Animate);
+	test (_mimicked Element);
+	test !(location _mimicked _mimicker);
+
+	exec (inst _id Mimic Setting CURRENTINTERVAL fil 
+		(mimicker _mimicker) (mimicked _mimicked) (inherent_aspect (inst Inherent_Semelfactive)));
+	exec (setcurrentinterval _id);
+}
+
+SCRIPT Photograph {
+	test (_photographer Animate);
+	test (_photographed Element);
+	test !(location _photographed _photographer);
+
+	exec (inst _id Photograph Setting CURRENTINTERVAL fil 
+		(photographer _photographer) (photographed _photographed) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+}
+
+SCRIPT Play_Musical_Instrument {
+	test (_player Animate);
+	test (_musical_instrument_with Element);
+	test !(location _musical_instrument_with _player);
+
+	exec (inst _id Play_Musical_Instrument Setting CURRENTINTERVAL fil 
+		(player _player) (musical_instrument_with _musical_instrument_with) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+SCRIPT Play_With {
+	test (_player Animate);
+	test (_played_with Element);
+	test !(location _played_with _player);
+
+	exec (inst _id Play_With Setting CURRENTINTERVAL fil 
+		(player _player) (played_with _played_with) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Point {
+	test (_person_pointing Animate);
+	test (_pointed_at Element);
+
+	exec (inst _id Point Setting CURRENTINTERVAL fil 
+		(person_pointing _person_pointing) (pointed_at _pointed_at) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Reach {
+	test (_reacher Animate);
+	test (_target Element);
+	test !(location _target _reacher);
+
+	exec (inst _id Reach Setting CURRENTINTERVAL fil 
+		(reacher _reacher) (target _target) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Read {
+	test (_reader Animate);
+	test (_read Book);
+
+	exec (inst _id Read Setting CURRENTINTERVAL fil 
+		(reader _reader) (read _read) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Release_Grasp {
+	test (_grasper Animate);
+	test (_grasped Manipulable_Inanimate_Object);
+	query (hand _grasper ?h);
+	test (location _grasped _h);
+
+	exec (inst _id Release_Grasp Setting CURRENTINTERVAL fil 
+		(grasper _grasper) (grasped _grasped) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+
+	query (relations CURRENTINTERVAL ?p) (?p Possession) (possessor ?p _grasper) (possessed ?p _grasped);
+	exec (rem relations CURRENTINTERVAL _p);
+}
+
+
+SCRIPT Reserve {
+	test (_reserver Animate);
+	test (_reserved Manipulable_Inanimate_Object);
+
+	exec (inst _id Reserve Setting CURRENTINTERVAL fil 
+		(reserver _reserver) (reserved _reserved) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Serve {
+	test (_server Animate);
+	test (_food Food);
+	test (_container Physical_Container);
+
+	exec (inst _id Serve Setting CURRENTINTERVAL fil 
+		(server _server) (food _food) (container _container) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Tease {
+	test (_teaser Animate);
+	test (_teased Concrete_Entity);
+
+	exec (inst _id Tease Setting CURRENTINTERVAL fil 
+		(teaser _teaser) (teased _teased) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Touch {
+	test (_toucher Animate);
+	test (_touched Concrete_Entity);
+
+	exec (inst _id Touch Setting CURRENTINTERVAL fil 
+		(toucher _toucher) (touched _touched) (inherent_aspect (inst Inherent_Accomplishment)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Wear {
+	test (_wearer Animate);
+	test (_worn Wearable_Item);
+
+	exec (inst _id Wear Setting CURRENTINTERVAL fil 
+		(wearer _wearer) (worn _worn) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+
+	runscript (ChangeLoc (mover _worn) (newloc _wearer));
+}
+
+
+SCRIPT Twist {
+	test (_twister Animate);
+	test (_twisted Concrete_Entity);
+
+	exec (inst _id Twist Setting CURRENTINTERVAL fil 
+		(twister _twister) (twisted _twisted) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Write {
+	test (_writer Animate);
+	test (_written Element);
+
+	exec (inst _id Write Setting CURRENTINTERVAL fil 
+		(writer _writer) (written _written) (written_on _written_on) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Substitute_For {
+	test (_original Animate);
+	test (_substitute Element);
+
+	exec (inst _id Substitute_For Setting CURRENTINTERVAL fil 
+		(original _original) (substitute _substitute) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Switch {
+	test (_switcher Animate);
+	test (_switched Element);
+
+	exec (inst _id Switch Setting CURRENTINTERVAL fil 
+		(switcher _switcher) (switched _switched) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Take_Off {
+	test (_wearer Animate);
+	test (_worn Wearable_Item);
+
+	exec (inst _id Take_Off Setting CURRENTINTERVAL fil 
+		(wearer _wearer) (worn _worn) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+
+	exec (rem location _mover);
+}
+
+
+SCRIPT Turn_Page {
+	test (_turner Animate);
+	test (_turned Book);
+
+	exec (inst _id Turn_Page Setting CURRENTINTERVAL fil 
+		(turner _turner) (turned _turned) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+//===================================
+// Communication
+//===================================
+
+
+SCRIPT Ask {
+	test (_asker Animate);
+	test (_asked Animate);
+
+	exec (inst _id Ask Setting CURRENTINTERVAL fil 
+		(asker _asker) (asked _asked) (question _question) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Accuse {
+	test (_accuser Animate);
+	test (_accused Animate);
+
+	exec (inst _id Accuse Setting CURRENTINTERVAL fil 
+		(accuser _accuser) (accused _accused) (accusation _accusation) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Beckon {
+	test (_beckoner Animate);
+	test (_beckoned Animate);
+
+	exec (inst _id Beckon Setting CURRENTINTERVAL fil 
+		(beckoner _beckoner) (beckoned _beckoned) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Explain {
+	test (_explainer Animate);
+	test (_explained_to Animate);
+
+	exec (inst _id Explain Setting CURRENTINTERVAL fil 
+		(explainer _explainer) (explained_to _explained_to) (explained _explained) 
+		(inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Illustrate {
+	test (_illustrator Animate);
+	test (_illustrated_to Animate);
+
+	exec (inst _id Illustrate Setting CURRENTINTERVAL fil 
+		(illustrator _illustrator) (illustrated_to _illustrated_to) (illustrated _illustrated) 
+		(inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Say {
+	test (_speaker Animate);
+
+	exec (inst _id Say Setting CURRENTINTERVAL fil 
+		(speaker _speaker) (content _content) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Talk_On_Phone {
+	test (_talker Animate);
+	test (_talked_to Animate);
+
+	exec (inst _id Talk_On_Phone Setting CURRENTINTERVAL fil 
+		(talker _talker) (talked_to _talked_to) (content _content) (inherent_aspect (inst Inherent_Activity)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Tell {
+	test (_speaker Animate);
+	test (_hearer Animate);
+
+	exec (inst _id Tell Setting CURRENTINTERVAL fil 
+		(speaker _speaker) (hearer _hearer) (content _content) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Permit {
+	test (_permiter Animate);
+	test (_permitee Animate);
+
+	exec (inst _id Permit Setting CURRENTINTERVAL fil 
+		(permiter _permiter) (permitee _permitee) (permitted _permitted) (inherent_aspect (inst Inherent_Achievement)));
+	exec (setcurrentinterval _id);
+}
+
+//===================================
+// Transfer (in progress)
+//===================================
+
+SCRIPT Buy {
+	test (_seller Animate);
+	test (_buyer Animate);
+	test (_goods Manipulable_Inanimate_Object);
+	testexist (?p Possession) (possessor ?p _seller) (possessed ?p _goods);
+
+	exec (inst _id Give Setting CURRENTINTERVAL fil 
+		(seller _seller) (buyer _buyer) (goods _goods) (inherent_aspect (inst Inherent_Achievement)));	
+	exec (setcurrentinterval _id);
+	
+	runscript (ChangeLoc (mover _goods) (newloc _buyer));
+	runscript (EstablishPossession (possessor _buyer) (possessed _goods));
+}
+
+
+SCRIPT Exchange {
+	test (_exchanger1 Animate);
+	test (_exchanger2 Animate);
+	test (_theme1 Manipulable_Inanimate_Object);
+	test (_theme2 Manipulable_Inanimate_Object);
+	
+	testexist (?p Possession) (possessor ?p _exchanger1) (possessed ?p _theme1);
+	testexist (?p Possession) (possessor ?p _exchanger2) (possessed ?p _theme2);
+
+	exec (inst _id Exchange Setting CURRENTINTERVAL fil 
+		(exchanger1 _exchanger1) (exchanger2 _exchanger2) (theme1 _theme1) (theme2 _theme2) 
+		(inherent_aspect (inst Inherent_Achievement)));	
+	exec (setcurrentinterval _id);
+	
+	runscript (ChangeLoc (mover _theme1) (newloc _exchanger2));
+	runscript (ChangeLoc (mover _theme2) (newloc _exchanger1));	
+	runscript (EstablishPossession (possessor _exchanger1) (possessed _theme2));
+	runscript (EstablishPossession (possessor _exchanger2) (possessed _theme1));
+}
+
+
+SCRIPT Give {
+	test (_giver Animate);
+	test (_recipient Animate);
+	test (_theme Manipulable_Inanimate_Object);
+	testexist (?p Possession) (possessor ?p _giver) (possessed ?p _theme);
+
+	exec (inst _id Give Setting CURRENTINTERVAL fil 
+		(giver _giver) (recipient _recipient) (theme _theme) (inherent_aspect (inst Inherent_Achievement)));	
+	exec (setcurrentinterval _id);
+	
+	runscript (ChangeLoc (mover _theme) (newloc _recipient));
+	runscript (EstablishPossession (possessor _recipient) (possessed _theme));
+}
+
+
+SCRIPT Feed {
+	test (_feeder Animate);
+	test (_eater Animate);
+	test (_food Food);
+	testexist (?p Possession) (possessor ?p _feeder) (possessed ?p _food);
+
+	exec (inst _id Feed Setting CURRENTINTERVAL fil 
+		(feeder _feeder) (eater _eater) (food _food) (inherent_aspect (inst Inherent_Achievement)));	
+	exec (setcurrentinterval _id);
+	exec (inst _Chew Chew Setting CURRENTINTERVAL fil 
+		(chewer _eater) (chewed _food) (inherent_aspect (inst Inherent_Activity)));
+	exec (inst _Swallow Swallow Setting _Chew fil 
+		(swallower _eater) (swallowed _food) (inherent_aspect (inst Inherent_Achievement)));
+	exec (inst _Eat Eat Setting CURRENTINTERVAL fil 
+		(eater _eater) (food _food) (chew _Chew) (swallow _Swallow) (inherent_aspect (inst Inherent_Activity)));	
+	exec (fil eat _id _Eat);	
+}
+
+SCRIPT Offer {
+	test (_offerer Animate);
+	test (_offeree Animate);
+	test (_offered Manipulable_Inanimate_Object);
+	testexist (?p Possession) (possessor ?p _offerer) (possessed ?p _offered);
+
+	exec (inst _id Offer Setting CURRENTINTERVAL fil 
+		(offerer _offerer) (offeree _offeree) (offered _offered) (inherent_aspect (inst Inherent_Achievement)));	
+	exec (setcurrentinterval _id);
+}
+
+
+SCRIPT Return{
+	test (_returner Animate);
+	test (_returnee Animate);
+	test (_returned Manipulable_Inanimate_Object);
+	testexist (?p Possession) (possessor ?p _returner) (possessed ?p _returned);
+
+	exec (inst _id Return Setting CURRENTINTERVAL fil 
+		(returner _returner) (returnee _returnee) (returned _returned) (inherent_aspect (inst Inherent_Achievement)));	
+	exec (setcurrentinterval _id);
+	
+	runscript (ChangeLoc (mover _returned) (newloc _returnee));
+	runscript (EstablishPossession (possessor _returnee) (possessed _returned));
+}

@@ -1,0 +1,209 @@
+/*********
+***
+*** Pronouns
+***
+*********/
+
+general construction Pronoun
+   subcase of NP, Word
+   constructional
+     constraints
+       self.features.massOrPlural <-- "no"
+   meaning
+    constraints
+      self.m.givenness <-- "in-focus" 
+
+construction Yo
+   subcase of Pronoun, Singular, FirstPerson
+   constructional
+     constraints
+       self.features.case <-- "nom"
+   form
+      constraints
+         self.f.orth <-- "yo"
+   meaning
+    constraints
+      self.m.ontological-category <-- @animate
+      self.m.number <-- "singular"
+      
+construction Tu
+   subcase of Pronoun, Singular, SecondPerson
+   constructional
+     constraints
+       self.features.case <-- "nom"
+   form
+      constraints
+         self.f.orth <-- "tu"
+   meaning
+    constraints
+      self.m.ontological-category <-- @animate
+      self.m.number <-- "singular"
+
+construction El-pronoun
+   subcase of Pronoun, Singular, Masculine, ThirdPerson
+   constructional
+     constraints
+       self.features.case <-- "nom"
+   form
+      constraints
+         self.f.orth <-- "el"
+   meaning
+    constraints
+      self.m.ontological-category <-- @maleAnimate
+      self.m.number <-- "singular"
+      self.m.gender <-- "masculine"
+
+
+//construction HimDat
+//   subcase of Pronoun, Singular, ThirdPerson
+//   constructional
+//     constraints
+//       self.features.case <-- "dat"
+//   form
+//      constraints
+//         self.f.orth <-- "him"
+//   meaning
+//    constraints
+//      self.m.ontological-category <-- @maleAnimate
+//      self.m.number <-- "1"
+
+
+//construction HimAcc
+//   subcase of Pronoun, Singular
+//   constructional
+//     constraints
+//       self.features.case <-- "acc"
+//   form
+//      constraints
+//         self.f.orth <-- "him"
+//   meaning
+//    constraints
+//      self.m.ontological-category <-- @maleAnimate
+//      self.m.number <-- "1"
+
+
+construction Ella
+   subcase of Pronoun, Singular, Feminine, ThirdPerson
+   constructional
+     constraints
+       self.features.case <-- "nom"
+   form
+      constraints
+         self.f.orth <-- "ella"
+   meaning
+    constraints
+      self.m.ontological-category <-- @femaleAnimate
+      self.m.number <-- "singular"
+      self.m.gender <-- "feminine"
+
+
+//construction HerDat
+//   subcase of Pronoun, Singular, ThirdPerson
+//   constructional
+//     constraints
+//       self.features.case <-- "dat"
+//   form
+//      constraints
+//         self.f.orth <-- "her"
+//   meaning
+//    constraints
+//      self.m.ontological-category <-- @femaleAnimate
+//      self.m.number <-- "1"
+
+
+//construction HerAcc
+//   subcase of Pronoun, Singular, ThirdPerson
+//   constructional
+//     constraints
+//       self.features.case <-- "acc"
+//   form
+//      constraints
+//         self.f.orth <-- "her"
+//   meaning
+//    constraints
+//      self.m.ontological-category <-- @femaleAnimate
+//      self.m.number <-- "1"
+
+construction Nosotros
+   subcase of Pronoun, Plural, Masculine, FirstPerson
+   constructional
+     constraints
+       self.features.case <-- "nom"
+   form
+      constraints
+         self.f.orth <-- "nosotros"
+   meaning
+    constraints
+      self.m.ontological-category <-- @maleAnimate
+      self.m.number <-- "plural"
+      self.m.gender <-- "masculine"
+      
+construction Nosotras
+   subcase of Pronoun, Plural, Feminine, FirstPerson
+   constructional
+     constraints
+       self.features.case <-- "nom"
+   form
+      constraints
+         self.f.orth <-- "nosotras"
+   meaning
+    constraints
+      self.m.ontological-category <-- @femaleAnimate
+      self.m.number <-- "plural"
+      self.m.gender <-- "feminine"
+      
+construction Vosotros
+   subcase of Pronoun, Plural, Masculine, SecondPerson
+   constructional
+     constraints
+       self.features.case <-- "nom"
+   form
+      constraints
+         self.f.orth <-- "vosotros"
+   meaning
+    constraints
+      self.m.ontological-category <-- @maleAnimate
+      self.m.number <-- "plural"
+      self.m.gender <-- "masculine"
+      
+construction Vosotras
+   subcase of Pronoun, Plural, Feminine, SecondPerson
+   constructional
+     constraints
+       self.features.case <-- "nom"
+   form
+      constraints
+         self.f.orth <-- "vosotras"
+   meaning
+    constraints
+      self.m.ontological-category <-- @femaleAnimate
+      self.m.number <-- "plural"
+      self.m.gender <-- "feminine"
+
+construction Ellos
+   subcase of Pronoun, Plural, Masculine, ThirdPerson
+   constructional
+     constraints
+       self.features.case <-- "nom"
+   form
+      constraints
+         self.f.orth <-- "ellos"
+   meaning
+    constraints
+      self.m.ontological-category <-- @maleAnimate
+      self.m.number <-- "plural"
+      self.m.gender <-- "masculine"
+      
+construction Ellas
+   subcase of Pronoun, Plural, Feminine, ThirdPerson
+   constructional
+     constraints
+       self.features.case <-- "nom"
+   form
+      constraints
+         self.f.orth <-- "ellas"
+   meaning
+    constraints
+      self.m.ontological-category <-- @femaleAnimate
+      self.m.number <-- "plural"
+      self.m.gender <-- "feminine"

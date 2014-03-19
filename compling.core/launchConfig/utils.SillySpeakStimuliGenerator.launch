@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/compling/source/compling/annotation/childes/SillySpeakStimuliGenerator.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="compling.annotation.childes.SillySpeakStimuliGenerator"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="&quot;C:\Documents and Settings\emok\Desktop\SillySpeak\data\vocabList.txt&quot;&#13;&#10;&quot;C:\Documents and Settings\emok\Desktop\SillySpeak\data\stimuliList.txt&quot;&#13;&#10;&quot;C:\Documents and Settings\emok\Desktop\SillySpeak\data\transcripts\&quot;"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="compling"/>
+</launchConfiguration>

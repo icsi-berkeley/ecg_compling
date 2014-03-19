@@ -1,0 +1,42 @@
+ 
+schema BoundedRegion
+	roles
+		boundary : @closedCurve
+		interior: @region
+		exterior: @region
+
+/*
+schema BoundedObject
+	subcase of BoundedRegion
+	roles
+		boundedObject: @entity 
+*/
+
+schema SpatialRelation
+
+schema Proximity	
+	subcase of SpatialRelation
+	roles
+		center
+		proximalArea
+
+schema Contact // short version
+	subcase of SpatialRelation
+	roles
+		entity1: @entity 
+		entity2: @entity
+
+schema TrajectorLandmark
+	roles
+		trajector 
+		landmark
+		profiledArea // ProfiledArea is defined with respect to Landmark
+
+
+// This schema is actually part of a radial category of SPG schemas
+schema SPG   
+	subcase of TrajectorLandmark
+	roles
+		source
+		path
+		goal

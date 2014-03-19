@@ -1,0 +1,607 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#throw">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#complexxnet"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#mud">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#entity"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#cant">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#modality"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#region">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#entity"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#block3-instance">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#instance"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#block"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#south">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#direction"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#declarative">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#mood"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#big">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#object-property"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#block">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#entity"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#possess">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#process"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#heading">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#enumeration"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#bounded-ongoing">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#temporality"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#take">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#objecttransfer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#maleAnimate">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#generic-person"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#hour">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#temporal-units"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Singleton">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Set"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#left">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#direction"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#future">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#tense"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#what">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#wh-word"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#block2-instance">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#instance"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#block"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#causal">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#process-kind"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#hit">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#agentiveimpactaction"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#instance">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#modifier-type">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#entity"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#want">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#process"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#up">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#direction"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#boxes">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#entity"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#verb">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#robot">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#sentient"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#active">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#voice"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#complexxnet">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#process"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#modality">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#object-property">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#adjective"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#ongoing">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#temporality"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#establishhold">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#forceapplication"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#adjective">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#modifier"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#centimeter">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#spatial-units"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#distance"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#right">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#direction"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#small">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#object-property"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#seconds">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#temporal-units"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#kick">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#agentiveimpactaction"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#motion">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#process"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#tense">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#wh-question">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#mood"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#releasehold">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#forceapplication"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#telicity">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#time"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#domain">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#enumeration"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#shared">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#robot2-instance">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#instance"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#robot"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#direction">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#heading"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#bounded">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#temporality"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#temporal">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#process-kind"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#push">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#motion"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#table">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#entity"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#yn-question">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#mood"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#squares">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#spatial-units"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#distance"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#time">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#domain"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#present">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#tense"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#modifier">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#one">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#number"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#temporality">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#slap">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#agentiveimpactaction"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#objecttransfer">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#complexxnet"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Interval">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#which">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#wh-word"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#down">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#direction"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#stage">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#process"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#voice">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#should">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#modality"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#invisible">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#object-property"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#can">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#modality"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#box">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#entity"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Multitude">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Group"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#red">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#object-property"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#forceapplication">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#routine"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#purpose">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#serial"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#minutes">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#temporal-units"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#west">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#direction"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#run">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#motion"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#metaphorical">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#entity"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#stasis">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#process"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Pair">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Group"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#square">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#spatial-units"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#distance"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#box1-instance">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#instance"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#box"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#start">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#stage"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#shared"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#instrument">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#modifier-type"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#units">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#stop">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#stage"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#shared"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#door">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#entity"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#temporal-units">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#units"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#time"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#sentient">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#animate"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#box2-instance">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#instance"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#box"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#entity">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#move">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#motion"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#nontemporal-units">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#units"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#imperative">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#mood"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Set">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#animate">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#entity"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#where">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#wh-word"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#location">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#closedCurve"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#adverb">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#modifier"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#wh-word">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#female-person">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#person"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#east">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#direction"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#serial">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#process-kind"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#interaction">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#process-kind"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#person">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#sentient"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#male-person">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#person"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#forcefulmotionaction">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#complexxnet"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#closedCurve">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#region"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#give">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#objecttransfer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#robot1-instance">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#instance"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#robot"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#STRING">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#generic-person">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#animate"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#distance">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#space"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#john-instance">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#maleAnimate"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#instance"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#femaleAnimate">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#generic-person"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#routine">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#process"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#mood">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#help">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#process"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#be">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#stasis"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#causeeffect">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#complexxnet"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#north">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#direction"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#passive">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#voice"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#process-kind">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#enumeration"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#effectormotion">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#complexxnet"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#enumeration">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#three">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#number"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#walk">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#motion"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#be2">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#be"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#two">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#number"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Group">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Set"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#action">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#block1-instance">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#instance"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#block"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#towards">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#heading"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#hammer">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#metaphorical-sentient"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#instrument"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#quantifier">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#modifier"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#process">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#Individual"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#number">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#quantifier"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#past">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#tense"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#agentiveimpactaction">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#forcefulmotionaction"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#metaphorical-sentient">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#metaphorical"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#sentient"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#space">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#domain"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#inch">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#spatial-units"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#distance"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#spatial-units">
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#space"/>
+    <rdfs:subClassOf rdf:resource="http://www.icsi.berkeley.edu/NTL/ontologies/base.owl#nontemporal-units"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+</rdf:RDF>

@@ -1,0 +1,98 @@
+/*********
+***
+*** Pronouns
+***
+*********/
+
+general construction Pronoun
+   subcase of NP, Word
+   constructional
+     constraints
+       self.features.massOrPlural <-- "no"
+   meaning
+    constraints
+      self.m.givenness <-- "in-focus" 
+
+
+construction He
+   subcase of Pronoun, Singular, ThirdPerson
+   constructional
+     constraints
+       self.features.case <-- "nom"
+   form
+      constraints
+         self.f.orth <-- "he"
+   meaning
+    constraints
+      self.m.ontological-category <-- @male-person
+      self.m.number <-- "1"
+
+
+construction HimDat
+   subcase of Pronoun, Singular, ThirdPerson
+   constructional
+     constraints
+       self.features.case <-- "dat"
+   form
+      constraints
+         self.f.orth <-- "him"
+   meaning
+    constraints
+      self.m.ontological-category <-- @male-person
+      self.m.number <-- "1"
+
+
+construction HimAcc
+   subcase of Pronoun, Singular
+   constructional
+     constraints
+       self.features.case <-- "acc"
+   form
+      constraints
+         self.f.orth <-- "him"
+   meaning
+    constraints
+      self.m.ontological-category <-- @male-person
+      self.m.number <-- "1"
+
+
+construction She
+   subcase of Pronoun, Singular, ThirdPerson
+   constructional
+     constraints
+       self.features.case <-- "nom"
+   form
+      constraints
+         self.f.orth <-- "she"
+   meaning
+    constraints
+      self.m.ontological-category <-- @female-person
+      self.m.number <-- "1"
+
+
+construction HerDat
+   subcase of Pronoun, Singular, ThirdPerson
+   constructional
+     constraints
+       self.features.case <-- "dat"
+   form
+      constraints
+         self.f.orth <-- "her"
+   meaning
+    constraints
+      self.m.ontological-category <-- @female-person
+      self.m.number <-- "1"
+
+
+construction HerAcc
+   subcase of Pronoun, Singular, ThirdPerson
+   constructional
+     constraints
+       self.features.case <-- "acc"
+   form
+      constraints
+         self.f.orth <-- "her"
+   meaning
+    constraints
+      self.m.ontological-category <-- @female-person
+      self.m.number <-- "1"

@@ -1,0 +1,44 @@
+digraph types {
+	size="11,8.5";
+	node [fontname="Arial", fontcolor=black, color="#aaff88", fillcolor="#aaff88"];
+	node [style="solid"]; InkAnkUnkInflectedVerb RegularSimpleInflectedVerb InflectedVerb CausativeSuffixIZE IngAngUngVerbParadigm RegularFinalEVerb PresentOnlyEVerb RegularInflectedVerb IngAngUngInflectedVerb;
+	node [style="filled"];
+
+	InflectedVerb -> VerbInflection [label="infl", style="dotted"]
+	InflectedVerb -> RegularInflectedVerb
+	RegularInflectedVerb -> RegularVerbInflection [label="infl", style="dotted"]
+	RegularInflectedVerb -> RegularFinalEVerb
+	RegularFinalEVerb -> RegularSuffixEInflection [label="infl", style="dotted"]
+	RegularFinalEVerb -> Move
+	Move -> RegularSuffixEInflection [label="infl", style="dotted"]
+	RegularFinalEVerb -> CausativeSuffixIZE
+	CausativeSuffixIZE -> WLMorph [label="stem", style="dotted"]
+	CausativeSuffixIZE -> RegularSuffixEInflection [label="infl", style="dotted"]
+	CausativeSuffixIZE -> CausativeSuffixIZEAdj
+	CausativeSuffixIZEAdj -> Adj [label="stem", style="dotted"]
+	CausativeSuffixIZEAdj -> RegularSuffixEInflection [label="infl", style="dotted"]
+	CausativeSuffixIZE -> CausativeSuffixIZENoun
+	CausativeSuffixIZENoun -> Noun [label="stem", style="dotted"]
+	CausativeSuffixIZENoun -> RegularSuffixEInflection [label="infl", style="dotted"]
+	CausativeSuffixIZENoun -> HOSPITALIZE
+	HOSPITALIZE -> Hospital [label="stem", style="dotted"]
+	HOSPITALIZE -> RegularSuffixEInflection [label="infl", style="dotted"]
+	RegularInflectedVerb -> RegularSimpleInflectedVerb
+	RegularSimpleInflectedVerb -> RegularVerbInflection [label="infl", style="dotted"]
+	RegularSimpleInflectedVerb -> Want
+	Want -> RegularVerbInflection [label="infl", style="dotted"]
+	InflectedVerb -> PresentOnlyEVerb
+	PresentOnlyEVerb -> PresentOnlyEInflection [label="infl", style="dotted"]
+	PresentOnlyEVerb -> Slide
+	Slide -> PresentOnlyEInflection [label="infl", style="dotted"]
+	InflectedVerb -> IngAngUngVerbParadigm
+	IngAngUngVerbParadigm -> IngAngUngInflection [label="infl", style="dotted"]
+	IngAngUngVerbParadigm -> IngAngUngInflectedVerb
+	IngAngUngInflectedVerb -> IngAngUngInflection [label="infl", style="dotted"]
+	IngAngUngInflectedVerb -> InkAnkUnkInflectedVerb
+	InkAnkUnkInflectedVerb -> IngAngUngInflection [label="infl", style="dotted"]
+	InkAnkUnkInflectedVerb -> Drink
+	Drink -> IngAngUngInflection [label="infl", style="dotted"]
+	IngAngUngInflectedVerb -> Ring
+	Ring -> IngAngUngInflection [label="infl", style="dotted"]
+}

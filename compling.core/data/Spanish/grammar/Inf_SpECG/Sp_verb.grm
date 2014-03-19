@@ -1,0 +1,66 @@
+//******** Verb Form Schemas 
+
+schema FiniteOrNonFinite
+
+schema Finite subcase of FiniteOrNonFinite
+
+schema NonFinite subcase of FiniteOrNonFinite
+
+schema Participle subcase of NonFinite
+
+schema Base subcase of NonFinite
+
+schema Infinitive subcase of NonFinite
+
+schema PresentParticiple subcase of Participle
+
+schema PastParticiple subcase of Participle
+
+schema Past subcase of Finite
+
+schema Present subcase of Finite
+
+
+
+//************ General Verb constructions
+
+general construction Verb
+   subcase of Word, HasVerbFeatures
+   meaning: Process
+
+
+general construction PastTense
+   subcase of HasVerbFeatures
+   constructional
+     constraints
+        self.features.verbform <-- Past
+      //can put stuff about an action wrt speech time here
+
+general construction PresentTense
+   subcase of HasVerbFeatures
+   constructional
+     constraints
+        self.features.verbform <-- Present
+        //can put stuff about an action wrt speech time here
+
+
+general construction BaseForm
+   subcase of HasVerbFeatures
+   constructional
+     constraints
+        self.features.verbform <-- Base
+
+
+general construction PresentParticiple
+   subcase of HasVerbFeatures
+   constructional
+     constraints
+        self.features.verbform <-- PresentParticiple
+
+
+general construction PastParticiple
+   subcase of HasVerbFeatures
+   constructional
+     constraints
+        self.features.verbform <-- PastParticiple
+

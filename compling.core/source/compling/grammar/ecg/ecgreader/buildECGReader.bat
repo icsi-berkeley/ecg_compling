@@ -1,0 +1,1 @@
+java -jar ../../../../../lib/java-cup-v11a.jar -package compling.grammar.ecg.ecgreader -parser ECGReader ECGReader.cup

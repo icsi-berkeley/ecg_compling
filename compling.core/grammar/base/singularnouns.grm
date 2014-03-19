@@ -1,0 +1,111 @@
+//
+// Singular Count Nouns
+//
+
+general construction SingularNoun
+  subcase of Noun, Singular
+   constructional
+     constraints
+       self.features.massOrPlural <-- "no"  
+   meaning
+    constraints
+      self.m.number <-- "1"
+
+
+construction Box
+   subcase of SingularNoun
+   form
+      constraints
+         self.f.orth <-- "box"
+      meaning
+    constraints
+      self.m.ontological-category <--  @box
+
+construction Block
+   subcase of SingularNoun
+   form
+      constraints
+         self.f.orth <-- "block"
+      meaning
+    constraints
+      self.m.ontological-category <--  @block
+
+construction Robot
+   subcase of SingularNoun
+   form
+      constraints
+         self.f.orth <-- "robot"
+      meaning
+    constraints
+      self.m.ontological-category <--  @robot
+
+
+construction Square
+   subcase of SingularNoun
+   form
+      constraints
+         self.f.orth <-- "square"
+      meaning
+    constraints
+      self.m.ontological-category <--  @square
+ 
+  /*  compress for now    
+construction Table
+   subcase of SingularNoun
+   form
+      constraints
+         self.f.orth <-- "table"
+      meaning
+    constraints
+      self.m.ontological-category <--  @table
+
+
+construction Door
+   subcase of SingularNoun
+   form
+      constraints
+         self.f.orth <-- "door"
+   meaning
+    constraints
+      self.m.ontological-category <--  @door
+*/
+construction Hammer
+   subcase of SingularNoun
+   form
+      constraints
+         self.f.orth <-- "hammer"
+   meaning
+    constraints
+      self.m.ontological-category <--  @hammer
+/*
+construction Centimeter
+   subcase of SingularNoun
+   form
+      constraints
+         self.f.orth <-- "cm"
+      meaning
+    constraints
+      self.m.ontological-category <--  @centimeter
+*/
+
+construction Inch
+   subcase of SingularNoun
+   form
+      constraints
+         self.f.orth <-- "inch"
+      meaning
+    constraints
+      self.m.ontological-category <-- @inch
+
+
+construction Hour
+   	subcase of SingularNoun
+   	form
+      	constraints
+         	self.f.orth <-- "hour"
+	meaning
+    	constraints
+      		self.m.ontological-category <--  @hour
+
+      
+      

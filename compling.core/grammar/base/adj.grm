@@ -1,0 +1,107 @@
+//
+// Adjectives
+// ==========
+//
+// This file has constructions for abstract adjectives and adjectival phrases
+// As well as example lexical adjectives.
+//  TODO- replace adjective list, need adverbs, etc.
+
+
+general construction Adjective  // parallel to Verb, etc.
+	meaning: Modification
+	
+general construction ComplexAdjective
+   subcase of Adjective
+
+general construction LexicalAdjective
+   subcase of Adjective, Word
+
+construction SerialAdjective
+   subcase of ComplexAdjective
+   	constructional 
+   	 constituents
+          	first: Adjective
+	    	second: Adjective
+	form
+       constraints
+       		first.f meets second.f
+   meaning
+   	constraints
+			self.m <--> first.m
+			self.m.modifiedThing <--> second.m.modifiedThing
+
+construction NegatedAdjective
+   subcase of ComplexAdjective
+   	constructional 
+   	 constituents
+          	first: Not-Aux
+	    	second: Adjective
+	form
+       constraints
+       		first.f meets second.f
+   meaning
+   	constraints
+			self.m <--> second.m
+			self.m.negated <-- "yes"
+			
+construction ModifiedAdjective
+   subcase of ComplexAdjective
+   	constructional 
+   	 constituents
+          	first: Adverb
+	    	second: Adjective
+	form
+       constraints
+       		first.f meets second.f
+   meaning
+   	constraints
+			self.m <--> second.m
+			first.m.modifiedThing <-> second.m
+//
+// Example Adjectives
+//
+
+construction Red
+  subcase of LexicalAdjective
+   form
+      constraints
+         self.f.orth <-- "red"
+   meaning: ScalarModifier
+    constraints
+      self.m.scalarValue <-- "red" //central red?, red hair?
+      self.m.scale <-- "colorSpace" //multi-dimensional scale???
+
+construction Invisible
+  subcase of LexicalAdjective
+   form
+      constraints
+         self.f.orth <-- "invisible"
+   meaning: ScalarModifier
+    constraints
+      self.m.scalarValue <-- "invisible" // or 0, ...
+      self.m.scale <-- "visibility"
+
+//
+// Sizes
+//
+
+construction Big
+  subcase of LexicalAdjective
+   form
+      constraints
+         self.f.orth <-- "big"
+   meaning: ScalarModifier
+    constraints
+      self.m.scalarValue <-- "big" 
+      self.m.scale <-- "size" 
+
+
+construction Bigger
+  subcase of LexicalAdjective
+   form
+      constraints
+         self.f.orth <-- "bigger"
+   meaning: ScalarModifier
+    constraints
+      self.m.scalarValue <-- "big" 
+      self.m.scale <-- "size" 

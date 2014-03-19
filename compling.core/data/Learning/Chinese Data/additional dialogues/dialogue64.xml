@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHAT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.talkbank.org/ns/talkbank talkbank.xsd" xmlns="http://www.talkbank.org/ns/talkbank" Version="1.1.3" Lang="zh" Corpus="beijing" Id="hy6" Date="1984-01-01">
+	
+	<Participants>
+		<participant id="CHI" name="HaoYu" role="Target_Child" language="zh" />
+		<participant id="MOT" role="Mother" language="zh" SES="Intellectual" />
+		<participant id="INV" name="XiaLing" role="Investigator" language="zh" />
+		<participant id="FAT" role="Father" language="zh" />
+	</Participants>
+	
+	<!--Child is driving a toy car and mother is instructing him on the steering -->
+	
+	<Setting>
+		<entity cat="Livingroom" id="livingroom"/>
+		<entity cat="Car" id="car"/>
+	</Setting>
+	
+	<Setup>
+		<binding field="location" source_ref="CHI" ref="livingroom"/>
+		<binding field="location" source_ref="MOT" ref="sofa(livingroom)"/>
+		<binding field="location" source_ref="car" ref="livingroom"/>
+	</Setup>
+	
+	<event cat="Drive" id="drive01">
+		<binding field="driver" ref="CHI"/>
+		<binding field="driven" ref="car"/>
+	</event>
+	
+	<u who="MOT" id="296">
+		<clause>
+			<w>guai3</w><w>guo4</w><w>lai2</w><pause fluency="fluent" symbolic-length="simple" length="1" />        
+			<a type="speech act">
+				<sa cat="requesting-action" id="u296sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="297">
+		<clause>
+			<w>guai3</w><w>guo4</w><w>lai2</w><pause fluency="fluent" symbolic-length="simple" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u297sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+		<clause>
+			<w>yi4</w><w>huir3</w><pause fluency="fluent" symbolic-length="simple" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u297sa2">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+		<clause>
+			<w>pao3</w><w>chuang2</w><wn><w>di4</w><wk type="cmp" /><w>xia4</w></wn><w>qu4</w><w>la</w><t type="e" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u297sa3">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="298">
+		<clause>
+			<w>guai3</w><w>guo4</w><w>lai2</w><t type="e" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u298sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="299">
+		<clause>
+			<w>guai3</w><t type="e" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u299sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<event cat="Steer" id="steer02">
+		<binding field="steerer" ref="CHI"/>
+		<binding field="steered" ref="car"/>
+	</event>
+	
+	<u who="CHI" id="300">
+		<clause>
+			<linker type="quick uptake" /><w>guai<p type="drawl" />3</w><t type="p" /><a type="comments">m and hy reorienting cars away from cot</a>
+			<a type="speech act">
+				<sa cat="answering" id="u300sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="301">
+		<clause>
+			<w>ang<p type="drawl" /></w><pause fluency="fluent" symbolic-length="simple" />
+			<a type="speech act">
+				<sa cat="approving" id="u301sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+		<clause>
+			<w>guai3</w><w>guo4</w><w>lai2</w><t type="e" />
+			<a type="speech act">
+				<sa cat="approving" id="u301sa2">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="CHI" id="302">
+		<clause>
+			<linker type="quick uptake" /><w>guai<p type="drawl" />3</w><w>guo<p type="drawl" />4</w><w>lai2</w><t type="p" />
+			<a type="speech act">
+				<sa cat="practicing" id="u302sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="307">
+		<clause>
+			<w>zher4</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u307sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="308">
+		<clause>
+			<w>jiu4</w><w>zai4</w><w>zher4</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u308sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="309">
+		<clause>
+			<w>dou1</w><w>guai3</w><w>yi4</w><w>guai3</w><pause fluency="fluent" symbolic-length="simple" length="3" />        
+			<a type="speech act">
+				<sa cat="requesting-action" id="u309sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="311">
+		<clause>
+			<w>xing2</w><w>le</w><pause fluency="fluent" symbolic-length="simple" length="1.5" />        
+			<a type="speech act">
+				<sa cat="approving" id="u311sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="CHI" id="312">
+		<clause>
+			<w>kai1</w><pause fluency="fluent" symbolic-length="simple" length="1" />        
+			<a type="speech act">
+				<sa cat="explaining" id="u312sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+</CHAT>

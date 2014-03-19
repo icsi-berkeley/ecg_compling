@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>base</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>compling.gui.grammargui.grammarBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>compling.gui.grammargui.grammarNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>base</name>
+			<type>2</type>
+			<location>C:/Dropbox/ECG/base</location>
+		</link>
+		<link>
+			<name>base.prefs</name>
+			<type>1</type>
+			<location>C:/Dropbox/ECG/base.prefs</location>
+		</link>
+	</linkedResources>
+</projectDescription>

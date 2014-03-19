@@ -1,0 +1,335 @@
+/*********************
+ Compositional morphology for verbals
+ *********************
+ nschneid
+ 2009-05-13
+*/
+
+general construction InflectedVerb
+  subcase of Verb
+  constructional
+    constituents
+      infl: VerbInflection
+    constraints
+      self.features <--> infl.features
+      self.atWordLevel <--> infl.atWordLevel
+      
+
+general construction RegularInflectedVerb
+  subcase of InflectedVerb
+  constructional
+    constituents
+      infl: RegularVerbInflection
+
+general construction RegularSimpleInflectedVerb
+  subcase of RegularInflectedVerb
+  form constraints
+    self.f.orth meets infl.f.suffix
+
+construction Want
+  subcase of ControlVerb, RegularSimpleInflectedVerb
+  form constraints
+    self.f.orth <-- "want"
+
+general construction RegularFinalEVerb	// e.g. mov{e(s),ing}/moved/moved
+  subcase of RegularInflectedVerb
+  constructional
+    constituents
+      infl: RegularSuffixEInflection
+  form: WLSuffixEForm
+  	constraints
+       self.f.stem meets infl.f.silentE
+       infl.f.silentE meets infl.f.suffix
+
+construction Move
+  subcase of RegularFinalEVerb
+  form constraints
+    self.f.stem <-- "mov"
+  meaning: Motion
+
+general construction PresentOnlyEVerb	// e.g. hid{e(s),ing}/hid/hidden; slid{e(s),ing}/slid/slid
+  subcase of InflectedVerb
+  constructional
+    constituents
+      infl: PresentOnlyEInflection
+  form: WLAblautEForm
+  	constraints
+       self.f.initial meets self.f.mainV
+       self.f.mainV meets self.f.final
+       self.f.final meets infl.f.presentOnlyE
+       infl.f.presentOnlyE meets infl.f.suffix
+
+construction Slide
+  subcase of PresentOnlyEVerb
+  form
+  	constraints
+       self.f.initial <-- "sl"
+       self.f.mainV <-- "i"
+       self.f.final <-- "d"
+  meaning
+    constraints
+      self.m.x-net <-- @slide
+
+general construction VerbInflection
+  subcase of HasVerbFeatures, Morph
+  form: SuffixForm
+
+general construction RegularVerbInflection
+  subcase of VerbInflection
+
+general construction SuffixEInflection
+  subcase of VerbInflection
+  form: SuffixEForm
+
+general construction RegularSuffixEInflection
+  subcase of SuffixEInflection, RegularVerbInflection
+
+
+general construction BareInflection
+  subcase of PresentOnlyEInflection, RegularSuffixEInflection
+  form constraints
+    self.f.suffix <-- ""
+    self.f.silentE <-- "e"
+    ignore self.f.presentOnlyE <-- ""
+           self.f.presentOnlyE <-- "e"
+
+construction PresentNon3SgInflection
+  subcase of PresentTense, BareInflection, WordLevelInflection
+  constructional
+    constraints
+      self.features <-- VerbNotSg3
+
+general construction NonWordLevelInflection
+  subcase of VerbInflection
+  constructional
+    constraints
+      self.atWordLevel <-- "no"
+
+construction BaseInflection
+  subcase of VerbalBase, BareInflection, WordLevelInflection
+
+general construction WordLevelInflection
+  subcase of VerbInflection
+  constructional
+    constraints
+      self.atWordLevel <-- "yes"	// finite verbs must not be embedded within derivational morphology
+      
+
+construction Present3SgInflection
+  subcase of PresentTense, PresentOnlyEInflection, RegularSuffixEInflection, WordLevelInflection
+  constructional
+    constraints
+      self.features <-- VerbSg3
+  form constraints
+    self.f.suffix <-- "s"
+    self.f.silentE <-- "e"
+    ignore self.f.presentOnlyE <-- ""
+           self.f.presentOnlyE <-- "e"
+    
+construction PastInflection
+  subcase of PastTense, RegularSuffixEInflection, WordLevelInflection
+  form constraints
+    self.f.suffix <-- "ed"
+    self.f.silentE <-- ""
+    
+construction PresentParticipleInflection
+  subcase of PresentPart, PresentOnlyEInflection, RegularSuffixEInflection, WordLevelInflection
+  form constraints
+    self.f.suffix <-- "ing"
+    self.f.silentE <-- ""
+    self.f.presentOnlyE <-- ""
+
+construction PastParticipleInflection	// e.g. believ{e(s),ing}/believed/believed
+  subcase of PastPart, RegularSuffixEInflection, WordLevelInflection
+  form constraints
+    self.f.suffix <-- "ed"
+    self.f.silentE <-- ""
+    
+
+    
+    
+// SUBREGULAR PARADIGMS
+
+// - Base form without final 'e'--used when composing within derivational suffixes
+
+construction InternalInflection
+  subcase of VerbalBase, RegularSuffixEInflection, PresentOnlyEInflection, NonWordLevelInflection
+  form constraints
+    self.f.suffix <-- ""
+    self.f.silentE <-- ""
+    self.f.orth <-- ""
+
+// - Past tense form is same as present tense, but without any final 'e': e.g. slide/slid
+
+construction PastInflectionBare
+  subcase of PastTense, PresentOnlyEInflection, WordLevelInflection
+  form constraints
+    self.f.suffix <-- ""
+    self.f.silentE <-- ""
+
+// - PresentOnlyE : the stem has a final 'e' which appears only in the present tense
+
+schema PresentOnlyEInflectionForm	// there is an 'e' only in the present tense: e.g. hid{e(s),ing}/hid/hidden; slid{e(s),ing}/slid/slid
+  subcase of SuffixEForm
+  roles
+    presentOnlyE
+
+general construction PresentOnlyEInflection
+  subcase of SuffixEInflection
+  form: PresentOnlyEInflectionForm
+    constraints
+      self.f.presentOnlyE <-- ""
+
+construction PastParticiplePresentOnlyEInflection	// e.g. slid{e(s),ing}/slid/slid
+  subcase of PastPart, PresentOnlyEInflection, WordLevelInflection
+  form constraints
+    self.f.suffix <-- ""
+    self.f.presentOnlyE <-- ""
+
+
+// - IngAngUng : e.g. 'ring/rang/rung'
+
+general construction IngAngUngVerbParadigm	// schematic construction for all verbs in the paradigm
+  subcase of InflectedVerb
+  constructional
+    constituents
+     infl: IngAngUngInflection
+  form: WLAblautEForm
+  	 constraints
+        self.f.initial meets infl.f.mainV
+        infl.f.mainV meets self.f.final
+        self.f.final meets infl.f.suffix
+
+general construction IngAngUngInflectedVerb	// prototype, e.g. 'ring', 'sing'
+  subcase of IngAngUngVerbParadigm
+  form
+  	 constraints
+        self.f.final <-- "ng"
+
+construction Ring
+  subcase of IngAngUngInflectedVerb
+  form
+  	 constraints
+        self.f.initial <-- "r"
+
+general construction InkAnkUnkInflectedVerb	// extension of the prototype: e.g. 'drink', 'sink'
+  subcase of IngAngUngInflectedVerb
+  form
+    constraints
+      ignore self.f.final <-- "ng"
+      self.f.final <-- "nk"
+
+construction Drink
+  subcase of InkAnkUnkInflectedVerb
+  form
+    constraints
+      self.f.initial <-- "dr"
+
+general construction IngAngUngInflection	// e.g. ring{s,ing}/rang/rung; swim{s,ming}/swam/swum
+  subcase of VerbInflection
+  form: WLAblautForm
+
+general construction BareIngAngUngInflection
+  subcase of IngAngUngInflection
+  form constraints
+    self.f.mainV <-- "i"
+    self.f.suffix <-- ""
+
+construction BaseIngAngUngInflection	// either word-level (ring) or non-word-level (ringer)
+  subcase of VerbalBase, BareIngAngUngInflection
+    
+construction PresentNon3SgIngAngUngInflection
+  subcase of PresentTense, BareIngAngUngInflection, WordLevelInflection
+  constructional constraints
+    self.features <-- VerbNotSg3
+    
+construction Present3SgIngAngUngInflection
+  subcase of PresentTense, IngAngUngInflection, WordLevelInflection
+  constructional constraints
+    self.features <-- VerbSg3
+  form constraints
+    self.f.mainV <-- "i"
+    self.f.suffix <-- "s"
+
+construction PastIngAngUngInflection
+  subcase of PastTense, IngAngUngInflection, WordLevelInflection
+  form constraints
+    self.f.mainV <-- "a"
+    self.f.suffix <-- ""
+    
+construction PastParticipleIngAngUngInflection
+  subcase of PastPart, IngAngUngInflection, WordLevelInflection
+  form constraints
+    self.f.mainV <-- "u"
+    self.f.suffix <-- ""
+    
+construction PresentParticipleIngAngUngInflection
+  subcase of PresentPart, IngAngUngInflection, WordLevelInflection
+  form constraints
+    self.f.mainV <-- "i"
+    self.f.suffix <-- "ing"
+    
+// Totally irregular verbs: no constituents
+
+general construction BEAbstract
+  subcase of Verb
+  // TODO: specify meaning here
+  
+construction Be
+  subcase of BEAbstract, VerbalBase
+  form constraints
+    self.f.orth <-- "be"
+  
+construction Am
+  subcase of BEAbstract, PresentTense
+  constructional constraints
+    self.features <-- VerbSg1
+    self.atWordLevel <-- "yes"
+  form constraints
+    self.f.orth <-- "am"
+
+construction Is
+  subcase of BEAbstract, PresentTense
+  constructional constraints
+    self.features <-- VerbSg3
+    self.atWordLevel <-- "yes"
+  form constraints
+    self.f.orth <-- "is"
+    
+construction Are
+  subcase of BEAbstract, PresentTense
+  constructional constraints
+    self.features <-- VerbNotSg3
+    self.atWordLevel <-- "yes"
+  form constraints
+    self.f.orth <-- "are"
+
+construction Was
+  subcase of BEAbstract, PastTense
+  constructional constraints
+    self.features <-- VerbNotSg2OrPl
+    self.atWordLevel <-- "yes"
+  form constraints
+    self.f.orth <-- "was"
+
+construction Were
+  subcase of BEAbstract, PastTense
+  constructional constraints
+    self.features <-- VerbSg2OrPl
+    self.atWordLevel <-- "yes"
+  form constraints
+    self.f.orth <-- "were"
+    
+construction Been
+  subcase of BEAbstract, PastPart
+  constructional constraints
+    self.atWordLevel <-- "yes"
+  form constraints
+    self.f.orth <-- "been"
+
+construction Being
+  subcase of BEAbstract, PresentPart
+  constructional constraints
+  	self.atWordLevel <-- "yes"
+  form constraints
+    self.f.orth <-- "being"

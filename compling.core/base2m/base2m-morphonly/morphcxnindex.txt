@@ -1,0 +1,98 @@
+verbmorphology.grm
+general construction InflectedVerb
+general construction RegularInflectedVerb
+general construction RegularSimpleInflectedVerb
+construction Want
+general construction RegularFinalEVerb
+construction Move
+general construction PresentOnlyEVerb
+construction Slide
+general construction VerbInflection
+general construction RegularVerbInflection
+general construction SuffixEInflection
+general construction RegularSuffixEInflection
+general construction BareInflection
+construction PresentNon3SgInflection
+general construction NonWordLevelInflection
+construction BaseInflection
+general construction WordLevelInflection
+construction Present3SgInflection
+construction PastInflection
+construction PresentParticipleInflection
+construction PastParticipleInflection
+construction InternalInflection
+construction PastInflectionBare
+general construction PresentOnlyEInflection
+construction PastParticiplePresentOnlyEInflection
+general construction IngAngUngVerbParadigm
+general construction IngAngUngInflectedVerb
+construction Ring
+general construction InkAnkUnkInflectedVerb
+construction Drink
+general construction IngAngUngInflection
+general construction BareIngAngUngInflection
+construction BaseIngAngUngInflection
+construction PresentNon3SgIngAngUngInflection
+construction Present3SgIngAngUngInflection
+construction PastIngAngUngInflection
+construction PastParticipleIngAngUngInflection
+construction PresentParticipleIngAngUngInflection
+general construction BEAbstract
+construction Be
+construction Am
+construction Is
+construction Are
+construction Was
+construction Were
+construction Been
+construction Being
+
+nounmorphology.grm
+construction PluralSNoun
+general construction InflectedNoun
+general construction RegularInflectedNoun
+general construction RegularSimpleInflectedNoun
+general construction RegularFinalSibInflectedNoun
+general construction RegularFinalYNoun
+general construction NounInflection
+construction InternalNounInflection
+general construction SingularNounInflection
+general construction PluralNounInflection
+general construction RegularNounInflection
+general construction RegularSimpleNounInflection
+construction RegularNounSingular
+construction RegularSimpleNounPlural
+general construction RegularFinalYNounInflection
+construction RegularFinalYNounPlural
+general construction RegularFinalSibilantPlural
+construction FinalSPlural
+construction FinalZPlural
+construction FinalXPlural
+construction FinalSHPlural
+construction FinalCHPlural
+
+inflectionalsuffixes.grm
+general construction BareSuffix
+general construction SSuffix
+general construction EDSuffix
+general construction NSuffix
+general construction INGSuffix
+
+derivationalsuffixes.grm
+general construction DerivationalMorpheme
+construction SuffixAgentiveER
+construction SuffixAgentiveEE
+construction SuffixATION
+general construction CausativeSuffixIZE
+construction CausativeSuffixIZEAdj
+construction CausativeSuffixIZENoun
+construction HOSPITALIZE
+
+morph.grm
+construction WROOT
+general construction Morph
+general construction WLMorph
+general construction Affix
+general construction Suffix
+general construction WLAffix
+general construction WLSuffix

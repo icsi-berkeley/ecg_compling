@@ -1,0 +1,59 @@
+
+FILE_ENCODING = UTF-8
+
+GRAMMAR_EXTENSIONS = grm
+GRAMMAR_PATHS ::==
+	./base
+;
+
+ONTOLOGY_TYPE = owl
+ONTOLOGY_NAMESPACE = http://www.icsi.berkeley.edu/NTL/ontologies/base.owl
+ONTOLOGY_PATHS ::==
+	./base/base.owl
+;
+
+ROBUST = FALSE
+BEAM_SIZE = 8
+DEFAULT_OMISSION_PROB = 0
+DEBUG = FALSE
+ANALYZE_IN_CONTEXT = FALSE
+// ANALYZE_IN_CONTEXT = TRUE
+NUM_ANALYSES_RETURNED = 6
+MULTI_ROOT_PENALTY = -3
+
+EXAMPLE_SENTENCES ::==
+Laura baked John a cake
+
+he moved
+he could move
+he could moving
+he could moved
+he was moving
+he was moved
+he was move
+he had moved
+he had moving
+he had move
+he could have move
+he could be moving
+he had been moving
+he could have been moving
+he had could moved
+he was being moving
+he was being moved
+
+he not moved
+he could not move
+he was not moving
+he had not moved
+he could be not moving
+he could not be not moving
+he did move
+
+could he be moving
+did he move
+did he moving
+did he moved
+
+he is at a table
+;

@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<CHAT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talkbank.org/ns/talkbank" xsi:schemaLocation="http://www.talkbank.org/ns/talkbank talkbank.xsd" Version="1.1.3" Lang="zh" Corpus="beijing" Id="cx1" Date="1984-01-01">
+	
+	<Participants>
+		<participant id="CHI" name="XiXi" role="Target_Child" language="zh" age="P1Y9M25D" />
+		<participant id="MOT" role="Mother" language="zh" SES="Worker" />
+		<participant id="INV" name="XiaLing_and_Niu" role="Investigator" language="zh" />
+	</Participants>
+	
+	
+	<Setting>
+		<entity cat="Diningroom" id="diningroom"/>
+		<entity cat="Livingroom" id="livingroom"/>
+		<entity cat="Ball" id="ball"/>
+	</Setting>
+	
+	
+	<event cat="Kick" id="kick02">
+		<binding field="kicker" ref="CHI"/>
+		<binding field="kickee" ref="ball"/>
+		<binding field="goal" ref="diningroom"/>
+	</event>
+	
+	<u who="MOT" id="731">
+		<clause>
+			<w>ba3</w><w>qiu2</w><w>na2</w><w>guo4</w><w>lai2</w><pause fluency="fluent" symbolic-length="simple" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u731sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">把球拿過來 </a>
+			<a type="gold standard">
+				<semantic>				
+					<temporal_element left="2" right="3" cat="Fetch" id="u731te1">
+						<binding field="fetcher" ref="CHI"/>
+						<binding field="fetched" left="1" right="2" ref="ball"/>
+					</temporal_element>
+					<image_schema cat="SPG" id="u731img1">
+						<binding field="trajector" ref="MOT"/>
+						<binding field="trajector" ref="ball"/>
+						<binding field="path" left="3" right="4" value="Across_Path"/>
+						<binding field="deixis" left="4" right="5" value="Towards"/>
+					</image_schema>
+					<temporal_structure left="0" right="5" cat="Joint_Motion" profiled="u731te1">
+						<binding field="principle_mover" ref="MOT"/>
+						<binding field="other_mover" ref="ball"/>
+						<binding field="spg" left="3" right="5" ref="u731img1"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="732">
+		<clause>
+			<w>ba3</w><w>qiu2</w><w>na2</w><w>guo4</w><w>lai2</w><pause fluency="fluent" symbolic-length="simple" length="3" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u732sa2">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">把球拿過來</a>
+			<a type="gold standard">
+				<semantic>				
+					<temporal_element left="2" right="3" cat="Fetch" id="u732te1">
+						<binding field="fetcher" ref="CHI"/>
+						<binding field="fetched" left="1" right="2" ref="ball"/>
+					</temporal_element>
+					<image_schema cat="SPG" id="u732img1">
+						<binding field="trajector" ref="MOT"/>
+						<binding field="trajector" ref="ball"/>
+						<binding field="path" left="3" right="4" value="Across_Path"/>
+						<binding field="deixis" left="4" right="5" value="Towards"/>
+					</image_schema>
+					<temporal_structure left="0" right="5" cat="Joint_Motion" profiled="u7321te1">
+						<binding field="principle_mover" ref="MOT"/>
+						<binding field="other_mover" ref="ball"/>
+						<binding field="spg" left="3" right="5" ref="u732img1"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+</CHAT>

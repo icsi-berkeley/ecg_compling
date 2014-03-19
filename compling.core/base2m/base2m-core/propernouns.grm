@@ -1,0 +1,57 @@
+//
+// Proper nouns
+//
+
+general construction ProperNoun
+    subcase of NP, Word, Singular
+
+
+general construction ProperMaleNoun
+	subcase of ProperNoun
+    meaning
+        constraints
+            self.m.ontological-category <-- @male-person
+
+
+general construction ProperFemaleNoun
+	subcase of ProperNoun
+    meaning
+        constraints
+            self.m.ontological-category <-- @female-person
+
+
+construction John
+    subcase of ProperMaleNoun
+    form
+        constraints
+            self.f.orth <-- "John"
+
+
+construction Laura
+    subcase of ProperFemaleNoun
+    form
+        constraints
+            self.f.orth <-- "Laura"
+
+//
+// Other lexical items
+//
+						
+construction France
+   	subcase of ProperNoun
+    form
+		constraints
+			self.f.orth <-- "France"
+   	meaning
+    	constraints
+      		self.m.ontological-category <-- @france
+
+
+construction Germany
+   	subcase of ProperNoun
+	form
+		constraints
+			self.f.orth <-- "Germany"
+   	meaning
+    	constraints
+      		self.m.ontological-category <-- @germany

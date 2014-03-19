@@ -1,0 +1,32 @@
+digraph types {
+	size="11,8.5";
+	pad="0.2,0.0";
+	node [fontname="Arial", fontcolor=black, color="#ffaaaa", fillcolor="#ffaaaa"];
+	node [style="solid"];
+	node [style="filled"];
+
+	MorphForm -> SilentEForm
+	SilentEForm -> WLAblautEForm
+	WLAblautForm -> WLAblautEForm
+	SilentEForm -> WLSuffixEForm
+	WLSuffixForm -> WLSuffixEForm
+	SilentEForm -> SuffixEForm
+	SuffixForm -> SuffixEForm
+	SuffixEForm -> PresentOnlyEInflectionForm
+	MorphForm -> WordForm
+	AffixForm -> WLAffixForm
+	WordForm -> WLAffixForm
+	WLAffixForm -> WLSuffixForm
+	SuffixForm -> WLSuffixForm
+	WLSuffixForm -> WLAblautForm
+	FinalSibilantForm -> WLFinalSibilantForm
+	WLSuffixForm -> WLFinalSibilantForm
+	WLFinalYForm -> WLFinalSibilantFinalYForm
+	WLFinalSibilantForm -> WLFinalSibilantFinalYForm
+	WLSuffixForm -> WLFinalYForm
+	FinalYForm -> WLFinalYForm
+	MorphForm -> FinalSibilantForm
+	MorphForm -> FinalYForm
+	MorphForm -> AffixForm
+	AffixForm -> SuffixForm
+}

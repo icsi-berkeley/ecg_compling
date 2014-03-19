@@ -1,0 +1,566 @@
+//============================================================
+// Everything in this section is assumed as prior knowledge
+//============================================================
+
+//============================================================
+// Schemas: Discourse & Form / Constructional Schemas
+//============================================================
+
+schema Morpheme_Features
+	roles
+		bound
+	
+
+schema Morpheme_Form
+	roles
+		orth
+
+
+schema Word_Features
+	subcase of Morpheme_Features
+	roles
+		syllable
+
+
+schema Verb_Features
+	subcase of Morpheme_Features
+	roles
+		motion_Focus : @Motion_Focus
+
+
+schema Undefined
+
+
+schema RD
+	roles
+		name
+		grammatical_gender : @Gender
+		ontological_category : @Element
+		discourse_participant_role : @Discourse_Participant_Role
+		set_size : @Set
+		givenness : @Givenness
+		proximity
+		modifiers
+		referent : @Element
+
+
+schema Event_Descriptor
+	roles
+		event_type: Process
+		profiled_process: Process
+		profiled_participant: @Element
+		event_structure: Event_Structure
+		modifiers: Modification
+		spatial_setting
+		temporal_setting
+		affectedness : @Affectedness
+		referent : @Process
+
+
+schema Discourse_Segment
+	roles
+		speaker : @Human
+		addressee : @Human
+		attentional_focus : @Entity
+		speech_act : Speech_Act
+	constraints
+		speaker <--> speech_act.speaker
+		addressee <--> speech_act.addressee
+
+
+schema Numerical_Value
+	roles
+		value
+		set_size : @Set
+
+
+schema Event_Structure
+	roles
+		inherent_aspect : @Inherent_Aspect
+		modifier_aspect : @Modifier_Aspect
+		event_aspect : @Event_Aspect
+
+
+schema Modification
+	roles
+		category : @Modification_Category
+		modified
+
+
+//============================================================
+// Schemas: Process
+//============================================================
+
+schema Process
+	roles
+		protagonist : @Element
+//		location: @Entity
+		instrument: @Entity
+		inherent_aspect : @Inherent_Aspect
+	
+
+schema Proto_Transitive	// this is a way to get around the radial category Construction and "guarantee" an interface for the coverbs
+	subcase of Process
+	roles
+		proto_agent : @Entity
+		proto_patient : @Element
+
+
+schema State
+	subcase of Process
+	roles
+		category : @Modification_Category
+	constraints
+		inherent_aspect <-- @Inherent_State
+
+
+schema State_Change
+	subcase of Process
+	roles
+		initial_state : State
+		means : Process
+		resulting_state : State
+
+
+schema Action
+	subcase of Process
+
+
+schema Intransitive_State
+	subcase of State
+
+
+schema Two_Participant_State
+	subcase of State
+	roles
+		experiencer : @Entity
+		percept : @Element
+	constraints
+		experiencer <--> protagonist
+
+
+schema Mental_State
+	subcase of Two_Participant_State
+	constraints
+		experiencer <-- @Animate
+
+
+schema Intransitive_Action
+	subcase of Action
+
+
+schema Expression
+	subcase of Intransitive_Action
+
+
+schema Motion
+	subcase of Action
+	roles
+		mover : @Entity
+
+
+schema Translational_Motion
+	subcase of Motion
+	roles
+		spg : Source_Path_Goal
+		goal : @Entity
+	constraints
+		mover <--> spg.trajector
+		goal <--> spg.goal
+
+
+schema Self_Motion
+	subcase of Intransitive_Action, Motion
+	constraints
+		mover <--> protagonist
+
+
+schema Translational_Self_Motion
+	subcase of Self_Motion, Translational_Motion
+
+
+schema Force_Application
+	subcase of Action
+	evokes Contact as contact
+	roles
+		force_supplier : @Entity
+		force_recipient : @Entity
+		effector : @Body_Part
+	constraints
+		force_supplier <--> protagonist
+		force_supplier <--> contact.material1
+		force_recipient <--> contact.material2
+
+
+schema Continuous_Force_Application
+	subcase of Force_Application
+
+
+schema Forceful_Motion
+	subcase of Force_Application
+
+
+schema Translational_Forceful_Motion
+	subcase of Forceful_Motion, Translational_Motion
+	constraints
+		force_recipient <--> mover
+
+
+schema Agentive_Impact
+	subcase of Forceful_Motion
+
+
+schema Cause_Change
+	subcase of Action
+	roles
+		actor : @Entity
+		undergoer : @Entity
+	constraints
+		actor <--> protagonist
+
+
+schema Obtainment		// resembling FrameNet's GETTING frame
+	subcase of Action
+	roles
+		obtainer : @Entity
+		obtained: @Entity
+	constraints
+		obtainer <--> protagonist
+
+
+schema Ingestion
+	subcase of Action
+	roles
+		ingester : @Entity
+		ingested : @Entity
+	constraints
+		ingester <--> protagonist
+
+
+schema Perception
+	subcase of Action
+	roles
+		perceiver : @Entity
+		percept : @Element
+	constraints
+		perceiver <--> protagonist
+
+
+schema Uncategorized_Transitive_Action
+	subcase of Action
+	roles
+		agent : @Entity
+		patient : @Entity
+	constraints
+		agent <--> protagonist
+
+
+schema Communication
+	subcase of Action
+	roles
+		communicator : @Entity
+		audience : @Entity
+		communicated : @Element
+	constraints
+		communicator <--> protagonist
+
+
+schema Transfer
+	subcase of Action
+	roles
+		giver : @Entity
+		recipient : @Entity
+		theme : @Entity
+	constraints
+		giver <--> protagonist
+
+
+//============================================================
+// Schemas: Complex Processes
+//============================================================
+
+schema Complex_Process
+	subcase of Process
+	roles
+		process1 : Process
+		process2 : Process
+	constraints
+		protagonist <--> process1.protagonist
+
+
+schema Serial_Processes			// process1 before process2
+	subcase of Complex_Process
+
+
+schema Concurrent_Processes		// process1 overlaps process2
+	subcase of Complex_Process
+
+
+schema Cause_Effect			// process1 starts before process2 starts
+	subcase of Complex_Process
+	roles
+		cause : Process
+		effect : Process
+	constraints
+		cause <--> process1
+		effect <--> process2
+
+
+schema Joint_Motion
+	subcase of Concurrent_Processes, Cause_Effect
+	evokes Continuous_Force_Application as cfa
+	roles
+		principle_mover : @Entity
+		other_mover : @Entity
+		propelling_motion : Translational_Motion
+		secondary_motion : Translational_Motion
+	constraints		
+		propelling_motion <--> process1
+		secondary_motion <--> process2
+		principle_mover <--> process1.protagonist
+		other_mover <--> process2.protagonist
+		cfa.force_supplier <--> process1.protagonist
+		cfa.force_recipient <--> process2.protagonist
+
+
+schema Caused_Motion
+	subcase of Cause_Effect 
+	evokes Source_Path_Goal as spg
+	roles
+		causer : @Entity
+		mover : @Entity
+		forceful_motion : Forceful_Motion
+		motion : Translational_Motion
+	constraints
+		causer <--> forceful_motion.force_supplier
+		mover <--> forceful_motion.force_recipient
+		forceful_motion <--> cause
+		motion <--> effect
+		motion.protagonist <--> forceful_motion.force_recipient
+		instrument <--> forceful_motion.instrument
+		spg <--> motion.spg
+		motion.protagonist <--> motion.spg.trajector
+
+
+schema Conditional_Processes
+	subcase of Complex_Process
+	roles
+		condition : Process
+		outcome : Process
+	constraints
+		condition <--> process1
+		outcome <--> process2
+
+
+schema Repeat_Until
+	subcase of Complex_Process
+	roles
+		repetition : Process
+		condition : Process
+	constraints
+		repetition <--> process1
+		condition <--> process2
+
+
+schema Means_And_Ends
+	subcase of Complex_Process
+	roles
+		means : Process
+		ends : Process
+	constraints
+		means <--> process1
+		ends <--> process2
+
+
+
+//============================================================
+// Schemas: Relations
+//============================================================
+
+schema BenefactionOrMalefaction
+	roles
+		benefactor : @Entity
+		beneficiary : @Entity
+		benefit : Process
+
+
+schema Negation
+	roles
+		process : Process
+
+
+schema Warning
+	roles
+		warner : @Human
+		warned : @Human
+		prohibited_action : Process
+		threatened_consequence : Process
+
+
+//============================================================
+// Schemas: Image Schemas
+//============================================================
+
+schema Image_Schema
+		
+
+schema Simple_Image_Schema
+	subcase of Image_Schema
+
+
+schema Complex_Image_Schema
+	subcase of Image_Schema
+
+
+schema Trajector_Landmark
+	subcase of Simple_Image_Schema
+	roles
+		trajector : @Entity
+		landmark : @Entity
+
+
+schema Up_Down
+	subcase of Trajector_Landmark
+	roles
+		highpoint : @Entity
+		lowpoint : @Entity
+
+schema Above
+	subcase of Up_Down
+	constraints
+		highpoint <--> trajector
+		lowpoint <--> landmark
+
+
+schema Below
+	subcase of Up_Down
+	constraints
+		highpoint <--> landmark
+		lowpoint <--> trajector
+
+
+schema Container
+	subcase of Simple_Image_Schema
+	roles
+		container : @Entity
+		outside : @Entity
+		inside : @Entity
+		portal : @Entity
+
+
+schema Outside
+	subcase of Trajector_Landmark
+	evokes Container as container
+	constraints
+		landmark <--> container.container
+		trajector <--> container.outside
+
+
+schema Orientation
+	subcase of Simple_Image_Schema
+	roles
+		body : @Entity
+		front : @Entity
+		back : @Entity
+		short-axis : @Entity
+		long-axis : @Entity
+
+
+schema Back
+	subcase of Trajector_Landmark
+	evokes Orientation as orientation
+	constraints
+		landmark <--> orientation.body
+		trajector <--> orientation.back
+
+
+schema Boundary
+	subcase of Simple_Image_Schema
+	roles
+		boundary : @Entity
+		areaA : @Entity
+		areaB : @Entity
+
+
+schema Contact
+	subcase of Simple_Image_Schema
+	roles
+		material1 : @Entity
+		material2 : @Entity
+		contact_area : @Entity
+
+
+schema Part_Whole
+	subcase of Simple_Image_Schema
+	roles
+		part : @Entity
+		whole : @Entity		
+
+
+schema Source_Path_Goal
+	subcase of Complex_Image_Schema
+	roles
+		trajector : @Entity
+		source : @Entity
+		path : @Path
+		goal : @Entity
+		deixis : @Deixis
+
+
+//============================================================
+// Schemas: Speech Acts
+//============================================================
+
+schema Speech_Act
+	roles
+		speaker : @Human
+		addressee : @Human
+		content : Event_Descriptor
+		forcefulness : @Forcefulness
+
+
+schema Explaining
+	subcase of Speech_Act
+
+
+schema Answering
+	subcase of Speech_Act
+	roles
+		original_prompt : Speech_Act
+
+
+schema Approving
+	subcase of Speech_Act
+	roles
+		action : @Element
+
+
+schema Admonishing
+	subcase of Speech_Act
+	roles
+		fault : @Element
+
+
+schema Response_Eliciting_Speech_Act
+	subcase of Speech_Act
+
+
+schema Requesting_Action
+	subcase of Response_Eliciting_Speech_Act
+
+
+schema Requesting_Answer
+	subcase of Response_Eliciting_Speech_Act
+
+
+schema Calling
+	subcase of Response_Eliciting_Speech_Act
+
+
+schema Exclaiming
+	subcase of Speech_Act
+	
+
+schema Practicing		// with a third party
+	subcase of Speech_Act
+

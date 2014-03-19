@@ -1,0 +1,32 @@
+// this
+DeterminerPlusKernel[5]
+  s:The[4]
+       features:NominalFeatureSet[2]
+       m:RD[7]
+            referent:[6]
+            ontological-category:[6]
+            givenness:[3]"uniquely-identifiable"
+            number:[0]
+  features:NominalFeatureSet[2]
+  m:RD[7]
+  k:Kernel[1]
+       features:NominalFeatureSet[2]
+       m:RD[7]
+
+// that
+SimpleKernel[5]
+  ap:AdjectivalPhrase[6]
+        m:Modifier[2]
+             modifiedEntity:[3]
+  n:Ball[4]
+       features:NominalFeatureSet[0]
+                   number:[10]"singular"
+                   massOrPlural:[11]"no"
+       m:RD[9]
+            referent:[3]
+            ontological-category:ball[1]
+            givenness:[8]
+            number:[7]"1"
+  features:NominalFeatureSet[0]
+  m:RD[9]
+

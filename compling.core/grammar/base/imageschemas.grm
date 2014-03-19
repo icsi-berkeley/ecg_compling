@@ -1,0 +1,86 @@
+ 
+schema BoundedRegion
+	roles
+		boundary: RD // used to be @closedCurve
+		interior: RD // used to be @region
+		exterior: RD // used to be @region
+	constraints
+		// These replace the typing above
+		boundary.ontological-category <-- @closedCurve
+		interior.ontological-category <-- @region
+		exterior.ontological-category <-- @region
+		
+schema BoundedObject
+	subcase of BoundedRegion
+	roles
+		boundedObject: RD
+	constraints
+
+schema SpatialRelation
+
+schema Proximity	
+	subcase of SpatialRelation
+	roles
+		center
+		proximalArea
+
+schema Contact // short version
+	subcase of SpatialRelation
+	roles
+		entity1: RD // @entity 
+		entity2: RD // @entity
+	constraints
+		entity1.ontological-category <-- @entity
+		entity2.ontological-category <-- @entity
+		
+schema TrajectorLandmark
+	roles
+		trajector: RD 
+		landmark: RD
+		profiledArea // ProfiledArea is defined with respect to Landmark
+	constraints
+		trajector.ontological-category <-- @entity
+		landmark.ontological-category <-- @entity
+
+//
+// this schema is actually part of a radial category of SPG schemas
+//
+schema SPG   
+	subcase of TrajectorLandmark
+	roles
+		source
+		path: Path
+		goal
+		distance
+		
+schema Path  
+
+/*
+schema Direction   // now use heading role
+	subcase of Path  
+	
+schema Motion-defined-path   
+	subcase of Path
+	  roles
+		defining: MotionPath
+*/
+/*
+schema Location // probably chage for new Base
+   subcase of TrajectorLandmark
+*/		
+
+// Temporal stuff
+
+schema TemporalInterval
+	roles
+		start
+		end
+		length
+		timeUnits: @temporal-units  //@minutes, @seconds
+		
+schema TemporalModifier
+    roles
+      	telicity // one of @bounded, @ongoing
+      	ti: TemporalInterval
+            
+		

@@ -1,0 +1,112 @@
+/************
+***
+*** Specifiers (Determiners, Possessive Pronouns, wh-words)
+***
+*************/
+
+general construction NPSpecifier
+  subcase of Word, HasNominalFeatures
+  meaning : RD
+
+general construction Determiner
+   subcase of NPSpecifier
+
+construction La
+   subcase of Determiner, Singular, Feminine
+   form
+      constraints
+         self.f.orth <-- "la"
+   meaning
+      constraints
+         self.m.givenness <-- "uniquely-identifiable"
+         self.m.gender <-- "feminine"
+     	 self.m.number <-- "singular"
+         
+construction El
+   subcase of Determiner, Singular, Masculine
+   form
+      constraints
+         self.f.orth <-- "el"
+   meaning
+      constraints
+         self.m.givenness <-- "uniquely-identifiable"
+         self.m.gender <-- "masculine"
+         self.m.number <-- "singular"
+
+construction Los
+   subcase of Determiner, Plural, Masculine
+   form
+      constraints
+         self.f.orth <-- "los"
+   meaning
+      constraints
+         self.m.givenness <-- "uniquely-identifiable"
+         self.m.gender <-- "masculine"
+         self.m.number <-- "plural"
+         
+construction Las
+   subcase of Determiner, Plural, Feminine
+   form
+      constraints
+         self.f.orth <-- "las"
+   meaning
+      constraints
+         self.m.givenness <-- "uniquely-identifiable"
+         self.m.gender <-- "feminine"
+         self.m.number <-- "plural"
+         
+construction Un
+  	subcase of Determiner, Singular, Masculine
+   	constructional
+     	constraints
+       		self.features.massOrPlural <-- "no"  
+   	form
+      	constraints
+         	self.f.orth <-- "un"
+   	meaning
+      	constraints
+         	self.m.givenness <-- "type-identifiable"
+         	self.m.gender <-- "masculine"
+         	self.m.number <-- "singular"
+         	
+construction Una
+  	subcase of Determiner, Singular, Feminine
+   	constructional
+     	constraints
+       		self.features.massOrPlural <-- "no"  
+   	form
+      	constraints
+         	self.f.orth <-- "una"
+   	meaning
+      	constraints
+         	self.m.givenness <-- "type-identifiable"
+         	self.m.gender <-- "feminine"
+         	self.m.number <-- "singular"
+         	
+construction Unos
+  	subcase of Determiner, Plural, Masculine
+   	constructional
+     	constraints
+       		self.features.massOrPlural <-- "no"  
+   	form
+      	constraints
+         	self.f.orth <-- "unos"
+   	meaning
+      	constraints
+         	self.m.givenness <-- "type-identifiable"
+         	self.m.gender <-- "masculine"
+         	self.m.number <-- "plural"       
+         	
+construction Unas
+  	subcase of Determiner, Plural, Feminine
+   	constructional
+     	constraints
+       		self.features.massOrPlural <-- "no"  
+   	form
+      	constraints
+         	self.f.orth <-- "unas"
+   	meaning
+      	constraints
+         	self.m.givenness <-- "type-identifiable"
+         	self.m.gender <-- "feminine"
+         	self.m.number <-- "plural"

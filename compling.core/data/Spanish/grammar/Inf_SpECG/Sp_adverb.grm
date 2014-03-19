@@ -1,0 +1,47 @@
+/************************************************************
+***
+*** This file is a place holder for adverbs. By now, only
+*** adverbs that modify verbs are implemented. However,
+*** it would be interesting to implement adverbs that 
+*** modify adjectives (such as 'muy' (very).
+***
+************************************************************/
+
+general construction AdverbialPhrase
+  meaning:Modifier
+
+general construction Adverb
+  subcase of Word, AdverbialPhrase
+
+general construction PolarityAdverb
+  subcase of Adverb
+  
+
+schema Negation
+  subcase of Modifier
+
+construction No
+  subcase of PolarityAdverb
+  form
+    constraints
+       self.f.orth <-- "no"
+  meaning: Negation
+
+/*schema Support
+  subcase of Modifier
+
+construction So
+  subcase of PolarityAdverb
+  form
+    constraints
+       self.f.orth <-- "so"
+  meaning:Support*/
+
+//Slowly
+construction lentamente
+  subcase of Adverb
+  form
+    constraints
+       self.f.orth <-- "lentamente"
+  meaning: Modifier
+

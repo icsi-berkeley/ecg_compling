@@ -1,0 +1,931 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHAT xmlns="http://www.talkbank.org/ns/talkbank" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.talkbank.org/ns/talkbank http://xml.talkbank.org/talkbank.xsd" Version="1.1.3" Lang="zh" Corpus="beijing" Id="lxb2" Date="1984-01-01">
+
+<Participants>
+<Participant id="FAT" role="Father" language="zh" />
+<Participant id="CHI" name="BingBing" role="Target_Child" language="zh" />
+<Participant id="MOT" role="Mother" language="zh" />
+<Participant id="INV" role="Investigator" language="zh" />
+<Participant id="OMM" role="Mother" language="zh" />
+<Participant id="OFF" role="Father" language="zh" />
+<Participant id="CH2" role="Child" language="zh" />
+<Participant id="UNC" name="Unclear" role="Unidentified" language="zh" />
+</Participants>
+
+<u who="FAT" id="1"><clause><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="CHI" id="2"><clause><w>en</w><t type="p" /></clause></u>
+<u who="FAT" id="3"><clause><precode>MOT</precode><w>zou3</w><t type="p" /></clause></u>
+<u who="MOT" id="4"><clause><precode>FA</precode><w>zou3</w><t type="p" /></clause></u>
+<u who="CHI" id="5"><clause><w>zou3</w><t type="p" /></clause></u>
+<u who="MOT" id="6"><clause><precode>FA</precode><w>zan2</w><w>shang4</w><w>nar3</w><w>qu4</w><w>a</w><t type="p" /></clause></u>
+<u who="FAT" id="7"><clause><precode>MOT</precode><w>ba3</w><w>che1</w><w>suo3</w><w>zai4</w><w>zher4</w><t type="p" /></clause></u>
+<u who="FAT" id="8"><clause><precode>MOT</precode><g><w>xx</w><w>xx</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="9"><clause><precode>FA</precode><g><w>suo3</w><overlap type="overlap precedes" /></g><wn><w>bianr1</w><wk type="cmp" /><w>shang4</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="10"><clause><precode>FA</precode><w>fang4</w><w>nei4</w><wn><w>bianr1</w><wk type="cmp" /><w>shang4</w></wn><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="11"><clause><precode>FA</precode><w>bie2</w><w>fang4</w><w>lu4</w><wn><w>zhong1</w><wk type="cmp" /><w>jian1</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="12"><clause><precode>FA</precode><w>zhe4</w><w>lu4</w><w>zhai3</w><t type="p" /></clause></u>
+<u who="MOT" id="13"><clause><precode>FA</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="3" /></clause><clause><t type="p" /></clause></u>
+<u who="INV" id="14"><clause><precode>FA</precode><w>zhe4</w><w>shi4</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="15"><clause><w>zou3</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="16"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="6" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="17"><clause><e type="action" /><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="OFF" id="18"><clause><precode>MOT</precode><w>ai</w><w>ni3</w><w>hao3</w><t type="p" /></clause></u>
+<u who="OFF" id="19"><clause><precode>MOT</precode><w>ei</w><w>ni3</w><w>hao3</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>zuo4</w><w>bu2</w><w>zuo4</w><w>la</w><t type="p" /></clause></u>
+<u who="MOT" id="20"><clause><precode>OFF</precode><w>a</w><t type="p" /></clause></u>
+<u who="OFF" id="21"><clause><precode>MOT</precode><w>chi1</w><w>guo4</w><w>wan3</w><w>fan4</w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="22"><clause><precode>OFF</precode><w>chi1</w><w>guo4</w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="23"><clause><precode>OFF</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="3" /></clause><clause><t type="p" /></clause></u>
+<u who="OFF" id="24"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing<p type="drawl" />1</w></wn><t type="p" /></clause></u>
+<u who="OFF" id="25"><clause><wn><w>a1</w><wk type="cmp" /><w>yi2</w></wn><w>lai2</w><w>le</w><t type="p" /></clause></u>
+<u who="OFF" id="26"><clause><w>jiao4</w><w>le</w><w>mei2</w><w>you3</w><t type="p" /></clause></u>
+<u who="OFF" id="27"><clause><w>jiao4</w><wn><w>a1</w><wk type="cmp" /><w>yi2</w></wn><w>le</w><w>mei2</w><w>you3</w><t type="p" /></clause></u>
+<u who="CHI" id="28"><clause><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="OFF" id="29"><clause><w>jiao4</w><w>le</w><w>mei2</w><w>you3</w><w>a</w><t type="p" /></clause></u>
+<u who="FAT" id="30"><clause><e type="action" /><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="OFF" id="31"><clause><precode>MOT</precode><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="32"><clause><precode>OFF</precode><w>he</w><e type="happening">laugh</e><t type="p" /></clause></u>
+<u who="MOT" id="33"><clause><w>zou3</w><w>ba</w><t type="p" /></clause></u>
+<u who="CHI" id="34"><clause><w>jiu3<a type="replacement">zou3</a><error /></w><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="35"><clause><precode>FA</precode><wn><w>deng1</w><wk type="cmp" /><w>shang4</w></wn><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>hai2</w><w>shang4</w><wn><w>dong1</w><wk type="cmp" /><w>mian4</w></wn><wn><w>nei4</w><wk type="cmp" /><w>bianr1</w></wn><w>qu4</w><w>ba</w><t type="p" /></clause></u>
+<u who="FAT" id="36"><clause><precode>MOT</precode><w>xing2</w><w>a</w><t type="p" /></clause></u>
+<u who="FAT" id="37"><clause><precode>MOT</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="2" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="38"><clause><precode>FA</precode><wn><w>shi3</w><wk type="cmp" /><w>jingr4</w></wn><t type="p" /></clause></u>
+<u who="FAT" id="39"><clause><precode>MOT</precode><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="40"><clause><precode>FA</precode><wn><w>shi3</w><wk type="cmp" /><w>jingr4</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="41"><clause><precode>FA</precode><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="FAT" id="42"><clause><precode>MOT</precode><w>bu4</w><w>cheng2</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="43"><clause><e type="action" /><t type="p" /><a type="comments">cough</a></clause></u>
+<u who="FAT" id="44"><clause><e type="action" /><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="MOT" id="45"><clause><precode>INV</precode><wn><w>wo3</w><wk type="cmp" /><w>men<p type="drawl" /></w></wn><wn><w>jing1</w><wk type="cmp" /><w>chang2</w></wn><w>shang4</w><wn><w>nei4</w><wk type="cmp" /><w>bianr1</w><k type="retracing" /></wn><wn><w>nei4</w><wk type="cmp" /><w>kuair4</w></wn><w>qu4</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><wn><w>zhuan4</w><wk type="cmp" /><w>qu4</w></wn><e type="happening">laugh</e><t type="p" /></clause></u>
+<u who="INV" id="46"><clause><precode>MOT</precode><w>jiu4</w><w>wo3</w><w>nei4</w><w>tian1</w><wn><w>peng4</w><wk type="cmp" /><w>dao4</w></wn><wn><w>ni3</w><wk type="cmp" /><w>men</w></wn><w>de</w><w>nar4</w><t type="p" /></clause></u>
+<u who="MOT" id="47"><clause><precode>INV</precode><w>ao</w><w>ao<p type="drawl" /></w><t type="p" /></clause></u>
+<u who="MOT" id="48"><clause><precode>INV</precode><w>zou3</w><wn><w>hai1</w><wk type="cmp" /><w>zi</w></wn><w>xia1</w><w>xie3</w><t type="p" /></clause></u>
+<u who="MOT" id="49"><clause><precode>INV</precode><wn><w>xiao3</w><wk type="cmp" /><w>xin1</w></wn><wn><w>yi4</w><wk type="cmp" /><w>dianr3</w></wn><wn><w>zhei4</w><wk type="cmp" /><w>bianr1</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="50"><clause><precode>INV</precode><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="51"><clause><precode>INV</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="3" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="52"><clause><precode>FA</precode><w>aiyo</w><wn><w>yi4</w><wk type="cmp" /><w>huir3</w></wn><w>bie2</w><w>yao4</w><w>xia4</w><w>yu3</w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="53"><clause><precode>FA</precode><g><wn><w>yi4</w><wk type="cmp" /><w>huir3</w></wn><overlap type="overlap follows" /></g><w>wo3</w><w>gang1</w><w>ting1</w><w>da3</w><w>lei2</w><w>le</w><t type="p" /></clause></u>
+<u who="FAT" id="54"><clause><precode>MOT</precode><g><w>xx</w><w>xx</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="55"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="56"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="15" /></clause><clause><t type="p" /></clause></u>
+<u who="FAT" id="57"><clause><wn><w>ba4</w><wk type="cmp" /><w>ba</w></wn><w>xx</w><w>zen3me</w><w>le</w><t type="p" /></clause></u>
+<u who="FAT" id="58"><clause><w>en</w><t type="p" /></clause></u>
+<u who="FAT" id="59"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="4" /></clause><clause><t type="p" /></clause></u>
+<u who="FAT" id="60"><clause><w>zou3</w><w>lou<p type="drawl" /></w><t type="p" /></clause></u>
+<u who="FAT" id="61"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="8" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="62"><clause><w>en</w><w>shi4</w><w>shui3</w><t type="p" /></clause></u>
+<u who="MOT" id="63"><clause><w>en<p type="drawl" /></w><t type="p" /></clause></u>
+<u who="MOT" id="64"><clause><w>you3</w><w>shui3</w><t type="p" /></clause></u>
+<u who="CHI" id="65"><clause><w>shi4</w><w>you3</w><w>shui<p type="drawl" />3</w><t type="p" /></clause></u>
+<u who="MOT" id="66"><clause><w>you3</w><w>shui3</w><t type="p" /></clause></u>
+<u who="MOT" id="67"><clause><w>cai3</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="68"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="2" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="69"><clause><w>aiyo</w><w>aiyo</w><w>aiyo</w><w>aiyo</w><t type="p" /></clause></u>
+<u who="MOT" id="70"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="9" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="71"><clause><w>ba</w><t type="p" /></clause></u>
+<u who="FAT" id="72"><clause><precode>MOT</precode><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="73"><clause><precode>FA</precode><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="74"><clause><precode>FA</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="11" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="75"><clause><w>ni3</w><w>shuo1</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><g><w>xiao3</w><w>bai2</w><w>tu4</w><k type="quotation" /></g><w>ba</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="76"><clause><e type="action" /><t type="p" /><a type="comments">cough</a></clause></u>
+<u who="MOT" id="77"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="78"><clause><w>ni3</w><w>shuo1</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><g><w>xiao3</w><w>bai2</w><w>tu4</w><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="79"><clause><w>kuai4</w><w>dianr3</w><t type="p" /></clause></u>
+<u who="MOT" id="80"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>shuo1</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><g><w>xiao3</w><w>bai2</w><w>tu4</w><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="81"><clause><w>shuo1</w><w>ya</w><t type="p" /></clause></u>
+<u who="MOT" id="82"><clause><w>shuo1</w><g><w>xiao3</w><w>bai2</w><w>tu4</w><w>bai2</w><w>you4</w><w>bai2</w><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="83"><clause><w>kuai4</w><w>dianr3</w><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="84"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>a</w><t type="p" /></clause></u>
+<u who="OMM" id="85"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="86"><clause><e type="action" /><t type="p" /><a type="comments">cough</a></clause></u>
+<u who="OMM" id="87"><clause><precode>OFF</precode><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="OFF" id="88"><clause><precode>OMM</precode><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="FAT" id="89"><clause><precode>MOT</precode><wn><w>yi4</w><wk type="cmp" /><w>huir3</w></wn><w>zai4</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><wn><w>yi4</w><wk type="cmp" /><w>huir3</w></wn><wn><w>hui2</w><wk type="cmp" /><w>lai2</w></wn><w>ge1</w><wn><w>yi2</w><wk type="cmp" /><w>liang4</w></wn><w>che1</w><t type="p" /></clause></u>
+<u who="MOT" id="90"><clause><precode>FA</precode><w>you3</w><w>che1</w><t type="p" /></clause></u>
+<u who="FAT" id="91"><clause><precode>MOT</precode><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="92"><clause><w>you3</w><w>che1</w><w>zou3</w><w>ma</w><t type="p" /></clause></u>
+<u who="CHI" id="93"><clause><w>jiu3<a type="replacement">zou3</a><error /></w><t type="p" /></clause></u>
+<u who="MOT" id="94"><clause><w>a<p type="drawl" /></w><t type="p" /></clause></u>
+<u who="CHI" id="95"><clause><w>jiu3<a type="replacement">zou3</a><error /></w><t type="p" /></clause></u>
+<u who="MOT" id="96"><clause><w>hai2</w><w>zou3</w><t type="p" /></clause></u>
+<u who="MOT" id="97"><clause><w>zhuang4</w><w>le</w><w>zen3me</w><w>ban4</w><w>ne</w><t type="p" /></clause></u>
+<u who="CHI" id="98"><clause><w>zhuang4</w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="99"><clause><w>en</w><t type="p" /></clause></u>
+<u who="CHI" id="100"><clause><w>xiang2<a type="replacement">zen3me</a><error /></w><w>bai2<a type="replacement">ban4</a><error /></w><t type="p" /></clause></u>
+<u who="MOT" id="101"><clause><w>en</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>zen3me</w><w>ban4</w><w>ne</w><t type="p" /></clause></u>
+<u who="MOT" id="102"><clause><w>zhuang4</w><w>le</w><w>zen3me</w><w>ban4</w><w>ne</w><t type="p" /></clause></u>
+<u who="MOT" id="103"><clause><w>en<p type="drawl" /></w><t type="p" /></clause></u>
+<u who="MOT" id="104"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="3" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="105"><clause><w>zhuang4</w><w>le</w><w>zen3me</w><w>ban4</w><w>ne</w><t type="p" /></clause></u>
+<u who="MOT" id="106"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="12" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="107"><clause><e type="action" /><t type="p" /><a type="comments">cough</a></clause></u>
+<u who="OFF" id="108"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="OFF" id="109"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="7" /></clause><clause><t type="p" /></clause></u>
+<u who="FAT" id="110"><clause><precode>MOT</precode><w>dao4</w><w>li3</w><w>da4</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="111"><clause><precode>FA</precode><w>shang4</w><w>nar4</w><w>qu4</w><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="112"><clause><precode>FA</precode><w>hao3</w><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="113"><clause><precode>FA</precode><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="114"><clause><precode>FA</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="16" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="115"><clause><precode>FA</precode><w>en<p type="drawl" /></w><t type="p" /></clause></u>
+<u who="MOT" id="116"><clause><precode>FA</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="2" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="117"><clause><w>you3</w><w>che1</w><t type="p" /></clause></u>
+<u who="MOT" id="118"><clause><w>you3</w><w>che1</w><t type="p" /></clause></u>
+<u who="MOT" id="119"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="16" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="120"><clause><e type="action" /><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="MOT" id="121"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="13" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="122"><clause><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="123"><clause><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="124"><clause><w>a</w><w>hai2</w><w>zhen1</w><w>shi4</w><t type="p" /></clause></u>
+<u who="MOT" id="125"><clause><w>zhei4</w><wn><w>gou3</w><wk type="cmp" /><w>gou<p type="drawl" />3</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="126"><clause><wn><w>mo1</w><wk type="cmp" /><w>qu4</w></wn><w>ba</w><w>xx</w><t type="p" /></clause></u>
+<u who="CHI" id="127"><clause><w>xiao3</w><wn><w>gou3</w><wk type="cmp" /><w>gou<p type="drawl" />3</w></wn><t type="p" /></clause></u>
+<u who="CHI" id="128"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="2" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="129"><clause><w>xiao3</w><wn><w>gou3</w><wk type="cmp" /><w>gou3</w></wn><t type="p" /></clause></u>
+<u who="CHI" id="130"><clause><w>xiao3</w><wn><w>gou3</w><wk type="cmp" /><w>gou3</w></wn><t type="p" /></clause></u>
+<u who="CHI" id="131"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="6" /></clause><clause><t type="p" /></clause></u>
+<u who="FAT" id="132"><clause><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>ya</w><t type="q" /></clause></u>
+<u who="FAT" id="133"><clause><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="CHI" id="134"><clause><w>xiao3</w><wn><w>gou3</w><wk type="cmp" /><w>gou3</w></wn><t type="p" /></clause></u>
+<u who="FAT" id="135"><clause><w>xiao3</w><wn><w>gou3</w><wk type="cmp" /><w>gou3</w></wn><w>pa4</w><w>ma</w><t type="p" /></clause></u>
+<u who="CHI" id="136"><clause><w>pa4</w><t type="p" /></clause></u>
+<u who="MOT" id="137"><clause><w>mo1</w><w>ma</w><t type="p" /></clause></u>
+<u who="OFF" id="138"><clause><w>ei</w><t type="p" /></clause></u>
+<u who="OFF" id="139"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="3" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="140"><clause><w>che1</w><t type="p" /></clause></u>
+<u who="MOT" id="141"><clause><w>a</w><t type="p" /></clause></u>
+<u who="CHI" id="142"><clause><wn><w>che1</w><wk type="cmp" /><w>che1</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="143"><clause><wn><w>che1</w><wk type="cmp" /><w>che1</w></wn><t type="p" /></clause></u>
+<u who="CHI" id="144"><clause><linker type="quick uptake" /><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="145"><clause><w>e</w><wn><w>che1</w><wk type="cmp" /><w>che1</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="146"><clause><w>wo3</w><w>bao4</w><w>ni3</w><wn><w>shang4</w><wk type="cmp" /><w>qu4</w></wn><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="147"><clause><w>xing2</w><w>ma</w><t type="p" /></clause></u>
+<u who="CHI" id="148"><clause><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="149"><clause><wn><w>che1</w><wk type="cmp" /><w>che1</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="150"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="2" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="151"><clause><w>en</w><t type="p" /></clause></u>
+<u who="FAT" id="152"><clause><w>zhei4</w><w>shi4</w><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>deng1</w><w>a</w><t type="p" /></clause></u>
+<u who="CHI" id="153"><clause><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="154"><clause><w>hon2</w><w>deng1</w><w>a</w><t type="p" /></clause></u>
+<u who="CHI" id="155"><clause><w>hong2</w><w>eng1<a type="replacement">deng1</a><error /></w><t type="p" /></clause></u>
+<u who="MOT" id="156"><clause><w>hong2</w><w>deng1</w><wn><w>zhi3</w><wk type="cmp" /><w>zhi3</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="157"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="2" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="158"><clause><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="159"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="5" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="160"><clause><w>hong2</w><w>deng<p type="drawl" />1</w><t type="p" /></clause></u>
+<u who="MOT" id="161"><clause><w>zhei4</w><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>deng1</w><w>le</w><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="162"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>zhei4</w><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>deng1</w><w>le</w><t type="p" /></clause></u>
+<u who="CHI" id="163"><clause><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="164"><clause><w>a</w><t type="p" /></clause></u>
+<u who="CHI" id="165"><clause><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="166"><clause><w>zhei4</w><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>deng1</w><w>le</w><t type="p" /></clause></u>
+<u who="CHI" id="167"><clause><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="168"><clause><w>zhei4</w><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>shar3</w><w>de</w><w>ya</w><t type="p" /></clause></u>
+<u who="CHI" id="169"><clause><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="170"><clause><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="171"><clause><w>lu4</w><w>deng1</w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="172"><clause><w>wang4</w><w>le</w><t type="p" /></clause></u>
+<u who="CHI" id="173"><clause><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="174"><clause><w>lu4</w><w>deng1</w><t type="p" /></clause></u>
+<u who="CHI" id="175"><clause><w>u4<error /><a type="replacement">lu4</a></w><w>deng1</w><w>ye</w><t type="p" /></clause></u>
+<u who="MOT" id="176"><clause><w>ao</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><wn><w>zhei4</w><wk type="cmp" /><w>ge</w></wn><w>da4</w><wn><w>che1</w><wk type="cmp" /><w>che1</w></wn><t type="p" /></clause></u>
+<u who="FAT" id="177"><clause><precode>MOT</precode><wn><w>nei4</w><wk type="cmp" /><w>bianr1</w></wn><w>fang4</w><wn><w>yin1</w><wk type="cmp" /><w>yue4</w></wn><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="178"><clause><precode>FA</precode><e type="action" /><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="FAT" id="179"><clause><precode>MOT</precode><w>zou3</w><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="180"><clause><precode>FA</precode><w>bu4</w><wn><w>zhi1</w><wk type="cmp" /><w>dao4</w></wn><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>mei2</w><wn><w>ting1</w><wk type="cmp" /><w>jian4</w></wn><w>ne</w><t type="p" /></clause></u>
+<u who="MOT" id="181"><clause><precode>FA</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="15" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="182"><clause><precode>FA</precode><e type="action" /><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="183"><clause><precode>FA</precode><w>you3</w><t type="p" /></clause></u>
+<u who="MOT" id="184"><clause><precode>FA</precode><e type="action" /><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="185"><clause><w>tiao4</w><w>wu3</w><w>qu4</w><w>ba</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="186"><clause><e type="action" /><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="187"><clause><w>lai2</w><w>ya</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><overlap type="overlap follows" /><t type="p" /></clause></u>
+<u who="FAT" id="188"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="189"><clause><g><w>tiao4</w><w>ba</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="FAT" id="190"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="191"><clause><g><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="FAT" id="192"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="193"><clause><g><wn><w>guo4</w><wk type="cmp" /><w>lai2</w></wn><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="194"><clause><g><wn><w>xian4</w><wk type="cmp" /><w>zai4</w></wn><w>tiao4</w><w>wu3</w><w>qu4</w><w>ba</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="195"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="196"><clause><g><w>lai2</w><w>ba</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="FAT" id="197"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">mudic</a></clause></u>
+<u who="CHI" id="198"><clause><g><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="CHI" id="199"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="200"><clause><w>ni3</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>tiao4</w><overlap type="overlap follows" /><t type="p" /></clause></u>
+<u who="MOT" id="201"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="202"><clause><g><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="FAT" id="203"><clause><g><w>xx</w><w>xx</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="FAT" id="204"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="205"><clause><g><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>tiao4</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="206"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="207"><clause><e type="action" /><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="208"><clause><g><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>tiao4</w><w>wu3</w><w>hao3</w><w>ma</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="FAT" id="209"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="210"><clause><w>a<overlap type="overlap precedes" /></w><t type="p" /></clause></u>
+<u who="FAT" id="211"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="212"><clause><e type="action" /><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="213"><clause><g><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>gen1</w><w>shei2</w><w>tiao4</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="FAT" id="214"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="215"><clause><g><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="FAT" id="216"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="217"><clause><g><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="218"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="219"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="22" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="220"><clause><g><w>tiao4</w><w>zai4</w><w>wo3</w><wn><w>bianr1</w><wk type="cmp" /><w>shang4</w></wn><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="221"><clause><w>tiao4</w><w>wu3</w><w>a</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>wang4</w><w>le</w><overlap type="overlap precedes" /><t type="p" /></clause></u>
+<u who="MOT" id="222"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="223"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="9" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="224"><clause><g><w>zai4</w><w>zher4</w><w>tiao4</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="225"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="226"><clause><w>zan2</w><w>bu2<k type="retracing" /></w><w>rang4<k type="retracing" /></w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>bu2</w><w>rang4</w><wn><w>ba4</w><wk type="cmp" /><w>ba</w></wn><w>kan4</w><overlap type="overlap precedes" /><t type="p" /></clause></u>
+<u who="MOT" id="227"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="228"><clause><g><w>zai4</w><w>zher4</w><w>tiao4</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="229"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="230"><clause><g><w>rang4</w><wn><w>ba4</w><wk type="cmp" /><w>ba</w></wn><w>kan4</w><w>ma</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="231"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="232"><clause><g><w>rang4<k type="retracing" /></w><w>rang4</w><wn><w>ba4</w><wk type="cmp" /><w>ba</w></wn><w>kan4</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="233"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="234"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="8" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="235"><clause><g><w>da4</w><wn><w>qi4</w><wk type="cmp" /><w>qiu2</w></wn><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="236"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="237"><clause><g><w>a</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="238"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="239"><clause><g><w>xx</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="240"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="241"><clause><g><w>ao</w><w>da4</w><wn><w>qi4</w><wk type="cmp" /><w>qiu2</w></wn><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="242"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="243"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="6" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="244"><clause><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>xiao4<a type="replacement">tiao4</a><error /></w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>xiao4<a type="replacement">tiao4</a><error /></w><overlap type="overlap precedes" /><t type="p" /></clause></u>
+<u who="CHI" id="245"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="246"><clause><w>ai<overlap type="overlap precedes" /></w><t type="p" /></clause></u>
+<u who="MOT" id="247"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="248"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="4" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="249"><clause><g><w>zhu1</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="250"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="251"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="16" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="252"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="MOT" id="253"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="254"><clause><g><w>kuai4</w><w>pao3</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="255"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="256"><clause><g><w>ei</w><w>hei</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="257"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="258"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="MOT" id="259"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="260"><clause><precode>MOT</precode><g><w>ni3</w><w>zen3me</w><w>gao3</w><w>de</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="FAT" id="261"><clause><precode>MOT</precode><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="262"><clause><precode>FA</precode><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="MOT" id="263"><clause><precode>FA</precode><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="264"><clause><g><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>tiao4</w><w>a</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="FAT" id="265"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="266"><clause><e type="action" /><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="267"><clause><g><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>zhei4</w><w>zen3me</w><w>tiao4</w><w>de</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="FAT" id="268"><clause><g><wn><w>zhei4</w><wk type="cmp" /><w>yang4</w></wn><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="FAT" id="269"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="270"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="MOT" id="271"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="272"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="6" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="273"><clause><g><w>ei</w><w>kuai4</w><w>tiao4</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="274"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="275"><clause><g><w>bu2</w><w>shi4</w><w>bu2</w><w>kan4</w><w>nei4</w><wn><w>a1</w><wk type="cmp" /><w>yi2</w></wn><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="276"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="277"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="40" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="278"><clause><g><w>a</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="279"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="280"><clause><g><w>yao4</w><wn><w>niao4</w><wk type="cmp" /><w>niao<p type="drawl" />4</w></wn><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="281"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="282"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="MOT" id="283"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="284"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="55" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="285"><clause><w>zhen1</w><wn><w>hao3</w><wk type="cmp" /><w>kan4</w></wn><pause fluency="fluent" symbolic-length="simple" /></clause><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>tiao4</w><w>de</w><overlap type="overlap precedes" /><t type="p" /></clause></u>
+<u who="MOT" id="286"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="287"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="10" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="288"><clause><g><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>ni3</w><w>kan4</w><w>zhei4</w><w>shi4</w><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>ya</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="289"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="290"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="5" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="291"><clause><g><w>wo3</w><w>hai2</w><wn><w>yi3</w><wk type="cmp" /><w>wei2</w></wn><w>shi4</w><wn><w>qiu1</w><wk type="cmp" /><w>yin3</w></wn><w>ne</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="292"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="293"><clause><g><w>bu4</w><w>cai3</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="294"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="295"><clause><g><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>bu4</w><w>cai3</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="296"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="297"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="17" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="298"><clause><g><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>qie3<a type="replacement">cai3</a><error /></w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="299"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="300"><clause><g><wn><w>ma1</w><wk type="cmp" /><w>ma1</w><wk type="cmp" /><w>qie3</w><a type="replacement">cai3</a><error /></wn><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="301"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="302"><clause><g><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>qie3<a type="replacement">cai3</a><error /></w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="303"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="304"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="14" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="305"><clause><w>a</w><wn><w>kan4</w><wk type="cmp" /><w>kan4</w></wn><pause fluency="fluent" symbolic-length="simple" /></clause><clause><wn><w>kan4</w><wk type="cmp" /><w>kan4</w></wn><overlap type="overlap precedes" /><t type="p" /></clause></u>
+<u who="CHI" id="306"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="307"><clause><g><wn><w>kan4</w><wk type="cmp" /><w>kan4</w></wn><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>ya</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="308"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="309"><clause><g><wn><w>kan4</w><wk type="cmp" /><w>kan4</w></wn><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>ya</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="310"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="311"><clause><g><wn><w>kai1</w><wk type="cmp" /><w>kai1</w><a type="replacement">kan4+kan4</a><error /></wn><w>hong2</w><w>deng1</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="312"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="313"><clause><g><w>a</w><w>kan4</w><w>kan4</w><w>hong2</w><w>deng1</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="314"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="315"><clause><g><w>ao<p type="drawl" /></w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="316"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="317"><clause><g><w>mei2</w><w>da4</w><w>fa1</w><w>de</w><w>deng1</w><w>hao</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="318"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="319"><clause><g><w>zhen1</w><wn><w>hao3</w><wk type="cmp" /><w>kan4</w></wn><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="320"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="321"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="12" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="322"><clause><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><t type="p" /></clause></u>
+<u who="CH2" id="323"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="CH2" id="324"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="6" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="325"><clause><wn><w>ma1</w><wk type="cmp" /><w>ma<p type="drawl" /></w></wn><t type="p" /></clause></u>
+<u who="CHI" id="326"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="4" /></clause><clause><t type="p" /></clause></u>
+<u who="OFF" id="327"><clause><w>ai</w><w>bie2</w><w>wo3</w><w>gen1</w><w>ni3</w><w>tiao4</w><w>ao</w><t type="p" /></clause></u>
+<u who="CH2" id="328"><clause><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="329"><clause><precode>OC</precode><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="330"><clause><precode>OC</precode><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="331"><clause><precode>OC</precode><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="18" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="332"><clause><w>xing2</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>jiu3<a type="replacement">zou3</a><error /></w><w>ba</w><overlap type="overlap precedes" /><t type="p" /></clause></u>
+<u who="CHI" id="333"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="334"><clause><g><w>ai</w><wn><w>kan4</w><wk type="cmp" /><w>kan4</w></wn><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="335"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="INV" id="336"><clause><g><w>ai</w><wn><w>zhei4</w><wk type="cmp" /><w>ge</w></wn><w>xx</w><w>ting3</w><w>hao3</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="INV" id="337"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="INV" id="338"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="12" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="339"><clause><g><wn><w>ba4</w><wk type="cmp" /><w>ba<p type="drawl" /></w></wn><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="340"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="341"><clause><wn><w>ba4</w><wk type="cmp" /><w>ba<p type="drawl" /></w></wn><wn><w>gu4</w><wk type="cmp" /><w>nai<p type="drawl" />2</w><a type="replacement">guo4+lai2</a><error /></wn><t type="p" /></clause></u>
+<u who="CHI" id="342"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="8" /></clause><clause><t type="p" /></clause></u>
+<u who="FAT" id="343"><clause><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><t type="p" /></clause></u>
+<u who="FAT" id="344"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="7" /></clause><clause><t type="p" /></clause></u>
+<u who="FAT" id="345"><clause><e type="action" /><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="346"><clause><precode>FA</precode><g><w>ai</w><wn><w>nei4</w><wk type="cmp" /><w>li3</w></wn><w>you3</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><w>xiao3</w><w>de</w><wn><w>din1</w><wk type="cmp" /><w>shu1</w><wk type="cmp" /><w>qi4</w></wn><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="347"><clause><precode>FA</precode><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="348"><clause><precode>FA</precode><g><w>gen1</w><wn><w>zhi3</w><wk type="cmp" /><w>jia3</w><wk type="cmp" /><w>dao1</w></wn><wn><w>cha4</w><wk type="cmp" /><w>bu4</w><wk type="cmp" /><w>duo1</w></wn><w>da4</w><w>xiao3</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="349"><clause><precode>FA</precode><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="350"><clause><precode>FA</precode><w>xiao3<k type="retracing" /></w><w>xiao3</w><w>de</w><wn><w>din1</w><wk type="cmp" /><w>shu1</w><wk type="cmp" /><w>qi4</w></wn><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>gen1</w><wn><w>zhi3</w><wk type="cmp" /><w>jia3</w><wk type="cmp" /><w>dao1</w></wn><wn><w>cha4</w><wk type="cmp" /><w>bu4</w><wk type="cmp" /><w>duo1</w></wn><w>da4</w><w>xiao3</w><overlap type="overlap precedes" /><t type="p" /></clause></u>
+<u who="MOT" id="351"><clause><precode>FA</precode><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="352"><clause><precode>MOT</precode><w>zan2</w><w>zou3</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>mai3</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><w>qu4</w><overlap type="overlap precedes" /><t type="p" /></clause></u>
+<u who="FAT" id="353"><clause><precode>MOT</precode><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="354"><clause><precode>FA</precode><g><wn><w>zan2</w><wk type="cmp" /><w>men</w></wn><w>mai3</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="355"><clause><precode>FA</precode><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="356"><clause><g><w>zai4</w><w>zher4</w><w>wanr2</w><w>ba</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="FAT" id="357"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="358"><clause><g><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="359"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="360"><clause><g><w>kan4</w><wn><w>zhei4</w><wk type="cmp" /><w>ge</w></wn><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="FAT" id="361"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="362"><clause><g><w>zhei4</w><w>shi4</w><wn><w>ge1</w><wk type="cmp" /><w>ge</w></wn><w>de</w><wn><w>qi4</w><wk type="cmp" /><w>che1</w></wn><w>ya</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="FAT" id="363"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="364"><clause><g><w>xx</w><w>xx</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="FAT" id="365"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="366"><clause><g><w>xx</w><w>xx</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="FAT" id="367"><clause><g><wn><w>ge1</w><wk type="cmp" /><w>ge</w></wn><wn><w>qi4</w><wk type="cmp" /><w>che1</w></wn><w>ya</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="FAT" id="368"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="369"><clause><g><w>ni3</w><w>qi2</w><w>ma</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="370"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="371"><clause><g><w>xx</w><w>xx</w><w>xx</w><w>en<p type="drawl" /></w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="CHI" id="372"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="373"><clause><e type="action"><a type="replacement">music</a></e><pause fluency="fluent" symbolic-length="simple" length="6" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="374"><clause><g><wn><w>qi2</w><wk type="cmp" /><w>che1</w></wn><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="375"><clause><precode>INV</precode><g><w>lu4</w><w>duo2</w><w>chang2</w><wn><w>shi2</w><wk type="cmp" /><w>jian1</w></wn><w>a</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="376"><clause><precode>INV</precode><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="377"><clause><precode>INV</precode><g><w>lu4</w><w>duo2</w><w>chang2</w><wn><w>shi2</w><wk type="cmp" /><w>jian1</w></wn><w>ya</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="378"><clause><precode>INV</precode><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="379"><clause><precode>INV</precode><g><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><wn><w>xiao3</w><wk type="cmp" /><w>shi2</w></wn><w>na</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="380"><clause><precode>INV</precode><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="381"><clause><precode>INV</precode><e type="action" /><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="382"><clause><g><w>ni3</w><w>zhao3</w><wn><w>a1</w><wk type="cmp" /><w>yi2</w></wn><w>a</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="FAT" id="383"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="384"><clause><g><w>xx</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="385"><clause><g><wn><w>a1</w><wk type="cmp" /><w>yi2</w></wn><w>zou3</w><w>le</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="386"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="387"><clause><g><wn><w>a1</w><wk type="cmp" /><w>yi2</w></wn><w>zou3</w><w>le</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="FAT" id="388"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="389"><clause><g><wn><w>a1</w><wk type="cmp" /><w>yi2</w></wn><w>zou3</w><w>le</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="390"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="391"><clause><g><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="392"><clause><g><w>hao3</w><w>ma</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="393"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="394"><clause><g><w>zan2</w><w>tiao4</w><w>wu3</w><w>hao3</w><w>ma</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="395"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="396"><clause><g><w>ni3</w><w>gei3</w><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>shuo1</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><g><w>xiao3</w><w>bai2</w><w>tu4</w><w>bai2</w><w>you4</w><w>bai2</w><k type="quotation" /></g><w>ba</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="397"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="398"><clause><g><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>gei3</w><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>shuo1</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><g><w>xiao3</w><w>bai2</w><w>tu4</w><w>bai2</w><w>you4</w><w>bai2</w><overlap type="overlap follows" /></g><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="399"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="400"><clause><g><w>shuo1</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="401"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="402"><clause><g><w>shuo1</w><w>ya</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="403"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="404"><clause><g><w>kuai4</w><w>dianr3</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="405"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="406"><clause><precode>MOT</precode><g><w>jiu4</w><w>zai4</w><w>zher4</w><w>wanr2</w><w>ba</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="FAT" id="407"><clause><precode>MOT</precode><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="FAT" id="408"><clause><g><wn><w>sa1</w><wk type="cmp" /><w>kai1</w></wn><w>shou3</w><wn><w>zi4</w><wk type="cmp" /><w>ji3</w></wn><wn><w>pao3</w><wk type="cmp" /><w>pao3</w></wn><w>hao3</w><w>ma</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="FAT" id="409"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="410"><clause><precode>FA</precode><g><w>bie2</w><w>pao3</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="411"><clause><precode>FA</precode><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="412"><clause><precode>FA</precode><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="39" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="413"><clause><g><wn><w>zen3</w><wk type="cmp" /><w>me</w></wn><wn><w>pao3</w><wk type="cmp" /><w>hui2</w><wk type="cmp" /><w>lai2</w></wn><w>le</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="414"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="415"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="3" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="416"><clause><w>xxx</w><t type="trail off" /></clause></u>
+<u who="MOT" id="417"><clause><w>wan2</w><w>le</w><w>ao</w><t type="p" /></clause></u>
+<u who="CHI" id="418"><clause><w>wan2</w><w>ne</w><t type="p" /></clause></u>
+<u who="MOT" id="419"><clause><w>wan2</w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="420"><clause><g><w>ren2</w><w>hai2</w><w>dei3</w><w>chang4</w><w>ne</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="CH2" id="421"><clause><g><w>xx</w><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CH2" id="422"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="423"><clause><w>hai2</w><w>chang4</w><w>ne</w><t type="p" /></clause></u>
+<u who="CH2" id="424"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="425"><clause><g><wn><w>yi4</w><wk type="cmp" /><w>huir3</w></wn><w>jiu4</w><w>chang4</w><w>le</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="OFF" id="426"><clause><precode>OC</precode><g><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="427"><clause><w>dui4</w><w>ma</w><t type="p" /></clause></u>
+<u who="CH2" id="428"><clause><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="429"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>chang4</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="430"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>shuo1</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><g><w>xiao3</w><w>bai2</w><w>tu4</w><w>bai2</w><w>you4</w><w>bai2</w><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="CHI" id="431"><clause><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="432"><clause><g><w>xiao3</w><w>bai2</w><w>tu4</w><w>bai2</w><w>you4</w><w>bai2</w><k type="quotation" /></g><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="433"><clause><wn><w>zen3</w><wk type="cmp" /><w>me</w></wn><w>le</w><t type="p" /></clause></u>
+<u who="CH2" id="434"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="CH2" id="435"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="FAT" id="436"><clause><w>kan4</w><w>zhei4</w><wn><w>ge1</w><wk type="cmp" /><w>ge</w></wn><w>qu4</w><t type="p" /></clause></u>
+<u who="FAT" id="437"><clause><g><w>ni3</w><w>zai4</w><w>gan4</w><w>ma2</w><w>ne</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="CH2" id="438"><clause><g><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CH2" id="439"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="FAT" id="440"><clause><g><w>a</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="CH2" id="441"><clause><g><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="442"><clause><w>kan4</w><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>ne</w><t type="p" /></clause></u>
+<u who="MOT" id="443"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="10" /></clause><clause><t type="p" /></clause></u>
+<u who="CH2" id="444"><clause><w>aya</w><w>aya</w><t type="p" /></clause></u>
+<u who="CH2" id="445"><clause><g><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="FAT" id="446"><clause><g><wn><w>hao3</w><wk type="cmp" /><w>wanr2</w></wn><w>ma</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="447"><clause><wn><w>hao4</w><wk type="cmp" /><w>wa2</w><a type="replacement">hao3+wanr2</a><error /></wn><t type="p" /></clause></u>
+<u who="CHI" id="448"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="4" /></clause><clause><t type="p" /></clause></u>
+<u who="FAT" id="449"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>xiang3</w><w>yao4</w><w>ge4</w><w>che1</w><w>ma</w><t type="p" /></clause></u>
+<u who="CHI" id="450"><clause><w>xiang3</w><w>ya4<a type="replacement">yao4</a><error /></w><w>che1</w><t type="p" /></clause></u>
+<u who="FAT" id="451"><clause><w>ni3</w><w>hui4</w><w>qi2</w><w>ma</w><t type="p" /></clause></u>
+<u who="CHI" id="452"><clause><w>hui4</w><w>qi2</w><t type="p" /></clause></u>
+<u who="FAT" id="453"><clause><wn><w>zen3</w><wk type="cmp" /><w>me</w></wn><w>qi2</w><w>de</w><w>ya</w><t type="p" /></clause></u>
+<u who="CHI" id="454"><clause><w>en</w><t type="p" /></clause></u>
+<u who="CHI" id="455"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="3" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="456"><clause><w>ni3</w><wn><w>fa1</w><wk type="cmp" /><w>xian4</w></wn><wn><w>shei2</w><wk type="cmp" /><w>me</w></wn><w>le</w><t type="p" /></clause></u>
+<u who="FAT" id="457"><clause><wn><w>zen3</w><wk type="cmp" /><w>me</w></wn><w>qi2</w><w>che1</w><w>de</w><t type="p" /></clause></u>
+<u who="FAT" id="458"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="4" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="459"><clause><w>ni3</w><w>qu4</w><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="460"><clause><w>zhao3</w><w>xiao3</w><wn><w>peng2</w><wk type="cmp" /><w>you3</w></wn><w>qu4</w><wn><w>wanr2</w><wk type="cmp" /><w>qu4</w></wn><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="461"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="11" /></clause><clause><t type="p" /></clause></u>
+<u who="FAT" id="462"><clause><w>bie2</w><w>zou3</w><w>shui3</w><t type="p" /></clause></u>
+<u who="FAT" id="463"><clause><wn><w>guo4</w><wk type="cmp" /><w>lai2</w></wn><pause fluency="fluent" symbolic-length="simple" /></clause><clause><wn><w>guo4</w><wk type="cmp" /><w>lai2</w></wn><overlap type="overlap follows" /><t type="p" /></clause></u>
+<u who="MOT" id="464"><clause><w>you3</w><w>shui3</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><overlap type="overlap precedes" /><t type="p" /></clause></u>
+<u who="MOT" id="465"><clause><w>heiyou</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><e type="happening">laugh</e><t type="p" /></clause></u>
+<u who="MOT" id="466"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="3" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="467"><clause><w>ni3</w><w>mei2</w><wn><w>kan4</w><wk type="cmp" /><w>dao4</w></wn><w>you3</w><w>shui3</w><t type="p" /></clause></u>
+<u who="MOT" id="468"><clause><w>ni3</w><w>zen3me</w><w>hai2</w><w>zou3</w><w>a</w><t type="p" /></clause></u>
+<u who="CH2" id="469"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="CH2" id="470"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="471"><clause><w>den1</w><w>den1</w><w>den1</w><w>den1</w><w>den1</w><w>den<p type="drawl" />1</w><t type="p" /></clause></u>
+<u who="CH2" id="472"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="CH2" id="473"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="474"><clause><e type="action" /><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="MOT" id="475"><clause><w>en<p type="drawl" /></w><wn><w>hao3</w><wk type="cmp" /><w>wanr2</w></wn><w>ma</w><t type="p" /></clause></u>
+<u who="CHI" id="476"><clause><wn><w>hao3</w><wk type="cmp" /><w>wanr2</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="477"><clause><w>xiao3</w><wn><w>jie3</w><wk type="cmp" /><w>jie</w></wn><w>gan4</w><w>ma2</w><w>ne</w><t type="p" /></clause></u>
+<u who="CHI" id="478"><clause><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="479"><clause><w>xiao3</w><wn><w>jie3</w><wk type="cmp" /><w>jie</w></wn><w>gan4</w><w>ma2</w><w>ne</w><t type="p" /></clause></u>
+<u who="CHI" id="480"><clause><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="481"><clause><w>qi2</w><w>che1</w><w>ne</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>shi4</w><w>me</w><t type="p" /></clause></u>
+<u who="FAT" id="482"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="483"><clause><w>ni3</w><w>ye3</w><w>qu4</w><wn><w>qi2</w><wk type="cmp" /><w>qu4</w></wn><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="484"><clause><w>zou3</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><wn><w>qi2</w><wk type="cmp" /><w>qu4</w></wn><t type="p" /></clause></u>
+<u who="CH2" id="485"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="CH2" id="486"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="CH2" id="487"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="17" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="488"><clause><w>ei</w><t type="p" /></clause></u>
+<u who="MOT" id="489"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="8" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="490"><clause><w>zhe4</w><w>wo3</w><w>le</w><t type="p" /></clause></u>
+<u who="CHI" id="491"><clause><w>zhe4</w><w>wo3</w><w>le</w><t type="p" /></clause></u>
+<u who="CH2" id="492"><clause><w>dai1</w><w>huir3</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>dai1</w><w>huir3</w><w>de</w><t type="p" /></clause></u>
+<u who="CHI" id="493"><clause><precode>OC</precode><g><w>en</w><w>zhe4</w><w>wo3</w><w>le</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="CH2" id="494"><clause><g><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CH2" id="495"><clause><w>na4</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><wn><w>yi4</w><wk type="cmp" /><w>jia1</w></wn><w>nong4</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><w>hao3</w><w>ma</w><t type="p" /></clause></u>
+<u who="CHI" id="496"><clause><precode>OC</precode><w>hao3</w><w>ya</w><t type="p" /></clause></u>
+<u who="CHI" id="497"><clause><precode>OC</precode><w>da1<k type="retracing" /></w><w>da1</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="CH2" id="498"><clause><e type="action" /><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="CHI" id="499"><clause><precode>OC</precode><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="CHI" id="500"><clause><precode>OC</precode><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="CHI" id="501"><clause><precode>OC</precode><w>hai<p type="drawl" /></w><t type="p" /></clause></u>
+<u who="CHI" id="502"><clause><precode>OC</precode><w>ya</w><t type="p" /></clause></u>
+<u who="CHI" id="503"><clause><precode>OC</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="10" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="504"><clause><e type="action" /><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="CHI" id="505"><clause><w>yi<p type="drawl" /></w><t type="p" /></clause></u>
+<u who="MOT" id="506"><clause><w>ei<p type="drawl" /></w><t type="p" /></clause></u>
+<u who="FAT" id="507"><clause><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="CHI" id="508"><clause><w>wo3</w><w>de</w><t type="p" /></clause></u>
+<u who="CHI" id="509"><clause><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="CHI" id="510"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="CHI" id="511"><clause><e type="action" /><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="MOT" id="512"><clause><w>en</w><w>zuo4</w><wn><w>san1</w><wk type="cmp" /><w>ge</w></wn><w>a</w><t type="p" /></clause></u>
+<u who="CH2" id="513"><clause><g><w>xx</w><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="CHI" id="514"><clause><precode>OC</precode><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="OFF" id="515"><clause><w>xx</w><w>xx</w><w>xx</w><w>kuai4</w><w>yao4</w><wn><w>ya1</w><wk type="cmp" /><w>huai4</w></wn><w>le</w><t type="p" /></clause></u>
+<u who="OFF" id="516"><clause><g><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="CH2" id="517"><clause><precode>OFF</precode><g><w>xx</w><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CH2" id="518"><clause><precode>OFF</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="20" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="519"><clause><w>en</w><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="520"><clause><w>you3</w><w>shui3</w><t type="p" /></clause></u>
+<u who="CH2" id="521"><clause><w>wo3</w><w>yao4</w><wn><w>yi4</w><wk type="cmp" /><w>zhi2</w></wn><w>tui1</w><t type="p" /></clause></u>
+<u who="CH2" id="522"><clause><w>bu4</w><w>guan3</w><w>zen3me</w><w>zhao</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>wo3</w><w>dei3</w><wn><w>yi4</w><wk type="cmp" /><w>zhi2</w></wn><w>tui1</w><t type="p" /></clause></u>
+<u who="CH2" id="523"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="CH2" id="524"><clause><w>aiya<p type="drawl" /></w><e type="happening">laugh</e><t type="p" /></clause></u>
+<u who="CH2" id="525"><clause><w>mo1</w><wn><w>pi4</w><wk type="cmp" /><w>gu</w></wn><t type="p" /></clause></u>
+<u who="CH2" id="526"><clause><e type="action" /><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="CH2" id="527"><clause><w>aiyo</w><w>zhei4</w><w>gou4</w><w>hen3</w><w>de</w><w>ya</w><t type="p" /></clause></u>
+<u who="CH2" id="528"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="CH2" id="529"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="530"><clause><w>qu4</w><wn><w>zi4</w><wk type="cmp" /><w>ji3</w></wn><wn><w>zhui</w><wk type="cmp" /><w>qu4</w></wn><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="531"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="6" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="532"><clause><wn><w>zhui</w><wk type="cmp" /><w>qu4</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="533"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="4" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="534"><clause><e type="action" /><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="MOT" id="535"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="40" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="536"><clause><precode>FA</precode><w>zou3</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>zan2</w><w>shang4</w><wn><w>nei4</w><wk type="cmp" /><w>bianr1</w></wn><w>qu4</w><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="537"><clause><precode>FA</precode><w>shang4</w><wn><w>nei4</w><wk type="cmp" /><w>bianr1</w></wn><w>qu4</w><t type="p" /></clause></u>
+<u who="MOT" id="538"><clause><precode>FA</precode><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="539"><clause><precode>FA</precode><w>bu2</w><w>zai4</w><w>zher4</w><w>la</w><t type="p" /></clause></u>
+<u who="FAT" id="540"><clause><precode>MOT</precode><w>xing2</w><w>a</w><t type="p" /></clause></u>
+<u who="FAT" id="541"><clause><precode>MOT</precode><w>wang3</w><wn><w>nei4</w><wk type="cmp" /><w>bianr1</w></wn><wn><w>zou3</w><wk type="cmp" /><w>zou3</w></wn><w>ye3</w><w>xing2</w><t type="p" /></clause></u>
+<u who="FAT" id="542"><clause><precode>MOT</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="8" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="543"><clause><g><w>ei</w><wn><w>bing1</w><wk type="cmp" /><w>bing<p type="drawl" />1</w></wn><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="544"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="545"><clause><e type="action" /><t type="p" /><a type="comments">the 2. side of tape</a></clause></u>
+<u who="MOT" id="546"><clause><w>zhei4</w><w>jiao4</w><w>tui1</w><t type="p" /></clause></u>
+<u who="MOT" id="547"><clause><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="548"><clause><g><w>nar3</w><w>qu4</w><w>le</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="549"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="550"><clause><w>bie2</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>ni3</w><w>bie2</w><w>zhuang4</w><w>zhe</w><overlap type="overlap follows" /><t type="p" /></clause></u>
+<u who="MOT" id="551"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="552"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="OFF" id="553"><clause><g><e type="action" /><overlap type="overlap precedes" /></g><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="OFF" id="554"><clause><g><w>xx</w><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="OFF" id="555"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="OFF" id="556"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="3" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="557"><clause><g><w>zou3</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="558"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="559"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="5" /></clause><clause><t type="p" /></clause></u>
+<u who="FAT" id="560"><clause><precode>MOT</precode><g><w>kan4</w><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>ya</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="FAT" id="561"><clause><precode>MOT</precode><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="562"><clause><precode>FA</precode><g><w>kan4</w><wn><w>nei4</w><wk type="cmp" /><w>ge</w></wn><wn><w>xiao3</w><wk type="cmp" /><w>hair2</w></wn><w>zai4</w><w>nar4</w><w>ye3</w><w>bei1</w><wn><w>zhei4</w><wk type="cmp" /><w>ge</w></wn><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="563"><clause><precode>FA</precode><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="564"><clause><precode>FA</precode><w>ta1</w><w>ye3</w><w>bei1</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>ta1</w><w>ye3</w><w>bei1</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><e type="happening">laugh</e><overlap type="overlap precedes" /><t type="p" /></clause></u>
+<u who="MOT" id="565"><clause><precode>FA</precode><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="566"><clause><precode>FA</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="11" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="567"><clause><g><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>ta1</w><w>shuo1</w><w>de</w><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>ya</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="568"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="569"><clause><g><w>bu2</w><w>shi4</w><w>zhei4</w><w>ge1</w><w>chang4</w><w>de</w><w>shi4</w><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>ya</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="570"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="571"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="7" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="572"><clause><g><w>ma1<k type="retracing" /></w><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>tiao4</w><w>ba</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="573"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="574"><clause><g><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>tiao4</w><w>ba</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="575"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="576"><clause><g><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>tiao4</w><w>bu4</w><w>xx</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="577"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="578"><clause><g><w>a</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="579"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="580"><clause><g><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>tiao4</w><w>ba</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="581"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="582"><clause><g><w>a</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="583"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="584"><clause><g><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>tiao4</w><w>ba</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="585"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="586"><clause><g><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>tiao4</w><w>ba</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="587"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="588"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="21" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="589"><clause><g><w>a</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="590"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="591"><clause><g><w>gan4</w><w>ma2</w><w>qu4</w><w>a</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="592"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="593"><clause><g><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="594"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="CHI" id="595"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="9" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="596"><clause><g><w>xx</w><w>xx</w><w>shang4</w><wn><w>nei4</w><wk type="cmp" /><w>bianr1</w></wn><w>qu4</w><w>ba</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="597"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="598"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="21" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="599"><clause><g><w>deng<p type="drawl" />4</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="600"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="601"><clause><e type="action"><a type="paralinguistics">music</a></e><pause fluency="fluent" symbolic-length="simple" length="8" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="602"><clause><g><w>en</w><w>hen</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="MOT" id="603"><clause><g><e type="action" /><overlap type="overlap follows" /></g><t type="p" /><a type="comments">music</a></clause></u>
+<u who="MOT" id="604"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="3" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="605"><clause><w>he1</w><w>shui3</w><w>ma</w><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="606"><clause><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="607"><clause><w>he1</w><w>bu4</w><w>he1</w><w>shui3</w><t type="p" /></clause></u>
+<u who="CHI" id="608"><clause><w>yi</w><t type="p" /></clause></u>
+<u who="MOT" id="609"><clause><w>a</w><t type="p" /></clause></u>
+<u who="CHI" id="610"><clause><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="611"><clause><w>he1</w><w>shui3</w><w>ma</w><t type="p" /></clause></u>
+<u who="CHI" id="612"><clause><w>he1</w><w>shui<p type="drawl" />3</w><t type="p" /></clause></u>
+<u who="MOT" id="613"><clause><w>he1</w><w>shui3</w><t type="p" /></clause></u>
+<u who="MOT" id="614"><clause><w>he1</w><w>dianr3</w><w>shui3</w><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="615"><clause><precode>FA</precode><w>gei3</w><w>ren2</w><w>he1</w><w>dianr3</w><w>shui3</w><t type="p" /></clause></u>
+<u who="FAT" id="616"><clause><w>bu4</w><w>gei3</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="617"><clause><precode>FA</precode><w>he1</w><t type="p" /></clause></u>
+<u who="CHI" id="618"><clause><w>bu4</w><w>gei3</w><t type="p" /></clause></u>
+<u who="FAT" id="619"><clause><w>rang4</w><wn><w>da4</w><wk type="cmp" /><w>ren2</w></wn><w>he1</w><t type="p" /></clause></u>
+<u who="MOT" id="620"><clause><precode>FA</precode><w>aiyo</w><w>bu4</w><w>bu4</w><t type="p" /></clause></u>
+<u who="MOT" id="621"><clause><precode>FA</precode><w>xx</w><w>xx</w><w>he1</w><t type="p" /></clause></u>
+<u who="CHI" id="622"><clause><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="623"><clause><w>bao4</w><w>zhe</w><w>he1</w><w>hao3</w><w>ma</w><t type="p" /></clause></u>
+<u who="FAT" id="624"><clause><w>he1</w><w>shui3</w><w>ma</w><t type="p" /></clause></u>
+<u who="CHI" id="625"><clause><w>an</w><w>ao</w><t type="p" /></clause></u>
+<u who="FAT" id="626"><clause><w>he1</w><w>ma</w><t type="p" /></clause></u>
+<u who="CHI" id="627"><clause><w>he1</w><t type="p" /></clause></u>
+<u who="FAT" id="628"><clause><w>a</w><t type="p" /></clause></u>
+<u who="FAT" id="629"><clause><g><w>he1</w><w>bu4</w><w>he1</w><w>a</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="630"><clause><g><w>he1</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="631"><clause><precode>FA</precode><g><w>he1</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="632"><clause><g><w>he1</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="CHI" id="633"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="2" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="634"><clause><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="635"><clause><wn><w>hao3</w><wk type="cmp" /><w>he1</w></wn><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="636"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="6" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="637"><clause><wn><w>zi4</w><wk type="cmp" /><w>ji3</w></wn><w>bao4</w><w>zhe</w><t type="p" /></clause></u>
+<u who="MOT" id="638"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="50" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="639"><clause><e type="action" /><t type="p" /><a type="comments">cough</a></clause></u>
+<u who="CHI" id="640"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="9" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="641"><clause><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="642"><clause><wn><w>zi4</w><wk type="cmp" /><w>ji3</w></wn><w>na2</w><w>zhe</w><t type="p" /></clause></u>
+<u who="MOT" id="643"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="48" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="644"><clause><w>aiyo</w><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>lei4</w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="645"><clause><w>ni3</w><wn><w>zi4</w><wk type="cmp" /><w>ji3</w></wn><w>bao4</w><w>zhe</w><t type="p" /></clause></u>
+<u who="MOT" id="646"><clause><wn><w>zi4</w><wk type="cmp" /><w>ji3</w></wn><wn><w>bao4</w><wk type="cmp" /><w>hao3</w></wn><w>le</w><w>ao</w><t type="p" /></clause></u>
+<u who="FAT" id="647"><clause><precode>MOT</precode><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="648"><clause><precode>FA</precode><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="649"><clause><precode>FA</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="41" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="650"><clause><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="651"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>shuo1</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><g><w>xiao3</w><w>bai2</w><w>tu4</w><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="652"><clause><w>ni3</w><w>shuo1</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="653"><clause><w>ni3</w><w>shuo1</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><g><w>xiao3</w><wn><w>hao4</w><wk type="cmp" /><w>zi</w></wn><w>shang4</w><wn><w>deng1</w><wk type="cmp" /><w>tai2</w></wn><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="654"><clause><g><w>xiao3</w><w>bai2</w><w>tu4</w><w>bai2</w><w>you4</w><w>bai2</w><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="655"><clause><g><w>liang3</w><w>zhi1</w><wn><w>er3</w><wk type="cmp" /><w>duo1</w></wn><w>shu4</w><w>qi3</w><w>lai2</w><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="CHI" id="656"><clause><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="657"><clause><g><w>ai4</w><w>chi1</w><wn><w>luo2</w><wk type="cmp" /><w>bo</w></wn><w>ai4</w><w>chi1</w><w>cai4</w><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="658"><clause><g><w>beng4</w><w>beng4</w><w>tiao4</w><w>tiao4</w><w>zhen1</w><wn><w>ke3</w><wk type="cmp" /><w>ai4</w></wn><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="659"><clause><w>dui4</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="660"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="9" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="661"><clause><w>da4</w><wn><w>gao1</w><wk type="cmp" /><w>lou2</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="662"><clause><w>shi4</w><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="663"><clause><w>gao1</w><w>you4</w><w>gao1</w><e type="happening">laugh</e><t type="p" /></clause></u>
+<u who="MOT" id="664"><clause><w>dui4</w><w>bu2</w><w>dui4</w><t type="p" /></clause></u>
+<u who="MOT" id="665"><clause><w>xiao3</w><wn><w>gu1</w><wk type="cmp" /><w>gu<p type="drawl" />1</w></wn><w>zhe4</w><w>hao3</w><wn><w>bao3</w><wk type="cmp" /><w>bao3</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="666"><clause><w>en</w><t type="p" /></clause></u>
+<u who="CHI" id="667"><clause><w>en</w><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="668"><clause><w>en</w><w>hao3</w><wn><w>guai1</w><wk type="cmp" /><w>guai1</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="669"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="6" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="670"><clause><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="CHI" id="671"><clause><wn><w>ba4</w><wk type="cmp" /><w>ba</w></wn><w>ne</w><t type="p" /></clause></u>
+<u who="MOT" id="672"><clause><wn><w>ba4</w><wk type="cmp" /><w>ba</w></wn><w>zai4</w><wn><w>hou4</w><wk type="cmp" /><w>tou</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="673"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="4" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="674"><clause><wn><w>ba4</w><wk type="cmp" /><w>ba</w></wn><w>ne</w><t type="p" /></clause></u>
+<u who="CHI" id="675"><clause><wn><w>ba4</w><wk type="cmp" /><w>ba</w></wn><w>ne</w><t type="p" /></clause></u>
+<u who="CHI" id="676"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="16" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="677"><clause><wn><w>zi4</w><wk type="cmp" /><w>ji3</w></wn><w>bao4</w><w>zhe</w><t type="p" /></clause></u>
+<u who="MOT" id="678"><clause><w>bao4</w><w>zhe</w><w>ao</w><t type="p" /></clause></u>
+<u who="MOT" id="679"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="4" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="680"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="681"><clause><precode>OFF</precode><wn><w>cheng2</w><wk type="cmp" /><w>jian4</w><wk type="cmp" /><w>san1</w><wk type="cmp" /><w>gong1</w><wk type="cmp" /><w>si1</w></wn><wn><w>xia4</w><wk type="cmp" /><w>lai2</w></wn><w>yao4</w><wn><w>gong1</w><wk type="cmp" /><w>qu1</w></wn><w>de</w><t type="p" /></clause></u>
+<u who="OFF" id="682"><clause><precode>MOT</precode><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="OFF" id="683"><clause><precode>MOT</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="34" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="684"><clause><w>deng3</w><w>huir3</w><w>zai4</w><w>he1</w><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="685"><clause><w>xing2</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="686"><clause><w>hai2</w><w>he1</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="687"><clause><w>ao</w><w>hai2</w><w>you3</w><wn><w>nen4</w><wk type="cmp" /><w>me</w></wn><w>duo1</w><w>ne</w><t type="p" /></clause></u>
+<u who="MOT" id="688"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="3" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="689"><clause><w>hai2</w><w>he1</w><w>bu4</w><w>he1</w><w>ya</w><t type="p" /></clause></u>
+<u who="CHI" id="690"><clause><w>hai2</w><w>he2<a type="replacement">he1</a><error /></w><t type="p" /></clause></u>
+<u who="MOT" id="691"><clause><w>hai2</w><w>he1</w><w>ya</w><t type="p" /></clause></u>
+<u who="MOT" id="692"><clause><w>he1</w><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="693"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="2" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="694"><clause><wn><w>zi4</w><wk type="cmp" /><w>ji3</w></wn><w>bao4</w><w>zhe</w><t type="p" /></clause></u>
+<u who="MOT" id="695"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="5" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="696"><clause><w>bao4</w><w>zhe</w><w>ya</w><t type="p" /></clause></u>
+<u who="MOT" id="697"><clause><w>tai2</w><w>gao1</w><w>dianr3</w><t type="p" /></clause></u>
+<u who="MOT" id="698"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="6" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="699"><clause><w>mei2</w><wn><w>he1</w><wk type="cmp" /><w>zhao2</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="700"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="10" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="701"><clause><g><wn><w>xia4</w><wk type="cmp" /><w>lai2</w></wn><overlap type="overlap precedes" /></g><w>dai1</w><w>huir3</w><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="702"><clause><wn><w>xia4</w><wk type="cmp" /><w>lai2</w></wn><w>zou3</w><w>huir3</w><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="703"><clause><w>beng2</w><w>he1</w><w>le</w><t type="p" /></clause></u>
+<u who="CHI" id="704"><clause><g><w>en<p type="drawl" /></w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="705"><clause><w>en</w><t type="p" /></clause></u>
+<u who="CHI" id="706"><clause><w>en<p type="drawl" /></w><t type="p" /></clause></u>
+<u who="CHI" id="707"><clause><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="708"><clause><w>lai4</w><w>zai4</w><w>wo3</w><w>shen1</w><w>shang4</w><w>le</w><t type="p" /></clause></u>
+<u who="CHI" id="709"><clause><w>en<p type="drawl" /></w><t type="p" /></clause></u>
+<u who="FAT" id="710"><clause><w>hai2</w><w>he1</w><w>ma</w><t type="p" /></clause></u>
+<u who="CHI" id="711"><clause><w>ehen</w><w>en</w><e type="happening">cry</e><t type="p" /></clause></u>
+<u who="FAT" id="712"><clause><w>hai2</w><w>he1</w><w>a</w><t type="p" /></clause></u>
+<u who="CHI" id="713"><clause><w>en</w><t type="p" /></clause></u>
+<u who="CHI" id="714"><clause><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>wei4</w><t type="p" /></clause></u>
+<u who="FAT" id="715"><clause><w>ao</w><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>wei4</w><t type="p" /></clause></u>
+<u who="MOT" id="716"><clause><w>wo3</w><w>zhei4</w><wn><w>yi4</w><wk type="cmp" /><w>zhi1</w></wn><w>shou3</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>bao4</w><w>zhe</w><w>ni3</w><t type="p" /></clause></u>
+<u who="MOT" id="717"><clause><wn><w>yi4</w><wk type="cmp" /><w>zhi1</w></wn><w>shou3</w><w>wei4</w><w>tai4</w><w>lei4</w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="718"><clause><e type="action" /><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="FAT" id="719"><clause><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="FAT" id="720"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="9" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="721"><clause><w>wo3</w><w>he<p type="drawl" />1</w><e type="happening">laugh</e><t type="p" /></clause></u>
+<u who="MOT" id="722"><clause><wn><w>zi4</w><wk type="cmp" /><w>ji3</w></wn><w>bao4</w><w>zhe</w><t type="p" /></clause></u>
+<u who="MOT" id="723"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="3" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="724"><clause><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="725"><clause><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="726"><clause><wn><w>zhei4</w><wk type="cmp" /><w>yang4</w></wn><w>na2</w><t type="p" /></clause></u>
+<u who="MOT" id="727"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="15" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="728"><clause><w>ni4</w><wn><w>kan4</w><wk type="cmp" /><w>jian4</w></wn><w>tian1</w><w>shang4</w><w>de</w><wn><w>xing1</w><wk type="cmp" /><w>xing1</w></wn><w>le</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="729"><clause><w>e</w><t type="p" /></clause></u>
+<u who="MOT" id="730"><clause><wn><w>kan4</w><wk type="cmp" /><w>jian4</w></wn><w>le</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="731"><clause><w>aiyo</w><t type="p" /></clause></u>
+<u who="MOT" id="732"><clause><wn><w>kan4</w><wk type="cmp" /><w>jian4</w></wn><w>lema</w><t type="p" /></clause></u>
+<u who="MOT" id="733"><clause><w>a</w><w>you3</w><wn><w>xing1</w><wk type="cmp" /><w>xing1</w></wn><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="734"><clause><w>you3</w><w>mei2</w><w>you3</w><w>a</w><t type="p" /></clause></u>
+<u who="CHI" id="735"><clause><w>you3</w><t type="p" /></clause></u>
+<u who="MOT" id="736"><clause><w>you3</w><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="737"><clause><w>you3</w><wn><w>ji3</w><wk type="cmp" /><w>ge</w></wn><w>ya</w><t type="p" /></clause></u>
+<u who="MOT" id="738"><clause><wn><w>shu3</w><wk type="cmp" /><w>shu3</w></wn><t type="p" /></clause></u>
+<u who="CHI" id="739"><clause><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="740"><clause><wn><w>shu3</w><wk type="cmp" /><w>shu3</w></wn><w>you3</w><wn><w>ji3</w><wk type="cmp" /><w>ge</w></wn><w>ya</w><t type="p" /></clause></u>
+<u who="CHI" id="741"><clause><wn><w>zin1</w><wk type="cmp" /><w>ge</w><a type="replacement">san1+ge</a><error /></wn><t type="p" /></clause></u>
+<u who="MOT" id="742"><clause><w>san1</w><w>ge</w><w>ya</w><w>cai2</w><t type="p" /></clause></u>
+<u who="MOT" id="743"><clause><w>zai4</w><wn><w>shu3</w><wk type="cmp" /><w>shu3</w></wn><t type="p" /></clause></u>
+<u who="CHI" id="744"><clause><wn><w>zin1</w><wk type="cmp" /><w>ge</w><a type="replacement">san1+ge</a><error /></wn><t type="p" /></clause></u>
+<u who="MOT" id="745"><clause><w>hai2</w><wn><w>san1</w><wk type="cmp" /><w>ge</w></wn><w>ya</w><t type="p" /></clause></u>
+<u who="UNC" id="746"><clause><w>ai<p type="drawl" /></w><t type="p" /></clause></u>
+<u who="MOT" id="747"><clause><w>zai4</w><wn><w>shu3</w><wk type="cmp" /><w>shu3</w></wn><t type="p" /></clause></u>
+<u who="CHI" id="748"><clause><w>zin1<a type="replacement">san1</a><error /></w><t type="p" /></clause></u>
+<u who="MOT" id="749"><clause><w>yi<p type="drawl" />1</w><w>er4</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>san<p type="drawl" />1</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>si4</w><t type="p" /></clause></u>
+<u who="MOT" id="750"><clause><w>hai2</w><w>you3</w><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>ya</w><t type="p" /></clause></u>
+<u who="MOT" id="751"><clause><w>wu3</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>wu3</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>liu4</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>qi1</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>ba1</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>jiu3</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>shi2</w><pause fluency="fluent" symbolic-length="long" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="752"><clause><w>xiao3</w><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="753"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="4" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="754"><clause><w>lai2</w><w>shuo1</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><g><w>xiao3</w><w>bai2</w><w>tu4</w><w>bai2</w><w>you4</w><w>bai2</w><k type="quotation" /></g><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="755"><clause><w>shuo1</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="756"><clause><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="757"><clause><w>shuo1</w><w>bu4</w><w>shuo1</w><w>ya</w><t type="p" /></clause></u>
+<u who="MOT" id="758"><clause><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="759"><clause><w>xiao3<k type="retracing" /></w><w>shuo1</w><wn><w>yi2</w><wk type="cmp" /><w>ge</w></wn><g><w>xiao3</w><wn><w>hao4</w><wk type="cmp" /><w>zi</w></wn><k type="quotation" /></g><w>ao</w><t type="p" /></clause></u>
+<u who="MOT" id="760"><clause><g><w>xiao3</w><wn><w>hao4</w><wk type="cmp" /><w>zi</w></wn><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="761"><clause><g><w>shang4</w><wn><w>deng1</w><wk type="cmp" /><w>tai2</w></wn><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="762"><clause><g><w>tou1</w><w>you2</w><w>chi1</w><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="763"><clause><g><w>xia4</w><w>bu4</w><w>lai2</w><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="764"><clause><g><w>zhir1</w><w>zhir1</w><w>jiao4</w><wn><w>nai3</w><wk type="cmp" /><w>nai</w></wn><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="765"><clause><g><wn><w>nai3</w><wk type="cmp" /><w>nai</w></wn><w>bu4</w><w>lai2</w><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="766"><clause><e type="action" /><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="MOT" id="767"><clause><w>dui4</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="768"><clause><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="769"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="5" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="770"><clause><wn><w>xia4</w><wk type="cmp" /><w>lai2</w></wn><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="771"><clause><wn><w>zi4</w><wk type="cmp" /><w>ji3</w></wn><w>zou3</w><w>huir3</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>xing2</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="772"><clause><w>en</w><t type="p" /></clause></u>
+<u who="CHI" id="773"><clause><w>en<p type="drawl" /></w><t type="p" /></clause></u>
+<u who="MOT" id="774"><clause><w>bu4</w><w>zou3</w><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="775"><clause><w>zou3</w><w>bu4</w><w>zou3</w><t type="p" /></clause></u>
+<u who="CHI" id="776"><clause><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="777"><clause><w>zou</w><t type="p" /></clause></u>
+<u who="CHI" id="778"><clause><w>bu4</w><w>zhou3<a type="replacement">zou3</a><error /></w><t type="p" /></clause></u>
+<u who="MOT" id="779"><clause><w>bu4</w><w>zou3</w><w>a</w><t type="p" /></clause></u>
+<u who="CHI" id="780"><clause><w>bu4</w><w>jiang3</w><t type="p" /></clause></u>
+<u who="MOT" id="781"><clause><w>na4</w><w>zen3me</w><w>ban4</w><w>ne</w><t type="p" /></clause></u>
+<u who="MOT" id="782"><clause><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="783"><clause><w>na4</w><w>zen3me</w><w>ban4</w><w>ne</w><t type="p" /></clause></u>
+<u who="FAT" id="784"><clause><w>ku1</w><w>ya</w><t type="p" /></clause></u>
+<u who="MOT" id="785"><clause><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="786"><clause><w>na4</w><w>zen3me</w><w>ban4</w><w>ne</w><t type="p" /></clause></u>
+<u who="MOT" id="787"><clause><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="788"><clause><w>na4</w><w>zen3me</w><w>ban4</w><w>ne</w><t type="p" /></clause></u>
+<u who="MOT" id="789"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="2" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="790"><clause><w>jiu3</w><w>dei3</w><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>bao4</w><w>zhe</w><t type="p" /></clause></u>
+<u who="MOT" id="791"><clause><w>dui4</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="792"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="39" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="793"><clause><precode>FA</precode><w>wang3</w><w>hui2</w><w>zou3</w><w>ba</w><t type="p" /></clause></u>
+<u who="FAT" id="794"><clause><precode>MOT</precode><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="795"><clause><precode>FA</precode><w>wang3</w><w>hui2</w><w>zou3</w><w>ba</w><t type="p" /></clause></u>
+<u who="FAT" id="796"><clause><precode>MOT</precode><w>na4</w><w>xing2</w><t type="p" /></clause></u>
+<u who="FAT" id="797"><clause><precode>MOT</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="2" /></clause><clause><t type="p" /></clause></u>
+<u who="FAT" id="798"><clause><precode>MOT</precode><w>zen3me</w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="799"><clause><precode>FA</precode><w>he1</w><w>shui3</w><w>ne</w><t type="p" /></clause></u>
+<u who="FAT" id="800"><clause><precode>MOT</precode><w>mei2</w><w>you3</w><wn><w>bi4</w><wk type="cmp" /><w>yao4</w></wn><w>he1</w><w>shui3</w><t type="p" /></clause></u>
+<u who="FAT" id="801"><clause><precode>MOT</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="5" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="802"><clause><w>hai2</w><w>he1</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="803"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="15" /></clause><clause><t type="p" /></clause></u>
+<u who="FAT" id="804"><clause><precode>MOT</precode><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="FAT" id="805"><clause><precode>MOT</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="5" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="806"><clause><e type="action" /><t type="p" /><a type="comments">sing</a></clause></u>
+<u who="MOT" id="807"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>zou3</w><w>zhei4</w><w>shang4</w><w>hao3</w><w>bu4</w><w>hao3</w><t type="p" /></clause></u>
+<u who="MOT" id="808"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="4" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="809"><clause><w>hai2</w><w>dei3</w><w>deng3</w><wn><w>yi4</w><wk type="cmp" /><w>huir3</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="810"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="4" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="811"><clause><w>yi4</w><w>er3</w><w>yi4</w><t type="p" /></clause></u>
+<u who="MOT" id="812"><clause><w>yi4</w><w>er3</w><w>yi4</w><t type="p" /></clause></u>
+<u who="MOT" id="813"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="4" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="814"><clause><w>aiyo</w><w>dou1</w><w>kuai4</w><w>gen1</w><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><wn><w>yi4</w><wk type="cmp" /><w>bianr1</w></wn><w>gao1</w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="815"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>zhan4</w><w>zhei4</w><w>shang4</w><t type="p" /></clause></u>
+<u who="MOT" id="816"><clause><w>shi4</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="817"><clause><wn><w>bi3</w><wk type="cmp" /><w>bi3</w></wn><w>ge4</w><t type="p" /></clause></u>
+<u who="MOT" id="818"><clause><w>gen1</w><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><wn><w>bi3</w><wk type="cmp" /><w>bi3</w></wn><w>ge4</w><t type="p" /></clause></u>
+<u who="MOT" id="819"><clause><w>dao4</w><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>nar3</w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="820"><clause><w>dao4</w><w>zher4</w><t type="p" /></clause></u>
+<u who="MOT" id="821"><clause><w>dao4</w><w>zher4</w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="822"><clause><w>shi4</w><w>bu2</w><w>shi4</w><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="823"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="7" /></clause><clause><t type="p" /></clause></u>
+<u who="CHI" id="824"><clause><w>ge1</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="825"><clause><w>aiya</w><t type="p" /></clause></u>
+<u who="MOT" id="826"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="5" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="827"><clause><wn><w>xia4</w><wk type="cmp" /><w>lai2</w></wn><w>zou3</w><t type="p" /></clause></u>
+<u who="MOT" id="828"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="8" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="829"><clause><w>nei4</w><w>shi4</w><w>cao3</w><t type="p" /></clause></u>
+<u who="MOT" id="830"><clause><w>cai3</w><w>ma</w><t type="p" /></clause></u>
+<u who="CHI" id="831"><clause><w>cei3<a type="replacement">cai3</a><error /></w><t type="p" /></clause></u>
+<u who="MOT" id="832"><clause><w>a</w><t type="p" /></clause></u>
+<u who="CHI" id="833"><clause><w>cei3<a type="replacement">cai3</a><error /></w><w>ba</w><t type="p" /></clause></u>
+<u who="MOT" id="834"><clause><w>cai3</w><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="835"><clause><w>bu4</w><w>cai3</w><t type="p" /></clause></u>
+<u who="MOT" id="836"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="12" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="837"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>ni3</w><w>chang4</w><g><w>xiao3</w><wn><w>xing1</w><wk type="cmp" /><w>xing<p type="drawl" />1</w></wn><w>ni3</w><w>hao3</w><w>ya<a type="paralinguistics">sing</a></w><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="838"><clause><g><w>ni3</w><wn><w>jin1</w><wk type="cmp" /><w>nian2</w></wn><w>ji3</w><w>sui4</w><w>le</w><a type="paralinguistics">sing</a></g><t type="q" /></clause></u>
+<u who="MOT" id="839"><clause><g><w>ni3</w><w>li2</w><w>wo3</w><w>men</w><w>you3</w><w>duo2</w><w>yuan3<a type="paralinguistics">sing</a></w><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="840"><clause><g><w>ni3</w><w>na4</w><wn><w>shang4</w><wk type="cmp" /><w>mian4</w></wn><w>dou1</w><w>you3</w><w>sha2</w><k type="quotation" /><a type="paralinguistics">sing</a></g><t type="q" /></clause></u>
+<u who="MOT" id="841"><clause><g><w>ni3</w><w>li2</w><w>wo3</w><w>men</w><w>you3</w><w>duo2</w><w>yuan3<a type="paralinguistics">sing</a></w><k type="quotation" /></g><t type="p" /></clause></u>
+<u who="MOT" id="842"><clause><g><w>ni3</w><w>na4</w><wn><w>shang4</w><wk type="cmp" /><w>mian4</w></wn><w>dou1</w><w>you3</w><w>sha2</w><k type="quotation" /><a type="paralinguistics">sing</a></g><t type="q" /></clause></u>
+<u who="MOT" id="843"><clause><w>dui4</w><w>bu2</w><w>dui4</w><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="844"><clause><w>ni3</w><w>hui4</w><w>chang4</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="845"><clause><w>hui4</w><w>bu2</w><w>hui4</w><w>chang4</w><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="846"><clause><w>bu4</w><w>shuo1</w><w>hua4</w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="847"><clause><w>a</w><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="848"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>zen3me</w><w>bu4</w><w>shuo1</w><w>hua4</w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="849"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="37" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="850"><clause><w>eiyi<p type="drawl" /></w><wn><w>shang4</w><wk type="cmp" /><w>lai2</w></wn><w>le</w><pause fluency="fluent" symbolic-length="long" /></clause><clause><t type="p" /></clause></u>
+<u who="FAT" id="851"><clause><precode>MOT</precode><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><w>xx</w><t type="p" /></clause></u>
+<u who="MOT" id="852"><clause><precode>FA</precode><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="853"><clause><precode>FA</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="53" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="854"><clause><e type="action" /><t type="p" /><a type="comments">sing</a></clause></u>
+<u who="MOT" id="855"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="8" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="856"><clause><w>zhei4</w><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>che1</w><w>ya</w><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="857"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="2" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="858"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="859"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="860"><clause><w>wan2</w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="861"><clause><w>ni3</w><w>kan4</w><w>zhei4</w><wn><w>shen2</w><wk type="cmp" /><w>me</w></wn><w>che1</w><w>ya</w><t type="p" /></clause></u>
+<u who="MOT" id="862"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="2" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="863"><clause><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="864"><clause><w>ni3</w><w>shang4</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="865"><clause><w>shang4</w><w>bu2</w><w>shang4</w><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="866"><clause><wn><w>shang4</w><wk type="cmp" /><w>shang4</w></wn><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="867"><clause><w>zou3</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><wn><w>ma1</w><wk type="cmp" /><w>ma</w></wn><w>dai4</w><w>ni3</w><w>qu4</w><t type="p" /></clause></u>
+<u who="MOT" id="868"><clause><w>xing2</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="869"><clause><w>zuo4</w><w>da4</w><wn><w>qi4</w><wk type="cmp" /><w>che1</w></wn><w>qu4</w><t type="p" /></clause></u>
+<u who="MOT" id="870"><clause><w>xing2</w><w>ma</w><t type="p" /></clause></u>
+<u who="MOT" id="871"><clause><g><w>xing2</w><overlap type="overlap precedes" /></g><t type="p" /></clause></u>
+<u who="CHI" id="872"><clause><g><w>xx</w><overlap type="overlap follows" /></g><t type="p" /></clause></u>
+<u who="MOT" id="873"><clause><w>a</w><t type="p" /></clause></u>
+<u who="CHI" id="874"><clause><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="875"><clause><w>xing2</w><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="876"><clause><w>zou3</w><t type="p" /></clause></u>
+<u who="MOT" id="877"><clause><w>you</w><w>ta1</w><w>zen3me</w><wn><w>kai1</w><wk type="cmp" /><w>pao3</w></wn><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="878"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>hai2</w><w>mei2</w><w>shang4</w><w>ne</w><w>jiu4</w><wn><w>kai1</w><wk type="cmp" /><w>pao3</w></wn><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="879"><clause><e type="action" /><t type="p" /><a type="comments">laugh</a></clause></u>
+<u who="MOT" id="880"><clause><w>a</w><t type="p" /></clause></u>
+<u who="CHI" id="881"><clause><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="882"><clause><wn><w>zen3</w><wk type="cmp" /><w>me</w></wn><w>hui2</w><w>shir4</w><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="883"><clause><w>ta1</w><w>zen3me</w><w>bu4</w><w>deng3</w><w>zhe</w><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="884"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="2" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="885"><clause><w>mei2</w><w>deng3</w><w>zhe</w><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>ne</w><t type="p" /></clause></u>
+<u who="MOT" id="886"><clause><w>wo3</w><w>shuo1</w><w>nei4</w><w>da4</w><wn><w>qi4</w><wk type="cmp" /><w>che1</w></wn><w>ya</w><t type="p" /></clause></u>
+<u who="MOT" id="887"><clause><wn><w>zen3</w><wk type="cmp" /><w>me</w></wn><w>mei2</w><w>deng3</w><w>zhe</w><wn><w>bing1</w><wk type="cmp" /><w>bing</w></wn><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="888"><clause><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>hai2</w><w>mei2</w><w>shang4</w><w>che1</w><w>ne</w><t type="p" /></clause></u>
+<u who="MOT" id="889"><clause><w>ta1</w><w>jiu4</w><w>ting2</w><t type="trail off" /></clause></u>
+<u who="MOT" id="890"><clause><w>ta1</w><w>jiu4</w><wn><w>kai1</w><wk type="cmp" /><w>pao3</w></wn><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="891"><clause><w>dui4</w><w>bu2</w><w>dui4</w><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="892"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="10" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="893"><clause><w>en</w><t type="p" /></clause></u>
+<u who="CHI" id="894"><clause><w>he1</w><w>beng3<a type="replacement">bao3</a><error /></w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="895"><clause><w>he1</w><w>bao3</w><w>le</w><t type="p" /></clause></u>
+<u who="CHI" id="896"><clause><w>en<k type="best guess" /></w><t type="trail off" /></clause></u>
+<u who="CHI" id="897"><clause><w>xiao3</w><w>xx</w><w>xx</w><w>he1</w><w>bao3</w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="898"><clause><w>ao</w><t type="p" /></clause></u>
+<u who="MOT" id="899"><clause><w>na4</w><wn><w>bing1</w><wk type="cmp" /><w>bing1</w></wn><w>hai2</w><w>shang4</w><w>ma</w><t type="p" /></clause></u>
+<u who="CHI" id="900"><clause><w>hai2</w><w>shang4</w><t type="p" /></clause></u>
+<u who="MOT" id="901"><clause><w>hai2</w><w>shang4</w><pause fluency="fluent" symbolic-length="simple" /></clause><clause><w>zen3me</w><w>shang4</w><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="902"><clause><wn><w>ren2</w><wk type="cmp" /><w>jia1</w></wn><wn><w>kai1</w><wk type="cmp" /><w>pao3</w></wn><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="903"><clause><w>da4</w><wn><w>qi4</w><wk type="cmp" /><w>che1</w></wn><wn><w>kai1</w><wk type="cmp" /><w>pao3</w></wn><w>le</w><t type="p" /></clause></u>
+<u who="CHI" id="904"><clause><w>en</w><t type="p" /></clause></u>
+<u who="MOT" id="905"><clause><w>da4</w><wn><w>qi4</w><wk type="cmp" /><w>che1</w></wn><wn><w>kai1</w><wk type="cmp" /><w>pao3</w></wn><w>le</w><w>zen3me</w><w>shang4</w><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="906"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="3" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="907"><clause><w>wo3</w><w>shuo1</w><w>da4</w><wn><w>qi4</w><wk type="cmp" /><w>che1</w></wn><wn><w>kai1</w><wk type="cmp" /><w>pao3</w></wn><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="908"><clause><w>ni3</w><w>zen3me</w><w>shang4</w><w>a</w><t type="p" /></clause></u>
+<u who="MOT" id="909"><clause><w>en</w><w>zen3me</w><w>le</w><t type="p" /></clause></u>
+<u who="MOT" id="910"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="3" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="911"><clause><e type="action" /><t type="p" /><a type="comments">cough</a></clause></u>
+<u who="MOT" id="912"><clause><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="29" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="913"><clause><precode>FA</precode><wn><w>ba4</w><wk type="cmp" /><w>ba</w></wn><t type="p" /></clause></u>
+<u who="MOT" id="914"><clause><precode>FA</precode><e type="action" /><pause fluency="fluent" symbolic-length="simple" length="10" /></clause><clause><t type="p" /></clause></u>
+<u who="MOT" id="915"><clause><precode>FA</precode><e type="action" /><t type="p" /><a type="comments">the end of tape</a></clause></u>
+
+</CHAT>

@@ -1,0 +1,104 @@
+//general construction ActiveTransitiveCEA
+//  subcase of ArgumentStructure
+//  constructional
+//    constituents
+//      np: NP [1.0, .9]
+//  form
+//    constraints
+//      v.f before np.f
+//  meaning: CauseEffectAction 
+//    constraints
+//      self.m.affected <--> np.m.referent
+
+
+
+
+
+// causative action, Causer profiled
+//e.g.  he hit the table
+
+//construction ActiveTransitiveProfiledCauser
+//  subcase of ActiveTransitiveCEA
+//  meaning: CauseEffectAction 
+//    evokes ForcefulMotionAction as fma
+//    constraints
+//      v.m <--> fma
+//      self.m.process1 <--> fma.process1
+//      self.m.causer <--> ed.profiledParticipant 
+//      self.m.x-net <--> fma.routine
+
+
+
+
+
+
+// causative action,  Instrument profiled
+//e.g.  The hammer hit the table
+
+//construction ActiveTransitiveProfiledInstrument
+//  subcase of ActiveTransitiveCEA
+//  meaning: CauseEffectAction   
+//    evokes ForcefulMotionAction as fma
+//    constraints
+//      v.m <--> fma
+//      self.m.process1 <--> fma.process1
+//      self.m.process1.instrument <--> ed.profiledParticipant
+//      self.m.x-net <--> fma.routine
+
+// Agentively caused process, Causer profiled
+//e.g.  He slid the box
+
+//construction ActiveTransitiveProfiledCauserResultProcess
+//  subcase of ActiveTransitiveCEA
+//  meaning: CauseEffectAction 
+//    evokes Motion as mp
+//    constraints
+//      mp <--> v.m
+//      self.m.process2 <--> mp
+//      self.m.causer <--> ed.profiledParticipant 
+
+
+//Passive CEA
+//general construction PassiveCEA
+//  subcase of ArgumentStructure
+//  constructional
+//    constituents
+//       optional byPhrase:ByPhrase
+//    constraints
+//       v.features.verbform <-- PastParticiple
+//  form
+//    constraints
+//      v.f before byPhrase.f
+//  meaning:CauseEffectAction
+//    constraints
+//       self.m.affected <--> ed.profiledParticipant
+
+
+//construction PassiveCEACauserBYPhrase
+//  subcase of PassiveCEA
+//  meaning
+//      evokes ForcefulMotionAction as fma
+//    constraints
+//      v.m <--> fma
+//      self.m.process1 <--> fma.process1
+//      self.m.causer <--> byPhrase.m.landmark
+//      self.m.x-net <--> fma.routine
+
+//construction PassiveCEAInstrumentBYPhrase
+//  subcase of PassiveCEA
+//  meaning
+//      evokes ForcefulMotionAction as fma
+//    constraints
+//      v.m <--> fma
+//      self.m.process1 <--> fma.process1
+//      self.m.process1.instrument <--> byPhrase.m.landmark
+//      self.m.x-net <--> fma.routine
+
+//construction PassiveCEACauserBYPhraseResultProcess
+//  subcase of PassiveCEA
+//  meaning
+//    evokes Motion as mp
+//    constraints
+//      mp <--> v.m
+//      self.m.process2 <--> mp
+//      self.m.causer <--> byPhrase.m.landmark      

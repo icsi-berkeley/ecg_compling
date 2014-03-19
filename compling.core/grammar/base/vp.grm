@@ -1,0 +1,338 @@
+//
+// vp.grm
+//
+
+general construction VP
+ subcase of HasVerbFeatures
+  meaning: Process 
+    evokes EventDescriptor as ed
+    constraints
+      self.m <--> ed.eventProcess
+	  
+
+general construction ComplexVP
+  subcase of VP
+
+			
+construction SerialVP  // robot, do X then do Y
+	subcase of ComplexVP 
+ 	constructional 
+        constituents
+         v1:VP
+         conj:SerialConjunction
+         v2:VP
+      form
+        constraints
+	       v1.f before conj
+	       conj before v2.f
+      meaning: SerialProcess
+        constraints
+        	self.m.protagonist <--> v1.m.protagonist
+        	self.m.process1 <--> v1.m
+        	self.m.process2 <--> v2.m
+			self.m.connective <--> conj.m
+
+		
+construction PurposeVP  // robot, do X then do Y
+	subcase of ComplexVP 
+ 	constructional 
+        constituents
+        	v1:VP
+        	optional inorder: InOrder
+         	conj:TO-Purpose
+          	v2:VP
+        constraints
+         	v2.features.verbform <-- Base // do X to do Y
+       form
+        constraints
+	       v1.f before inorder
+	       inorder before  conj
+	       conj before v2.f
+       meaning: PurposeProcess
+       	constraints
+       		self.m.connective <--> conj.m
+       
+  
+construction  InOrder // used only above
+     subcase of Word
+     form
+      	constraints
+         	self.f.orth <-- "inorder"
+
+construction AdverbialVP  // he moved Box2 fast;  no order
+	subcase of ComplexVP
+	constructional 
+		constituents
+			modifier: Adverbial
+			modifiedVP: VP
+		constraints
+			self.features <--> 	modifiedVP.features
+	meaning
+		constraints
+			modifier.m.modifiedThing <--> modifiedVP.m
+
+
+construction StagedImperativeVP  // 
+   subcase of	VP
+    constructional 
+        constituents
+           asp: StageVerb // start, etc
+           vp: VP
+  		constraints
+			asp.features.expectedVerbForm <-->  vp.features.verbform 		
+  form
+  		constraints
+			asp.f meets vp.f
+  meaning: StagedProcess
+        constraints	
+          self.m.stageRole <--> asp.m.actionary
+          ed.profiledProcess <--> vp.m
+          ed.profiledParticipant <--> vp.ed.profiledParticipant
+
+ /*        
+
+construction ConjVP  // TODO  -- needs work
+  subcase of ComplexVP
+  constructional
+    constituents
+		first: VP
+      	second: VP
+      	connective: Conjunction // and or etc.S
+    constraints
+    	first.features <--> self.features
+    	second.features <--> self.features
+	meaning: ConjProcess 
+  		evokes ConjED as ed 
+		constraints
+	   		ed.ed1 <--> first.ed // fill in conjED
+	  		ed.ed2 <--> second.ed
+	   		ed.profiledParticipant <--> ed.ed1.profiledParticipant // fill in conjED
+	   		ed.profiledParticipant <--> ed.ed2.profiledParticipant
+*/
+
+//
+// The idea is that e.g., a conjED will point to the 2 conjuncts, but usually 
+// will not have the other ED roles filled in. This is detectable from the 
+// form, but also because unfilled role is known .
+//
+                 
+general construction ArgumentStructure
+  subcase of VP
+  constructional
+    constituents
+      v : Verb 
+    constraints
+      //v.features.verbform <-- Finite  // trying this *******************
+      self.features <--> v.features
+   meaning
+     constraints
+       v.m  <--> ed.profiledProcess 
+
+
+general construction AdjunctVP   // general for other coda, purpose, etc.
+ subcase of VP
+  constructional
+    constituents
+      vp: VP
+      pp: AdjunctPP
+   constraints        
+  	  self.features <--> vp.features
+ 	meaning      
+      evokes AdjunctModification as adj     
+  	constraints
+		self.m <--> vp.m   
+      	ed <--> vp.ed
+		adj.modifiedThing <--> self.m
+    	adj.modifier <--> pp.m
+      
+
+construction InstrumentVP   
+  subcase of AdjunctVP   
+  constructional
+    constituents
+    	pp: InstrumentPP  //sub AdjunctPP
+   meaning
+	constraints
+		adj.kind <-- @instrument
+		//self.m.instrument <--> pp.m.np //for instrument
+
+/*
+construction TemporalVP   // needs work
+  subcase of AdjunctVP
+  constructional
+    constituents
+      pp: TemporalPhrase
+  form
+    constraints
+      vp.f meets pp.f  // could eliminate order
+  meaning  
+    constraints
+      self.m <--> vp.m
+      ed <--> vp.ed
+      ed.e-features.duration <--> pp.m.ti // TemporalInterval
+      ed.e-features.telicity <--> pp.m.telicity // @bounded,
+      adj.kind <-- @temporal
+*/
+
+
+
+construction LightVerbArgumentStructure  // revisit
+  subcase of ArgumentStructure
+  constructional
+    constituents
+      v: LightVerb // make, do, etc.
+      np: ProcessNP  
+  form
+    constraints
+      v.f meets np.f  // for now
+   meaning: PerfomAction
+     constraints
+	   self.ed.profiledParticipant <--> self.m.actor
+	   self.m.actor <--> np.m.action.protagonist
+	   self.m.action <--> np.m.action
+	   self.m.repetitions <--> np.m.repetitions
+	   	
+// Modal VP
+
+construction ModalPlusVP  
+  subcase of VP
+  	constructional 
+    	constituents
+      		modal: Modal  // EventFeatures 
+      		vp: VP  // also CopularVP
+    	constraints
+      		self.features <--> modal.features 
+      		modal.features.expectedVerbForm <--> vp.features.verbform
+    form
+    	constraints
+       		modal.f before vp.f 
+    meaning
+    	constraints
+      		self.m <--> vp.m // semantics comes from the vp
+      		modal.m <--> vp.ed.e-features
+      		self.m.protagonist <--> vp.m.protagonist
+	   		self.ed <--> vp.ed  //evoked schemas are available
+			
+construction NegModalPlusVP  
+  	subcase of ModalPlusVP
+  	 constructional 
+    	constituents
+    	   neg: Not-event
+    form
+    	constraints
+       		modal.f meets neg.f 
+    meaning
+    	constraints
+			vp.ed.e-features.negated <-- "yes"
+			
+// Particle CxN, currently work only for Motion
+
+construction VplusParticle  //moved up X
+  subcase of Verb
+  	constructional
+    	constituents
+      		prep: Particle
+      		v: LexicalVerb
+      	constraints
+  			self.features <--> v.features
+   form
+    	constraints
+       		v.f before prep.f 
+    meaning: Motion
+    	constraints
+    		self.m <--> v.m
+      		self.m.heading <--> prep.m.val
+      		 
+
+construction VPplusParticle  // moved X up
+  subcase of VP
+  	constructional 
+    	constituents
+      		prep: Particle
+      		vp: ArgumentStructure
+      	constraints
+  			self.features <--> vp.features 
+   	form
+    	constraints
+       		vp.f meets prep.f
+    meaning: Motion
+    	constraints
+    		self.m <--> vp.v.m
+      		self.m.heading <--> prep.m.val	
+
+/*
+CopularVP 
+*/            
+        
+construction CopularVPLocative
+  subcase of VP
+  constructional  
+    constituents
+      	cop: Copula  // verb
+      	pred: LocPrepPhrase // for now
+  	constraints
+  		self.features <--> cop.features
+  form
+    constraints
+      cop.f meets pred.f  // for now
+  meaning: Stasis
+    constraints
+    	self.m <--> cop.m
+        ed.profiledParticipant <--> pred.m.trajector 
+        self.m.stayer <--> ed.profiledParticipant
+        self.m.state <-->  pred.m 
+        
+construction CopularVPNominal
+  subcase of VP
+  constructional  
+    constituents
+      	cop: Copula  // verb
+      	nominal: NP
+    constraints
+  		self.features <--> cop.features 
+  form
+    constraints
+      	cop.f meets nominal.f
+  meaning: PredicateNom
+    constraints
+    	self.m <--> cop.m
+        self.m.stayer <--> ed.profiledParticipant
+        self.m.modifier <--> self.nominal.m       
+        
+construction CopularVPAdjective
+  subcase of VP
+  constructional  
+    constituents
+      	cop: Copula  // verb
+      	adj: Adjective
+  	constraints
+  		self.features <--> cop.features
+	form
+    constraints
+      	cop.f meets adj.f
+  meaning: Stasis
+    constraints
+    	self.m <--> cop.m
+    	cop.m.actionary <-- @be2
+        self.m.stayer <--> ed.profiledParticipant
+        self.m.state <--> adj.m
+        self.adj.m.modifiedThing <--> ed.profiledParticipant
+ /*              
+construction PossessionVP // TODO: needs work!
+  subcase of VP
+  constructional  
+    constituents
+      vb: PossessionVerb 
+      pred: NP
+  form
+    constraints
+      vb.f before pred.f  
+  meaning 
+    evokes Possession as poss
+    constraints
+        ed.profiledParticipant <--> poss.possessor 
+        //pred.m.referent <--> poss.possessed
+        pred.m <--> poss.possessed
+
+*/
+

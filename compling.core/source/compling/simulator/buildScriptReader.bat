@@ -1,0 +1,1 @@
+java -jar ../../../lib/java-cup-v11a.jar -package compling.simulator -parser ScriptReader -symbols ScriptReaderSym ScriptReader.cup

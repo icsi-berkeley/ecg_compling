@@ -1,0 +1,167 @@
+/*******************************************************************************
+    np.grm
+
+This file contains (possible) constructions for kernel noun phrases.
+
+The assumption is that each NP has an RD structure as its meaning.
+This implies that proper nouns, pronouns, and mass/plural nouns make
+RD their meaning. For sake of uniformity, I also assume that common
+count nouns (which are not NPs) also denote an RD.
+
+Semantically, adjectives, noun modifiers and post-nominal modifiers form a constellation
+of modifiers around the primary RD for the NP. Each modifier binds the
+referent role of the entity that it's modifying to its modifiedEntity role.
+
+
+Additionally, the givenness role should be inspected and evaluated for the
+different types of NPs, and this file has "?" when I didn't know what value to
+assign a role.
+
+*******************************************************************************/
+
+
+/***
+ ***
+ *** The root constructions of the NP, Noun and Nominal  hierarchy
+ ***
+ ***/
+
+general construction NP
+   subcase of HasNominalFeatures	//, RootType
+   meaning: RD
+
+general construction Nominal //This is the root of nouns and noun noun compounds
+   subcase of HasNominalFeatures
+   meaning: RD 
+
+general construction Noun
+   subcase of Word, Nominal
+
+general construction CommonNoun	// nschneid
+   subcase of Noun
+
+/***
+ ***
+ ***    Combining Adjectives and Nouns
+ ***
+ ***/
+
+
+// Note that Kernel is NOT an NP
+// it is  general because we need a supertype to cover the bracketed phrases in
+// 'the [big table]'  and 'the [big table and leather chair]'
+//
+general construction Kernel
+   subcase of HasNominalFeatures
+   meaning: RD
+
+
+construction  SimpleKernel 
+  subcase of Kernel
+  constructional
+    constituents
+      optional ap: AdjectivalPhrase
+      n: Nominal
+    constraints
+      self.features <--> n.features
+  form
+    constraints
+      ap.f meets n.f
+  meaning
+    constraints
+      self.m <--> n.m
+      self.m.referent <--> ap.m.modifiedEntity
+      
+
+general construction SpecifierPlusKernel
+  subcase of NP
+  constructional
+    constituents   
+      s: NPSpecifier
+      k: Kernel
+    constraints
+      self.features <--> k.features
+      self.features <--> s.features
+  form
+    constraints
+      s.f meets k.f
+  meaning
+    constraints
+      self.m <--> k.m
+      self.m <--> s.m
+      
+
+construction DeterminerPlusKernel
+  subcase of SpecifierPlusKernel
+  constructional
+    constituents   
+      s: Determiner  
+
+
+// I separated PossessivePronounPlusKernel because the likelihood of omitting 
+// the kernel is nonzero with possessive pronouns (e.g. 'I want the'* vs. 'I 
+// want his')
+
+construction PossessivePronounPlusKernel
+  subcase of SpecifierPlusKernel
+  constructional
+    constituents   
+      s: PossessivePronoun
+      k: Kernel // Here is where we would specify the higher likelihood of an 
+                // omitted kernel given a PossPronoun
+
+
+construction  UndeterminedNP
+  subcase of NP, SimpleKernel
+  constructional
+    constraints
+        n.features.massOrPlural <-- "yes"
+  meaning
+    constraints
+        self.m.givenness <-- "type-identifiable" // Michael
+
+
+/***
+ *** Building Noun Noun Compounds
+ *** Note that this construction allows for both left and right branching.
+ ***
+ *** One way to extend this would be to make this construction general, 
+ *** and then make subcases of it for the productive kinds of noun-noun
+ *** modification and the lexicalized noun-noun compound
+ ***
+ ***/
+
+construction NounNounCompound
+   subcase of Nominal
+   constructional
+      constituents
+        mod: Nominal
+        head: Nominal
+      constraints
+        self.features <--> head.features
+   form
+     constraints
+       mod.f meets head.f
+   meaning
+     evokes NounNounModifier as nnm
+     constraints
+       self.m <--> head.m
+       nnm.modifiedEntity <--> head.m.referent
+       nnm.modifierEntity <--> mod.m.referent       
+
+
+/***
+ *** WH NPs can be be wh pronouns or NPs in which 'which' and 'what' are the 
+ *** specifiers
+ ***
+ ***/
+
+general construction WH-NP
+   subcase of NP
+
+
+construction WhSpecifierPlusKernel
+  subcase of SpecifierPlusKernel, WH-NP
+  constructional
+    constituents   
+      s:WH-Specifier

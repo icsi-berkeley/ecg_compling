@@ -1,0 +1,162 @@
+//
+// complexverb.grm
+//
+
+general construction ComplexVerb
+   subcase of Verb
+
+
+general construction AuxPlusVerb
+   	subcase of ComplexVerb
+   	constructional 
+   		constituents
+			aux: Aux
+			main: ComplexVerb
+	    constraints
+			self.features.verbform <--> aux.features.verbform
+			self.features.verbkind <--> main.features.verbkind
+			aux.features.expectedVerbForm <--> main.features.verbform
+   form
+      constraints
+       		aux.f meets main.f 
+   meaning
+      constraints
+			aux.m <--> main.m.p-features
+			self.m <--> main.m
+
+
+  construction PassiveAuxPlusVerb  // was moved
+   	subcase of AuxPlusVerb
+   	constructional 
+   		constituents
+			aux: BeAux  // do get also!!
+			main: VerbChunk
+	    constraints
+			main.features.verbform <-- PastParticiple
+	meaning
+		constraints
+			aux.m.voice <-- @passive
+		
+		
+construction ProgressiveAuxPlusVerb  // was moving, has been moving
+   	subcase of AuxPlusVerb
+   	constructional 
+   		constituents
+			aux: Aux  
+			main: ComplexVerb
+	    constraints
+			main.features.verbform <-- PresentParticiple
+	meaning
+		constraints
+			aux.m.progressive <-- "yes"
+					
+construction PerfectAuxPlusVerb  // has moved
+   	subcase of AuxPlusVerb
+   	constructional 
+   		constituents
+			aux: HaveAux  
+			main: ComplexVerb
+	    constraints
+			 main.features.verbform <-- PastParticiple
+			 
+construction PassivePefectAuxPlusVerb  // has been moved
+   	subcase of AuxPlusVerb
+   	constructional 
+   		constituents
+			aux: AuxPlusAux // should restrict further !!
+			main: VerbChunk
+	    constraints
+			main.features.verbform <-- PastParticiple
+	meaning
+		constraints
+			aux.m.perfect <-- "yes"
+			aux.m.voice <-- @passive
+	
+construction PassiveProgressiveAuxPlusVerb  // was being moved
+   	subcase of AuxPlusVerb
+   	constructional 
+   		constituents
+			aux: BePlusBeing
+			main: VerbChunk
+	    constraints
+			main.features.verbform <-- PastParticiple
+	meaning
+		constraints
+		     aux.m.progressive <-- "yes"
+			 aux.m.voice <-- @passive
+					
+// will want this in, brute force way here; Passive Version
+construction PerfectProgressiveAuxPlusVerb  //has been being moved
+   	subcase of ComplexVerb
+   	constructional 
+   		constituents
+			aux: AuxPlusAux  // restrict to perfect
+			being: BeAuxPresentParticiple
+ 			main: VerbChunk
+	    constraints
+			main.features.verbform <-- PastParticiple
+	form
+      constraints
+       		aux.f meets being.f
+			being.f meets main.f 
+	meaning
+		constraints
+			aux.m.progressive <-- "yes"
+			aux.m.voice <-- @passive
+			
+	
+
+// end of Aux CxN
+
+construction ConjVerb
+   subcase of ComplexVerb  // general case, not chunk?
+   constructional 
+   		constituents
+          	first: Verb
+	    	connective: And-Logical  // and or etc.
+	    	second: Verb
+	    constraints
+	    	first.features <--> self.features
+	    	first.features <--> second.features  // maybe not here
+   form
+      constraints
+       		first.f meets connective.f 
+            connective.f meets second.f
+   meaning: ConjProcess
+      constraints
+      	first.m <-> self.m.process1
+        second.m <-> self.m.process2
+       	connective.m <-> self.m.connective
+       	self.m.protagonist <--> self.m.protagonist2
+
+construction SerialVerb  // maybe have conj require feature match
+   subcase of ComplexVerb
+   constructional 
+   		constituents
+          	first: Verb
+	    	connective: SerialConjunction  //  then, etc.
+	    	second: Verb
+	    constraints
+	    	first.features <--> self.features
+   form
+      constraints
+       	 first.f meets connective.f 
+         connective.f meets second.f
+   meaning: SerialProcess
+      constraints
+      	first.m <--> self.m.process1
+        second.m <--> self.m.process2
+       	//connective.m <--> self.m.connective
+        self.m.protagonist <--> self.m.protagonist2
+
+construction ModifiedVerb
+  	subcase of ComplexVerb
+   	constructional 
+   		constituents
+			modifier: Adverbial
+			modifiedVerb: Verb
+	meaning
+		constraints
+			modifier.m.modifiedThing <--> modifiedVerb.m
+
+			

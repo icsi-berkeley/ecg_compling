@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHAT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.talkbank.org/ns/talkbank talkbank.xsd" xmlns="http://www.talkbank.org/ns/talkbank" Version="1.1.3" Lang="zh" Corpus="beijing" Id="lxb2" Date="1984-01-01">
+	
+	<Participants>
+		<participant id="FAT" role="Father" language="zh" />
+		<participant id="CHI" name="BingBing" role="Target_Child" language="zh" />
+		<participant id="MOT" role="Mother" language="zh" />
+		<participant id="INV" role="Investigator" language="zh" />
+		<participant id="OMM" role="Mother" language="zh" />
+		<participant id="OFF" role="Father" language="zh" />
+		<participant id="CH2" role="Child" language="zh" />
+		<participant id="UNC" name="Unclear" role="Unidentified" language="zh" />
+	</Participants>
+	
+	
+</CHAT>

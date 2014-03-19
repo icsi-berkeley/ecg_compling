@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHAT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talkbank.org/ns/talkbank" xsi:schemaLocation="http://www.talkbank.org/ns/talkbank talkbank.xsd" Version="1.1.3" Lang="zh" Corpus="beijing" Id="hy2" Date="1984-01-01">
+	
+	<Participants><participant id="CHI" name="HaoYu" role="Target_Child" language="zh" />
+		<participant id="MOT" role="Mother" language="zh" />
+		<participant id="INV" name="XiaLing" role="Investigator" language="zh" />
+		<participant id="FAT" role="Father" language="zh" />
+		<participant id="OFF" role="Father" language="zh" />
+		<participant id="OMM" role="Mother" language="zh" />
+		<participant id="JJJ" role="Unidentified" language="zh" />
+		<participant id="CH2" role="Child" language="zh" />
+	</Participants>
+	
+	<Setting>
+		<entity cat="Diningroom" id="diningroom"/>
+		<entity cat="Fish" id="fish"/>
+		<entity cat="Fish" id="fishpiece1"/>
+		<entity cat="Fish" id="fishpiece2"/>
+		<entity cat="Plate" id="plate"/>
+	</Setting>
+	
+	<Setup>
+		<binding field="location" source_ref="fish" ref="plate"/>
+		<binding field="location" source_ref="fishpiece1" ref="plate"/>
+		<binding field="location" source_ref="fishpiece2" ref="plate"/>
+	</Setup>
+	
+	<event cat="Chew" id="chew01">
+		<binding field="chewer" ref="CHI"/>
+		<binding field="chewed" ref="fishpiece1"/>
+	</event>
+	
+	<event cat="Take" id="take02">
+		<binding field="taker" ref="MOT"/>
+		<binding field="taken" ref="fishpiece2"/>
+	</event>
+	
+	<event cat="Prick" id="prick03">
+		<binding field="pricked" ref="CHI"/>
+		<binding field="prick" ref="bone(fishpiece1)"/>
+	</event>
+	
+	<u who="MOT" id="653">
+		<clause>
+			<w>tu4</w><w>chu1</w><w>lai2</w><w>a</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u653sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular">吐出來啊</a>
+			<a type="gold standard">
+				<semantic>	
+					<temporal_element left="0" right="1" cat="Spit" id="u653te1">
+						<binding field="spitter" ref="CHI"/>
+						<binding field="spitted" ref="bone(fishpiece1)"/>
+					</temporal_element>
+					<image_schema cat="Container" id="u653img1">
+						<binding field="container" ref="mouth(CHI)"/>
+					</image_schema>
+					<image_schema cat="SPG" id="u653img2">
+						<binding field="trajector" ref="bone(fishpiece1)"/>
+						<binding field="path" left="1" right="2" value="Out_Path"/>
+						<binding field="deixis" left="2" right="3" value="Towards"/>
+					</image_schema>
+					<temporal_structure left="0" right="3" cat="Caused_Motion" profiled="u653te1">
+						<binding field="causer" ref="CHI"/>
+						<binding field="mover" ref="bone(fishpiece1)"/>
+						<binding field="spg" left="1" right="3" ref="u653img2"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+			
+		</clause>
+	</u>
+	
+	<u who="MOT" id="654">
+		<clause>
+			<w>you3</w><w>cir4</w><w>tu4</w><w>chu1</w><w>lai2</w><w>ao</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u654sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular">有刺吐出來噢</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="0" right="1" cat="Exist" id="u654te1">
+						<binding field="protagonist" left="1" right="2" ref="bone(fishpiece1)"/>		
+					</temporal_element>
+					<temporal_structure left="0" right="2" cat="Intransitive_State" profiled="u654te1" id="u654ts1">
+						<binding field="protagonist" left="1" right="2" ref="bone(fishpiece1)"/>
+					</temporal_structure>
+					
+					<temporal_element left="2" right="3" cat="Spit" id="u654te2">
+						<binding field="spitter" ref="CHI"/>
+						<binding field="spitted" left="1" right="2" ref="bone(fishpiece1)"/>
+					</temporal_element>
+					<image_schema cat="Container" id="u654img1">
+						<binding field="container" ref="mouth(CHI)"/>
+					</image_schema>
+					<image_schema cat="SPG" id="u654img2">
+						<binding field="trajector" left="1" right="2" ref="bone(fishpiece1)"/>
+						<binding field="path" left="3" right="4" value="Out_Path"/>
+						<binding field="deixis" left="4" right="5" value="Towards"/>
+					</image_schema>
+					<temporal_structure left="2" right="5" cat="Caused_Motion" profiled="u654te2" id="u654ts2">
+						<binding field="causer" ref="CHI"/>
+						<binding field="mover" left="1" right="2" ref="bone(fishpiece1)"/>
+						<binding field="spg" left="3" right="5" ref="u654img2"/>
+					</temporal_structure>
+					
+					<conditional>
+						<binding field="premise" left="0" right="2" ref="u654ts1"/>
+						<binding field="conclusion" left="2" right="5" ref="u654ts2"/>
+					</conditional>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<event cat="Spit" id="spit04">
+		<binding field="spitter" ref="CHI"/>
+		<binding field="spitted" ref="bone(fishpiece1)"/>
+	</event>
+	
+	<event cat="Pick" id="pick05">
+		<binding field="picker" ref="MOT"/>
+		<binding field="picked" ref="bone(fishpiece2)"/>
+	</event>
+	
+	<u who="MOT" id="655">
+		<clause>
+			<w>en</w><w>tiao1</w><w>le</w><pause fluency="fluent" symbolic-length="simple" />
+			<a type="speech act">
+				<sa cat="explaining" id="u655sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">嗯挑了 </a>
+			<a type="gold standard">
+				<semantic>	
+					<temporal_element left="1" right="2" cat="Pick" id="u653te1">
+						<binding field="picker" ref="MOT"/>
+						<binding field="picked" ref="bone(fishpiece1)"/>
+					</temporal_element>
+					<temporal_structure left="0" right="3" cat="Caused_Motion" profiled="u653te1">
+						<binding field="causer" ref="MOT"/>
+						<binding field="mover" ref="bone(fishpiece1)"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+		<clause>
+			<w>zhen1</w><w>xi4</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u655sa2">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">真細</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="1" right="2" cat="Fine" id="u655te1">
+						<binding field="protagonist" ref="bone(fishpiece2)"/>					
+					</temporal_element>
+					<temporal_structure left="0" right="2" cat="Intransitive_State" profiled="u655te1">
+						<binding field="protagonist" ref="bone(fishpiece2)"/>
+						<binding field="modifier" subcat="Degree" left="0" right="1" modified="u655te1"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<!-- ISSUE: this really should be an unsuccessful attempt at picking the other fine piece of bone -->
+	
+	<event cat="Pick" id="pick06">
+		<binding field="picker" ref="MOT"/>
+		<binding field="picked" ref="bone(fishpiece2)"/>
+	</event>
+	
+	<u who="MOT" id="656">
+		<clause>
+			<w>en</w><w>tiao1</w><w>bu4</w><w>le</w><wn><w>ne4</w><wk type="cmp" /><w>me</w></wn><w>xi4</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u656sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">嗯挑不了那麼細</a>
+			<a type="gold standard">
+				<semantic>	
+					<temporal_element left="1" right="2" cat="Pick" id="u656te1">
+						<binding field="picker" ref="MOT"/>
+						<binding field="picked" ref="bone(fishpiece2)"/>
+					</temporal_element>
+					<temporal_structure left="1" right="4" cat="Caused_Motion" profiled="u656te1">
+						<binding field="causer" ref="MOT"/>
+						<binding field="mover" ref="bone(fishpiece2)"/>
+					</temporal_structure>
+					
+					<temporal_element left="6" right="7" cat="Fine" id="u656te2">
+						<binding field="protagonist" ref="bone(fishpiece2)"/>					
+					</temporal_element>
+					<temporal_structure left="4" right="7" cat="Intransitive_State" profiled="u656te2">
+						<binding field="protagonist" ref="bone(fishpiece2)"/>
+						<binding field="modifier" subcat="Degree" left="4" right="6" modified="u656te2"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<event cat="Prick" id="prick07">
+		<binding field="pricked" ref="CHI"/>
+		<binding field="prick" ref="bone(fish)"/>
+	</event>
+	
+	<u who="MOT" id="657">
+		<clause>
+			<w>lao3</w><w>you3</w><w>cir4</w><w>zha1</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u657sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">老有刺扎</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="1" right="2" cat="Exist" id="u657te1">
+						<binding field="protagonist" left="2" right="3" ref="bone(fish)"/>		
+					</temporal_element>
+					<temporal_structure left="0" right="3" cat="Intransitive_State" profiled="u657te1">
+						<binding field="protagonist" left="2" right="3" ref="bone(fish)"/>
+						<binding field="modifier" subcat="Occurrence" left="0" right="1" modified="u657te1"/>
+					</temporal_structure>
+					
+					<temporal_element left="3" right="4" cat="Prick" id="u657te2">
+						<binding field="prick" left="2" right="3" ref="bone(fish)"/>
+						<binding field="pricked" ref="CHI"/>
+					</temporal_element>
+					<temporal_structure left="2" right="4" cat="Transitive_Action" profiled="u657te2">
+						<binding field="agent" left="2" right="3" ref="bone(fish)"/>
+						<binding field="patient" ref="CHI"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="658">
+		<clause>
+			<w>ni3</w><w>shao3</w><w>chi1</w><w>dianr3</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u658sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">你少吃點</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="2" right="3" cat="Eat" id="u658te1">
+						<binding field="eater" left="0" right="1" ref="CHI"/>
+						<binding field="food" ref="fish"/>
+					</temporal_element>
+					<temporal_structure left="2" right="4" cat="Transitive_Action" profiled="u658te1">
+						<binding field="agent" left="0" right="1" ref="CHI"/>
+						<binding field="patient" ref="fish"/>
+						<binding field="modifier" subcat="Manner" left="1" right="2" modified="u658te1"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="661">
+		<clause>
+			<w>you3</w><w>cir4</w><w>tu4</w><w>chu1</w><w>lai2</w><w>ao</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u661sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular">有刺吐出來噢</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="0" right="1" cat="Exist" id="u661te1">
+						<binding field="protagonist" left="1" right="2" value="Bone"/>		
+					</temporal_element>
+					<temporal_structure left="0" right="2" cat="Intransitive_State" profiled="u661te1" id="u661ts1">
+						<binding field="protagonist" left="1" right="2" value="Bone"/>
+					</temporal_structure>
+					
+					<temporal_element left="2" right="3" cat="Spit" id="u661te2">
+						<binding field="spitter" ref="CHI"/>
+						<binding field="spitted" left="1" right="2" value="Bone"/>
+					</temporal_element>
+					<image_schema cat="Container" id="u661img1">
+						<binding field="container" ref="mouth(CHI)"/>
+					</image_schema>
+					<image_schema cat="SPG" id="u661img2">
+						<binding field="trajector" left="1" right="2" value="Bone"/>
+						<binding field="path" left="3" right="4" value="Out_Path"/>
+						<binding field="deixis" left="4" right="5" value="Towards"/>
+					</image_schema>
+					<temporal_structure left="2" right="5" cat="Caused_Motion" profiled="u661te2" id="u661ts2">
+						<binding field="causer" ref="CHI"/>
+						<binding field="mover" left="1" right="2" value="Bone"/>
+						<binding field="spg" left="3" right="5" ref="u661img2"/>
+					</temporal_structure>
+					
+					<conditional>
+						<binding field="premise" left="0" right="2" ref="u661ts1"/>
+						<binding field="conclusion" left="2" right="5" ref="u661ts2"/>
+					</conditional>
+				</semantic>
+			</a>
+			
+		</clause>
+	</u>
+	
+	<u who="CHI" id="662">
+		<clause>
+			<w>en</w><t type="p" />
+			<a type="speech act">
+				<sa cat="answering" id="u662sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">嗯</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_structure cat="none"/>
+				</semantic>
+			</a>	
+		</clause>
+	</u>
+	
+	
+	
+</CHAT>

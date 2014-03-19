@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHAT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talkbank.org/ns/talkbank" xsi:schemaLocation="http://www.talkbank.org/ns/talkbank talkbank.xsd" Version="1.1.3" Lang="zh" Corpus="beijing" Id="hy1" Date="1984-01-01">
+	
+	<Participants>
+		<participant id="CHI" name="HaoYu" role="Target_Child" language="zh" />
+		<participant id="MOT" role="Mother" language="zh" SES="Intellectual" />
+		<participant id="INV" name="XiaLing" role="Investigator" language="zh" />
+		<participant id="FAT" role="Father" language="zh" />
+	</Participants>
+	
+	
+	<Setting>
+		<entity cat="Livingroom" id="livingroom"/>
+		<entity cat="Picturebook" id="picturebook"/>
+		<entity cat="Car" id="car"/>
+	</Setting>
+	
+	<Setup>
+		<binding source_ref="car" field="location" ref="picturebook"/>
+	</Setup>
+	
+	<event cat="Read" id="read01">
+		<binding field="reader" ref="MOTandCHI"/>
+		<binding field="read" ref="picturebook"/>
+	</event>
+	
+	<u who="CHI" id="470">
+		<clause>
+			<w>ma3</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u470sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">馬</a>
+			<a type="gold standard">
+				<semantic>
+					<topic left="0" right="1" value="Horse"/>
+					<temporal_structure cat="None"/>
+				</semantic>
+			</a>	
+		</clause>
+	</u>
+	
+	<u who="CHI" id="471">
+		<clause>
+			<wn><w>ma3</w><wk type="cmp" /><w>che1</w></wn><w>ma<p type="drawl" />3</w><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u471sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">馬車馬</a>
+			<a type="gold standard">
+				<semantic>
+					<topic left="0" right="2" value="Carriage"/>
+					<topic left="2" right="3" value="Horse"/>
+					<temporal_structure cat="None"/>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="472">
+		<clause>
+			<w>yao4</w><w>kan4</w><w>ma3</w><w>ya</w><t type="q" /><a type="extension" flavor="cod">$Q:NQP</a>
+			<a type="speech act">
+				<sa cat="requesting-answer" id="u472sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">要看馬呀?</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="0" right="1" cat="Want" id="u472te1">
+						<binding field="experiencer" ref="CHI"/>
+						<binding field="percept" left="1" right="3" ref="u472ts2"/>				
+					</temporal_element>
+					<temporal_structure left="1" right="3" cat="Two_Participant_State" profiled="u472te1" id="u472ts1">
+						<binding field="experiencer" ref="CHI"/>
+						<binding field="percept" left="1" right="3" ref="u472ts2"/>
+					</temporal_structure>
+					
+					<temporal_element left="1" right="2" cat="Perceive_Visual" id="u472te2">
+						<binding field="perceiver" ref="CHI"/>
+						<binding field="percept" left="2" right="3" value="Horse"/>					
+					</temporal_element>
+					<temporal_structure left="1" right="3" cat="Transitive_Action" profiled="u472te2" id="u472ts2">
+						<binding field="agent" ref="CHI"/>
+						<binding field="patient" left="2" right="3" value="Horse"/>	
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="473">
+		<clause>
+			<w>wo3</w><w>gei3</w><w>ni3</w><w>zhao3</w><w>ma3</w><w>a</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u473sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular">我給你找馬啊</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="3" right="4" cat="Find" id="u473te1">
+						<binding field="finder" left="0" right="1" ref="MOT"/>
+						<binding field="target" left="4" right="5" value="Horse"/>					
+					</temporal_element>
+					<temporal_structure left="0" right="5" cat="Transitive_Action" profiled="u473te1" id="u473ts1">
+						<binding field="agent" left="0" right="1" ref="MOT"/>
+						<binding field="patient" left="4" right="5" value="Horse"/>
+					</temporal_structure>
+					
+					<benefaction>
+						<binding field="benefactor" left="0" right="1" ref="MOT"/>
+						<binding field="beneficiary" left="2" right="3" ref="CHI"/>
+						<binding field="benefit" left="3" right="5" ref="u473ts1"/>
+					</benefaction>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="CHI" id="474">
+		<clause>
+			<w>en</w><w>yi3</w><w>che<p type="drawl" />1</w><w>ya</w><w>che<p type="drawl" />1</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u474sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">嗯椅車呀車</a>
+			<a type="gold standard">
+				<semantic>
+					<topic left="1" right="2" value="Chair"/>
+					<topic left="2" right="3" ref="car"/>
+					<reduplication left="4" right="5"/>
+					<temporal_structure cat="None"/>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="475">
+		<clause>
+			<w>eng</w><w>che1</w><w>a</w><w>che1</w><pause fluency="fluent" symbolic-length="simple" />
+			<a type="speech act">
+				<sa cat="approving" id="u475sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">嗯車呀車 </a>
+			<a type="gold standard">
+				<semantic>
+					<topic left="1" right="2" ref="car"/>
+					<reduplication left="3" right="4"/>
+					<temporal_structure cat="None"/>
+				</semantic>
+			</a>
+		</clause>
+		<clause>
+			<w>wo3</w><w>gei3</w><w>ni3</w><w>zhao3</w><w>ma3</w><w>a</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u475sa2">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular">我給你找馬啊</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="3" right="4" cat="Find" id="u473te1">
+						<binding field="finder" left="0" right="1" ref="MOT"/>
+						<binding field="target" left="4" right="5" value="Horse"/>					
+					</temporal_element>
+					<temporal_structure left="0" right="5" cat="Transitive_Action" profiled="u473te1" id="u473ts1">
+						<binding field="agent" left="0" right="1" ref="MOT"/>
+						<binding field="patient" left="4" right="5" value="Horse"/>
+					</temporal_structure>
+					
+					<benefaction>
+						<binding field="benefactor" left="0" right="1" ref="MOT"/>
+						<binding field="beneficiary" left="2" right="3" ref="CHI"/>
+						<binding field="benefit" left="3" right="5" ref="u473ts1"/>
+					</benefaction>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	
+</CHAT>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHAT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talkbank.org/ns/talkbank" xsi:schemaLocation="http://www.talkbank.org/ns/talkbank  http://xml.talkbank.org/talkbank.xsd" Version="1.1.3" Lang="zh" Corpus="beijing" Id="cx1" Date="1984-01-01">
+
+<Participants>
+<participant id="CHI" name="XiXi" role="Target_Child" language="zh" age="P1Y9M25D" />
+<participant id="MOT" role="Mother" language="zh" SES="Worker" />
+<participant id="INV" name="XiaLing_and_Niu" role="Investigator" language="zh" />
+</Participants>
+
+
+</CHAT>

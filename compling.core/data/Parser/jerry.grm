@@ -1,0 +1,175 @@
+abstract construction S
+ constructional
+   constituents  
+     vp:VP
+ meaning: EventSchema
+  constraints
+  self.m <--> vp.m
+
+schema EventSchema
+  protagonist
+  action:XSchema
+  constraints
+    protagonist <--> action.protagonist
+
+schema XSchema
+  protagonist
+
+construction NPVP
+ subcase of S
+ constructional
+   constituents  
+     subj: NP
+ form
+   constraints
+   subj.f before vp.f
+ meaning
+  constraints
+  self.m.protagonist <--> subj.m
+
+abstract construction NP
+  
+
+construction DetNoun
+  subcase of NP
+  constructional
+    constituents
+      d:Determiner
+      n:Noun
+  form
+    constraints
+      d.f before n.f
+  meaning
+    //evokes RD as rd
+    constraints
+      self.m <--> n.m 
+
+abstract construction Determiner
+
+construction The
+  subcase of Determiner
+  form:WordForm
+    constraints
+      self.f.orth <-- "the"
+  meaning
+   //obviously there should be something here, but what should be put...
+
+schema WordForm
+  orth
+
+abstract construction Noun
+
+construction House
+  subcase of Noun
+  form:WordForm
+    constraints
+    self.f.orth <-- "house"
+  meaning:HouseSchema
+
+schema ContainerSchema
+  interior
+  exterior
+  boundary
+  portal
+
+schema HouseSchema
+  subcase of ContainerSchema
+
+abstract construction ProperName
+  subcase of NP
+
+construction Eve
+  subcase of ProperName
+  form:WordForm
+    constraints
+    self.f.orth <-- "eve"
+  meaning:Person
+    constraints
+      self.m.name <-- "eve"
+
+schema Person
+  name
+
+
+abstract construction VP
+  constructional
+    constituents
+      v:Verb
+  meaning:EventSchema
+    constraints
+      self.m.action <--> v.m
+
+construction Motion-VP
+  subcase of VP
+  constructional
+    constituents
+      path:Spatial-PP
+  meaning
+    evokes Motion-XSchema as mx
+    evokes SPG as s
+    constraints
+      v.m <--> mx
+      path.m <--> s
+      mx.protagonist <--> s.trajector
+
+abstract construction Verb
+  form:WordForm
+  meaning:XSchema
+
+construction WalkedVerb
+  subcase of Verb
+  form
+   constraints
+     self.f.orth <--"walked"
+  meaning:WalkXSchema
+
+schema Motion-XSchema
+  subcase of XSchema
+
+schema WalkXSchema
+  subcase of Motion-XSchema
+  roles
+    walker
+  constraints
+  walker <--> protagonist
+
+schema TrajectorLandmark
+  trajector
+  landmark
+
+schema SPG
+  subcase of TrajectorLandmark
+  source
+  path
+  goal
+
+
+construction Spatial-PP
+  constructional
+    constituents
+      prep:Spatial-Preposition
+      landmark:NP
+  form
+    constraints
+      prep.f meets landmark.f
+  meaning:TrajectorLandmark
+    constraints
+      self.m <--> prep.m
+      self.m.landmark <--> landmark.m
+
+
+abstract construction Spatial-Preposition
+  form:WordForm
+  meaning:TrajectorLandmark
+
+construction Into
+  subcase of Spatial-Preposition
+  form
+    constraints
+      self.f.orth <-- "into"
+  meaning:SPG
+    evokes ContainerSchema as c
+    constraints
+      self.m.landmark <--> c
+      self.m.landmark <--> self.m.goal
+    

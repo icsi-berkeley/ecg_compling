@@ -1,0 +1,75 @@
+//
+// Modifier Schemas
+//
+
+
+// A simple modifier schema which is the root of the modifier schema hierarchy
+
+schema Modification
+	roles
+		kind // @modifier-type   for the specializer
+    	modifier
+     	modifiedThing
+     	negated //@yes or blank
+
+// A simple modifier schema for scalars like "big" or "red"
+
+schema ScalarModifier
+	subcase of Modification // does not use modifier role
+   	roles
+     	scale
+     	scalarValue
+
+schema ScalarComparison  //kind has greater, etc.
+	subcase of ScalarModifier
+   	roles
+		brandX // thing to compare against
+
+schema ProcessModifier
+	subcase of Modification
+   	roles
+     	modifiedThing: Process
+
+
+// A simple (atomic) attribute-filler modifier (e.g. someone's name)
+
+schema AttributeFiller  // Not currently used
+	subcase of Modification
+	roles
+		relationName
+		filler
+
+
+// For noun noun compounds, we need a way to underspecify the
+// relation between the two entities, so this one will leave the "relationName" 
+// role blank
+// and just specify the two entities that are in relation two each other
+
+schema NounNounModifier
+	subcase of Modification
+
+
+// Of course, frame based modifiers will also have to be a subcase of Modification
+
+schema NP-PP-Modifier
+	subcase of Modification
+	roles
+		modifier
+
+/*
+schema AdverbialModification
+	subcase of Modification
+	roles 
+		modifier: Adverbial
+*/
+
+// Adjuncts
+
+schema AdjunctModification // for VP
+	subcase of Modification
+	roles
+		kind // adjunct kind // instrument, etc.
+		adjunct  //unyped here
+	
+	
+	

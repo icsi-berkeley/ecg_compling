@@ -1,0 +1,98 @@
+/*
+construction Want	// a prototypical verb in terms of its inflections
+  subcase of ControlVerb, SuffixingVerb
+   form
+      constraints
+         self.f.stem <-- "want"
+   meaning:WantProcess
+
+
+construction WantPast
+  subcase of Want, PastVerb
+*/
+
+/*
+construction Slide
+  subcase of Verb
+  form: WLAblautEForm
+  	 constraints
+        self.f.initial <-- "sl"
+        self.f.mainV <-- "i"
+        self.f.final <-- "d"
+        self.f.silentE <-- "e"
+        //self.f.suffix <-- ""	// inherited
+        self.f.initial meets self.f.mainV
+        self.f.mainV meets self.f.final
+        self.f.final meets self.f.silentE
+        self.f.silentE meets self.f.suffix
+
+
+general construction InflectedVerb
+	subcase of Verb
+	constructional constraints
+		ignore self.features.verbform <-- NonFinite
+		
+construction PresentNot3SgVerb	// finite, present tense, 3 singular
+	subcase of InflectedVerb, PresentTense, SuffixingVerb
+	constructional
+		constraints
+			self.features.verbform <-- Present
+			self.features <-- VerbNotSg3
+
+construction Present3SgVerb	// finite, present tense, 3 singular
+	subcase of InflectedVerb, PresentTense, SuffixingVerb
+	constructional
+		constraints
+			self.morph.pres3SgType <-- "-s"
+			self.features.verbform <-- Present
+			self.features <-- VerbSg3
+	form constraints
+		ignore self.f.suffix <-- ""
+		       self.f.suffix <-- "s"
+
+construction PastVerb	// finite, past tense
+	subcase of InflectedVerb, AbstractPastVerb, SuffixingVerb
+	constructional
+		constraints
+			self.morph.pastType <-- "-ed"
+			self.features.verbform <-- Past
+	form constraints
+		ignore self.f.suffix <-- ""
+		       self.f.suffix <-- "ed"
+
+general construction IrregularPastVerb	// no stem--this should simply inherit from the bare verb 
+	subcase of AbstractPastVerb
+	constructional constraints
+		ignore self.morph.pastType <-- "-ed"
+		self.morph.pastType <-- "X"	// X stands for irregular (usu. with a stem-internal change)
+
+construction PrespartVerb	// present participle
+	subcase of InflectedVerb, PresentParticiple, SuffixingVerb
+	constructional
+		constraints
+			self.morph.prespartType <-- "-ing"
+			self.features.verbform <-- PresentParticiple
+	form constraints
+		ignore self.f.suffix <-- ""
+		       self.f.suffix <-- "ing"
+
+construction PastpartVerb	// past participle
+	subcase of InflectedVerb, PastParticiple, SuffixingVerb
+	constructional
+		constraints
+			self.morph.pastpartType <-- "-ed"
+			self.features.verbform <-- PastParticiple
+	form constraints
+		ignore self.f.suffix <-- ""
+		       self.f.suffix <-- "ed"
+		
+construction PastpartVerbN	// past participle with -n suffix (e.g. 'thrown')
+	subcase of PastpartVerb
+	constructional
+		constraints
+			ignore self.morph.pastpartType <-- "-ed"
+			self.morph.pastpartType <-- "-n"
+	form constraints
+		ignore self.f.suffix <-- "ed"
+		       self.f.suffix <-- "n"
+*/

@@ -1,0 +1,71 @@
+construction ROOT
+  constructional
+    constituents
+	rootconstituent: RootType
+  meaning
+    constraints
+	self.m <--> rootconstituent.m
+
+
+general construction RootType
+
+
+construction UnknownWord
+  subcase of Word, RootType
+  form  
+    constraints
+        self.f.orth <-- "UNKNOWN-ITEM"
+
+
+general construction HasAgreementFeatures
+  constructional: AgreementFeatures
+
+
+general construction HasVerbFeatures
+  subcase of HasAgreementFeatures
+  constructional: VerbFeatures
+  
+
+general construction HasNominalFeatures
+  subcase of HasAgreementFeatures
+  constructional: NominalFeatures
+  
+
+general construction Singular
+  subcase of HasAgreementFeatures
+  constructional
+    constraints
+      self.features.number <-- Sg
+
+general construction Plural
+  subcase of HasAgreementFeatures
+  constructional
+    constraints
+      self.features.number <-- Pl
+
+
+general construction FirstPerson
+  subcase of HasAgreementFeatures
+  constructional
+    constraints
+      self.features.person <-- Person1
+
+general construction SecondPerson
+  subcase of HasAgreementFeatures
+  constructional
+    constraints
+      self.features.person <-- Person2
+
+general construction ThirdPerson
+  subcase of HasAgreementFeatures
+  constructional
+    constraints
+      self.features.person <-- Person3
+
+
+general construction Word
+  subcase of WLMorph	//, RootType
+   form : WordForm
+
+
+

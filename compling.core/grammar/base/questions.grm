@@ -1,0 +1,17 @@
+/*	
+general construction Yes-No-Question
+  subcase of S-With-Aux-Inversion
+   
+
+Old Johno version - only use of extraposed
+
+construction Fronted-WH-Question
+	subcase of S-With-Aux-Inversion
+	constructional
+    	constituents
+			extraposed qnp: WH-NP
+  form
+    constraints
+      	qnp.f meets fin.f	
+	
+*/

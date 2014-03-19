@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/compling/source/compling/gui/GrammarWritingUtilities.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.debug.core.appendEnvironmentVariables" value="true"/>
+<stringAttribute key="org.eclipse.debug.ui.ATTR_CAPTURE_IN_FILE" value="C:\Documents and Settings\emok\Desktop\undefinedLex.txt"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="compling.gui.GrammarWritingUtilities"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="&quot;C:\Documents and Settings\emok\Desktop\pref files\prefLearnerMoreData.txt&quot;&#13;&#10;&quot;C:\Documents and Settings\emok\Desktop\pref files\prefSillySpeak.txt&quot;&#13;&#10;&quot;C:\Documents and Settings\emok\Desktop\pref files\prefLearnerNewData.txt&quot;&#13;&#10;&quot;C:\Documents and Settings\emok\Desktop\pref files\prefFullTestData.txt&quot;&#13;&#10;&quot;C:\Documents and Settings\emok\Desktop\pref files\prefFull.txt&quot;&#13;&#10;&quot;C:\Documents and Settings\emok\Desktop\pref files\prefLearner.txt&quot;&#13;&#10;&quot;C:\Documents and Settings\emok\Desktop\pref files\prefLearnerTestData.txt&quot;"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="compling"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dfile.encoding=UTF-8 -Xmx1024m -Xms256m"/>
+</launchConfiguration>

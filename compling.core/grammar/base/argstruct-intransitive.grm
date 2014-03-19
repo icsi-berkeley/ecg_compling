@@ -1,0 +1,9 @@
+
+
+construction IntransitiveArgumentStructure  
+  subcase of ArgumentStructure
+  meaning: Process
+    constraints
+      self.m.protagonist <--> ed.profiledParticipant
+      self.m <--> v.m
+

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHAT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.talkbank.org/ns/talkbank talkbank.xsd" xmlns="http://www.talkbank.org/ns/talkbank" Version="1.1.3" Lang="zh" Corpus="beijing" Id="cx4" Date="1984-01-01">
+	
+	<Participants>
+		<participant id="MOT" role="Mother" language="zh" />
+		<participant id="CHI" role="Target_Child" language="zh" />
+		<participant id="INV" role="Investigator" language="zh" />
+	</Participants>
+	
+	<!-- Mother tries to distract her fussing child with crayons -->
+	
+	<Setting>
+		<entity cat="Livingroom" id="livingroom"/>
+		<entity cat="Crayon" id="crayon"/>
+	</Setting>
+	
+	<Setup>
+		<binding field="location" source_ref="CHI" ref="table(livingroom)"/>
+		<binding field="location" source_ref="MOT" ref="table(livingroom)"/>
+		<binding field="location" source_ref="crayon" ref="table(livingroom)"/>
+	</Setup>
+	
+	<event cat="Find" id="find01">
+		<binding field="finder" ref="MOT"/>
+		<binding field="target" ref="crayon"/>
+	</event>	
+	
+	<u who="MOT" id="1015">
+		<clause>
+			<w>zher4</w><w>ne</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u1015sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="1016">
+		<clause>
+			<w>ma1</w><w>gei3</w><w>ni3</w><w>na2</w><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u1016sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<event cat="Fetch" id="find02">
+		<binding field="fetcher" ref="MOT"/>
+		<binding field="fetched" ref="crayon"/>
+	</event>
+	
+	<u who="MOT" id="1017">
+		<clause>
+			<w>gei3</w><w>ni3</w><w>na2</w><wn><w>cai3</w><wk type="cmp" /><w>bi3</w></wn><t type="p" />
+			<a type="speech act">
+				<sa cat="explaining" id="u1017sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">給你拿彩筆</a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="MOT" id="1018">
+		<clause>
+			<w>ni3</w><w>rang4</w><wn><w>a1</w><wk type="cmp" /><w>yi2</w></wn><wn><w>kan4</w><wk type="cmp" /><w>kan4</w></wn><w>ni3</w><w>de</w><w>bi3</w><wn><w>hao3</w><wk type="cmp" /><w>kan4</w></wn><w>bu4</w><wn><w>hao3</w><wk type="cmp" /><w>kan4</w></wn><t type="p" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u1018sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<u who="CHI" id="1019">
+		<clause>
+			<w>a<p type="drawl" /><k type="stressing" /></w><t type="p" />
+			<a type="speech act">
+				<sa cat="exclaiming" id="u1019sa1">
+					<binding field="speaker" ref="CHI"/>
+					<binding field="addressee" ref="MOT"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular"></a>
+			<a type="gold standard">
+				<semantic>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+</CHAT>

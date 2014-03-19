@@ -1,0 +1,158 @@
+//
+// grammaticalschemas.grm
+//
+
+
+schema RD // meaning of NP
+  roles
+    ontological-category // XXX: :@enumeration
+    givenness
+    referent 
+    number
+
+
+schema QuantitySchema
+	roles
+		value
+
+schema QuantifiedRD
+	subcase of RD
+	roles
+      	quant: QuantitySchema //subcases include numbers, “several”, etc.
+      	units: @units
+
+schema QuantifiedSpatialRD
+	subcase of QuantifiedRD
+	roles
+      	units: @nontemporal-units
+
+schema QuantifiedTemporalRD
+	subcase of QuantifiedRD
+    roles
+       	units: @temporal-units
+
+schema ProcessRD
+	subcase of RD
+	roles
+		ontological-category: @process
+		action: Process
+		repetitions
+		
+schema QuestionRD
+	subcase of RD
+	roles
+		specific: @wh-word
+			
+// A simple schema for a word
+schema WordForm
+  roles
+    orth
+
+// Constructional Agreement Features
+
+schema AgreementFeatureSet
+  roles
+    number
+    person
+
+schema AgreementFeatures
+  roles
+    features: AgreementFeatureSet
+
+
+schema NominalFeatureSet
+  subcase of AgreementFeatureSet
+  roles
+    case
+    massOrPlural //set to 'yes' for mass nouns and plural nouns
+
+
+schema NominalFeatures
+  subcase of AgreementFeatures
+  roles
+    features: NominalFeatureSet
+
+
+schema AuxFeatureSet
+  subcase of VerbFeatureSet
+  roles
+    expectedVerbForm // now not needed
+
+
+schema VerbFeatures
+  subcase of AgreementFeatures
+  roles
+    features: VerbFeatureSet
+
+schema VerbFeatureSet  // could add kind ~ control, etc.
+  subcase of AgreementFeatureSet
+  roles
+    verbform: FiniteOrNonFinite
+	verbkind: VerbKind
+	expectedVerbForm
+	
+schema AuxFeatures
+  subcase of VerbFeatures
+  roles
+    features: AuxFeatureSet
+
+
+/*
+schema Speech_Act // not currently used ~ Utterance
+    roles
+        speaker: RD
+        addressee: RD
+        content: EventDescriptor
+	constraints 
+		speaker.ontological-category <-- @sentient
+		addressee.ontological-category <-- @sentient
+*/
+
+schema DiscourseElement //meaning of Utterance
+    roles
+        speaker: RD 	// used to be @generic-person
+        addressee: RD 	// used to be @generic-person
+        attentional_focus  // not used yet
+        content: EventDescriptor
+        // epistemic: epistemic status, probability   
+        mood: @mood			// one of declarative, imperative, ...
+    constraints
+		speaker.ontological-category <-- @sentient
+		addressee.ontological-category <-- @sentient
+
+schema EventDescriptor // meaning of S
+	roles
+		eventProcess: Process		
+		e-features: EventFeatures
+		profiledProcess: Process	
+		profiledParticipant		
+		profiledStage
+				
+// TODO: needs work on roles
+schema EventFeatures
+	roles
+		telicity	
+		duration
+		voice: @voice
+		tense: @tense
+		modality: @modality
+		//preconditions   gone !!
+		 negated  
+
+schema ComplexED
+   subcase of EventDescriptor
+   roles
+   		ed1: EventDescriptor
+		ed2: EventDescriptor
+		
+schema SerialED
+   subcase of ComplexED
+   roles
+    	connective //: SerialConjunction  //  then, etc.
+	constraints  
+		profiledParticipant <--> ed1.profiledParticipant
+		e-features	<--> ed1.e-features
+		
+
+
+

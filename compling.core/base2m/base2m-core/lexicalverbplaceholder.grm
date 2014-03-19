@@ -1,0 +1,184 @@
+/*********************
+*** This file is just a place holder until the verb hierarchy gets
+*** worked out.
+**********************/
+
+
+
+general construction ControlVerb
+   subcase of Verb
+   meaning:ControlVerbProcess
+
+
+general construction CausativeVerb	// nschneid
+   subcase of Verb
+   meaning: CauseEffectAction
+
+/*
+construction SlidePast
+   subcase of Verb, PastTense
+   form
+      constraints
+         self.f.orth <-- "slid"
+   meaning: MotionPath 
+      constraints
+         self.m.x-net <-- @slide
+
+
+construction SlideBase
+   subcase of Verb, Base
+   form
+      constraints
+         self.f.orth <-- "slide"
+   meaning: MotionPath 
+      constraints
+         self.m.x-net <-- @slide
+
+
+construction SlidePresentParticiple
+   subcase of Verb, PresentPart
+   form
+      constraints
+         self.f.orth <-- "sliding"
+   meaning: MotionPath 
+      constraints
+         self.m.x-net <-- @slide
+
+
+construction SlidePastParticiple
+   subcase of Verb, PastPart
+   form
+      constraints
+         self.f.orth <-- "slid"
+   meaning: MotionPath 
+      constraints
+         self.m.x-net <-- @slide
+
+construction Walk
+   subcase of VerbStem, PresentNot3SgVerb
+   form
+      constraints
+         self.f.orth <-- "walk"
+   meaning: MotionPath 
+      constraints
+         self.m.x-net <-- @walk
+*/
+
+
+construction SLAP1
+   subcase of Verb   // may be subcase of FA Verbs and of EMP Verbs
+   form
+      constraints
+         self.f.orth <-- "slapped"
+   meaning: AgentiveImpactAction  
+      constraints
+         self.m.routine <-- @slap
+
+
+construction HIT1
+   subcase of Verb   // may be subcase of FA Verbs and of EMP Verbs
+   form
+      constraints
+         self.f.orth <-- "hit"
+   meaning: AgentiveImpactAction  
+      constraints
+         self.m.routine <-- @hit
+
+
+construction Give1
+   subcase of Verb
+   form
+      constraints
+         self.f.orth <-- "gave"
+   meaning: ObjectTransfer
+      constraints
+         self.m.x-net <-- @give
+
+
+construction ThrowPastTense
+   subcase of Verb
+   form
+      constraints
+         self.f.orth <-- "threw"
+   meaning: CauseMotionPathAction
+      constraints
+         self.m.x-net <-- @throw
+
+
+construction Bake1
+   subcase of Verb
+   form
+      constraints
+         self.f.orth <-- "baked"
+   meaning: CreationAction
+      constraints
+         self.m.x-net <-- @bake
+
+/*
+construction WANTED
+  subcase of ControlVerb
+   form
+      constraints
+         self.f.orth <-- "wanted"
+   meaning:WantProcess
+*/
+
+/*	// without allowing -ize verbs to be further inflected
+construction HOSPITALIZE_
+	subcase of Verb
+	constructional:VerbFeatures
+		constraints
+			features <--> VerbFeatureSet_26_
+	form
+		constraints
+			self.f.orth <-- "hospitalize"
+	meaning
+		evokes WLSuffixForm as WLSuffixForm_1_
+		evokes MotionPath as MotionPath_2_
+		evokes SPG as SPG_3_
+		evokes @entity as ONTOLOGY_entity_4_
+		evokes @complexxnet as ONTOLOGY_complexxnet_5_
+		evokes Institutionalization as Institutionalization_7_
+		evokes @animate as ONTOLOGY_animate_10_
+		evokes @entity as ONTOLOGY_entity_11_
+		evokes ForceApplication as ForceApplication_14_
+		evokes RD as RD_15_
+		evokes @hospital as ONTOLOGY_hospital_17_
+		evokes NominalFeatureSet as NominalFeatureSet_18_
+		evokes NounMorphDescriptors as NounMorphDescriptors_19_
+		evokes WordForm as WordForm_21_
+		evokes Sg as Sg_24_
+		evokes VerbFeatureSet as VerbFeatureSet_26_
+		constraints
+			WLSuffixForm_1_.affix <-- "ize"
+			WLSuffixForm_1_.suffix <-- "ize"
+			NominalFeatureSet_18_.massOrPlural <-- "no"
+			NounMorphDescriptors_19_.pluralType <-- "-s"
+			WordForm_21_.orth <-- "hospital"
+			self.m <--> Institutionalization_7_
+			Institutionalization_7_.process2 <--> MotionPath_2_
+			Institutionalization_7_.process1 <--> ForceApplication_14_
+			Institutionalization_7_.x-net <--> ONTOLOGY_complexxnet_5_
+			Institutionalization_7_.authority <--> ONTOLOGY_animate_10_
+			Institutionalization_7_.protagonist <--> ONTOLOGY_animate_10_
+			Institutionalization_7_.causer <--> ONTOLOGY_animate_10_
+			ForceApplication_14_.protagonist <--> ONTOLOGY_animate_10_
+			ForceApplication_14_.actor <--> ONTOLOGY_animate_10_
+			MotionPath_2_.mover <--> ONTOLOGY_entity_11_
+			MotionPath_2_.protagonist <--> ONTOLOGY_entity_11_
+			Institutionalization_7_.affected <--> ONTOLOGY_entity_11_
+			Institutionalization_7_.protagonist2 <--> ONTOLOGY_entity_11_
+			Institutionalization_7_.patient <--> ONTOLOGY_entity_11_
+			ForceApplication_14_.actedUpon <--> ONTOLOGY_entity_11_
+			MotionPath_2_.spg <--> SPG_3_
+			SPG_3_.goal <--> ONTOLOGY_entity_4_
+			Institutionalization_7_.facility <--> ONTOLOGY_entity_4_
+			RD_15_.referent <--> ONTOLOGY_entity_4_
+			NominalFeatureSet_18_.number <--> Sg_24_
+			RD_15_.ontological-category <--> ONTOLOGY_hospital_17_
+*/
+
+
+
+
+

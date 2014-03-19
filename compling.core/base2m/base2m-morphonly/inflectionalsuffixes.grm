@@ -1,0 +1,32 @@
+/*********************
+ Inflectional suffixes
+ *********************
+ nschneid
+ 2009-05-13
+*/
+
+general construction BareSuffix
+	subcase of WLSuffix
+	form constraints
+	  self.f.suffix <-- ""
+
+general construction SSuffix
+	subcase of WLSuffix
+	form constraints
+      self.f.suffix <-- "s"
+
+general construction EDSuffix
+	subcase of WLSuffix
+	form constraints
+		self.f.suffix <-- "ed"
+
+general construction NSuffix
+	subcase of WLSuffix
+	form constraints
+		self.f.suffix <-- "n"
+
+general construction INGSuffix
+	subcase of WLSuffix
+	form constraints
+		self.f.suffix <-- "ing"
+		

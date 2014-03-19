@@ -1,0 +1,126 @@
+/* This file contains the definitions of the roots of the
+* common nouns. */
+
+//
+// This is the root of nouns and noun noun compounds
+//
+general construction Nominal
+   subcase of HasNominalFeatures, RootType
+   meaning:RD 
+  
+  
+/**
+* Spanish morphology requires to distinguish between Singular and 
+* Plural nouns and gendered and ungendered roots. For example,
+* 'chic' (root for boy and girl) is an ungendered root  that 
+* requires a gender suffix and can also have a number suffix. 
+* However, nouns like 'clase' (classroom) have an implicit gender
+* and cannot have a gender suffix while they can have a number suffix.
+* (The same states for adjectives)
+*/  
+construction UngenderedRootPluralNoun
+	subcase of Nominal
+	constructional
+  	constituents
+  		root : UngenderedNounRoot
+		genderSuffix : GenderSuffix
+		numberSuffix : NumberSuffix
+  	constraints
+  		self.features.gender <--> genderSuffix.features.gender
+  		self.features.number <--> genderSuffix.features.number
+  form
+    constraints
+      	root.f meets genderSuffix.f
+      	genderSuffix.f meets numberSuffix.f
+  meaning
+    constraints
+    	self.m.gender <--> genderSuffix.m
+    	self.m.number <--> numberSuffix.m
+      	self.m <--> root.m
+
+
+construction UngenderedRootSingularNoun
+	subcase of Nominal
+	constructional
+  	constituents
+  		root : UngenderedNounRoot
+		suffix : GenderSuffix
+  	constraints
+  		self.features <--> suffix.features
+  form
+    constraints
+      	root.f meets suffix.f
+  meaning
+    constraints
+    	self.m.gender <--> suffix.m
+    	self.m.number <-- "singular"
+      	self.m <--> root.m
+      	
+      	
+construction GenderedRootPluralNoun
+	subcase of Nominal
+	constructional
+  	constituents
+  		root : GenderedNounRoot
+		suffix : NumberSuffix
+  	constraints
+  		self.features <--> suffix.features
+  form
+    constraints
+      	root.f meets suffix.f
+  meaning
+    constraints
+    	self.m.number <--> suffix.m
+      	self.m <--> root.m
+
+      	
+construction GenderedRootSingularNoun
+	subcase of Nominal
+	constructional
+		constituents 
+			root : GenderedNounRoot
+  		constraints 
+  			root.features.number <-- "singular"
+  			self.features <--> root.features
+  	meaning 
+    	constraints
+    		root.m.number <-- "singular"
+    		self.m <--> root.m
+
+
+
+/***********
+* Noun roots
+************/
+general construction UngenderedNounRoot
+	subcase of Morpheme
+	meaning : RD
+	
+general construction GenderedNounRoot
+	subcase of Morpheme, HasNominalFeatures
+	meaning : RD
+
+construction ChicRoot
+	subcase of UngenderedNounRoot
+	form
+      constraints
+         self.f.orth <-- "chic"
+   meaning
+    constraints
+      self.m.ontological-category <-- @chic
+      
+/* There are some noun roots that have an implicit gender 
+* (car, classroom...) so they do not have gender suffixes */
+construction ClaseRoot
+	subcase of GenderedNounRoot
+	constructional
+		constraints
+			self.features.gender <-- "feminine"
+	form
+      constraints
+         self.f.orth <-- "clase"
+   meaning
+    constraints
+      self.m.ontological-category <-- @clase
+
+		

@@ -1,0 +1,747 @@
+//============================================================
+// Everything in this section has to be learned
+//============================================================
+
+//============================================================
+// Lexicon: Morpheme, etc
+//============================================================
+
+Construction de-AM
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "de"	
+
+
+Construction de-NOM
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "de"
+
+
+
+//========================================
+// Lexicon: Aspect Markers
+//========================================
+
+Construction le
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "le"
+
+
+Construction guo4
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "guo4"
+
+
+Construction zhe
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "zhe"
+
+
+Construction zher
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "zher"
+
+
+//============================================================
+// Lexicon: Locative and Directional Morphemes
+//============================================================
+
+Construction zai4-CV
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "zai4"
+
+
+Construction dao4-CV
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "dao4"
+
+
+Construction wang3-CV
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "wang3"
+
+
+//============================================================
+// Lexicon: Other Morphemes
+//============================================================
+
+Construction ba3-CV
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "ba3"
+
+
+Construction yong4-CV
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "yong4"
+
+Construction gei3-CV
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "gei3"
+
+			
+//============================================================
+// Lexicon: Verbal Particles
+//============================================================
+
+
+Construction jin4-P
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "jin4"
+	meaning: Source_Path_Goal
+		evokes Container as container
+		evokes @Entity as ce
+		constraints
+			ce <--> container.container
+			self.m.source <--> container.outside
+			self.m.goal <--> container.inside
+			self.m.goal <--> container.container	//hack
+			self.m.path <-- @Enter_Path
+			
+
+Construction chu1-P
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "chu1"
+	meaning: Source_Path_Goal
+		evokes Container as container
+		evokes @Entity as ce
+		constraints
+			ce <--> container.container
+			self.m.source <--> container.inside
+			self.m.source <--> container.container	//hack
+			self.m.goal <--> container.outside			
+			self.m.path <-- @Out_Path
+
+
+//FIXME: there are two "senses" - chuan1 shang4 yi1 fu2; pa2 shang4 yi3 zi3; but tiu1 niu2 shang4 shu4
+Construction shang4-P	
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "shang4"
+	meaning: Source_Path_Goal
+		evokes Up_Down as up_down
+		evokes @Entity as ce
+		constraints
+			ce <--> up_down.highpoint
+			self.m.source <--> up_down.lowpoint
+			self.m.goal <--> up_down.highpoint
+			self.m.path <-- @Up_Path
+
+
+Construction xia4-P	//FIXME: there are two "senses" - fang4 xia4 shu1 ben; zou3 xia4 shan1 bo1
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "xia4"
+	meaning: Source_Path_Goal
+		evokes Up_Down as up_down
+		evokes @Entity as ce
+		constraints
+			ce <--> up_down.lowpoint
+			self.m.source <--> up_down.lowpoint
+			self.m.goal <--> up_down.highpoint
+			self.m.path <-- @Down_Path
+
+
+Construction hui2-P
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "hui2"
+	meaning: Source_Path_Goal
+		evokes @Entity as ce
+		constraints
+			ce <--> self.m.goal
+			self.m.path <-- @Return_Path
+
+
+Construction qi3-P
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "qi3"
+	meaning: Source_Path_Goal
+		evokes @Entity as ce
+		constraints
+			self.m.path <-- @Rising_Path	
+
+
+Construction guo4-P
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "guo4"
+	meaning: Source_Path_Goal
+		evokes Orientation as orientation
+		evokes Boundary as boundary
+		evokes @Entity as ce
+		constraints
+			ce <--> orientation.body
+			orientation.long-axis <--> boundary.boundary
+			self.m.source <--> boundary.areaA
+			self.m.goal <--> boundary.areaB
+			self.m.path <-- @Across_Path
+
+
+Construction qu4-D
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "qu4"
+	meaning: Source_Path_Goal
+		evokes @Entity as ce
+		constraints
+			self.m.deixis <-- @Deitic_Away
+
+
+Construction lai2-D
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "lai2"
+	meaning: Source_Path_Goal
+		evokes @Entity as ce
+		constraints
+			self.m.deixis <-- @Deitic_Towards
+
+
+//========================================
+// Lexicon: Classifier
+//========================================
+
+// Quantification
+//=================
+
+Construction xie1-C
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "xie1"
+
+Construction dian3-C
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "dian3"
+
+// Entity Individuation
+//=================
+
+Abstract Construction ge4_variant-C
+	subcase of Morpheme
+
+
+Construction ge-C
+	subcase of ge4_variant-C
+	form
+		constraints
+			self.f.orth <-- "ge"
+
+
+Construction ge4-C
+	subcase of ge4_variant-C
+	form
+		constraints
+			self.f.orth <-- "ge4"
+
+
+Abstract Construction kuai4_variant-C
+	subcase of Morpheme
+
+
+Construction kuai4-C
+	subcase of kuai4_variant-C
+	form
+		constraints
+			self.f.orth <-- "kuai4"
+
+
+Construction kuair4-C
+	subcase of kuai4_variant-C
+	form
+		constraints
+			self.f.orth <-- "kuair4"	
+
+
+Abstract Construction ben3_variant-C
+	subcase of Morpheme
+
+Construction ben3-C
+	subcase of ben3_variant-C
+	form
+		constraints
+			self.f.orth <-- "ben3"
+
+
+Construction benr3-C
+	subcase of ben3_variant-C
+	form
+		constraints
+			self.f.orth <-- "benr3"
+
+
+Construction banr4-C
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "banr4"
+
+
+Construction dianr3-C
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "dianr3"
+
+
+Construction tao4-C
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "tao4"
+
+
+Construction shou3-C
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "shou3"
+
+
+Construction zhang1-C
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "zhang1"
+
+
+Construction zhi1-C
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "zhi1"
+
+// Event Individuation
+//=================
+
+Construction ci4-C
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "ci4"
+
+
+Construction tang4-C
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "tang4"
+
+//============================================================
+// Lexicon: Locative Particles
+//============================================================
+
+
+Construction hou4-L
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "hou4"
+
+
+Construction hou4tou-Cmp-L
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "hou4+tou"
+
+
+Construction li3-L
+	subcase of Morpheme 
+	form
+		constraints
+			self.f.orth <-- "li3"
+
+
+Construction li3mian4-Cmp-L
+	subcase of Morpheme 
+	form
+		constraints
+			self.f.orth <-- "li3+mian4"
+
+
+Construction li3tou-Cmp-L
+	subcase of Morpheme 
+	form
+		constraints
+			self.f.orth <-- "li3+tou"
+
+
+Construction qian2-L
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "qian2"
+
+
+Construction shang4-L
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "shang4"
+
+
+Construction shang4tou2-Cmp-L
+	subcase of Morpheme 
+	form
+		constraints
+			self.f.orth <-- "shang4+tou2"
+
+
+Construction xia4-L
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "xia4"
+
+
+Construction wai4-L
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "wai4"
+
+
+//========================================
+// Lexicon: Sentence Final Particles
+//========================================
+
+
+/* 
+*********************************************
+sentence-final particles are analyzed by Li & Thompson 
+as denoting the following speech acts:
+
+le 'currently relevant state'
+ne 'response to expectation'
+ba 'solicit agreement'
+ou 'friendly warning'
+a/ya 'reduce forcefulness'
+
+I have made the following modification and mapping to schemas
+(though the mapping is often not clear-cut or one-to-one):
+
+le -- Explaining
+ne/nou -- Explaining (but sometimes used in requests as well)
+ba -- Requesting_Action with low forcefulness
+ao/ou -- Admonishing with low forcefulness
+a/la/ya -- underspecifies speech act, but set low forcefulness
+ma -- requesting answer with low forcefulness
+none -- high forcefulness (blunt)
+*********************************************
+*/
+
+Construction le-SP
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "le"
+
+Construction na-SP
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "na"
+
+Construction ne-SP
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "ne"
+
+Construction nei-SP
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "nei"
+
+Construction nou-SP1
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "nou"
+
+Construction ba-SP
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "ba"
+
+Construction ao-SP
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "ao"
+
+Construction ou-SP
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "ou"
+
+Construction a-SP
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "a"
+
+Construction la-SP
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "la"
+
+Construction ya-SP
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "ya"
+
+Abstract Construction ma_variant-SP
+	subcase of Morpheme
+
+Construction ma-SP
+	subcase of ma_variant-SP
+	form
+		constraints	
+			self.f.orth <-- "ma"
+
+Construction ma2-SP
+	subcase of ma_variant-SP
+	form
+		constraints	
+			self.f.orth <-- "ma2"
+
+Construction lai2zhe-Cmp-SP
+	subcase of Morpheme
+	form
+		constraints
+			self.f.orth <-- "lai2+zhe"
+
+//========================================
+// Conjunctions
+//========================================
+
+Construction he2-J
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "he2"
+
+
+Construction huo4-J
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "huo4"
+
+
+Construction gen1-J
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "gen1"
+
+//========================================
+// Lexicon: Linkers, Modals, and non-manner Adverbials
+//========================================
+
+Construction bi4xu1-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "bi4+xu1"
+
+Construction cai2-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "cai2"
+
+Construction chong2-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "chong2"
+
+Construction dou1-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "dou1"
+
+Construction hui4-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "hui4"
+
+
+Construction jiu4-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "jiu4"
+
+
+Construction ke2yi3-Cmp-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "ke2+yi3"
+
+
+Construction ke3jiu4-Cmp-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "ke3+jiu4"
+
+
+Construction ye3-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "ye3"
+
+
+Construction dei3-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "dei3"	
+
+
+Construction gai1-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "gai1"	
+
+
+Construction neng2-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "neng2"	
+
+
+Construction ke3yi3-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "ke3+yi3"
+
+
+Construction hai2-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "hai2"
+
+
+Construction lao3-A2
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "lao3"
+
+
+Construction xian1-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "xian1"
+
+
+Construction yi3jing1-Cmp-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "yi3+jing1"
+
+
+Construction yao4bu4ran2-Cmp-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "yao4+bu4+ran2"
+
+
+Construction yao4ma-Cmp-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "yao4+ma"
+
+
+Construction yao4shi4-Cmp-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "yao4+shi4"
+
+
+Construction ying1-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "ying1"
+
+
+Construction ying1gai1-Cmp-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "ying1+gai1"
+
+
+Construction you4-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "you4"
+
+
+Construction zai4-A
+	subcase of Morpheme
+	form
+		constraints	
+			self.f.orth <-- "zai4"

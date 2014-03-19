@@ -1,0 +1,6 @@
+SCRIPT CHI {
+	exec (inst childHand Hand);
+	exec (inst childFace Face);
+	exec (inst childShoulder Shoulder);
+	//exec (inst CHI Child fil (name "Xixi") (gender "female") (hand childHand) (face childFace));
+}

@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<CHAT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talkbank.org/ns/talkbank" xsi:schemaLocation="http://www.talkbank.org/ns/talkbank talkbank.xsd" Version="1.1.3" Lang="zh" Corpus="beijing" Id="cx1" Date="1984-01-01">
+	
+	<Participants>
+		<participant id="CHI" name="XiXi" role="Target_Child" language="zh" age="P1Y9M25D" />
+		<participant id="MOT" role="Mother" language="zh" SES="Worker" />
+		<participant id="INV" name="XiaLing_and_Niu" role="Investigator" language="zh" />
+	</Participants>
+	
+	
+	<Setting>
+		<entity cat="Diningroom" id="diningroom"/>
+		<entity cat="Livingroom" id="livingroom"/>
+		<entity cat="Rice" id="rice"/>
+		<entity cat="Bowl" id="bowl"/>
+		<entity cat="Soup" id="soup"/>
+	</Setting>
+	
+	<u who="MOT" id="117">		
+		<clause>
+			<w>ma1</w><w>gei3</w><w>ni3</w><w>na2</w><w>fanr4</w><pause fluency="fluent" symbolic-length="simple" />
+			<a type="speech act">
+				<sa cat="explaining" id="u117sa3">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">媽給你拿飯</a>
+			<a type="gold standard">
+				<semantic>				
+					<temporal_element left="3" right="4" cat="Fetch" id="u117te3">
+						<binding field="fetcher" ref="MOT"/>
+						<binding field="fetched" ref="rice"/>
+					</temporal_element>
+					<temporal_structure left="0" right="5" cat="Joint_Motion" profiled="u117te3" id="u117ts3">
+						<binding field="principle_mover" ref="MOT"/>
+						<binding field="other_mover" ref="rice"/>	
+					</temporal_structure>
+					<benefaction>
+						<binding field="benefactor" left="0" right="1" ref="MOT"/>
+						<binding field="beneficiary" left="2" right="3" ref="CHI"/>
+						<binding field="benefit" left="3" right="5" ref="u117ts3"/>
+					</benefaction>				
+				</semantic>
+			</a>	
+		</clause>
+	</u>
+			
+	<event cat="Grasp" id="grasp03">
+		<binding field="grasper" ref="MOT"/>
+		<binding field="grasped" ref="bowl"/>
+	</event>
+	
+	<event cat="Release_Grasp" id="release_grasp04">
+		<binding field="grasper" ref="MOT"/>
+		<binding field="grasped" ref="bowl"/>
+	</event>	
+	
+	<u who="MOT" id="490">
+		<clause>
+			<w>beng2</w><w>na2</w><w>zhei4</w><w>wanr3</w><w>le</w><t type="e" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u490sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Normal"/>
+				</sa>
+			</a>
+			<a type="vernacular">甭拿這碗兒了</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="1" right="2" cat="Grasp" id="u490te1">
+						<binding field="grasper" ref="MOT"/>
+						<binding field="grasped" left="2" right="5" ref="bowl"/>
+					</temporal_element>
+					<temporal_structure left="1" right="5" cat="Transitive_Action" profiled="u490te1" id="u490ts1">
+						<binding field="agent" ref="MOT"/>
+						<binding field="patient" left="2" right="5" ref="bowl"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+	
+	<event cat="Grasp" id="grasp05">
+		<binding field="grasper" ref="MOT"/>
+		<binding field="grasped" ref="bowl"/>
+	</event>
+	
+	<event cat="Serve" id="serve06">
+		<binding field="server" ref="MOT"/>
+		<binding field="food" ref="soup"/>
+		<binding field="container" ref="bowl"/>
+	</event>
+	
+	<u who="MOT" id="497">
+		<clause>
+			<w>na2</w><w>wanr3</w><w>he1</w><w>ba</w><pause fluency="fluent" symbolic-length="simple" length="20" />
+			<a type="speech act">
+				<sa cat="requesting-action" id="u497sa1">
+					<binding field="speaker" ref="MOT"/>
+					<binding field="addressee" ref="CHI"/>
+					<binding field="forcefulness" value="Reduced"/>
+				</sa>
+			</a>
+			<a type="vernacular">拿碗喝吧 !</a>
+			<a type="gold standard">
+				<semantic>
+					<temporal_element left="0" right="1" cat="Grasp" id="u497te1">
+						<binding field="grasper" ref="CHI"/>
+						<binding field="grasped" left="1" right="2" ref="bowl"/>
+					</temporal_element>
+					<temporal_structure left="0" right="3" cat="Transitive_Action" profiled="u497te1" id="u497ts1">
+						<binding field="agent" ref="CHI"/>
+						<binding field="patient" left="1" right="2" ref="bowl"/>
+					</temporal_structure>
+					
+					<temporal_element left="2" right="3" cat="Drink" id="u497te2">
+						<binding field="drinker" ref="CHI"/>
+						<binding field="beverage" ref="soup"/>
+					</temporal_element>
+					<temporal_structure left="2" right="3" cat="Transitive_Action" profiled="u497te2" id="u497ts2">
+						<binding field="agent" ref="CHI"/>
+						<binding field="patient" ref="soup"/>
+						<binding field="instrument" left="1" right="2" ref="bowl"/>
+					</temporal_structure>
+					
+					<temporal_structure left="0" right="4" cat="Concurrent_Processes">
+						<binding field="agent"  ref="CHI"/>
+						<binding field="process1" left="0" right="3" ref="u497ts1"/>
+						<binding field="process2" left="3" right="4" ref="u497ts2"/>
+					</temporal_structure>
+				</semantic>
+			</a>
+		</clause>
+	</u>
+</CHAT>
+	

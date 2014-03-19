@@ -1,0 +1,211 @@
+
+/********************	
+/* Verbal suffixes  (regular)
+/* Not worrying for the tense and aspect by the moment
+/* Added a conjugation feature to the VerbFeatureSet
+********************/
+general construction VerbalSuffix
+	subcase of Suffix, HasVerbFeatures
+
+/****************************/
+/* First conjugation present*/
+/*First person singular*/
+construction S1Present1ConjSuffix
+	subcase of VerbalSuffix, PresentTense,
+		Singular, FirstPerson, FirstConjugation
+	form
+		constraints
+			self.f.orth <-- "o"
+			
+/*Second person singular*/
+construction S2Present1ConjSuffix
+	subcase of VerbalSuffix, PresentTense,
+		Singular, SecondPerson, FirstConjugation
+	form
+		constraints
+			self.f.orth <-- "as"
+			
+/*Third person singular*/
+construction S3Present1ConjSuffix
+	subcase of VerbalSuffix, PresentTense,
+		Singular, ThirdPerson, FirstConjugation
+	form
+		constraints
+			self.f.orth <-- "a"
+
+/*First person plural*/
+construction P1Present1ConjSuffix
+	subcase of VerbalSuffix, PresentTense,
+		Plural, FirstPerson, FirstConjugation
+	form
+		constraints
+			self.f.orth <-- "amos"
+
+/*Second person plural*/
+construction P2Present1ConjSuffix
+	subcase of VerbalSuffix, PresentTense,
+		Plural, SecondPerson, FirstConjugation
+	form
+		constraints
+			self.f.orth <-- "áis"
+
+/*Third person plural*/
+construction P3Present1ConjSuffix
+	subcase of VerbalSuffix, PresentTense,
+		Plural, ThirdPerson, FirstConjugation
+	form
+		constraints
+			self.f.orth <-- "an"
+		
+/****************************/	
+/* First conjugation past*/
+/*First person singular*/
+construction S1Past1ConjSuffix
+	subcase of VerbalSuffix, PastTense,
+		Singular, FirstPerson, FirstConjugation
+	form
+		constraints
+			self.f.orth <-- "é"
+
+/*Second person singular*/
+construction S2Past1ConjSuffix
+	subcase of VerbalSuffix, PastTense,
+		Singular, SecondPerson, FirstConjugation
+	form
+		constraints
+			self.f.orth <-- "aste"
+			
+/*Third person singular*/
+construction S3Past1ConjSuffix
+	subcase of VerbalSuffix, PastTense,
+		Singular, ThirdPerson, FirstConjugation
+	form
+		constraints
+			self.f.orth <-- "ó"
+			
+/*First person plural*/
+construction P1Past1ConjSuffix
+	subcase of VerbalSuffix, PastTense,
+		Plural, FirstPerson, FirstConjugation
+	form
+		constraints
+			self.f.orth <-- "amos"
+
+/*Second person plural*/
+construction P2Past1ConjSuffix
+	subcase of VerbalSuffix, PastTense,
+		Plural, SecondPerson, FirstConjugation
+	form
+		constraints
+			self.f.orth <-- "asteis"
+			
+/*Third person plural*/
+construction P3Past1ConjSuffix
+	subcase of VerbalSuffix, PastTense,
+		Plural, ThirdPerson, FirstConjugation
+	form
+		constraints
+			self.f.orth <-- "aron"	
+			
+			
+			
+/****************************/	
+/* Third conjugation present*/
+/*First person singular*/
+construction S1Present3ConjSuffix
+	subcase of VerbalSuffix, PresentTense,
+		Singular, FirstPerson, ThirdConjugation
+	form
+		constraints
+			self.f.orth <-- "o"
+			
+/*Second person singular*/
+construction S2Present3ConjSuffix
+	subcase of VerbalSuffix, PresentTense,
+		Singular, SecondPerson, ThirdConjugation
+	form
+		constraints
+			self.f.orth <-- "es"
+			
+/*Third person singular*/
+construction S3Present3ConjSuffix
+	subcase of VerbalSuffix, PresentTense,
+		Singular, ThirdPerson, ThirdConjugation
+	form
+		constraints
+			self.f.orth <-- "e"
+			
+/*First person plural*/
+construction P1Present3ConjSuffix
+	subcase of VerbalSuffix, PresentTense,
+		Plural, FirstPerson, ThirdConjugation
+	form
+		constraints
+			self.f.orth <-- "imos"			
+
+/*Second person plural*/
+construction P2Present3ConjSuffix
+	subcase of VerbalSuffix, PresentTense,
+		Plural, SecondPerson, ThirdConjugation
+	form
+		constraints
+			self.f.orth <-- "ís"
+
+/*Third person plural*/
+construction P3Present3ConjSuffix
+	subcase of VerbalSuffix, PresentTense,
+		Plural, ThirdPerson, ThirdConjugation
+	form
+		constraints
+			self.f.orth <-- "en"			
+			
+			
+/****************************/	
+/* Third conjugation past*/
+/*First person singular*/
+construction S1Past3ConjSuffix
+	subcase of VerbalSuffix, PastTense,
+		Singular, FirstPerson, ThirdConjugation
+	form
+		constraints
+			self.f.orth <-- "í"
+			
+/*Second person singular*/
+construction S2Past3ConjSuffix
+	subcase of VerbalSuffix, PastTense,
+		Singular, SecondPerson, ThirdConjugation
+	form
+		constraints
+			self.f.orth <-- "iste"
+			
+/*Third person singular*/
+construction S3Past3ConjSuffix
+	subcase of VerbalSuffix, PastTense,
+		Singular, ThirdPerson, ThirdConjugation
+	form
+		constraints
+			self.f.orth <-- "ió"
+
+/*First person plural*/
+construction P1Past3ConjSuffix
+	subcase of VerbalSuffix, PastTense,
+		Plural, FirstPerson, ThirdConjugation
+	form
+		constraints
+			self.f.orth <-- "imos"
+
+/*Second person plural*/
+construction P2Past3ConjSuffix
+	subcase of VerbalSuffix, PastTense,
+		Plural, SecondPerson, ThirdConjugation
+	form
+		constraints
+			self.f.orth <-- "isteis"
+			
+/*Third person plural*/
+construction P3Past3ConjSuffix
+	subcase of VerbalSuffix, PastTense,
+		Plural, ThirdPerson, ThirdConjugation
+	form
+		constraints
+			self.f.orth <-- "ieron"

@@ -1,0 +1,51 @@
+//
+// conjunctions.grm
+//
+
+general construction Conjunction
+	subcase of Word
+	
+construction Or
+	subcase of Conjunction
+   	form
+		constraints
+         	self.f.orth <-- "or"
+	
+
+general construction SerialConjunction 
+	subcase of Conjunction
+	
+	general construction SerialVPConjunction 
+	subcase of SerialConjunction
+	
+/*
+construction And-Serial
+	subcase of SerialConjunction
+   	form
+		constraints
+         	self.f.orth <-- "and"
+*/	
+
+construction Then-Serial
+	subcase of SerialConjunction
+   	form
+		constraints
+         	self.f.orth <-- "then"
+	
+
+general construction LogicalConjunction 
+	subcase of Conjunction
+	
+
+construction And-Logical
+	subcase of LogicalConjunction
+   	form
+		constraints
+         	self.f.orth <-- "and"
+	
+construction Than
+	subcase of SerialConjunction
+   	form
+		constraints
+         	self.f.orth <-- "than"
+	

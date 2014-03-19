@@ -1,0 +1,498 @@
+//========================================
+// Lexicon: Interjections
+//========================================
+
+Construction a-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints	
+			self.f.orth <-- "a"
+
+Construction a1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "a1"
+
+Construction a2-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "a2"
+
+Construction a4-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "a4"
+
+Construction ah-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ah"
+
+Construction ahn-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ahn"
+
+Abstract Construction ai1_variant-INJ
+	subcase of Interjection_Morpheme
+
+Construction ai-INJ
+	subcase of ai1_variant-INJ
+	form
+		constraints
+			self.f.orth <-- "ai"
+
+Construction ai1-INJ
+	subcase of ai1_variant-INJ
+	form
+		constraints
+			self.f.orth <-- "ai1"
+
+Construction ai2-INJ
+	subcase of ai1_variant-INJ
+	form
+		constraints
+			self.f.orth <-- "ai2"
+
+
+Construction aiyou-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "aiyou"
+
+Construction ai1you
+	subcase of Interjection
+	constructional
+		constituents
+			a : ai1_variant-INJ
+			y : you-INJ
+	form
+		constraints
+			a.f meets y.f
+
+Construction aiya-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "aiya"
+
+Construction aiyou4-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "aiyou4"
+
+Construction akhah-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "akhah"
+
+Construction an2-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "an2"
+
+Construction ang-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ang"
+
+Construction ang1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ang1"
+
+Construction ang4-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ang4"
+
+Construction ao-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ao"
+
+Construction ao1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ao1"
+
+Construction ao4-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ao4"
+
+Construction ar-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ar"
+
+Construction du1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "du1"
+
+Construction e-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "e"
+
+Construction e1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "e1"
+
+Construction eh-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "eh"
+
+Construction ei-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ei"
+
+Construction ei1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ei1"
+
+Construction ei2-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ei2"
+
+Construction ei4-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ei4"
+
+Construction em-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "em"
+
+Construction em1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "em1"
+
+Construction em2-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "em2"
+
+Construction em4-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "em4"
+
+Construction emg-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "emg"
+
+Construction emn-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "emn"
+
+Construction en-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "en"
+
+Construction en1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "en1"
+
+Construction en2-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "en2"
+
+Construction en4-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "en4"
+
+Construction eng-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "eng"
+
+Construction eng1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "eng1"
+
+Construction eng2-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "eng2"
+
+Construction eng4-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "eng4"
+
+Construction enh-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "enh"
+
+Construction enn-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "enn"
+
+
+Construction enna-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "enna"
+
+Construction ha1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ha1"
+
+Construction ha4-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ha4"
+
+Construction haha-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "haha"
+
+Construction hang1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "hang1"
+
+Construction hai1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "hai1"
+
+Construction hai4-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "hai4"
+
+Construction heh1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "heh1"
+
+Construction hei-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "hei"
+
+Construction heng1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "heng1"
+
+Construction hm-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "hm"
+
+Construction hmm1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "hmm1"
+
+Construction hmmm-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "hmmm"
+
+Construction lei1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "lei1"
+
+Construction lou-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "lou"
+
+Construction lou1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "lou1"
+
+Construction na-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "na"
+
+Construction ne4-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ne4"
+
+Construction ni-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ni"
+
+Construction niu-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "niu"
+
+Construction ou3-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ou3"
+
+Construction ta1ma-Cmp-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ta1+ma"
+
+Construction tsch-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "tsch"
+
+Construction umemm4-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "umemm4"
+
+Construction wa4-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "wa4"
+
+Construction wu-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "wu"
+
+Construction wu1-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "wu1"
+
+Construction xie4xie4-Cmp-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints	
+			self.f.orth <-- "xie4+xie4"
+
+Construction ya-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ya"
+
+Construction ya2-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ya2"
+
+Construction ya4-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ya4"
+
+Construction yer2-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "yer2"
+
+Construction you-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "you"
+
+Construction you4-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "you4"
+
+Construction ze-INJ
+	subcase of Interjection_Morpheme
+	form
+		constraints
+			self.f.orth <-- "ze"

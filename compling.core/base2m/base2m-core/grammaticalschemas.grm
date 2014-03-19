@@ -1,0 +1,179 @@
+// A simple RD schema
+schema RD
+  roles
+    ontological-category
+    givenness
+    referent 
+    number
+
+
+// A simple schema for a word
+schema WordForm
+  subcase of MorphForm
+
+schema AgreementFeatureSet
+  roles
+    number: NumberFeature	// types: nschneid
+    person: PersonFeature
+
+schema AgreementFeatures
+  subcase of MorphFeatures
+  roles
+    features: AgreementFeatureSet
+
+
+schema NominalFeatureSet
+  subcase of AgreementFeatureSet
+  roles
+    case
+    massOrPlural //set to 'yes' for mass nouns and plural nouns
+
+
+schema NominalFeatures
+  subcase of AgreementFeatures
+  roles
+    features:NominalFeatureSet
+
+
+schema VerbFeatureSet
+  subcase of AgreementFeatureSet
+  roles
+    verbform
+
+
+schema AuxFeatureSet
+  subcase of VerbFeatureSet
+  roles
+    expectedVerbForm
+
+
+schema VerbFeatures
+  subcase of AgreementFeatures
+  roles
+    features:VerbFeatureSet
+	//morph:VerbMorphDescriptors	// nschneid
+
+
+schema AuxFeatures
+  subcase of VerbFeatures
+  roles
+    features:AuxFeatureSet
+
+schema SentenceFeatureSet
+  roles
+    mood
+
+schema SentenceFeatures
+   roles
+     features: SentenceFeatureSet
+
+
+
+schema NounInflectionMeaning
+  roles
+    number
+
+
+
+/*
+schema EventDescriptor 
+	roles
+		eventType: Process		
+		profiledProcess: Process	
+		profiledParticipant		
+*/
+
+
+schema WH-Question-SpeechAct
+  roles
+    focus
+
+
+
+
+
+// nschneid - Person/number feature schemas to facilitate e.g. inflections of 'be'
+
+// Joint schemas
+
+schema NotSg3 subcase of AgreementFeatureSet
+
+schema Sg2OrPl subcase of AgreementFeatureSet
+
+schema NotSg2OrPl subcase of AgreementFeatureSet
+
+schema Sg1 subcase of NotSg3, NotSg2OrPl
+constraints
+	person <-- Person1
+	number <-- Sg
+
+schema Sg2 subcase of NotSg3, Sg2OrPl
+constraints
+	person <-- Person2
+	number <-- Sg
+
+schema Sg3 subcase of NotSg2OrPl
+constraints
+	person <-- Person3
+	number <-- Sg
+
+schema Pl1 subcase of NotSg3, Sg2OrPl
+constraints
+	person <-- Person1
+	number <-- Pl
+
+schema Pl2 subcase of NotSg3, Sg2OrPl
+constraints
+	person <-- Person2
+	number <-- Pl
+
+schema Pl3 subcase of NotSg3, Sg2OrPl
+constraints
+	person <-- Person3
+	number <-- Pl
+
+// Verb counterparts, for type correctness
+
+schema VerbNotSg3 subcase of NotSg3, VerbFeatureSet	// present tense agreement
+
+schema VerbNotSg2OrPl subcase of NotSg2OrPl, VerbFeatureSet	// 'was'
+
+schema VerbSg2OrPl subcase of Sg2OrPl, VerbFeatureSet	// 'were'
+
+schema VerbSg1 subcase of Sg1, VerbFeatureSet
+
+schema VerbSg2 subcase of Sg2, VerbFeatureSet
+
+schema VerbSg3 subcase of Sg3, VerbFeatureSet
+
+schema VerbPl1 subcase of Pl1, VerbFeatureSet
+
+schema VerbPl2 subcase of Pl2, VerbFeatureSet
+
+schema VerbPl3 subcase of Pl3, VerbFeatureSet
+
+
+// Number only
+
+schema NumberFeature
+
+schema Pl subcase of NumberFeature
+
+schema Sg subcase of NumberFeature
+
+// Person only
+
+schema PersonFeature
+
+schema NotPerson3 subcase of PersonFeature
+
+schema Person1 subcase of NotPerson3
+
+schema Person2 subcase of NotPerson3
+
+schema Person3 subcase of PersonFeature
+
+
+
+
+

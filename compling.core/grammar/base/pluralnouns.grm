@@ -1,0 +1,82 @@
+/**********
+***
+*** Plural Nouns
+***
+***********/
+
+general construction PluralNoun
+  subcase of Noun, Plural
+   constructional
+     constraints
+       self.features.massOrPlural <-- "yes"  
+   meaning
+    constraints
+      self.m.number <-- ">1"
+
+
+construction Centimeters
+   subcase of PluralNoun
+   form
+      constraints
+         self.f.orth <-- "cm"
+      meaning
+    constraints
+      self.m.ontological-category <--  @centimeter
+
+construction Inches
+   subcase of PluralNoun
+   form
+      constraints
+         self.f.orth <-- "inches"
+      meaning
+    constraints
+      self.m.ontological-category <--  @inch
+
+construction Squares
+   subcase of PluralNoun
+   form
+      constraints
+         self.f.orth <-- "squares"
+      meaning
+    constraints
+      self.m.ontological-category <--  @square
+
+construction Blocks
+   subcase of PluralNoun
+   form
+      constraints
+         self.f.orth <-- "blocks"
+      meaning
+    constraints
+      self.m.ontological-category <--  @block
+
+construction Boxes
+   subcase of PluralNoun
+   form
+      constraints
+         self.f.orth <-- "boxes"
+      meaning
+    constraints
+      self.m.ontological-category <--  @box
+      
+construction Robots
+   subcase of PluralNoun
+   form
+      constraints
+         self.f.orth <-- "robots"
+      meaning
+    constraints
+      self.m.ontological-category <--  @robot
+      
+construction Minutes
+   	subcase of PluralNoun
+   	form
+      	constraints
+         	self.f.orth <-- "minutes"
+	meaning: QuantifiedTemporalRD
+    	constraints
+      		self.m.ontological-category <-- @temporal-units
+      		self.m.units <-- @minutes
+
+
+      
