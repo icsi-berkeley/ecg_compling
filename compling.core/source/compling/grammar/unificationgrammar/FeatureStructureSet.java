@@ -71,8 +71,7 @@ public class FeatureStructureSet implements Cloneable {
 			// iteration
 			if (map.containsKey(role)) {
 				slot = map.get(role);
-			}
-			else {
+			} else {
 				return false;
 
 			}
@@ -91,8 +90,7 @@ public class FeatureStructureSet implements Cloneable {
 			// iteration
 			if (map.containsKey(role)) {
 				slot = map.get(role);
-			}
-			else {
+			} else {
 				slot = new Slot(role);
 				map.put(role, slot);
 				allSlots.add(slot);
@@ -152,8 +150,7 @@ public class FeatureStructureSet implements Cloneable {
 		atom = interner.intern(atom);
 		if (slot.hasAtomicFiller()) {
 			return slot.atom == atom;
-		}
-		else if (!slot.hasFiller()) {
+		} else if (!slot.hasFiller()) {
 			slot.atom = atom;
 			slot.realFiller = true;
 			return true;
@@ -198,8 +195,7 @@ public class FeatureStructureSet implements Cloneable {
 			fss.roots = new HashSet<Slot>();
 			fss.myRoot = fss.slotCopier(this.allSlots, this.roots, this.myRoot);
 			return fss;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("Inexplicable meltdown in FeatureStructureSet.clone: " + e);
 			throw new GrammarException("Inexplicable meltdown in FeatureStructureSet.clone: " + e);
 		}
@@ -215,8 +211,8 @@ public class FeatureStructureSet implements Cloneable {
 		private List<Role> rolesThatPointToMe = new ArrayList<Role>();
 		public List<Slot> listValue = null;
 		private TypeConstraint typeConstraint = null;
-		private int uniqueID = -1; // this is available for external programs, and
-											// gets preserved in clones
+		private int uniqueID = -1; // this is available for external programs,
+									// and gets preserved in clones
 		private boolean realFiller = false;
 
 		private Slot(Role role) {
@@ -358,18 +354,15 @@ public class FeatureStructureSet implements Cloneable {
 				}
 				return true;
 
-			}
-			else if (this.isListSlot() && !that.isListSlot()) {
+			} else if (this.isListSlot() && !that.isListSlot()) {
 				this.listValue.add(that);
 				this.realFiller = true;
 				return true;
-			}
-			else if (!this.isListSlot() && that.isListSlot()) {
+			} else if (!this.isListSlot() && that.isListSlot()) {
 				that.listValue.add(this);
 				that.realFiller = true;
 				return true;
-			}
-			else {
+			} else {
 				// throw new
 				// FailureToUnifyException("Failure to unify slot between this slot set: "+rolesThatPointToMe+" and this set "+that.rolesThatPointToMe);
 				return false;
@@ -380,33 +373,26 @@ public class FeatureStructureSet implements Cloneable {
 			TypeConstraint thisType = typeConstraint;
 			if (thisType == null && thatType == null) {
 				return true;
-			}
-			else if (thisType == null && thatType != null) {
+			} else if (thisType == null && thatType != null) {
 				typeConstraint = thatType;
 				return true;
-			}
-			else if (thisType != null && thatType == null) {
+			} else if (thisType != null && thatType == null) {
 				return true;
-			}
-			else if (thisType.typeSystem != thatType.typeSystem) {
+			} else if (thisType.typeSystem != thatType.typeSystem) {
 				return false;
-			}
-			else { // now that both slots have compatible type systems
+			} else { // now that both slots have compatible type systems
 				try {
 					if (thisType.typeSystem.subtype(thisType.type, thatType.type)) {
 						// this type is more specific
 						return true;
-					}
-					else if (thisType.typeSystem.subtype(thatType.type, thisType.type)) {
+					} else if (thisType.typeSystem.subtype(thatType.type, thisType.type)) {
 						// that type is more specific
 						typeConstraint = thatType;
 						return true;
-					}
-					else {
+					} else {
 						return false;
 					}
-				}
-				catch (TypeSystemException tse) {
+				} catch (TypeSystemException tse) {
 					throw new GrammarException(tse + ".\nThis.typeSystem=" + thisType.getTypeSystem().getName()
 							+ " and thatType.typeSystem=" + thatType.getTypeSystem().getName());
 				}
@@ -416,17 +402,14 @@ public class FeatureStructureSet implements Cloneable {
 		private boolean unifyFillers(Slot that) {
 			if ((!this.hasFiller() && !that.hasFiller()) || (this.hasFiller() && !that.hasFiller())) {
 				return true;
-			}
-			else if (!this.hasFiller() && that.hasFiller()) {
+			} else if (!this.hasFiller() && that.hasFiller()) {
 				this.features = that.features;
 				this.atom = that.atom;
 				realFiller = true;
 				return true;
-			}
-			else if (this.hasAtomicFiller() && that.hasAtomicFiller()) {
+			} else if (this.hasAtomicFiller() && that.hasAtomicFiller()) {
 				return this.atom == that.atom;
-			}
-			else if (this.hasStructuredFiller() && that.hasStructuredFiller()) {
+			} else if (this.hasStructuredFiller() && that.hasStructuredFiller()) {
 				for (Role thatRole : that.features.keySet()) {
 					if (this.features.containsKey(thatRole)) {
 						if (this.features.get(thatRole) == null) {
@@ -435,15 +418,13 @@ public class FeatureStructureSet implements Cloneable {
 						if (!this.features.get(thatRole).unify(that.features.get(thatRole))) {
 							return false;
 						}
-					}
-					else {
+					} else {
 						this.features.put(thatRole, that.features.get(thatRole));
 					}
 				}
 				realFiller = this.realFiller || that.realFiller;
 				return true;
-			}
-			else {
+			} else {
 				return false;
 			}
 		}
@@ -468,29 +449,34 @@ public class FeatureStructureSet implements Cloneable {
 
 	public static void main(String[] args) {
 
-//		FeatureStructureSet fss1 = new FeatureStructureSet();
-//		fss1.coindex(new SlotChain("a.b"), new SlotChain("c.d"));
-//		System.out.println("Before fill fs1:" + fss1.allSlots.size() + "\n" + fss1);
-//		fss1.fill(new SlotChain("a.b"), "6");
-//		// fss1.fill(new SlotChain("a.c"), "7");
-//		// fss1.getSlot(new SlotChain("a.f"));
-//		// fss1.getSlot(new SlotChain("a.g"));
-//		System.out.println("Original fs1:\n" + fss1);
-//		FeatureStructureSet fss2 = (FeatureStructureSet) fss1.clone();
-//		System.out.println("fss2 fill true or false: " + fss2.fill(new SlotChain("a.f"), "9"));
-//		System.out.println("fss2 coindex true or false: " + fss2.coindex(new SlotChain("a.f"), new SlotChain("a.g")));
-//		System.out.println("New fs1:\n" + fss1);
-//		System.out.println("Fss2:\n" + fss2);
-//		FeatureStructureSet fss3 = new FeatureStructureSet();
-//		fss3.coindex(new SlotChain("p.q"), new SlotChain("x.y"));
-//		fss3.fill(new SlotChain("p.q"), "13");
-//		System.out.println("Fss3 before cfsc:\n" + fss3);
-//		fss3.coindexAcrossFeatureStructureSets(new SlotChain("p"), new SlotChain("a"), fss1);
-//		// fss3.fill(new SlotChain("p.a.f"), "42");
-//		System.out.println("Fss3 after cfsc:\n" + fss3);
-//		System.out.println("final fss1:\n" + fss1); // System.out.println("Now we should have a runtime exception");
-//		// fss1.coindexAcrossFeatureStructureSets(new SlotChain(""), new
-//		// SlotChain(""), fss2);
+		// FeatureStructureSet fss1 = new FeatureStructureSet();
+		// fss1.coindex(new SlotChain("a.b"), new SlotChain("c.d"));
+		// System.out.println("Before fill fs1:" + fss1.allSlots.size() + "\n" +
+		// fss1);
+		// fss1.fill(new SlotChain("a.b"), "6");
+		// // fss1.fill(new SlotChain("a.c"), "7");
+		// // fss1.getSlot(new SlotChain("a.f"));
+		// // fss1.getSlot(new SlotChain("a.g"));
+		// System.out.println("Original fs1:\n" + fss1);
+		// FeatureStructureSet fss2 = (FeatureStructureSet) fss1.clone();
+		// System.out.println("fss2 fill true or false: " + fss2.fill(new
+		// SlotChain("a.f"), "9"));
+		// System.out.println("fss2 coindex true or false: " + fss2.coindex(new
+		// SlotChain("a.f"), new SlotChain("a.g")));
+		// System.out.println("New fs1:\n" + fss1);
+		// System.out.println("Fss2:\n" + fss2);
+		// FeatureStructureSet fss3 = new FeatureStructureSet();
+		// fss3.coindex(new SlotChain("p.q"), new SlotChain("x.y"));
+		// fss3.fill(new SlotChain("p.q"), "13");
+		// System.out.println("Fss3 before cfsc:\n" + fss3);
+		// fss3.coindexAcrossFeatureStructureSets(new SlotChain("p"), new
+		// SlotChain("a"), fss1);
+		// // fss3.fill(new SlotChain("p.a.f"), "42");
+		// System.out.println("Fss3 after cfsc:\n" + fss3);
+		// System.out.println("final fss1:\n" + fss1); //
+		// System.out.println("Now we should have a runtime exception");
+		// // fss1.coindexAcrossFeatureStructureSets(new SlotChain(""), new
+		// // SlotChain(""), fss2);
 
 		TypeSystem<Construction> bogusTS = new TypeSystem<Construction>("bogus");
 

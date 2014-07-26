@@ -29,7 +29,8 @@ Require-Bundle: compling.core;bundle-version="1.0.0",
  org.eclipse.ui.forms;bundle-version="3.5.101"
 Bundle-Activator: compling.gui.grammargui.EcgEditorPlugin
 Bundle-Vendor: ICSI Berkeley
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7,
+ JavaSE-1.6
 Export-Package: compling.gui.grammargui;
   uses:="org.eclipse.core.runtime,
    org.eclipse.jface.resource,
