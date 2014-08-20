@@ -54,6 +54,7 @@ public class AnalyzerPrefs implements Prefs {
 		GRAMMAR_PARAMS_USE_CFGBACKOFF(Datatype.BOOL),
 
 		EXAMPLE_SENTENCES(Datatype.LISTSTRING),
+		TEST_SENTENCES(Datatype.LISTSTRING),
 
 		PARSER_SETTINGS(Datatype.STRING),
 
@@ -96,6 +97,7 @@ public class AnalyzerPrefs implements Prefs {
 		listsTable.put(AP.ONTOLOGY_PATHS, new ArrayList<String>());
 		listsTable.put(AP.GRAMMAR_PARAMS_PATHS, new ArrayList<String>());
 		listsTable.put(AP.EXAMPLE_SENTENCES, new ArrayList<String>());
+		listsTable.put(AP.TEST_SENTENCES, new ArrayList<String>());
 	}
 
 	public AnalyzerPrefs clone() {

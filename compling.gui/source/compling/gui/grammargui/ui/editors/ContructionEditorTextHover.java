@@ -18,6 +18,7 @@ public class ContructionEditorTextHover extends DefaultTextHover {
 
 	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
 		// Let's see if there's an annotation at the hover region
+		@SuppressWarnings("deprecation")
 		String info = super.getHoverInfo(textViewer, hoverRegion);
 		if (info != null)
 			return info;
