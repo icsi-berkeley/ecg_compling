@@ -271,6 +271,20 @@
             name="Situation"
             parentCategory="compling.gui.grammargui.categories.ecg">
       </category>
+      <category
+            id="compling.gui.grammargui.categories.test"
+            name="Testing"
+            parentCategory="compling.gui.grammargui.categories.ecg">
+      </category>
+      <view
+            allowMultiple="false"
+            category="compling.gui.grammargui.categories.ecg"
+            class="compling.gui.grammargui.ui.views.TestRunnerView"
+            icon="icons/test.gif"
+            id="compling.gui.views.TestRunnerView"
+            name="Sentence Test Runner View"
+            restorable="true">
+      </view>
    </extension>
 
    <extension point="org.eclipse.ui.navigator.viewer">

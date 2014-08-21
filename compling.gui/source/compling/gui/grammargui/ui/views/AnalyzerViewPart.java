@@ -13,6 +13,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
@@ -131,7 +132,7 @@ public class AnalyzerViewPart extends ViewPart {
 //	}
 
 	private ComboViewer comboViewer;
-	private Viewer tableViewer;
+//	private Viewer tableViewer;
 
 	// private Text transcript;
 
@@ -176,7 +177,7 @@ public class AnalyzerViewPart extends ViewPart {
 			}
 		});
 		
-		tableViewer = createTableViewer(parent);
+//		tableViewer = createTableViewer(parent);
 
 		updateActionBars();
 	}
@@ -225,10 +226,13 @@ public class AnalyzerViewPart extends ViewPart {
 
 		viewer.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent event) {
-				contentProvider.addSentence(comboViewer.getCombo().getText());
+				AnalyzerSentence newSentence = new AnalyzerSentence(comboViewer.getCombo().getText(), PrefsManager.instance());
+				contentProvider.addSentence(newSentence);
+				comboViewer.add(newSentence);
+				comboViewer.setSelection(new StructuredSelection(new Object[] { newSentence }));
 			}
 		});
-
+		
 		return viewer;
 	}
 

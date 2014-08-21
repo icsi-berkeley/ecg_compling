@@ -2,23 +2,22 @@ package compling.gui.grammargui.model;
 
 import java.util.Set;
 
-import org.eclipse.jface.viewers.AbstractListViewer;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
-import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.Viewer;
 
 import compling.gui.grammargui.util.ModelChangedEvent;
 
 public class AnalyzerSentenceContentProvider implements IStructuredContentProvider, IModelChangedListener {
 
-	private AbstractListViewer viewer;
+	private StructuredViewer viewer;
 	private Set<AnalyzerSentence> sentences;
 	private PrefsManager model;
 
 	/**
 	 * @param viewer
 	 */
-	public AnalyzerSentenceContentProvider(AbstractListViewer viewer) {
+	public AnalyzerSentenceContentProvider(StructuredViewer viewer) {
 		this.viewer = viewer;
 	}
 
@@ -40,16 +39,13 @@ public class AnalyzerSentenceContentProvider implements IStructuredContentProvid
 			((PrefsManager) oldInput).removeModelChangeListener(this);
 	}
 
-	public void addSentence(String sentence) {
-		AnalyzerSentence newSentence = new AnalyzerSentence(sentence, PrefsManager.instance());
+	public void addSentence(AnalyzerSentence newSentence) {
 		if (! sentences.contains(newSentence)) {
 			sentences.add(newSentence);
-			viewer.add(newSentence);
-			viewer.setSelection(new StructuredSelection(new Object[] { newSentence }));
 		}
 	}
 
-	public void removeSentence(Object sentence) {
+	public void removeSentence(AnalyzerSentence sentence) {
 		sentences.remove(sentence);
 		update();
 	}

@@ -234,7 +234,8 @@ public class AnalyzerViewPart2 extends ViewPart {
 		});
 		viewer.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent event) {
-				contentProvider.addSentence(comboViewer.getCombo().getText());
+				AnalyzerSentence newSentence = new AnalyzerSentence(comboViewer.getCombo().getText(), PrefsManager.instance());
+				contentProvider.addSentence(newSentence);
 			}
 		});
 
