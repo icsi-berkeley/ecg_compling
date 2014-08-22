@@ -67,7 +67,7 @@ public class AnalyzerViewPart2 extends ViewPart {
 			setDisabledImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID,
 					IImageKeys.ADD_SENTENCE_D));
 
-			setEnabled(PrefsManager.instance().getGrammar() != null);
+			setEnabled(PrefsManager.getDefault().getGrammar() != null);
 		}
 
 		@Override
@@ -111,7 +111,7 @@ public class AnalyzerViewPart2 extends ViewPart {
 			IEditorPart editor = page.findEditor(new AnalyzerEditorInput(sentence));
 			if (editor != null)
 				page.closeEditor(editor, false);
-			provider.removeSentence(sentence);
+//			provider.removeSentence(sentence);
 		}
 
 		public void selectionChanged(IWorkbenchPart part, ISelection selection) {
@@ -181,7 +181,7 @@ public class AnalyzerViewPart2 extends ViewPart {
 		// Content provider...
 		contentProvider = new AnalyzerSentenceContentProvider(comboViewer);
 		comboViewer.setContentProvider(contentProvider);
-		comboViewer.setInput(PrefsManager.instance());
+		comboViewer.setInput(PrefsManager.getDefault());
 		comboViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
 				IStructuredSelection selection = (IStructuredSelection) event.getSelection();
@@ -232,12 +232,12 @@ public class AnalyzerViewPart2 extends ViewPart {
 				return ((AnalyzerSentence) s1).getText().compareToIgnoreCase(((AnalyzerSentence) s2).getText());
 			}
 		});
-		viewer.addDoubleClickListener(new IDoubleClickListener() {
-			public void doubleClick(DoubleClickEvent event) {
-				AnalyzerSentence newSentence = new AnalyzerSentence(comboViewer.getCombo().getText(), PrefsManager.instance());
-				contentProvider.addSentence(newSentence);
-			}
-		});
+//		viewer.addDoubleClickListener(new IDoubleClickListener() {
+//			public void doubleClick(DoubleClickEvent event) {
+//				AnalyzerSentence newSentence = new AnalyzerSentence(comboViewer.getCombo().getText(), PrefsManager.getDefault());
+//				contentProvider.addSentence(newSentence);
+//			}
+//		});
 
 		return viewer;
 	}
@@ -261,7 +261,7 @@ public class AnalyzerViewPart2 extends ViewPart {
 	
 	protected void updateActionBars() {
 		addSentence = new AddSentenceAction();
-		PrefsManager.instance().addModelChangeListener((IModelChangedListener) addSentence);
+		PrefsManager.getDefault().addModelChangeListener((IModelChangedListener) addSentence);
 		IAction deleteSentence = new DeleteSentenceAction();
 
 		IActionBars actionBars = getViewSite().getActionBars();
@@ -278,7 +278,7 @@ public class AnalyzerViewPart2 extends ViewPart {
 
 	@Override
 	public void dispose() {
-		PrefsManager.instance().removeModelChangeListener((IModelChangedListener) addSentence);
+		PrefsManager.getDefault().removeModelChangeListener((IModelChangedListener) addSentence);
 		toolkit.dispose();
 		super.dispose();
 	}

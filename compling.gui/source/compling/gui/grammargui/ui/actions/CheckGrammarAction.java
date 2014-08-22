@@ -14,7 +14,7 @@ public class CheckGrammarAction extends Action implements IModelChangedListener 
 
 	public CheckGrammarAction() {
 		super();
-		manager = PrefsManager.instance();
+		manager = PrefsManager.getDefault();
 		manager.addModelChangeListener(this);
 		setId(ID);
 		setActionDefinitionId(ID);

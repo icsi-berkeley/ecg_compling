@@ -18,7 +18,7 @@ public class CloseFileAction extends Action implements IModelChangedListener {
 		super();
 		setId(ID);
 		setActionDefinitionId(ID);
-		manager = PrefsManager.instance();
+		manager = PrefsManager.getDefault();
 		manager.addModelChangeListener(this);
 		setText("Close &Preferences File");
 		setEnabled(manager.getProject() != null);

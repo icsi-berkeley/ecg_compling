@@ -62,7 +62,7 @@ public class GrammarFileLabelDecorator extends BaseLabelProvider implements ILig
 	public void update() {
 		try {
 			resources = new LinkedList<IResource>();
-			PrefsManager.instance().getProject().getWorkspace().getRoot().accept(visitor);
+			PrefsManager.getDefault().getProject().getWorkspace().getRoot().accept(visitor);
 			fireLabelProviderChanged(new LabelProviderChangedEvent(this, resources.toArray()));
 		}
 		catch (CoreException e) {

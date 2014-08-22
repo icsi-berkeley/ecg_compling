@@ -40,7 +40,7 @@ public class OpenFileAction extends Action implements IWorkbenchWindowActionDele
 		if (path != null)
 			SafeRunner.run(new SafeRunnable() {
 				public void run() throws Exception {
-					PrefsManager.instance().setPreferences(path);
+					PrefsManager.getDefault().setPreferences(path);
 				}
 			});
 	}

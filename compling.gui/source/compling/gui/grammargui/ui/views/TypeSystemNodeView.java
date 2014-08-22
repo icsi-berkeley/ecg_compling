@@ -91,7 +91,7 @@ public class TypeSystemNodeView extends ViewPart implements ISelectionProvider {
 
 		Assert.isTrue(elements.length > 1);
 
-		TypeSystemNode node = Utils.fromDescriptor(PrefsManager.instance().getGrammar(), elements);
+		TypeSystemNode node = Utils.fromDescriptor(PrefsManager.getDefault().getGrammar(), elements);
 		link.setText(node.toString());
 		setSelection(new TreeSelection(new TreePath(new Object[] { node })));
 		selectionProvider.fireSelectionChanged(new SelectionChangedEvent(this, selection));

@@ -20,7 +20,7 @@ public class GrammarTreeView extends TypeSystemTreeView {
 
 	@Override
 	protected Object getTypeSystem() {
-		Grammar g = PrefsManager.instance().getGrammar();
+		Grammar g = PrefsManager.getDefault().getGrammar();
 		return g == null ? null : Arrays.asList(g.getCxnTypeSystem(), g.getSchemaTypeSystem(), g.getMapTypeSystem(),
 				g.getSituationTypeSystem(), g.getOntologyTypeSystem());
 	}

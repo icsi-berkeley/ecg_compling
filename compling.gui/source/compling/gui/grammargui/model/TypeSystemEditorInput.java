@@ -27,7 +27,7 @@ public class TypeSystemEditorInput extends PlatformObject implements IFileEditor
 
 	public TypeSystemEditorInput(TypeSystemNode typeSystemNode) {
 		this.typeSystemNode = typeSystemNode;
-		this.file = PrefsManager.instance().getFileFor(typeSystemNode);
+		this.file = PrefsManager.getDefault().getFileFor(typeSystemNode);
 		Assert.isNotNull(file);
 	}
 
@@ -67,7 +67,7 @@ public class TypeSystemEditorInput extends PlatformObject implements IFileEditor
 	}
 
 	public String getToolTipText() {
-		return PrefsManager.instance().getContentAsText(typeSystemNode);
+		return PrefsManager.getDefault().getContentAsText(typeSystemNode);
 	}
 
 	@SuppressWarnings("rawtypes")

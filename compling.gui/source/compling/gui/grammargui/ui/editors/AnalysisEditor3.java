@@ -372,12 +372,12 @@ public class AnalysisEditor3 extends FormEditor implements IGotoMarker, ISelecti
 					return ((AnalyzerSentence) s1).getText().compareToIgnoreCase(((AnalyzerSentence) s2).getText());
 				}
 			});
-			viewer.addDoubleClickListener(new IDoubleClickListener() {
-				public void doubleClick(DoubleClickEvent event) {
-					AnalyzerSentence newSentence = new AnalyzerSentence(comboViewer.getCombo().getText(), PrefsManager.instance());
-					contentProvider.addSentence(newSentence);
-				}
-			});
+//			viewer.addDoubleClickListener(new IDoubleClickListener() {
+//				public void doubleClick(DoubleClickEvent event) {
+//					AnalyzerSentence newSentence = new AnalyzerSentence(comboViewer.getCombo().getText(), PrefsManager.getDefault());
+//					contentProvider.addSentence(newSentence);
+//				}
+//			});
 
 			return viewer;
 		}
@@ -422,7 +422,7 @@ public class AnalysisEditor3 extends FormEditor implements IGotoMarker, ISelecti
 			toolkit.adapt(combo, true, true);
 			contentProvider = new AnalyzerSentenceContentProvider(comboViewer);
 			comboViewer.setContentProvider(contentProvider);
-			comboViewer.setInput(PrefsManager.instance());
+			comboViewer.setInput(PrefsManager.getDefault());
 			getSite().setSelectionProvider(comboViewer);
 			comboViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 				public void selectionChanged(SelectionChangedEvent event) {

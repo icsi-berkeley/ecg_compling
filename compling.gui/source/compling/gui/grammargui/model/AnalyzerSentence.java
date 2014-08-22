@@ -128,6 +128,11 @@ public class AnalyzerSentence extends PlatformObject {
 	}
 	
 	@Override
+	public String toString() {
+		return "AnalyzerSentence [sentence=" + sentence + ", model=" + model + "]";
+	}
+
+	@Override
 	public boolean equals(Object other) {
 		return (other instanceof AnalyzerSentence && this.sentence.equals(((AnalyzerSentence) other).sentence));
 	}

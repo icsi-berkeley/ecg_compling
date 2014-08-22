@@ -186,7 +186,7 @@ public class ConstructionEditorOutlinePage extends ContentOutlinePage {
 
       /** @return the node */
       public TypeSystemNode getNode() {
-        final Grammar g = PrefsManager.instance().getGrammar();
+        final Grammar g = PrefsManager.getDefault().getGrammar();
         return Utils.fromDescriptor(g, type, name);
       }
     }

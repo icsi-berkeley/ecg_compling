@@ -27,7 +27,7 @@ public interface Prefs {
 	public String getSetting(Property property);
 
 	public List<String> getList(Property property);
-
+	
 	public Prefs clone();
 
 	public String setSetting(Property property, String value);

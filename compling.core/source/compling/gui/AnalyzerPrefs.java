@@ -16,6 +16,7 @@ import java.util.List;
 import compling.grammar.ecg.ECGGrammarUtilities;
 import compling.grammar.ecg.Grammar;
 import compling.grammar.ecg.Prefs;
+import compling.grammar.ecg.Prefs.Property;
 import compling.grammar.unificationgrammar.TypeSystemException;
 import compling.util.fileutil.TextFileLineIterator;
 

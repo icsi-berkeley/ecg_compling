@@ -51,7 +51,7 @@ public class TypeSystemNodeHyperlink implements IHyperlink {
 
 	public void open() {
 		try {
-			Grammar grammar = PrefsManager.instance().getGrammar();
+			Grammar grammar = PrefsManager.getDefault().getGrammar();
 			for (TypeSystemNodeType t : TypeSystemNodeType.values()) {
 				TypeSystemNode node = Utils.fromDescriptor(grammar, t.toString() + '/' + text);
 				if (node != null)

@@ -51,7 +51,7 @@ public class HyperlinkDetector extends AbstractHyperlinkDetector {
 		IRegion wordRegion = findWord(document, region.getOffset());
 		if (wordRegion != null) {
 			try {
-				Set<String> symbols = PrefsManager.instance().getSymbols();
+				Set<String> symbols = PrefsManager.getDefault().getSymbols();
 				String s = document.get(wordRegion.getOffset(), wordRegion.getLength());
 				if (symbols.contains(s))
 					return new IHyperlink[] { new TypeSystemNodeHyperlink(wordRegion, s, part) };

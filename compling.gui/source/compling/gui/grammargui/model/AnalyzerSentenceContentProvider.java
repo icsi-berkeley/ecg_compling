@@ -6,6 +6,7 @@ import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.Viewer;
 
+import compling.gui.grammargui.util.Log;
 import compling.gui.grammargui.util.ModelChangedEvent;
 
 public class AnalyzerSentenceContentProvider implements IStructuredContentProvider, IModelChangedListener {
@@ -39,15 +40,14 @@ public class AnalyzerSentenceContentProvider implements IStructuredContentProvid
 			((PrefsManager) oldInput).removeModelChangeListener(this);
 	}
 
-	public void addSentence(AnalyzerSentence newSentence) {
+	private void addSentence(AnalyzerSentence newSentence) {
 		if (! sentences.contains(newSentence)) {
 			sentences.add(newSentence);
 		}
 	}
 
-	public void removeSentence(AnalyzerSentence sentence) {
+	private void removeSentence(AnalyzerSentence sentence) {
 		sentences.remove(sentence);
-		update();
 	}
 
 	protected void init(PrefsManager model) {
@@ -67,7 +67,15 @@ public class AnalyzerSentenceContentProvider implements IStructuredContentProvid
 	}
 
 	public void modelChanged(ModelChangedEvent event) {
-		init((PrefsManager) event.getSource());
+		Log.logInfo("modelChanged: %s\n", event);
+		
+		for (AnalyzerSentence s : event.getAdded())
+			addSentence(s);
+
+		for (AnalyzerSentence s : event.getRemoved())
+			removeSentence(s);
+
+		update();
 	}
 
 }

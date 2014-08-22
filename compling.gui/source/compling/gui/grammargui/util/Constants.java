@@ -10,6 +10,8 @@ public final class Constants {
 		public static final String DELETE_SENTENCE_D = "icons/d/remove_exc.gif";
 		public static final String ADD_SENTENCE_E = "icons/e/add_exc.gif";
 		public static final String ADD_SENTENCE_D = "icons/d/add_exc.gif";
+		public static final String ANALYZE_SENTENCE_E = "icons/e/run_exc.gif";
+		public static final String ANALYZE_SENTENCE_D = "icons/d/run_exc.gif";
 		public static final String OPEN_EDITOR_E = "icons/text.gif";
 		public static final String PROBLEM_OVERLAY = "icons/error_co.gif";
 		public static final String CONSTRUCTION = "icons/constr16-1.png";

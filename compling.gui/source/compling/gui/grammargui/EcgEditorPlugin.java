@@ -49,7 +49,7 @@ public class EcgEditorPlugin extends AbstractUIPlugin {
 //			}
 //		});
 
-		PrefsManager manager = PrefsManager.instance();
+		PrefsManager manager = PrefsManager.getDefault();
 		ISavedState lastState = ResourcesPlugin.getWorkspace().addSaveParticipant(PLUGIN_ID, manager);
 		if (lastState == null)
 			return;

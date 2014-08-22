@@ -11,7 +11,7 @@ public class SchemaTreeView extends TypeSystemTreeView {
 
 	@Override
 	protected TypeSystem<? extends TypeSystemNode> getTypeSystem() {
-		Grammar grammar = PrefsManager.instance().getGrammar();
+		Grammar grammar = PrefsManager.getDefault().getGrammar();
 		return grammar != null ? grammar.getSchemaTypeSystem() : null;
 	}
 

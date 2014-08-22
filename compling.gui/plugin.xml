@@ -345,7 +345,7 @@
       </navigatorContent>
    </extension>
    -->
-   <extension
+   <!--extension
          point="org.eclipse.ui.viewActions">
       <viewContribution
             id="compling.gui.grammargui.contributions.analyzeSentence"
@@ -379,7 +379,7 @@
                tooltip="Analyze or reanalyze the sentence below">
          </action>
       </viewContribution>
-   </extension>
+   </extension-->
    <extension
          point="org.eclipse.ui.commands">
       <category

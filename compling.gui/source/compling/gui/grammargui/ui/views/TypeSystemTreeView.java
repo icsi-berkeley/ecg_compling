@@ -172,7 +172,7 @@ public abstract class TypeSystemTreeView extends ViewPart {
 
 		getSite().setSelectionProvider(treeViewer);
 
-		PrefsManager.instance().addModelChangeListener(new IModelChangedListener() {
+		PrefsManager.getDefault().addModelChangeListener(new IModelChangedListener() {
 			public void modelChanged(ModelChangedEvent event) {
 				if (event.getGrammarProxy() != null)
 					SafeRunner.run(new SafeRunnable() {
@@ -330,7 +330,7 @@ public abstract class TypeSystemTreeView extends ViewPart {
 			return;
 
 		// final IEditorInput input = new TypeSystemEditorInput(node);
-		final IEditorInput input = new FileEditorInput(PrefsManager.instance().getFileFor(node));
+		final IEditorInput input = new FileEditorInput(PrefsManager.getDefault().getFileFor(node));
 		final IWorkbenchPage page = getSite().getPage();
 		IEditorPart activeEditor = page.getActiveEditor();
 		if (activeEditor != null && activeEditor.equals(page.findEditor(input)))

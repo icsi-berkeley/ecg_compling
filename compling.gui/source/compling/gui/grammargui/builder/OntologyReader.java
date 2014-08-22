@@ -37,7 +37,7 @@ public class OntologyReader extends MiniOntologyReader implements ISpecification
 		try {
 			result = parse();
 			Collection<? extends TypeSystemNode> types = m.getTypeSystem().getAllTypes();
-			PrefsManager.instance().updateNodeMap(types, from);
+			PrefsManager.getDefault().updateNodeMap(types, from);
 		}
 		catch (Exception e) {
 			errorListener.notify(e.getMessage(), scanner.getLocation(), Severity.FATAL);

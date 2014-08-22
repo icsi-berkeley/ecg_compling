@@ -123,7 +123,7 @@ public class MultiPageConstructionEditor extends FormEditor implements IGotoMark
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		try {
 			Object[] descriptors = ((IStructuredSelection) selection).toArray();
-			openEditorFor(Utils.fromDescriptor(PrefsManager.instance().getGrammar(), descriptors));
+			openEditorFor(Utils.fromDescriptor(PrefsManager.getDefault().getGrammar(), descriptors));
 		}
 		catch (PartInitException e) {
 			Log.logError(e, "selectionChanged");

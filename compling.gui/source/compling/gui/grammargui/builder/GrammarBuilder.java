@@ -109,7 +109,7 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
 		// Ignore non-full builds
 		if (kind == FULL_BUILD) {
-			fullBuild(PrefsManager.instance(), monitor);
+			fullBuild(PrefsManager.getDefault(), monitor);
 		}
 		return null;
 	}
@@ -304,7 +304,7 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 	}
 
 	private ISpecificationReader getParserFor(IFile file) throws CoreException {
-		PrefsManager model = PrefsManager.instance();
+		PrefsManager model = PrefsManager.getDefault();
 		AnalyzerPrefs prefs = model.getPreferences();
 		if (prefs == null) {
 			for (IResource m : getProject().members(false))

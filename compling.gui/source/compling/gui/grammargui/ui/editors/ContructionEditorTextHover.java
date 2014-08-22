@@ -25,7 +25,7 @@ public class ContructionEditorTextHover extends DefaultTextHover {
 
 		try {
 			String symbol = textViewer.getDocument().get(hoverRegion.getOffset(), hoverRegion.getLength());
-			return PrefsManager.instance().getContentAsText(symbol);
+			return PrefsManager.getDefault().getContentAsText(symbol);
 		}
 		catch (BadLocationException e) {
 			// TODO Auto-generated catch block

@@ -7,8 +7,10 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.ICheckStateListener;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
@@ -37,6 +39,7 @@ import compling.gui.grammargui.model.AnalyzerSentenceContentProvider;
 import compling.gui.grammargui.model.AnalyzerSentenceLabelProvider;
 import compling.gui.grammargui.model.PrefsManager;
 import compling.gui.grammargui.util.Constants.IImageKeys;
+import compling.gui.grammargui.util.Log;
 
 /**
  * This sample class demonstrates how to plug-in a new workbench view. The view
@@ -74,7 +77,7 @@ public class TestRunnerView extends ViewPart {
 
 	private CheckboxTableViewer viewer;
 	private Action action1;
-//	private Action action2;
+	// private Action action2;
 	private Action doubleClickAction;
 
 	/*
@@ -84,31 +87,31 @@ public class TestRunnerView extends ViewPart {
 	 * ignore it and always show the same content (like Task List, for example).
 	 */
 
-	class ViewContentProvider implements IStructuredContentProvider {
-		public void inputChanged(Viewer v, Object oldInput, Object newInput) {
-		}
+//	class ViewContentProvider implements IStructuredContentProvider {
+//		public void inputChanged(Viewer v, Object oldInput, Object newInput) {
+//		}
+//
+//		public void dispose() {
+//		}
+//
+//		public Object[] getElements(Object parent) {
+//			return new String[] { "One", "Two", "Three" };
+//		}
+//	}
 
-		public void dispose() {
-		}
-
-		public Object[] getElements(Object parent) {
-			return new String[] { "One", "Two", "Three" };
-		}
-	}
-
-	class ViewLabelProvider extends LabelProvider implements ITableLabelProvider {
-		public String getColumnText(Object obj, int index) {
-			return getText(obj);
-		}
-
-		public Image getColumnImage(Object obj, int index) {
-			return getImage(obj);
-		}
-
-		public Image getImage(Object obj) {
-			return PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_ELEMENT);
-		}
-	}
+//	class ViewLabelProvider extends LabelProvider implements ITableLabelProvider {
+//		public String getColumnText(Object obj, int index) {
+//			return getText(obj);
+//		}
+//
+//		public Image getColumnImage(Object obj, int index) {
+//			return getImage(obj);
+//		}
+//
+//		public Image getImage(Object obj) {
+//			return PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_ELEMENT);
+//		}
+//	}
 
 	class NameSorter extends ViewerSorter {
 	}
@@ -129,8 +132,8 @@ public class TestRunnerView extends ViewPart {
 		viewer.setContentProvider(new AnalyzerSentenceContentProvider(viewer));
 		viewer.setLabelProvider(new AnalyzerSentenceLabelProvider());
 		viewer.setSorter(new NameSorter());
-		viewer.setInput(PrefsManager.instance());
-		
+		viewer.setInput(PrefsManager.getDefault());
+
 		makeActions();
 		hookContextMenu();
 		hookDoubleClickAction();
@@ -138,9 +141,15 @@ public class TestRunnerView extends ViewPart {
 		hookListener();
 	}
 
-	
 	private void hookListener() {
-		
+		viewer.addCheckStateListener(new ICheckStateListener() {
+			
+			@Override
+			public void checkStateChanged(CheckStateChangedEvent event) {
+				// TODO Auto-generated method stub
+				Log.consoleLog("CheckStateChange: %s", event);
+			}
+		});
 	}
 
 	private void hookContextMenu() {
@@ -164,20 +173,20 @@ public class TestRunnerView extends ViewPart {
 
 	private void fillLocalPullDown(IMenuManager manager) {
 		manager.add(action1);
-//		manager.add(new Separator());
-//		manager.add(action2);
+		// manager.add(new Separator());
+		// manager.add(action2);
 	}
 
 	private void fillContextMenu(IMenuManager manager) {
 		manager.add(action1);
-//		manager.add(action2);
+		// manager.add(action2);
 		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 
 	private void fillLocalToolBar(IToolBarManager manager) {
 		manager.add(action1);
-//		manager.add(action2);
+		// manager.add(action2);
 	}
 
 	private void makeActions() {
@@ -186,18 +195,18 @@ public class TestRunnerView extends ViewPart {
 				showMessage("Action 1 executed");
 			}
 		};
-		action1.setText("Start ");
+		action1.setText("Start");
 		action1.setToolTipText("Begin testing the current grammar on the sentences.");
 		action1.setImageDescriptor(EcgEditorPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.START));
 
-//		action2 = new Action() {
-//			public void run() {
-//				showMessage("Action 2 executed");
-//			}
-//		};
-//		action2.setText("Action 2");
-//		action2.setToolTipText("Action 2 tooltip");
-//		action2.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
+		// action2 = new Action() {
+		// public void run() {
+		// showMessage("Action 2 executed");
+		// }
+		// };
+		// action2.setText("Action 2");
+		// action2.setToolTipText("Action 2 tooltip");
+		// action2.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
 
 		doubleClickAction = new Action() {
 			public void run() {
