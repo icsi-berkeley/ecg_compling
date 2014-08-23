@@ -96,9 +96,9 @@ public class AnalyzerViewPart2 extends ViewPart {
 			setText("&Delete");
 			setToolTipText("Delete the current sentence.");
 			setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID,
-					IImageKeys.DELETE_SENTENCE_E));
+					IImageKeys.REMOVE_SENTENCE_E));
 			setDisabledImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID,
-					IImageKeys.DELETE_SENTENCE_D));
+					IImageKeys.REMOVE_SENTENCE_D));
 			getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(this);
 		}
 

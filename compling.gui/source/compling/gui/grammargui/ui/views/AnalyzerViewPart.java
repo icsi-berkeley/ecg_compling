@@ -89,8 +89,8 @@ public class AnalyzerViewPart extends ViewPart {
 
 			setText("&Delete");
 			setToolTipText("Delete the current sentence.");
-			setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.DELETE_SENTENCE_E));
-			setDisabledImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.DELETE_SENTENCE_D));
+			setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.REMOVE_SENTENCE_E));
+			setDisabledImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.REMOVE_SENTENCE_D));
 			getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(DeleteSentenceAction.this);
 		}
 
@@ -317,19 +317,19 @@ public class AnalyzerViewPart extends ViewPart {
 			}
 		});
 
-		combo.addListener(SWT.DefaultSelection, new Listener() {
-			@Override
-			public void handleEvent(Event event) {
-				Log.logInfo("event: %s\n", event);
-				
-//				IStructuredSelection selection = (IStructuredSelection) comboViewer.getSelection();
-//				assert selection != null;
-				
-				AnalyzerSentence sentence = new AnalyzerSentence(getSentenceText(), PrefsManager.getDefault());
-//				combo.add(string, index);
-				PrefsManager.getDefault().addSentence(sentence);
-			}
-		});
+//		combo.addListener(SWT.DefaultSelection, new Listener() {
+//			@Override
+//			public void handleEvent(Event event) {
+//				Log.logInfo("event: %s\n", event);
+//				
+////				IStructuredSelection selection = (IStructuredSelection) comboViewer.getSelection();
+////				assert selection != null;
+//				
+//				AnalyzerSentence sentence = new AnalyzerSentence(getSentenceText(), PrefsManager.getDefault());
+////				combo.add(string, index);
+//				PrefsManager.getDefault().addSentence(sentence);
+//			}
+//		});
 		
 		PrefsManager.getDefault().addModelChangeListener((IModelChangedListener) addSentence);
 

@@ -4,10 +4,13 @@ import compling.gui.util.TypeSystemNodeType;
 
 public final class Constants {
 	public interface IImageKeys {
+		public static final String SENTENCE = "icons/edit-quotation_16x16.png";
 		public static final String SENTENCE_VALID = "icons/e/public_co.gif";
-		public static final String SENTENCE_INVALID = "icons/e/private_co.gif";
-		public static final String DELETE_SENTENCE_E = "icons/e/remove_exc.gif";
-		public static final String DELETE_SENTENCE_D = "icons/d/remove_exc.gif";
+		public static final String SENTENCE_INVALID = "icons/d/private_co.gif";
+		public static final String REMOVE_SENTENCE_E = "icons/e/remove_co.png";
+		public static final String REMOVE_SENTENCE_D = "icons/d/remove_co.png";
+		public static final String REMOVE_ALL_SENTENCES_E = "icons/e/removeall_co.png";
+		public static final String REMOVE_ALL_SENTENCES_D = "icons/d/removeall_co.png";
 		public static final String ADD_SENTENCE_E = "icons/e/add_exc.gif";
 		public static final String ADD_SENTENCE_D = "icons/d/add_exc.gif";
 		public static final String ANALYZE_SENTENCE_E = "icons/e/run_exc.gif";
@@ -24,6 +27,7 @@ public final class Constants {
 		public static final String UNTYPED = "icons/brackets_16x16.png";
 		public static final String ATOMIC = "icons/attr_val_16x16.gif";
 		public static final String START = "icons/run_tool.png";
+		public static final String ERROR = "icons/error_co.gif";
 		
 	}
 	

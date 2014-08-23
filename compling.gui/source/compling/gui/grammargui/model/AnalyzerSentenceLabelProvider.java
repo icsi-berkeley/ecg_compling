@@ -20,7 +20,7 @@ public class AnalyzerSentenceLabelProvider extends LabelProvider {
 
 	@Override
 	public Image getImage(Object element) {
-		return PLATFORM_IMAGES.getImage(IImageKeys.SENTENCE_VALID);
+		return PLATFORM_IMAGES.getImage(IImageKeys.SENTENCE);
 	}
 
 	@Override
