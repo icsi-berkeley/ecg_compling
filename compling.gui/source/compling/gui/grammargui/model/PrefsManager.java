@@ -376,11 +376,24 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 			sentences.remove(sentence);
 			prefs.getList(AP.EXAMPLE_SENTENCES).remove(sentence.getText());
 
-			eventManager.fireModelChanged(this, new AnalyzerSentence[] { /* none */}, new AnalyzerSentence[] { sentence });
+			eventManager.fireModelChanged(this, new AnalyzerSentence[0], new AnalyzerSentence[] { sentence });
 		} else
 			Log.logInfo("PrefsManager.removeSentence: sentence \"%s\" not present", sentence.getText());
 	}
 
+	public void removeAllSentences() {
+		if (prefs == null)
+			throw new IllegalStateException("preference not set");
+
+		if (sentences == null)
+			throw new IllegalStateException("no sentences present");
+
+		AnalyzerSentence[] removed = new AnalyzerSentence[sentences.size()];
+		sentences.toArray(removed);
+		
+		eventManager.fireModelChanged(this, new AnalyzerSentence[0], removed);
+	}
+	
 	public String getContentAsText(String nodeName) {
 		if (grammar == null)
 			return null;
@@ -390,7 +403,6 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 			nameToNode.putAll(getGrammar().getAllConstructionsByName());
 			for (TypeSystemNode n : getGrammar().getAllSchemas())
 				nameToNode.put(n.getType(), n);
-			@SuppressWarnings("unchecked")
 			TypeSystem<? extends TypeSystemNode> ontologyTypeSystem = getGrammar().getOntologyTypeSystem();
 			if (ontologyTypeSystem != null)
 				for (TypeSystemNode n : ontologyTypeSystem.getAllTypes())

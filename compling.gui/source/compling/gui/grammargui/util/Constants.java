@@ -26,7 +26,8 @@ public final class Constants {
 		public static final String PARSE = "icons/16-file-archive_16x16.png";
 		public static final String UNTYPED = "icons/brackets_16x16.png";
 		public static final String ATOMIC = "icons/attr_val_16x16.gif";
-		public static final String START = "icons/run_tool.png";
+		public static final String START_E = "icons/e/run_exc.gif";
+		public static final String START_D = "icons/d/run_exc.gif";
 		public static final String ERROR = "icons/error_co.gif";
 		
 	}

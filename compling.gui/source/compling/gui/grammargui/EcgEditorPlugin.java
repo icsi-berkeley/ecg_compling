@@ -77,7 +77,7 @@ public class EcgEditorPlugin extends AbstractUIPlugin {
 		}
 	}
 
-	private final Image imageFor(String key) {
+	public final Image imageFor(String key) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, key).createImage();
 	}
 

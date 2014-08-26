@@ -67,7 +67,7 @@ public class AnalyzerSentenceContentProvider implements IStructuredContentProvid
 	}
 
 	public void modelChanged(ModelChangedEvent event) {
-		Log.logInfo("modelChanged: %s\n", event);
+//		Log.logInfo("modelChanged: %s\n", event);
 		
 		for (AnalyzerSentence s : event.getAdded())
 			addSentence(s);
