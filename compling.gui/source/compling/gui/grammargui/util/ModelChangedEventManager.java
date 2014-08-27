@@ -8,6 +8,7 @@ import org.eclipse.swt.widgets.Display;
 
 import compling.gui.grammargui.model.AnalyzerSentence;
 import compling.gui.grammargui.model.IModelChangedListener;
+import compling.gui.grammargui.model.PrefsManager;
 
 /**
  * Used in GrammarBrowser to keep track of objects (manus) listening for changes in the underlying data.

@@ -98,7 +98,7 @@ public class AnalyzerPrefs implements Prefs {
 		listsTable.put(AP.ONTOLOGY_PATHS, new ArrayList<String>());
 		listsTable.put(AP.GRAMMAR_PARAMS_PATHS, new ArrayList<String>());
 		listsTable.put(AP.EXAMPLE_SENTENCES, new ArrayList<String>());
-		listsTable.put(AP.TEST_SENTENCES, new ArrayList<String>());
+//		listsTable.put(AP.TEST_SENTENCES, new ArrayList<String>());
 	}
 
 	public AnalyzerPrefs clone() {

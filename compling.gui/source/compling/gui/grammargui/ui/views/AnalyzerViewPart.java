@@ -10,13 +10,10 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.jface.viewers.DoubleClickEvent;
-import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
@@ -49,7 +46,6 @@ import compling.gui.grammargui.model.IModelChangedListener;
 import compling.gui.grammargui.model.PrefsManager;
 import compling.gui.grammargui.ui.editors.AnalysisEditor;
 import compling.gui.grammargui.util.Constants.IImageKeys;
-import compling.gui.grammargui.util.Log;
 import compling.gui.grammargui.util.ModelChangedEvent;
 
 public class AnalyzerViewPart extends ViewPart {
@@ -102,7 +98,7 @@ public class AnalyzerViewPart extends ViewPart {
 			IEditorPart editor = page.findEditor(new AnalyzerEditorInput(sentence));
 			if (editor != null)
 				page.closeEditor(editor, false);
-//			provider.removeSentence(sentence);
+			// provider.removeSentence(sentence);
 		}
 
 		public void selectionChanged(IWorkbenchPart part, ISelection selection) {
@@ -130,7 +126,10 @@ public class AnalyzerViewPart extends ViewPart {
 
 		@Override
 		public void run() {
-			final AnalyzerSentence sentence = new AnalyzerSentence(getSentenceText(), PrefsManager.getDefault());
+			final String text = getSentenceText();
+			final AnalyzerSentence sentence = new AnalyzerSentence(text, PrefsManager.getDefault());
+			Combo combo = comboViewer.getCombo();
+			combo.setSelection(new Point(0, text.length()));
 			PrefsManager.getDefault().addSentence(sentence);
 			Job parserJob = sentence.getParserJob();
 			parserJob.addJobChangeListener(new JobChangeAdapter() {
@@ -143,7 +142,8 @@ public class AnalyzerViewPart extends ViewPart {
 								openEditor(new AnalyzerEditorInput(sentence));
 							}
 						});
-					} else {
+					}
+					else {
 						Display.getDefault().asyncExec(new Runnable() {
 							@Override
 							public void run() {
@@ -160,7 +160,8 @@ public class AnalyzerViewPart extends ViewPart {
 		protected void openEditor(IEditorInput input) {
 			try {
 				getSite().getPage().openEditor(input, AnalysisEditor.ID);
-			} catch (PartInitException e) {
+			}
+			catch (PartInitException e) {
 				e.printStackTrace();
 			}
 		}
@@ -194,7 +195,6 @@ public class AnalyzerViewPart extends ViewPart {
 	public String getSentenceText() {
 		return comboViewer.getCombo().getText();
 	}
-	
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -213,13 +213,13 @@ public class AnalyzerViewPart extends ViewPart {
 		contentProvider = new AnalyzerSentenceContentProvider(comboViewer);
 		comboViewer.setContentProvider(contentProvider);
 		comboViewer.setInput(PrefsManager.getDefault());
-		
+
 		getSite().setSelectionProvider(comboViewer);
-		
+
 		comboViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
 				IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-				if (! selection.isEmpty()) {
+				if (!selection.isEmpty()) {
 					AnalyzerSentence sentence = (AnalyzerSentence) selection.getFirstElement();
 					// TODO: why this?
 					IEditorInput input = new AnalyzerEditorInput(sentence);
@@ -277,14 +277,17 @@ public class AnalyzerViewPart extends ViewPart {
 			}
 		});
 
-//		viewer.addDoubleClickListener(new IDoubleClickListener() {
-//			public void doubleClick(DoubleClickEvent event) {
-//				AnalyzerSentence newSentence = new AnalyzerSentence(comboViewer.getCombo().getText(), PrefsManager.getDefault());
-//				contentProvider.addSentence(newSentence);
-//				comboViewer.add(newSentence);
-//				comboViewer.setSelection(new StructuredSelection(new Object[] { newSentence }));
-//			}
-//		});
+		// viewer.addDoubleClickListener(new IDoubleClickListener() {
+		// public void doubleClick(DoubleClickEvent event) {
+		// AnalyzerSentence newSentence = new
+		// AnalyzerSentence(comboViewer.getCombo().getText(),
+		// PrefsManager.getDefault());
+		// contentProvider.addSentence(newSentence);
+		// comboViewer.add(newSentence);
+		// comboViewer.setSelection(new StructuredSelection(new Object[] {
+		// newSentence }));
+		// }
+		// });
 
 		return viewer;
 	}
@@ -317,20 +320,22 @@ public class AnalyzerViewPart extends ViewPart {
 			}
 		});
 
-//		combo.addListener(SWT.DefaultSelection, new Listener() {
-//			@Override
-//			public void handleEvent(Event event) {
-//				Log.logInfo("event: %s\n", event);
-//				
-////				IStructuredSelection selection = (IStructuredSelection) comboViewer.getSelection();
-////				assert selection != null;
-//				
-//				AnalyzerSentence sentence = new AnalyzerSentence(getSentenceText(), PrefsManager.getDefault());
-////				combo.add(string, index);
-//				PrefsManager.getDefault().addSentence(sentence);
-//			}
-//		});
-		
+		// combo.addListener(SWT.DefaultSelection, new Listener() {
+		// @Override
+		// public void handleEvent(Event event) {
+		// Log.logInfo("event: %s\n", event);
+		//
+		// // IStructuredSelection selection = (IStructuredSelection)
+		// comboViewer.getSelection();
+		// // assert selection != null;
+		//
+		// AnalyzerSentence sentence = new AnalyzerSentence(getSentenceText(),
+		// PrefsManager.getDefault());
+		// // combo.add(string, index);
+		// PrefsManager.getDefault().addSentence(sentence);
+		// }
+		// });
+
 		PrefsManager.getDefault().addModelChangeListener((IModelChangedListener) addSentence);
 
 		IActionBars actionBars = getViewSite().getActionBars();

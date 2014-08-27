@@ -3,6 +3,7 @@ package compling.gui.grammargui.util;
 import java.util.EventObject;
 
 import compling.gui.grammargui.model.AnalyzerSentence;
+import compling.gui.grammargui.model.PrefsManager;
 
 /**
  * A even describing change in the application's model
@@ -31,7 +32,7 @@ public class ModelChangedEvent extends EventObject {
 	public ModelChangedEvent(Object source, IProxy grammarProxy) {
 		super(source);
 		this.grammarProxy = grammarProxy;
-		this.added = new AnalyzerSentence[0];
+		this.added = ((PrefsManager) source).getSentences().toArray(new AnalyzerSentence[0]);
 		this.removed = new AnalyzerSentence[0];
 	}
 

@@ -156,7 +156,8 @@ public class AnalysisEditor extends MultiPageEditorPart  implements IModelChange
 
 	@Override
 	public void modelChanged(ModelChangedEvent event) {
-		close();
+		if (event.getGrammarProxy() != null)
+			close();
 	}
 
 	@Override

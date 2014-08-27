@@ -193,7 +193,8 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 								public void run() {
 									try {
 										setPreferences(null);
-									} catch (CoreException e) {
+									}
+									catch (CoreException e) {
 										Log.logError(e, "should not be here");
 									}
 								}
@@ -213,7 +214,8 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 					return true;
 				}
 			});
-		} catch (CoreException e) {
+		}
+		catch (CoreException e) {
 			Log.logError(e, "resourceChanged");
 		}
 	}
@@ -239,7 +241,8 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 		if (analyzer == null) {
 			try {
 				analyzer = new ECGAnalyzer(getGrammar(), prefs);
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				e.printStackTrace();
 				Log.logError(e, "impossible to get analyzer from %s", prefs);
 				analyzer = null;
@@ -263,11 +266,13 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 			String fileName = ((Primitive) node).getLocation().getFile();
 			Assert.isTrue(fileName != null, format("fileName for %s is null!", node));
 			return mapFileNameToResource(fileName);
-		} else if (node instanceof MiniOntology.Type) {
+		}
+		else if (node instanceof MiniOntology.Type) {
 			if (nodeToFileMap == null) {
 				try {
 					project.build(IncrementalProjectBuilder.FULL_BUILD, nullProgressMonitor);
-				} catch (CoreException e) {
+				}
+				catch (CoreException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 					return null;
@@ -277,7 +282,8 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 			IFile file = nodeToFileMap.get(node.getType());
 			if (file != null)
 				return file;
-		} else {
+		}
+		else {
 			// FIXME: This is a terrible hack...
 			String fileName = prefs.getList(AP.ONTOLOGY_PATHS).get(0);
 			if (fileName != null)
@@ -294,10 +300,12 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 			try {
 				project.refreshLocal(IResource.DEPTH_INFINITE, nullProgressMonitor);
 				project.build(IncrementalProjectBuilder.FULL_BUILD, null);
-			} catch (GrammarException e) {
+			}
+			catch (GrammarException e) {
 				grammar = null;
 				Log.logError(e, "Problem reading grammar %s", prefs);
-			} catch (CoreException e) {
+			}
+			catch (CoreException e) {
 				grammar = null;
 				Log.logError(e, "Problem building grammar %s", prefs);
 			}
@@ -330,13 +338,12 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 	 * @return the sentences defined in the local GrammarPrefs object.
 	 */
 	public Set<AnalyzerSentence> getSentences() {
-		if (prefs == null)
-			return null;
-
 		if (sentences == null) {
 			sentences = new HashSet<AnalyzerSentence>();
-			for (String s : prefs.getList(AP.EXAMPLE_SENTENCES))
-				sentences.add(new AnalyzerSentence(s, this));
+			if (prefs != null) {
+				for (String s : prefs.getList(AP.EXAMPLE_SENTENCES))
+					sentences.add(new AnalyzerSentence(s, this));
+			}
 		}
 		return sentences;
 	}
@@ -354,11 +361,11 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 		Log.logInfo("addSentence: sentence: %s\n", sentence);
 		Log.logInfo("addSentence: sentences: %s\n", sentences);
 
-		if (! sentences.contains(sentence)) {
+		if (!sentences.contains(sentence)) {
 			sentences.add(sentence);
 			prefs.getList(AP.EXAMPLE_SENTENCES).add(sentence.getText());
 
-			eventManager.fireModelChanged(this, new AnalyzerSentence[] { sentence }, new AnalyzerSentence[] { /* none */});
+			eventManager.fireModelChanged(this, new AnalyzerSentence[] { sentence }, new AnalyzerSentence[0]);
 		}
 	}
 
@@ -377,7 +384,8 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 			prefs.getList(AP.EXAMPLE_SENTENCES).remove(sentence.getText());
 
 			eventManager.fireModelChanged(this, new AnalyzerSentence[0], new AnalyzerSentence[] { sentence });
-		} else
+		}
+		else
 			Log.logInfo("PrefsManager.removeSentence: sentence \"%s\" not present", sentence.getText());
 	}
 
@@ -390,10 +398,10 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 
 		AnalyzerSentence[] removed = new AnalyzerSentence[sentences.size()];
 		sentences.toArray(removed);
-		
+
 		eventManager.fireModelChanged(this, new AnalyzerSentence[0], removed);
 	}
-	
+
 	public String getContentAsText(String nodeName) {
 		if (grammar == null)
 			return null;
@@ -417,9 +425,11 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 		String text;
 		try {
 			text = node.toString();
-		} catch (NullPointerException e) {
+		}
+		catch (NullPointerException e) {
 			return null;
-		} finally {
+		}
+		finally {
 			Grammar.setFormatter(linkFormatter);
 		}
 		return text;
@@ -466,12 +476,14 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 				if (!prefsPath.isAbsolute())
 					new IllegalArgumentException(String.format("Argument %s must be absolute", prefsFileName));
 				this.prefs = new AnalyzerPrefs(prefsPath.toOSString(), Charset.forName(ECGConstants.DEFAULT_ENCODING));
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				IStatus s = new Status(IStatus.ERROR, EcgEditorPlugin.PLUGIN_ID, "unable to read preferences", e);
 				Log.log(s);
 				throw new CoreException(s);
 			}
-		} else {
+		}
+		else {
 			prefs = null;
 			prefsPath = null;
 			if (project != null) {
@@ -506,7 +518,8 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 			IFile prefsFile = project.getFile(prefsName);
 			try {
 				prefs = new AnalyzerPrefs(prefsFile.getRawLocation().toOSString(), Charset.forName(ECGConstants.DEFAULT_ENCODING));
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				IStatus s = new Status(IStatus.ERROR, EcgEditorPlugin.PLUGIN_ID, "problem reading preferences");
 				Log.log(s);
 				throw new CoreException(s);
@@ -545,7 +558,8 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 				if (!folder.exists())
 					folder.createLink(prefsBase.append(p).makeAbsolute(), IResource.NONE, nullProgressMonitor);
 			}
-		} catch (CoreException e) {
+		}
+		catch (CoreException e) {
 			Log.logError(e, "Problem setting up project");
 		}
 	}
@@ -589,7 +603,8 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 				Writer w = new FileWriter(plugin.getStateLocation().append(fileName).toFile());
 				writeStateTo(w);
 				w.close();
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				throw new CoreException(new Status(Status.WARNING, "Status save failed", EcgEditorPlugin.PLUGIN_ID, e));
 			}
 			context.map(new Path("save"), new Path(fileName));
