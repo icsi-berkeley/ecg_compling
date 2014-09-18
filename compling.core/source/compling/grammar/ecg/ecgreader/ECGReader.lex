@@ -41,7 +41,7 @@ PROBABILITY = 0[\.][0-9]+ | [\.][0-9]+ | 1 | 1[\.]0
 
 %%
 
-<YYINITIAL> "["     				  { return new Symbol(sym.OPENBRACKET); }
+<YYINITIAL> "["     		    { return new Symbol(sym.OPENBRACKET); }
 <YYINITIAL> "]"                 { return new Symbol(sym.CLOSEBRACKET); }
 <YYINITIAL> "<--"               { return new Symbol(sym.ASSIGN, ECGConstants.ASSIGN); }
 <YYINITIAL> "<->"               { return new Symbol(sym.IDENTIFY, ECGConstants.IDENTIFY); }
