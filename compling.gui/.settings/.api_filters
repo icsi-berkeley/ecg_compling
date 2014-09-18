@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="compling.gui" version="2">
+    <resource path="source/compling/gui/grammargui/model/AnalyzerSentence.java" type="compling.gui.grammargui.model.AnalyzerSentence$JobStatus">
+        <filter comment="test" id="574619656">
+            <message_arguments>
+                <message_argument value="IJobStatus"/>
+                <message_argument value="JobStatus"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>
