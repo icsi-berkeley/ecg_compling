@@ -282,7 +282,7 @@ public class Analysis implements Cloneable {
     }
     myMiniSemSpecs = new PossibleSemSpecs(chains, types, frameRoles);
   }
-
+   
   public boolean addConstraint(Constraint constraint, Role prepend, String prefix) {
     if (constraint.isAssign()) {
       return addConstraint(new Constraint(constraint.getOperator(), new ECGSlotChain(prepend, constraint.getArguments()

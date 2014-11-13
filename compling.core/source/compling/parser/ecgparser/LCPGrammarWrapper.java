@@ -25,6 +25,9 @@ public class LCPGrammarWrapper implements GrammarWrapper {
 	Grammar grammar;
 	private HashMap<String, List<String>> subtypeList = new HashMap<String, List<String>>();
 	private HashMap<String, List<Construction>> lexemeToLexicalConstructions = new HashMap<String, List<Construction>>();
+
+	// private HashMap<String, List<Construction>> lemmaToLexicalConstructions = new HashMap<String, List<Construction>>
+
 	Construction morph;
 	Construction word;
 
@@ -52,7 +55,9 @@ public class LCPGrammarWrapper implements GrammarWrapper {
 							new ArrayList<Construction>());
 				}
 				lexemeToLexicalConstructions.get(ECGGrammarUtilities.getLexemeFromLexicalConstruction(parent)).add(parent);
-			}
+			} // could be code checking if it's a LemmaConstruction?, then put in Lemma hashmap (if necessary) (@seantrott, 11/12/14)
+			  // alternatively, lemma constructions could just also be lexical constructions
+			// elif (isLemmaConstruction(parent))
 		}
 	}
 
@@ -98,6 +103,10 @@ public class LCPGrammarWrapper implements GrammarWrapper {
 		return c.getKind() == ECGConstants.CONCRETE && c.getConstructionalBlock().getElements().size() == 0
 				&& !isSubcaseOfMorph(c);
 	}
+
+	// public boolean isLemmaConstruction(Construction c) {
+		// ** check if it's a lemma construction
+	// }
 
 //	public boolean isLexicalConstruction(Construction c) {
 //// return c.getKind() == ECGConstants.CONCRETE && isSubcaseOfWord(c);
