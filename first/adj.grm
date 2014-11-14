@@ -1,0 +1,37 @@
+//
+// Adjectives
+// ========== 
+// 
+
+general construction Adjective  // parallel to Verb, etc. \
+	subcase of  RootType  // for testing
+	//subcase of HasNominalFeatures   **** for agreement in Spanish, etc.
+	meaning: Modification
+
+general construction LexicalAdjective
+   subcase of Adjective, Word
+    
+general construction PropertyAdjective  // parallel to Verb, etc. \
+	subcase of  LexicalAdjective
+	//subcase of HasNominalFeatures   **** for agreement in Spanish, etc.
+	meaning: PropertyModifier	
+
+general construction Color  //subcase of non-scale Adj
+  subcase of PropertyAdjective    
+   meaning: PropertyModifier
+    constraints
+       self.m.property <-- @color 
+	   self.m.domain <-- @physicalEntity
+
+construction Red
+  subcase of Color
+   form
+      constraints
+         self.f.orth <-- "red"  
+   meaning: PropertyModifier
+    constraints
+       	self.m.value <-- @red 
+
+	
+
+ 

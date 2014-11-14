@@ -1,0 +1,79 @@
+//
+// Singular Count Nouns
+//
+
+general construction SingularNoun
+  subcase of Noun, Singular
+   constructional
+     constraints
+      self.features.number <-- "singular"  
+   meaning
+    constraints
+      self.m.number <-- @singular
+	  self.m.bounding <-- @determinate
+
+
+construction Block
+   subcase of SingularNoun
+   form
+      constraints
+         self.f.orth <-- "block"
+      meaning
+    constraints
+      self.m.ontological-category <--  @block
+      self.m.scale <-- @size 
+     
+ 
+  
+      
+construction Room
+   subcase of SingularNoun
+   form
+      constraints
+         self.f.orth <-- "room"
+      meaning
+    constraints
+      self.m.ontological-category <--  @room
+      self.m.scale <-- @size
+
+//
+// Plural Count Nouns
+//
+general construction PluralNoun
+  subcase of Noun, Plural
+   constructional
+     constraints
+      self.features.number <-- "plural" 
+   meaning
+    constraints
+      //self.m.ontological-category <-- @multiplex // might restrict some
+      self.m.number <-- @plural
+      self.m.bounding <-- @indeterminate
+
+construction Blocks
+   subcase of PluralNoun
+   form
+      constraints
+       self.f.orth <-- "blocks"
+   meaning
+     constraints
+       self.m.ontological-category <--  @block
+	  
+// Proper Nouns
+general construction ProperNounNP
+    subcase of NP, Word
+    
+ construction JOHN
+    subcase of ProperNounNP, Singular, ThirdPerson
+    constructional
+    form
+        constraints
+            self.f.orth <-- "John"
+    meaning
+        constraints
+            self.m.referent <-- @john-instance
+            self.m.ontological-category <-- @person
+      		self.m.number <-- @singular
+			self.m.gender <-- @male
+
+      

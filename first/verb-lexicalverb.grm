@@ -1,0 +1,85 @@
+
+ 
+general construction Verb
+   subcase of HasVerbFeatures
+   meaning: Process
+
+general construction ComplexVerb
+   subcase of Verb
+   
+general construction VerbChunk  
+	subcase of  RootType, ComplexVerb 
+
+general construction LexicalVerb
+	subcase of VerbChunk, Word
+	meaning
+		evokes ProcessFeatures as pf
+   	constraints
+   		pf <--> self.m.p-features
+
+
+general construction Move  
+   	subcase of LexicalVerb
+	meaning: MotionPath 
+      	constraints
+         	self.m.actionary <-- @move      	
+		
+construction MoveBase 
+   	subcase of Move, BaseForm
+   	form
+      	constraints
+         	self.f.orth <-- "move"          
+
+construction MovePast
+   subcase of Move, PastTense 
+   form
+      constraints
+         self.f.orth <-- "moved"
+
+construction MovePastParticiple
+   subcase of Move, PastParticiple
+   form
+      constraints
+         self.f.orth <-- "moved"
+         
+
+
+ 
+general construction SeeT // 8/21/13 Transitive
+   subcase of LexicalVerb
+   meaning: Perception
+      constraints 
+         self.m.actionary <-- @see
+		 self.argform <-- Transitive
+ 		 self.verbkind <-- Perceptual  // 10/3/13
+ 		 
+	
+construction SeeBaseT
+   subcase of SeeT, BaseForm
+   form
+      constraints
+         self.f.orth <-- "see"
+
+construction SeePastT
+   subcase of SeeT, PastTense
+   form
+      constraints
+         self.f.orth <-- "saw"
+/*        
+general construction Enter   
+   subcase of LexicalVerb
+   meaning: ChangeLocation // mover changes location wrt a landmark 
+      //evokes BoundedObject as bo   
+     constraints
+         //self.m.landmark <--> bo.boundedObject
+         //self.m.goal <--> bo.interior
+         self.m.landmark.ontological-category <-- @container
+         self.m.actionary <-- @enter
+
+construction EnterPast
+   subcase of Enter, PastTense
+   form
+      constraints
+         self.f.orth <-- "entered"
+*/         
+         
