@@ -209,6 +209,17 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
         //     add constraints from possibility to clone_n  --> LCP extends Analysis, which has addConstraint(...) method
         //     add clone_n to item's array of constructions --> input[i]
 
+        lemma = "block"
+        morphed = ['Plural']
+        // assume 'plural' morphed will give us number of Plural, etc.
+        List<Construction> lemmaCxns = grammar.getLemmaConstruction(lemma)
+        // make new list: input[i] = ??, based on size of lemmaCxns (but also based on combinations between morphed and lemmaCxns)
+        for (int j = 0; j < lemmaCxns.size(); j++) {
+          cxn = lemmaCxns.get(j).clone()   // make a copy of construction, we don't want to modify the original
+          cblock = cxn.getConstructionalBlock()
+          mblock = cxn.getMeaningBlock()
+        }
+
       } catch (GrammarException g) {
 
         System.out.println("Unknown input lexeme: " + utterance.getElement(i).getOrthography());

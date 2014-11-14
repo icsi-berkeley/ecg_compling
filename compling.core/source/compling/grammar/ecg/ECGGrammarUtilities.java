@@ -582,6 +582,31 @@ public class ECGGrammarUtilities {
     throw new GrammarException("Not a lexical construction: " + lexicalConstruction.getName(), lexicalConstruction);
   }
 
+
+  // @author: seantrott 11/13/14, used for generating Lemma-->Construction hashmap.
+  public static String getLemmaFromLexicalConstruction(Construction lexicalConstruction) {
+    for (Constraint constraint : lexicalConstruction.getFormBlock().getConstraints()) {
+      if (constraint.getOperator().equals(ECGConstants.ASSIGN)
+          && constraint.getArguments().get(0).toString().indexOf("lemma") != -1) {
+        return constraint.getValue();
+      }
+    }
+        // Look for an assignment to 'orth' in the schema
+    if (lexicalConstruction.getFormBlock().getTypeConstraint().getType() != ECGConstants.UNTYPED) {
+      for (Constraint constraint : lexicalConstruction.getSchemaTypeSystem()
+              .get(lexicalConstruction.getFormBlock().getType()).getContents().getConstraints()) {
+        if (constraint.getOperator().equals(ECGConstants.ASSIGN)
+                && constraint.getArguments().get(0).toString().indexOf("lemma") != -1) {
+          return constraint.getValue();
+        }
+      }
+    }
+    throw new GrammarException("Not a lexical construction: " + lexicalConstruction.getName(), lexicalConstruction);
+
+
+
+  }
+
   public static Grammar read(AnalyzerPrefs preferences) throws IOException, TypeSystemException {
 
     File base = preferences.getBaseDirectory();
