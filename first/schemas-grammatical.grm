@@ -5,6 +5,8 @@
 schema WordForm
   roles
     orth 
+    lemma
+
 
 // REFERENT DESCRIPTOR (RD) schemas
 

@@ -23,7 +23,17 @@ construction Block
       self.m.ontological-category <--  @block
       self.m.scale <-- @size 
      
- 
+
+ construction BlockLemma
+   subcase of Noun
+   form
+      constraints
+         self.f.lemma <-- "block"
+      meaning
+    constraints
+      self.m.ontological-category <--  @block
+      self.m.scale <-- @size 
+
   
       
 construction Room
