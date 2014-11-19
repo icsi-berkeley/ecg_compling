@@ -49,3 +49,16 @@ construction He
       self.m.number <-- @singular
       self.m.gender <-- @male  
             
+construction I-Pronoun
+   subcase of Pronoun, Singular, FirstPerson
+   constructional
+     constraints
+       self.features.case <-- "nom"
+   form
+      constraints
+         self.f.orth <-- "I"
+   meaning
+    constraints
+      self.m.ontological-category <-- @person  
+      self.m.number <-- @singular
+      self.m.gender <-- @genderValues  
