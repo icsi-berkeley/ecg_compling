@@ -452,6 +452,7 @@ public class Grammar {
 			this.constructionalBlock = constructionalBlock;
 			this.kind = kind;
 		}
+		
 
 		public void setMeaningBlock(Block meaningBlock) {
 			this.meaningBlock = meaningBlock;

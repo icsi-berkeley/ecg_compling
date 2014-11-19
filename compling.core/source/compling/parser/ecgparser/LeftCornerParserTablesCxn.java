@@ -481,6 +481,14 @@ public class LeftCornerParserTablesCxn {
 			a.getPossibleSemSpecs().setID();
 			return a;
 		}
+		
+		// adds a new Construction to canonical Instances HashMap. @seantrott. 
+		public void put(Construction cxn) {
+			T a = factory.get(cxn);
+			canonicalInstances.put(cxn, a); //   factory.get(cxn));
+			//System.out.println(factory.get(cxn));
+			
+		}
 
 		@SuppressWarnings("unchecked")
 		public T get(Construction cxn) {

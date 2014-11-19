@@ -1,6 +1,7 @@
 package compling.parser.ecgparser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +15,8 @@ import compling.grammar.ecg.Grammar;
 import compling.grammar.ecg.Grammar.Construction;
 import compling.grammar.unificationgrammar.TypeSystem;
 import compling.grammar.unificationgrammar.TypeSystemException;
+import compling.grammar.unificationgrammar.UnificationGrammar;
+import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
 import compling.grammar.unificationgrammar.UnificationGrammar.Role;
 import compling.parser.ParserException;
 import compling.parser.RobustParser;
@@ -167,6 +170,9 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   }
 
   public PriorityQueue<List<T>> getBestPartialParses(Utterance<Word, String> utterance) {
+	
+	 
+	
     lastNormalizer = 0;
     currentEntropy = 0;
     parserLog = new StringBuilder();
@@ -183,55 +189,137 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
     input = new Construction[utterance.size() + 1][];
     for (int i = 0; i < utterance.size(); i++) {
+      
 
-      // Try to process input string as lexical construction.
-      try { 
-        List<Construction> lexicalCxns = grammar.getLexicalConstruction(StringUtilities.addQuotes(utterance.getElement(
-                i).getOrthography()));
-        input[i] = new Construction[lexicalCxns.size()];
-        for (int j = 0; j < lexicalCxns.size(); j++) {
-          //System.out.println("i:"+i+", j:"+j+"  "+lexicalCxns.get(j).getName());
-          input[i][j] = lexicalCxns.get(j);
-      } catch (GrammarException g) {}
+
+
 
       // Try to process input string as lemma, after decomposing into morphological parts.
       try {
-        // Here, we can call Celex or whichever morphological analyzer we use on lexeme, and then look up the lemma in grammar. If that fails, then do normal error.
-        // 
-        // lemma, morphed = MorphologicalProcessor.analyze(utterance.getElement(i).getOrthography())   --> this could contain lemma + list of flecttypes
-        // List<Construction> lemmaCxns = grammar.getLemma(lemma)   -->  could add new hash map from lemmas to constructions (vs. orthographic strings to constructions)
-        // 
-        // make new list for input[i] array --> input[i] = new Construction[] ???* (needs to be length of #constructions)
-        //
-        // for each construction in lemmaCxns:
-        //   for each possibility in morphed:
-        //     clone_n = copy(construction)
-        //     add constraints from possibility to clone_n  --> LCP extends Analysis, which has addConstraint(...) method
-        //     add clone_n to item's array of constructions --> input[i]
+
+    	// Get lemma output from Morph analyzer. For now, just set to "block". 
+    	String lemma = "block";
+    	
+    	String[] morphs = new String[]{"Plural", "Present|!Participle"};
 
 
-        String lemma = "block"
-        Constraint testConstraint = new Constraint(ECGConstants.ASSIGN, Slotchain('verbform')) // ??
-        // assume 'plural' morphed will give us number of Plural, etc.
-        List<Construction> lemmaCxns = grammar.getLemmaConstruction(lemma)
+    	
+    	// beginnings of initializing a morph table hashmap. Should actually be initialized outside function. Though ideally inside grammar.
+    	HashMap<String, String[]> meaning_morphTable = new HashMap<String, String[]>() 
+    	{{
+    		put("Plural", new String[]{"self.m.number", "@plural"});
+    		put("Singular", new String[]{"self.m.number", "@singular"});
+    		// put("Singular", new String[]{"self.m.bounding", "@determinate"});
+    		put("Past|!Participle", new String[]{"self.pf.tense", "@past"});
+    		put("Present|!Participle", new String[]{"self.pf.tense", "@present"});
+    		put("Comparative", new String[]{"self.m.kind", "@comparative"});
+    		put("Superlative", new String[]{"self.m.kind", "@superlative"});
+    	}};
+    	
+    	// beginnings of initializing a morph table HashMap for constructional features.
+    	HashMap<String, String[]> constructional_morphTable = new HashMap<String, String[]>()
+    			{{
+    				put("Plural", new String[]{"self.features.number", "\"plural\""});
+    				put("Singular", new String[]{"self.features.number", "\"singular\""});
+    				put("Present|!Participle", new String[]{"self.verbform", "Present"});
+    			}};
+
+
+    	// Search for lemma in constructions
+        List<Construction> lemmaCxns = grammar.getLemmaConstruction(StringUtilities.addQuotes(lemma)); //(StringUtilities.addQuotes(utterance.getElement(i).getOrthography()));
+        
         // make new list: input[i] = ??, based on size of lemmaCxns (but also based on combinations between morphed and lemmaCxns)
+        input[i] = new Construction[lemmaCxns.size()];
+        
         for (int j = 0; j < lemmaCxns.size(); j++) {
-          Construction cxn = lemmaCxns.get(j).clone()   // make a copy of construction, we don't want to modify the original
-          Block cblock = cxn.getConstructionalBlock()
-          Block mblock = cxn.getMeaningBlock()
+          Construction cxn = lemmaCxns.get(j);   // should actually make a copy of construction
+          
+
+          //Construction cxn2 = new Construction("BlockTest2", cxn.getParents(), cxn.getFormBlock(), cxn.getMeaningBlock(), cxn.getConstructionalBlock());
+	
+          // Procedure: iterate through constructional constraints.
+          // Check if constraint matches FlectTypes in constructional Table.
+          // Change value if true.
+          
+          for (Constraint constraint: cxn.getConstructionalBlock().getConstraints()) {
+        	  if (constraint.getValue().replace("\"", "").equals("undetermined")) {
+        		  for (String morph : morphs) {
+        			  if (constraint.getArguments().toString().replace("]", "").replace("[", "").equals(constructional_morphTable.get(morph)[0])) {
+        				  constraint.setValue(constructional_morphTable.get(morph)[1]);
+        			  }
+        		  }
+        	  }
+        	  
+          }
+          
+          // Procedure: iterate through semantic constraints. For each constraint, check if any of returned FlectTypes match in preset HashMap.
+          // If they do match, change value of constraint to value specified in HashMap.
+          
+          
+          for (Constraint constraint : cxn.getMeaningBlock().getConstraints()) {
+        	  if (constraint.isAssign() && constraint.getValue().replace("\"", "").equals("undetermined")) {
+        		  for (String morph : morphs) {
+        			  //String arg = meaning_morphTable.get(morph)[0];
+        			  if (constraint.getArguments().toString().replace("]", "").replace("[", "")
+        					  .equals(meaning_morphTable.get(morph)[0])) { 
+        				  constraint.setValue(meaning_morphTable.get(morph)[1]);
+        			  }
+        		  }
+        		  
+        	  }
+          }
+          
+          cloneTable.put(cxn);
+          cloneTable.update();
+          
+          input[i][j] = cxn;
+
+
         }
 
       } catch (GrammarException g) {
-
-        System.out.println("Unknown input lexeme: " + utterance.getElement(i).getOrthography());
-        input[i] = new Construction[1];
-        List<Construction> lexicalCxns = grammar.getLexicalConstruction(StringUtilities
-                .addQuotes(ECGConstants.UNKNOWN_ITEM));
-        input[i][0] = lexicalCxns.get(0);
-
+      		System.out.println("Unknown input lemma: " + utterance.getElement(i).getOrthography());
+	       	input[i] = new Construction[1];
+	        List<Construction> lexicalCxns = grammar.getLexicalConstruction(StringUtilities
+	                .addQuotes(ECGConstants.UNKNOWN_ITEM));
+	        input[i][0] = lexicalCxns.get(0);
+  
+    	  
+    	  
       }
+      // Currently this creates a new copy of the existing list, then adds to lexical Cxns list. 
+      try { 
+          List<Construction> lexicalCxns = grammar.getLexicalConstruction(StringUtilities.addQuotes(utterance.getElement(
+                  i).getOrthography()));
+          
+
+          Construction[] copy = new Construction[input[i].length + lexicalCxns.size()];
+          for (int k = 0; k < input[i].length; k++){
+        	  copy[k] = input[i][k];
+          }
+          
+          
+          Construction[] test = new Construction[lexicalCxns.size()]; //input[i] = new Construction[lexicalCxns.size()];
+          for (int j = 0; j < lexicalCxns.size(); j++) {
+            //System.out.println("i:"+i+", j:"+j+"  "+lexicalCxns.get(j).getName());
+            test[j] = lexicalCxns.get(j); //input[i][j] = lexicalCxns.get(j);
+          }
+          
+          int it = 0;
+          for (int l = input[i].length; l < copy.length; l++){
+        	  copy[l] = test[it];
+        	  it += 1;
+          }
+          
+          input[i] = copy;
+          
+        }catch (GrammarException g) {
+        	System.out.println("Unknown input lexeme: " + utterance.getElement(i).getOrthography());
+        	
+        }
 
     }
+
     input[utterance.size()] = new Construction[1];
     input[utterance.size()][0] = null;
 
