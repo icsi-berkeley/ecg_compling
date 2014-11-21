@@ -90,6 +90,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   
   private HashMap<String, String[]> constructional_morphTable;
   private HashMap<String, String[]> meaning_morphTable;
+  
+ 
  
 
   private long constructorTime;
@@ -211,7 +213,6 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
   public PriorityQueue<List<T>> getBestPartialParses(Utterance<Word, String> utterance) {
 	
-	 
 	
     lastNormalizer = 0;
     currentEntropy = 0;
@@ -683,11 +684,14 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
       if (reachabilityCost > Double.NEGATIVE_INFINITY) {
         
     	
-        T lexical = cloneTable.get(lexicalCxn, index);
+        T lexical2 = cloneTable.get(lexicalCxn, index);
         
 
 
-        System.out.println(lexical);
+
+        
+        T lexical = (T) lexical2.clone();
+
         String[] morphs = new String[]{"Plural|!Present|!Past"};
         
         // currently just adds constraints to "Nouns". Testing. Need to figure out solution to matching problem.
@@ -1410,8 +1414,6 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     String ontFile = null;
     ontFile = args[1];
     Grammar grammar = ECGGrammarUtilities.read(args[0], "ecg cxn sch grm", ontFile);
-
-    
 
     // debugPrint(grammar);
 

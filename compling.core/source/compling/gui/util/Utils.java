@@ -126,10 +126,10 @@ public final class Utils {
 	// TODO: make this synchronized?
 	public static Collection<IParse> getParses(String text, ECGAnalyzer analyzer) {
 		assert text != null;
-		
 		Collection<IParse> parses = new ArrayList<IParse>();
 		Sentence sentence = new Sentence(Arrays.split(text));
 		if (analyzer.robust()) {
+
 			PriorityQueue<List<Analysis>> pp = analyzer.getBestPartialParses(sentence);
 			while (pp.size() > 0) {
 				double priority = pp.getPriority();

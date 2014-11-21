@@ -50,6 +50,8 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	private boolean useBackoff;
 
 	private LCPGrammarWrapper grammar;
+	
+	private ECGMorph ecgmorph;
 
 	private ConstituentExpansionCostTable cect = null;
 
@@ -60,6 +62,7 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public ECGAnalyzer(Grammar ecgGrammar, AnalyzerPrefs prefs) throws IOException {
+
 		grammar = new LCPGrammarWrapper(ecgGrammar);
 
 		if (prefs == null) {
@@ -150,6 +153,8 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 
 		parser.setParameters(robust, debug, beamSize, numAnalysesReturned, multiRootPenalty);
 
+
+
 //    needs to be more code here to further process the grammar prefs
 	}
 
@@ -207,6 +212,8 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	public GrammarWrapper getGrammarWrapper() {
 		return grammar;
 	}
+	
+
 
 	public PriorityQueue<Analysis> getBestParses(Utterance<Word, String> utterance) {
 		PriorityQueue<List<Analysis>> pqa = parser.getBestPartialParses(utterance);

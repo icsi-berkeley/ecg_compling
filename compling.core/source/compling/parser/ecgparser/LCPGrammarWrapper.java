@@ -53,7 +53,16 @@ public class LCPGrammarWrapper implements GrammarWrapper {
 				if (lexemeToLexicalConstructions.get(ECGGrammarUtilities.getLexemeFromLexicalConstruction(parent)) == null) {
 					lexemeToLexicalConstructions.put(ECGGrammarUtilities.getLexemeFromLexicalConstruction(parent),
 							new ArrayList<Construction>());
+				} 
+				// @ author seantrott
+				// instantiate new entry for lemma if it's not already in hashmap
+				if (lemmaToLexicalConstructions.get(ECGGrammarUtilities.getLemmaFromLexicalConstruction(parent)) == null) {     // so far just putting in lexeme hashmap
+					lemmaToLexicalConstructions.put(ECGGrammarUtilities.getLemmaFromLexicalConstruction(parent), new ArrayList<Construction>());
 				}
+
+				// add parent to lemma hashmap
+				lemmaToLexicalConstructions.get(ECGGrammarUtilities.getLemmaFromLexicalConstruction(parent)).add(parent);
+
 				lexemeToLexicalConstructions.get(ECGGrammarUtilities.getLexemeFromLexicalConstruction(parent)).add(parent);
 			}
 		}
