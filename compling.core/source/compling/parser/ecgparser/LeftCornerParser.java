@@ -228,10 +228,21 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
     input = new Construction[utterance.size() + 1][];
     for (int i = 0; i < utterance.size(); i++) {
-      
-
-
-
+      try {
+        List<Construction> lexicalCxns = grammar.getLexicalConstruction(StringUtilities.addQuotes(utterance.getElement(
+                i).getOrthography()));
+        input[i] = new Construction[lexicalCxns.size()];
+        for (int j = 0; j < lexicalCxns.size(); j++) {
+          // System.out.println("i:"+i+", j:"+j+"  "+lexicalCxns.get(j).getName());
+          input[i][j] = lexicalCxns.get(j);
+        }
+      }
+      catch (GrammarException g) {
+        System.out.println("Unknown input lexeme: " + utterance.getElement(i).getOrthography());
+        input[i] = new Construction[1];
+        List<Construction> lexicalCxns = grammar.getLexicalConstruction(StringUtilities
+                .addQuotes(ECGConstants.UNKNOWN_ITEM));
+        input[i][0] = lexicalCxns.get(0);
 
       // Try to process input string as lemma, after decomposing into morphological parts.
       try {
@@ -299,7 +310,6 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
           */
 
           input[i][j] = cxn;
-
 
         }
 
