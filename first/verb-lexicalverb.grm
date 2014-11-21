@@ -51,7 +51,7 @@ construction BlockLemmaVerb
 	     self.verbform <-- Present
 	form
 	   constraints
-	      self.f.orth <-- "orth" // testing so it doesn't get picked up as lexicalCxn
+	      //self.f.orth <-- "orth" // testing so it doesn't get picked up as lexicalCxn
 	      self.f.lemma <-- "block"
 	meaning
 	   constraints

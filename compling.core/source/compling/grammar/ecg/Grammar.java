@@ -90,6 +90,15 @@ public class Grammar {
 		}
 	}
 
+	//@seantrott
+	public Construction copyConstruction(Construction cxn) {
+		Construction returned = new Construction(cxn.getName(), cxn.getKind(), cxn.getParents(),
+        		  								cxn.getFormBlock(), cxn.getMeaningBlock(), cxn.getConstructionalBlock());
+		return returned;
+		
+	}
+	
+	
 	public static void setFormatter(ECGGrammarFormatter f) {
 		formatter = f;
 	}

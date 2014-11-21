@@ -33,6 +33,9 @@ class Analyzer(object):
     
     def issubtype(self, typesystem, child, parent):
         return self.analyzer.issubtype(typesystem, child, parent)
+    
+    def reload(self, prefs):
+        self.analyzer.reload(prefs)    
 
 analyzer = Analyzer("http://localhost:8090")
 

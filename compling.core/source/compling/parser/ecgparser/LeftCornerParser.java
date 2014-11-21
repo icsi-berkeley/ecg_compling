@@ -13,6 +13,7 @@ import compling.grammar.ecg.ECGConstants;
 import compling.grammar.ecg.ECGGrammarUtilities;
 import compling.grammar.ecg.Grammar;
 import compling.grammar.ecg.Grammar.Construction;
+import compling.grammar.unificationgrammar.FeatureStructureSet.Slot;
 import compling.grammar.unificationgrammar.TypeSystem;
 import compling.grammar.unificationgrammar.TypeSystemException;
 import compling.grammar.unificationgrammar.UnificationGrammar;
@@ -85,6 +86,10 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   private Construction RootCxn;
   private Role RootCxnConstituent;
   private StringBuilder parserLog;
+  
+  private HashMap<String, String[]> constructional_morphTable;
+  private HashMap<String, String[]> meaning_morphTable;
+ 
 
   private long constructorTime;
   private double currentEntropy = 0;
@@ -155,6 +160,33 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     constructorTime = System.currentTimeMillis() - constructorTime;
     RootCxn = grammar.getConstruction(ECGConstants.ROOT);
     RootCxnConstituent = (Role) RootCxn.getConstructionalBlock().getElements().toArray()[0];
+    
+	// beginnings of initializing a morph table hashmap for semantic features. Should actually be initialized outside function. 
+	this.meaning_morphTable = new HashMap<String, String[]>() 
+	{{
+		put("Plural|!Present|!Past", new String[]{"self.m.number", "@plural", "self.m.bounding", "@indeterminate"});
+		put("Singular|!Present|!Past", new String[]{"self.m.number", "@singular", "self.m.bounding", "@determinate"});
+		put("Past|!Participle", new String[]{"self.pf.tense", "@past"});
+		put("Present|!Participle|3rd|Singular", new String[]{"self.pf.tense", "@present"});
+		put("Comparative", new String[]{"self.m.kind", "@comparative"});
+		put("Superlative", new String[]{"self.m.kind", "@superlative"});
+	}};
+	
+	
+	// PROBLEM: if I just check each key in HashMap, it might incorrectly map some of the values in certain cases.
+	// Example: "Present|!Participle|3rd|Singular" incorrectly sets "number" to singular for "block-lemma".
+	// I need a better way to rule out certain matches; don't match unless all match.
+	// In other words: only match constraints if ALL of the constraints match
+	
+	// beginnings of initializing a morph table HashMap for constructional features.
+	this.constructional_morphTable = new HashMap<String, String[]>()
+			{{
+				put("Plural|!Present|!Past", new String[]{"self.features.number", "\"plural\""});
+				put("Singular|!Present|!Past", new String[]{"self.features.number", "\"singular\""});
+				put("Present|!Participle|3rd|Singular", new String[]{"self.verbform", "Present", "self.features.person", "\"3\"", "self.features.number", "\"singular\""});
+				put("Present|!Participle|!3rd", new String[]{"self.verbform", "Present"});
+				put("Past|!Participle", new String[]{"self.verbform", "Past"});
+			}};
   }
 
   public long getConstructorTime() {
@@ -167,6 +199,13 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
   public int getNumberOfStatesProcessedForLastUtterance() {
     return processedStates;
+  }
+  
+  
+  // To be filled in: should check if all constraints on construction match.
+  public boolean isConstraintMatch(Construction cxn, String[] constraints) {
+	  
+	  return false;
   }
 
   public PriorityQueue<List<T>> getBestPartialParses(Utterance<Word, String> utterance) {
@@ -198,31 +237,14 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
       try {
 
     	// Get lemma output from Morph analyzer. For now, just set to "block". 
-    	String lemma = "block";
+    	String lemma1 = "block";
     	
-    	String[] morphs = new String[]{"Plural", "Present|!Participle"};
+    	String lemma = utterance.getElement(i).getOrthography();
+    	lemma = lemma.replace("s", "");
+    	
+    	// Get FlectTypes from Morph analyzer. For now, just set to this string array.
+    	String[] morphs = new String[]{"Plural|!Present|!Past", "Present|!Participle|3rd|Singular"};
 
-
-    	
-    	// beginnings of initializing a morph table hashmap. Should actually be initialized outside function. Though ideally inside grammar.
-    	HashMap<String, String[]> meaning_morphTable = new HashMap<String, String[]>() 
-    	{{
-    		put("Plural", new String[]{"self.m.number", "@plural"});
-    		put("Singular", new String[]{"self.m.number", "@singular"});
-    		// put("Singular", new String[]{"self.m.bounding", "@determinate"});
-    		put("Past|!Participle", new String[]{"self.pf.tense", "@past"});
-    		put("Present|!Participle", new String[]{"self.pf.tense", "@present"});
-    		put("Comparative", new String[]{"self.m.kind", "@comparative"});
-    		put("Superlative", new String[]{"self.m.kind", "@superlative"});
-    	}};
-    	
-    	// beginnings of initializing a morph table HashMap for constructional features.
-    	HashMap<String, String[]> constructional_morphTable = new HashMap<String, String[]>()
-    			{{
-    				put("Plural", new String[]{"self.features.number", "\"plural\""});
-    				put("Singular", new String[]{"self.features.number", "\"singular\""});
-    				put("Present|!Participle", new String[]{"self.verbform", "Present"});
-    			}};
 
 
     	// Search for lemma in constructions
@@ -234,44 +256,48 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
         for (int j = 0; j < lemmaCxns.size(); j++) {
           Construction cxn = lemmaCxns.get(j);   // should actually make a copy of construction
           
-
-          //Construction cxn2 = new Construction("BlockTest2", cxn.getParents(), cxn.getFormBlock(), cxn.getMeaningBlock(), cxn.getConstructionalBlock());
-	
-          // Procedure: iterate through constructional constraints.
-          // Check if constraint matches FlectTypes in constructional Table.
-          // Change value if true.
+          //Construction cxn = ecgGrammar.copyConstruction(cxn2);
+          //cxn.setName(cxn.getName() + "-Morphed");
+          // ecgGrammar.addConstruction(cxn);
+          
+          
+          
+          /*
           
           for (Constraint constraint: cxn.getConstructionalBlock().getConstraints()) {
         	  if (constraint.getValue().replace("\"", "").equals("undetermined")) {
         		  for (String morph : morphs) {
-        			  if (constraint.getArguments().toString().replace("]", "").replace("[", "").equals(constructional_morphTable.get(morph)[0])) {
-        				  constraint.setValue(constructional_morphTable.get(morph)[1]);
-        			  }
+    				  for (int index = 0; index < constructional_morphTable.get(morph).length; index +=2){
+        				  if (constraint.getArguments().toString().replace("]", "").replace("[", "") 
+        						  .equals(constructional_morphTable.get(morph)[index])) {
+            				  constraint.setValue(constructional_morphTable.get(morph)[index + 1]);
+        				  }
+    				  }
         		  }
         	  }
         	  
           }
           
+          
           // Procedure: iterate through semantic constraints. For each constraint, check if any of returned FlectTypes match in preset HashMap.
           // If they do match, change value of constraint to value specified in HashMap.
-          
-          
           for (Constraint constraint : cxn.getMeaningBlock().getConstraints()) {
         	  if (constraint.isAssign() && constraint.getValue().replace("\"", "").equals("undetermined")) {
         		  for (String morph : morphs) {
-        			  //String arg = meaning_morphTable.get(morph)[0];
-        			  if (constraint.getArguments().toString().replace("]", "").replace("[", "")
-        					  .equals(meaning_morphTable.get(morph)[0])) { 
-        				  constraint.setValue(meaning_morphTable.get(morph)[1]);
-        			  }
-        		  }
-        		  
+    				  for (int index = 0; index < meaning_morphTable.get(morph).length; index +=2) {
+        				  if (constraint.getArguments().toString().replace("]", "").replace("[", "") 
+        						  .equals(meaning_morphTable.get(morph)[index])) {
+            				  constraint.setValue(meaning_morphTable.get(morph)[index + 1]);
+        				  }
+    				  }	  
+        		  }       		  
         	  }
           }
           
           cloneTable.put(cxn);
           cloneTable.update();
-          
+          */
+
           input[i][j] = cxn;
 
 
@@ -300,6 +326,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
           
           
           Construction[] test = new Construction[lexicalCxns.size()]; //input[i] = new Construction[lexicalCxns.size()];
+          
+          
           for (int j = 0; j < lexicalCxns.size(); j++) {
             //System.out.println("i:"+i+", j:"+j+"  "+lexicalCxns.get(j).getName());
             test[j] = lexicalCxns.get(j); //input[i][j] = lexicalCxns.get(j);
@@ -319,6 +347,17 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
         }
 
     }
+    
+    /*
+    for (Construction[] cxn : input) {
+    	if (cxn != null) {
+    		for (Construction c : cxn) {
+    			System.out.println(c);
+    		}
+    	}
+    }
+    */
+    
 
     input[utterance.size()] = new Construction[1];
     input[utterance.size()][0] = null;
@@ -656,14 +695,41 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
       // System.out.println("lexpush here");
       if (reachabilityCost > Double.NEGATIVE_INFINITY) {
-        // System.out.println("lexpush now here");
+        
+    	
         T lexical = cloneTable.get(lexicalCxn, index);
-        lexical.advance();
+        
+
+
+        System.out.println(lexical);
+        String[] morphs = new String[]{"Plural|!Present|!Past"};
+        
+        // currently just adds constraints to "Nouns". Testing. Need to figure out solution to matching problem.
+        // Idea: two lists, as Johno suggested - one to add FlectType to, one normal.
+        // This solves problem of adding constraints only to lemmas, but still doesn't disambiguate types of lemmas (block[n.] versus block[v.]).
+        if (lexicalCxn.getParents().contains("Noun")) {
+	        for (String morph : morphs) {
+	        	String[] constraint = this.meaning_morphTable.get(morph);
+	        	for (int k = 0; k < constraint.length; k += 2) {
+	        		lexical.addConstraint(UnificationGrammar.generateConstraint(constraint[k+1]), constraint[k]);
+	        	}
+	        	String[] con_constraint = this.constructional_morphTable.get(morph);
+	        	for (int k = 0; k < con_constraint.length; k += 2) {
+	        		lexical.addConstraint(UnificationGrammar.generateConstraint(con_constraint[k+1]), con_constraint[k]);
+	        	}
+	        }
+        }
+
+
+
+        
+        lexical.advance();        
         if (incorporateAncSem(ancestor, lexicalCxn, lexical)) {
           RobustParserState rps = new RobustParserState(lexical, ancestor, reachabilityCost
                   + ancestor.getConstructionalLogLikelihood());
           // System.out.println("And finally here.");
           results.add(rps);
+          
         }
       }
       else {

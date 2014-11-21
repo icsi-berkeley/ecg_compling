@@ -8,6 +8,13 @@ import compling.grammar.GrammarException;
 import compling.util.Interner;
 
 public class UnificationGrammar {
+	
+	
+	//used as testing method
+	public static Constraint generateConstraint(String value) {
+		Constraint c = new Constraint("<--", new SlotChain(""), value); //"@block");
+		return c;
+	}
 
 	public static class Role implements Cloneable {
 

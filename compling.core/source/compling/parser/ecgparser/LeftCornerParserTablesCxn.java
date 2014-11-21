@@ -472,6 +472,7 @@ public class LeftCornerParserTablesCxn {
 			factory.staticSetUp();
 			for (Construction cxn : canonicalInstances.keySet()) {
 				factory.update(canonicalInstances.get(cxn));
+
 			}
 		}
 

@@ -28,19 +28,20 @@ construction Block
    subcase of Noun
    constructional
      constraints
-       self.features.number <-- "undetermined"
+       //self.features.number <-- "undetermined"
    form
       constraints
          self.f.lemma <-- "block" 
-         self.f.orth <-- "orth" // testing so it doesn't get picked up as lexicalCxn
+         self.f.orth <-- "block"
+         //self.f.orth <-- "orth" // testing so it doesn't get picked up as lexicalCxn
       meaning
     constraints
       self.m.ontological-category <--  @block
       self.m.scale <-- @size 
-      self.m.number <-- "undetermined"
+	  self.m.number <-- @plural
 
   
-      
+/*      
 construction Room
    subcase of SingularNoun
    form
@@ -50,17 +51,17 @@ construction Room
     constraints
       self.m.ontological-category <--  @room
       self.m.scale <-- @size
-
+*/
 construction RoomLemma
    subcase of Noun
    form
       constraints
-         self.f.orth <-- "room"
          self.f.lemma <-- "room"
-      meaning
+   meaning
     constraints
       self.m.ontological-category <--  @room
       self.m.scale <-- @size
+
 
 //
 // Plural Count Nouns

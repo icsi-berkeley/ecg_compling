@@ -308,6 +308,7 @@ public class LeftCornerParserTablesSem {
     public List<SlotChain> getCanonicalChains(Construction cxn) {
       return canonicalChains.get(cxn);
     }
+    
 
     public List<Pair<TypeConstraint, Role>> getFrameRoles(Construction cxn, SlotChain sc) {
       if (canonicalRoleTypes.get(cxn) != null) {

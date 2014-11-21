@@ -35,6 +35,10 @@ general construction ProcessNominal
 */
 general construction Noun
    subcase of Word, Nominal 
+   meaning
+     constraints
+       self.m.number <-- @RDnumberValues
+       self.m.bounding <-- @grammaticalValues
 
 /*
  *
