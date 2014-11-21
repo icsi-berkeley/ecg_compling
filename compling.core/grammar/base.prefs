@@ -1,6 +1,8 @@
 
 FILE_ENCODING = UTF-8
 
+MORPHOLOGY_PATH = ./base/celex.ecgmorph
+
 GRAMMAR_EXTENSIONS = grm
 GRAMMAR_PATHS ::==
 	./base

@@ -183,46 +183,16 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
     input = new Construction[utterance.size() + 1][];
     for (int i = 0; i < utterance.size(); i++) {
-
-      // Try to process input string as lexical construction.
-      try { 
+      try {
         List<Construction> lexicalCxns = grammar.getLexicalConstruction(StringUtilities.addQuotes(utterance.getElement(
                 i).getOrthography()));
         input[i] = new Construction[lexicalCxns.size()];
         for (int j = 0; j < lexicalCxns.size(); j++) {
-          //System.out.println("i:"+i+", j:"+j+"  "+lexicalCxns.get(j).getName());
+          // System.out.println("i:"+i+", j:"+j+"  "+lexicalCxns.get(j).getName());
           input[i][j] = lexicalCxns.get(j);
-      } catch (GrammarException g) {}
-
-      // Try to process input string as lemma, after decomposing into morphological parts.
-      try {
-        // Here, we can call Celex or whichever morphological analyzer we use on lexeme, and then look up the lemma in grammar. If that fails, then do normal error.
-        // 
-        // lemma, morphed = MorphologicalProcessor.analyze(utterance.getElement(i).getOrthography())   --> this could contain lemma + list of flecttypes
-        // List<Construction> lemmaCxns = grammar.getLemma(lemma)   -->  could add new hash map from lemmas to constructions (vs. orthographic strings to constructions)
-        // 
-        // make new list for input[i] array --> input[i] = new Construction[] ???* (needs to be length of #constructions)
-        //
-        // for each construction in lemmaCxns:
-        //   for each possibility in morphed:
-        //     clone_n = copy(construction)
-        //     add constraints from possibility to clone_n  --> LCP extends Analysis, which has addConstraint(...) method
-        //     add clone_n to item's array of constructions --> input[i]
-
-
-        String lemma = "block"
-        Constraint testConstraint = new Constraint(ECGConstants.ASSIGN, Slotchain('verbform')) // ??
-        // assume 'plural' morphed will give us number of Plural, etc.
-        List<Construction> lemmaCxns = grammar.getLemmaConstruction(lemma)
-        // make new list: input[i] = ??, based on size of lemmaCxns (but also based on combinations between morphed and lemmaCxns)
-        for (int j = 0; j < lemmaCxns.size(); j++) {
-          Construction cxn = lemmaCxns.get(j).clone()   // make a copy of construction, we don't want to modify the original
-          Block cblock = cxn.getConstructionalBlock()
-          Block mblock = cxn.getMeaningBlock()
         }
-
-      } catch (GrammarException g) {
-
+      }
+      catch (GrammarException g) {
         System.out.println("Unknown input lexeme: " + utterance.getElement(i).getOrthography());
         input[i] = new Construction[1];
         List<Construction> lexicalCxns = grammar.getLexicalConstruction(StringUtilities

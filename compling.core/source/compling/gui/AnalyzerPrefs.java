@@ -37,6 +37,8 @@ public class AnalyzerPrefs implements Prefs {
 		BASE(Datatype.STRING),
 
 		FILE_ENCODING(Datatype.STRING),
+		
+		MORPHOLOGY_PATH(Datatype.STRING),
 
 		GRAMMAR_PATHS(Datatype.LISTSTRING),
 		GRAMMAR_EXTENSIONS(Datatype.STRING),

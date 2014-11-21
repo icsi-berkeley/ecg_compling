@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 
 import compling.grammar.ecg.ECGGrammarUtilities;
 import compling.grammar.ecg.Grammar;
+import compling.grammar.ecg.GrammarWrapper;
 import compling.grammar.unificationgrammar.FeatureStructureUtilities.DefaultStructureFormatter;
 import compling.gui.AnalyzerPrefs;
 import compling.gui.AnalyzerPrefs.AP;
@@ -22,6 +23,7 @@ import compling.parser.ecgparser.LeftCornerParserTablesCxn.ParamFileConstituentE
 import compling.parser.ecgparser.LeftCornerParserTablesCxn.ParamFileConstituentExpansionCostTableCFG;
 import compling.parser.ecgparser.LeftCornerParserTablesCxn.ParamFileConstituentExpansionCostTableFromCounts;
 import compling.parser.ecgparser.LeftCornerParserTablesCxn.UnifyTable;
+import compling.parser.ecgparser.ECGMorph;
 import compling.parser.ecgparser.SemSpecScorer.BasicScorer;
 import compling.parser.ecgparser.SemSpecScorer.BasicTableScorer;
 import compling.parser.ecgparser.SemSpecScorer.ParamFileScorerFromCounts;
@@ -201,6 +203,10 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	public Grammar getGrammar() {
 		return grammar.grammar;
 	}
+	
+	public GrammarWrapper getGrammarWrapper() {
+		return grammar;
+	}
 
 	public PriorityQueue<Analysis> getBestParses(Utterance<Word, String> utterance) {
 		PriorityQueue<List<Analysis>> pqa = parser.getBestPartialParses(utterance);
@@ -268,6 +274,10 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	public static void main(String[] args) throws Exception {
 		System.out.print("Initialiazing analyzer ...");
 		ECGAnalyzer analyzer = new ECGAnalyzer(args[0]);
+		System.out.println(" done.");
+		
+		System.out.print("Reading Morphology Dictionary ...");
+		ECGMorph morph = new ECGMorph(analyzer);
 		System.out.println(" done.");
 
 		TextFileLineIterator tfli = new TextFileLineIterator(args[1]);
