@@ -12,7 +12,7 @@ general construction SingularNoun
       self.m.number <-- @singular
 	  self.m.bounding <-- @determinate
 
-
+/*
 construction Block
    subcase of SingularNoun
    form
@@ -22,17 +22,22 @@ construction Block
     constraints
       self.m.ontological-category <--  @block
       self.m.scale <-- @size 
-     
+ */    
 
- construction BlockLemma
+ construction BlockLemmaNoun
    subcase of Noun
+   constructional
+     constraints
+       self.features.number <-- "undetermined"
    form
       constraints
-         self.f.lemma <-- "block"
+         self.f.lemma <-- "block" 
+         self.f.orth <-- "orth" // testing so it doesn't get picked up as lexicalCxn
       meaning
     constraints
       self.m.ontological-category <--  @block
       self.m.scale <-- @size 
+      self.m.number <-- "undetermined"
 
   
       
@@ -41,6 +46,17 @@ construction Room
    form
       constraints
          self.f.orth <-- "room"
+      meaning
+    constraints
+      self.m.ontological-category <--  @room
+      self.m.scale <-- @size
+
+construction RoomLemma
+   subcase of Noun
+   form
+      constraints
+         self.f.orth <-- "room"
+         self.f.lemma <-- "room"
       meaning
     constraints
       self.m.ontological-category <--  @room
@@ -60,6 +76,7 @@ general construction PluralNoun
       self.m.number <-- @plural
       self.m.bounding <-- @indeterminate
 
+/*
 construction Blocks
    subcase of PluralNoun
    form
@@ -68,6 +85,7 @@ construction Blocks
    meaning
      constraints
        self.m.ontological-category <--  @block
+*/
 	  
 // Proper Nouns
 general construction ProperNounNP

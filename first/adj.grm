@@ -32,6 +32,6 @@ construction Red
     constraints
        	self.m.value <-- @red 
 
-	
+
 
  

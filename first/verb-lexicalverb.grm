@@ -43,6 +43,19 @@ construction MovePastParticiple
          self.f.orth <-- "moved"
          
 
+// testing lemma usage
+construction BlockLemmaVerb
+	subcase of LexicalVerb
+	constructional
+	  constraints
+	     self.verbform <-- Present
+	form
+	   constraints
+	      self.f.orth <-- "orth" // testing so it doesn't get picked up as lexicalCxn
+	      self.f.lemma <-- "block"
+	meaning
+	   constraints
+	      self.pf.tense <-- "undetermined"
 
  
 general construction SeeT // 8/21/13 Transitive

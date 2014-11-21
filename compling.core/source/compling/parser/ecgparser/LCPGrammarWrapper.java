@@ -25,6 +25,9 @@ public class LCPGrammarWrapper implements GrammarWrapper {
 	Grammar grammar;
 	private HashMap<String, List<String>> subtypeList = new HashMap<String, List<String>>();
 	private HashMap<String, List<Construction>> lexemeToLexicalConstructions = new HashMap<String, List<Construction>>();
+	// for lemmas and constructions
+	private HashMap<String, List<Construction>> lemmaToLexicalConstructions = new HashMap<String, List<Construction>>();
+
 	Construction morph;
 	Construction word;
 
@@ -123,6 +126,7 @@ public class LCPGrammarWrapper implements GrammarWrapper {
 		}
 		return lex;
 	}
+	
 
 	public Set<Construction> getAllConcretePhrasalConstructions() {
 		Set<Construction> cxns = new LinkedHashSet<Construction>();
