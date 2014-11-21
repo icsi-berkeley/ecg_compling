@@ -127,6 +127,15 @@ public class LCPGrammarWrapper implements GrammarWrapper {
 		return lex;
 	}
 	
+	public List<Construction> getLemmaConstruction(String lemma) {
+		List<Construction> lem = lemmaToLexicalConstructions.get(lemma);
+		if (lem == null) {
+			// System.out.println(lexemeToLexicalConstruction.keySet());
+			throw new GrammarException("undefined lexeme: " + lemma + " in Grammar.getLexicalConstruction");
+		}
+		return lem;
+	}
+	
 
 	public Set<Construction> getAllConcretePhrasalConstructions() {
 		Set<Construction> cxns = new LinkedHashSet<Construction>();

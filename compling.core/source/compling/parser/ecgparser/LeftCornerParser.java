@@ -45,6 +45,7 @@ import compling.util.math.SloppyMath;
 import compling.utterance.Sentence;
 import compling.utterance.Utterance;
 import compling.utterance.Word;
+import compling.parser.ecgparser.ECGMorph;
 
 public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
@@ -228,21 +229,6 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
     input = new Construction[utterance.size() + 1][];
     for (int i = 0; i < utterance.size(); i++) {
-      try {
-        List<Construction> lexicalCxns = grammar.getLexicalConstruction(StringUtilities.addQuotes(utterance.getElement(
-                i).getOrthography()));
-        input[i] = new Construction[lexicalCxns.size()];
-        for (int j = 0; j < lexicalCxns.size(); j++) {
-          // System.out.println("i:"+i+", j:"+j+"  "+lexicalCxns.get(j).getName());
-          input[i][j] = lexicalCxns.get(j);
-        }
-      }
-      catch (GrammarException g) {
-        System.out.println("Unknown input lexeme: " + utterance.getElement(i).getOrthography());
-        input[i] = new Construction[1];
-        List<Construction> lexicalCxns = grammar.getLexicalConstruction(StringUtilities
-                .addQuotes(ECGConstants.UNKNOWN_ITEM));
-        input[i][0] = lexicalCxns.get(0);
 
       // Try to process input string as lemma, after decomposing into morphological parts.
       try {
@@ -253,8 +239,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     	String lemma = utterance.getElement(i).getOrthography();
     	lemma = lemma.replace("s", "");
     	
-    	// Get FlectTypes from Morph analyzer. For now, just set to this string array.
-    	String[] morphs = new String[]{"Plural|!Present|!Past", "Present|!Participle|3rd|Singular"};
+    	// Get FlectTypes from Morph analyzer. Will want to pass along with Cxn to Analysis.
 
 
 
@@ -358,15 +343,6 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
     }
     
-    /*
-    for (Construction[] cxn : input) {
-    	if (cxn != null) {
-    		for (Construction c : cxn) {
-    			System.out.println(c);
-    		}
-    	}
-    }
-    */
     
 
     input[utterance.size()] = new Construction[1];
@@ -1435,11 +1411,17 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     ontFile = args[1];
     Grammar grammar = ECGGrammarUtilities.read(args[0], "ecg cxn sch grm", ontFile);
 
+    
+
     // debugPrint(grammar);
 
     LeftCornerParser<AnalysisInContext> parser = new LeftCornerParser<AnalysisInContext>(grammar,
             new AnalysisInContextFactory(new LCPGrammarWrapper(grammar), grammar.getContextModel()
                     .getContextModelCache()));
+    
+
+    
+    
     List<String> words = new ArrayList<String>();
     for (int i = 2; i < args.length; i++) {
       words.add(args[i]);
