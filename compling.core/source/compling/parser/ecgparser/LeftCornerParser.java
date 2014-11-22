@@ -83,6 +83,13 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   private SlotConnectionTracker slotConnectionTracker;
   private int statecounter = 0;
   private int processedStates = 0;
+  
+  //@seantrott: new type of input array
+  private List<HashMap<Construction, String[]>> mappings;
+  
+  
+
+  
   private Construction[][] input;
   private Construction RootCxn;
   private Role RootCxnConstituent;
@@ -229,6 +236,11 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     this.completeAnalyses = new PriorityQueue<List<T>>();
 
     input = new Construction[utterance.size() + 1][];
+    
+    
+    // @seantrott: new input array
+    mappings = new ArrayList<HashMap<Construction, String[]>>();
+
     for (int i = 0; i < utterance.size(); i++) {
 
       // Try to process input string as lemma, after decomposing into morphological parts.
@@ -244,56 +256,32 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
 
 
+
     	// Search for lemma in constructions
         List<Construction> lemmaCxns = grammar.getLemmaConstruction(StringUtilities.addQuotes(lemma)); //(StringUtilities.addQuotes(utterance.getElement(i).getOrthography()));
+
         
         // make new list: input[i] = ??, based on size of lemmaCxns (but also based on combinations between morphed and lemmaCxns)
         input[i] = new Construction[lemmaCxns.size()];
         
+        // new input array
+
+        mappings.add(i, new HashMap<Construction, String[]>());
+        
+        
         for (int j = 0; j < lemmaCxns.size(); j++) {
           Construction cxn = lemmaCxns.get(j);   // should actually make a copy of construction
           
-          //Construction cxn = ecgGrammar.copyConstruction(cxn2);
-          //cxn.setName(cxn.getName() + "-Morphed");
-          // ecgGrammar.addConstruction(cxn);
+          
+          // puts Construction--> String[] in HashMap of ArrayList
+          System.out.println("here");
+          mappings.get(i).put(cxn, new String[]{"Plural|!Present|!Past", null});
+          
+
           
           
           
-          /*
-          
-          for (Constraint constraint: cxn.getConstructionalBlock().getConstraints()) {
-        	  if (constraint.getValue().replace("\"", "").equals("undetermined")) {
-        		  for (String morph : morphs) {
-    				  for (int index = 0; index < constructional_morphTable.get(morph).length; index +=2){
-        				  if (constraint.getArguments().toString().replace("]", "").replace("[", "") 
-        						  .equals(constructional_morphTable.get(morph)[index])) {
-            				  constraint.setValue(constructional_morphTable.get(morph)[index + 1]);
-        				  }
-    				  }
-        		  }
-        	  }
-        	  
-          }
-          
-          
-          // Procedure: iterate through semantic constraints. For each constraint, check if any of returned FlectTypes match in preset HashMap.
-          // If they do match, change value of constraint to value specified in HashMap.
-          for (Constraint constraint : cxn.getMeaningBlock().getConstraints()) {
-        	  if (constraint.isAssign() && constraint.getValue().replace("\"", "").equals("undetermined")) {
-        		  for (String morph : morphs) {
-    				  for (int index = 0; index < meaning_morphTable.get(morph).length; index +=2) {
-        				  if (constraint.getArguments().toString().replace("]", "").replace("[", "") 
-        						  .equals(meaning_morphTable.get(morph)[index])) {
-            				  constraint.setValue(meaning_morphTable.get(morph)[index + 1]);
-        				  }
-    				  }	  
-        		  }       		  
-        	  }
-          }
-          
-          cloneTable.put(cxn);
-          cloneTable.update();
-          */
+
 
           input[i][j] = cxn;
 
@@ -314,7 +302,12 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
           List<Construction> lexicalCxns = grammar.getLexicalConstruction(StringUtilities.addQuotes(utterance.getElement(
                   i).getOrthography()));
           
+          
+          if (i >= mappings.size()) {
+        	  mappings.add(i, new HashMap<Construction, String[]>());
+          } 
 
+          
           Construction[] copy = new Construction[input[i].length + lexicalCxns.size()];
           for (int k = 0; k < input[i].length; k++){
         	  copy[k] = input[i][k];
@@ -331,6 +324,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
           
           int it = 0;
           for (int l = input[i].length; l < copy.length; l++){
+        	  mappings.get(i).put(test[it], new String[]{null, null});
         	  copy[l] = test[it];
         	  it += 1;
           }
@@ -344,6 +338,13 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
     }
     
+    for (HashMap<Construction, String[]> h : mappings) {
+    	System.out.println("MAP:");
+    	for (Construction c : h.keySet()) {
+    		System.out.println(c);
+    		System.out.println(h.get(c)[0]);
+    	}
+    }
     
 
     input[utterance.size()] = new Construction[1];
