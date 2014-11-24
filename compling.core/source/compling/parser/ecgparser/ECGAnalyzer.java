@@ -64,6 +64,7 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	public ECGAnalyzer(Grammar ecgGrammar, AnalyzerPrefs prefs) throws IOException {
 
 		grammar = new LCPGrammarWrapper(ecgGrammar);
+		ecgmorph = new ECGMorph(grammar);
 
 		if (prefs == null) {
 			throw new ParserException("AnalyzerPrefs object expected");
@@ -144,14 +145,17 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 
 				Analysis.setSemSpecScorer(scorer);
 			}
-
-			parser = new LeftCornerParser<Analysis>(ecgGrammar, factory, cect);
+			
+			parser = new LeftCornerParser<Analysis>(ecgGrammar, factory, cect, ecgmorph);
 		}
 		else {
-			parser = new LeftCornerParser<Analysis>(ecgGrammar, factory);
+			parser = new LeftCornerParser<Analysis>(ecgGrammar, factory, ecgmorph);
 		}
 
 		parser.setParameters(robust, debug, beamSize, numAnalysesReturned, multiRootPenalty);
+		
+
+		
 
 
 
@@ -201,7 +205,7 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 			Analysis.setSemSpecScorer(null);
 		}
 
-		parser = new LeftCornerParser<Analysis>(ecgGrammar, factory, cect);
+		parser = new LeftCornerParser<Analysis>(ecgGrammar, factory, cect, ecgmorph);
 		parser.setParameters(robust, debug, beamSize, numAnalysesReturned, multiRootPenalty);
 	}
 
@@ -284,7 +288,7 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 		System.out.println(" done.");
 		
 		System.out.print("Reading Morphology Dictionary ...");
-		ECGMorph morph = new ECGMorph(analyzer);
+		ECGMorph morph = new ECGMorph(analyzer.getGrammarWrapper());
 		System.out.println(" done.");
 
 		TextFileLineIterator tfli = new TextFileLineIterator(args[1]);

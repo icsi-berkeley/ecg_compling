@@ -83,14 +83,17 @@ public class ECGMorph {
 	 * @param analyzer_arg
 	 * @throws IOException
 	 */
-	public ECGMorph(ECGAnalyzer analyzer_arg) throws IOException {
-		analyzer = analyzer_arg;
-		grammar = analyzer.getGrammar();
-		grammarWrapper = analyzer.getGrammarWrapper();
-		prefs = (AnalyzerPrefs) grammar.getPrefs();
+	public ECGMorph(GrammarWrapper wrapper) throws IOException { //ECGAnalyzer analyzer_arg) throws IOException {
+		//analyzer = analyzer_arg;
+		//grammar = analyzer.getGrammar();
+		grammarWrapper = wrapper;
+		//grammarWrapper = analyzer.getGrammarWrapper();
+		// prefs = (AnalyzerPrefs) grammar.getPrefs();
 		
-		File base = prefs.getBaseDirectory();
+		prefs = (AnalyzerPrefs) grammarWrapper.getGrammar().getPrefs();
 		
+		File base = prefs.getBaseDirectory();	
+
 		ecgmorph_path = new File(base, prefs.getSetting(AP.MORPHOLOGY_PATH));
 		
 		morphs = new HashMap<String, List<MorphEntry>>();
@@ -157,7 +160,7 @@ public class ECGMorph {
 	 * @returns A Set of Strings containing the lemmas
 	 */
 	
-	Set<String> getLemmas(String wordform) {
+	public Set<String> getLemmas(String wordform) {
 		Set<String> lemmaStrs = new HashSet<String>();
 		for (MorphEntry morph : morphs.get(wordform)) {
 			lemmaStrs.add(morph.lemma);

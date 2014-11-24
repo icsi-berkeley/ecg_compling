@@ -41,7 +41,7 @@ construction Block
 	  self.m.number <-- @plural
 
   
-/*      
+     
 construction Room
    subcase of SingularNoun
    form
@@ -51,7 +51,7 @@ construction Room
     constraints
       self.m.ontological-category <--  @room
       self.m.scale <-- @size
-*/
+/*
 construction RoomLemma
    subcase of Noun
    form
@@ -61,7 +61,7 @@ construction RoomLemma
     constraints
       self.m.ontological-category <--  @room
       self.m.scale <-- @size
-
+*/
 
 //
 // Plural Count Nouns

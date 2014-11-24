@@ -20,6 +20,8 @@ import java.util.Set;
 import compling.grammar.ecg.Grammar.Construction;
 
 public interface GrammarWrapper {
+	
+	public Grammar getGrammar();
 
 	public boolean isLexicalConstruction(Construction c);
 

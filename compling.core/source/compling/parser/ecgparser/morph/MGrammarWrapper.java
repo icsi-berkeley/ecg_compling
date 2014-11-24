@@ -58,6 +58,10 @@ public class MGrammarWrapper implements GrammarWrapper {
 
 	private Set<Construction> noncontigs = new HashSet<Construction>(); // All concrete noncontiguous morphological
 																								// constructions
+	
+	public Grammar getGrammar() {
+		return grammar;
+	}
 
 	public MGrammarWrapper(Grammar ecgGrammar, StringBuffer errLog) {
 		grammar = ecgGrammar;

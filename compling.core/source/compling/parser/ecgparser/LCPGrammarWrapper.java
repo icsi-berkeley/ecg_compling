@@ -67,6 +67,11 @@ public class LCPGrammarWrapper implements GrammarWrapper {
 			}
 		}
 	}
+	
+	public Grammar getGrammar() {
+		return grammar;
+		
+	}
 
 	/** Returns the concrete rules that are subtypes of construction */
 	public List<Construction> getRules(String construction) {
