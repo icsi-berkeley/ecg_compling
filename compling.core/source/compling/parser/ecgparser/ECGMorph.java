@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
+
+import com.hp.hpl.jena.sparql.util.StringUtils;
 
 import compling.grammar.ecg.Grammar;
 import compling.grammar.ecg.GrammarWrapper;
@@ -58,7 +61,7 @@ public class ECGMorph {
 	 */
 	public class MorphEntry {
 		String lemma;
-		HashSet<String> inflections;
+		TreeSet<String> inflections;
 		
 		/**
 		 * @param lemma_str         The lemma (e.g. block)
@@ -66,7 +69,7 @@ public class ECGMorph {
 		 */
 		public MorphEntry(String lemma_str, String inflections_str) {
 			lemma = lemma_str;
-			inflections = new HashSet<String>();
+			inflections = new TreeSet<String>(); //new HashSet<String>();
 			for (String inflect : inflections_str.split("\\s*[,/]\\s*")) {
 				inflections.add(inflect);			
 			}
@@ -154,6 +157,31 @@ public class ECGMorph {
 		return false;
 	} // match()
 	
+	
+	public String[] getInflections(String lemma, String wordform) {
+		List<String> inflections = new ArrayList<String>();
+		for (MorphEntry morph : morphs.get(wordform)) {
+			if (morph.lemma.equals(lemma)) {
+				inflections.add(concatenateSet(morph.inflections));
+			}
+		}
+		return inflections.toArray(new String[inflections.size()]);
+	}
+	
+	private String concatenateSet(Set<String> input) {
+		String[] array = input.toArray(new String[input.size()]);
+		String output = "";
+		for (int i = 0; i < array.length;  i++) {
+			output += array[i];
+			if (i < (array.length - 1)) {
+				output += ",";
+			}
+			
+		}
+		return output;
+	}
+	
+	
 	/**
 	 * Looks up a wordform and returns the lemmas.
 	 * 
@@ -195,9 +223,15 @@ public class ECGMorph {
 		if (grammarWrapper.hasLexicalConstruction(StringUtilities.addQuotes(splitline[0]))) {
 			return true;
 		}
+		if (grammarWrapper.hasLemmaConstruction(StringUtilities.addQuotes(splitline[0]))) {
+			return true;
+		}
 		// Now check for all the possible lemmas.
 		for (int ii = 1; ii < splitline.length; ii+=2) {
 			if (grammarWrapper.hasLexicalConstruction(StringUtilities.addQuotes(splitline[ii]))) {
+				return true;
+			}
+			if (grammarWrapper.hasLemmaConstruction(StringUtilities.addQuotes(splitline[ii]))) {
 				return true;
 			}
 		}

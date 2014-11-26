@@ -22,6 +22,8 @@ import compling.grammar.ecg.Grammar.Construction;
 public interface GrammarWrapper {
 	
 	public Grammar getGrammar();
+	
+	public boolean hasLemmaConstruction(String lemma);
 
 	public boolean isLexicalConstruction(Construction c);
 

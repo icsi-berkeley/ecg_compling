@@ -131,6 +131,10 @@ public class LCPGrammarWrapper implements GrammarWrapper {
 	public boolean hasLexicalConstruction(String lexeme) {
 		return lexemeToLexicalConstructions.containsKey(lexeme);
 	}
+	
+	public boolean hasLemmaConstruction(String lemma) {
+		return lemmaToLexicalConstructions.containsKey(lemma);
+	}
 
 	public List<Construction> getLexicalConstruction(String lexeme) {
 		List<Construction> lex = lexemeToLexicalConstructions.get(lexeme);

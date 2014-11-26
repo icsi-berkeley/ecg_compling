@@ -32,21 +32,31 @@ construction Block
    form
       constraints
          self.f.lemma <-- "block" 
-         self.f.orth <-- "block"
+         //self.f.orth <-- "block"
          //self.f.orth <-- "orth" // testing so it doesn't get picked up as lexicalCxn
       meaning
     constraints
       self.m.ontological-category <--  @block
       self.m.scale <-- @size 
-	  self.m.number <-- @plural
 
-  
+
+ construction Box
+   subcase of Noun
+   form
+      constraints
+         self.f.orth <-- "box"
+         self.f.lemma <-- "box"
+      meaning
+    constraints
+      self.m.ontological-category <--  @box
+      self.m.scale <-- @size 
      
 construction Room
-   subcase of SingularNoun
+   subcase of Noun
    form
       constraints
          self.f.orth <-- "room"
+         self.f.lemma <-- "room"
       meaning
     constraints
       self.m.ontological-category <--  @room

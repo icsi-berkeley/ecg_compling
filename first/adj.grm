@@ -28,6 +28,7 @@ construction Red
    form
       constraints
          self.f.orth <-- "red"  
+         self.f.lemma <-- "red"
    meaning: PropertyModifier
     constraints
        	self.m.value <-- @red 

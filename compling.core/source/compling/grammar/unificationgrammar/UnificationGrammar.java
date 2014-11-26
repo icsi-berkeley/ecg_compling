@@ -12,7 +12,7 @@ public class UnificationGrammar {
 	
 	//used as testing method
 	public static Constraint generateConstraint(String value) {
-		Constraint c = new Constraint("<--", new SlotChain(""), value); //"@block");
+		Constraint c = new Constraint("<--", new SlotChain(""), value); 
 		return c;
 	}
 

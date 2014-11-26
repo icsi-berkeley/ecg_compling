@@ -62,6 +62,10 @@ public class MGrammarWrapper implements GrammarWrapper {
 	public Grammar getGrammar() {
 		return grammar;
 	}
+	
+	
+	
+	
 
 	public MGrammarWrapper(Grammar ecgGrammar, StringBuffer errLog) {
 		grammar = ecgGrammar;
@@ -450,6 +454,11 @@ public class MGrammarWrapper implements GrammarWrapper {
 	 * Is there an lexical (i.e. nondecomposable) analysis for the word via a single construction?
 	 */
 	public boolean hasLexicalConstruction(String inputWord) {
+		return cxnHash.containsKey(inputWord);
+	}
+	
+	// TODO: Not used in anything, but should make sure it works.
+	public boolean hasLemmaConstruction(String inputWord) {
 		return cxnHash.containsKey(inputWord);
 	}
 
