@@ -40,6 +40,8 @@ public class AnalyzerPrefs implements Prefs {
 		
 		MORPHOLOGY_PATH(Datatype.STRING),
 
+		TOKEN_PATH(Datatype.STRING),  
+
 		GRAMMAR_PATHS(Datatype.LISTSTRING),
 		GRAMMAR_EXTENSIONS(Datatype.STRING),
 

@@ -290,6 +290,11 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 		System.out.print("Reading Morphology Dictionary ...");
 		ECGMorph morph = new ECGMorph(analyzer.getGrammarWrapper());
 		System.out.println(" done.");
+		
+		System.out.print("Reading tokens ...");
+		ECGTokenReader tokens = new ECGTokenReader(analyzer.getGrammarWrapper());
+		System.out.println(" done.");
+		
 
 		TextFileLineIterator tfli = new TextFileLineIterator(args[1]);
 		while (tfli.hasNext()) {

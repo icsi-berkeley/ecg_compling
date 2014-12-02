@@ -1,0 +1,4 @@
+pink	Color	self.m.value <-- @red
+purple	Color	self.m.value <-- @blue
+adam	PropoerNounNP	     self.m.ontological-category <-- @person	self.m.number <-- @signular	self.m.gender <-- @male
+
