@@ -15,13 +15,14 @@ schema WordForm
 
 schema RD // meaning of NP 
   roles
-    ontological-category //: @entity  
+    ontological-category  
     givenness: @givennessValues  
     referent 
-    number // : @RDnumberValues
+    number 
 	gender: @genderValues
-	bounding: @boundingValues
-	scale: @scale // 
+	bounding 
+	scale: @scale 
+	
 	//hedge: @hedgeVal  // @fake, etc  
 	//continuity: @continuityValues 
     //amount: Amount // schemas for quantifiers, etc. 

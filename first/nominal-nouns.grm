@@ -12,17 +12,11 @@ general construction SingularNoun
       self.m.number <-- @singular
 	  self.m.bounding <-- @determinate
 
-/*
-construction Block
-   subcase of SingularNoun
-   form
-      constraints
-         self.f.orth <-- "block"
-      meaning
-    constraints
-      self.m.ontological-category <--  @block
-      self.m.scale <-- @size 
- */    
+
+
+ 
+ 
+
 
  construction BlockLemmaNoun
    subcase of Noun
@@ -44,7 +38,7 @@ construction Block
    subcase of Noun
    form
       constraints
-         self.f.orth <-- "box"
+         //self.f.orth <-- "box"
          self.f.lemma <-- "box"
       meaning
     constraints
@@ -55,7 +49,7 @@ construction Room
    subcase of Noun
    form
       constraints
-         self.f.orth <-- "room"
+         //self.f.orth <-- "room"
          self.f.lemma <-- "room"
       meaning
     constraints

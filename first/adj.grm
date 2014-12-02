@@ -27,12 +27,20 @@ construction Red
   subcase of Color
    form
       constraints
-         self.f.orth <-- "red"  
+         //self.f.orth <-- "red"  
          self.f.lemma <-- "red"
    meaning: PropertyModifier
     constraints
        	self.m.value <-- @red 
 
-
+construction Blue
+  subcase of Color
+   form
+      constraints
+         //self.f.orth <-- "red"  
+         self.f.lemma <-- "blue"
+   meaning: PropertyModifier
+    constraints
+       	self.m.value <-- @blue 
 
  

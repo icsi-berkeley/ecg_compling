@@ -116,7 +116,7 @@ general construction Specifier2PlusKernel   //also see Determiner, Wh, Possesive
   subcase of SpecifierPlusKernel
   constructional
     constituents   
-      s: SpecifierPhrase   //12/30/12
+      s: SpecifierPhrase                 //12/30/12
       k: Kernel
     constraints
       self.features <--> k.features
@@ -135,6 +135,9 @@ construction DeterminerPlusKernel
   constructional
     constituents   
       s: Determiner  
+
+
+
 
 
 //  we now also have "his" as Possessive-NP, 
