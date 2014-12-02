@@ -772,9 +772,28 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
   private List<RobustParserState> pushLexicalState(RobustParserState ancestor, int index) {
     List<RobustParserState> results = new LinkedList<RobustParserState>();
-    
-    for (int iter=0; iter < constructionInput.size(); iter++) {
-    	for (int second=0; second < constructionInput.get(iter).size(); second ++) {
+    /*
+    for (int i = 0; i < input[index].length; i++) {
+        Construction lexicalCxn = input[index][i];
+        double reachabilityCost = computeNormalizedReachability(ancestor.primaryAnalysis, lexicalCxn,
+                ancestor.hasGapFiller() && !ancestor.primaryAnalysis.alreadyUsedGapFiller(), ancestor.getGapFillerType());
+
+        // System.out.println("lexpush here");
+        if (reachabilityCost > Double.NEGATIVE_INFINITY) {
+          // System.out.println("lexpush now here");
+          T lexical = cloneTable.get(lexicalCxn, index);
+          lexical.advance();
+          if (incorporateAncSem(ancestor, lexicalCxn, lexical)) {
+            RobustParserState rps = new RobustParserState(lexical, ancestor, reachabilityCost
+                    + ancestor.getConstructionalLogLikelihood());
+            // System.out.println("And finally here.");
+            results.add(rps);
+          }
+        }*/
+    int iter = index;
+    //for (int iter=0; iter < constructionInput.size(); iter++) {
+    	//for (int second=0; second < constructionInput.get(iter).size(); second ++) {
+    for (int second=0; second < constructionInput.get(index).size(); second++) {
     		Construction cxn = constructionInput.get(iter).get(second);
     		System.out.println(cxn);
     		double reachabilityCost = computeNormalizedReachability(ancestor.primaryAnalysis, cxn,
@@ -812,11 +831,11 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 	     		debugPrint("\t\t" + ancestor.primaryAnalysis.getHeadCxn().getName() + " cannot generate "
 	               + cxn.getName());
     	    }
-    	}
+    }
     	if (results.size() == 0) {
     		System.out.println("no results");
     	}
-    }
+    //}
     return results;
 	    	
   }
