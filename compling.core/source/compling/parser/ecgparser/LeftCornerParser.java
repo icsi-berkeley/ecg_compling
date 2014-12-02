@@ -206,6 +206,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 		put("Positive", new String[]{"Adjective"});
 		put("Participle,PresentTense", new String[]{"self.pf.temporality", "@ongoing", "LexicalVerb"});  // TODO: Check if "ongoing" is what we want.
 		put("Participle,PastTense", new String[]{"LexicalVerb"});
+		put("NoMorphology", new String[]{"Pronoun"});
 	}};
 	
 	
@@ -235,6 +236,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 				put("Positive", new String[]{"Adjective"});
 				put("Participle,PresentTense", new String[]{"self.verbform", "PresentParticiple", "LexicalVerb"});
 				put("Participle,PastTense", new String[]{"self.verbform", "PastParticiple", "LexicalVerb"});
+				put("NoMorphology", new String[]{"Pronoun"});
 			}};
   }
 
@@ -301,6 +303,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     for (int i = 0; i < utterance.size(); i++) {
       try {
     	String wordform = utterance.getElement(i).getOrthography();
+    	
+    	System.out.println(wordform);
     	
     	Set<String> lems = this.morpher.getLemmas(wordform);
     	
@@ -418,7 +422,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     
     
     
-    /*
+    
     for (int k=0; k < constructionInput.size(); k ++) {
     	System.out.println("Item number:");
     	System.out.println(k+1);
@@ -431,14 +435,15 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     		System.out.println(mt[0]);
     	}
     }
-    */
+
+    morphToken.add(new ArrayList<String[]>());
+    morphToken.get(utterance.size()).add(new String[]{null, null});
     
-    
-    //constructionInput.add(new ArrayList<Construction>());
+    constructionInput.add(new ArrayList<Construction>());
     //constructionInput.set(utterance.size(), new ArrayList<Construction>());
-    //constructionInput.get(utterance.size()).add(null);
-    input[utterance.size()] = new Construction[1];
-    input[utterance.size()][0] = null;
+    constructionInput.get(utterance.size()).add(null);
+    //input[utterance.size()] = new Construction[1];
+    //input[utterance.size()][0] = null;
 
     T root = cloneTable.get(RootCxn, 0);
     RobustParserState rootState = new RobustParserState(root, null, 0);
@@ -771,12 +776,14 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     for (int iter=0; iter < constructionInput.size(); iter++) {
     	for (int second=0; second < constructionInput.get(iter).size(); second ++) {
     		Construction cxn = constructionInput.get(iter).get(second);
+    		System.out.println(cxn);
     		double reachabilityCost = computeNormalizedReachability(ancestor.primaryAnalysis, cxn,
     	              ancestor.hasGapFiller() && !ancestor.primaryAnalysis.alreadyUsedGapFiller(), ancestor.getGapFillerType());
       		String[] extra_info = morphToken.get(iter).get(second);
-    	    if (reachabilityCost > Double.NEGATIVE_INFINITY) {
+    	    if (reachabilityCost > Double.NEGATIVE_INFINITY && cxn != null) {
+    	    	System.out.println("I am here");
     	    	T lex_analysis = cloneTable.get(cxn, index);
-    	    	T ultimate = (T) lex_analysis.clone();
+    	    	T ultimate = (T) lex_analysis.clone(); 	    	
     	    	if (extra_info[0] != null) {
     	    		String morph = extra_info[0];
     	    		String[] mConstraint = this.meaning_morphTable.get(morph);
@@ -813,62 +820,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     return results;
 	    	
   }
-  /*
-    	    }
-    	}
-    }
 
-    
-    
-    for (HashMap<Construction, String[][]> map : mappings) {
-    	for (Construction cxn: map.keySet()) {
-    	    double reachabilityCost = computeNormalizedReachability(ancestor.primaryAnalysis, cxn,
-    	              ancestor.hasGapFiller() && !ancestor.primaryAnalysis.alreadyUsedGapFiller(), ancestor.getGapFillerType());
-    	    String[][] extra_info = map.get(cxn);
-    	    if (reachabilityCost > Double.NEGATIVE_INFINITY) {
-    	    	T lex_analysis = cloneTable.get(cxn, index);
-    	    	T ultimate = (T) lex_analysis.clone();
-    	    	// add morphological information
-    	    	if (extra_info[0][0] != null) {
-    	    		String[] morphs = extra_info[0];
-    	    		for (String morph : morphs) {
-        	    		String[] constraint = this.meaning_morphTable.get(morph);    	    		
-        	    		for (int k = 0; k < constraint.length - 1; k += 2) {
-        	    			ultimate.addConstraint(UnificationGrammar.generateConstraint(constraint[k+1]), constraint[k]);
-        	    		}
-        	        	String[] con_constraint = this.constructional_morphTable.get(morph);
-        	        	for (int k = 0; k < con_constraint.length - 1; k += 2) {
-        	        		ultimate.addConstraint(UnificationGrammar.generateConstraint(con_constraint[k+1]), con_constraint[k]);
-        	        	}	
-    	    		}	
-    	    	}
-    	    	
-    	    	// TODO: Add token constraint modifier
-    	    	if (extra_info[1][0] != null) {
-    	    		String[] tokens = extra_info[1];
-    	    	}
-
-    	    	ultimate.advance();
-    	        if (incorporateAncSem(ancestor, cxn, ultimate)) {
-    	            RobustParserState rps = new RobustParserState(ultimate, ancestor, reachabilityCost
-    	                    + ancestor.getConstructionalLogLikelihood());
-    	            // System.out.println("And finally here.");
-    	            results.add(rps);
-    	        }
-    	    }
-    	     	else {
-    	     		debugPrint("\t\t" + ancestor.primaryAnalysis.getHeadCxn().getName() + " cannot generate "
-    	                + cxn.getName());
-    	     	}
-    	}
-    	if (results.size() == 0) {
-    		System.out.println("no results");
-    	}
-    }
-    return results;
-    	    	
-    }
-    */
 
     
   private List<RobustParserState> finishIncompleteState(RobustParserState p) {
@@ -904,9 +856,14 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
     if (ROBUST && stackTop.ancestor != null && stackTop.rightIndex - stackTop.leftIndex == 1
             && (stackTop.rightSiblings == null || stackTop.rightSiblings.size() == 0)) {
-      for (int i = 0; i < input[index].length; i++) {
-        robustTerm = SloppyMath.logAdd(robustTerm, reachabilityTable.reachable(RootCxnConstituent, input[index][i]));
-      }
+      // TODO: *** for (int i = 0; i < input[index].length; i++) {
+    	System.out.println("here:");
+    	System.out.println(index);
+    	System.out.println(constructionInput.size());
+    	for (int i = 0; i < constructionInput.get(index).size(); i++) {
+    		System.out.println("reached");
+    		robustTerm = SloppyMath.logAdd(robustTerm, reachabilityTable.reachable(RootCxnConstituent, constructionInput.get(index).get(i)));//input[index][i]));
+    	}
       robustTerm = robustTerm + EXTRAROOTPENALTY;
       // System.out.println(robustTerm);
 
@@ -919,9 +876,13 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
   private double pNextInputGivenStack(int index, RobustParserState stackTop, boolean tryLeftSib) {
     double total = Double.NEGATIVE_INFINITY;
-    for (int i = 0; i < input[index].length; i++) {
-
-      Construction lexicalCxn = input[index][i];
+    // TODO: *** for (int i = 0; i < input[index].length; i++) {
+    System.out.println("here:");
+    for (int i = 0; i < constructionInput.get(index).size(); i++) {
+    	System.out.println("here:");	
+      Construction lexicalCxn = constructionInput.get(index).get(i);
+      System.out.println(lexicalCxn);
+      // TODO: *** Construction lexicalCxn = input[index][i];
 
       total = SloppyMath.logAdd(
               total,
@@ -1023,13 +984,13 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
           return completionCostSoFar;
         }
       }
-      if (ROBUST && tryLeftSib && leftSib != null && total < 0 && index < input.length - 1) {
+      if (ROBUST && tryLeftSib && leftSib != null && total < 0 && index < constructionInput.size() - 1) {       /////input.length - 1) {
         total = SloppyMath.logAdd(total, completionCostSoFar + pNextInputGivenStack(index, leftSib, false));
         if (total > 0) {
           total = 0;
         }
       }
-      else if (ROBUST && tryLeftSib && leftSib != null && total < 0 && index == input.length - 1) {
+      else if (ROBUST && tryLeftSib && leftSib != null && total < 0 && index == constructionInput.size() - 1) {		//input.length - 1) {
         while (leftSib != null) {
           total = total + pNextInputGivenStack(index, leftSib, false);
           leftSib = leftSib.leftSibling;
