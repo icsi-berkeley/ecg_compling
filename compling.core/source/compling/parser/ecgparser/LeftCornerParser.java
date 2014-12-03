@@ -314,6 +314,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
       try {
     	String wordform = utterance.getElement(i).getOrthography();
     	
+    	/*
     	ECGTokenReader.ECGToken t = this.tokenReader.getToken("walk");
     	System.out.println(t.token_name);
     	System.out.println(t.parent);
@@ -321,6 +322,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     	for (Constraint c : t.constraints) {
     		System.out.println(c);
     	}
+    	*/
     	
     	System.out.println(wordform);
     	

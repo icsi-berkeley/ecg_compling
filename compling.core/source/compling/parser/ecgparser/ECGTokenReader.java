@@ -27,7 +27,7 @@ public class ECGTokenReader {
 	AnalyzerPrefs prefs;
 	File token_path;
 	
-	Map<String, ECGToken> tokens;
+	Map<String, ArrayList<ECGToken>> tokens;
 
 	public ECGTokenReader(GrammarWrapper wrapper) throws IOException {
 		grammarWrapper = wrapper;
@@ -35,7 +35,7 @@ public class ECGTokenReader {
 		prefs = (AnalyzerPrefs) grammarWrapper.getGrammar().getPrefs();
 		File base = prefs.getBaseDirectory();
 		token_path = new File(base, prefs.getSetting(AP.TOKEN_PATH));
-		tokens = new HashMap<String, ECGToken>();		
+		tokens = new HashMap<String, ArrayList<ECGToken>>();		
 		
 		TextFileLineIterator tfli = new TextFileLineIterator(token_path);
 		int lineNum = 0;
@@ -46,32 +46,41 @@ public class ECGTokenReader {
 			if (line.matches("^\\s*#") || line.matches("^\\s*$")) {
 				continue;
 			}
-			String splitline[] = line.split("\\s*\\t\\s*");
+			String splitline[] = line.split("\\s*::\\s*");
 			if (splitline.length < 3) {
 				// TODO: Create a TokenException class and throw that instead
 				throw new IOException("Improperly formatted entry in token file " + token_path + ", line " + lineNum);
 			}
-			String token_name = splitline[0];
-			String parent_name = splitline[1];
+			String token_name = splitline[0].trim();
+			String parent_name = splitline[1].trim();
+			// TODO: Make sure parent exists, is non-general, and has orth="*".
 			ECGToken token = new ECGToken();
 			token.token_name = token_name;
 			token.parent = grammarWrapper.getGrammar().getConstruction(parent_name);
 			token.constraints = new ArrayList<Constraint>();
 			for (int ii = 2; ii < splitline.length; ii++) {
-				String constraint_str = splitline[ii];
+				String constraint_str = splitline[ii].trim();
 				String split_constraint[] = constraint_str.split("\\s*<--\\s*");
 				if (split_constraint.length != 2) {
+					// TODO: Create a TokenException class and throw that instead
 					throw new IOException("Improperly formatted constraint in token file " + token_path + ", line " + lineNum + ", constraint " + constraint_str);
 				}
 				String slotchain_str = split_constraint[0];
 				String value_str = split_constraint[1];
+				// TODO: Make sure constraint is consistent with parent
 				token.constraints.add(new Constraint("<--", new SlotChain(slotchain_str), value_str));
 			}
-			tokens.put(token_name, token);
+			// TODO: Make sure there's an appropriate ontology constraint
+
+			// Add token to token list associated with the name
+			if (!tokens.containsKey(token_name)) {
+				tokens.put(token_name, new ArrayList<ECGToken>());
+			}
+			tokens.get(token_name).add(token);
 		}
 	} // ECGTokenReader()
 	
-	public ECGToken getToken(String token) {
+	public List<ECGToken> getToken(String token) {
 		return tokens.get(token);
 	} // getToken()
 	

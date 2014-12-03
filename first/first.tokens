@@ -2,4 +2,8 @@ pink	Color	self.m.value <-- @red
 purple	Color	self.m.value <-- @blue
 adam	ProperNounNP	     self.m.ontological-category <-- @person	self.m.number <-- @singular	self.m.gender <-- @male
 walk	SelfMotion	self.m.actionary <-- @walk		self.m.speed <-- “3”
+scarlet :: Color :: self.m.value <-- @red
+purple 	:: Color :: self.m.value <-- @blue
+adam	:: ProperNounNP :: self.m.ontological-category <-- @person :: self.m.number <-- @singular :: self.m.gender <-- @male
+scarlet	:: ProperNounNP :: self.m.ontological-category <-- @person :: self.m.number <-- @singular :: self.m.gender <-- @female
 
