@@ -46,20 +46,20 @@ public class ECGTokenReader {
 			if (line.matches("^\\s*#") || line.matches("^\\s*$")) {
 				continue;
 			}
-			String splitline[] = line.split("\\s*\\t\\s*");
+			String splitline[] = line.split("\\s*::\\s*");
 			if (splitline.length < 3) {
 				// TODO: Create a TokenException class and throw that instead
 				throw new IOException("Improperly formatted entry in token file " + token_path + ", line " + lineNum);
 			}
-			String token_name = splitline[0];
-			String parent_name = splitline[1];
+			String token_name = splitline[0].trim();
+			String parent_name = splitline[1].trim();
 			// TODO: Make sure parent exists, is non-general, and has orth="*".
 			ECGToken token = new ECGToken();
 			token.token_name = token_name;
 			token.parent = grammarWrapper.getGrammar().getConstruction(parent_name);
 			token.constraints = new ArrayList<Constraint>();
 			for (int ii = 2; ii < splitline.length; ii++) {
-				String constraint_str = splitline[ii];
+				String constraint_str = splitline[ii].trim();
 				String split_constraint[] = constraint_str.split("\\s*<--\\s*");
 				if (split_constraint.length != 2) {
 					// TODO: Create a TokenException class and throw that instead
