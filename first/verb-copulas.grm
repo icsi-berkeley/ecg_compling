@@ -2,6 +2,18 @@
 // copulas.grm
 //  	
 
+construction BeCopula
+	subcase of LexicalVerb 
+     	constructional
+      		constraints
+          		argform <-- Copula_All
+     form
+        constraints
+           self.f.lemma <-- "be"
+     meaning: Stasis 
+		constraints
+        	self.m.actionary <-- @be
+ /*       	
 general construction BeCopula  // all forms listed
 	subcase of LexicalVerb 
      	constructional
@@ -67,5 +79,5 @@ construction BeCopulaPastPlural  //now evokes ProcessFeatures
 		constraints
         	self.f.orth <-- "were"
 
-        	
+*/        	
         	

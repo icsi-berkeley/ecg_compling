@@ -52,6 +52,8 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	private LCPGrammarWrapper grammar;
 	
 	private ECGMorph ecgmorph;
+	
+	private ECGTokenReader tokenReader;
 
 	private ConstituentExpansionCostTable cect = null;
 
@@ -65,6 +67,8 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 
 		grammar = new LCPGrammarWrapper(ecgGrammar);
 		ecgmorph = new ECGMorph(grammar);
+		
+		tokenReader = new ECGTokenReader(grammar);
 
 		if (prefs == null) {
 			throw new ParserException("AnalyzerPrefs object expected");
@@ -146,10 +150,10 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 				Analysis.setSemSpecScorer(scorer);
 			}
 			
-			parser = new LeftCornerParser<Analysis>(ecgGrammar, factory, cect, ecgmorph);
+			parser = new LeftCornerParser<Analysis>(ecgGrammar, factory, cect, ecgmorph, tokenReader);
 		}
 		else {
-			parser = new LeftCornerParser<Analysis>(ecgGrammar, factory, ecgmorph);
+			parser = new LeftCornerParser<Analysis>(ecgGrammar, factory, ecgmorph, tokenReader);
 		}
 
 		parser.setParameters(robust, debug, beamSize, numAnalysesReturned, multiRootPenalty);
@@ -205,7 +209,7 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 			Analysis.setSemSpecScorer(null);
 		}
 
-		parser = new LeftCornerParser<Analysis>(ecgGrammar, factory, cect, ecgmorph);
+		parser = new LeftCornerParser<Analysis>(ecgGrammar, factory, cect, ecgmorph, tokenReader);
 		parser.setParameters(robust, debug, beamSize, numAnalysesReturned, multiRootPenalty);
 	}
 

@@ -93,7 +93,7 @@ construction Blocks
 */
 	  
 // Proper Nouns
-general construction ProperNounNP
+construction ProperNounNP
     subcase of NP, Word
     
  construction JOHN

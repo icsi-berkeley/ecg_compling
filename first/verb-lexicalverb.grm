@@ -27,6 +27,11 @@ construction MoveLemma
       constraints
          self.m.actionary <-- @move
 
+construction SelfMotion
+   subcase of LexicalVerb
+   meaning: MotionPath
+      constraints
+         self.m.actionary <-- @move
 
 /*
 general construction Move  

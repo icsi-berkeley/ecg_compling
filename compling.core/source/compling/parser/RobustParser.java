@@ -9,4 +9,5 @@ public interface RobustParser<PARSEKIND> extends Parser<PARSEKIND> {
 
 	public List<PARSEKIND> getBestPartialParse(Utterance<Word, String> utterance);
 
+
 }
