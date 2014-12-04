@@ -343,6 +343,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 		        */
 		        List<ECGToken> tokens = this.tokenReader.getToken(lemma);
 		        for (ECGToken token : tokens) {
+		        	System.out.println("here");
+		        	System.out.println(token);
 		        	Construction parent = token.parent;
 		        	String[] inflections = morpher.getInflections(lemma, wordform);
 		        	for (String inf : inflections) {

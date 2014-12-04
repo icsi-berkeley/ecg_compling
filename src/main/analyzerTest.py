@@ -23,13 +23,11 @@ and test them all.
 
 import os
 from subprocess import * #call, check_output
-os.environ['JYTHONPATH'] = 'lib/compling.core.jar:src/main'
+os.environ['JYTHONPATH'] = 'compling.core/build/compling.core.jar:src/main'
 import unittest
+from specializer import *
 import time
 from signal import *
-import sys
-from utils import *
-from feature import *
 
 try:
     # Python 2?
@@ -94,7 +92,8 @@ since it reloads the grammar in the 'for' loop. If not, there should be no other
 
 """
 #prefix = '/Users/seantrott/Dropbox/ECG/'
-prefix = ''
+prefix = ""
+
 if __name__ == "__main__":
 
 	total_errors = 0
@@ -116,10 +115,9 @@ if __name__ == "__main__":
 		if "/" in sys.argv[1]:
 			prefix = sys.argv[1]
 			if len(sys.argv) > 2:
-				to_test = sys.argv[2]
+				to_test = sys.argv[2:]
 		else:
 			to_test = sys.argv[1]
-
 	
 	gen = (key for key in suites.keys() if key in to_test)
 	#for name, grammar in suites.items():
