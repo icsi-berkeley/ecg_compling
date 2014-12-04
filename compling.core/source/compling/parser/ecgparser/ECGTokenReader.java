@@ -44,7 +44,7 @@ public class ECGTokenReader {
 			lineNum++;
 			String line = tfli.next();
 			// Skip blank lines or lines with just a comment
-			if (line.matches("^\\s*#") || line.matches("^\\s*$")) {
+			if (line.matches("\\s*#.*") || line.matches("\\s*")) {
 				continue;
 			}
 			String splitline[] = line.split("\\s*::\\s*");
