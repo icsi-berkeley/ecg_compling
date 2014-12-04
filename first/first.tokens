@@ -2,4 +2,14 @@ scarlet :: Color :: self.m.value <-- @red
 purple 	:: Color :: self.m.value <-- @blue
 adam	:: ProperNounNP :: self.m.ontological-category <-- @person :: self.m.number <-- @singular :: self.m.gender <-- @male
 scarlet	:: ProperNounNP :: self.m.ontological-category <-- @person :: self.m.number <-- @singular :: self.m.gender <-- @female
-
+## The following should (eventually) all produce errors. Uncomment to test.
+## Test for parent not existing:
+# test :: DoesntExist :: some.chain <-- illegal
+## Test for slotchain not existing
+# test :: Color :: some.chain <-- @red
+## Test for value not existing
+# test :: Color :: self.m.value <-- @doesntexist
+## Test for inconsistent ontology values
+# test :: Color :: self.m.value <-- @female
+## Test for missing ontology value
+# test :: ProperNountNP :: self.m.number <-- @singular

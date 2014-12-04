@@ -53,10 +53,16 @@ public class ECGTokenReader {
 			}
 			String token_name = splitline[0].trim();
 			String parent_name = splitline[1].trim();
-			// TODO: Make sure parent exists, is non-general, and has orth="*".
 			ECGToken token = new ECGToken();
 			token.token_name = token_name;
 			token.parent = grammarWrapper.getGrammar().getConstruction(parent_name);
+			
+			if (token.parent == null) {
+				// TODO: Create a TokenException class and throw that instead
+				throw new IOException("Parent construction \"" + parent_name + "\" is not defined (token \"" + token_name + "\" in token file \"" + token_path + "\" line " + lineNum + ")");
+			}
+			// TODO: Other checks of parent (non-general, has orth="*", etc)
+						
 			token.constraints = new ArrayList<Constraint>();
 			for (int ii = 2; ii < splitline.length; ii++) {
 				String constraint_str = splitline[ii].trim();
@@ -70,7 +76,7 @@ public class ECGTokenReader {
 				// TODO: Make sure constraint is consistent with parent
 				token.constraints.add(new Constraint("<--", new SlotChain(slotchain_str), value_str));
 			}
-			// TODO: Make sure there's an appropriate ontology constraint
+			// TODO: Make sure there's an appropriate ontology constraint that's consistent with parent
 
 			// Add token to token list associated with the name
 			if (!tokens.containsKey(token_name)) {
