@@ -17,6 +17,19 @@ general construction LexicalVerb
    	constraints
    		pf <--> self.m.p-features
 
+construction LexicalVerbType
+	subcase of VerbChunk, Word
+	meaning
+		evokes ProcessFeatures as pf
+   	constraints
+   		pf <--> self.m.p-features
+   		
+   		
+construction SelfMotionType
+	subcase of LexicalVerbType
+	meaning: MotionPath
+      constraints
+         self.m.actionary <-- @move 		
 
 construction MoveLemma
    subcase of LexicalVerb
@@ -27,11 +40,8 @@ construction MoveLemma
       constraints
          self.m.actionary <-- @move
 
-construction SelfMotion
-   subcase of LexicalVerb
-   meaning: MotionPath
-      constraints
-         self.m.actionary <-- @move
+
+
 
 /*
 general construction Move  

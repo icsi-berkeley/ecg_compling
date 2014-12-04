@@ -1,9 +1,13 @@
-pink	Color	self.m.value <-- @red
-purple	Color	self.m.value <-- @blue
-adam	ProperNounNP	     self.m.ontological-category <-- @person	self.m.number <-- @singular	self.m.gender <-- @male
-walk	SelfMotion	self.m.actionary <-- @walk		self.m.speed <-- “3”
-scarlet :: Color :: self.m.value <-- @red
-purple 	:: Color :: self.m.value <-- @blue
+scarlet :: ColorType :: self.m.value <-- @red
+red :: ColorType :: self.m.value <-- @red
+purple 	:: ColorType :: self.m.value <-- @blue
 adam	:: ProperNounNP :: self.m.ontological-category <-- @person :: self.m.number <-- @singular :: self.m.gender <-- @male
 scarlet	:: ProperNounNP :: self.m.ontological-category <-- @person :: self.m.number <-- @singular :: self.m.gender <-- @female
-
+block   :: NounType  :: self.m.ontological-category <-- @block :: self.m.scale <-- @size
+move    :: SelfMotionType  :: self.m.actionary <-- @move
+walk    :: SelfMotionType  :: self.m.actionary <-- @walk :: self.m.speed <-- "3"
+run     :: SelfMotionType  :: self.m.actionary <-- @run  :: self.m.speed <-- "7"
+block   :: LexicalVerbType :: self.m.actionary <-- @block-verb
+box     :: NounType  :: self.m.ontological-category <-- @box :: self.m.scale <-- @size
+room    :: NounType  :: self.m.ontological-category <-- @room :: self.m.scale <-- @size
+be      :: BeCopula  :: self.m.actionary <-- @be

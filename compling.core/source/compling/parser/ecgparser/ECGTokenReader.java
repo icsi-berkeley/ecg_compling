@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import compling.grammar.GrammarException;
 import compling.grammar.ecg.Grammar.Construction;
 import compling.grammar.ecg.GrammarWrapper;
 import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
@@ -81,7 +82,11 @@ public class ECGTokenReader {
 	} // ECGTokenReader()
 	
 	public List<ECGToken> getToken(String token) {
-		return tokens.get(token);
+		if (tokens.keySet().contains(token)) {
+			return tokens.get(token);
+		} else {
+			throw new GrammarException("Token not in database.");
+		}
 	} // getToken()
 	
 	public boolean hasToken(String token) {

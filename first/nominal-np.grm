@@ -40,6 +40,10 @@ general construction Noun
        //self.m.number <-- @RDnumberValues
        //self.m.bounding <-- @grammaticalValues
 
+
+construction NounType
+   subcase of Noun
+
 /*
  *
  * Combining Adjectives and Nouns

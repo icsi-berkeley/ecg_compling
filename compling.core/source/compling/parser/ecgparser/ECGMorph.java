@@ -11,6 +11,7 @@ import java.util.TreeSet;
 
 import com.hp.hpl.jena.sparql.util.StringUtils;
 
+import compling.grammar.GrammarException;
 import compling.grammar.ecg.Grammar;
 import compling.grammar.ecg.GrammarWrapper;
 import compling.gui.AnalyzerPrefs;
@@ -55,6 +56,7 @@ public class ECGMorph {
 	AnalyzerPrefs prefs;
 	File ecgmorph_path;
 	HashMap<String, List<MorphEntry> > morphs;
+	ECGTokenReader tokenReader;
 	
 	/**
 	 * Store a single morph entry, including the lemma and the inflections.
@@ -86,12 +88,13 @@ public class ECGMorph {
 	 * @param analyzer_arg
 	 * @throws IOException
 	 */
-	public ECGMorph(GrammarWrapper wrapper) throws IOException { //ECGAnalyzer analyzer_arg) throws IOException {
+	public ECGMorph(GrammarWrapper wrapper, ECGTokenReader tokener) throws IOException { //ECGAnalyzer analyzer_arg) throws IOException {
 		//analyzer = analyzer_arg;
 		//grammar = analyzer.getGrammar();
 		grammarWrapper = wrapper;
 		//grammarWrapper = analyzer.getGrammarWrapper();
 		// prefs = (AnalyzerPrefs) grammar.getPrefs();
+		tokenReader = tokener;
 		
 		prefs = (AnalyzerPrefs) grammarWrapper.getGrammar().getPrefs();
 		
@@ -190,10 +193,15 @@ public class ECGMorph {
 	
 	public Set<String> getLemmas(String wordform) {
 		Set<String> lemmaStrs = new HashSet<String>();
-		for (MorphEntry morph : morphs.get(wordform)) {
-			lemmaStrs.add(morph.lemma);
+		if (morphs.keySet().contains(wordform)) {
+			for (MorphEntry morph : morphs.get(wordform)) {
+				lemmaStrs.add(morph.lemma);
+			}
+			return lemmaStrs;
+		} else {
+			throw new GrammarException("Cannot find wordform in lemma base");
 		}
-		return lemmaStrs;
+
 	}  // getLemmas()
 	
 	/**
@@ -225,6 +233,12 @@ public class ECGMorph {
 		}
 		if (grammarWrapper.hasLemmaConstruction(StringUtilities.addQuotes(splitline[0]))) {
 			return true;
+		} 
+		if (tokenReader.tokens.keySet().contains(splitline[0])) {
+			return true;
+		}
+		if (tokenReader.hasToken(StringUtilities.addQuotes(splitline[0]))) {
+			return true;
 		}
 		// Now check for all the possible lemmas.
 		for (int ii = 1; ii < splitline.length; ii+=2) {
@@ -232,6 +246,12 @@ public class ECGMorph {
 				return true;
 			}
 			if (grammarWrapper.hasLemmaConstruction(StringUtilities.addQuotes(splitline[ii]))) {
+				return true;
+			}
+			if (tokenReader.hasToken(StringUtilities.addQuotes(splitline[ii]))) {
+				return true;
+			}
+			if (tokenReader.tokens.keySet().contains(splitline[ii])) {
 				return true;
 			}
 		}

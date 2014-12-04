@@ -430,6 +430,8 @@ DEFS:
 
 (type process sub entity) // scales ??  10/18/13 is this right???
 
+(type block-verb sub process)
+
 (type stasis sub process)
 
 (type be sub stasis)

@@ -23,6 +23,14 @@ general construction Color  //subcase of non-scale Adj
        self.m.property <-- @color 
 	   self.m.domain <-- @physicalEntity
 
+construction ColorType  //subcase of non-scale Adj
+  subcase of PropertyAdjective    
+   meaning: PropertyModifier
+    constraints
+       self.m.property <-- @color 
+	   self.m.domain <-- @physicalEntity
+	   self.m.value <-- @colorValue
+
 construction Red
   subcase of Color
    form

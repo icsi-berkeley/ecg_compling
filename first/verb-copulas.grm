@@ -3,13 +3,10 @@
 //  	
 
 construction BeCopula
-	subcase of LexicalVerb 
+	subcase of LexicalVerbType
      	constructional
       		constraints
           		argform <-- Copula_All
-     form
-        constraints
-           self.f.lemma <-- "be"
      meaning: Stasis 
 		constraints
         	self.m.actionary <-- @be

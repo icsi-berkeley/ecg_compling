@@ -66,9 +66,10 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	public ECGAnalyzer(Grammar ecgGrammar, AnalyzerPrefs prefs) throws IOException {
 
 		grammar = new LCPGrammarWrapper(ecgGrammar);
-		ecgmorph = new ECGMorph(grammar);
-		
 		tokenReader = new ECGTokenReader(grammar);
+		ecgmorph = new ECGMorph(grammar, tokenReader);
+		
+		
 
 		if (prefs == null) {
 			throw new ParserException("AnalyzerPrefs object expected");
@@ -291,14 +292,15 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 		ECGAnalyzer analyzer = new ECGAnalyzer(args[0]);
 		System.out.println(" done.");
 		
-		System.out.print("Reading Morphology Dictionary ...");
-		ECGMorph morph = new ECGMorph(analyzer.getGrammarWrapper());
-		System.out.println(" done.");
+		
 		
 		System.out.print("Reading tokens ...");
 		ECGTokenReader tokens = new ECGTokenReader(analyzer.getGrammarWrapper());
 		System.out.println(" done.");
 		
+		System.out.print("Reading Morphology Dictionary ...");
+		ECGMorph morph = new ECGMorph(analyzer.getGrammarWrapper(), tokens);
+		System.out.println(" done.");
 
 		TextFileLineIterator tfli = new TextFileLineIterator(args[1]);
 		while (tfli.hasNext()) {
