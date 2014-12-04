@@ -220,8 +220,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 		put("Superlative", new String[]{"self.m.kind", "@superlative", "Adjective"});
 		put("Infinitive", new String[]{"LexicalVerbType"});
 		put("Positive", new String[]{"Adjective"});
-		put("Participle,PresentTense", new String[]{"self.pf.temporality", "@ongoing", "LexicalVerbType"});  // TODO: Check if "ongoing" is what we want.
-		put("Participle,PastTense", new String[]{"LexicalVerbType"});
+		put("Participle,PresentTense", new String[]{"self.pf.tense", "@present", "LexicalVerbType"});  // TODO: Check if "@ongoing" for "pf.temporality" is what we want.
+		put("Participle,PastTense", new String[]{"LexicalVerbType"});  // TODO: do we want "@bounded" for "pf.temporality"?
 		put("NoMorphology", new String[]{"Pronoun"});
 	}};
 	
@@ -238,7 +238,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 				put("Plural", new String[]{"self.features.number", "\"plural\"", "NounType"});
 				put("Singular", new String[]{"self.features.number", "\"singular\"", "NounType"});
 				put("PresentTense,Singular,ThirdPerson", new String[]{"self.verbform", "Present", "self.features.person", "\"3\"", "self.features.number", "\"singular\"", "LexicalVerb"});
-				put("FirstPerson,PresentTense,Singular", new String[]{"self.verbform", "Base", "LexicalVerbType"});
+				put("FirstPerson,PresentTense,Singular", new String[]{"self.verbform", "Base", "self.features.person", "\"1\"", "LexicalVerbType"});
 				put("FirstPerson,PastTense,Singular", new String[]{"self.verbform", "Past", "LexicalVerbType"});
 				put("PresentTense,SecondPerson,Singular", new String[]{"self.verbform", "Base", "LexicalVerbType"});
 				put("PastTense,Plural", new String[]{"self.verbform", "Past", "LexicalVerbType"});
@@ -344,7 +344,6 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 		        List<ECGToken> tokens = this.tokenReader.getToken(lemma);
 		        for (ECGToken token : tokens) {
 		        	Construction parent = token.parent;
-		        	System.out.println(parent);
 		        	String[] inflections = morpher.getInflections(lemma, wordform);
 		        	for (String inf : inflections) {
 		        		int what = this.meaning_morphTable.get(inf).length - 1;
@@ -373,10 +372,10 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
           }
           if (i >= morphToken.size()) {
         	  //morphToken.add(new ArrayList<String[]>());
+        	  morphToken.add(new ArrayList<MorphTokenPair>());
           }
           constructionInput.get(i).addAll(lexicalCxns);
           for (int k = 0; k < lexicalCxns.size(); k++) {
-        	  String[] mt = new String[]{null, null};
         	  //morphToken.get(i).add(mt);
         	  morphToken.get(i).add(new MorphTokenPair(null, null));
           }
@@ -393,6 +392,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
         }
 
     }
+   
     
 
     morphToken.add(new ArrayList<MorphTokenPair>());
@@ -753,8 +753,9 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 	    	if (extra_info.token != null) {
 	    		ECGTokenReader.ECGToken token = extra_info.token;
 	    		for (Constraint c : token.constraints) {
+	    			//ultimate.addConstraint(c, "");
+	    			//System.out.println(ultimate);
 	    			ultimate.addConstraint(UnificationGrammar.generateConstraint(c.getValue()), c.getArguments().get(0).toString());
-	    			//ultimate.addConstraint(c, c.getArguments().get(0).toString());
 	    		}
 	    	}
 	    	ultimate.advance();
@@ -764,8 +765,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 	            // System.out.println("And finally here.");
 	            results.add(rps);
 	        }
-	    }
-	    else {
+	    } else {
      		debugPrint("\t\t" + ancestor.primaryAnalysis.getHeadCxn().getName() + " cannot generate "
                + cxn.getName());
 	    }

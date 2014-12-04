@@ -6,8 +6,9 @@ scarlet	:: ProperNounNP :: self.m.ontological-category <-- @person :: self.m.num
 block   :: NounType  :: self.m.ontological-category <-- @block :: self.m.scale <-- @size
 move    :: SelfMotionType  :: self.m.actionary <-- @move
 walk    :: SelfMotionType  :: self.m.actionary <-- @walk :: self.m.speed <-- "3"
-run     :: SelfMotionType  :: self.m.actionary <-- @run  :: self.m.speed <-- "7"
+run     :: SelfMotionType  :: self.m.actionary <-- @run  :: self.m.speed <-- "7
 block   :: LexicalVerbType :: self.m.actionary <-- @block-verb
 box     :: NounType  :: self.m.ontological-category <-- @box :: self.m.scale <-- @size
 room    :: NounType  :: self.m.ontological-category <-- @room :: self.m.scale <-- @size
 be      :: BeCopula  :: self.m.actionary <-- @be
+sprint  :: SelfMotionType  :: self.m.actionary <-- @run  :: self.m.speed <-- "8" 
