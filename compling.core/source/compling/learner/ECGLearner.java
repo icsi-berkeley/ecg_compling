@@ -236,7 +236,7 @@ public class ECGLearner {
 		}
 	}
 
-	private void loadNewGrammar() {
+	private void loadNewGrammar() throws IOException {
 		if (engine.isGrammarModified()) {
 			LearnerGrammar newGrammar = engine.getExperimentalGrammar().makeCopy();
 			if (newGrammar != null) {

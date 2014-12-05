@@ -10,6 +10,7 @@ ONTOLOGY_PATHS ::==
 
 MORPHOLOGY_PATH = ./robots/celex.ecgmorph
 TOKEN_PATH = ./robots/robots.tokens
+TABLE_PATH = ./robots/robots.morph
 
 ROBUST = FALSE 
 BEAM_SIZE = 20

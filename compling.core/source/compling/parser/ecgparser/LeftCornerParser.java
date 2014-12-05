@@ -82,6 +82,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   
   private ECGMorph morpher;
   private ECGTokenReader tokenReader;
+  private ECGMorphTableReader morphTable;
 
   private Grammar ecgGrammar;
   private LCPGrammarWrapper grammar;
@@ -146,7 +147,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   }
 
   public LeftCornerParser(compling.grammar.ecg.Grammar grammar, AnalysisFactory<T> analysisFactory, 
-		  ECGMorph morpher, ECGTokenReader token) {
+		  ECGMorph morpher, ECGTokenReader token) throws IOException {
     this(grammar, analysisFactory, new DumbConstituentExpansionCostTable(new LCPGrammarWrapper(grammar)), morpher, token);
   }
 
@@ -160,7 +161,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   // }
 
   public LeftCornerParser(compling.grammar.ecg.Grammar ecgGrammar, AnalysisFactory analysisFactory,
-          ConstituentExpansionCostTable cect, ECGMorph morpher, ECGTokenReader token) {
+          ConstituentExpansionCostTable cect, ECGMorph morpher, ECGTokenReader token) throws IOException {
     constructorTime = System.currentTimeMillis();
 
     this.ecgGrammar = ecgGrammar;
@@ -169,6 +170,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     this.morpher = morpher;
     
     this.tokenReader = token;
+    
+    this.morphTable = new ECGMorphTableReader(this.grammar);
     
 
     
@@ -201,9 +204,10 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     constructorTime = System.currentTimeMillis() - constructorTime;
     RootCxn = grammar.getConstruction(ECGConstants.ROOT);
     RootCxnConstituent = (Role) RootCxn.getConstructionalBlock().getElements().toArray()[0];
-    
+    /*
 	// beginnings of initializing a morph table hashmap for semantic features. Should actually be initialized outside function. 
-	this.meaning_morphTable = new HashMap<String, String[]>() 
+	this.meaning_morphTable = new HashMap<String, String[]>()
+	
 	{{
 		put("Plural", new String[]{"self.m.number", "@plural", "self.m.bounding", "@indeterminate", "NounType"});
 		put("Singular", new String[]{"self.m.number", "@singular", "self.m.bounding", "@determinate", "NounType"});
@@ -224,10 +228,12 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 		put("Participle,PastTense", new String[]{"LexicalVerbType"});  // TODO: do we want "@bounded" for "pf.temporality"?
 		put("NoMorphology", new String[]{"Pronoun"});
 	}};
+	*/
 	
 	
 	// beginnings of initializing a morph table HashMap for constructional features.
 	// TODO: Check that it's consistent with Celex / ECGMorph.
+	/*
 	this.constructional_morphTable = new HashMap<String, String[]>()
 			{{
 				put("Plural", new String[]{"self.features.number", "\"plural\"", "NounType"});
@@ -249,6 +255,11 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 				put("Participle,PastTense", new String[]{"self.verbform", "PastParticiple", "LexicalVerbType"});
 				put("NoMorphology", new String[]{"Pronoun"});
 			}};
+			*/
+			
+			
+	this.constructional_morphTable = this.morphTable.getConstructionalTable();
+	this.meaning_morphTable = this.morphTable.getMeaningTable();
   }
 
   public long getConstructorTime() {

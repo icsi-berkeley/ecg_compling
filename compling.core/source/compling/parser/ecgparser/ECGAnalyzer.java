@@ -172,7 +172,7 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void loadNewGrammar(Grammar ecgGrammar, StringBuffer grammarParamsCxn, StringBuffer grammarParamsSem) {
+	public void loadNewGrammar(Grammar ecgGrammar, StringBuffer grammarParamsCxn, StringBuffer grammarParamsSem) throws IOException {
 		grammar = new LCPGrammarWrapper(ecgGrammar);
 		AnalysisFactory factory;
 		if (analyzeInContext) {

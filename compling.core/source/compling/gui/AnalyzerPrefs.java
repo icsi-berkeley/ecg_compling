@@ -39,6 +39,8 @@ public class AnalyzerPrefs implements Prefs {
 		FILE_ENCODING(Datatype.STRING),
 		
 		MORPHOLOGY_PATH(Datatype.STRING),
+		
+		TABLE_PATH(Datatype.STRING), // TODO
 
 		TOKEN_PATH(Datatype.STRING),  
 

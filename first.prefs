@@ -11,6 +11,7 @@ ONTOLOGY_PATHS ::==
 
 MORPHOLOGY_PATH = ./first/celex.ecgmorph
 TOKEN_PATH = ./first/first.tokens
+TABLE_PATH = ./first/first.morph
 
 ROBUST = FALSE 
 BEAM_SIZE = 20

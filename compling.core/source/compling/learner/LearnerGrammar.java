@@ -180,13 +180,13 @@ public class LearnerGrammar {
 	MapSet<String, String> removedNearlyIdentical = new MapSet<String, String>();
 	List<List<String>> removedChainable = new ArrayList<List<String>>();
 
-	public LearnerGrammar(Grammar grammar) {
+	public LearnerGrammar(Grammar grammar) throws IOException {
 		this(grammar, new GrammarTables(grammar), new NGram(grammar), new ConstructionalSubtypeTable(grammar),
 				new SemanticSubtypeTable(grammar), printer.format(grammar));
 	}
 
 	public LearnerGrammar(Grammar grammar, TextFileLineIterator nGramTableIterator,
-			TextFileLineIterator subtypeTableIterator, TextFileLineIterator localityTableIterator) {
+			TextFileLineIterator subtypeTableIterator, TextFileLineIterator localityTableIterator) throws IOException {
 
 		this(grammar, new GrammarTables(grammar), new NGram(grammar, nGramTableIterator), new ConstructionalSubtypeTable(
 				grammar, subtypeTableIterator, localityTableIterator), new SemanticSubtypeTable(grammar), printer
@@ -194,7 +194,7 @@ public class LearnerGrammar {
 	}
 
 	protected LearnerGrammar(Grammar grammar, GrammarTables tables, NGram nGram, ConstructionalSubtypeTable cst,
-			SemanticSubtypeTable sst, String grammarBuffer) {
+			SemanticSubtypeTable sst, String grammarBuffer) throws IOException {
 
 		this.grammar = grammar;
 		this.cxnTypeSystem = grammar.getCxnTypeSystem();
@@ -209,7 +209,7 @@ public class LearnerGrammar {
 		mdlCost = new MDLCost(this);
 	}
 
-	public LearnerGrammar makeCopy() {
+	public LearnerGrammar makeCopy() throws IOException {
 		try {
 			Grammar newGrammar = ECGGrammarUtilities.read(grammarBuffer, contextModel);
 			newGrammar.update();

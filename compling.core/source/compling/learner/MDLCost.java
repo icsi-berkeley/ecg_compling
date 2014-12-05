@@ -41,7 +41,7 @@ public class MDLCost {
 	static ECGAnalyzer analyzer = null;
 	private static Logger logger = Logger.getLogger(MDLCost.class.getName());
 
-	public MDLCost(LearnerGrammar grammar) {
+	public MDLCost(LearnerGrammar grammar) throws IOException {
 		learnerGrammar = grammar;
 
 		if (analyzer != null) {
