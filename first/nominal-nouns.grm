@@ -94,7 +94,7 @@ construction Blocks
 	  
 // Proper Nouns
 construction ProperNounNP
-    subcase of NP, Word
+    subcase of NP, Word, NounType
     
  construction JOHN
     subcase of ProperNounNP, Singular, ThirdPerson

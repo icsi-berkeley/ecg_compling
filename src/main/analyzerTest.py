@@ -117,7 +117,7 @@ if __name__ == "__main__":
 			if len(sys.argv) > 2:
 				to_test = sys.argv[2:]
 		else:
-			to_test = sys.argv[1]
+			to_test = sys.argv[1:]
 	
 	gen = (key for key in suites.keys() if key in to_test)
 	#for name, grammar in suites.items():

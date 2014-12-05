@@ -6921,7 +6921,7 @@ bowsprit	bowsprit Singular
 bowsprits	bowsprit Plural
 bowwow	bowwow Singular bowwow NoMorphology
 bowwows	bowwow Plural
-box	box Singular box Infinitive box Plural box Singular/PresentTense/FirstPerson box Singular/PresentTense/SecondPerson box Plural/PresentTense
+box	box Singular box Infinitive box Plural/PresentTense box Singular/PresentTense/FirstPerson box Singular/PresentTense/SecondPerson box Plural/PresentTense
 box-kite	box-kite Singular
 box-kites	box-kite Plural
 box-number	box-number Singular
@@ -55678,6 +55678,7 @@ scarifying	scarify PresentTense/Participle
 scaring	scare PresentTense/Participle
 scarlatina	scarlatina Singular
 scarlet	scarlet Singular scarlet Positive
+scarlet		scarlet Singular
 scarlets	scarlet Plural
 scarp	scarp Singular
 scarper	scarper Infinitive scarper Singular/PresentTense/FirstPerson scarper Singular/PresentTense/SecondPerson scarper Plural/PresentTense

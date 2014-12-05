@@ -226,11 +226,6 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 	}};
 	
 	
-	// PROBLEM: if I just check each key in HashMap, it might incorrectly map some of the values in certain cases.
-	// Example: "Present|!Participle|3rd|Singular" incorrectly sets "number" to singular for "block-lemma".
-	// I need a better way to rule out certain matches; don't match unless all match.
-	// In other words: only match constraints if ALL of the constraints match
-	
 	// beginnings of initializing a morph table HashMap for constructional features.
 	// TODO: Check that it's consistent with Celex / ECGMorph.
 	this.constructional_morphTable = new HashMap<String, String[]>()
@@ -238,14 +233,14 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 				put("Plural", new String[]{"self.features.number", "\"plural\"", "NounType"});
 				put("Singular", new String[]{"self.features.number", "\"singular\"", "NounType"});
 				put("PresentTense,Singular,ThirdPerson", new String[]{"self.verbform", "Present", "self.features.person", "\"3\"", "self.features.number", "\"singular\"", "LexicalVerb"});
-				put("FirstPerson,PresentTense,Singular", new String[]{"self.verbform", "Base", "self.features.person", "\"1\"", "LexicalVerbType"});
-				put("FirstPerson,PastTense,Singular", new String[]{"self.verbform", "Past", "LexicalVerbType"});
-				put("PresentTense,SecondPerson,Singular", new String[]{"self.verbform", "Base", "LexicalVerbType"});
-				put("PastTense,Plural", new String[]{"self.verbform", "Past", "LexicalVerbType"});
-				put("Plural,PresentTense", new String[]{"self.verbform", "Present", "LexicalVerbType"});
-				put("PastTense,Singular,ThirdPerson", new String[]{"self.verbform", "Past", "LexicalVerbType"});
-				put("PastTense,SecondPerson,Singular", new String[]{"self.verbform", "Past", "LexicalVerbType"});
-				put("FirstPerson,PastTense,Singular", new String[]{"self.verbform", "Past", "LexicalVerbType"});
+				put("FirstPerson,PresentTense,Singular", new String[]{"self.verbform", "Base", "self.features.person", "\"1\"", "self.features.number", "\"singular\"", "LexicalVerbType"});
+				put("FirstPerson,PastTense,Singular", new String[]{"self.verbform", "Past", "self.features.person", "\"3\"", "self.features.number", "\"singular\"","LexicalVerbType"});
+				put("PresentTense,SecondPerson,Singular", new String[]{"self.verbform", "Base", "self.features.person", "\"2\"", "self.features.number", "\"singular\"","LexicalVerbType"});
+				put("PastTense,Plural", new String[]{"self.verbform", "Past", "self.features.person", "\"3\"", "self.features.number", "\"plural\"","LexicalVerbType"});
+				put("Plural,PresentTense", new String[]{"self.verbform", "Present", "self.features.person", "\"3\"", "self.features.number", "\"plural\"","LexicalVerbType"});
+				put("PastTense,Singular,ThirdPerson", new String[]{"self.verbform", "Past", "self.features.person", "\"3\"", "self.features.number", "\"singular\"", "LexicalVerbType"});
+				put("PastTense,SecondPerson,Singular", new String[]{"self.verbform", "Past", "self.features.person", "\"2\"", "self.features.number", "\"singular\"", "LexicalVerbType"});
+				put("FirstPerson,PastTense,Singular", new String[]{"self.verbform", "Past", "self.features.person", "\"1\"", "self.features.number", "\"singular\"", "LexicalVerbType"});
 				put("Infinitive", new String[]{"self.verbform", "Infinitive", "LexicalVerbType"});
 				put("Comparative", new String[]{"Adjective"});
 				put("Superlative", new String[]{"Adjective"});
@@ -343,8 +338,6 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 		        */
 		        List<ECGToken> tokens = this.tokenReader.getToken(lemma);
 		        for (ECGToken token : tokens) {
-		        	System.out.println("here");
-		        	System.out.println(token);
 		        	Construction parent = token.parent;
 		        	String[] inflections = morpher.getInflections(lemma, wordform);
 		        	for (String inf : inflections) {
@@ -393,8 +386,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
         	
         }
 
-    }
-   
+    }   
     
 
     morphToken.add(new ArrayList<MorphTokenPair>());
