@@ -149,6 +149,7 @@ public class FeatureStructureSet implements Cloneable {
 	private boolean fill(Slot slot, String atom) {
 		atom = interner.intern(atom);
 		if (slot.hasAtomicFiller()) {
+			slot.atom = atom;  // TODO: @seantrott (sets "*" to "8", for example)
 			return slot.atom == atom;
 		} else if (!slot.hasFiller()) {
 			slot.atom = atom;

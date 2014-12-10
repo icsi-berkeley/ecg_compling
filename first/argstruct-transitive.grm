@@ -131,21 +131,7 @@ schema ChangeLocation // protagonist changes location wrt a LM
      // goal <--> spg.goal 
       protagonist.ontological-category <-- @physicalEntity  // hack 10/23/12
       
-general construction Enter   // 10/15/13
-   subcase of LexicalVerb
-   meaning: ChangeLocation 
-      //evokes BoundedObject as bo   
-     constraints
-         //self.m.landmark <--> bo.boundedObject
-         //self.m.goal <--> bo.interior
-         self.m.landmark.ontological-category <-- @container
-         self.m.actionary <-- @enter
 
-construction EnterPast
-   subcase of Enter, PastTense
-   form
-      constraints
-         self.f.orth <-- "entered"
 
 
 		

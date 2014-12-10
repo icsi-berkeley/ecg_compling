@@ -2,7 +2,7 @@
 // grammaticalschemas.grm
 //
 // A simple schema for the orthographic form associated with Word cxns
-schema WordForm
+schema WordForm 
   roles
     orth 
     lemma

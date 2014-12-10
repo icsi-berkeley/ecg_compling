@@ -13,60 +13,6 @@ general construction SingularNoun
 	  self.m.bounding <-- @determinate
 
 
-
- 
- 
-
-
- construction BlockLemmaNoun
-   subcase of Noun
-   constructional
-     constraints
-       //self.features.number <-- "undetermined"
-   form
-      constraints
-         self.f.lemma <-- "block" 
-         //self.f.orth <-- "block"
-         //self.f.orth <-- "orth" // testing so it doesn't get picked up as lexicalCxn
-      meaning
-    constraints
-      self.m.ontological-category <--  @block
-      self.m.scale <-- @size 
-
-
- construction Box
-   subcase of Noun
-   form
-      constraints
-         //self.f.orth <-- "box"
-         self.f.lemma <-- "box"
-      meaning
-    constraints
-      self.m.ontological-category <--  @box
-      self.m.scale <-- @size 
-     
-construction Room
-   subcase of Noun
-   form
-      constraints
-         //self.f.orth <-- "room"
-         self.f.lemma <-- "room"
-      meaning
-    constraints
-      self.m.ontological-category <--  @room
-      self.m.scale <-- @size
-/*
-construction RoomLemma
-   subcase of Noun
-   form
-      constraints
-         self.f.lemma <-- "room"
-   meaning
-    constraints
-      self.m.ontological-category <--  @room
-      self.m.scale <-- @size
-*/
-
 //
 // Plural Count Nouns
 //
@@ -81,16 +27,7 @@ general construction PluralNoun
       self.m.number <-- @plural
       self.m.bounding <-- @indeterminate
 
-/*
-construction Blocks
-   subcase of PluralNoun
-   form
-      constraints
-       self.f.orth <-- "blocks"
-   meaning
-     constraints
-       self.m.ontological-category <--  @block
-*/
+
 	  
 // Proper Nouns
 construction ProperNounNP

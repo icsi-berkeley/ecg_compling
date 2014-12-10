@@ -99,7 +99,7 @@ construction Blocks
 //
 
 general construction ProperNounNP
-    subcase of NP, Word
+    subcase of NP, Word, NounType
     
 construction John
     subcase of ProperNounNP, Singular, ThirdPerson

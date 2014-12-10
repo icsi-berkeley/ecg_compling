@@ -9,7 +9,10 @@ import java.util.Map;
 
 import compling.grammar.GrammarException;
 import compling.grammar.ecg.Grammar.Construction;
+import compling.grammar.ecg.ECGConstants;
 import compling.grammar.ecg.GrammarWrapper;
+import compling.grammar.unificationgrammar.TypeSystem;
+import compling.grammar.unificationgrammar.TypeSystemException;
 import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
 import compling.grammar.unificationgrammar.UnificationGrammar.SlotChain;
 import compling.gui.AnalyzerPrefs;
@@ -63,6 +66,8 @@ public class ECGTokenReader {
 				throw new IOException("Parent construction \"" + parent_name + "\" is not defined (token \"" + token_name + "\" in token file \"" + token_path + "\" line " + lineNum + ")");
 			}
 			// TODO: Other checks of parent (non-general, has orth="*", etc)
+			
+			
 						
 			token.constraints = new ArrayList<Constraint>();
 			for (int ii = 2; ii < splitline.length; ii++) {
@@ -75,6 +80,14 @@ public class ECGTokenReader {
 				String slotchain_str = split_constraint[0];
 				String value_str = split_constraint[1];
 				// TODO: Make sure constraint is consistent with parent
+				
+				
+				// This iterates through parent's constraints; if it doesn't find the Slotchain, no Exception is thrown.
+				if (!slotMatch(token.parent, slotchain_str, value_str)) {
+					throw new IOException("Either slot chain " + slotchain_str + " not found in parent " + token.parent.getName() 
+							+ " or value " + value_str + " not a proper subcase.");
+				}
+
 				token.constraints.add(new Constraint("<--", new SlotChain(slotchain_str), value_str));
 			}
 			// TODO: Make sure there's an appropriate ontology constraint that's consistent with parent
@@ -86,6 +99,31 @@ public class ECGTokenReader {
 			tokens.get(token_name).add(token);
 		}
 	} // ECGTokenReader()
+	
+	
+	// Currently assumes VALUE is either an Ontology item ("@walk") or a FillerString (""8""). 
+	public boolean slotMatch(Construction parent, String slotchain, String value) {
+		boolean found = false;
+		for (Constraint c : parent.getMeaningBlock().getConstraints()) {
+			if (c.getArguments().get(0).toString().equals(slotchain)) {
+				if (c.getValue().charAt(0) == ECGConstants.ONTOLOGYPREFIX &&
+						value.charAt(0) == ECGConstants.ONTOLOGYPREFIX) {
+					try {
+						TypeSystem ts = grammarWrapper.getGrammar().getOntologyTypeSystem();
+						String v1 = value.substring(1, value.length()).trim();
+						String v2 = c.getValue().substring(1, c.getValue().length()).trim();
+						found = ts.subtype(ts.getInternedString(v1), ts.getInternedString(v2));
+					} catch (TypeSystemException tse) {
+						System.out.println(tse.getMessage());
+						return false;
+					}
+				} else {
+					found = true;
+				}
+			}
+		}
+		return found;
+	}
 	
 	public List<ECGToken> getToken(String token) {
 		if (tokens.keySet().contains(token)) {

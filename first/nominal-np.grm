@@ -43,6 +43,13 @@ general construction Noun
 
 construction NounType
    subcase of Noun
+   meaning
+      constraints
+        self.m.number <-- @RDnumberValues
+        self.m.gender <-- @genderValues
+        self.m.ontological-category <-- @entity
+        self.m.scale <-- @scale
+        
 
 /*
  *
@@ -95,6 +102,23 @@ construction  KernelAdj // literal case
       ap.m <--> pm.modifier 
       //ap.m.property <--> n.m.scale  //4/26/13  ***** n.m.scale is implicit, e.g inch
       //ap.m.domain <--> n.m.ontological-category //constraint NOT here    
+
+
+ 
+construction Kernel-LocPP
+   subcase of Kernel
+   constructional
+     constituents
+       n: Nominal
+       pp: Loc-PP
+   form
+     constraints
+       n.f meets pp.f
+   meaning
+     constraints 
+       self.m <--> n.m
+       n.m <--> pp.m.trajector
+
 
 construction  KernelNoAdj // no adjective
   subcase of Kernel

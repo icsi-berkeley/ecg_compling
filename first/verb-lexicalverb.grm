@@ -23,61 +23,27 @@ construction LexicalVerbType
 		evokes ProcessFeatures as pf
    	constraints
    		pf <--> self.m.p-features
+   		self.m.actionary <-- @process
    		
    		
 construction SelfMotionType
 	subcase of LexicalVerbType
 	meaning: MotionPath
       constraints
-         self.m.actionary <-- @move 		
-
-construction MoveLemma
-   subcase of LexicalVerb
-   form
-      constraints
-         self.f.lemma <-- "move"
-   meaning: MotionPath
-      constraints
-         self.m.actionary <-- @move
+         self.m.actionary <-- @move 	
+         self.m.speed <-- "*"
 
 
 
+construction PerceptionType
+   subcase of LexicalVerbType
+   meaning: Perception
+     constraints
+        self.m.actionary <-- @process
+        self.argform <-- Transitive
+        self.verbkind <-- Perceptual
 
-/*
-general construction Move  
-   	subcase of LexicalVerb
-	meaning: MotionPath 
-      	constraints
-         	self.m.actionary <-- @move      	
-		
-construction MoveBase 
-   	subcase of Move, BaseForm
-   	form
-      	constraints
-         	self.f.orth <-- "move"          
-
-construction MovePast
-   subcase of Move, PastTense 
-   form
-      constraints
-         self.f.orth <-- "moved"
-
-construction MovePastParticiple
-   subcase of Move, PastParticiple
-   form
-      constraints
-         self.f.orth <-- "moved"
- */        
-
-// testing lemma usage
-construction BlockLemmaVerb
-	subcase of LexicalVerb
-	form
-	   constraints
-	      //self.f.orth <-- "orth" // testing so it doesn't get picked up as lexicalCxn
-	      self.f.lemma <-- "block"
-
- 
+/* 
 general construction SeeT // 8/21/13 Transitive
    subcase of LexicalVerb
    meaning: Perception
@@ -98,10 +64,12 @@ construction SeePastT
    form
       constraints
          self.f.orth <-- "saw"
-/*        
-general construction Enter   
+*/
+   
+
+general construction Enter   // 10/15/13
    subcase of LexicalVerb
-   meaning: ChangeLocation // mover changes location wrt a landmark 
+   meaning: ChangeLocation 
       //evokes BoundedObject as bo   
      constraints
          //self.m.landmark <--> bo.boundedObject
@@ -113,6 +81,7 @@ construction EnterPast
    subcase of Enter, PastTense
    form
       constraints
-         self.f.orth <-- "entered"
-*/         
+         self.f.orth <-- "entered" 
+         
+        
          

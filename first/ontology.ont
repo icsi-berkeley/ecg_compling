@@ -450,6 +450,8 @@ DEFS:
 
 (type see sub process)  // 2/7/13  perception
 
+(type hear sub process)
+
 (type change sub statechange) // 2/17/13 ? subtype of ?
 
 (type effectormotion sub complexxnet)

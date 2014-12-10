@@ -304,6 +304,7 @@ public class Analysis implements Cloneable {
   public boolean addConstraint(Constraint constraint, String prefix) {
     if (constraint.getOperator().equals(ECGConstants.ASSIGN)) {
       if (constraint.getValue().charAt(0) == ECGConstants.CONSTANTFILLERPREFIX) {
+    	  
         return featureStructure.fill(new ECGSlotChain(prefix, constraint.getArguments().get(0)), constraint.getValue());
       }
       else if (constraint.getValue().charAt(0) != ECGConstants.CONSTANTFILLERPREFIX) { // then
