@@ -2,15 +2,15 @@ Constructional
 Plural :: self.features.number, "plural", NounType
 Singular :: self.features.number, "singular", "NounType"
 PresentTense,Singular,ThirdPerson :: self.verbform, Present, self.features.person, "3", self.features.number, "singular", LexicalVerb
-FirstPerson,PresentTense,Singular :: self.verbform, Base, self.features.person, "1", self.features.number, "singular", LexicalVerbType
+FirstPerson,PresentTense,Singular :: self.verbform, Present, self.features.person, "1", self.features.number, "singular", LexicalVerbType
 FirstPerson,PastTense,Singular :: self.verbform, Past, self.features.person, "3", self.features.number, "singular", LexicalVerbType
-PresentTense,SecondPerson,Singular :: self.verbform, Base, self.features.person, "2", self.features.number, "singular", LexicalVerbType
+PresentTense,SecondPerson,Singular :: self.verbform, Present, self.features.person, "2", self.features.number, "singular", LexicalVerbType
 PastTense,Plural :: self.verbform, Past, self.features.person, "3", self.features.number, "plural", LexicalVerbType
 Plural,PresentTense :: self.verbform, Present, self.features.person, "3", self.features.number, "plural", LexicalVerbType
 PastTense,Singular,ThirdPerson :: self.verbform, Past, self.features.person, "3", self.features.number, "singular", LexicalVerbType
 PastTense,SecondPerson,Singular :: self.verbform, Past, self.features.person, "2", self.features.number, "singular", LexicalVerbType
 FirstPerson,PastTense,Singular :: self.verbform, Past, self.features.person, "1", self.features.number, "singular", LexicalVerbType
-Infinitive :: self.verbform, Infinitive, LexicalVerbType
+Infinitive :: self.verbform, BaseOrInfinitive, LexicalVerbType
 Comparative :: Adjective
 Superlative :: Adjective
 Positive :: Adjective

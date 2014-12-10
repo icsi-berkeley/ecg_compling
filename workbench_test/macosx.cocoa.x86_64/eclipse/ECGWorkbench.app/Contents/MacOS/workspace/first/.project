@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>first</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>compling.gui.grammarBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>compling.gui.grammarNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>first</name>
+			<type>2</type>
+			<location>/Users/seantrott/icsi/compling/first</location>
+		</link>
+		<link>
+			<name>first.prefs</name>
+			<type>1</type>
+			<location>/Users/seantrott/icsi/compling/first.prefs</location>
+		</link>
+	</linkedResources>
+</projectDescription>
