@@ -448,9 +448,11 @@ DEFS:
 
 (type motion sub process)
 
-(type see sub process)  // 2/7/13  perception
+(type perception sub process)
 
-(type hear sub process)
+(type see sub perception)  // 2/7/13  perception
+
+(type hear sub perception)
 
 (type change sub statechange) // 2/17/13 ? subtype of ?
 

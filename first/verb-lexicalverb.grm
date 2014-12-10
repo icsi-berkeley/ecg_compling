@@ -39,33 +39,11 @@ construction PerceptionType
    subcase of LexicalVerbType
    meaning: Perception
      constraints
-        self.m.actionary <-- @process
+        self.m.actionary <-- @perception
         self.argform <-- Transitive
         self.verbkind <-- Perceptual
 
-/* 
-general construction SeeT // 8/21/13 Transitive
-   subcase of LexicalVerb
-   meaning: Perception
-      constraints 
-         self.m.actionary <-- @see
-		 self.argform <-- Transitive
- 		 self.verbkind <-- Perceptual  // 10/3/13
- 		 
-	
-construction SeeBaseT
-   subcase of SeeT, BaseForm
-   form
-      constraints
-         self.f.orth <-- "see"
 
-construction SeePastT
-   subcase of SeeT, PastTense
-   form
-      constraints
-         self.f.orth <-- "saw"
-*/
-   
 
 general construction Enter   // 10/15/13
    subcase of LexicalVerb

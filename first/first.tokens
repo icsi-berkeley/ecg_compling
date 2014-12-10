@@ -13,7 +13,8 @@ room    :: NounType  :: self.m.ontological-category <-- @room :: self.m.scale <-
 be      :: BeCopula  :: self.m.actionary <-- @be
 see     :: PerceptionType :: self.m.actionary <-- @see
 hear    :: PerceptionType :: self.m.actionary <-- @hear
-sprint  :: SelfMotionType  :: self.m.actionary <-- @run  :: self.m.speed <-- "8" 
+sprint  :: SelfMotionType  :: self.m.actionary <-- @run  :: self.m.speed <-- "8"
+jog  :: SelfMotionType  :: self.m.actionary <-- @run  :: self.m.speed <-- "6"
 ## The following should (eventually) all produce errors. Uncomment to test.
 ## Test for parent not existing:
 # test :: DoesntExist :: some.chain <-- illegal
