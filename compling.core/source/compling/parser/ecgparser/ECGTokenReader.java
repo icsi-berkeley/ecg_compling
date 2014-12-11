@@ -102,17 +102,17 @@ public class ECGTokenReader {
 	
 	
 	// Currently assumes VALUE is either an Ontology item ("@walk") or a FillerString (""8""). 
-	public boolean slotMatch(Construction parent, String slotchain, String value) {
+	public boolean slotMatch(Construction parentCxn, String slotchain, String value) {
 		boolean found = false;
-		for (Constraint c : parent.getMeaningBlock().getConstraints()) {
-			if (c.getArguments().get(0).toString().equals(slotchain)) {
-				if (c.getValue().charAt(0) == ECGConstants.ONTOLOGYPREFIX &&
+		for (Constraint constraint : parentCxn.getMeaningBlock().getConstraints()) {
+			if (constraint.getArguments().get(0).toString().equals(slotchain)) {
+				if (constraint.getValue().charAt(0) == ECGConstants.ONTOLOGYPREFIX &&
 						value.charAt(0) == ECGConstants.ONTOLOGYPREFIX) {
 					try {
 						TypeSystem ts = grammarWrapper.getGrammar().getOntologyTypeSystem();
-						String v1 = value.substring(1, value.length()).trim();
-						String v2 = c.getValue().substring(1, c.getValue().length()).trim();
-						found = ts.subtype(ts.getInternedString(v1), ts.getInternedString(v2));
+						String child = value.substring(1, value.length()).trim();
+						String ancestor = constraint.getValue().substring(1, constraint.getValue().length()).trim();
+						found = ts.subtype(ts.getInternedString(child), ts.getInternedString(ancestor));
 					} catch (TypeSystemException tse) {
 						System.out.println(tse.getMessage());
 						return false;
