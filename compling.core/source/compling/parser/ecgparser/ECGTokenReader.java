@@ -19,6 +19,11 @@ import compling.gui.AnalyzerPrefs;
 import compling.gui.AnalyzerPrefs.AP;
 import compling.util.fileutil.TextFileLineIterator;
 
+/**
+ * Reads in the Token file and builds "ECGToken" instances, which contains a parent Cxn and additional constraints.
+ * It then constructs a HashMap from each token string to a list of possible ECGToken instances.
+ *
+ */
 public class ECGTokenReader {
 
 	public class ECGToken {

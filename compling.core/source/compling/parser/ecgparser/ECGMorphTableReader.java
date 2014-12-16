@@ -12,6 +12,25 @@ import compling.gui.AnalyzerPrefs;
 import compling.gui.AnalyzerPrefs.AP;
 import compling.util.fileutil.TextFileLineIterator;
 
+
+/**
+ * This class reads in a text file containing morphological specifications.
+ * Specifically, the text file represents a matching between certain "FlectTypes" (Celex output)
+ * and the ECG constraints.
+ * 
+ * Example:
+ * "Plural :: self.m.number <-- @plural, self.m.bounding <-- @indeterminate".
+ *                       
+ * The text file must be formatted with the "constructional block" of constraints at the top,
+ * and the "meaning block" of constraints following it - with each section clearly marked "constructional"
+ * or "meaning". 
+ * 
+ * Once the class reads in the constraints, it builds a HashMap between each FlectType and the constraints, which
+ * is referenced by the Parser during runtime. 
+ * 
+ * @author Sean Trott
+ *
+ */
 public class ECGMorphTableReader {
 	GrammarWrapper grammarWrapper;
 	AnalyzerPrefs prefs;
