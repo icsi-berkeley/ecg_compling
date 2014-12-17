@@ -66,8 +66,8 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	public ECGAnalyzer(Grammar ecgGrammar, AnalyzerPrefs prefs) throws IOException {
 
 		grammar = new LCPGrammarWrapper(ecgGrammar);
-		tokenReader = new ECGTokenReader(grammar);
-		ecgmorph = new ECGMorph(grammar, tokenReader);
+		//tokenReader = new ECGTokenReader(grammar);
+		//ecgmorph = new ECGMorph(grammar, tokenReader);
 		
 		
 
@@ -151,10 +151,10 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 				Analysis.setSemSpecScorer(scorer);
 			}
 			
-			parser = new LeftCornerParser<Analysis>(ecgGrammar, factory, cect, ecgmorph, tokenReader);
+			parser = new LeftCornerParser<Analysis>(ecgGrammar, factory, cect);
 		}
 		else {
-			parser = new LeftCornerParser<Analysis>(ecgGrammar, factory, ecgmorph, tokenReader);
+			parser = new LeftCornerParser<Analysis>(ecgGrammar, factory);
 		}
 
 		parser.setParameters(robust, debug, beamSize, numAnalysesReturned, multiRootPenalty);
@@ -165,6 +165,14 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 
 
 //    needs to be more code here to further process the grammar prefs
+	}
+	
+	public void reloadTokens() {
+		try {
+			this.parser.reloadTokens();
+		} catch(IOException problem) {
+			System.out.println("Error reloading tokens.");
+		}
 	}
 
 	public ECGAnalyzer(String prefsFileName) throws Exception {
@@ -210,7 +218,7 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 			Analysis.setSemSpecScorer(null);
 		}
 
-		parser = new LeftCornerParser<Analysis>(ecgGrammar, factory, cect, ecgmorph, tokenReader);
+		parser = new LeftCornerParser<Analysis>(ecgGrammar, factory, cect);
 		parser.setParameters(robust, debug, beamSize, numAnalysesReturned, multiRootPenalty);
 	}
 

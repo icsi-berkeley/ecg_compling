@@ -133,14 +133,16 @@
    </extension>
    
    <extension point="org.eclipse.ui.views">
+   
    	  <view
    	        allowMultiple="false"
    	        category="compling.gui.grammargui.categories.construction"
             class="compling.gui.grammargui.ui.views.TokenView"
             icon="icons/tokenTest.ico"
             id="compling.gui.grammargui.views.tokenView"
-            name="Tokens">
+            name="Token Adder">
       </view>
+      
       <view
             allowMultiple="false"
             category="compling.gui.grammargui.categories.construction"

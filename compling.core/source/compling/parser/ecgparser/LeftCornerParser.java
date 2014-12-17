@@ -146,9 +146,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     PSYCHOOUTPUT = true;
   }
 
-  public LeftCornerParser(compling.grammar.ecg.Grammar grammar, AnalysisFactory<T> analysisFactory, 
-		  ECGMorph morpher, ECGTokenReader token) throws IOException {
-    this(grammar, analysisFactory, new DumbConstituentExpansionCostTable(new LCPGrammarWrapper(grammar)), morpher, token);
+  public LeftCornerParser(compling.grammar.ecg.Grammar grammar, AnalysisFactory<T> analysisFactory) throws IOException {
+    this(grammar, analysisFactory, new DumbConstituentExpansionCostTable(new LCPGrammarWrapper(grammar)));
   }
 
   // public LeftCornerParser(compling.grammar.ecg.Grammar grammar,
@@ -161,16 +160,16 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   // }
 
   public LeftCornerParser(compling.grammar.ecg.Grammar ecgGrammar, AnalysisFactory analysisFactory,
-          ConstituentExpansionCostTable cect, ECGMorph morpher, ECGTokenReader token) throws IOException {
+          ConstituentExpansionCostTable cect) throws IOException {
     constructorTime = System.currentTimeMillis();
 
     this.ecgGrammar = ecgGrammar;
     this.grammar = new LCPGrammarWrapper(ecgGrammar);
     
-    this.morpher = morpher;
+
     
-    this.tokenReader = token;
-    
+    this.tokenReader = new ECGTokenReader(new LCPGrammarWrapper(this.ecgGrammar));
+    this.morpher = new ECGMorph(this.grammar, this.tokenReader);
     this.morphTable = new ECGMorphTableReader(this.grammar);
     
 
@@ -244,6 +243,13 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 		  }
 		  return false;
 	  }
+  }
+  
+  /** Reloads tokens and morphology instances. 
+ * @throws IOException */
+  public void reloadTokens() throws IOException {
+	  this.tokenReader = new ECGTokenReader(new LCPGrammarWrapper(this.ecgGrammar));
+	  this.morpher = new ECGMorph(this.grammar, this.tokenReader);
   }
   
 
@@ -1393,8 +1399,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
     LeftCornerParser<AnalysisInContext> parser = new LeftCornerParser<AnalysisInContext>(grammar,
             new AnalysisInContextFactory(new LCPGrammarWrapper(grammar), grammar.getContextModel()
-                    .getContextModelCache()), new ECGMorph(new LCPGrammarWrapper(grammar), new ECGTokenReader(new LCPGrammarWrapper(grammar))),
-                    new ECGTokenReader(new LCPGrammarWrapper(grammar)));
+                    .getContextModelCache()));
     
 
     
