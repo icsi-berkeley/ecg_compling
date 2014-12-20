@@ -41,15 +41,7 @@ general construction Noun
        //self.m.bounding <-- @grammaticalValues
 
 
-construction NounType
-   subcase of Noun
-   meaning
-      constraints
-        self.m.number <-- @RDnumberValues
-        self.m.gender <-- @genderValues
-        self.m.ontological-category <-- @entity
-        self.m.scale <-- @scale
-        
+
 
 /*
  *

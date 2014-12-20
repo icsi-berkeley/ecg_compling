@@ -1,16 +1,15 @@
 scarlet :: ColorType :: self.m.value <-- @red
 red :: ColorType :: self.m.value <-- @red
 blue :: ColorType :: self.m.value <-- @blue
-purple 	:: ColorType :: self.m.value <-- @blue
-adam	:: ProperNounNP :: self.m.ontological-category <-- @person :: self.m.number <-- @singular :: self.m.gender <-- @male
-scarlet	:: ProperNounNP :: self.m.ontological-category <-- @person :: self.m.number <-- @singular :: self.m.gender <-- @female
-block   :: NounType  :: self.m.ontological-category <-- @block :: self.m.scale <-- @size
+adam	:: ProperNounNP :: self.m.ontological-category <-- @person :: self.m.gender <-- @male
+scarlet	:: ProperNounNP :: self.m.ontological-category <-- @person :: self.m.gender <-- @female
+block   :: PhysicalNounType  :: self.m.ontological-category <-- @block :: self.m.scale <-- @size
 move    :: SelfMotionType  :: self.m.actionary <-- @move :: self.m.speed <-- "5"
 walk    :: SelfMotionType  :: self.m.actionary <-- @walk :: self.m.speed <-- "3"
 run     :: SelfMotionType  :: self.m.actionary <-- @run  :: self.m.speed <-- "7" 
 block   :: LexicalVerbType :: self.m.actionary <-- @block-verb
-box     :: NounType  :: self.m.ontological-category <-- @box :: self.m.scale <-- @size
-room    :: NounType  :: self.m.ontological-category <-- @room :: self.m.scale <-- @size
+box     :: PhysicalNounType  :: self.m.ontological-category <-- @box :: self.m.scale <-- @size
+room    :: PhysicalNounType  :: self.m.ontological-category <-- @room :: self.m.scale <-- @size
 be      :: BeCopula  :: self.m.actionary <-- @be
 see     :: PerceptionType :: self.m.actionary <-- @see
 hear    :: PerceptionType :: self.m.actionary <-- @hear
@@ -28,4 +27,3 @@ enter :: PathVerbType   :: self.m.actionary <-- @enter :: self.m.landmark.ontolo
 # test :: Color :: self.m.value <-- @female
 ## Test for missing ontology value
 # test :: ProperNountNP :: self.m.number <-- @singular
-

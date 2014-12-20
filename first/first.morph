@@ -30,7 +30,7 @@ Plural,PresentTense :: self.pf.tense, @present, LexicalVerbType
 PastTense,Plural :: self.pf.tense, @past, LexicalVerbType
 PresentTense,Singular,ThirdPerson :: self.pf.tense, @present, LexicalVerbType
 Comparative :: self.m.kind, @comparative, Adjective
-Superlative :: self.m.kind, @superlative, "djective
+Superlative :: self.m.kind, @superlative, Adjective
 Infinitive :: LexicalVerbType
 Positive :: Adjective
 Participle,PresentTense :: self.pf.tense, @present, LexicalVerbType

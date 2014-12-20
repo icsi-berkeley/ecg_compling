@@ -36,7 +36,7 @@ schema MotionPath // (bounded) translational motion
       direction:RD  // 10/15/13  source or goal
    constraints  
       mover <--> spg.trajector
-      mover.ontological-category <-- @physicalEntity        
+      //mover.ontological-category <-- @physicalEntity        
 
 
 schema Perception  // "he saw the box"  

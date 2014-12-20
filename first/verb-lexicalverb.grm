@@ -18,7 +18,7 @@ general construction LexicalVerb
    		pf <--> self.m.p-features
 
 construction LexicalVerbType
-	subcase of VerbChunk, Word
+	subcase of VerbChunk, GeneralTypeCxn
 	meaning
 		evokes ProcessFeatures as pf
    	constraints
@@ -30,11 +30,14 @@ construction SelfMotionType
 	subcase of LexicalVerbType
 	meaning: MotionPath
       constraints
-         self.m.actionary <-- @move 	
+         self.m.actionary <-- @move
          self.m.speed <-- "*"
 
 
 
+// You could imagine adding another constraint here on the 
+// ontological category of the "Content" of the perception;
+// then the "tokens" can place different constraints on that.
 construction PerceptionType
    subcase of LexicalVerbType
    meaning: Perception
@@ -42,6 +45,7 @@ construction PerceptionType
         self.m.actionary <-- @perception
         self.argform <-- Transitive
         self.verbkind <-- Perceptual
+
 
 
 construction PathVerbType

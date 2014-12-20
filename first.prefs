@@ -9,6 +9,8 @@ ONTOLOGY_PATHS ::==
 	./first/ontology.ont
 ;
 
+ONTOLOGY_PATHS = ./first/ontology.ont
+
 MORPHOLOGY_PATH = ./first/celex.ecgmorph
 TOKEN_PATH = ./first/first.tokens
 TABLE_PATH = ./first/first.morph

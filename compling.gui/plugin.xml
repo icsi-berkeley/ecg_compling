@@ -144,6 +144,15 @@
       </view>
       
       <view
+         	allowMultiple="false"
+   	        category="compling.gui.grammargui.categories.ontology"
+            class="compling.gui.grammargui.ui.views.OntologyLatticeView"
+            icon="icons/latticeIcon.ico"
+            id="compling.gui.grammargui.views.ontologylatticeview"
+            name="Ontology Lattice">
+      </view>
+      
+      <view
             allowMultiple="false"
             category="compling.gui.grammargui.categories.construction"
             class="compling.gui.grammargui.ui.views.ConstructionTreeView"

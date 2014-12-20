@@ -1,5 +1,7 @@
 //
+
 // ontology.ont
+
 //
 
 DEFS:
@@ -17,8 +19,10 @@ DEFS:
 //(type point sub region)   // 11//4/13, removed 3/2/14
 
 (type location-concrete sub location )  //3/2/14
+
 (type location-metaphorical sub location )
-(type physicalEntity sub entity location-concrete ) 
+
+(type physicalEntity sub entity location-concrete )
 
 //(type physicalEntity sub entity location )  // no interior 11//4/13; 3/2/14
 
@@ -32,14 +36,13 @@ DEFS:
 
 (type event-kind sub enumeration) // conditional, serial
 
-(type crisis sub eventTop)  // 11/26/12 
+(type crisis sub eventTop)  // 11/26/12
 
 (type money sub entity scale units) // ?? abstract or physical or both
 
 (type prices sub money)
 
 (type moveable sub physicalEntity)  //  used in animate
-
 
 (type socialProblem sub abstract) // severity scale
 
@@ -63,16 +66,11 @@ DEFS:
 
 (type bunch sub  grouper)  // hack, needed for Quantity NP***********fix
 
-
-
 // m4 test ontology additions 2/22/14
 
-(type poverty sub socialProblem abstractState)  
+(type poverty sub socialProblem abstractState)
 
 (type slide sub motion)
-
-
-
 
 // metaphors
 
@@ -102,13 +100,13 @@ DEFS:
 
 // socialEntity
 
-(type socialEntity sub shaped entity )  // count, 
+(type socialEntity sub shaped entity )  // count,
 
 (type institution sub socialEntity  )
 
 (type group sub socialEntity )
 
-(type city-inst sub institution )  // 2 conceptualizations 
+(type city-inst sub institution )  // 2 conceptualizations
 
 (type city-artifact sub artifact )
 
@@ -120,7 +118,7 @@ DEFS:
 
 (type initiative sub idea )
 
-(type crime sub socialProblem) 
+(type crime sub socialProblem)
 
 (type corruption sub crime)
 
@@ -132,7 +130,7 @@ DEFS:
 
 (type storm sub naturalForce eventTop )
 
-// modifier types 
+// modifier types
 
 //(type modifier-type  sub item)  // not sub entity **************
 
@@ -152,7 +150,7 @@ DEFS:
 
 (type male  sub genderValues)
 
-(type female  sub genderValues) 
+(type female  sub genderValues)
 
 (type neuter  sub genderValues)
 
@@ -188,7 +186,6 @@ DEFS:
 
 (type inFocus  sub activated)
 
-
 (type quantifierValues  sub grammaticalValues) // for QuantitySchema.values
 
 (type some sub quantifierValues)
@@ -207,7 +204,7 @@ DEFS:
 
 // animate sentient
 
-(type animate sub shaped moveable agent physicalEntity)  // can also be numbered, etc. 
+(type animate sub shaped moveable agent physicalEntity)  // can also be numbered, etc.
 
 (type inanimate sub shaped physicalEntity)  // 10/23/12
 
@@ -223,10 +220,10 @@ DEFS:
 
 (type robot sub artifact sentient)
 
- // inanimate stuff
- 
+// inanimate stuff
+
 (type shaped sub entity)  // contrast with mass
- 
+
 (type artifact sub inanimate)
 
 (type block sub artifact physicalEntity )
@@ -239,23 +236,21 @@ DEFS:
 
 // (type door sub artifact)  for HowTo
 
-(type instrument sub  physicalEntity) 
+(type instrument sub  physicalEntity)
 
 (type hammer sub instrument artifact moveable)
- 
+
 (type vehicle sub instrument artifact moveable)  // 6/2/13
 
 (type car sub vehicle)
 
 (type bodyPart sub shaped physicalEntity) // 11/16/12
 
-(type hand sub bodyPart instrument moveable) 
+(type hand sub bodyPart instrument moveable)
 
-(type head sub bodyPart) 
+(type head sub bodyPart)
 
-(type arm sub bodyPart instrument moveable)   
-
-
+(type arm sub bodyPart instrument moveable)
 
 // containers
 
@@ -269,7 +264,6 @@ DEFS:
 
 // mass
 
-
 (type mass sub physicalEntity )  // contrast with shaped, weight, volume scales
 
 (type discreteAble sub mass)
@@ -282,9 +276,10 @@ DEFS:
 
 (type steel sub material)
 
-
 //
+
 // Instances
+
 //
 
 (type instance)
@@ -305,7 +300,6 @@ DEFS:
 
 (type robot2-instance sub instance robot)
 
-
 // Hedges
 
 (type fake sub hedgeVal)  //4/8/13
@@ -313,7 +307,9 @@ DEFS:
 (type none sub hedgeVal)
 
 // 	Enumerations
+
 //
+
 (type EventKind sub enumeration)
 
 (type lexicalORgerund sub EventKind)
@@ -324,7 +320,7 @@ DEFS:
 
 (type infinitive sub EventKind)
 
-(type process-kind sub enumeration)  // 
+(type process-kind sub enumeration)  //
 
 (type coprocess sub process-kind)   // 10/18/13
 
@@ -342,7 +338,7 @@ DEFS:
 
 (type time sub measure)  // temporal domain
 
-(type date sub time entity) 
+(type date sub time entity)
 
 (type conditional sub event-kind)
 
@@ -364,8 +360,10 @@ DEFS:
 
 (type property sub possessionKind)
 
-// 
+//
+
 // Regions
+
 //
 
 (type region sub  space entity)
@@ -374,13 +372,15 @@ DEFS:
 
 (type location sub region) // source for stateAsLocation
 
-(type deicticCenter sub location)  
-
+(type deicticCenter sub location)
 
 //
+
 // directions
+
 //
-(type heading sub enumeration space)  
+
+(type heading sub enumeration space)
 
 (type towards sub heading)
 
@@ -395,7 +395,7 @@ DEFS:
 (type east sub direction)
 
 (type west sub direction)
- 
+
 (type up sub direction)
 
 (type down sub direction)
@@ -416,7 +416,7 @@ DEFS:
 
 (type continue sub stage shared)
 
-// Voice 
+// Voice
 
 (type voice sub item)
 
@@ -438,7 +438,7 @@ DEFS:
 
 (type be2 sub be)
 
-// (type inchoativestasis sub stasis) 
+// (type inchoativestasis sub stasis)
 
 (type become sub stasis) // 2/14/13
 
@@ -510,7 +510,7 @@ DEFS:
 
 (type give sub objecttransfer)
 
-(type give-light  sub process) 
+(type give-light  sub process)
 
 (type take sub objecttransfer)
 
@@ -522,7 +522,7 @@ DEFS:
 
 (type emotionKind sub scale)
 
-(type anger sub emotionKind)  // 3/29/13 verb  
+(type anger sub emotionKind)  // 3/29/13 verb
 
 (type help sub process)
 
@@ -535,7 +535,9 @@ DEFS:
 (type prevent sub process)  // 1/22/13
 
 //
-// Distances 
+
+// Distances
+
 //
 
 (type distance sub space)  // relate this to scales ****
@@ -558,11 +560,13 @@ DEFS:
 
 (type spatial-units sub space nontemporal-units)
 
-// 
-// Time
 //
 
-(type hour sub temporal-units) 
+// Time
+
+//
+
+(type hour sub temporal-units)
 
 (type minutes sub temporal-units)
 
@@ -574,18 +578,17 @@ DEFS:
 
 (type bounded sub telicity)
 
-
-
 //
+
 // Modifiers and Scales
-//
 
+//
 
 (type modifier)  // shared ??
 
-(type quantifier sub modifier)  // cf. use in specializer 
+(type quantifier sub modifier)  // cf. use in specializer
 
-(type adjective sub modifier) 
+(type adjective sub modifier)
 
 (type adverb sub modifier)
 
@@ -607,7 +610,7 @@ DEFS:
 
 (type morality sub verticality )  // a basic scale
 
-(type length sub size) // another scale sub of size 
+(type length sub size) // another scale sub of size
 
 (type speed sub scale )  // fast, faster, etc
 
@@ -621,18 +624,17 @@ DEFS:
 
 // Properties
 
-(type object-property sub shared)  
+(type object-property sub shared)
 
 (type color sub object-property )  // cf. size, non-scalar property
 
-(type propValue sub sharedEnumeration )  // non-scale properties are sets 
+(type propValue sub sharedEnumeration )  // non-scale properties are sets
 
 (type colorValue sub propValue)
- 
-(type red sub colorValue)
- 
-(type blue sub colorValue)
 
+(type red sub colorValue)
+
+(type blue sub colorValue)
 
 // numbers
 
@@ -645,13 +647,17 @@ DEFS:
 (type three sub number)
 
 //
+
 // Verbs
+
 //
 
 (type verb)
 
 //
+
 // Temporality
+
 //
 
 (type temporality)
@@ -663,7 +669,9 @@ DEFS:
 //(type bounded-ongoing sub temporality)
 
 //
+
 // Verb Tense
+
 //
 
 (type tense)
@@ -675,21 +683,25 @@ DEFS:
 (type future sub tense)
 
 //
+
 // Mood
+
 //
 
 (type mood)  // all of these are moodValue
 
 (type declarative sub mood)
- 
+
 (type imperative sub mood)
- 
+
 (type wh-question sub mood)
- 
+
 (type yn-question sub mood)
- 
+
 //
+
 // Modality
+
 //
 
 (type modality) // all of these are modalityValue
@@ -702,23 +714,34 @@ DEFS:
 
 (type should sub modality)
 
- // 
- // WH Stuff
- //
- 
- (type wh-word)
- 
- (type which sub wh-word)
- 
- (type where sub wh-word)
- 
- (type what sub wh-word)
- 
- //
+//
+
+// WH Stuff
+
+//
+
+(type wh-word)
+
+(type which sub wh-word)
+
+(type where sub wh-word)
+
+(type what sub wh-word)
+
+//
+
 // Numbers
+
 //
 
 //(type number sub entity)
- 
- 
+
+(type skip sub move)
+
+(type violet sub colorValue)
+
+(type trudge sub move)
+
+(type orange sub colorValue)
+
 INSTS:

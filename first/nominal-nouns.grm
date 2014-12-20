@@ -47,3 +47,31 @@ construction ProperNounNP
 			self.m.gender <-- @male
 
       
+// "Type" constructions
+construction NounType
+   subcase of Noun, GeneralTypeCxn
+   meaning
+      constraints
+        //self.m.number <-- @RDnumberValues
+        self.m.gender <-- @genderValues
+        self.m.ontological-category <-- @entity
+        self.m.scale <-- @scale
+
+construction PhysicalNounType
+   subcase of NounType
+   meaning
+      constraints
+        //self.m.number <-- @RDnumberValues
+        self.m.gender <-- @genderValues
+        self.m.ontological-category <-- @physicalEntity
+        self.m.scale <-- @scale        
+        
+construction ArtifactNounType
+	subcase of PhysicalNounType
+	meaning
+	  constraints
+	    self.m.ontological-category <-- @artifact
+	    self.m.gender <-- @genderValues
+        self.m.scale <-- @scale      
+	    
+	    

@@ -24,7 +24,7 @@ general construction Color  //subcase of non-scale Adj
 	   self.m.domain <-- @physicalEntity
 
 construction ColorType  //subcase of non-scale Adj
-  subcase of PropertyAdjective    
+  subcase of PropertyAdjective, GeneralTypeCxn 
    meaning: PropertyModifier
     constraints
        self.m.property <-- @color 

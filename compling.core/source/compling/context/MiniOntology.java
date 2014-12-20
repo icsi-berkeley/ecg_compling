@@ -639,7 +639,7 @@ public class MiniOntology {
 		}
 	}
 
-	void addType(String name, List<String> parents) {
+	public void addType(String name, List<String> parents) {
 		Type t = new Type(name, parents);
 		typeSystem.addType(t);
 		if (verbose) {

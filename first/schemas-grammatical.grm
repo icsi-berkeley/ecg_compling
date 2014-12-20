@@ -8,7 +8,7 @@ schema WordForm
     lemma
   constraints
      lemma <-- "*"
-     orth <-- "*"
+     //orth <-- "*"
 
 
 // REFERENT DESCRIPTOR (RD) schemas
