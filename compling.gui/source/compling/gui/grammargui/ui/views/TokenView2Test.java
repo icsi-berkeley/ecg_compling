@@ -40,7 +40,7 @@ import compling.parser.ecgparser.ECGAnalyzer;
 import compling.parser.ecgparser.LCPGrammarWrapper;
 import compling.util.fileutil.TextFileLineIterator;
 
-public class TokenView extends ViewPart {
+public class TokenView2Test extends ViewPart {
 	public static final String ID = "compling.gui.grammargui.views.tokenView";
 	private String token;
 	private String parentCxn;
@@ -198,32 +198,39 @@ public class TokenView extends ViewPart {
 		GridLayout layout = new GridLayout();
 		form.getBody().setLayout(layout);
 		
-		layout.numColumns = 2;
+		layout.numColumns = 1;
 		GridData gd = new GridData();
 		gd.horizontalSpan = 4;
 
 		final Label tokenLabel = toolkit.createLabel(form.getBody(), "Enter Token:");
 		final Text tokenText = toolkit.createText(form.getBody(), "");
-		tokenText.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		tokenText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		
+		// final Label parentLabel = toolkit.createLabel(form.getBody(), "Enter Parent:");
+		//final Text parentText = toolkit.createText(form.getBody(), "");
 
+		//parentText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		
 		final Combo parentText = new Combo(parent, SWT.DROP_DOWN);
 		parentText.setItems(typeCxns);
 		toolkit.adapt(parentText);
-		parentText.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		//toolkit.paintBordersFor(parentText);
+		//parentText.setLayoutData(new GridData(SWT.FILL, 1, true, false));
+		parentText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		
 		
 		
 		final Combo constraintBox = new Combo(parent, SWT.DROP_DOWN);
 		constraintBox.setItems(new String[0]);
 		toolkit.adapt(constraintBox);
-		constraintBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		//toolkit.paintBordersFor(constraintBox);
+		//parentText.setLayoutData(new GridData(SWT.FILL, 1, true, false));
+		constraintBox.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		
 		
 		final Text constraintText = toolkit.createText(form.getBody(), "");
-		constraintText.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		constraintText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		
 		final HashMap<String, String> slotsValues = new HashMap<String, String>();
@@ -231,26 +238,63 @@ public class TokenView extends ViewPart {
 		
 		final ArrayList<String> parents = new ArrayList<String>();
 		
+		/*
+		final Label constraint1 = toolkit.createLabel(form.getBody(), "Constraint 1:");
+		constraint1.setLayoutData(new GridData(SWT.FILL, 1, true, false));
+		final Text constraint1Text = toolkit.createText(form.getBody(), "");
+		constraint1Text.setLayoutData(new GridData(SWT.FILL, 1, true, false));
+		final Label constraint2 = toolkit.createLabel(form.getBody(), "Constraint 2:");
+		constraint2.setLayoutData(new GridData(SWT.FILL, 1, true, false));
+		final Text constraint2Text = toolkit.createText(form.getBody(), "");
+		constraint2Text.setLayoutData(new GridData(SWT.FILL, 1, true, false));
+		final Label constraint3 = toolkit.createLabel(form.getBody(), "Constraint 3:");
+		constraint3.setLayoutData(new GridData(SWT.FILL, 1, true, false));
+		final Text constraint3Text = toolkit.createText(form.getBody(), "");
+		constraint3Text.setLayoutData(new GridData(SWT.FILL, 1, true, false));
+		*/
 
-		constraintBox.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				slots.clear();
-				slotsValues.clear();
-				parents.clear();
-				constraints.clear();
-				parentCxn = parentText.getText();
-				try {
-					for (Constraint c : getGrammar().getConstruction(parentCxn).getMeaningBlock().getConstraints()) {
-						slots.add(c.getArguments().get(0).toString());
-						slotsValues.put(c.getArguments().get(0).toString(), c.getValue());
+		// TODO: Add more constraint fields, or change to drop-down menu.
+		
+		/*
+		final ArrayList<Label> labelText = new ArrayList<Label>();
+		labelText.add(constraint1);
+		labelText.add(constraint2);
+		labelText.add(constraint3);
+		final ArrayList<Text> textList = new ArrayList<Text>();
+		textList.add(constraint1Text);
+		textList.add(constraint2Text);
+		textList.add(constraint3Text);
+		*/
+
+		parentText.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.keyCode == 13) {
+					slots.clear();
+					slotsValues.clear();
+					parents.clear();
+					constraints.clear();
+					parentCxn = parentText.getText();
+					try {
+						for (Constraint c : getGrammar().getConstruction(parentCxn).getMeaningBlock().getConstraints()) {
+							slots.add(c.getArguments().get(0).toString());
+							slotsValues.put(c.getArguments().get(0).toString(), c.getValue());
+							/*
+							if (labelText.size() > i && c.getOperator().equals("<--")) {
+								labelText.get(i).setText(c.getArguments().get(0).toString());
+								textList.get(i).setText(c.getValue());
+								parents.add(textList.get(i).getText());
+							}
+							*/
+						}
+						String[] slotArray = new String[slots.size()];
+						for (int i=0; i < slotArray.length; i++) {
+							slotArray[i] = slots.get(i);
+						}
+						constraintBox.setItems(slotArray);
+					} catch(NullPointerException problem) {
+						throw new GrammarException("That doesn't exist.");
 					}
-					String[] slotArray = new String[slots.size()];
-					for (int i=0; i < slotArray.length; i++) {
-						slotArray[i] = slots.get(i);
-					}
-					constraintBox.setItems(slotArray);
-				} catch(NullPointerException problem) {
-					throw new GrammarException("That doesn't exist.");
 				}
 			}
 		});
@@ -297,7 +341,46 @@ public class TokenView extends ViewPart {
 			}
 		});
 		addTokenButton.setLayoutData(gd);
-		
+		/*
+		addTokenButton.addSelectionListener(new SelectionAdapter() { 
+			public void widgetSelected(SelectionEvent e) {
+				token = tokenText.getText();
+				parentCxn = parentText.getText();
+				boolean write = true;
+				for (int i = 0; i < parents.size(); i++) {
+					write = true;
+					String p = parents.get(i);
+					String value = textList.get(i).getText();
+					if (value.charAt(0) == ECGConstants.ONTOLOGYPREFIX &&
+							p.charAt(0) == ECGConstants.ONTOLOGYPREFIX) {
+						if (!exists(value)) {
+							//write = false;
+							addOntologyItem(value, p); 
+						} else {
+							if (!isSubtype(value, p)) {
+								System.out.println("Not a proper subtype.");
+								constraints.clear();
+								parents.clear();
+								write = false;
+							}
+						}
+					}
+					if (write) {
+						constraints.add(labelText.get(i).getText() + " <-- " + textList.get(i).getText());
+					}
+					labelText.get(i).setText("Constraint " + (i+1));
+					textList.get(i).setText("");
+				}
+				if (write) {
+					write(token, parentCxn, constraints);
+					tokenText.setText("");
+					parentText.setText("");
+				}
+				parents.clear();
+			}
+		});
+		addTokenButton.setLayoutData(gd);
+		*/
 		Button loadTokens = toolkit.createButton(form.getBody(), "Reload tokens.", SWT.PUSH);
 		loadTokens.addSelectionListener(new SelectionAdapter() { 
 			public void widgetSelected(SelectionEvent e) {

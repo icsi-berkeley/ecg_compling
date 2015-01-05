@@ -27,3 +27,4 @@ enter :: PathVerbType   :: self.m.actionary <-- @enter :: self.m.landmark.ontolo
 # test :: Color :: self.m.value <-- @female
 ## Test for missing ontology value
 # test :: ProperNountNP :: self.m.number <-- @singular
+

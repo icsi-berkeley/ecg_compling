@@ -744,4 +744,6 @@ DEFS:
 
 (type orange sub colorValue)
 
+(type magenta sub colorValue)
+
 INSTS:
