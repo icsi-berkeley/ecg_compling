@@ -1,6 +1,4 @@
-
- 
-general construction Verb
+ general construction Verb
    subcase of HasVerbFeatures
    meaning: Process
 
@@ -23,15 +21,15 @@ construction LexicalVerbType
 		evokes ProcessFeatures as pf
    	constraints
    		pf <--> self.m.p-features
-   		self.m.actionary <-- @process
+   		//self.m.actionary <-- @process
    		
    		
 construction SelfMotionType
 	subcase of LexicalVerbType
 	meaning: MotionPath
       constraints
-         self.m.actionary <-- @move
-         self.m.speed <-- "*"
+         self.m.actionary <-- @motion
+         self.m.speed <-- "?"
 
 
 
@@ -55,6 +53,13 @@ construction PathVerbType
        self.m.actionary <-- @motion
        self.m.landmark.ontological-category <-- @location
 
+construction AgentDriveType
+	subcase of LexicalVerbType
+	meaning: VehicularMotion
+	  constraints
+	     self.m.actionary <-- @drive
+	     self.m.vehicleType.ontological-category <-- @vehicle
+	     self.m.protagonist.ontological-category <-- @agent
 
 
 

@@ -16,6 +16,7 @@ schema NominalFeatureSet
   roles
     case
     reflexive  // 1/19/13  semantic feature??
+    gender
 
 schema NominalFeatures
   subcase of AgreementFeatures

@@ -19,6 +19,10 @@ import compling.grammar.unificationgrammar.UnificationGrammar.TypeConstraint;
 
 parser code {:
 
+  /* New global variables to track package and import requirements. */
+  public String package = "unknown";
+  public String import = "unknown";
+
   public Grammar grammar = new Grammar();
   public String file = "unknown";
   public StringBuffer errorLog = new StringBuffer();
@@ -53,7 +57,7 @@ parser code {:
 :}
 
 /* Terminals (tokens returned by the scanner). */
-terminal  CONSTRUCTION, SUBCASE, CONSTRUCTIONAL, SCHEMA, ABSTRACT;
+terminal  CONSTRUCTION, SUBCASE, CONSTRUCTIONAL, SCHEMA, ABSTRACT, PACKAGE, IMPORT;
 terminal  FORM, MEANING, BEFORE, MEETS, COLON, COMMA, OPENBRACKET, CLOSEBRACKET, OPTIONAL, EXTRAPOSED;
 terminal  ASSIGN, IDENTIFY, EVOKES, AS, OF, ROLES;
 terminal  CONSTITUENTS, CONSTRAINTS, FEATURE, SEMANTIC, IGNORE;
@@ -86,6 +90,10 @@ non terminal String map_kinds;
 non terminal Situation situation;
 non terminal String situation_kinds;
 
+/* New additions (seantrott) */
+non terminal String package_kind;
+non terminal String import_kind;
+
 ecg_list ::=
   ecg_list:el schema:s {: 
     if (s != null){el.addSchema(s);} 
@@ -108,7 +116,7 @@ ecg_list ::=
       el.addSituation(s); 
     } 
     RESULT = el; 
-  :}
+  :} 
   | /* epsilon */ {: 
     RESULT = parser.grammar; 
   :}
@@ -221,6 +229,19 @@ schema ::=
      RESULT = null; 
   :}
 ;
+
+/* PACKAGE (seantrott) */
+package_kinds ::=
+   PACKAGE {:
+     RESULT = ECGConstants.PACKAGE;
+   :}
+   ;
+
+package ::=
+   package_kinds: k IDENTIFIER: n
+     parser.grammar.setPackage(n);
+   :}
+   ;
 
 /* MAP */
 

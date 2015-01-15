@@ -452,8 +452,6 @@ DEFS:
 
 (type see sub perception)  // 2/7/13  perception
 
-(type hear sub perception)
-
 (type change sub statechange) // 2/17/13 ? subtype of ?
 
 (type effectormotion sub complexxnet)
@@ -736,14 +734,6 @@ DEFS:
 
 //(type number sub entity)
 
-(type skip sub move)
-
-(type violet sub colorValue)
-
-(type trudge sub move)
-
-(type orange sub colorValue)
-
-(type magenta sub colorValue)
+(type pencil sub entity artifact moveable)
 
 INSTS:

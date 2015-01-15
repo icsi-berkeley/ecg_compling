@@ -53,6 +53,17 @@ public class Grammar {
 	private static ECGGrammarFormatter formatter = new SimpleGrammarPrinter();
 	private ContextModel contextModel = null;
 
+	private static String pkg;
+	/** Testing: seantrott. Setting field for package. */
+	public void setPackage(String packageName) {
+		pkg = packageName;
+	}
+	
+	public String getPackage() {
+		return pkg;
+	}
+	
+	
 	public void setContextModel(ContextModel cm) {
 		this.contextModel = cm;
 	}
@@ -251,6 +262,17 @@ public class Grammar {
 	}
 
 	public abstract class Primitive implements TypeSystemNode, ILocatable {
+		
+		/* New field for package name. */
+		protected String pkg;
+		
+		public String getPackage() {
+			return pkg;
+		}
+		
+		public void setPackage(String packageName) {
+			pkg = packageName;
+		}
 
 		protected String name;
 		protected Set<String> parents;

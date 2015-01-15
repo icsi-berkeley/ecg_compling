@@ -236,7 +236,7 @@
             class="compling.gui.grammargui.ui.views.AnalyzerViewPart2"
             icon="icons/e/metharg_obj.gif"
             id="compling.gui.grammargui.views.analyzer2"
-            name="A Better Analizer View"
+            name="A Better Analyzer View"
             restorable="true">
       </view>
       <view

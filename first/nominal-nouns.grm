@@ -50,6 +50,9 @@ construction ProperNounNP
 // "Type" constructions
 construction NounType
    subcase of Noun, GeneralTypeCxn
+   constructional
+     constraints
+        self.features.gender <-- @genderValues
    meaning
       constraints
         //self.m.number <-- @RDnumberValues

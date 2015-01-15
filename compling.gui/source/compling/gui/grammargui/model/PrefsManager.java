@@ -65,6 +65,7 @@ import compling.gui.grammargui.util.ISpecificationReader;
 import compling.gui.grammargui.util.Log;
 import compling.gui.grammargui.util.ModelChangedEventManager;
 import compling.gui.grammargui.util.SpecificationReaderBuilder;
+import compling.gui.util.Utils;
 import compling.parser.ecgparser.ECGAnalyzer;
 
 /**
@@ -134,6 +135,8 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 				project.build(IncrementalProjectBuilder.FULL_BUILD, nullProgressMonitor);
 			}
 		});
+		Utils.flushCaches(getAnalyzer());
+		getAnalyzer().reloadTokens();
 	}
 
 	private void resetTables() {

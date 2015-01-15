@@ -9,7 +9,9 @@ package compling.gui.util;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import compling.grammar.GrammarException;
 import compling.grammar.ecg.Grammar;
@@ -33,6 +35,36 @@ import compling.utterance.Sentence;
  * @author lucag
  */
 public final class Utils {
+	
+	private static HashMap<String, String> parseCache = new HashMap<String, String>();
+	private static HashMap<String, Collection<IParse>> alterParseCache = new HashMap<String, Collection<IParse>>();
+	
+	public static void flushCaches(ECGAnalyzer analyzer) {
+		String[] keySet = parseCache.keySet().toArray(new String[parseCache.keySet().size()]);
+		for (String key : keySet) {
+			System.out.println("flushed " + key + " parse");
+			alterParseCache.remove(key);
+			alterParseCache.put(key, getParses(key, analyzer));
+			parseCache.remove(key);
+			parseCache.put(key, parse(key, analyzer));
+			System.out.println("replaced " + key + " parse");
+		}
+		/*
+		for (String key : parseCache.keySet()) {
+			System.out.println("flushed " + key + " parse");
+			alterParseCache.remove(key);
+			alterParseCache.put(key, getParses(key, analyzer));
+			System.out.println("replaced " + key + " parse");
+		}
+		for (String key : alterParseCache.keySet()) {
+			System.out.println("flushed " + key + " parse");
+			parseCache.remove(key);
+			parseCache.put(key, parse(key, analyzer));
+			System.out.println("replaced " + key + " parse");
+		}
+		*/
+		
+	}
 
 	public static class Parse implements IParse {
 		public static final IParse NO_PARSE = new Parse((Analysis) null, 0);
@@ -125,6 +157,10 @@ public final class Utils {
 
 	// TODO: make this synchronized?
 	public static Collection<IParse> getParses(String text, ECGAnalyzer analyzer) {
+		if (alterParseCache.containsKey(text)) {
+			System.out.println("Retrieving from cache...");
+			return alterParseCache.get(text);
+		} 
 		assert text != null;
 		Collection<IParse> parses = new ArrayList<IParse>();
 		Sentence sentence = new Sentence(Arrays.split(text));
@@ -145,6 +181,8 @@ public final class Utils {
 				parses.add(new Parse(analysis, priority));
 			}
 		}
+		System.out.println("Inserting into cache...");
+		alterParseCache.put(text, parses);
 		return parses;
 	}
 
@@ -228,6 +266,10 @@ public final class Utils {
 	}
 
 	public static String parse(String sentence, ECGAnalyzer analyzer) {
+		if (parseCache.containsKey(sentence)) {
+			System.out.println("Retrieving from cache...");
+			return parseCache.get(sentence);
+		} 
 		List<String> words = Arrays.split(sentence);
 		StringBuilder result = new StringBuilder();
 		Analysis.setFormatter(new GuiAnalysisFormatter());
@@ -281,6 +323,8 @@ public final class Utils {
 			System.err.printf("Grammar exception: %s\n", e);
 //			Log.logError(e, "Grammar Exception");
 		}
+		System.out.println("Inserting into cache...");
+		parseCache.put(sentence, result.toString());
 		return result.toString();
 	}
 

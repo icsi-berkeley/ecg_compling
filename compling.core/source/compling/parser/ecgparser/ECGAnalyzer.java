@@ -3,6 +3,7 @@ package compling.parser.ecgparser;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -36,6 +37,7 @@ import compling.utterance.Utterance;
 import compling.utterance.Word;
 
 public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
+
 	private LeftCornerParser<Analysis> parser;
 
 	private int beamSize;
@@ -48,6 +50,7 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 
 	private String paramsType;
 	private boolean useBackoff;
+	
 
 	private LCPGrammarWrapper grammar;
 	
@@ -167,6 +170,7 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 //    needs to be more code here to further process the grammar prefs
 	}
 	
+	/** Reads token file into Parser again. Needs to be done when you want new tokens in lexicon. */
 	public void reloadTokens() {
 		try {
 			this.parser.reloadTokens();
@@ -229,8 +233,6 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	public GrammarWrapper getGrammarWrapper() {
 		return grammar;
 	}
-	
-
 
 	public PriorityQueue<Analysis> getBestParses(Utterance<Word, String> utterance) {
 		PriorityQueue<List<Analysis>> pqa = parser.getBestPartialParses(utterance);

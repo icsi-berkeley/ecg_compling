@@ -127,6 +127,24 @@ public class ECGTokenReader {
 				}
 			}
 		}
+		for (Constraint constraint : parentCxn.getConstructionalBlock().getConstraints()) {
+			if (constraint.getArguments().get(0).toString().equals(slotchain)) {
+				if (constraint.getValue().charAt(0) == ECGConstants.ONTOLOGYPREFIX &&
+						value.charAt(0) == ECGConstants.ONTOLOGYPREFIX) {
+					try {
+						TypeSystem ts = grammarWrapper.getGrammar().getOntologyTypeSystem();
+						String child = value.substring(1, value.length()).trim();
+						String ancestor = constraint.getValue().substring(1, constraint.getValue().length()).trim();
+						found = ts.subtype(ts.getInternedString(child), ts.getInternedString(ancestor));
+					} catch (TypeSystemException tse) {
+						System.out.println(tse.getMessage());
+						return false;
+					}
+				} else {
+					found = true;
+				}
+			}
+		}
 		return found;
 	}
 	

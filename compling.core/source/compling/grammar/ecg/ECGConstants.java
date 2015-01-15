@@ -175,5 +175,9 @@ public class ECGConstants {
 
 	/** This is the current home for the default probability that an optional constituent appears */
 	public static final double DEFAULTOPTIONALPROBABILITY = .5;
+	
+	/** Package / import constants. (seantrott). */
+	public static final String PACKAGE = "PACKAGE";
+	public static final String IMPORT = "IMPORT";
 
 }

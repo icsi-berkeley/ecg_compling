@@ -156,6 +156,14 @@ schema CauseEffectAction // prototypical/central case of causation
       complexKind <-- @causal
  	//effect – could define as EventRD and bind aff Entity and process roles
       //cause - could define as EventRD and bind causalAgent and Process roles
+ 
+ 
+schema VehicularMotion
+   subcase of MotionPath
+   roles
+     vehicleType: RD
+   constraints
+     vehicleType.ontological-category <-- @vehicle     
 
 
 

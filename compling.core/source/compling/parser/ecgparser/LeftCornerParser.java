@@ -105,8 +105,11 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
   
   private ArrayList<ArrayList<Construction>> constructionInput; 
-  //private ArrayList<ArrayList<String[]>> morphToken; 
   private ArrayList<ArrayList<MorphTokenPair>> morphToken;
+  
+  /**This is intended to be a cache of type Cxns; when type-identical utterances appear, just retrieve from cache.
+  Will still need to integrate MorphToken information into SemSpec effectively. */
+  private HashMap<ArrayList<ArrayList<Construction>>, PriorityQueue<List<T>>> typeCache;
   
   
 
@@ -162,6 +165,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   public LeftCornerParser(compling.grammar.ecg.Grammar ecgGrammar, AnalysisFactory analysisFactory,
           ConstituentExpansionCostTable cect) throws IOException {
     constructorTime = System.currentTimeMillis();
+    
+    this.typeCache = new HashMap<ArrayList<ArrayList<Construction>>, PriorityQueue<List<T>>>();
 
     this.ecgGrammar = ecgGrammar;
     this.grammar = new LCPGrammarWrapper(ecgGrammar);
@@ -254,6 +259,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   
 
   public PriorityQueue<List<T>> getBestPartialParses(Utterance<Word, String> utterance) {
+	  
 
     lastNormalizer = 0;
     currentEntropy = 0;
@@ -335,6 +341,12 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     
     constructionInput.add(new ArrayList<Construction>());
     constructionInput.get(utterance.size()).add(null);
+    /*
+    if (this.typeCache.containsKey(constructionInput)) {  // type cache
+    	System.out.println("Retrieving from type CACHE.");
+    	return this.typeCache.get(constructionInput);
+    }*/
+
 
     T root = cloneTable.get(RootCxn, 0);
     RobustParserState rootState = new RobustParserState(root, null, 0);
@@ -350,6 +362,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
         throw new ParserException("No complete analysis found for: " + utterance.toString());
       }
       else {
+    	//System.out.println("------- Inserting into type CACHE. ---------");
+    	//this.typeCache.put((ArrayList<ArrayList<Construction>>) constructionInput.clone(), this.completeAnalyses.clone());  // typeCache
         return completeAnalyses;
       }
     }
@@ -370,7 +384,10 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
         throw new ParserException("No complete analysis found for: " + utterance.toString());
       }
       else {
-        return prune(completeAnalyses, PARSESTORETURN);
+    	PriorityQueue<List<T>> toReturn = prune(completeAnalyses, PARSESTORETURN);
+    	//System.out.println("------- Inserting into TYPE CACHE. ---------");
+    	//this.typeCache.put((ArrayList<ArrayList<Construction>>) constructionInput.clone(), toReturn.clone());
+        return toReturn; //prune(completeAnalyses, PARSESTORETURN);
       }
     }
   }
