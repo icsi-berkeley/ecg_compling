@@ -35,7 +35,7 @@ public class EcgCodeScanner extends RuleBasedScanner {
 			"constraints", "subcase", "schema", "form", "meaning", "feature", "semantic", "constituents", "before",
 			"ignore", "meets", "evokes", "as", "of", "abstract", "general", "roles", "setcurrentinterval", "defs:",
 			"type", "inst", "insts:", "rel", "rem", "fun", "ind", "fil", "eq", "transient", "persistent", "nonblocking",
-			"map", "situation", "sub", };
+			"map", "situation", "sub", "package", "import",};
 
 	private static final String[] operators = { "<--", "<->", "<-->", "[", "]", ".", ",", ":", "@", };
 

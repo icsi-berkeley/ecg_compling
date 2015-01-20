@@ -73,6 +73,19 @@ public class ResourceGatherer {
 
 		return newList;
 	}
+	
+	/** Returns a list of File objects whose path is specified in this prefs' base. These are files whose contents
+	 * will be imported by the grammar using the package/import system.
+	 */
+	public List<File> getImportFiles() {
+		List<String> importPaths = preferences.getList(AP.IMPORT_PATHS);
+		ArrayList<File> files = new ArrayList<File>();
+		List<File> filesUnder = FileUtils.getFilesUnder(base, importPaths, new ExtensionFileFilter(
+				getGrammarExtensions()));
+		for (File f : filesUnder)
+			files.add(Utils.getRelativeTo(f, base));
+		return files;
+	}
 
 	/**
 	 * @return A List of File objects whose path is relative to this prefs' base

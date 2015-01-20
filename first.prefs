@@ -9,6 +9,8 @@ ONTOLOGY_PATHS ::==
 	./first/ontology.ont
 ;
 
+IMPORT_PATHS :: ==
+
 ONTOLOGY_PATHS = ./first/ontology.ont
 
 MORPHOLOGY_PATH = ./first/celex.ecgmorph

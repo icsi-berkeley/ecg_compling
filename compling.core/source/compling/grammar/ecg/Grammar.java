@@ -48,19 +48,42 @@ public class Grammar {
 	private TypeSystem<Situation> situationTypeSystem = new TypeSystem<Situation>(ECGConstants.SITUATION);
 	private TypeSystem<? extends TypeSystemNode> ontologyTypeSystem;
 	
+	private HashMap<String, ArrayList<Primitive>> packageList = new HashMap<String, ArrayList<Primitive>>();
+	
 	private boolean consistent = false;
 	
 	private static ECGGrammarFormatter formatter = new SimpleGrammarPrinter();
 	private ContextModel contextModel = null;
 
-	private static String pkg;
+	
+	private static String pkg = "global";
+	private static String importRequest = "global";
+	private static ArrayList<String> importRequests = new ArrayList<String>(){{
+		add("global");
+	}};
+
 	/** Testing: seantrott. Setting field for package. */
-	public void setPackage(String packageName) {
+	public String setPackage(String packageName) {
 		pkg = packageName;
+		return pkg;
 	}
 	
 	public String getPackage() {
 		return pkg;
+	}
+	
+	/** Adds import to import list, returns import name. */
+	public String addImport(String importName) {
+		if (!importRequests.contains(importName)) {
+			importRequests.add(importName);
+		}
+		//importRequest.add(importName);
+		importRequest = importName;
+		return importRequest;
+	}
+	
+	public ArrayList<String> getImport() {
+		return importRequests;
 	}
 	
 	
@@ -266,12 +289,22 @@ public class Grammar {
 		/* New field for package name. */
 		protected String pkg;
 		
+		/** Returns the package type for construction. Constructions are defined as part of a package.
+		 * (Default is "global" in grammar). *
+		 * @return package name that construction is a part of. ("Global" is default").
+		 */
 		public String getPackage() {
 			return pkg;
 		}
 		
-		public void setPackage(String packageName) {
+		/** Sets package name.
+		 * 
+		 * @param 
+		 * @return Returns the string representation of the package name.
+		 */
+		public String setPackage(String packageName) {
 			pkg = packageName;
+			return pkg;
 		}
 
 		protected String name;
@@ -474,6 +507,8 @@ public class Grammar {
 		private Role extraPosedRole = null;
 		private Set<Role> allRoles = null;
 
+		
+		
 		public Construction(String name, String kind, Set<String> parents, Block formBlock, Block meaningBlock,
 				Block constructionalBlock) {
 			this.name = name;
@@ -659,6 +694,10 @@ public class Grammar {
 
 		public Block getContents() {
 			return contents;
+		}
+		
+		public String getKind() {
+			return this.kind;
 		}
 
 		public Set<Role> getAllRoles() {

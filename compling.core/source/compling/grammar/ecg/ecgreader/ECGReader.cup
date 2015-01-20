@@ -19,10 +19,6 @@ import compling.grammar.unificationgrammar.UnificationGrammar.TypeConstraint;
 
 parser code {:
 
-  /* New global variables to track package and import requirements. */
-  public String package = "unknown";
-  public String import = "unknown";
-
   public Grammar grammar = new Grammar();
   public String file = "unknown";
   public StringBuffer errorLog = new StringBuffer();
@@ -91,8 +87,10 @@ non terminal Situation situation;
 non terminal String situation_kinds;
 
 /* New additions (seantrott) */
-non terminal String package_kind;
+non terminal String package_kinds;
+non terminal String current_package;
 non terminal String import_kind;
+non terminal String current_import;
 
 ecg_list ::=
   ecg_list:el schema:s {: 
@@ -117,6 +115,18 @@ ecg_list ::=
     } 
     RESULT = el; 
   :} 
+  | ecg_list: el current_import:i {:
+    if (i != null) {
+      el.addImport(i);
+    }
+    RESULT = el;
+  :}
+  | ecg_list: el current_package:c {:
+    if (c != null) {
+      el.setPackage(c);
+    }
+    RESULT = el;
+  :}
   | /* epsilon */ {: 
     RESULT = parser.grammar; 
   :}
@@ -145,7 +155,9 @@ cxn ::=
     }
     
     RESULT = parser.grammar.new Construction(n, k, p, f, m, c); 
+    //parser.grammar.getConstruction(n).setPackage(parser.grammar.getPackage()); 
     RESULT.setLocation(new Location(n, parser.file, nleft, nright));
+    RESULT.setPackage(parser.grammar.getPackage()); // (seantrott)
   :}
   | cxn_kind IDENTIFIER:n error {: 
     parser.structural_error("Construction "+n+" has an error"); 
@@ -221,7 +233,8 @@ schema ::=
     block.setEvokedElements(e);
     block.setElements(r);
     block.setConstraints(c);
-    RESULT = parser.grammar.new Schema(n, k, p, block); 
+    RESULT = parser.grammar.new Schema(n, k, p, block);
+    RESULT.setPackage(parser.grammar.getPackage()); // (seantrott)
     RESULT.setLocation(new Location(n, parser.file, nleft, nright));
   :}
   | schema_kinds IDENTIFIER:n error {: 
@@ -237,11 +250,25 @@ package_kinds ::=
    :}
    ;
 
-package ::=
-   package_kinds: k IDENTIFIER: n
-     parser.grammar.setPackage(n);
+current_package ::=
+   package_kinds: k IDENTIFIER: n {:
+     RESULT = parser.grammar.setPackage(n);
    :}
    ;
+
+
+/* IMPORT (seantrott) */
+import_kind ::= 
+    IMPORT {:
+      RESULT = ECGConstants.IMPORT;
+    :}
+    ;
+
+current_import ::=
+    import_kind: k IDENTIFIER: n {:
+      RESULT = parser.grammar.addImport(n);
+    :}
+    ;
 
 /* MAP */
 

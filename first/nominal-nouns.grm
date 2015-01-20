@@ -1,3 +1,5 @@
+package first
+
 //
 // Singular Count Nouns
 //
@@ -32,7 +34,10 @@ general construction PluralNoun
 // Proper Nouns
 construction ProperNounNP
     subcase of NP, Word, NounType
-    
+
+
+package john-package
+
  construction JOHN
     subcase of ProperNounNP, Singular, ThirdPerson
     constructional
@@ -46,7 +51,8 @@ construction ProperNounNP
       		self.m.number <-- @singular
 			self.m.gender <-- @male
 
-      
+
+package first    
 // "Type" constructions
 construction NounType
    subcase of Noun, GeneralTypeCxn

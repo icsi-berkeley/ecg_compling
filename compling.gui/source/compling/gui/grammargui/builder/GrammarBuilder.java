@@ -239,19 +239,58 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 	 * @throws IOException
 	 */
 	protected void fullBuild(PrefsManager manager, final IProgressMonitor monitor) throws CoreException {
+		
 		List<File> files = new ResourceGatherer(manager.getPreferences()).getGrammarFiles();
+		
+		List<File> importFiles = new ResourceGatherer(manager.getPreferences()).getImportFiles(); // (seantrott)
+		System.out.println(importFiles);
 		
 		int stepCount = 1 + 1 + files.size();
 		monitor.beginTask("Building grammar", stepCount);
 		
 		Grammar grammar = prebuildGrammar(manager);
 		monitor.worked(1);
-
 		for (File f : files) {
 			IFile grammarFile = (IFile) getProject().findMember(f.getPath());
 			buildGrammar(grammarFile, grammar);
 			monitor.worked(1);
 		}
+
+		Grammar grammar2 = prebuildGrammar(manager);
+		for (File f : importFiles) {
+			System.out.println(f);
+			IFile grammarFile = (IFile) getProject().findMember(f.getPath());
+			System.out.println(grammarFile);
+			buildGrammar(grammarFile, grammar2);
+			monitor.worked(1);
+		}
+	
+		
+		grammar.setContextModel(grammar2.getContextModel());
+		//grammar.setOntologyTypeSystem(grammar2.getOntologyTypeSystem());
+		for (Grammar.Schema schema : grammar2.getAllSchemas()) {
+			System.out.println("SCHEMA PACKAGE " +schema.getPackage());
+			System.out.println("IMPORT PACKAGE " + grammar.getImport());
+			if (grammar.getImport().contains(schema.getPackage())) {
+				System.out.println("Adding schema " + schema.getName());
+				grammar.addSchema(grammar.new Schema(schema.getName(), schema.getKind(), schema.getParents(), schema.getContents()));
+			}
+		}
+
+		
+		for (Grammar.Construction cxn : grammar2.getAllConstructions()) {
+			if (grammar.getImport().contains(cxn.getPackage())) {
+				grammar.addConstruction(grammar.new Construction(cxn.getName(), cxn.getKind(), cxn.getParents(), 
+																 cxn.getFormBlock(), cxn.getMeaningBlock(), cxn.getConstructionalBlock()));
+			}
+		}
+		
+		/*
+		System.out.println("---------");
+		for (Grammar.Schema schema : grammar.getAllSchemas()) {
+			System.out.println(schema.getName());
+		} */
+
 
 		updateLocality(grammar);
 
