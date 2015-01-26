@@ -33,6 +33,10 @@ construction ColorType  //subcase of non-scale Adj
 	   self.m.domain <-- @physicalEntity
 	   self.m.value <-- @colorValue
 
+package construction-package
+
+general construction TestCxn
+	subcase of RootType, Word
 
 
  

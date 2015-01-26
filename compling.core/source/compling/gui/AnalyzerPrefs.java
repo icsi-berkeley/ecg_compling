@@ -42,7 +42,9 @@ public class AnalyzerPrefs implements Prefs {
 		
 		IMPORT_PATHS(Datatype.LISTSTRING),
 		
-		TABLE_PATH(Datatype.STRING), // TODO
+		TABLE_PATH(Datatype.STRING),
+		
+		PACKAGE_NAME(Datatype.STRING), // TODO
 
 		TOKEN_PATH(Datatype.STRING),  
 

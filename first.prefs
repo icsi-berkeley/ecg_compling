@@ -5,6 +5,8 @@ GRAMMAR_PATHS ::==
 	./first
 ;
 
+PACKAGE_NAME = first
+
 ONTOLOGY_PATHS ::==
 	./first/ontology.ont
 ;

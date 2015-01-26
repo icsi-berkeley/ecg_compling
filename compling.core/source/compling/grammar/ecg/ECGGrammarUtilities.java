@@ -15,8 +15,8 @@ import java.util.StringTokenizer;
 
 // import org.semanticweb.owlapi.model.OWLOntologyAlreadyExistsException;
 
-import java_cup.runtime.Symbol;
 
+import java_cup.runtime.Symbol;
 import compling.context.ContextModel;
 import compling.grammar.GrammarException;
 import compling.grammar.ecg.Grammar.Block;
@@ -615,9 +615,53 @@ public class ECGGrammarUtilities {
     if (ext == null) {
       ext = "ecg cxn sch grm";
     }
+    
+    String packageName = preferences.getSetting(AP.PACKAGE_NAME);
+    System.out.println(packageName);
+    
+    /** Added by @seantrott for adding imported packages. Testing. */
+    List<String> importPaths = preferences.getList(AP.IMPORT_PATHS);
+    List<File> importFiles = FileUtils.getFilesUnder(base, importPaths, new ExtensionFileFilter(ext));
+    Grammar grammarImport = new Grammar();
+    System.out.println(importFiles);
+    if (!importFiles.isEmpty()) {
 
+	    ext = preferences.getSetting(AP.ONTOLOGY_EXTENSIONS);
+	    if (ext == null) {
+	      ext = "def inst ont";
+	    }
+	    String[] extsI = ext.split(" ");
+	    String encSettingI = preferences.getSetting(AP.FILE_ENCODING);
+	    Charset encodingI = Charset.forName(encSettingI != null ? encSettingI : ECGConstants.DEFAULT_ENCODING);
+	    String ontologyImport = preferences.getSetting(AP.ONTOLOGY_TYPE);
+	    if (ontologyImport != null && ontologyImport.equalsIgnoreCase(AnalyzerPrefs.OWL_TYPE)) {
+	      grammarImport = read(importFiles, OWLOntology.fromPreferences(preferences).getTypeSystem(), encodingI);
+	    }
+	    else {
+	      List<String> ontPaths = preferences.getList(AP.ONTOLOGY_PATHS);
+	      List<File> ontFiles = FileUtils.getFilesUnder(base, ontPaths, new ExtensionFileFilter(ext));
+	
+	      ContextModel contextModel;
+	      if (ontFiles.size() == 1) {
+	        contextModel = new ContextModel(ontFiles.get(0).getAbsolutePath());
+	      }
+	      else {
+	        contextModel = new ContextModel(ontFiles, extsI[0], extsI[1]);
+	      }
+	      grammarImport = read(importFiles, contextModel, encodingI);
+	      grammarImport.update();
+	    }
+    }
+    // 
+    
+    ext = preferences.getSetting(AP.GRAMMAR_EXTENSIONS);
+    if (ext == null) {
+      ext = "ecg cxn sch grm";
+    }
+    
     List<String> grammarPaths = preferences.getList(AP.GRAMMAR_PATHS);
     List<File> grammarFiles = FileUtils.getFilesUnder(base, grammarPaths, new ExtensionFileFilter(ext));
+    System.out.println(grammarFiles);
 
     ext = preferences.getSetting(AP.ONTOLOGY_EXTENSIONS);
     if (ext == null) {
@@ -645,6 +689,9 @@ public class ECGGrammarUtilities {
         contextModel = new ContextModel(ontFiles, exts[0], exts[1]);
       }
       grammar = read(grammarFiles, contextModel, encoding);
+      if (!importFiles.isEmpty()) {
+    	  grammar = addGrammar(grammar, grammarImport);  // @seantrott, testing. Function to add imported packages.
+      }
       grammar.update();
     }
 
@@ -659,12 +706,28 @@ public class ECGGrammarUtilities {
         updateLocality(grammar, locParamFiles);
       }
     }
-
     grammar.setPrefs(preferences);
-
     return grammar;
   }
 
+  private static Grammar addGrammar(Grammar g, Grammar gImport) {
+	g.setContextModel(gImport.getContextModel());
+	//grammar.setOntologyTypeSystem(grammar2.getOntologyTypeSystem());
+	for (Grammar.Schema schema : gImport.getAllSchemas()) {
+		if (g.getImport().contains(schema.getPackage())) {
+			g.addSchema(g.new Schema(schema.getName(), schema.getKind(), schema.getParents(), schema.getContents()));
+		}
+	}
+	for (Grammar.Construction cxn : gImport.getAllConstructions()) {
+		if (g.getImport().contains(cxn.getPackage())) {
+			g.addConstruction(g.new Construction(cxn.getName(), cxn.getKind(), cxn.getParents(), 
+															 cxn.getFormBlock(), cxn.getMeaningBlock(), cxn.getConstructionalBlock()));
+		}
+
+	}
+	return g;
+  }
+  
   protected static void updateLocality(Grammar grammar, List<File> localityParamFiles) {
     for (File localityParamFile : localityParamFiles) {
       TextFileLineIterator lines = new TextFileLineIterator(localityParamFile);

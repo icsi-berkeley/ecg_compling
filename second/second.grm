@@ -1,0 +1,12 @@
+import first
+import compTest
+import construction-package
+
+general construction SubSubCxn
+    subcase of TestSubCxn
+
+construction orthSubCxn
+    subcase of SubSubCxn
+    form
+      constraints
+        self.f.orth <-- "sparrow"

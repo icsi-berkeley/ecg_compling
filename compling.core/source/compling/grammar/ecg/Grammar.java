@@ -48,17 +48,15 @@ public class Grammar {
 	private TypeSystem<Situation> situationTypeSystem = new TypeSystem<Situation>(ECGConstants.SITUATION);
 	private TypeSystem<? extends TypeSystemNode> ontologyTypeSystem;
 	
-	private HashMap<String, ArrayList<Primitive>> packageList = new HashMap<String, ArrayList<Primitive>>();
-	
 	private boolean consistent = false;
 	
 	private static ECGGrammarFormatter formatter = new SimpleGrammarPrinter();
 	private ContextModel contextModel = null;
 
 	
-	private static String pkg = "global";
-	private static String importRequest = "global";
-	private static ArrayList<String> importRequests = new ArrayList<String>(){{
+	private String pkg = "global";
+	private String importRequest = "global";
+	private ArrayList<String> importRequests = new ArrayList<String>(){{
 		add("global");
 	}};
 

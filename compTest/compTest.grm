@@ -1,3 +1,7 @@
 import first
+import construction-package 
+package compTest
+general construction TestSubCxn
+	subcase of TestCxn
 
-// import john-package
+import john-package
