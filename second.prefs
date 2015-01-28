@@ -8,8 +8,8 @@ GRAMMAR_PATHS ::==
 PACKAGE_NAME = second
 
 IMPORT_PATHS ::==
-	./first
 	./compTest
+	./first
 ;
 
 ONTOLOGY_PATHS ::==

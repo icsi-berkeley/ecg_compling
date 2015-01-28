@@ -1,6 +1,5 @@
-import first
 import compTest
-import construction-package
+//import construction-package
 
 general construction SubSubCxn
     subcase of TestSubCxn

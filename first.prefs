@@ -11,7 +11,9 @@ ONTOLOGY_PATHS ::==
 	./first/ontology.ont
 ;
 
-IMPORT_PATHS :: ==
+IMPORT_PATHS ::==
+	./first
+;
 
 ONTOLOGY_PATHS = ./first/ontology.ont
 

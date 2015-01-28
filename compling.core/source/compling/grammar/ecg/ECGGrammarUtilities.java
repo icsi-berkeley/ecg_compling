@@ -615,15 +615,57 @@ public class ECGGrammarUtilities {
     if (ext == null) {
       ext = "ecg cxn sch grm";
     }
-    
+
     String packageName = preferences.getSetting(AP.PACKAGE_NAME);
-    System.out.println(packageName);
     
-    /** Added by @seantrott for adding imported packages. Testing. */
+    Grammar grammar = new Grammar();
+    grammar.addImport(packageName);
+    
     List<String> importPaths = preferences.getList(AP.IMPORT_PATHS);
     List<File> importFiles = FileUtils.getFilesUnder(base, importPaths, new ExtensionFileFilter(ext));
     Grammar grammarImport = new Grammar();
-    System.out.println(importFiles);
+    if (!importFiles.isEmpty()) {
+
+	    ext = preferences.getSetting(AP.ONTOLOGY_EXTENSIONS);
+	    if (ext == null) {
+	      ext = "def inst ont";
+	    }
+	    String[] extsI = ext.split(" ");
+	    String encSettingI = preferences.getSetting(AP.FILE_ENCODING);
+	    Charset encodingI = Charset.forName(encSettingI != null ? encSettingI : ECGConstants.DEFAULT_ENCODING);
+	    String ontologyImport = preferences.getSetting(AP.ONTOLOGY_TYPE);
+	    if (ontologyImport != null && ontologyImport.equalsIgnoreCase(AnalyzerPrefs.OWL_TYPE)) {
+	      grammarImport = read(importFiles, OWLOntology.fromPreferences(preferences).getTypeSystem(), encodingI);
+	    }
+	    else {
+	      List<String> ontPaths = preferences.getList(AP.ONTOLOGY_PATHS);
+	      List<File> ontFiles = FileUtils.getFilesUnder(base, ontPaths, new ExtensionFileFilter(ext));
+	
+	      ContextModel contextModel;
+	      if (ontFiles.size() == 1) {
+	        contextModel = new ContextModel(ontFiles.get(0).getAbsolutePath());
+	      }
+	      else {
+	        contextModel = new ContextModel(ontFiles, extsI[0], extsI[1]);
+	      }
+	      grammarImport = read(importFiles, contextModel, encodingI);
+	      grammarImport.update();
+	    }
+    }
+    for (String imp : grammarImport.getImport()) {
+    	grammar.addImport(imp);
+    }
+ 
+    if (!importFiles.isEmpty()) {
+    	grammar = addGrammar(grammar, grammarImport);
+    	grammar.update();
+    } 
+    
+    /** Added by @seantrott for adding imported packages. Testing. */
+ /*
+    List<String> importPaths = preferences.getList(AP.IMPORT_PATHS);
+    List<File> importFiles = FileUtils.getFilesUnder(base, importPaths, new ExtensionFileFilter(ext));
+    Grammar grammarImport = new Grammar();
     if (!importFiles.isEmpty()) {
 
 	    ext = preferences.getSetting(AP.ONTOLOGY_EXTENSIONS);
@@ -694,7 +736,7 @@ public class ECGGrammarUtilities {
       }
       grammar.update();
     }
-
+	*/
     List<String> paramPaths = preferences.getList(AP.GRAMMAR_PARAMS_PATHS);
     if (!paramPaths.isEmpty()) {
       ext = preferences.getSetting(AP.GRAMMAR_PARAMS_LOCALITY_EXTENSION);
@@ -723,7 +765,6 @@ public class ECGGrammarUtilities {
 			g.addConstruction(g.new Construction(cxn.getName(), cxn.getKind(), cxn.getParents(), 
 															 cxn.getFormBlock(), cxn.getMeaningBlock(), cxn.getConstructionalBlock()));
 		}
-
 	}
 	return g;
   }

@@ -15,8 +15,10 @@ import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.swt.widgets.Display;
@@ -248,19 +250,39 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 		monitor.beginTask("Building grammar", stepCount);
 		
 		Grammar grammar = prebuildGrammar(manager);
+		grammar.addImport(manager.getPreferences().getSetting(AP.PACKAGE_NAME));
+		System.out.println(manager.getPreferences().getSetting(AP.PACKAGE_NAME));
+		/*
 		monitor.worked(1);
 		for (File f : files) {
 			IFile grammarFile = (IFile) getProject().findMember(f.getPath());
 			buildGrammar(grammarFile, grammar);
 			monitor.worked(1);
 		}
-		
+		*/
 		if (gatherer.getImportFiles().size() > 0) {
 			List<File> importFiles = gatherer.getImportFiles(); // (seantrott)
+			System.out.println(importFiles);
 			Grammar grammar2 = prebuildGrammar(manager);
+			IPath destination = new Path("./compRobots");
 			for (File f : importFiles) {
-				IFile grammarFile = (IFile) getProject().findMember(f.getPath());
+				System.out.println("File: " + f);
+				System.out.println(f.getPath());
+				System.out.println(f.getParent());
+				IPath pa = new Path(f.getPath());
+				IFile grammarFile = getProject().getFile(pa);
+				if (!f.getParent().equals("./compRobots")) {
+					grammarFile = getProject().getFile(pa);
+					grammarFile.move(destination, true, monitor);
+				} else {
+					grammarFile = (IFile) getProject().findMember(pa);
+				}
+
+				//IFile grammarFile = (IFile) getProject().findMember(f.getPath());
+				//getProject().find
 				buildGrammar(grammarFile, grammar2);
+				
+				//buildGrammar(grammarFile, grammar2);
 				monitor.worked(1);
 			}
 		
@@ -268,15 +290,11 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 			grammar.setContextModel(grammar2.getContextModel());
 			//grammar.setOntologyTypeSystem(grammar2.getOntologyTypeSystem());
 			for (Grammar.Schema schema : grammar2.getAllSchemas()) {
-				System.out.println("SCHEMA PACKAGE " +schema.getPackage());
-				System.out.println("IMPORT PACKAGE " + grammar.getImport());
 				if (grammar.getImport().contains(schema.getPackage())) {
-					System.out.println("Adding schema " + schema.getName());
 					grammar.addSchema(grammar.new Schema(schema.getName(), schema.getKind(), schema.getParents(), schema.getContents()));
 				}
 			}
-	
-			
+
 			for (Grammar.Construction cxn : grammar2.getAllConstructions()) {
 				if (grammar.getImport().contains(cxn.getPackage())) {
 					grammar.addConstruction(grammar.new Construction(cxn.getName(), cxn.getKind(), cxn.getParents(), 
