@@ -266,20 +266,8 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 			Grammar grammar2 = prebuildGrammar(manager);
 			IPath destination = new Path("./compRobots");
 			for (File f : importFiles) {
-				System.out.println("File: " + f);
-				System.out.println(f.getPath());
-				System.out.println(f.getParent());
-				IPath pa = new Path(f.getPath());
-				IFile grammarFile = getProject().getFile(pa);
-				if (!f.getParent().equals("./compRobots")) {
-					grammarFile = getProject().getFile(pa);
-					grammarFile.move(destination, true, monitor);
-				} else {
-					grammarFile = (IFile) getProject().findMember(pa);
-				}
 
-				//IFile grammarFile = (IFile) getProject().findMember(f.getPath());
-				//getProject().find
+				IFile grammarFile = (IFile) getProject().findMember(f.getPath());
 				buildGrammar(grammarFile, grammar2);
 				
 				//buildGrammar(grammarFile, grammar2);
