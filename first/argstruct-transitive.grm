@@ -81,22 +81,23 @@ construction ActiveTransCausedLocationChange // he moved the block into the room
   constructional
    constituents//one of these needs to be present
       //optional dis: SpatialQuantityNP
-      //optional dir: Directional 
-      pp: Path-PP  // test 5/20/13 made this required rather than optional
+      optional dir: Directional 
+      optional pp: Path-PP  // 
    constraints
 	// v.argform <-->  ?????????????
    form
      constraints
-	   v.f before pp.f 
+	   v.f before dir.f 
        //dis.f before pp.f
-       //dir.f before pp.f   
+       dir.f before pp.f   
    meaning  //inherited? Along with evoked MotionPath??
 	constraints 
-          //self.m.affectedProcess <--> mp // inherited?
-          // self.m.affected <--> mp.mover //  inherited?
+          self.m.affectedProcess <--> mp // inherited?
+          self.m.affected <--> mp.mover //  inherited?
     	   //self.m.affected <--> mp.spg.trajector
     	    mp.spg <--> pp.m 
    		//mp.spg.distance <--> dis.m
+   		mp.heading <--> dir.m
 
 
 		

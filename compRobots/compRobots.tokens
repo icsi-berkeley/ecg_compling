@@ -25,7 +25,16 @@ enter :: PathVerbType   :: self.m.actionary <-- @enter :: self.m.landmark.ontolo
 # test :: Color :: self.m.value <-- @female
 ## Test for missing ontology value
 # test :: ProperNountNP :: self.m.number <-- @singular
-
-
-
+north :: DirectionalType :: self.m.tag <-- @north
+south :: DirectionalType :: self.m.tag <-- @south
+east :: DirectionalType :: self.m.tag <-- @east
+west :: DirectionalType :: self.m.tag <-- @west
 pencil :: NounType :: self.m.ontological-category <-- @pencil
+robot1 :: ProperNPInstance :: self.m.ontological-category <-- @robot :: self.m.referent <-- @robot1-instance
+box1 :: ProperNPInstance :: self.m.referent <-- @box1-instance :: self.m.ontological-category <-- @box
+box2 :: ProperNPInstance :: self.m.referent <-- @box2-instance :: self.m.ontological-category <-- @box
+box3 :: ProperNPInstance :: self.m.referent <-- @box3-instance :: self.m.ontological-category <-- @box
+box4 :: ProperNPInstance :: self.m.referent <-- @box4-instance :: self.m.ontological-category <-- @box
+
+green :: ColorType :: self.m.value <-- @green
+purple :: ColorType :: self.m.value <-- @purple

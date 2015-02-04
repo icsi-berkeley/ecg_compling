@@ -16,6 +16,7 @@ import compling.grammar.ecg.Grammar.Situation;
 import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
 import compling.grammar.unificationgrammar.UnificationGrammar.Role;
 import compling.grammar.unificationgrammar.UnificationGrammar.TypeConstraint;
+import java.util.ArrayList;
 
 parser code {:
 
@@ -94,7 +95,9 @@ non terminal String current_import;
 
 ecg_list ::=
   ecg_list:el schema:s {: 
-    if (s != null){el.addSchema(s);} 
+    if (s != null) {
+    	el.addSchema(s);
+    } 
     RESULT = el;
   :}
   | ecg_list:el cxn:c {: 
@@ -124,6 +127,7 @@ ecg_list ::=
   | ecg_list: el current_package:c {:
     if (c != null) {
       el.setPackage(c);
+      el.addPackage(c);
     }
     RESULT = el;
   :}

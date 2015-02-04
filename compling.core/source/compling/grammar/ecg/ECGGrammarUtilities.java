@@ -16,6 +16,9 @@ import java.util.StringTokenizer;
 // import org.semanticweb.owlapi.model.OWLOntologyAlreadyExistsException;
 
 
+
+
+
 import java_cup.runtime.Symbol;
 import compling.context.ContextModel;
 import compling.grammar.GrammarException;
@@ -33,6 +36,7 @@ import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
 import compling.grammar.unificationgrammar.UnificationGrammar.Role;
 import compling.gui.AnalyzerPrefs;
 import compling.gui.AnalyzerPrefs.AP;
+import compling.gui.util.Utils;
 import compling.ontology.OWLOntology;
 import compling.parser.ecgparser.LCPGrammarWrapper;
 import compling.util.fileutil.ExtensionFileFilter;
@@ -615,6 +619,10 @@ public class ECGGrammarUtilities {
     if (ext == null) {
       ext = "ecg cxn sch grm";
     }
+    String passage = preferences.getSetting(AP.GRAMMAR_EXTENSIONS);
+    if (passage == null) {
+      passage = "ecg cxn sch grm";
+    }
 
     String packageName = preferences.getSetting(AP.PACKAGE_NAME);
     
@@ -625,7 +633,95 @@ public class ECGGrammarUtilities {
     List<File> importFiles = FileUtils.getFilesUnder(base, importPaths, new ExtensionFileFilter(ext));
     Grammar grammarImport = new Grammar();
     if (!importFiles.isEmpty()) {
-
+    	ArrayList<Grammar> grammarList = new ArrayList<Grammar>();
+		List<List<File>> importList = getImportFilesDir(base, preferences, passage);
+		List<String> seenPackages = new ArrayList<String>();
+		for (List<File> fileList : importList) {
+		    
+			Grammar tempGrammar = new Grammar();
+		    ext = preferences.getSetting(AP.ONTOLOGY_EXTENSIONS);
+		    if (ext == null) {
+		      ext = "def inst ont";
+		    }
+		    String[] extsI = ext.split(" ");
+		    String encSettingI = preferences.getSetting(AP.FILE_ENCODING);
+		    Charset encodingI = Charset.forName(encSettingI != null ? encSettingI : ECGConstants.DEFAULT_ENCODING);
+		    String ontologyImport = preferences.getSetting(AP.ONTOLOGY_TYPE);
+		    
+		    if (ontologyImport != null && ontologyImport.equalsIgnoreCase(AnalyzerPrefs.OWL_TYPE)) {
+		      tempGrammar = read(fileList, OWLOntology.fromPreferences(preferences).getTypeSystem(), encodingI);
+		    }
+		    else {
+		      List<String> ontPaths = preferences.getList(AP.ONTOLOGY_PATHS);
+		      List<File> ontFiles = FileUtils.getFilesUnder(base, ontPaths, new ExtensionFileFilter(ext));
+		
+		      ContextModel contextModel;
+		      if (ontFiles.size() == 1) {
+		        contextModel = new ContextModel(ontFiles.get(0).getAbsolutePath());
+		      }
+		      else {
+		        contextModel = new ContextModel(ontFiles, extsI[0], extsI[1]);
+		      }
+		      tempGrammar = read(fileList, contextModel, encodingI);
+		      grammarList.add(tempGrammar);
+		      System.out.println("OK, added another temporary grammar.");
+		    }
+		}
+		
+		for (Grammar g : grammarList) {
+			for (String request : g.getImport()) {
+				grammar.addImport(request);
+			}
+			for (Grammar.Schema schema : g.getSchemasNoUpdate()) {
+				if (grammar.getImport().contains(schema.getPackage()) 
+						&& !seenPackages.contains(schema.getPackage())) {
+					Grammar.Schema s = grammar.new Schema(schema.getName(), schema.getKind(), schema.getParents(), schema.getContents());
+					s.setLocation(schema.getLocation());
+					grammar.addSchema(s);
+				}
+			}
+			for (Grammar.Construction cxn : g.getCxnsNoUpdate()) {
+				if (grammar.getImport().contains(cxn.getPackage())
+						&& !seenPackages.contains(cxn.getPackage())) {
+					Grammar.Construction c = grammar.new Construction(cxn.getName(), cxn.getKind(), cxn.getParents(), 
+							 cxn.getFormBlock(), cxn.getMeaningBlock(), cxn.getConstructionalBlock());
+					c.setLocation(cxn.getLocation());
+					grammar.addConstruction(c);
+				}
+			}
+			seenPackages.addAll(g.getPackages());
+		}
+		System.out.println("OK, imported temporary grammars into working model.");
+	    ext = preferences.getSetting(AP.ONTOLOGY_EXTENSIONS);
+	    if (ext == null) {
+	      ext = "def inst ont";
+	    }
+	    String[] extsI = ext.split(" ");
+	    String encSettingI = preferences.getSetting(AP.FILE_ENCODING);
+	    Charset encodingI = Charset.forName(encSettingI != null ? encSettingI : ECGConstants.DEFAULT_ENCODING);
+	    String ontologyImport = preferences.getSetting(AP.ONTOLOGY_TYPE);
+	    
+	    if (ontologyImport != null && ontologyImport.equalsIgnoreCase(AnalyzerPrefs.OWL_TYPE)) {
+	    	grammar.setOntologyTypeSystem(OWLOntology.fromPreferences(preferences).getTypeSystem());
+	    }
+	    else {
+	      List<String> ontPaths = preferences.getList(AP.ONTOLOGY_PATHS);
+	      List<File> ontFiles = FileUtils.getFilesUnder(base, ontPaths, new ExtensionFileFilter(ext));
+	      ContextModel contextModel;
+	      if (ontFiles.size() == 1) {
+	        contextModel = new ContextModel(ontFiles.get(0).getAbsolutePath());
+	      }
+	      else {
+	        contextModel = new ContextModel(ontFiles, extsI[0], extsI[1]);
+	      }
+	      grammar.setContextModel(contextModel);
+	    }
+		grammar.update();
+    }
+	
+    
+    	
+    /*
 	    ext = preferences.getSetting(AP.ONTOLOGY_EXTENSIONS);
 	    if (ext == null) {
 	      ext = "def inst ont";
@@ -650,93 +746,17 @@ public class ECGGrammarUtilities {
 	      }
 	      grammarImport = read(importFiles, contextModel, encodingI);
 	      grammarImport.update();
-	    }
-    }
-    for (String imp : grammarImport.getImport()) {
-    	grammar.addImport(imp);
-    }
+	    } 
+
  
     if (!importFiles.isEmpty()) {
     	grammar = addGrammar(grammar, grammarImport);
     	grammar.update();
     } 
     
+    */
     /** Added by @seantrott for adding imported packages. Testing. */
- /*
-    List<String> importPaths = preferences.getList(AP.IMPORT_PATHS);
-    List<File> importFiles = FileUtils.getFilesUnder(base, importPaths, new ExtensionFileFilter(ext));
-    Grammar grammarImport = new Grammar();
-    if (!importFiles.isEmpty()) {
-
-	    ext = preferences.getSetting(AP.ONTOLOGY_EXTENSIONS);
-	    if (ext == null) {
-	      ext = "def inst ont";
-	    }
-	    String[] extsI = ext.split(" ");
-	    String encSettingI = preferences.getSetting(AP.FILE_ENCODING);
-	    Charset encodingI = Charset.forName(encSettingI != null ? encSettingI : ECGConstants.DEFAULT_ENCODING);
-	    String ontologyImport = preferences.getSetting(AP.ONTOLOGY_TYPE);
-	    if (ontologyImport != null && ontologyImport.equalsIgnoreCase(AnalyzerPrefs.OWL_TYPE)) {
-	      grammarImport = read(importFiles, OWLOntology.fromPreferences(preferences).getTypeSystem(), encodingI);
-	    }
-	    else {
-	      List<String> ontPaths = preferences.getList(AP.ONTOLOGY_PATHS);
-	      List<File> ontFiles = FileUtils.getFilesUnder(base, ontPaths, new ExtensionFileFilter(ext));
-	
-	      ContextModel contextModel;
-	      if (ontFiles.size() == 1) {
-	        contextModel = new ContextModel(ontFiles.get(0).getAbsolutePath());
-	      }
-	      else {
-	        contextModel = new ContextModel(ontFiles, extsI[0], extsI[1]);
-	      }
-	      grammarImport = read(importFiles, contextModel, encodingI);
-	      grammarImport.update();
-	    }
-    }
-    // 
-    
-    ext = preferences.getSetting(AP.GRAMMAR_EXTENSIONS);
-    if (ext == null) {
-      ext = "ecg cxn sch grm";
-    }
-    
-    List<String> grammarPaths = preferences.getList(AP.GRAMMAR_PATHS);
-    List<File> grammarFiles = FileUtils.getFilesUnder(base, grammarPaths, new ExtensionFileFilter(ext));
-    System.out.println(grammarFiles);
-
-    ext = preferences.getSetting(AP.ONTOLOGY_EXTENSIONS);
-    if (ext == null) {
-      ext = "def inst ont";
-    }
-    String[] exts = ext.split(" ");
-
-    String encSetting = preferences.getSetting(AP.FILE_ENCODING);
-    Charset encoding = Charset.forName(encSetting != null ? encSetting : ECGConstants.DEFAULT_ENCODING);
-
-    Grammar grammar;
-    String ontologyType = preferences.getSetting(AP.ONTOLOGY_TYPE);
-    if (ontologyType != null && ontologyType.equalsIgnoreCase(AnalyzerPrefs.OWL_TYPE)) {
-      grammar = read(grammarFiles, OWLOntology.fromPreferences(preferences).getTypeSystem(), encoding);
-    }
-    else {
-      List<String> ontPaths = preferences.getList(AP.ONTOLOGY_PATHS);
-      List<File> ontFiles = FileUtils.getFilesUnder(base, ontPaths, new ExtensionFileFilter(ext));
-
-      ContextModel contextModel;
-      if (ontFiles.size() == 1) {
-        contextModel = new ContextModel(ontFiles.get(0).getAbsolutePath());
-      }
-      else {
-        contextModel = new ContextModel(ontFiles, exts[0], exts[1]);
-      }
-      grammar = read(grammarFiles, contextModel, encoding);
-      if (!importFiles.isEmpty()) {
-    	  grammar = addGrammar(grammar, grammarImport);  // @seantrott, testing. Function to add imported packages.
-      }
-      grammar.update();
-    }
-	*/
+ 
     List<String> paramPaths = preferences.getList(AP.GRAMMAR_PARAMS_PATHS);
     if (!paramPaths.isEmpty()) {
       ext = preferences.getSetting(AP.GRAMMAR_PARAMS_LOCALITY_EXTENSION);
@@ -750,6 +770,23 @@ public class ECGGrammarUtilities {
     }
     grammar.setPrefs(preferences);
     return grammar;
+    }
+
+  
+  public static List<List<File>> getImportFilesDir(File base, AnalyzerPrefs preferences, String passage) {
+	  List<String> importPaths = preferences.getList(AP.IMPORT_PATHS);
+	  List<List<File>> fileList = new ArrayList<List<File>>();
+	  for (String path : importPaths) {
+		List<File> newFiles = new ArrayList<File>();
+		List<String> test = new ArrayList<String>();
+		test.add(path);
+		List<File> filesUnder = FileUtils.getFilesUnder(base, test, new ExtensionFileFilter(
+				passage));
+		for (File f : filesUnder)
+			newFiles.add(Utils.getRelativeTo(f, base));
+		fileList.add(newFiles);
+	}
+	return fileList;
   }
 
   private static Grammar addGrammar(Grammar g, Grammar gImport) {

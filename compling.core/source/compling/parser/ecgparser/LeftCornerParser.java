@@ -2,6 +2,8 @@ package compling.parser.ecgparser;
 
 import java.util.ArrayList;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -119,8 +121,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   private Role RootCxnConstituent;
   private StringBuilder parserLog;
   
-  private HashMap<String, String[]> constructional_morphTable;
-  private HashMap<String, String[]> meaning_morphTable;
+  private HashMap<String, ArrayList<String[]>> constructional_morphTable;
+  private HashMap<String, ArrayList<String[]>> meaning_morphTable;
   
  
  
@@ -250,6 +252,36 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 	  }
   }
   
+  // TODO: Returns a boolean if "cxn" is compatible with type. Noun-Block is compatible with "noun", etc.
+  private boolean isCompatible2(Construction cxn, String[] type) {
+	  Set<String> parents = cxn.getParents();
+	  List<String> types = Arrays.asList(type);
+	  if (types.contains(cxn.getName())) {
+		  return true;
+	  }
+	  if (!Collections.disjoint(parents, types)) {
+		  return true;
+	  }
+	  /*
+	  if (!new HashSet<String>(parents).retainAll(types).isEmpty()) {
+		  return false;
+	  }
+	  if (parents.contains(type)) {
+		  return true;
+	  } */
+	  else if (parents.contains("RootType")) {
+		  return false;
+	  } else {
+		  for (String p : parents) {
+			  Construction c = this.grammar.getConstruction(p);
+			  if (isCompatible2(c, type)) {
+				  return true;
+			  }
+		  }
+		  return false;
+	  }
+  }
+  
   /** Reloads tokens and morphology instances. 
  * @throws IOException */
   public void reloadTokens() throws IOException {
@@ -285,23 +317,25 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     	String wordform = utterance.getElement(i).getOrthography();
 
     	Set<String> lems = this.morpher.getLemmas(wordform);
-    	
     	constructionInput.add(new ArrayList<Construction>());
     	morphToken.add(new ArrayList<MorphTokenPair>());
 
     	for (String lemma : lems) {
 	    	try {
-
 		        List<ECGToken> tokens = this.tokenReader.getToken(lemma);
 		        for (ECGToken token : tokens) {
 		        	Construction parent = token.parent;
 		        	String[] inflections = morpher.getInflections(lemma, wordform);
 		        	for (String inf : inflections) {
-		        		int what = this.meaning_morphTable.get(inf).length - 1;
-		        		if (isCompatible(parent, this.meaning_morphTable.get(inf)[what])) {
+		        		//int what = this.meaning_morphTable.get(inf).length - 1;
+		        		if (isCompatible2(parent, this.meaning_morphTable.get(inf).get(1))) {
 		        			constructionInput.get(i).add(parent);
 		        			morphToken.get(i).add(new MorphTokenPair(inf, token));
 		        		}
+		        		/*
+		        		if (isCompatible(parent, this.meaning_morphTable.get(inf)[what])) {
+
+		        		} */
 		        	}
 		        }		        
 	    	} catch (GrammarException g) {
@@ -335,6 +369,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
         	}
         }
     }   
+    
     
     morphToken.add(new ArrayList<MorphTokenPair>());
     morphToken.get(utterance.size()).add(new MorphTokenPair(null, null));
@@ -693,11 +728,11 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 	    	T ultimate = (T) lex_analysis.clone(); 	    	
 	    	if (extra_info.morph != null) {
 	    		String morph = extra_info.morph;
-	    		String[] mConstraint = this.meaning_morphTable.get(morph);
+	    		String[] mConstraint = this.meaning_morphTable.get(morph).get(0);
 	    		for (int k = 0; k < mConstraint.length - 1; k += 2) {
 	    			ultimate.addConstraint(UnificationGrammar.generateConstraint(mConstraint[k+1]), mConstraint[k]);
 	    		}
-	    		String[] con_constraint = this.constructional_morphTable.get(morph);
+	    		String[] con_constraint = this.constructional_morphTable.get(morph).get(0);
 	        	for (int k = 0; k < con_constraint.length - 1; k += 2) {
 	        		ultimate.addConstraint(UnificationGrammar.generateConstraint(con_constraint[k+1]), con_constraint[k]);
 	        	}

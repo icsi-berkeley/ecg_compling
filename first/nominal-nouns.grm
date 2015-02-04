@@ -55,7 +55,7 @@ package john-package
 package first    
 // "Type" constructions
 construction NounType
-   subcase of Noun, GeneralTypeCxn
+   subcase of Noun, GeneralTypeCxn, ThirdPerson
    constructional
      constraints
         self.features.gender <-- @genderValues
@@ -83,4 +83,5 @@ construction ArtifactNounType
 	    self.m.gender <-- @genderValues
         self.m.scale <-- @scale      
 	    
-	    
+
+general construction Directional	    

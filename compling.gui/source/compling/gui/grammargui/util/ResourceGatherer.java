@@ -86,6 +86,22 @@ public class ResourceGatherer {
 			files.add(Utils.getRelativeTo(f, base));
 		return files;
 	}
+	
+	public List<List<File>> getImportFilesDir() {
+		List<String> importPaths = preferences.getList(AP.IMPORT_PATHS);
+		List<List<File>> fileList = new ArrayList<List<File>>();
+		for (String path : importPaths) {
+			List<File> newFiles = new ArrayList<File>();
+			List<String> test = new ArrayList<String>();
+			test.add(path);
+			List<File> filesUnder = FileUtils.getFilesUnder(base, test, new ExtensionFileFilter(
+					getGrammarExtensions()));
+			for (File f : filesUnder)
+				newFiles.add(Utils.getRelativeTo(f, base));
+			fileList.add(newFiles);
+		}
+		return fileList;
+	}
 
 	/**
 	 * @return A List of File objects whose path is relative to this prefs' base

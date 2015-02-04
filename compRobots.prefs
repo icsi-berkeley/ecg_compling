@@ -19,7 +19,10 @@ IMPORT_PATHS ::==
 ONTOLOGY_PATHS = ./compRobots/ontology.ont
 
 MORPHOLOGY_PATH = ./compRobots/celex.ecgmorph
-TOKEN_PATH = ./compRobots/compRobots.tokens
+TOKEN_PATH ::== 
+	./compRobots/compRobots.tokens
+	./first/first.tokens
+;
 TABLE_PATH = ./first/first.morph
 
 ROBUST = FALSE 

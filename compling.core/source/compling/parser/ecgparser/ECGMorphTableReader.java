@@ -35,13 +35,13 @@ public class ECGMorphTableReader {
 	GrammarWrapper grammarWrapper;
 	AnalyzerPrefs prefs;
 	File table_path;
-	public HashMap<String, String[]> constructional_morphTable;
-	public HashMap<String, String[]> meaning_morphTable;
+	public HashMap<String, ArrayList<String[]>> constructional_morphTable;
+	public HashMap<String, ArrayList<String[]>> meaning_morphTable;
 	
 	public ECGMorphTableReader(GrammarWrapper wrapper) throws IOException {
 		
-		constructional_morphTable = new HashMap<String, String[]>();
-		meaning_morphTable = new HashMap<String, String[]>();
+		constructional_morphTable = new HashMap<String, ArrayList<String[]>>();
+		meaning_morphTable = new HashMap<String, ArrayList<String[]>>();
 		
 		grammarWrapper = wrapper;
 		prefs = (AnalyzerPrefs) grammarWrapper.getGrammar().getPrefs();
@@ -61,8 +61,12 @@ public class ECGMorphTableReader {
 			}
 			String[] s = l.split("\\s*::\\s*");
 			String key = s[0];
-			String[] value = s[1].split(",\\s");
-			constructional_morphTable.put(key, value);
+			String[] constraints = s[1].split(",\\s");
+			String[] parents = s[2].split(",\\s");
+			ArrayList<String[]> values = new ArrayList<String[]>();
+			values.add(constraints);
+			values.add(parents);
+			constructional_morphTable.put(key, values);
 		}
 		
 		// This loop fills in meaning_morphTable.
@@ -70,17 +74,21 @@ public class ECGMorphTableReader {
 			String l = tfli.next();
 			String[] array = l.split("\\s*::\\s*");
 			String key = array[0];
-			String[] value = array[1].split(",\\s");
-			meaning_morphTable.put(key, value);
+			String[] constraints = array[1].split(",\\s");
+			String[] parents = array[2].split(",\\s");
+			ArrayList<String[]> values = new ArrayList<String[]>();
+			values.add(constraints);
+			values.add(parents);
+			meaning_morphTable.put(key, values);
 		}
 
 	}
 	
-	public HashMap<String, String[]> getConstructionalTable() {
+	public HashMap<String, ArrayList<String[]>> getConstructionalTable() {
 		return constructional_morphTable;
 	}
 	
-	public HashMap<String, String[]> getMeaningTable() {
+	public HashMap<String, ArrayList<String[]>> getMeaningTable() {
 		return meaning_morphTable;
 	}
 

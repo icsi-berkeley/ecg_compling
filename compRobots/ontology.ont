@@ -736,4 +736,12 @@ DEFS:
 
 (type pencil sub entity artifact moveable)
 
+(type box3-instance sub instance box)
+
+(type box4-instance sub instance box)
+
+(type green sub colorValue)
+
+(type purple sub colorValue)
+
 INSTS:

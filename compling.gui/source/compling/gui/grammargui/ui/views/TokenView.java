@@ -75,7 +75,8 @@ public class TokenView extends ViewPart {
 	/** Opens up token file from TOKEN_PATH. */
 	private void openFile() {
 		try {
-			token_file = new File(base, prefs.getSetting(AP.TOKEN_PATH));
+			List<String> token_paths = prefs.getList(AP.TOKEN_PATH);
+			token_file = new File(base, token_paths.get(0));  // writes to the first token path listed
 			if (!token_file.exists()) {
 				token_file.createNewFile();
 			}

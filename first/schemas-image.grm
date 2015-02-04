@@ -60,4 +60,16 @@ schema Possession  //revised 11/30/12
 	   possessor:RD
 	   possessed:RD
 		
-				
+
+schema RefRelation
+   roles
+     first: RD
+     second: RD
+     
+schema RefIdentity
+	subcase of RefRelation
+	constraints
+	  first.ontological-category <--> second.ontological-category
+	  first.number <--> second.number
+	  first.gender <--> second.gender
+					

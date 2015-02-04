@@ -96,6 +96,20 @@ construction CopularVPAdjective
         self.adj.m.modifiedThing <--> ed.profiledParticipant  // might be enough for Adj-N agreement 10/27/12
  		self.adj.m.domain <--> ed.profiledParticipant.ontological-category // Adj-N agreement 10/27/12
  
+construction CopularVPNominal // 2/14/13
+  subcase of CopularVP
+  constructional  
+    constituents
+      	nominal: NP
+  form
+    constraints
+      	cop.f meets nominal.f
+  meaning: Stasis
+    evokes RefIdentity as ri
+   constraints
+        self.m.state <--> ri
+        ri.first <--> ed.profiledParticipant
+        ri.second <--> nominal.m     
 /*
 Nominal copulas (e.g. "it is a box") could be analyzed using a CopuluarVPNominal cxn
 such as the one shown below, whcih is a subcase of the general CopularVP cxn above.

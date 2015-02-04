@@ -3,6 +3,7 @@ package compling.gui.grammargui.builder;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -243,7 +244,7 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 	protected void fullBuild(PrefsManager manager, final IProgressMonitor monitor) throws CoreException {
 		
 		ResourceGatherer gatherer = new ResourceGatherer(manager.getPreferences());
-		List<File> files = gatherer.getGrammarFiles(); //new ResourceGatherer(manager.getPreferences()).getGrammarFiles();
+		List<File> files = gatherer.getImportFiles(); //new ResourceGatherer(manager.getPreferences()).getGrammarFiles();
 		
 		
 		int stepCount = 1 + 1 + files.size();
@@ -251,44 +252,49 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 		
 		Grammar grammar = prebuildGrammar(manager);
 		grammar.addImport(manager.getPreferences().getSetting(AP.PACKAGE_NAME));
-		System.out.println(manager.getPreferences().getSetting(AP.PACKAGE_NAME));
-		/*
-		monitor.worked(1);
-		for (File f : files) {
-			IFile grammarFile = (IFile) getProject().findMember(f.getPath());
-			buildGrammar(grammarFile, grammar);
-			monitor.worked(1);
-		}
-		*/
-		if (gatherer.getImportFiles().size() > 0) {
-			List<File> importFiles = gatherer.getImportFiles(); // (seantrott)
-			System.out.println(importFiles);
-			Grammar grammar2 = prebuildGrammar(manager);
-			IPath destination = new Path("./compRobots");
-			for (File f : importFiles) {
-
-				IFile grammarFile = (IFile) getProject().findMember(f.getPath());
-				buildGrammar(grammarFile, grammar2);
-				
-				//buildGrammar(grammarFile, grammar2);
-				monitor.worked(1);
-			}
 		
-			
-			grammar.setContextModel(grammar2.getContextModel());
-			//grammar.setOntologyTypeSystem(grammar2.getOntologyTypeSystem());
-			for (Grammar.Schema schema : grammar2.getAllSchemas()) {
-				if (grammar.getImport().contains(schema.getPackage())) {
-					grammar.addSchema(grammar.new Schema(schema.getName(), schema.getKind(), schema.getParents(), schema.getContents()));
-				}
-			}
+		if (gatherer.getImportFiles().size() > 0) {
 
-			for (Grammar.Construction cxn : grammar2.getAllConstructions()) {
-				if (grammar.getImport().contains(cxn.getPackage())) {
-					grammar.addConstruction(grammar.new Construction(cxn.getName(), cxn.getKind(), cxn.getParents(), 
-																	 cxn.getFormBlock(), cxn.getMeaningBlock(), cxn.getConstructionalBlock()));
+			ArrayList<Grammar> grammarList = new ArrayList<Grammar>();
+			List<List<File>> importList = gatherer.getImportFilesDir();
+			List<String> seenPackages = new ArrayList<String>();
+			for (List<File> fileList : importList) {
+				Grammar tempGrammar = prebuildGrammar(manager);
+				for (File f : fileList) {
+					IFile grammarFile = (IFile) getProject().findMember(f.getPath());
+					buildGrammar(grammarFile, tempGrammar);
+					monitor.worked(1);
 				}
+				grammarList.add(tempGrammar);
+				System.out.println("OK, added another temporary grammar.");
+			} 
+			
+			for (Grammar g : grammarList) {
+				for (String request : g.getImport()) {
+					grammar.addImport(request);
+				}
+				for (Grammar.Schema schema : g.getSchemasNoUpdate()) {
+					if (grammar.getImport().contains(schema.getPackage()) 
+							&& !seenPackages.contains(schema.getPackage())) {
+						Grammar.Schema s = grammar.new Schema(schema.getName(), schema.getKind(), schema.getParents(), schema.getContents());
+						s.setLocation(schema.getLocation());
+						grammar.addSchema(s);
+					}
+				}
+				for (Grammar.Construction cxn : g.getCxnsNoUpdate()) {
+					if (grammar.getImport().contains(cxn.getPackage())
+							&& !seenPackages.contains(cxn.getPackage())) {
+						Grammar.Construction c = grammar.new Construction(cxn.getName(), cxn.getKind(), cxn.getParents(), 
+								 cxn.getFormBlock(), cxn.getMeaningBlock(), cxn.getConstructionalBlock());
+						c.setLocation(cxn.getLocation());
+						grammar.addConstruction(c);
+					}
+				}
+				seenPackages.addAll(g.getPackages());
 			}
+			System.out.println("OK, imported temporary grammars into working model.");
+			
+		
 		}
 
 
@@ -296,6 +302,8 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 
 		GrammarChecker.setErrorListener(new BasicGrammarErrorListener() {
 			public void notify(String message, Location location, Severity severity) {
+				System.out.println(location);
+				System.out.println(getProject());
 				IResource file = getProject().findMember(location.getFile());
 				if (file != null)
 					addMarker(file, message, location, severity);

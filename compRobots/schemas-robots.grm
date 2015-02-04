@@ -1,0 +1,32 @@
+package robots
+import first
+
+schema HeadingSchema
+   roles
+     tag: @heading
+     landmark: RD
+
+schema SerialProcess
+	subcase of ComplexProcess
+	roles
+	  connective
+	  process1: Process
+	  process2: Process
+	  protagonist
+	constraints
+	  protagonist <--> process1.protagonist
+	  protagonist2 <--> protagonist
+	  protagonist2 <--> process2.protagonist
+	  complexKind <-- @serial
+
+schema ComplexED
+	subcase of EventDescriptor
+	roles
+	  complexKind: @event-kind
+	  ed1: EventDescriptor
+	  ed2: EventDescriptor
+	  
+schema QuestionRD
+	subcase of RD
+	roles
+	  specificWh: @wh-word	  

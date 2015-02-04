@@ -51,8 +51,8 @@ public class GrammarChecker {
 			checkMaps(g, errorListener);
 			checkConstructions(g, errorListener);
 		} catch (TypeSystemException x) {
-			for (GrammarError e : x.getErrors())
-				errorListener.notify(e.getMessage(), e.getLocation(), e.getSeverity());
+			for (GrammarError e : x.getErrors()) 
+				errorListener.notify(e.getMessage(), e.getLocation(), e.getSeverity()); 
 		}
 		return errorListener.asStringBuffer();
 	}

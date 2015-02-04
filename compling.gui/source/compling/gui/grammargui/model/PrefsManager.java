@@ -556,7 +556,13 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 			if (!prefsFile.exists())
 				prefsFile.createLink(prefsPath, IResource.FILE, nullProgressMonitor);
 			IPath prefsBase = prefsPath.removeLastSegments(1);
+			/*
 			for (String p : prefs.getList(AP.GRAMMAR_PATHS)) {
+				IFolder folder = project.getFolder(p);
+				if (!folder.exists())
+					folder.createLink(prefsBase.append(p).makeAbsolute(), IResource.NONE, nullProgressMonitor);
+			}  */
+			for (String p : prefs.getList(AP.IMPORT_PATHS)) {
 				IFolder folder = project.getFolder(p);
 				if (!folder.exists())
 					folder.createLink(prefsBase.append(p).makeAbsolute(), IResource.NONE, nullProgressMonitor);

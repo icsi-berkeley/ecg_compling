@@ -55,6 +55,9 @@ public class Grammar {
 
 	
 	private String pkg = "global";
+	private ArrayList<String> pkgs = new ArrayList<String>(){{
+		add("global");
+	}};
 	private String importRequest = "global";
 	private ArrayList<String> importRequests = new ArrayList<String>(){{
 		add("global");
@@ -68,6 +71,17 @@ public class Grammar {
 	
 	public String getPackage() {
 		return pkg;
+	}
+	
+	public List<String> getPackages() {
+		return pkgs;
+	}
+	
+	public String addPackage(String pkgName) {
+		if (!pkgs.contains(pkgName)) {
+			pkgs.add(pkgName);
+		}
+		return pkgName;
 	}
 	
 	/** Adds import to import list, returns import name. */
@@ -157,6 +171,10 @@ public class Grammar {
 		update();
 		return cxns;
 	}
+	
+	public Collection<Construction> getCxnsNoUpdate() {
+		return cxns.values();
+	}
 
 	public Collection<Construction> getAllConstructions() {
 		update();
@@ -205,6 +223,11 @@ public class Grammar {
 	public Situation getSituation(String name) {
 		update();
 		return situations.get(name);
+	}
+	
+	/** Added @seantrott for testing - building incremental grammars, don't want to update. */
+	public Collection<Schema> getSchemasNoUpdate() {
+		return schemas.values();
 	}
 
 	public Collection<Schema> getAllSchemas() {
