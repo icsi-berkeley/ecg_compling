@@ -1,0 +1,32 @@
+package robots
+import first
+
+/*
+construction Nominal-LocPP
+	subcase of Kernel
+	constructional
+	 constituents
+	  n: Nominal
+	  pp: Loc-PP
+	form
+	 constraints
+	  n.f meets pp.f
+	meaning: RD
+	 constraints
+	  self.m <--> n.m
+	  n.m <--> pp.m.trajector
+*/
+
+construction KernelAdj-LocPP
+	subcase of Kernel
+    constructional
+     constituents
+       ka: KernelAdj
+       pp: Loc-PP
+   form
+     constraints
+       ka.f meets pp.f
+   meaning
+     constraints 
+       self.m <--> ka.m
+       ka.n.m <--> pp.m.trajector	        

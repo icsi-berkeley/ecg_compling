@@ -96,43 +96,46 @@ public class ECGMorph {
 		// prefs = (AnalyzerPrefs) grammar.getPrefs();
 		tokenReader = tokener;
 		
+		morphs = new HashMap<String, List<MorphEntry>>();
+		
 		prefs = (AnalyzerPrefs) grammarWrapper.getGrammar().getPrefs();
 		
 		File base = prefs.getBaseDirectory();	
 
-		ecgmorph_path = new File(base, prefs.getSetting(AP.MORPHOLOGY_PATH));
-		
-		morphs = new HashMap<String, List<MorphEntry>>();
-
-		TextFileLineIterator tfli = new TextFileLineIterator(ecgmorph_path);
-		
-		int lineNum = 0;
-								
-		while (tfli.hasNext()) {
-			lineNum++;
-			String line = tfli.next();
-			// Skip blank lines or lines with just a comment
-			if (line.matches("\\s*#.*") || line.matches("\\s*")) {
-				continue;
-			}
-			String splitline[] = line.split("\\s+");
-			if (splitline.length < 3) {
-				// TODO: Create a MorphException class and throw that instead
-				throw new IOException("Improperly formatted entry in morph file " + ecgmorph_path + ", line " + lineNum);
-			}
-			if (entryInGrammar(splitline)) {
-				// System.out.println("Found morph for \"" + entrystr[0] + "\"");
-				List<MorphEntry> morphlist;
-				// Create data structure. Since every wordform should only occur once,
-				// this could probably be hoisted, but better safe...
-				if (!morphs.containsKey(splitline[0])) {
-					morphlist = new ArrayList<MorphEntry>();
-					morphs.put(splitline[0], morphlist);
-				} else {
-					morphlist = morphs.get(splitline[0]);
+		List<String> morph_paths = prefs.getList(AP.MORPHOLOGY_PATH);
+		for (String path : morph_paths) {
+			ecgmorph_path = new File(base, path);
+	
+			TextFileLineIterator tfli = new TextFileLineIterator(ecgmorph_path);
+			
+			int lineNum = 0;
+									
+			while (tfli.hasNext()) {
+				lineNum++;
+				String line = tfli.next();
+				// Skip blank lines or lines with just a comment
+				if (line.matches("\\s*#.*") || line.matches("\\s*")) {
+					continue;
 				}
-				for (int ii = 1; ii < splitline.length; ii+=2) {
-					morphlist.add(new MorphEntry(splitline[ii], splitline[ii+1]));
+				String splitline[] = line.split("\\s+");
+				if (splitline.length < 3) {
+					// TODO: Create a MorphException class and throw that instead
+					throw new IOException("Improperly formatted entry in morph file " + ecgmorph_path + ", line " + lineNum);
+				}
+				if (entryInGrammar(splitline)) {
+					// System.out.println("Found morph for \"" + entrystr[0] + "\"");
+					List<MorphEntry> morphlist;
+					// Create data structure. Since every wordform should only occur once,
+					// this could probably be hoisted, but better safe...
+					if (!morphs.containsKey(splitline[0])) {
+						morphlist = new ArrayList<MorphEntry>();
+						morphs.put(splitline[0], morphlist);
+					} else {
+						morphlist = morphs.get(splitline[0]);
+					}
+					for (int ii = 1; ii < splitline.length; ii+=2) {
+						morphlist.add(new MorphEntry(splitline[ii], splitline[ii+1]));
+					}
 				}
 			}
 		}

@@ -634,6 +634,8 @@ DEFS:
 
 (type blue sub colorValue)
 
+(type sizeValue sub propValue)
+
 // numbers
 
 (type number sub quantifier)
@@ -743,5 +745,11 @@ DEFS:
 (type green sub colorValue)
 
 (type purple sub colorValue)
+
+(type big sub sizeValue)
+
+(type small sub sizeValue)
+
+(type push_move sub motion push)
 
 INSTS:

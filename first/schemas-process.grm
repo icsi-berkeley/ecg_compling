@@ -157,6 +157,64 @@ schema CauseEffectAction // prototypical/central case of causation
  	//effect – could define as EventRD and bind aff Entity and process roles
       //cause - could define as EventRD and bind causalAgent and Process roles
  
+/* Unsure if this is final version of causation. */ 
+schema CauseEffect   // Direct Physical Causation
+   subcase of ComplexProcess 
+   roles
+      causalAgent: RD 
+      affectedEntity: RD
+      causalProcess: ForceApplication
+      affectedProcess
+   constraints
+      causalAgent <--> protagonist // binding to inherited role
+      affectedEntity <--> protagonist2 // binding to inherited role
+      causalProcess <--> process1 // binding to inherited role
+      affectedProcess <--> process2 // binding to inherited role
+      causalProcess.actedUpon <--> protagonist2
+      causalProcess.actionary <-- @forceapplication
+      complexKind <-- @causal
+      
+ schema MotorControl
+   subcase of Process
+   roles
+      actor: RD 
+      effector: RD
+      effort
+      routine : @routine
+   constraints
+   	  actor.ontological-category <-- @agent //  12/21/12
+      actor <--> protagonist  // protagonist inherited from Process
+      routine <--> actionary
+
+schema ForceTransfer 
+   evokes Contact as cont
+   roles
+      supplier: RD // @entity    
+      recipient: RD // @entity
+      amount  // name conflict ********
+   constraints 
+   	  // no replacement for the above since Contact constrains
+   	  // entity{1,2}.referent to @entity
+      supplier <--> cont.entity1
+      recipient <--> cont.entity2   
+
+schema ForceApplication
+   subcase of MotorControl     
+   evokes ForceTransfer as ft 
+   roles
+      actedUpon: RD // @entity
+      routine : @forceapplication
+      instrument: RD // @instrument
+   constraints
+      actor <-->  ft.supplier
+      actedUpon <--> ft.recipient
+      //other   <-->   ft.recipient // 4/30/13 ********    
+      instrument <--> effector
+      effort <-->  ft.amount    
+      actionary <-- @forceapplication
+
+      
+
  
 schema VehicularMotion
    subcase of MotionPath

@@ -6922,10 +6922,6 @@ bowsprits	bowsprit Plural
 bowwow	bowwow Singular bowwow NoMorphology
 bowwows	bowwow Plural
 box	box Singular box Infinitive box Plural/PresentTense box Singular/PresentTense/FirstPerson box Singular/PresentTense/SecondPerson box Plural/PresentTense
-box1		box2 Singular
-box2		box2 Singular
-box3		box3 Singular
-box4		box4 Singular
 box-kite	box-kite Singular
 box-kites	box-kite Plural
 box-number	box-number Singular
@@ -54167,7 +54163,6 @@ robin	robin Singular
 robing	robe PresentTense/Participle
 robins	robin Plural
 robot	robot Singular
-robot1  robot1 Singular
 robots	robot Plural
 robs	rob Singular/PresentTense/ThirdPerson
 robust	robust Positive

@@ -31,7 +31,7 @@ construction SelfMotionType
 	meaning: MotionPath
       constraints
          self.m.actionary <-- @motion
-         self.m.speed <-- "?"
+         self.m.speed <-- "5"
 
 
 
