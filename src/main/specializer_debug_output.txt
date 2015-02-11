@@ -599,3 +599,31 @@ Struct(predicate_type='command', parameters=[Struct(protagonist={'objectDescript
 Imperative 
 robot1, sprint to box1! 
 Struct(predicate_type='command', return_type='error_descriptor', parameters=[Struct(speed=0.8, direction=None, distance=Struct(units='square', value=8), protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, action='run', goal={'objectDescriptor': {'type': 'box', 'referent': 'box1_instance'}}, kind='execute', heading=None, control_state='ongoing')])
+
+Imperative 
+robot1, move behind the big red box! 
+Struct(return_type='error_descriptor', parameters=[Struct(protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, speed=0.5, action='move', control_state='ongoing', distance=Struct(units='square', value=8), kind='execute', goal={'locationDescriptor': {'objectDescriptor': {'color': 'red', 'type': 'box', 'size': 'big', 'givenness': 'uniquelyIdentifiable'}, 'relation': 'behind'}}, heading=None, direction=None)], predicate_type='command')
+
+Imperative 
+robot1, move behind the blue box! 
+Struct(return_type='error_descriptor', parameters=[Struct(heading=None, direction=None, control_state='ongoing', speed=0.5, action='move', goal={'partDescriptor': {'objectDescriptor': {'type': 'box', 'givenness': 'uniquelyIdentifiable', 'color': 'blue'}, 'relation': {'type': 'back'}}}, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, kind='execute', distance=Struct(value=8, units='square'))], predicate_type='command')
+
+Imperative 
+robot1, move behind the blue box! 
+Struct(parameters=[Struct(speed=0.5, kind='execute', distance=Struct(units='square', value=8), goal={'partDescriptor': {'relation': {'type': 'back'}, 'objectDescriptor': {'type': 'box', 'color': 'blue', 'givenness': 'uniquelyIdentifiable'}}}, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, action='move', heading=None, control_state='ongoing', direction=None)], predicate_type='command', return_type='error_descriptor')
+
+Imperative 
+robot1, move behind the blue box! 
+Struct(predicate_type='command', parameters=[Struct(heading=None, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, direction=None, kind='execute', goal={'locationDescriptor': {'objectDescriptor': {'givenness': 'uniquelyIdentifiable', 'type': 'box', 'color': 'blue'}, 'relation': 'behind'}}, distance=Struct(value=8, units='square'), control_state='ongoing', action='move', speed=0.5)], return_type='error_descriptor')
+
+Imperative 
+robot1, move to the north side of the blue box! 
+Struct(parameters=[Struct(distance=Struct(value=8, units='square'), action='move', protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, heading=None, speed=0.5, direction=None, goal={'locationDescriptor': {'relation': '', 'objectDescriptor': {'type': 'region', 'givenness': 'givennessValues'}}}, kind='execute', control_state='ongoing')], return_type='error_descriptor', predicate_type='command')
+
+Imperative 
+robot1, move to the north side of the blue box! 
+Struct(parameters=[Struct(action='move', heading=None, direction=None, speed=0.5, distance=Struct(value=8, units='square'), control_state='ongoing', protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, kind='execute', goal={'partDescriptor': {'relation': {'givenness': 'uniquelyIdentifiable', 'type': 'side', 'side': 'northSide'}, 'objectDescriptor': {'givenness': 'uniquelyIdentifiable', 'type': 'side', 'side': 'northSide'}}})], predicate_type='command', return_type='error_descriptor')
+
+Imperative 
+robot1, move to the north side of box1! 
+Struct(return_type='error_descriptor', parameters=[Struct(kind='execute', speed=0.5, direction=None, control_state='ongoing', goal={'partDescriptor': {'relation': {'side': 'northSide', 'givenness': 'uniquelyIdentifiable', 'type': 'side'}, 'objectDescriptor': {'referent': 'box1_instance', 'type': 'box'}}}, protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, action='move', heading=None, distance=Struct(value=8, units='square'))], predicate_type='command')

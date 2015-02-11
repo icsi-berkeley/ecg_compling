@@ -218,12 +218,11 @@ class RobotProblemSolver(DispatchingProblemSolver):
                         self.move(inst, obj.pos.x, obj.pos.y, obj.pos.z, speed=speed)         
                 elif ('locationDescriptor') in goal:
                     properties = goal['locationDescriptor']
-                    loc = self.get_described_loc_pos(properties,getattr(self.world, inst))
+                    loc = self.get_described_loc_pos(properties,inst)
                     if (loc):
                         self.move(inst, loc[0], loc[1], speed=speed)    
         elif heading:
             n = float(parameters.distance.value)
-            print(inst)
             name = getattr(inst, 'name')
             #pos = getattr(inst, 'pos') #self.getpos(inst)
             pos = self.getpos(name)
@@ -388,16 +387,16 @@ class RobotProblemSolver(DispatchingProblemSolver):
     def get_described_part_pos(self,partDescription,protagonist= None):
         obj = self.get_described_obj(partDescription['objectDescriptor'])
 
-        if (partDescription['relation']['side']=='north'):
+        if (partDescription['relation']['side']=='northSide'):
             x = obj.pos.x 
             y = obj.pos.y +3
-        elif (partDescription['relation']['side']=='east'):
+        elif (partDescription['relation']['side']=='eastSide'):
             x = obj.pos.x +3
             y = obj.pos.y 
-        elif (partDescription['relation']['side']=='south'):
+        elif (partDescription['relation']['side']=='southSide'):
             x = obj.pos.x 
             y = obj.pos.y -3
-        elif (partDescription['relation']['side']=='west'):
+        elif (partDescription['relation']['side']=='westSide'):
             x = obj.pos.x -3
             y = obj.pos.y 
         else:

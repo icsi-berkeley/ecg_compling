@@ -106,7 +106,7 @@ def main_loop(analyzer, solver=NullProblemSolver(), specializer=RobotSpecializer
                 print('Problem solving SemSpec #: %s' % count)
                 print(analyses)#[count-1])
                 #print(fs)
-                #traceback.print_exc()
+                traceback.print_exc()
                 if count == len(analyses):
                     print("Unable to solve any of the SemSpecs.")
                 count += 1

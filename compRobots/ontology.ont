@@ -378,6 +378,16 @@ DEFS:
 
 (type home sub location)
 
+//Metonymy
+
+(type part sub physicalEntity)
+
+(type side sub part location)
+
+(type back sub side)
+
+(type front sub side)
+
 (type antecedent sub physicalEntity)
 
 //
@@ -642,6 +652,8 @@ DEFS:
 
 (type sizeValue sub propValue)
 
+(type sideValue sub propValue)
+
 // numbers
 
 (type number sub quantifier)
@@ -775,5 +787,13 @@ DEFS:
 (type magenta sub colorValue)
 
 (type dash sub motion)
+
+(type northSide sub sideValue)
+
+(type southSide sub sideValue)
+
+(type eastSide sub sideValue)
+
+(type westSide sub sideValue)
 
 INSTS:

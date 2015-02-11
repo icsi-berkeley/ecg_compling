@@ -34,4 +34,11 @@ construction ComplexAdjKernel
 	    self.m <--> n.m
 	    self.m <--> ap.m.modifiedThing
 	
-	          
+
+construction SideAdj-Type
+	subcase of GeneralTypeCxn, PropertyAdjective
+	meaning
+	  constraints
+	    self.m.value <-- @sideValue
+	    self.m.property <-- @side
+	    self.m.domain <-- @part	          

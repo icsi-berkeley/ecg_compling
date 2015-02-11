@@ -1,15 +1,47 @@
 package location
 import starter
 
-    
-schema Location2D
-	subcase of RD
-	roles
-	  xCoord: @number
-	  yCoord: @number
+
+construction Part-Of-Whole 
+  subcase of Kernel  
+   constructional
+    constituents   
+      snp: Kernel
+      of-prep: OF-Modifier
+      np: NP
    constraints
-     ontological-category <-- @location
-     number <-- @singular
+      self.features <--> snp.features
+  form
+    constraints
+      snp.f meets of-prep.f
+      of-prep.f meets np.f	
+ meaning //RD
+	evokes PartWhole as pw  
+  	constraints
+  		self.m <--> snp.m  // percolate 
+  		//snp.m.ontological-category <-- @container // applies only to containers
+  		snp.m <--> self.pw.part
+  		snp.m.ontological-category <-- @part
+  		np.m <--> self.pw.whole
+  		snp.m.extensions <--> self.pw
+
+construction NP-ModifierPP
+	subcase of NP
+	constructional
+	  constituents
+	    np: NP
+	    modpp: ModifierPP
+	  constraints
+	    self.features <--> np.features
+	form
+	  constraints
+	    np.f meets modpp.f
+	meaning
+	  constraints
+	    np.m.ontological-category <-- @physicalEntity
+	    np.m <--> modpp.m.modifiedThing
+	    self.m <--> np.m
+
 
 construction LOCATION
 	subcase of Word, HasAgreementFeatures
@@ -33,4 +65,6 @@ construction LocationNP
 	meaning: Location2D
 	  constraints
 	    self.m.xCoord <--> x.m.value
-	    self.m.yCoord <--> y.m.value 	        
+	    self.m.yCoord <--> y.m.value 
+	    
+	    	        

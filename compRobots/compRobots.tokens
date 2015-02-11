@@ -27,3 +27,7 @@ violet :: ColorType :: self.m.value <-- @purple
 orange :: ColorType :: self.m.value <-- @orange
 magenta :: ColorType :: self.m.value <-- @magenta
 dash :: SelfMotionType :: self.m.actionary <-- @dash :: self.m.speed <-- ".8"
+north :: SideAdj-Type :: self.m.value <-- @northSide
+south :: SideAdj-Type :: self.m.value <-- @southSide
+east :: SideAdj-Type :: self.m.value <-- @eastSide
+west :: SideAdj-Type :: self.m.value <-- @westSide

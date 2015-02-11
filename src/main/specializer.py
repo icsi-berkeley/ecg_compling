@@ -270,10 +270,10 @@ class RobotSpecializer(UtilitySpecializer, TemplateSpecializer):
                 elif g.ontological_category.type() == 'heading':
                     goal = None
                     params.update(heading=g.tag.type())
-                elif g.ontological_category.type() == 'region':
-                    goal['locationDescriptor'] = {'objectDescriptor': self.get_objectDescriptor(process.landmark), 'relation': self.get_locationDescriptor(g)}
                 elif self.analyzer.issubtype('ONTOLOGY', g.ontological_category.type(), 'part'): # checks if it's a "part" in a part whole relation
-                    goal['partDescriptor'] = {'objectDescriptor': self.get_objectDescriptor(g.extensions.whole), 'relation': self.get_objectDescriptor(g)}
+                    goal['partDescriptor'] = {'objectDescriptor': self.get_objectDescriptor(g.extensions.whole), 'relation': self.get_objectDescriptor(g)}    
+                elif g.ontological_category.type() == 'region':
+                    goal['locationDescriptor'] = {'objectDescriptor': self.get_objectDescriptor(process.landmark), 'relation': self.get_locationDescriptor(g)}  
                 elif g.ontological_category.type() == 'antecedent':
                     try:
                         goal = self.resolve_anaphoricOne(g)

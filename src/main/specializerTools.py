@@ -149,6 +149,7 @@ class UtilitySpecializer(DebuggingSpecializer):
             ref = popper.pop()
             if 'location' in ref or 'locationDescriptor' in ref:
                 ref = popper.pop()
+                #return self.resolves_one(ref['locationDescriptor']['objectDescriptor'])
             else:
                 # Inspect object descriptor: if it contains color and size, maybe add these too?
                 if item.givenness.type() == 'distinct':
@@ -160,6 +161,7 @@ class UtilitySpecializer(DebuggingSpecializer):
                     #test['type'] = ref['objectDescriptor']['type']
                     return {'objectDescriptor': merged}
         raise Exception
+
 
     def merge_descriptors(self, old, new):
         """ Merges object descriptors from OLD and NEW. Objective: move all descriptions / properties from OLD

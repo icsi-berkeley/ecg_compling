@@ -1,30 +1,5 @@
 package robots
 import starter
-
-schema HeadingSchema
-   roles
-     tag: @heading
-     landmark: RD
-
-schema SerialProcess
-	subcase of ComplexProcess
-	roles
-	  connective
-	  process1: Process
-	  process2: Process
-	  protagonist
-	constraints
-	  protagonist <--> process1.protagonist
-	  protagonist2 <--> protagonist
-	  protagonist2 <--> process2.protagonist
-	  complexKind <-- @serial
-
-schema ComplexED
-	subcase of EventDescriptor
-	roles
-	  complexKind: @event-kind
-	  ed1: EventDescriptor
-	  ed2: EventDescriptor
 	  
 schema QuestionRD
 	subcase of RD
@@ -51,6 +26,14 @@ schema QuantifiedRD  // general case
       	units: @spatial-units	// check the typing wrt all kinds	
       	
       	
+schema Location2D
+	subcase of RD
+	roles
+	  xCoord: @number
+	  yCoord: @number
+   constraints
+     ontological-category <-- @location
+     number <-- @singular
       	
       	
 // added 8/4/14 (ST) from base

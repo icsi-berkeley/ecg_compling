@@ -32,8 +32,8 @@ general construction PluralNoun
 
 	  
 // Proper Nouns
-construction ProperNounNP
-    subcase of NP, Word, NounType
+general construction ProperNounNP
+    subcase of NP, Word
 
 
 package john-package
@@ -66,22 +66,8 @@ construction NounType
         self.m.ontological-category <-- @entity
         self.m.scale <-- @scale
 
-construction PhysicalNounType
-   subcase of NounType
-   meaning
-      constraints
-        //self.m.number <-- @RDnumberValues
-        self.m.gender <-- @genderValues
-        self.m.ontological-category <-- @physicalEntity
-        self.m.scale <-- @scale        
-        
-construction ArtifactNounType
-	subcase of PhysicalNounType
-	meaning
-	  constraints
-	    self.m.ontological-category <-- @artifact
-	    self.m.gender <-- @genderValues
-        self.m.scale <-- @scale      
+       
+  
 	    
 
 general construction Directional	    
