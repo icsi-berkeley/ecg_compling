@@ -56,7 +56,7 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 
 	/** The default character set. Let's see if it needs to be moved elsewhere. */
 	private static final Charset DEFAULT_CHARSET = Charset.forName(ECGConstants.DEFAULT_ENCODING);
-
+	
 	class SampleDeltaVisitor implements IResourceDeltaVisitor {
 		public boolean visit(IResourceDelta delta) throws CoreException {
 			IResource resource = delta.getResource();
@@ -251,7 +251,11 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 		monitor.beginTask("Building grammar", stepCount);
 		
 		Grammar grammar = prebuildGrammar(manager);
-		grammar.addImport(manager.getPreferences().getSetting(AP.PACKAGE_NAME));
+		//grammar.addImport(manager.getPreferences().getSetting(AP.PACKAGE_NAME));
+		List<String> packageNames = manager.getPreferences().getList(AP.PACKAGE_NAME);
+		for (String name : packageNames) {
+	    	grammar.addImport(name);
+	    }
 		
 		if (gatherer.getImportFiles().size() > 0) {
 

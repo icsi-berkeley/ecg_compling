@@ -51,6 +51,12 @@ def json_to_struct(f):
     return n
 
 
+class ClarificationError(Exception):
+    def __init__(self, message, ntuple, cue=None):
+        self.message = message
+        self.ntuple = ntuple
+        self.cue=cue
+
 class ProblemSolver(object):
     """Base for all problem solvers.
     """
@@ -70,33 +76,45 @@ class DispatchingProblemSolver(ProblemSolver):
 #     def __init__(self, simulator):
 #         self.simulator = simulator
 
+    _return_type = None
+
+    ntuple = None
+
+    _wh = None
+
     def solve(self, json_ntuple):
         """Decode the ntuple and dispatch the call.
         """
         #print('JSON-encoded ntuple to solve:', json_ntuple, sep='\n')
         ntuple = loads(json_ntuple, object_hook=StructJSONEncoder.as_struct)
+        self.ntuple = ntuple
+        self._return_type = ntuple.return_type
         try:
+            self.home_pos = self.world.robot1_instance.pos
             if (hasattr(ntuple, "predicate_type") and ntuple.predicate_type =="conditional"):
                  dispatch = getattr(self, 'solve_%s' % "conditional")
+                 dispatch(ntuple)
             else:  
-                dispatch = getattr(self, 'solve_%s' % ntuple.parameters[0].action)
-            dispatch(ntuple)
+                for p in ntuple.parameters:
+                    dispatch = getattr(self, 'solve_%s' % p.action)
+                    dispatch(p)
+            #dispatch(ntuple)
         except AttributeError:
             pprint(ntuple)
             raise
 
     #dispatch based on ntuple, should be inner fn for solve...
     def solve_ntuple (self,ntuple):
-        print(ntuple)
-        try:
-            if (hasattr(ntuple, "predicate_type") and ntuple.predicate_type =="conditional"):
-                 dispatch = getattr(self, 'solve_%s' % "conditional")
-            else:    
-                dispatch = getattr(self, 'solve_%s' % ntuple.parameters[0].action)
-            dispatch(ntuple)
-        except AttributeError:
-            pprint(ntuple)
-            raise
+            try:
+                if (hasattr(ntuple, "predicate_type") and ntuple.predicate_type =="conditional"):
+                     dispatch = getattr(self, 'solve_%s' % "conditional")
+                else:
+                    for p in ntuple.parameters:    
+                        dispatch = getattr(self, 'solve_%s' % p.action)
+                        dispatch(p)
+            except AttributeError:
+                pprint(ntuple)
+                raise
 
 
 class RobotProblemSolver(DispatchingProblemSolver):
@@ -111,6 +129,8 @@ class RobotProblemSolver(DispatchingProblemSolver):
     headings = dict(north=(0.0, 1.0, 0.0), south=(0.0, -1.0, 0.0), 
                     east=(1.0, 0.0, 0.0), west=(-1.0, 0.0, 0.0))
 
+
+    _recent = None
 
     # Lists names and attributes of all the objects in the world (besides Robot1)
     def names(self):
@@ -156,101 +176,121 @@ class RobotProblemSolver(DispatchingProblemSolver):
         self.solve_move(ntuple)
 
 
-    def solve_move(self, ntuple):
+    def solve_move(self, parameters):
         color = None
         size = None
         world = self.world
-        home_pos = world.robot1_instance.pos
         print('solver: begin move_to_destination')
-        for parameters in ntuple.parameters:
-            protagonist = parameters.protagonist
-            speed = parameters.speed * 6
-            heading = parameters.heading
-            goal = parameters.goal
-            direction = parameters.direction
-            inst =protagonist 
-            #getattr(self.world, protagonist)
-            if goal:
-                # TODO: super/subtype relations missing!
-    #             print(goal)
-                if 'location' in goal:
-                    #inst.move(x=float(goal['location'][0]), y=float(goal['location'][1]), z=0.0)
-                    if goal['location'] == 'home':
-                        self.move(inst, home_pos.x, home_pos.y, home_pos.z, tolerance= 2, speed=speed) 
-                    else:
-                        self.move(inst,float(goal['location'][0]), float(goal['location'][1]), 0.0, speed=speed) 
-
-                elif goal == 'home':
-                    self.move(inst, home_pos.x, home_pos.y, home_pos.z, speed=speed)    
-                elif 'referent' in goal:
-                    obj = getattr(self.world, goal['referent']) 
-                    #inst.move(x=obj.pos.x, y=obj.pos.y, z=obj.pos.z)
-                    self.move(inst, obj.pos.x, obj.pos.y, obj.pos.z, speed=speed)
-                elif ('partDescriptor' in goal):
-                    if goal['partDescriptor']['relation']['type'] == 'side':
-                        loc = self.get_described_part_pos(goal['partDescriptor'],inst)
-                        if (loc):
-                            self.move(inst, loc[0], loc[1], tolerence= 2, speed=speed)
+        #for parameters in ntuple.parameters:
+        protagonist = self.get_described_obj(parameters.protagonist['objectDescriptor'])
+        speed = parameters.speed * 6
+        heading = parameters.heading
+        goal = parameters.goal
+        direction = parameters.direction
+        inst =protagonist 
+        #getattr(self.world, protagonist)
+        if goal:
+            # TODO: super/subtype relations missing!
+#             print(goal)
+            if 'location' in goal:
+                #inst.move(x=float(goal['location'][0]), y=float(goal['location'][1]), z=0.0)
+                if goal['location'] == 'home':
+                    self.move(inst, self.home_pos.x, self.home_pos.y, self.home_pos.z, tolerance= 2, speed=speed) 
                 else:
-                    if ('objectDescriptor') in goal: 
-                        properties = goal['objectDescriptor']
-                        obj = self.get_described_obj(properties, multiple=True)
-                        if (obj):
-                            self.move(inst, obj.pos.x, obj.pos.y, obj.pos.z, speed=speed)         
-                    elif ('locationDescriptor') in goal:
-                        properties = goal['locationDescriptor']
-                        loc = self.get_described_loc_pos(properties,getattr(self.world, inst))
-                        if (loc):
-                            self.move(inst, loc[0], loc[1], speed=speed)
-                
-            elif heading:
-                n = float(parameters.distance.value)
-                pos = self.getpos(inst)
-                newpos = vector_add(pos, vector_mul(n, self.headings[heading]))
-                self.move(inst, newpos[0], newpos[1], newpos[2], speed=speed)
+                    self.move(inst,float(goal['location'][0]), float(goal['location'][1]), 0.0, speed=speed) 
+
+            elif goal == 'home':
+                self.move(inst, home_pos.x, home_pos.y, home_pos.z, speed=speed)    
+            elif 'referent' in goal:
+                obj = getattr(self.world, goal['referent']) 
+                #inst.move(x=obj.pos.x, y=obj.pos.y, z=obj.pos.z)
+                self.move(inst, obj.pos.x, obj.pos.y, obj.pos.z, speed=speed)
+            elif ('partDescriptor' in goal):
+                if goal['partDescriptor']['relation']['type'] == 'side':
+                    loc = self.get_described_part_pos(goal['partDescriptor'],inst)
+                    if (loc):
+                        self.move(inst, loc[0], loc[1], tolerance= 2, speed=speed)
+            else:
+                if ('objectDescriptor') in goal: 
+                    properties = goal['objectDescriptor']
+                    obj = self.get_described_obj(properties, multiple=True)
+                    if (obj):
+                        self.move(inst, obj.pos.x, obj.pos.y, obj.pos.z, speed=speed)         
+                elif ('locationDescriptor') in goal:
+                    properties = goal['locationDescriptor']
+                    loc = self.get_described_loc_pos(properties,getattr(self.world, inst))
+                    if (loc):
+                        self.move(inst, loc[0], loc[1], speed=speed)    
+        elif heading:
+            n = float(parameters.distance.value)
+            print(inst)
+            name = getattr(inst, 'name')
+            #pos = getattr(inst, 'pos') #self.getpos(inst)
+            pos = self.getpos(name)
+            newpos = vector_add(pos, vector_mul(n, self.headings[heading]))
+            self.move(inst, newpos[0], newpos[1], newpos[2], speed=speed)
         print('solver: end move_to_destination')
 
-    def solve_push_move(self, ntuple):
+    def solve_push_move(self, parameters):
         color = None
         size = None
         world = self.world
         home_pos = world.robot1_instance.pos
         print('solver: begin move_to_destination')
-        for parameters in ntuple.parameters:
-            protagonist = parameters.causer
-            heading = parameters.affectedProcess.heading
-            goal = parameters.affectedProcess.goal
-            distance = parameters.causalProcess.distance.value 
-            inst =protagonist #getattr(self.world, protagonist)
-            obj = self.get_described_obj(parameters.causalProcess.acted_upon['objectDescriptor'])
-            if goal:
-                print("not yet supported. try pushing a box in a direction")
-            if heading:
-                n = float(distance)
-                print(obj.pos)
+        #for parameters in ntuple.parameters:
+        protagonist = self.get_described_obj(parameters.causer['objectDescriptor'])
+        heading = parameters.affectedProcess.heading
+        goal = parameters.affectedProcess.goal
+        distance = parameters.affectedProcess.distance.value 
+        inst =protagonist
+        if parameters.causalProcess.acted_upon == None:
+            tag = ['acted_upon']
+            tagged = self.tag_ntuple(properties='', ntuple=self.ntuple, tag=tag)
+            raise ClarificationError(message="push what?", ntuple=tagged, cue=True)
 
-                addpos = vector_mul(-6, self.headings[heading])
-                self.move_precise(inst, obj.pos.x + addpos[0], obj.pos.y + addpos[1])
-                addpos = vector_mul(-3, self.headings[heading])
-                self.move_push(inst, obj.pos.x + addpos[0], obj.pos.y + addpos[1], 2)
-                addpos = vector_mul(4, self.headings[heading])
-                self.move_push(inst, obj.pos.x + addpos[0], obj.pos.y + addpos[1],2 )
+
+        obj = self.get_described_obj(parameters.causalProcess.acted_upon['objectDescriptor'])
+        if goal:
+            print("Not yet supported. Try pushing a box in a direction.")
+        elif heading:
+            n = float(distance)
+            self.push_direction(heading, inst, obj, n)
+
+        else:
+            tag = ['heading', 'goal']
+            tagged = self.tag_ntuple(properties='', ntuple=self.ntuple, tag=tag)
+            raise ClarificationError(message="push it where?", ntuple=tagged)
+
+    def push_direction(self, heading, inst, obj, n):
+        """ Pushes in a certain direction. Used to simplify "solve push move" function. """
+        addpos = vector_mul(-6, self.headings[heading])
+        self.move_precise(inst, obj.pos.x + addpos[0], obj.pos.y + addpos[1])
+        addpos = vector_mul(-3, self.headings[heading])
+        self.move_push(inst, obj.pos.x + addpos[0], obj.pos.y + addpos[1], 2)
+
+        #this is the part where it actually pushes forward. I think to make it right, you would need to repalce the following line:
+        #addpos = vector_mul(4, self.headings[heading])
+
+        #with this line
+        addpos = vector_mul(n, self.headings[heading])
+
+        self.move_push(inst, obj.pos.x + addpos[0], obj.pos.y + addpos[1],2 )
+
+
 
     #needs to be fixed, currently just returns the first conditional...
-    def evaluate_condition(self, params):
-        params =params
-        for parameters in params:
-            protagonist = parameters.protagonist
-
-
-            prediction = parameters.predication
-            if ('referent' in protagonist.keys()):
-                item = getattr(self.world, protagonist['referent'])
-            else: 
-                item = self.get_described_obj(protagonist['objectDescriptor'])
-                if (item == None):
-                    return False
-            return self.eval_condtion_one_item(item, prediction)
+    def evaluate_condition(self, parameters):
+        #params =params
+        #for parameters in params:
+        protagonist = parameters.protagonist
+        predication = parameters.predication
+        if ('referent' in protagonist.keys()):
+            item = getattr(self.world, protagonist['referent'])
+        else: 
+            item = self.get_described_obj(protagonist['objectDescriptor'])
+            if (item == None):
+                return False
+        return self.eval_condtion_one_item(item, predication)
         
     
     def eval_condtion_one_item(self, item, prediction):
@@ -263,36 +303,45 @@ class RobotProblemSolver(DispatchingProblemSolver):
                         print ("items are not near") 
                         return False
                     else:
-                        print ("items are near") 
+                        return True
+                        #print ("items are near") 
             elif not( hasattr(item, pred_prop)):
-                print ( "item does not have the " + pred_prop + " property" )
+                #print ( "item does not have the " + pred_prop + " property" )
                 return False
             elif not( getattr(item, pred_prop) == prediction [pred_prop]):
-                print ("item is not " + prediction [pred_prop] )
+                #print ("item is not " + prediction [pred_prop] )
                 return False
-            else:
-                print ("item is " + prediction [pred_prop] )
+            #else:
+                #print ("item is " + prediction [pred_prop] )
         return True
 
     def solve_conditional(self, ntuple):
-        if (self.evaluate_condition([ntuple.parameters[0].condition ])):
+        # Need to call just parameters.condition
+        if (self.evaluate_condition(ntuple.parameters[0].condition[0])):  # Changed to index into complex condition, might need to fine-tune later
             self.solve_ntuple(Struct(parameters =ntuple.parameters[0].command))
         
 
-    def solve_be2(self, ntuple):
-        return self.evaluate_condition( ntuple.parameters)
+    def solve_be2(self, parameters):
+        if self.evaluate_condition(parameters):
+            print("yes")
+        else:
+            print("no")
+        #return self.evaluate_condition(parameters)
+        #return self.evaluate_condition( ntuple.parameters)
 
-    def solve_be(self, ntuple):
-        if hasattr(ntuple.parameters[0], 'specificWh'):
-            return self.eval_wh(ntuple.parameters[0], ntuple.return_type)
-        return self.evaluate_condition( ntuple.parameters)
+    def solve_be(self, parameters):
+        if hasattr(parameters, 'specificWh'):
+            return self.eval_wh(parameters, self._return_type) #ntuple.return_type)
+        return self.evaluate_condition(parameters)
 
 
     def eval_which(self, params, num, referentType):
+        self._wh = True
         if num == 'singleton':
             obj = self.get_described_obj(params.protagonist['objectDescriptor'])
             if obj is not None:
                 print(obj.name)
+            self._wh = False
             return obj
         else:
             objs = self.get_described_objects(params.protagonist['objectDescriptor'], multiple=True)
@@ -302,6 +351,7 @@ class RobotProblemSolver(DispatchingProblemSolver):
             else:
                 for i in objs:
                     print(i.name)
+            self._wh = False
 
     def eval_what(self, params, num, referentType):
         return None
@@ -402,6 +452,22 @@ class RobotProblemSolver(DispatchingProblemSolver):
         else:
             return locations[0]
 
+
+    def get_small(self, objs):
+        smalls = []
+        for i in objs:
+            if float(i.size) <= 1:
+                smalls.append(i)
+        return smalls
+
+
+    def get_large(self, objs):
+        bigs = []
+        for i in objs:
+            if float(i.size) > 1:
+                bigs.append(i)
+        return bigs
+
     def get_described_objects(self, properties, protagonist=None, multiple=False):
         objs = []
         if 'referent' in properties:
@@ -419,9 +485,11 @@ class RobotProblemSolver(DispatchingProblemSolver):
         if 'size' in properties:
             size = properties['size']
             if size[0].lower() == 's':
-                return [self.getsmallest(objs)]
+                objs = self.get_small(objs)
+                #return [self.getsmallest(objs)]
             elif size[0].lower() == 'b':
-                return [self.getbiggest(objs)]
+                objs = self.get_large(objs)
+                #return [self.getbiggest(objs)]
         if 'locationDescriptor' in properties:
             if protagonist is None:
                 objs = self.get_described_loc(objs, properties['locationDescriptor'], self.get_described_obj(properties['locationDescriptor']['objectDescriptor']), multiple=multiple)
@@ -431,21 +499,80 @@ class RobotProblemSolver(DispatchingProblemSolver):
                 objs = [objs]
         return objs
 
+
     #takes in an object descriptor, and returns the object that matches the description
     #if noobject is found, or multiple objects are found, returns none and prints and error
     def get_described_obj(self, properties, protagonist= None, multiple=False):   
         objs = self.get_described_objects(properties, protagonist, multiple)
         if len(objs) == 1:
+            self._recent = objs[0]
             return objs[0]
         elif len(objs) >1:
             if 'givenness' in properties:
                 if properties['givenness'] == 'typeIdentifiable':
                     return random.choice(objs)
-            print('Problem: there is more than one object that matches that description. Please be more specific.')
+                if properties['givenness'] == 'distinct':
+                    if self._recent in objs:
+                        objs.remove(self._recent)
+                    return random.choice(objs) # Should return random object but not most recent one
+            if self._wh:
+                print("More than one object matches that description.")
+                self._wh = False
+                return None
+            message = "which " + self.assemble_string(properties) + "?"
+            tagged = self.tag_ntuple({'objectDescriptor': properties}, self.ntuple)
+            raise ClarificationError(message, tagged)
             return None
         else:
             print('Problem: that item does not exist')
             return None
+
+    def tag_ntuple(self, properties, ntuple, tag=[]):
+        """ Takes in properties and tags the ntuple where these properties occur. """
+        p = ntuple.parameters
+        for param in ntuple.parameters:
+            p = param.__dict__
+            for key, value in p.items():
+                if type(value) == Struct:
+                    p2 = value.__dict__
+                    for k, v in p2.items():
+                        if v == properties or k in tag:
+                            temp = "*" + str(k)
+                            p2[temp] = p2.pop(k)
+                elif value == properties or key in tag:
+                    temp = "*" + str(key)
+                    p[temp] = p.pop(key)
+                """
+                elif type(value) == dict and self.search_ntuple(properties, value):
+                    print("this is it")
+                    temp = "*" + str(key)
+                """
+
+        return ntuple
+
+    def search_ntuple(self, properties, descriptor):
+        """ Searches a value in a "descriptor" dictionary (which is itself a dictionary) if it contains "properties". Does a deep search. """
+        for key, value in descriptor.items():
+            if value == properties['objectDescriptor']:   # Hack, address later
+                return True
+            elif type(value) == dict:
+                return self.search_ntuple(properties,value)
+        return False
+
+
+    def assemble_string(self, properties):
+        """ Takes in properties and assembles a string, to format: "which blue box", etc. """
+        ont = properties['type']
+        attributes = ""
+        for key, value in properties.items():   # Creates string of properties
+            if key == "color" or key == "size":
+                attributes += " " + value 
+            if key == "location":
+                attributes += " "  + value
+            elif key == "locationDescriptor":
+                attributes += str(ont) + " " + value["relation"] + " " + self.assemble_string(value['objectDescriptor'])
+        return str(attributes) + " " + str(ont)
+
 
     def move_precise(self,inst,a, b, c=0, tolerance=2, speed=1.5):
         self.move(inst,a, b, c,tolerance,  speed)
@@ -491,12 +618,12 @@ class RobotProblemSolver(DispatchingProblemSolver):
     def solve_step(self, ntuple):
         print('step:', ntuple)
         
-    def close(self):
-        self.world.robot1_instance.close()
+
 
 class MockProblemSolver(RobotProblemSolver):
     def __init__(self, **kw):
         update(self, world=build('mock'))
+        self.home_pos = self.world.robot1_instance.pos
 
     def getpos(self, inst):
         p = getattr(getattr(self.world, inst), 'pos')
@@ -509,16 +636,22 @@ class MockProblemSolver(RobotProblemSolver):
         print("robot is at:")
         print(a,b)
         #(self.world.) 
-        setattr(getattr(self.world, inst), 'pos',Struct(x =a, y=b, z =c ))
+        setattr(inst, 'pos',Struct(x =a, y=b, z =c ))
 
         print("the world is now:")   
         pprint(self.world)
 
+    def close(self):
+        return
     
  
 class MorseProblemSolver(RobotProblemSolver):
     def __init__(self, **kw):
         update(self, world=build('morse'))
+        home_pos = self.world.robot1_instance.pos
+
+    def close(self):
+        self.world.robot1_instance.close()
 
     #ax, ay are start location bx by are end location
     #returns True if there is an obstacle in the path
@@ -627,7 +760,7 @@ class MorseProblemSolver(RobotProblemSolver):
         return (p.x, p.y, p.z) 
 
     def move(self,inst,a, b, c=0, tolerance=4, speed=1.5, collide = False):#tolerance=1.5, speed=2.0):
-        inst =getattr(self.world, inst)
+        #inst =getattr(self.world, inst)
         #carry out the move action
         robotloc = self.world.robot1_instance.pos
         #print("printing avoidance")
@@ -645,6 +778,7 @@ class MorseProblemSolver(RobotProblemSolver):
             #update the location of all objects in the world
         for obj in newworld:
             setattr(getattr(self.world, obj['name']), 'pos',Struct(x =obj['position'][0], y=obj['position'][1], z =obj['position'][2]) )
+
          
         #print("robot is going to:")
         #print(a,b)

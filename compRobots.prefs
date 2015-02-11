@@ -1,11 +1,12 @@
 
 GRAMMAR_EXTENSIONS = grm
 
-GRAMMAR_PATHS ::==
-	./compRobots
-;
 
-PACKAGE_NAME = robots
+PACKAGE_NAME ::== 
+	robots
+	location
+	motion
+;
 
 ONTOLOGY_PATHS ::==
 	./compRobots/ontology.ont
@@ -13,10 +14,9 @@ ONTOLOGY_PATHS ::==
 
 IMPORT_PATHS ::==
 	./compRobots
-	./first
+	./starter
 ;
 
-ONTOLOGY_PATHS = ./compRobots/ontology.ont
 
 MORPHOLOGY_PATH ::== 
 	./compRobots/celex.ecgmorph
@@ -25,9 +25,9 @@ MORPHOLOGY_PATH ::==
 
 TOKEN_PATH ::== 
 	./compRobots/compRobots.tokens
-	./first/first.tokens
+	./starter/starter.tokens
 ;
-TABLE_PATH = ./first/first.morph
+TABLE_PATH = ./starter/starter.morph
 
 ROBUST = FALSE 
 BEAM_SIZE = 20
@@ -35,8 +35,8 @@ DEFAULT_OMISSION_PROB = .1
 DEBUG = FALSE
 //DEBUG = TRUE
 ANALYZE_IN_CONTEXT = FALSE
-// ANALYZE_IN_CONTEXT = TRUE
-NUM_ANALYSES_RETURNED = 3
+//ANALYZE_IN_CONTEXT = TRUE
+NUM_ANALYSES_RETURNED = 4
 MULTI_ROOT_PENALTY = -3
 
 EXAMPLE_SENTENCES ::==

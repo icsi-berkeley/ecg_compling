@@ -1,5 +1,5 @@
 package robots
-import first
+import starter
 //import transitives
 
 construction CauseEffectType
@@ -14,3 +14,11 @@ construction CauseEffectType
 	    self.mp <--> self.m.affectedProcess
 	    self.fa.actedUpon <--> self.m.affectedEntity
 
+construction ReturnType
+	subcase of LexicalVerbType
+	meaning: MotionPath
+	 constraints
+	   self.m.actionary <-- @move
+	   self.m.spg.goal <-- @home
+	   
+	   

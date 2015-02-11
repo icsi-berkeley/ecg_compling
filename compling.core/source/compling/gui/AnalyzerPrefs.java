@@ -44,7 +44,7 @@ public class AnalyzerPrefs implements Prefs {
 		
 		TABLE_PATH(Datatype.STRING),
 		
-		PACKAGE_NAME(Datatype.STRING), 
+		PACKAGE_NAME(Datatype.LISTSTRING), 
 
 		TOKEN_PATH(Datatype.LISTSTRING),  
 
@@ -111,6 +111,7 @@ public class AnalyzerPrefs implements Prefs {
 		listsTable.put(AP.EXAMPLE_SENTENCES, new ArrayList<String>());
 		listsTable.put(AP.TOKEN_PATH, new ArrayList<String>());
 		listsTable.put(AP.MORPHOLOGY_PATH, new ArrayList<String>());
+		listsTable.put(AP.PACKAGE_NAME, new ArrayList<String>());
 //		listsTable.put(AP.TEST_SENTENCES, new ArrayList<String>());
 	}
 
@@ -187,7 +188,8 @@ public class AnalyzerPrefs implements Prefs {
 							|| currentBlock == AP.GRAMMAR_PARAMS_PATHS || currentBlock == AP.EXAMPLE_SENTENCES
 							|| currentBlock == AP.IMPORT_PATHS
 							|| currentBlock == AP.TOKEN_PATH
-							|| currentBlock == AP.MORPHOLOGY_PATH) {
+							|| currentBlock == AP.MORPHOLOGY_PATH
+							|| currentBlock == AP.PACKAGE_NAME) {
 						listsTable.get(currentBlock).add(line);
 					}
 				}

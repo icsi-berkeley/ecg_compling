@@ -1,5 +1,11 @@
 package robots
-import first
+import starter
+
+ // Imports a motion package declared in 
+ // compRobots directory (distinguished from same-name package in first)
+ // For the purposes of testing and practicality.
+//import motion
+
 
 general construction Conjunction
    subcase of Word

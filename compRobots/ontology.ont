@@ -8,6 +8,8 @@ DEFS:
 
 (type shared)  // all elements of the shared ontology
 
+(type variable sub shared)
+
 (type item)  // very top of our lattice, not all shared
 
 // (type countable sub item)  no longer needed
@@ -256,9 +258,9 @@ DEFS:
 
 (type container sub  artifact location entity)  //11/4/1/3
 
-(type box sub container)
+(type box sub container moveable)
 
-(type boxes sub container)
+(type boxes sub container moveable)
 
 (type room sub container)
 
@@ -373,6 +375,10 @@ DEFS:
 (type location sub region) // source for stateAsLocation
 
 (type deicticCenter sub location)
+
+(type home sub location)
+
+(type antecedent sub physicalEntity)
 
 //
 
@@ -736,6 +742,18 @@ DEFS:
 
 //(type number sub entity)
 
+// variable functions
+
+(type function sub process)
+
+(type visit sub function)
+
+(type tour sub function)
+
+(type join sub function)
+
+(type task sub function)
+
 (type pencil sub entity artifact moveable)
 
 (type box3-instance sub instance box)
@@ -751,5 +769,11 @@ DEFS:
 (type small sub sizeValue)
 
 (type push_move sub motion push)
+
+(type orange sub colorValue)
+
+(type magenta sub colorValue)
+
+(type dash sub motion)
 
 INSTS:

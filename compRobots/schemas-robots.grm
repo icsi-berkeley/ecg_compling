@@ -1,5 +1,5 @@
 package robots
-import first
+import starter
 
 schema HeadingSchema
    roles
@@ -29,4 +29,39 @@ schema ComplexED
 schema QuestionRD
 	subcase of RD
 	roles
-	  specificWh: @wh-word	  
+	  specificWh: @wh-word	 
+
+schema Amount   // general schema parent of all
+
+schema QuantitySchema  // numerical, some, "a few", etc.
+  subcase of Amount
+  roles
+  	value  // numbers ++
+  	number: @RDnumberValues
+  		  
+schema QuantifiedRD  // general case 
+	subcase of RD //, RelativizedRD  7/18/14
+	roles
+      	amount: QuantitySchema //subcases include numbers, “several”, etc. ****name?**
+ 		units	 
+ 		
+ schema QuantifiedSpatialRD
+	subcase of QuantifiedRD
+	roles
+      	units: @spatial-units	// check the typing wrt all kinds	
+      	
+      	
+      	
+      	
+// added 8/4/14 (ST) from base
+schema ComplexRD
+   subcase of RD 
+   roles
+   complexKind // : NPkind
+   
+schema ConjRD
+   subcase of ComplexRD
+   roles
+   		connective   // and or etc.
+      	rd1: RD
+     	rd2: RD	      		  

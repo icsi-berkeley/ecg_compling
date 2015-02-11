@@ -32,7 +32,7 @@ from utils import update, Struct
 from feature import StructJSONEncoder 
 from os.path import basename
 from specializerTools import *
-from solver2 import NullProblemSolver, MorseProblemSolver, XnetProblemSolver, MockProblemSolver, ClarificationError
+from solver import NullProblemSolver, MorseProblemSolver, XnetProblemSolver, MockProblemSolver, ClarificationError
 # from pprint import pprint, pformat
 
 def updated(d, *maps, **entries):
@@ -88,6 +88,7 @@ class RobotSpecializer(UtilitySpecializer, TemplateSpecializer):
 
     def specialize_np(self, fs, tagged, cue=None):
         """ This method takes an NP SemSpec specifically and puts it into an N-Tuple (the last N-Tuple). """
+
         replace = None
         if fs.m.type() == "HeadingSchema":
             new_od = fs.m.tag.type()
@@ -186,7 +187,9 @@ class RobotSpecializer(UtilitySpecializer, TemplateSpecializer):
             def params_for_motionPath(process, params):
                 """ returns parameters for motion path process ("move to the box"). """
                 if hasattr(process, 'actionary'):
-                    params.update(action = process.actionary.type())
+                    if self.analyzer.issubtype('ONTOLOGY', process.actionary.type(), 'motion'):
+                        params.update(action='move')
+                    #params.update(action = process.actionary.type())
                 if hasattr(process, 'speed') and str(process.speed) != "None":# and process.speed.type():
                     params.update(speed = float(process.speed))
                 else:  # Might change this - "dash quickly" (what should be done here?)
@@ -268,7 +271,7 @@ class RobotSpecializer(UtilitySpecializer, TemplateSpecializer):
                     goal = None
                     params.update(heading=g.tag.type())
                 elif g.ontological_category.type() == 'region':
-                    goal['locationDescriptor'] = {'objectDescriptor': self.get_objectDescriptor(process.spg.landmark), 'relation': self.get_locationDescriptor(g)}
+                    goal['locationDescriptor'] = {'objectDescriptor': self.get_objectDescriptor(process.landmark), 'relation': self.get_locationDescriptor(g)}
                 elif self.analyzer.issubtype('ONTOLOGY', g.ontological_category.type(), 'part'): # checks if it's a "part" in a part whole relation
                     goal['partDescriptor'] = {'objectDescriptor': self.get_objectDescriptor(g.extensions.whole), 'relation': self.get_objectDescriptor(g)}
                 elif g.ontological_category.type() == 'antecedent':
@@ -662,7 +665,9 @@ def main_loop(analyzer, solver=NullProblemSolver(), specializer=RobotSpecializer
         f = open(generated, "w")
         f.write(json_ntuple)
 
+    count = 1
     for analyses in prompt():
+
         for fs in filter(filter_predicate, analyses):
             try:
                 #resolve = specializer.reference_resolution(fs)          
@@ -677,14 +682,20 @@ def main_loop(analyzer, solver=NullProblemSolver(), specializer=RobotSpecializer
                             break
                         except ClarificationError as ce:
                             new_input = input(ce.message + " > ")
+                            if new_input == "q":
+                                return
+                                solver.close()
                             specialized = specializer.specialize_np(analyzer.parse(new_input)[0], ce.ntuple, ce.cue) 
                             json_ntuple = dumps(specialized, cls=StructJSONEncoder, indent=2)
                             #solver.solve(json_ntuple)
-                
+                break
             except:
-                print('Problem solving %s' % analyses)
+                print('Problem solving SemSpec #: %s' % count)
+                print(analyses)#[count-1])
+                #print(fs)
                 traceback.print_exc()
-            break
+                count += 1
+            #break
         
 def usage(args):
     print('Usage: %s [-s <problem solver>] [-a <all server URL>]' % basename(args[0]))

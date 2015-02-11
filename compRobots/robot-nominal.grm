@@ -1,32 +1,36 @@
-package robots
-import first
+package location
+import starter
 
-/*
-construction Nominal-LocPP
-	subcase of Kernel
-	constructional
-	 constituents
-	  n: Nominal
-	  pp: Loc-PP
+    
+schema Location2D
+	subcase of RD
+	roles
+	  xCoord: @number
+	  yCoord: @number
+   constraints
+     ontological-category <-- @location
+     number <-- @singular
+
+construction LOCATION
+	subcase of Word, HasAgreementFeatures
 	form
-	 constraints
-	  n.f meets pp.f
-	meaning: RD
-	 constraints
-	  self.m <--> n.m
-	  n.m <--> pp.m.trajector
-*/
-
-construction KernelAdj-LocPP
-	subcase of Kernel
-    constructional
-     constituents
-       ka: KernelAdj
-       pp: Loc-PP
-   form
-     constraints
-       ka.f meets pp.f
-   meaning
-     constraints 
-       self.m <--> ka.m
-       ka.n.m <--> pp.m.trajector	        
+	  constraints
+	    self.f.orth <-- "location"
+     
+construction LocationNP
+	subcase of NP, Kernel
+	constructional
+	  constituents
+	    tag: LOCATION
+	    x: Quantifier
+	    optional comma: Comma
+	    y: Quantifier
+	form
+	  constraints
+	    tag.f meets x.f
+	    x.f meets comma.f
+	    comma.f meets y.f
+	meaning: Location2D
+	  constraints
+	    self.m.xCoord <--> x.m.value
+	    self.m.yCoord <--> y.m.value 	        

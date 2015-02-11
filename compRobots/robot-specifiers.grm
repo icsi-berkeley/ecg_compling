@@ -1,0 +1,16 @@
+package robots
+import starter
+
+// Numbers added 3/28/14
+general construction Quantifier // different meaning than Specifier  
+	subcase of Word, HasNominalFeatures
+	meaning: QuantitySchema
+   		
+construction NumberType   //rename, check digits
+	subcase of Quantifier, GeneralTypeCxn
+   	meaning: QuantitySchema
+   	  constraints
+   	    self.m.value <-- "?"
+   	    self.m.number <-- @RDnumberValues
+	
+	

@@ -1,7 +1,0 @@
-package compTest
-import first
-import construction-package 
-general construction TestSubCxn
-	subcase of TestCxn
-
-import john-package

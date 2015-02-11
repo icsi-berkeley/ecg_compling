@@ -1,30 +1,3 @@
-scarlet :: ColorType :: self.m.value <-- @red
-red :: ColorType :: self.m.value <-- @red
-blue :: ColorType :: self.m.value <-- @blue
-adam	:: ProperNounNP :: self.m.ontological-category <-- @person :: self.m.gender <-- @male
-scarlet	:: ProperNounNP :: self.m.ontological-category <-- @person :: self.m.gender <-- @female
-block   :: PhysicalNounType  :: self.m.ontological-category <-- @block :: self.m.scale <-- @size
-move    :: SelfMotionType  :: self.m.actionary <-- @move
-walk    :: SelfMotionType  :: self.m.actionary <-- @walk :: self.m.speed <-- "3"
-run     :: SelfMotionType  :: self.m.actionary <-- @run  :: self.m.speed <-- "7" 
-box     :: PhysicalNounType  :: self.m.ontological-category <-- @box :: self.m.scale <-- @size
-room    :: PhysicalNounType  :: self.m.ontological-category <-- @room :: self.m.scale <-- @size
-be      :: BeCopula  :: self.m.actionary <-- @be
-see     :: PerceptionType :: self.m.actionary <-- @see
-sprint  :: SelfMotionType  :: self.m.actionary <-- @run  :: self.m.speed <-- "8"
-jog  :: SelfMotionType  :: self.m.actionary <-- @run  :: self.m.speed <-- "6"
-enter :: PathVerbType   :: self.m.actionary <-- @enter :: self.m.landmark.ontological-category <-- @container
-## The following should (eventually) all produce errors. Uncomment to test.
-## Test for parent not existing:
-# test :: DoesntExist :: some.chain <-- illegal
-## Test for slotchain not existing
-# test :: Color :: some.chain <-- @red
-## Test for value not existing
-# test :: Color :: self.m.value <-- @doesntexist
-## Test for inconsistent ontology values
-# test :: Color :: self.m.value <-- @female
-## Test for missing ontology value
-# test :: ProperNountNP :: self.m.number <-- @singular
 north :: DirectionalType :: self.m.tag <-- @north
 south :: DirectionalType :: self.m.tag <-- @south
 east :: DirectionalType :: self.m.tag <-- @east
@@ -40,3 +13,17 @@ purple :: ColorType :: self.m.value <-- @purple
 big :: SizeType :: self.m.value <-- @big
 small :: SizeType :: self.m.value <-- @small
 push :: CauseEffectType :: self.m.actionary <-- @push_move
+return :: ReturnType :: self.m.actionary <-- @move
+one :: NumberType :: self.m.value <-- "1"
+two :: NumberType :: self.m.value <-- "2"
+violet :: ColorType :: self.m.value <-- @purple
+0 :: NumberType :: self.m.value <-- "0"
+1 :: NumberType :: self.m.value <-- "1"
+2 :: NumberType :: self.m.value <-- "2"
+3 :: NumberType :: self.m.value <-- "3"
+4 :: NumberType :: self.m.value <-- "4"
+5 :: NumberType :: self.m.value <-- "5"
+-1 :: NumberType :: self.m.value <-- "-1"
+orange :: ColorType :: self.m.value <-- @orange
+magenta :: ColorType :: self.m.value <-- @magenta
+dash :: SelfMotionType :: self.m.actionary <-- @dash :: self.m.speed <-- ".8"

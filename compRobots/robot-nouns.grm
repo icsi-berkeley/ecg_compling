@@ -1,6 +1,5 @@
 package robots
-//package first
-import first
+import starter
 
 construction ProperNPInstance
 	subcase of ProperNounNP, ThirdPerson // Third person testing here ("Robot1")
@@ -17,8 +16,38 @@ construction DirectionalType
 	    
 	    
 
+general construction UnitsNP // stands alone, no Specifier  11/24/12
+  subcase of NP
+  constructional
+    	constituents
+	  		num: Quantifier	//
+      		k: Noun 
+    	constraints
+      		self.features <--> k.features
+  form
+    	constraints
+      		num.f meets k.f
+  meaning: QuantifiedRD
+    constraints
+    	self.m <--> k.m
+    	//k.m.ontological-category <-- @spatial-units   generalized
+		self.m.units <-> k.m.ontological-category
+		self.m.amount.value <--> num.m.value
+		
+ construction SpatialQuantityNP // stands alone, no Specifier
+  subcase of UnitsNP
+  meaning: QuantifiedSpatialRD
+    constraints
+    	k.m.ontological-category <-- @spatial-units // only difference *** generalize 11/24/12
+  
 
-
-	
+construction Inches
+   subcase of PluralNoun
+   form
+      constraints
+         self.f.orth <-- "inches"
+      meaning// RD, is this right ????? 11/24/12
+    constraints
+      self.m.ontological-category <--  @inch	
 	
 	

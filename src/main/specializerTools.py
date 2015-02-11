@@ -31,8 +31,9 @@ except:
 from utils import update, Struct
 from feature import StructJSONEncoder 
 from os.path import basename
-from solver2 import NullProblemSolver, MorseProblemSolver, XnetProblemSolver,\
+from solver import NullProblemSolver, MorseProblemSolver, XnetProblemSolver,\
     MockProblemSolver
+from analyzerClass import Analyzer
 # from pprint import pprint, pformat
 
 
@@ -41,19 +42,6 @@ def updated(d, *maps, **entries):
     """
     dd = dict(**d) if isinstance(d, dict) else Struct(d)
     return update(dd, *maps, **entries)
-    
-class Analyzer(object):
-    """A proxy for the Analyzer. 
-    Note: It assumes the server is running with the right grammar
-    """
-    def __init__(self, url):
-        self.analyzer = ServerProxy(url, encoding='utf-8') 
-        
-    def parse(self, sentence):        
-        return [as_featurestruct(r, s) for r, s in self.analyzer.parse(sentence)]
-    
-    def issubtype(self, typesystem, child, parent):
-        return self.analyzer.issubtype(typesystem, child, parent)
 
 # This just defines the interface
 class NullSpecializer(object):
@@ -206,11 +194,13 @@ class UtilitySpecializer(DebuggingSpecializer):
                     return self.analyzer.issubtype('ONTOLOGY', popped['objectDescriptor']['type'], 'physicalEntity')
         if actionary == 'forceapplication' or actionary == 'move':
             if 'location' in popped or 'locationDescriptor' in popped:
+                print("WHERE")
                 return False
             #if 'referent' in popped: #hasattr(popped, 'referent'):
             #    test = popped['referent'].replace('_', '-')
             #    return self.analyzer.issubtype('ONTOLOGY', test, 'moveable')
             if 'partDescriptor' in popped:
+                print("THERE")
                 pd = popped['partDescriptor']['objectDescriptor']
                 if 'referent' in pd:
                     return self.analyzer.issubtype('ONTOLOGY', pd['referent'].replace('_', '-'), 'moveable')

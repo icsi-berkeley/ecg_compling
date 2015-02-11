@@ -624,10 +624,14 @@ public class ECGGrammarUtilities {
       passage = "ecg cxn sch grm";
     }
 
+    List<String> packageNames = preferences.getList(AP.PACKAGE_NAME);
     String packageName = preferences.getSetting(AP.PACKAGE_NAME);
     
     Grammar grammar = new Grammar();
-    grammar.addImport(packageName);
+    //grammar.addImport(packageName);
+    for (String name : packageNames) {
+    	grammar.addImport(name);
+    }
     
     List<String> importPaths = preferences.getList(AP.IMPORT_PATHS);
     List<File> importFiles = FileUtils.getFilesUnder(base, importPaths, new ExtensionFileFilter(ext));

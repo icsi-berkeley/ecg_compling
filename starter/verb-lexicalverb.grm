@@ -1,0 +1,70 @@
+package starter
+
+ general construction Verb
+   subcase of HasVerbFeatures
+   meaning: Process
+
+general construction ComplexVerb
+   subcase of Verb
+   
+general construction VerbChunk  
+	subcase of  RootType, ComplexVerb 
+
+general construction LexicalVerb
+	subcase of VerbChunk, Word
+	meaning
+		evokes ProcessFeatures as pf
+   	constraints
+   		pf <--> self.m.p-features
+
+construction LexicalVerbType
+	subcase of VerbChunk, GeneralTypeCxn
+	meaning
+		evokes ProcessFeatures as pf
+   	constraints
+   		pf <--> self.m.p-features
+   		//self.m.actionary <-- @process
+   		
+   		
+construction SelfMotionType
+	subcase of LexicalVerbType
+	meaning: MotionPath
+      constraints
+         self.m.actionary <-- @motion
+         self.m.speed <-- ".5"
+
+
+
+// You could imagine adding another constraint here on the 
+// ontological category of the "Content" of the perception;
+// then the "tokens" can place different constraints on that.
+construction PerceptionType
+   subcase of LexicalVerbType
+   meaning: Perception
+     constraints
+        self.m.actionary <-- @perception
+        self.argform <-- Transitive
+        self.verbkind <-- Perceptual
+
+
+
+construction PathVerbType
+   subcase of LexicalVerbType
+   meaning: ChangeLocation
+     constraints 
+       self.m.actionary <-- @motion
+       self.m.landmark.ontological-category <-- @location
+
+construction AgentDriveType
+	subcase of LexicalVerbType
+	meaning: VehicularMotion
+	  constraints
+	     self.m.actionary <-- @drive
+	     self.m.vehicleType.ontological-category <-- @vehicle
+	     self.m.protagonist.ontological-category <-- @agent
+
+
+
+         
+        
+         

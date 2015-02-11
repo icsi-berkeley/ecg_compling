@@ -133,7 +133,9 @@ public class TokenView extends ViewPart {
 		value = value.substring(1, value.length()).trim();
 		parent = parent.substring(1, parent.length()).trim();
 		try {
-			ontFile = new File(base, prefs.getSetting(AP.ONTOLOGY_PATHS));
+			List<String> ontPaths = prefs.getList(AP.ONTOLOGY_PATHS);
+			ontFile = new File(base, ontPaths.get(0));
+			//ontFile = new File(base, prefs.getSetting(AP.ONTOLOGY_PATHS));
 			File tempFile = new File("tempFile.ont");
 			ontWriter = new FileWriter(tempFile.getAbsoluteFile(), true);
 			bOntWriter = new BufferedWriter(ontWriter);
