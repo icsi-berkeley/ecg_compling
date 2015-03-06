@@ -51,6 +51,8 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	private String paramsType;
 	private boolean useBackoff;
 	
+	private AnalyzerPrefs preferences;
+	
 
 	private LCPGrammarWrapper grammar;
 	
@@ -64,15 +66,19 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 		this(grammar, grammar.getPrefs() != null && grammar.getPrefs() instanceof AnalyzerPrefs ? (AnalyzerPrefs) grammar
 				.getPrefs() : new AnalyzerPrefs());
 	}
+	
+	public AnalyzerPrefs getPrefs() {
+		return preferences;
+	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public ECGAnalyzer(Grammar ecgGrammar, AnalyzerPrefs prefs) throws IOException {
+		
+		preferences = prefs;
 
 		grammar = new LCPGrammarWrapper(ecgGrammar);
 		//tokenReader = new ECGTokenReader(grammar);
 		//ecgmorph = new ECGMorph(grammar, tokenReader);
-		
-		
 
 		if (prefs == null) {
 			throw new ParserException("AnalyzerPrefs object expected");

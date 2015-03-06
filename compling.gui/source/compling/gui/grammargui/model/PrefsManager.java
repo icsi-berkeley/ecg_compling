@@ -59,6 +59,7 @@ import compling.gui.AnalyzerPrefs.AP;
 import compling.gui.grammargui.Application;
 import compling.gui.grammargui.EcgEditorPlugin;
 import compling.gui.grammargui.builder.GrammarNature;
+import compling.gui.grammargui.ui.views.TokenView;
 import compling.gui.grammargui.util.GrammarBrowserTextPrinter;
 import compling.gui.grammargui.util.IProxy;
 import compling.gui.grammargui.util.ISpecificationReader;
@@ -92,6 +93,8 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 	private IWorkspace workspace;
 	private NullProgressMonitor nullProgressMonitor;
 	private IPath prefsPath;
+	
+	private TokenView tv = new TokenView();
 
 	private Set<String> symbols;
 	private HashMap<String, IFile> nodeToFileMap;
@@ -137,6 +140,7 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 		});
 		Utils.flushCaches(getAnalyzer());
 		getAnalyzer().reloadTokens();
+		tv.setTypes();
 	}
 
 	private void resetTables() {

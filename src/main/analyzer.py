@@ -13,6 +13,7 @@ from SimpleXMLRPCServer import SimpleXMLRPCServer  # @UnresolvedImport
 from utils import interpreter
 from pprint import pprint
 from xmlrpclib import Fault
+import time
 
 # Possibly change this for your system
 dll = {'linux': '/jre/lib/amd64/server/libjvm.so', 
@@ -35,6 +36,9 @@ except ImportError:
     from compling.parser import ParserException  # @UnusedImport
     from compling.parser.ecgparser import ECGAnalyzer
     from compling.grammar.unificationgrammar.FeatureStructureUtilities import getDfs  # @UnusedImport
+    from compling.gui import AnalyzerPrefs
+    from compling.grammar.ecg.Prefs import Property
+    from compling.gui.AnalyzerPrefs import AP
 
 
 class Analyzer(object):
@@ -48,6 +52,11 @@ class Analyzer(object):
             return getParses(sentence, self.analyzer)
         except ParserException:
             raise Fault(-1, u'The sentence "%s" has no valid parses.' % sentence)
+
+    def get_mapping(self):
+        v = AP.valueOf("MAPPING_PATH")
+        return self.analyzer.getPrefs().getSetting(v)
+
         
     def parse(self, sentence):
         def root(parse):
@@ -63,6 +72,13 @@ class Analyzer(object):
             return (-1, '<ROOT>') + desc(root_), seq
         
         return [as_sequence(p) for p in self.get_parses(sentence)]
+
+
+    def getConstructionSize(self):
+        return len(self.analyzer.getGrammar().getAllConstructions())
+
+    def getSchemaSize(self):
+        return len(self.analyzer.getGrammar().getAllSchemas())
 
 
     def reload(self, prefs):
@@ -144,10 +160,19 @@ def server(obj, host='localhost', port=8090):
 def main(args):
     display(interpreter())
     display('Starting up Analyzer ... ', term='')
+    start = time.time()
     analyzer = Analyzer(args[1])
+    end = time.time()
+    print("Inversion time:")
+    print(end - start)
+    print("Num constructions: ")
+    print(analyzer.getConstructionSize())
+    print("Num schemas: ")
+    print(analyzer.getSchemaSize())
+    print("Total: ")
+    print(analyzer.getConstructionSize() + analyzer.getSchemaSize())
     serve = server(analyzer)
     analyzer.server = serve
-    print(analyzer.server)
 
 def test_remote(sentence='Robot1, move to location 1 2!'):
     from feature import as_featurestruct

@@ -63,13 +63,13 @@ class NullSpecializer(object):
         abstract  # @UndefinedVariable
 
 
-class RobotSpecializer(UtilitySpecializer, TemplateSpecializer):
+class RobotSpecializer(UtilitySpecializer, RobotTemplateSpecializer):
     def __init__(self):
         """ Inherits from UtilitySpecializer and TemplateSpecializer. """
 
         # This puts the Analyzer and _Stacked list into the Task-Specializer --> is there a cleaner way to do this?
         UtilitySpecializer.__init__(self)
-        TemplateSpecializer.__init__(self)
+        RobotTemplateSpecializer.__init__(self)
 
         # Setting for printing N-tuples or not
         #self.debug_mode = False
@@ -84,7 +84,7 @@ class RobotSpecializer(UtilitySpecializer, TemplateSpecializer):
         self.needs_solve = True
 
         # Past parameters
-        self.parameters = None
+        self.parameters = []
 
     def specialize_np(self, fs, tagged, cue=None):
         """ This method takes an NP SemSpec specifically and puts it into an N-Tuple (the last N-Tuple). """
@@ -186,10 +186,12 @@ class RobotSpecializer(UtilitySpecializer, TemplateSpecializer):
             
             def params_for_motionPath(process, params):
                 """ returns parameters for motion path process ("move to the box"). """
+                """
                 if hasattr(process, 'actionary'):
                     if self.analyzer.issubtype('ONTOLOGY', process.actionary.type(), 'motion'):
                         params.update(action='move')
                     #params.update(action = process.actionary.type())
+                """
                 if hasattr(process, 'speed') and str(process.speed) != "None":# and process.speed.type():
                     params.update(speed = float(process.speed))
                 else:  # Might change this - "dash quickly" (what should be done here?)
@@ -204,6 +206,7 @@ class RobotSpecializer(UtilitySpecializer, TemplateSpecializer):
                 if hasattr(process.spg, 'distance') and hasattr(process.spg.distance, 'amount'):
                     d = process.spg.distance
                     params.update(distance=Struct(value=int(d.amount.value), units=d.units.type()))
+                    print(params)
                 # Is a goal specified?
                 if hasattr(process.spg, 'goal'):
                     params.update(goal = get_goal(process.spg, params))
@@ -325,7 +328,11 @@ class RobotSpecializer(UtilitySpecializer, TemplateSpecializer):
             def get_actionary(process):
                 """ Returns the actionary of PROCESS. Checks to make sure actionary is contained in process. """
                 if hasattr(process, "actionary"):
-                    return process.actionary.type()
+                    v = process.actionary.type()
+                    if v in self.mappings:
+                        v = self.mappings[v]
+                    return v
+                    #return process.actionary.type()
                 elif process.type() == 'MotionPath':
                    return 'move'
                 return None
@@ -588,7 +595,7 @@ class RobotSpecializer(UtilitySpecializer, TemplateSpecializer):
                          getattr(self, 'specialize_%s' % mood)(fs),
                          parameters=[Struct(param) for param in params])
 
-        self.parameters = params
+        self.parameters += params
 
         if self.debug_mode:
             print(Struct(ntuple))
@@ -622,95 +629,4 @@ class RobotSpecializer(UtilitySpecializer, TemplateSpecializer):
         return dict(predicate_type='definition', return_type = 'error_descriptor')
 
 
-def main_loop(analyzer, solver=NullProblemSolver(), specializer=RobotSpecializer(), 
-              filter_predicate=None):
-    """REPL-like thing. Should be reusable.
-    """
 
-    def handle_debug():
-        debugging = open('src/main/specializer_debug_output.txt', 'a')
-        #debugging.truncate()
-        specializer.set_debug()
-        print("Debug mode is", specializer.debug_mode)
-        return debugging
-
-    def prompt():
-        while True:
-            ans = input('Command or q/Q to quit, d/D for Debug mode> ') # Python 3
-            specialize = True
-            if ans.lower() == 'd':
-                specializer._output = handle_debug()
-                specialize = False
-            elif ans.lower() == 'names':
-                solver.names()
-                specialize = False
-            if ans.lower() == 'q':
-                return
-                solver.close()
-            elif ans.lower()== 'h':
-                solver.test()
-            elif ans and specialize:
-                specializer._sentence = ans
-                try:
-                    yield analyzer.parse(ans)#this is a generator
-                except Fault as err:
-                    print('Fault', err)
-                    if err.faultString == 'compling.parser.ParserException':
-                        print("No parses found for '%s'" % ans)
-
-    def write_file():
-        sentence = specializer._sentence.replace(" ", "_").replace(",", "").replace("!", "").replace("?", "")
-        t = str(time.time())
-        generated = "src/main/json_tuples/" + sentence
-        f = open(generated, "w")
-        f.write(json_ntuple)
-
-    count = 1
-    for analyses in prompt():
-
-        for fs in filter(filter_predicate, analyses):
-            try:
-                #resolve = specializer.reference_resolution(fs)          
-                ntuple = specializer.specialize(fs)
-                json_ntuple = dumps(ntuple, cls=StructJSONEncoder, indent=2)
-                if specializer.debug_mode:
-                    write_file()
-                if specializer.needs_solve and ntuple != None:
-                    while True:
-                        try:
-                            solver.solve(json_ntuple)
-                            break
-                        except ClarificationError as ce:
-                            new_input = input(ce.message + " > ")
-                            if new_input == "q":
-                                return
-                                solver.close()
-                            specialized = specializer.specialize_np(analyzer.parse(new_input)[0], ce.ntuple, ce.cue) 
-                            json_ntuple = dumps(specialized, cls=StructJSONEncoder, indent=2)
-                            #solver.solve(json_ntuple)
-                break
-            except:
-                print('Problem solving SemSpec #: %s' % count)
-                print(analyses)#[count-1])
-                #print(fs)
-                traceback.print_exc()
-                count += 1
-            #break
-        
-def usage(args):
-    print('Usage: %s [-s <problem solver>] [-a <all server URL>]' % basename(args[0]))
-    sys.exit(-1)
-    
-    
-if __name__ == '__main__':
-    # These contain default values for the options
-    options = {'-s': 'null', 
-               '-a': 'http://localhost:8090'}
-    options.update(dict(a.split() for a in sys.argv[1:] if a.startswith('-')))
-               
-    if not all(o[1] in 'sa' for (o, _) in options.items()):
-        usage(sys.argv)
-    
-    solver = dict(null=MockProblemSolver, morse=MorseProblemSolver, xnet=XnetProblemSolver)
-    main_loop(Analyzer(options['-a']), specializer=RobotSpecializer(), solver=solver[options['-s']]())
-    sys.exit(0)

@@ -796,4 +796,14 @@ DEFS:
 
 (type westSide sub sideValue)
 
+(type violet sub colorValue)
+
+(type dart sub motion)
+
+(type scamper sub motion)
+
+(type gallop sub motion)
+
+(type crimson sub colorValue)
+
 INSTS:

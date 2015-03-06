@@ -4,29 +4,29 @@
     "parameters": [
       {
         "__JSON_Struct__": {
-          "direction": null,
-          "kind": "execute",
-          "action": "move",
-          "heading": null,
+          "distance": {
+            "__JSON_Struct__": {
+              "units": "square",
+              "value": 4
+            }
+          },
           "control_state": "ongoing",
+          "speed": 0.5,
+          "heading": null,
+          "action": "move",
           "protagonist": {
             "objectDescriptor": {
               "referent": "robot1_instance",
               "type": "robot"
             }
           },
+          "direction": null,
+          "kind": "execute",
           "goal": {
             "objectDescriptor": {
-              "type": "box",
               "givenness": "uniquelyIdentifiable",
-              "color": "blue"
-            }
-          },
-          "speed": 0.5,
-          "distance": {
-            "__JSON_Struct__": {
-              "value": 8,
-              "units": "square"
+              "color": "blue",
+              "type": "box"
             }
           }
         }

@@ -5,6 +5,8 @@ GRAMMAR_EXTENSIONS = grm
 PACKAGE_NAME ::== 
 	robots
 	location
+	universal-schemas
+	universal-constructions
 	motion
 ;
 
@@ -14,6 +16,7 @@ ONTOLOGY_PATHS ::==
 
 IMPORT_PATHS ::==
 	./compRobots
+	./universal
 	./starter
 ;
 
@@ -27,6 +30,9 @@ TOKEN_PATH ::==
 	./compRobots/compRobots.tokens
 	./starter/starter.tokens
 ;
+
+MAPPING_PATH = ./compRobots/robot.mappings
+
 TABLE_PATH = ./starter/starter.morph
 
 ROBUST = FALSE 

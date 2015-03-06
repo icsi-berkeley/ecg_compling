@@ -34,6 +34,7 @@ from os.path import basename
 from solver import NullProblemSolver, MorseProblemSolver, XnetProblemSolver,\
     MockProblemSolver
 from analyzerClass import Analyzer
+from mappingReader import MappingReader
 # from pprint import pprint, pformat
 
 
@@ -68,6 +69,9 @@ class UtilitySpecializer(DebuggingSpecializer):
         self._stacked = []
         DebuggingSpecializer.__init__(self)
         self.analyzer = Analyzer('http://localhost:8090')
+        self.mapping_reader = MappingReader()
+        self.mapping_reader.read_file(self.analyzer.get_mapping_path())
+        self.mappings = self.mapping_reader.get_mappings()
 
     """ Input PROCESS, searches SemSpec for Adverb Modifiers. Currently just returns speed,
     but could easily be modified to return general manner information. """
@@ -126,7 +130,10 @@ class UtilitySpecializer(DebuggingSpecializer):
                 if filler.typesystem() == 'SCHEMA':
                     if self.analyzer.issubtype('SCHEMA', filler.type(), 'PropertyModifier'):
                         if filler.modifiedThing.index() == goal.index():
-                            returned[str(filler.property.type())] = filler.value.type()
+                            v = filler.value.type()
+                            if v in self.mappings:
+                                v = self.mappings[v]
+                            returned[str(filler.property.type())] = v
                     """
                     if filler.type() == 'PropertyModifier':
                         if filler.modifiedThing.index() == goal.index():
@@ -212,18 +219,19 @@ class UtilitySpecializer(DebuggingSpecializer):
                 return self.analyzer.issubtype('ONTOLOGY', popped['objectDescriptor']['type'], 'moveable')
         return False      
 
-class TemplateSpecializer(NullSpecializer):
+class RobotTemplateSpecializer(NullSpecializer):
     def __init__(self):
 
         self._NTUPLE_T = dict(predicate_type=None,             
                               parameters=None, # one of (_execute, _query)                         
                               return_type='error_descriptor') 
+        
         # Basic executable dictionary
         self._execute = dict(kind='execute',
                              control_state='ongoing', 
                              action=None,
                              protagonist=None,
-                             distance=Struct(value=8, units='square'),
+                             distance=Struct(value=4, units='square'),
                              goal=None,
                              speed = .5,
                              heading=None, #'north',

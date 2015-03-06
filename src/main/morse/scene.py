@@ -21,6 +21,12 @@ def build():
     motion.add_interface('socket')
     atrv.append(motion)
 
+    proximity = Proximity()
+    atrv.append(proximity)
+    proximity.properties(Range = 4.0, Track = "Catch_me")
+    proximity.add_stream('socket')
+    proximity.add_service('socket')
+    #proximity.set_tracked_tag("Catch_me")
     
 
 
@@ -49,7 +55,7 @@ def build():
     box1.setgraspable()
     box1.translate(x=6.0, y=6.0, z=1)
     #box1.rotate(z=0.2)
-    box1.properties(Object=True, Label = "box1_instance")
+    box1.properties(Object=True, Label = "box1_instance", Type="box", Catch_me=True)
     # box1.add_interface('socket')
 
     #adding a 2nd box
@@ -57,21 +63,27 @@ def build():
     box2.setgraspable()
     box2.translate(x=-5.0, y=4.0, z=1)
     #box2.rotate(z=0.2)
-    box2.properties(Object=True, Label = "box2_instance")
+    box2.properties(Object=True, Label = "box2_instance", Type="box", Catch_me=True)
 
     # #adding a 3rd box
     box3 = PassiveObject('environments/indoors-1/boxes', 'GreenBox')
     box3.setgraspable()
     box3.translate(x=-2, y=-8, z=1)
     #box3.rotate(z=0.2)
-    box3.properties(Object=True, Label = "box3_instance")
+    box3.properties(Object=True, Label = "box3_instance", Catch_me=True, Type="box")
 
     box4 = PassiveObject('environments/indoors-1/boxes', 'RedBox_small')
     box4.setgraspable()
     box4.translate(x=3, y=-7.0, z=0)
     #box4.rotate(z=0.2)
-    box4.properties(Object=True, Label = "box4_instance")
-    
+    box4.properties(Object=True, Label = "box4_instance", Type="box", Catch_me=True)
+
+
+    # Adding a table?
+    desk1 = PassiveObject('environments/indoors-1/indoor-1', 'Desk_1')
+    desk1.translate(x=0, y=5.0, z=0)
+    #box4.rotate(z=0.2)
+    desk1.properties(Object=True, Label = "desk1", Type='desk', Catch_me=True)
 
     # Environment
     env = Environment('indoors-1/empty-room')

@@ -46,7 +46,9 @@ public class AnalyzerPrefs implements Prefs {
 		
 		PACKAGE_NAME(Datatype.LISTSTRING), 
 
-		TOKEN_PATH(Datatype.LISTSTRING),  
+		TOKEN_PATH(Datatype.LISTSTRING),
+		
+		MAPPING_PATH(Datatype.STRING),
 
 		GRAMMAR_PATHS(Datatype.LISTSTRING),
 		GRAMMAR_EXTENSIONS(Datatype.STRING),

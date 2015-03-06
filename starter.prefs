@@ -7,6 +7,9 @@ GRAMMAR_PATHS ::==
 
 PACKAGE_NAME ::== 
 	starter
+	motion
+	universal-schemas
+	universal-constructions
 ;
 
 ONTOLOGY_PATHS ::==
@@ -14,6 +17,7 @@ ONTOLOGY_PATHS ::==
 ;
 
 IMPORT_PATHS ::==
+	./universal
 	./starter
 ;
 

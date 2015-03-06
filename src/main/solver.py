@@ -447,6 +447,7 @@ class RobotProblemSolver(DispatchingProblemSolver):
             return None
         elif len(locations)== 0:
             print('Problem: there is no object that matches that description. Please try again.')
+            print("Sorry, I don't know what the '" + self.assemble_string(properties) + "' is.")
             return None
         else:
             return locations[0]
@@ -523,8 +524,10 @@ class RobotProblemSolver(DispatchingProblemSolver):
             raise ClarificationError(message, tagged)
             return None
         else:
-            print('Problem: that item does not exist')
+            print("Sorry, I don't know what the '" + self.assemble_string(properties) + "' is.")
             return None
+
+
 
     def tag_ntuple(self, properties, ntuple, tag=[]):
         """ Takes in properties and tags the ntuple where these properties occur. """
@@ -769,14 +772,19 @@ class MorseProblemSolver(RobotProblemSolver):
         #print ("collide is")
        # print (collide)
         if collide == True:
-            inst.move(x=a, y=b, z=0,tolerance = tolerance, speed = speed)
+            discovered = inst.move(x=a, y=b, z=0,tolerance = tolerance, speed = speed)
         else:
             for loc in self.avoid_obstacle( robotloc.x,robotloc.y , a, b):
-                inst.move(x=loc[0], y=loc[1], z=0,tolerance = tolerance, speed = speed)
+                discovered = inst.move(x=loc[0], y=loc[1], z=0,tolerance = tolerance, speed = speed)
         newworld = inst.get_world_info()
             #update the location of all objects in the world
         for obj in newworld:
-            setattr(getattr(self.world, obj['name']), 'pos',Struct(x =obj['position'][0], y=obj['position'][1], z =obj['position'][2]) )
+            if hasattr(self.world, obj['name']):    
+                setattr(getattr(self.world, obj['name']), 'pos',Struct(x =obj['position'][0], y=obj['position'][1], z =obj['position'][2]) )
+            else:
+                #if obj['type'] in discovered:
+                self.world.__dict__[obj['name']] = Struct(pos=Struct(x =obj['position'][0], y=obj['position'][1], z = obj['position'][2]))
+                print(obj['name'] + " is not in my data structure.")
 
          
         #print("robot is going to:")

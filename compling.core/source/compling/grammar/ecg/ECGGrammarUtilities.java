@@ -668,7 +668,6 @@ public class ECGGrammarUtilities {
 		      }
 		      tempGrammar = read(fileList, contextModel, encodingI);
 		      grammarList.add(tempGrammar);
-		      System.out.println("OK, added another temporary grammar.");
 		    }
 		}
 		
@@ -695,7 +694,6 @@ public class ECGGrammarUtilities {
 			}
 			seenPackages.addAll(g.getPackages());
 		}
-		System.out.println("OK, imported temporary grammars into working model.");
 	    ext = preferences.getSetting(AP.ONTOLOGY_EXTENSIONS);
 	    if (ext == null) {
 	      ext = "def inst ont";

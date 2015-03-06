@@ -19,7 +19,7 @@ and test them all.
 
 """
 
-
+import time
 
 import os
 from subprocess import * #call, check_output
@@ -81,7 +81,7 @@ def read_examples(filename):
 
 
 """ These paths should be modified, once there's a good location for the grammars (not machine-dependent.) """
-suites = {'first': 'first.prefs',
+suites = {'starter': 'starter.prefs',
 		  'robots': 'robots.prefs',
 		  'primero': 'primero.prefs',
 		  'spanish-metaphor': 'spanish-metaphor.prefs',
@@ -136,6 +136,7 @@ if __name__ == "__main__":
 
 
 		errors = []
+		start = time.time()
 		for sentence in examples:
 			try:
 				analyzer.parse(sentence)
@@ -144,8 +145,11 @@ if __name__ == "__main__":
 				print(err.faultString)
 				print("failure: " + sentence)
 				errors.append(sentence)
+		end = time.time()
+		print("Time to analyze: %s", (end - start))
 		print("Total errors in " + str(name) + ": " + str(len(errors)))
 		total_errors += len(errors)
+
 		if len(errors) > 0:
 			print("Sentences causing errors: ")
 			for s in errors:

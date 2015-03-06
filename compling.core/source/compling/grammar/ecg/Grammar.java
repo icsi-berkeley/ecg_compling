@@ -63,7 +63,7 @@ public class Grammar {
 		add("global");
 	}};
 
-	/** Testing: seantrott. Setting field for package. */
+	/** Sets field for package. */
 	public String setPackage(String packageName) {
 		pkg = packageName;
 		return pkg;
@@ -86,7 +86,9 @@ public class Grammar {
 	
 	/** Adds import to import list, returns import name. */
 	public String addImport(String importName) {
+		String p = getPackage();
 		if (!importRequests.contains(importName)) {
+				//&& getImport().contains(getPackage())) {   // also check if it has current package?
 			importRequests.add(importName);
 		}
 		//importRequest.add(importName);

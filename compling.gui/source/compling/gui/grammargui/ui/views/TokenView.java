@@ -34,6 +34,7 @@ import compling.grammar.GrammarException;
 import compling.grammar.ecg.ECGConstants;
 import compling.grammar.ecg.Grammar;
 import compling.grammar.ecg.Grammar.Construction;
+import compling.grammar.ecg.GrammarError;
 import compling.grammar.unificationgrammar.TypeSystem;
 import compling.grammar.unificationgrammar.TypeSystemException;
 import compling.grammar.unificationgrammar.TypeSystemNode;
@@ -129,13 +130,11 @@ public class TokenView extends ViewPart {
 	
 	// Adds VALUE to ontology as a subtype of PARENT. 
 	private void addOntologyItem(String value, String parent) {
-		//TypeSystem ts = getGrammar().getOntologyTypeSystem();
 		value = value.substring(1, value.length()).trim();
 		parent = parent.substring(1, parent.length()).trim();
 		try {
 			List<String> ontPaths = prefs.getList(AP.ONTOLOGY_PATHS);
 			ontFile = new File(base, ontPaths.get(0));
-			//ontFile = new File(base, prefs.getSetting(AP.ONTOLOGY_PATHS));
 			File tempFile = new File("tempFile.ont");
 			ontWriter = new FileWriter(tempFile.getAbsoluteFile(), true);
 			bOntWriter = new BufferedWriter(ontWriter);
@@ -254,12 +253,30 @@ public class TokenView extends ViewPart {
 	 * it.
 	 */
 	
+	public void setTypes() {
+		String t = parentText.getText();
+		parentText.setItems(getTypes("\"*\""));
+		parentText.setText(t);
+	}
+	
+	static Combo parentText; // = new Combo(form.getBody(), SWT.DROP_DOWN);
+	
+	/** This is a method to map a language ontology value to the app ontology value. This is written to the mapping file. */
+	public void writeMappingFile(String language, String application) {
+		String mapping_path = prefs.getSetting(AP.MAPPING_PATH);
+		File mapping_file = new File(base, mapping_path);
+		try {
+			FileWriter mw = new FileWriter(mapping_file.getAbsoluteFile(), true);
+			BufferedWriter bmw = new BufferedWriter(mw);
+			bmw.write(language + " :: " + application);
+			bmw.close();
+		} catch(IOException e) {
+			System.out.println("There was a problem opening the mapping file.");
+		}
+	}
+	
 	public void createPartControl(Composite parent) {
 
-		
-
-		
-		
 		constraints = new ArrayList<String>();
 		prefs =  (AnalyzerPrefs) getGrammar().getPrefs();
 		base = prefs.getBaseDirectory();
@@ -287,21 +304,23 @@ public class TokenView extends ViewPart {
 	
 
 		final Label parentLabel = toolkit.createLabel(form.getBody(), "Select Parent Type:");
-		final Combo parentText = new Combo(form.getBody(), SWT.DROP_DOWN);
-		parentText.setItems(typeCxns);
+		//final Combo parentText = new Combo(form.getBody(), SWT.DROP_DOWN);
+		parentText = new Combo(form.getBody(), SWT.DROP_DOWN);
+		//parentText.setItems(typeCxns);
+		setTypes();
 		//toolkit.adapt(parentText);
 		parentText.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
 		parentText.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(parent);
 		
-		final Label constraintSelect = toolkit.createLabel(form.getBody(), "Select Constraint:");
+		final Label constraintSelect = toolkit.createLabel(form.getBody(), "Select Role:");
 		final Combo constraintBox = new Combo(form.getBody(), SWT.DROP_DOWN);
 		constraintBox.setItems(new String[0]);
 		constraintBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
 		constraintBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(parent);
 		
-		final Label constraintSet = toolkit.createLabel(form.getBody(), "Set Constraint:");
+		final Label constraintSet = toolkit.createLabel(form.getBody(), "Set Role Item:");
 		final Text constraintText = toolkit.createText(form.getBody(), "");
 		constraintText.setLayoutData(gd);
 		
@@ -309,6 +328,11 @@ public class TokenView extends ViewPart {
 		final Text constraintParents = toolkit.createText(form.getBody(), "");
 		constraintParents.setToolTipText("Enter a comma-separated list of ontology super-types for the new constraint. E.g., \" entity, artifact, moveable \"");
 		constraintParents.setLayoutData(gd);
+		
+		final Label appMappingLabel = toolkit.createLabel(form.getBody(), "Application mapping (optional):");
+		final Text appMappingText = toolkit.createText(form.getBody(), "$");
+		appMappingText.setToolTipText("Enter the value you want this constrain value to be translated to in the application domain. E.g., red-adj might become just red.");	
+		appMappingText.setLayoutData(gd);
 		
 		
 		Button addConstraintButton = toolkit.createButton(form.getBody(), "", SWT.PUSH);
@@ -361,6 +385,7 @@ public class TokenView extends ViewPart {
 			public void widgetSelected(SelectionEvent e) {
 				constraintText.setText(slotsValues.get(constraintBox.getText()));
 				parentValue = slotsValues.get(constraintBox.getText());
+				appMappingText.setText("$");
 			}
 		});		
 
@@ -368,6 +393,7 @@ public class TokenView extends ViewPart {
 		addConstraintButton.addSelectionListener(new SelectionAdapter() { 
 			public void widgetSelected(SelectionEvent e) {
 				String value = constraintText.getText();
+				String appValue = appMappingText.getText();
 				String inputParents = "";
 				if (!constraintParents.getText().equals("")) {
 					inputParents = constraintParents.getText().replace(",", "");
@@ -388,20 +414,27 @@ public class TokenView extends ViewPart {
 							parentValue += " " + inputParents;
 							addOntologyItem(value, parentValue);
 							constraints.add(constraintBox.getText() + " <-- " + value);
+							if (appValue.length() > 1) {
+								writeMappingFile(value, appValue);
+							}
 						} else {
 							System.out.println("No parent assigned.");
 						}
 					} else {
 						if (!isSubtype(value, parentValue)) {
-							System.out.println("Not a proper subtype.");
 							constraints.clear();
+							System.out.println(value + " already exists in Ontology, and is not a subtype of " + parentValue + " .");
 						} else {
 							constraints.add(constraintBox.getText() + " <-- " + value);
+							if (appValue.length() > 1) {
+								writeMappingFile(value, appValue);
+							}
 						}
 					}
 				} else {
 					constraints.add(constraintBox.getText() + " <-- " + value);
 				}
+				appMappingText.setText("$");
 				constraintText.setText("");
 				constraintParents.setText("");
 			}

@@ -627,3 +627,67 @@ Struct(parameters=[Struct(action='move', heading=None, direction=None, speed=0.5
 Imperative 
 robot1, move to the north side of box1! 
 Struct(return_type='error_descriptor', parameters=[Struct(kind='execute', speed=0.5, direction=None, control_state='ongoing', goal={'partDescriptor': {'relation': {'side': 'northSide', 'givenness': 'uniquelyIdentifiable', 'type': 'side'}, 'objectDescriptor': {'referent': 'box1_instance', 'type': 'box'}}}, protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, action='move', heading=None, distance=Struct(value=8, units='square'))], predicate_type='command')
+
+Imperative 
+robot1, push the green box 3 inches south! 
+Struct(predicate_type='command', parameters=[Struct(affectedProcess=Struct(direction=None, protagonist={'objectDescriptor': {'color': 'green', 'givenness': 'uniquelyIdentifiable', 'type': 'box'}}, distance=Struct(units='inch', value=3), speed=0.5, action='move', goal=None, control_state='ongoing', heading='south', kind='execute'), action='push_move', causer={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, causalProcess=Struct(acted_upon={'objectDescriptor': {'color': 'green', 'givenness': 'uniquelyIdentifiable', 'type': 'box'}}, direction=None, protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, distance=Struct(units='square', value=4), speed=0.5, action='forceapplication', goal=None, control_state='ongoing', heading=None, kind='execute'), kind='cause')], return_type='error_descriptor')
+
+Imperative 
+robot1, push the box 3 inches north! 
+Struct(return_type='error_descriptor', predicate_type='command', parameters=[Struct(action='push_move', affectedProcess=Struct(direction=None, action='move', protagonist={'objectDescriptor': {'givenness': 'uniquelyIdentifiable', 'type': 'box'}}, control_state='ongoing', distance=Struct(units='inch', value=3), kind='execute', speed=0.5, goal=None, heading='north'), causer={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, causalProcess=Struct(direction=None, action='forceapplication', protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, control_state='ongoing', distance=Struct(units='square', value=4), kind='execute', acted_upon={'objectDescriptor': {'givenness': 'uniquelyIdentifiable', 'type': 'box'}}, speed=0.5, goal=None, heading=None), kind='cause')])
+
+Imperative 
+robot1, push the blue box north! 
+Struct(parameters=[Struct(action='push_move', affectedProcess=Struct(kind='execute', direction=None, protagonist={'objectDescriptor': {'color': 'blue', 'type': 'box', 'givenness': 'uniquelyIdentifiable'}}, goal=None, action='move', speed=0.5, control_state='ongoing', heading='north', distance=Struct(units='square', value=4)), kind='cause', causer={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, causalProcess=Struct(acted_upon={'objectDescriptor': {'color': 'blue', 'type': 'box', 'givenness': 'uniquelyIdentifiable'}}, kind='execute', direction=None, protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, goal=None, action='forceapplication', speed=0.5, control_state='ongoing', heading=None, distance=Struct(units='square', value=4)))], predicate_type='command', return_type='error_descriptor')
+
+Conditional_Imperative 
+robot1, if the box near the green box is red, push it south! 
+Struct(parameters=[Struct(condition=[Struct(kind='execute', direction=None, protagonist={'objectDescriptor': {'locationDescriptor': {'relation': 'near', 'objectDescriptor': {'color': 'green', 'type': 'box', 'givenness': 'uniquelyIdentifiable'}}, 'type': 'box', 'givenness': 'uniquelyIdentifiable'}}, goal=None, action='be', speed=0.5, control_state='ongoing', heading=None, predication={'color': 'red'}, distance=Struct(units='square', value=4))], command=[Struct(action='push_move', affectedProcess=Struct(kind='execute', direction=None, protagonist={'objectDescriptor': {'locationDescriptor': {'relation': 'near', 'objectDescriptor': {'color': 'green', 'type': 'box', 'givenness': 'uniquelyIdentifiable'}}, 'type': 'box', 'givenness': 'uniquelyIdentifiable'}}, goal=None, action='move', speed=0.5, control_state='ongoing', heading='south', distance=Struct(units='square', value=4)), kind='cause', causer={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, causalProcess=Struct(acted_upon={'objectDescriptor': {'locationDescriptor': {'relation': 'near', 'objectDescriptor': {'color': 'green', 'type': 'box', 'givenness': 'uniquelyIdentifiable'}}, 'type': 'box', 'givenness': 'uniquelyIdentifiable'}}, kind='execute', direction=None, protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, goal=None, action='forceapplication', speed=0.5, control_state='ongoing', heading=None, distance=Struct(units='square', value=4)))], kind='conditional')], predicate_type='conditional', return_type='error_descriptor')
+
+Imperative 
+robot1, move to the red box! 
+Struct(parameters=[Struct(kind='execute', direction=None, protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, goal={'objectDescriptor': {'color': 'red', 'type': 'box', 'givenness': 'uniquelyIdentifiable'}}, action='move', speed=0.5, control_state='ongoing', heading=None, distance=Struct(units='square', value=4))], predicate_type='command', return_type='error_descriptor')
+
+Imperative 
+robot1, move to the green box! 
+Struct(parameters=[Struct(kind='execute', direction=None, protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, goal={'objectDescriptor': {'color': 'green', 'type': 'box', 'givenness': 'uniquelyIdentifiable'}}, action='move', speed=0.5, control_state='ongoing', heading=None, distance=Struct(units='square', value=4))], predicate_type='command', return_type='error_descriptor')
+
+Imperative 
+robot1, sprint to the blue box! 
+Struct(parameters=[Struct(kind='execute', direction=None, protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, goal={'objectDescriptor': {'color': 'blue', 'type': 'box', 'givenness': 'uniquelyIdentifiable'}}, action='move', speed=0.8, control_state='ongoing', heading=None, distance=Struct(units='square', value=4))], predicate_type='command', return_type='error_descriptor')
+
+Conditional_Imperative 
+robot1, if the box near the green box is red, push it south! 
+Struct(parameters=[Struct(condition=[Struct(kind='execute', direction=None, protagonist={'objectDescriptor': {'locationDescriptor': {'relation': 'near', 'objectDescriptor': {'color': 'green', 'type': 'box', 'givenness': 'uniquelyIdentifiable'}}, 'type': 'box', 'givenness': 'uniquelyIdentifiable'}}, goal=None, action='be', speed=0.5, control_state='ongoing', heading=None, predication={'color': 'red'}, distance=Struct(units='square', value=4))], command=[Struct(action='push_move', affectedProcess=Struct(kind='execute', direction=None, protagonist={'objectDescriptor': {'locationDescriptor': {'relation': 'near', 'objectDescriptor': {'color': 'green', 'type': 'box', 'givenness': 'uniquelyIdentifiable'}}, 'type': 'box', 'givenness': 'uniquelyIdentifiable'}}, goal=None, action='move', speed=0.5, control_state='ongoing', heading='south', distance=Struct(units='square', value=4)), kind='cause', causer={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, causalProcess=Struct(acted_upon={'objectDescriptor': {'locationDescriptor': {'relation': 'near', 'objectDescriptor': {'color': 'green', 'type': 'box', 'givenness': 'uniquelyIdentifiable'}}, 'type': 'box', 'givenness': 'uniquelyIdentifiable'}}, kind='execute', direction=None, protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, goal=None, action='forceapplication', speed=0.5, control_state='ongoing', heading=None, distance=Struct(units='square', value=4)))], kind='conditional')], predicate_type='conditional', return_type='error_descriptor')
+
+Imperative 
+robot1, move to the blue box! 
+Struct(return_type='error_descriptor', parameters=[Struct(distance=Struct(units='square', value=4), control_state='ongoing', speed=0.5, heading=None, action='move', protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, direction=None, kind='execute', goal={'objectDescriptor': {'givenness': 'uniquelyIdentifiable', 'color': 'blue', 'type': 'box'}})], predicate_type='command')
+
+Imperative 
+robot1, move to the red box! 
+Struct(return_type='error_descriptor', parameters=[Struct(distance=Struct(units='square', value=4), control_state='ongoing', speed=0.5, heading=None, action='move', protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, direction=None, kind='execute', goal={'objectDescriptor': {'givenness': 'uniquelyIdentifiable', 'color': 'red', 'type': 'box'}})], predicate_type='command')
+
+Imperative 
+robot1, move to the red box! 
+Struct(return_type='error_descriptor', parameters=[Struct(distance=Struct(units='square', value=4), control_state='ongoing', speed=0.5, heading=None, action='move', protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, direction=None, kind='execute', goal={'objectDescriptor': {'givenness': 'uniquelyIdentifiable', 'color': 'red', 'type': 'box'}})], predicate_type='command')
+
+Imperative 
+robot1, move to the violet box! 
+Struct(return_type='error_descriptor', parameters=[Struct(distance=Struct(units='square', value=4), control_state='ongoing', speed=0.5, heading=None, action='move', protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, direction=None, kind='execute', goal={'objectDescriptor': {'givenness': 'uniquelyIdentifiable', 'color': 'purple', 'type': 'box'}})], predicate_type='command')
+
+Imperative 
+robot1, move to the blue green box! 
+Struct(parameters=[Struct(speed=0.5, action='move', heading=None, direction=None, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, distance=Struct(value=4, units='square'), goal={'objectDescriptor': {'type': 'box', 'givenness': 'uniquelyIdentifiable', 'color': 'green'}}, kind='execute', control_state='ongoing')], predicate_type='command', return_type='error_descriptor')
+
+Imperative 
+robot1, move to the magenta box! 
+Struct(predicate_type='command', parameters=[Struct(heading=None, speed=0.5, protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, control_state='ongoing', kind='execute', direction=None, action='move', distance=Struct(units='square', value=4), goal={'objectDescriptor': {'type': 'box', 'color': 'magenta', 'givenness': 'uniquelyIdentifiable'}})], return_type='error_descriptor')
+
+YN_Question 
+is it red? 
+Struct(parameters=[Struct(kind='query', action='be2', predication={'color': 'red'}, protagonist={'objectDescriptor': {'type': 'box', 'givenness': 'uniquelyIdentifiable', 'size': 'big'}})], predicate_type='query', return_type='boolean')
+
+Imperative 
+robot1, move to the small box 
+Struct(parameters=[Struct(control_state='ongoing', action='move', heading=None, distance=Struct(value=4, units='square'), speed=0.5, goal={'objectDescriptor': {'type': 'box', 'givenness': 'uniquelyIdentifiable', 'size': 'small'}}, kind='execute', protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, direction=None)], predicate_type='command', return_type='error_descriptor')

@@ -8,6 +8,7 @@ except:
     from xmlrpc.client import ServerProxy, Fault
 
 from feature import StructJSONEncoder, as_featurestruct
+import os
 
 class Analyzer(object):
     """A proxy for the Analyzer. 
@@ -21,3 +22,6 @@ class Analyzer(object):
     
     def issubtype(self, typesystem, child, parent):
         return self.analyzer.issubtype(typesystem, child, parent)
+
+    def get_mapping_path(self):
+        return os.path.realpath(self.analyzer.get_mapping())

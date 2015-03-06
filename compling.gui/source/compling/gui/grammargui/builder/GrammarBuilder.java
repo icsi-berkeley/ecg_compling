@@ -264,13 +264,15 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 			List<String> seenPackages = new ArrayList<String>();
 			for (List<File> fileList : importList) {
 				Grammar tempGrammar = prebuildGrammar(manager);
+				// This adds all the import requests. Necessary if you want to only count an import statement if it's made
+				// during an active package.
+				//tempGrammar.getImport().addAll(packageNames);
 				for (File f : fileList) {
 					IFile grammarFile = (IFile) getProject().findMember(f.getPath());
 					buildGrammar(grammarFile, tempGrammar);
 					monitor.worked(1);
 				}
 				grammarList.add(tempGrammar);
-				System.out.println("OK, added another temporary grammar.");
 			} 
 			
 			for (Grammar g : grammarList) {
@@ -296,7 +298,6 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 				}
 				seenPackages.addAll(g.getPackages());
 			}
-			System.out.println("OK, imported temporary grammars into working model.");
 			
 		
 		}
