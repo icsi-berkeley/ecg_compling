@@ -131,8 +131,8 @@ class UtilitySpecializer(DebuggingSpecializer):
                     if self.analyzer.issubtype('SCHEMA', filler.type(), 'PropertyModifier'):
                         if filler.modifiedThing.index() == goal.index():
                             v = filler.value.type()
-                            if v in self.mappings:
-                                v = self.mappings[v]
+                            #if v in self.mappings:
+                            #    v = self.mappings[v]
                             returned[str(filler.property.type())] = v
                     """
                     if filler.type() == 'PropertyModifier':
@@ -218,6 +218,19 @@ class UtilitySpecializer(DebuggingSpecializer):
             else:
                 return self.analyzer.issubtype('ONTOLOGY', popped['objectDescriptor']['type'], 'moveable')
         return False      
+
+    def replace_mappings(self, ntuple):
+        """ This is supposed to replace all of the mappings in the ntuple with values from the action ontology, if applicable. """
+        n = ntuple
+        if type(ntuple) == Struct:
+            n = ntuple.__dict__
+        for k,v in n.items():
+            if type(v) == dict or type(v) == Struct:
+                n[k]= self.replace_mappings(v)
+            elif v in self.mappings:
+                n[k] = self.mappings[v]
+                v = self.mappings[v]
+        return n
 
 class RobotTemplateSpecializer(NullSpecializer):
     def __init__(self):

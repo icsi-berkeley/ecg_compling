@@ -206,7 +206,6 @@ class RobotSpecializer(UtilitySpecializer, RobotTemplateSpecializer):
                 if hasattr(process.spg, 'distance') and hasattr(process.spg.distance, 'amount'):
                     d = process.spg.distance
                     params.update(distance=Struct(value=int(d.amount.value), units=d.units.type()))
-                    print(params)
                 # Is a goal specified?
                 if hasattr(process.spg, 'goal'):
                     params.update(goal = get_goal(process.spg, params))
@@ -329,8 +328,8 @@ class RobotSpecializer(UtilitySpecializer, RobotTemplateSpecializer):
                 """ Returns the actionary of PROCESS. Checks to make sure actionary is contained in process. """
                 if hasattr(process, "actionary"):
                     v = process.actionary.type()
-                    if v in self.mappings:
-                        v = self.mappings[v]
+                    #if v in self.mappings:
+                    #    v = self.mappings[v]
                     return v
                     #return process.actionary.type()
                 elif process.type() == 'MotionPath':
@@ -577,6 +576,9 @@ class RobotSpecializer(UtilitySpecializer, RobotTemplateSpecializer):
             eventProcess = core.m.eventProcess
             return moods[mood]()  
 
+
+
+
         # Add mood for conditionals, etc.        
         mood = fs.m.mood.replace('-', '_')
         assert mood in ('YN_Question', 'WH_Question', 'Declarative', 'Imperative', 'Conditional_Imperative', 'Definition')
@@ -590,6 +592,8 @@ class RobotSpecializer(UtilitySpecializer, RobotTemplateSpecializer):
         if params is None or params[0] is None:
             self.needs_solve == False
             return None
+
+        params = [self.replace_mappings(param) for param in params]
 
         ntuple = updated(self._NTUPLE_T,
                          getattr(self, 'specialize_%s' % mood)(fs),

@@ -8,6 +8,8 @@ box3		box3 Singular
 Box3		box3 Singular
 box4		box4 Singular
 Box4		box4 Singular
+Box5		box5 Singular
+box5 		box5 Singular
 North		north Positive
 South		south Positive
 East		east Positive
@@ -36,3 +38,5 @@ QL4			ql4 Singular
 0			0 Singular
 one			one Singular
 two			two Singular
+desk1		desk1 Singular
+shelf1		shelf1 Singular

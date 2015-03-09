@@ -23,7 +23,7 @@ def test_robot1():
 #         inst.pose.subscribe(print_pos)
     
         # sends a destination
-        inst.motion.publish({'x' : 0.0, 'y': 4.0, 'z': 0.0,
+        inst.motion.publish({'x' : 10.0, 'y': 0.0, 'z': 0.0,
                              'tolerance' : 0.5, 'speed' : 1.0})
     
         # Leave a couple of millisec to the simulator to start the action
@@ -56,8 +56,6 @@ class Robot(object):
         update(self, name=name, pos=Struct(x=0.0, y=0.0, z=0.0), simulator=Morse())
         inst = getattr(self.simulator, self.name)
         inst.robot_pose.subscribe(self.setpos)
-        #context_model = build('mock')
-        self.context_model = ['box', 'box', 'box', 'box']
 
     def get_pos():
         return  pose
@@ -77,14 +75,17 @@ class Robot(object):
     
         # waits until we reach the target
         discovered = []
+        interrupted=False
         while inst.motion.get_status() != "Arrived":
-            print(p.get()['near_objects'])
-            for obj in p.get()['near_objects'].keys():
-                if not obj in self.context_model:
-                    self.context_model.append(obj)
+            prox = p.get()['near_objects'].keys()
+            if len(prox) > 0:
+                for obj in p.get()['near_objects'].keys():
                     discovered.append(obj)
-            self.simulator.sleep(0.5) 
-        return discovered
+                interrupted=True
+                return (discovered, interrupted)
+
+            self.simulator.sleep(0.2) 
+        return discovered, interrupted
 
     def move_collide(self, **to):
         inst = getattr(self.simulator, self.name)

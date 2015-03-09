@@ -691,3 +691,7 @@ Struct(parameters=[Struct(kind='query', action='be2', predication={'color': 'red
 Imperative 
 robot1, move to the small box 
 Struct(parameters=[Struct(control_state='ongoing', action='move', heading=None, distance=Struct(value=4, units='square'), speed=0.5, goal={'objectDescriptor': {'type': 'box', 'givenness': 'uniquelyIdentifiable', 'size': 'small'}}, kind='execute', protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, direction=None)], predicate_type='command', return_type='error_descriptor')
+
+Imperative 
+robot1, move east 1 inch 
+Struct(return_type='error_descriptor', predicate_type='command', parameters=[Struct(heading='east', protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, direction=None, control_state='ongoing', kind='execute', goal=None, distance=Struct(value=4, units='square'), action='move', speed=0.5)])

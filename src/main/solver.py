@@ -183,7 +183,7 @@ class RobotProblemSolver(DispatchingProblemSolver):
         print('solver: begin move_to_destination')
         #for parameters in ntuple.parameters:
         protagonist = self.get_described_obj(parameters.protagonist['objectDescriptor'])
-        speed = parameters.speed * 6
+        speed = parameters.speed * 4
         heading = parameters.heading
         goal = parameters.goal
         direction = parameters.direction
@@ -460,7 +460,7 @@ class RobotProblemSolver(DispatchingProblemSolver):
                 smalls.append(i)
         return smalls
 
-
+    """ This needs to be modified. It assumes "small" = 1, and "big"=2. It should really be dependent on the type of object. """
     def get_large(self, objs):
         bigs = []
         for i in objs:
@@ -761,7 +761,8 @@ class MorseProblemSolver(RobotProblemSolver):
         p = instance.pos
         return (p.x, p.y, p.z) 
 
-    def move(self,inst,a, b, c=0, tolerance=4, speed=1.5, collide = False):#tolerance=1.5, speed=2.0):
+    def move(self,inst,a, b, c=0, tolerance=3, speed=1.5, collide = False):#tolerance=1.5, speed=2.0):
+        #print("Moving........")
         #inst =getattr(self.world, inst)
         #carry out the move action
         robotloc = self.world.robot1_instance.pos
@@ -772,10 +773,14 @@ class MorseProblemSolver(RobotProblemSolver):
         #print ("collide is")
        # print (collide)
         if collide == True:
-            discovered = inst.move(x=a, y=b, z=0,tolerance = tolerance, speed = speed)
+            discovered, interrupted = inst.move(x=a, y=b, z=0,tolerance = tolerance, speed = speed)
+
         else:
             for loc in self.avoid_obstacle( robotloc.x,robotloc.y , a, b):
-                discovered = inst.move(x=loc[0], y=loc[1], z=0,tolerance = tolerance, speed = speed)
+                #print(loc)
+                discovered, interrupted = inst.move(x=loc[0], y=loc[1], z=0,tolerance = tolerance, speed = speed)
+
+        
         newworld = inst.get_world_info()
             #update the location of all objects in the world
         for obj in newworld:
@@ -783,8 +788,16 @@ class MorseProblemSolver(RobotProblemSolver):
                 setattr(getattr(self.world, obj['name']), 'pos',Struct(x =obj['position'][0], y=obj['position'][1], z =obj['position'][2]) )
             else:
                 #if obj['type'] in discovered:
-                self.world.__dict__[obj['name']] = Struct(pos=Struct(x =obj['position'][0], y=obj['position'][1], z = obj['position'][2]))
-                print(obj['name'] + " is not in my data structure.")
+                if obj['name'] in discovered:
+                    self.world.__dict__[obj['name']] = Struct(pos=Struct(x =obj['position'][0], y=obj['position'][1], z = obj['position'][2]), 
+                                                              name=obj['name'],
+                                                              type=obj['type'])
+                    print("I discovered a " + obj['type'] + " called " + obj['name'] 
+                            + " at position (" + str(obj['position'][0]) + ", " 
+                                + str(obj['position'][1]) + ").")
+        if interrupted:
+            self.move(inst,a, b, c, tolerance, collide=False)
+
 
          
         #print("robot is going to:")

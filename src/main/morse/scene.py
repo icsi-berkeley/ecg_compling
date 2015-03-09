@@ -23,7 +23,7 @@ def build():
 
     proximity = Proximity()
     atrv.append(proximity)
-    proximity.properties(Range = 4.0, Track = "Catch_me")
+    proximity.properties(Range = 3.0, Track = "Catch_me")
     proximity.add_stream('socket')
     proximity.add_service('socket')
     #proximity.set_tracked_tag("Catch_me")
@@ -78,12 +78,25 @@ def build():
     #box4.rotate(z=0.2)
     box4.properties(Object=True, Label = "box4_instance", Type="box", Catch_me=True)
 
+    box5 = PassiveObject('environments/indoors-1/indoor-1', 'PinkBox')
+    box5.setgraspable()
+    box5.translate(x=6, y=0.0, z=0)
+    #box4.rotate(z=0.2)
+    box5.properties(Object=True, Label = "box5", Type="box", Catch_me=True, description='pink')
+
 
     # Adding a table?
+
     desk1 = PassiveObject('environments/indoors-1/indoor-1', 'Desk_1')
-    desk1.translate(x=0, y=5.0, z=0)
+    desk1.translate(x=3, y=3.0, z=0)
     #box4.rotate(z=0.2)
     desk1.properties(Object=True, Label = "desk1", Type='desk', Catch_me=True)
+    """
+    shelf1 = PassiveObject('environments/indoors-1/indoor-1', 'Shelf_3.001')
+    shelf1.translate(x=3, y=3.0, z=0)
+    #box4.rotate(z=0.2)
+    shelf1.properties(Object=True, Label = "shelf1", Type='shelf', Catch_me=True)
+    """
 
     # Environment
     env = Environment('indoors-1/empty-room')
