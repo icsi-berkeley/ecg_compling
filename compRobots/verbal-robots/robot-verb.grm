@@ -1,0 +1,24 @@
+package robots
+import starter
+//import transitives
+
+construction CauseEffectType
+	subcase of LexicalVerbType, GeneralTypeCxn
+	meaning: CauseEffect
+	 evokes ForceApplication as fa
+	 evokes MotionPath as mp
+	  constraints
+	    self.m.actionary <-- @motion
+	    self.m.protagonist.ontological-category <-- @agent
+	    self.fa <--> self.m.causalProcess
+	    self.mp <--> self.m.affectedProcess
+	    self.fa.actedUpon <--> self.m.affectedEntity
+
+construction ReturnType
+	subcase of LexicalVerbType
+	meaning: MotionPath
+	 constraints
+	   self.m.actionary <-- @move
+	   self.m.spg.goal <-- @home
+	   
+	   
