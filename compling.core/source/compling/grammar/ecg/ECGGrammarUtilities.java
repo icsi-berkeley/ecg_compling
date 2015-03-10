@@ -628,7 +628,6 @@ public class ECGGrammarUtilities {
     String packageName = preferences.getSetting(AP.PACKAGE_NAME);
     
     Grammar grammar = new Grammar();
-    //grammar.addImport(packageName);
     for (String name : packageNames) {
     	grammar.addImport(name);
     }
@@ -723,40 +722,7 @@ public class ECGGrammarUtilities {
 	
     
     	
-    /*
-	    ext = preferences.getSetting(AP.ONTOLOGY_EXTENSIONS);
-	    if (ext == null) {
-	      ext = "def inst ont";
-	    }
-	    String[] extsI = ext.split(" ");
-	    String encSettingI = preferences.getSetting(AP.FILE_ENCODING);
-	    Charset encodingI = Charset.forName(encSettingI != null ? encSettingI : ECGConstants.DEFAULT_ENCODING);
-	    String ontologyImport = preferences.getSetting(AP.ONTOLOGY_TYPE);
-	    if (ontologyImport != null && ontologyImport.equalsIgnoreCase(AnalyzerPrefs.OWL_TYPE)) {
-	      grammarImport = read(importFiles, OWLOntology.fromPreferences(preferences).getTypeSystem(), encodingI);
-	    }
-	    else {
-	      List<String> ontPaths = preferences.getList(AP.ONTOLOGY_PATHS);
-	      List<File> ontFiles = FileUtils.getFilesUnder(base, ontPaths, new ExtensionFileFilter(ext));
-	
-	      ContextModel contextModel;
-	      if (ontFiles.size() == 1) {
-	        contextModel = new ContextModel(ontFiles.get(0).getAbsolutePath());
-	      }
-	      else {
-	        contextModel = new ContextModel(ontFiles, extsI[0], extsI[1]);
-	      }
-	      grammarImport = read(importFiles, contextModel, encodingI);
-	      grammarImport.update();
-	    } 
 
- 
-    if (!importFiles.isEmpty()) {
-    	grammar = addGrammar(grammar, grammarImport);
-    	grammar.update();
-    } 
-    
-    */
     /** Added by @seantrott for adding imported packages. Testing. */
  
     List<String> paramPaths = preferences.getList(AP.GRAMMAR_PARAMS_PATHS);

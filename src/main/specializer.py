@@ -136,7 +136,7 @@ class RobotSpecializer(UtilitySpecializer, RobotTemplateSpecializer):
                     copy.pop(key)
                     #p[temp] = new_od
 
-        tagged.parameters[i] = Struct(copy)
+        tagged.parameters[i] = Struct(self.replace_mappings(copy))
  
 
 

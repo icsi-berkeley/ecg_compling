@@ -4,6 +4,7 @@
 from morse.builder import ATRV, Pose, Waypoint, Environment, SemanticCamera, PassiveObject,Destination
 from math import pi
 from morse.builder import *
+import morse.helpers.colors
 
 def build():
     # Add a robot with a position sensor and a motion controller
@@ -55,7 +56,8 @@ def build():
     box1.setgraspable()
     box1.translate(x=6.0, y=6.0, z=1)
     #box1.rotate(z=0.2)
-    box1.properties(Object=True, Label = "box1_instance", Type="box", Catch_me=True)
+    box1.properties(Object=True, Label = "box1_instance", Type="box", Catch_me=True, Color="red")
+    box1.set_color(256, 0, 0)
     # box1.add_interface('socket')
 
     #adding a 2nd box
@@ -91,12 +93,7 @@ def build():
     desk1.translate(x=3, y=3.0, z=0)
     #box4.rotate(z=0.2)
     desk1.properties(Object=True, Label = "desk1", Type='desk', Catch_me=True)
-    """
-    shelf1 = PassiveObject('environments/indoors-1/indoor-1', 'Shelf_3.001')
-    shelf1.translate(x=3, y=3.0, z=0)
-    #box4.rotate(z=0.2)
-    shelf1.properties(Object=True, Label = "shelf1", Type='shelf', Catch_me=True)
-    """
+
 
     # Environment
     env = Environment('indoors-1/empty-room')

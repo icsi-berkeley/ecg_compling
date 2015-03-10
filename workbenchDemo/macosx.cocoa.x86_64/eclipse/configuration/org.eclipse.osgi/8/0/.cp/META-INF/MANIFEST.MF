@@ -60,7 +60,7 @@ Require-Bundle: compling.core;bundle-version="1.0.0",org.jdom;bundle-v
 Bundle-Vendor: ICSI Berkeley
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-Version: 0.6.4.201502241507
+Bundle-Version: 0.6.4.201503101503
 Bundle-Name: ECG Workbench Plug-in
 Bundle-Activator: compling.gui.grammargui.EcgEditorPlugin
 Bundle-ManifestVersion: 2

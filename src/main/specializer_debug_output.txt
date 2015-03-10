@@ -695,3 +695,11 @@ Struct(parameters=[Struct(control_state='ongoing', action='move', heading=None, 
 Imperative 
 robot1, move east 1 inch 
 Struct(return_type='error_descriptor', predicate_type='command', parameters=[Struct(heading='east', protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, direction=None, control_state='ongoing', kind='execute', goal=None, distance=Struct(value=4, units='square'), action='move', speed=0.5)])
+
+Imperative 
+robot1, move to the big box! 
+Struct(predicate_type='command', parameters=[Struct(heading=None, action='move', control_state='ongoing', direction=None, kind='execute', speed=0.5, goal={'objectDescriptor': {'type': 'box', 'givenness': 'uniquelyIdentifiable', 'size': 'big', 'kind': 'unmarked'}}, distance={'value': 4, 'units': 'square'}, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}})], return_type='error_descriptor')
+
+Imperative 
+robot1, move to the smallest box 
+Struct(return_type='error_descriptor', predicate_type='command', parameters=[Struct(heading=None, direction=None, speed=0.5, kind='execute', control_state='ongoing', distance={'value': 4, 'units': 'square'}, goal={'objectDescriptor': {'size': 'small', 'givenness': 'uniquelyIdentifiable', 'type': 'box', 'kind': 'superlative'}}, protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, action='move')])

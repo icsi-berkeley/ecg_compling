@@ -134,6 +134,7 @@ class UtilitySpecializer(DebuggingSpecializer):
                             #if v in self.mappings:
                             #    v = self.mappings[v]
                             returned[str(filler.property.type())] = v
+                            returned['kind'] = str(filler.kind.type())
                     """
                     if filler.type() == 'PropertyModifier':
                         if filler.modifiedThing.index() == goal.index():

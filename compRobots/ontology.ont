@@ -820,4 +820,6 @@ DEFS:
 
 (type pink sub colorValue)
 
+(type large sub sizeValue)
+
 INSTS:
