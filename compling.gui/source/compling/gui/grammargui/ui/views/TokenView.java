@@ -134,7 +134,6 @@ public class TokenView extends ViewPart {
 		parent = parent.substring(1, parent.length()).trim();
 		try {
 			List<String> ontPaths = prefs.getList(AP.ONTOLOGY_PATHS);
-			System.out.println(ontPaths);
 			ontFile = new File(base, ontPaths.get(0));
 			File tempFile = new File("tempFile.ont");
 			ontWriter = new FileWriter(tempFile.getAbsoluteFile(), true);
@@ -394,6 +393,7 @@ public class TokenView extends ViewPart {
 		addConstraintButton.addSelectionListener(new SelectionAdapter() { 
 			public void widgetSelected(SelectionEvent e) {
 				String value = constraintText.getText();
+				System.out.println(value);
 				String appValue = appMappingText.getText();
 				String inputParents = "";
 				if (!constraintParents.getText().equals("")) {
@@ -411,9 +411,9 @@ public class TokenView extends ViewPart {
 				} else if (value.charAt(0) == ECGConstants.ONTOLOGYPREFIX &&
 							parentValue.charAt(0) == ECGConstants.ONTOLOGYPREFIX) {
 					if (!exists(value)) {
+						System.out.println("Value does not exist. Adding it...");
 						if (parentValue != null) {
 							parentValue += " " + inputParents;
-							System.out.println(value);
 							addOntologyItem(value, parentValue);
 							constraints.add(constraintBox.getText() + " <-- " + value);
 							if (appValue.length() > 1) {
