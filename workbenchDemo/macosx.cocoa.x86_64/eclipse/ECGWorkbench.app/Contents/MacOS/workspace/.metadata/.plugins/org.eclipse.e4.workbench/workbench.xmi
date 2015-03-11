@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_soT_kcdxEeSqFLpHo9Lmnw" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.ui.workbench" selectedElement="_soT_ksdxEeSqFLpHo9Lmnw" bindingContexts="_soT_mMdxEeSqFLpHo9Lmnw">
-  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;workbench>&#xA;&lt;mruList>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;compling.gui.grammargui.editors.constructionEditor&quot; name=&quot;robot-definitions.grm&quot; tooltip=&quot;compRobots/compRobots/robot-sentence/robot-definitions.grm&quot;>&#xA;&lt;persistable path=&quot;/compRobots/compRobots/robot-sentence/robot-definitions.grm&quot;/>&#xA;&lt;/file>&#xA;&lt;/mruList>&#xA;&lt;/workbench>"/>
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;workbench>&#xA;&lt;mruList>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.ui.DefaultTextEditor&quot; name=&quot;compRobots.tokens&quot; tooltip=&quot;compRobots/compRobots/compRobots.tokens&quot;>&#xA;&lt;persistable path=&quot;/compRobots/compRobots/compRobots.tokens&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;compling.gui.grammargui.editors.constructionEditor&quot; name=&quot;ontology.ont&quot; tooltip=&quot;compRobots/compRobots/ontology.ont&quot;>&#xA;&lt;persistable path=&quot;/compRobots/compRobots/ontology.ont&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;compling.gui.grammargui.editors.constructionEditor&quot; name=&quot;agreement_features-schemas-U.grm&quot; tooltip=&quot;starter/universal/schemas-universal/agreement_features-schemas-U.grm&quot;>&#xA;&lt;persistable path=&quot;/starter/universal/schemas-universal/agreement_features-schemas-U.grm&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;compling.gui.grammargui.editors.constructionEditor&quot; name=&quot;robot-definitions.grm&quot; tooltip=&quot;compRobots/compRobots/robot-sentence/robot-definitions.grm&quot;>&#xA;&lt;persistable path=&quot;/compRobots/compRobots/robot-sentence/robot-definitions.grm&quot;/>&#xA;&lt;/file>&#xA;&lt;/mruList>&#xA;&lt;/workbench>"/>
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <tags>ModelMigrationProcessor.001</tags>
   <children xsi:type="basic:TrimmedWindow" xmi:id="_soT_ksdxEeSqFLpHo9Lmnw" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.ui.workbench" selectedElement="_tCA5AMdxEeSqFLpHo9Lmnw" label="%trimmedwindow.label.eclipseSDK" x="69" y="22" width="1263" height="722">
     <persistedState key="coolBarVisible" value="true"/>
     <persistedState key="perspectiveBarVisible" value="true"/>
     <persistedState key="workingSets" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;workingSets/>"/>
-    <persistedState key="aggregateWorkingSetId"/>
+    <persistedState key="aggregateWorkingSetId" value="Aggregate for window 1426026153549"/>
     <tags>topLevel</tags>
     <tags>shellMaximized</tags>
     <children xsi:type="basic:PartSashContainer" xmi:id="_tCA5AMdxEeSqFLpHo9Lmnw" selectedElement="_tCA5AcdxEeSqFLpHo9Lmnw" horizontal="true">
@@ -40,10 +40,9 @@
               <children xsi:type="advanced:Placeholder" xmi:id="_tFdOk8dxEeSqFLpHo9Lmnw" elementId="compling.gui.grammargui.views.GrammarTreeView" ref="_tFV50MdxEeSqFLpHo9Lmnw"/>
             </children>
             <children xsi:type="basic:PartSashContainer" xmi:id="_tFdOlMdxEeSqFLpHo9Lmnw" containerData="7000" selectedElement="_tFdOlcdxEeSqFLpHo9Lmnw" horizontal="true">
-              <children xsi:type="basic:PartSashContainer" xmi:id="_tFdOlcdxEeSqFLpHo9Lmnw" containerData="6000" selectedElement="_tFdOlsdxEeSqFLpHo9Lmnw">
+              <children xsi:type="basic:PartSashContainer" xmi:id="_tFdOlcdxEeSqFLpHo9Lmnw" containerData="6000" selectedElement="_tFdOmMdxEeSqFLpHo9Lmnw">
                 <children xsi:type="basic:PartStack" xmi:id="_tFdOlsdxEeSqFLpHo9Lmnw" elementId="topfolder" containerData="1500" selectedElement="_tFdOl8dxEeSqFLpHo9Lmnw">
                   <tags>newtablook</tags>
-                  <tags>active</tags>
                   <children xsi:type="advanced:Placeholder" xmi:id="_tFdOl8dxEeSqFLpHo9Lmnw" elementId="compling.gui.grammargui.views.Analyzer" ref="_tFZkMMdxEeSqFLpHo9Lmnw"/>
                 </children>
                 <children xsi:type="basic:PartSashContainer" xmi:id="_tFdOmMdxEeSqFLpHo9Lmnw" containerData="8500" selectedElement="_tFdOmcdxEeSqFLpHo9Lmnw">
@@ -57,8 +56,10 @@
               </children>
               <children xsi:type="basic:PartStack" xmi:id="_tFdOncdxEeSqFLpHo9Lmnw" elementId="resourceFolder" containerData="4000" selectedElement="_tFdOnsdxEeSqFLpHo9Lmnw">
                 <tags>newtablook</tags>
+                <tags>org.eclipse.e4.secondaryDataStack</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_tFdOnsdxEeSqFLpHo9Lmnw" elementId="compling.gui.grammargui.views.commonExplorer" ref="_tFYWEMdxEeSqFLpHo9Lmnw"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_tFdOn8dxEeSqFLpHo9Lmnw" elementId="org.eclipse.ui.views.ContentOutline" ref="_tFY9IMdxEeSqFLpHo9Lmnw"/>
+                <children xsi:type="advanced:Placeholder" xmi:id="_9B3WAMdzEeSwA_ZrbGz8EQ" elementId="compling.gui.grammargui.views.tokenView" ref="_9B2u8MdzEeSwA_ZrbGz8EQ"/>
               </children>
             </children>
           </children>
@@ -73,10 +74,19 @@
       <tags>categoryTag:General</tags>
     </sharedElements>
     <sharedElements xsi:type="advanced:Area" xmi:id="_tFN-AMdxEeSqFLpHo9Lmnw" elementId="org.eclipse.ui.editorss" selectedElement="_tFN-AcdxEeSqFLpHo9Lmnw">
-      <children xsi:type="basic:PartStack" xmi:id="_tFN-AcdxEeSqFLpHo9Lmnw" elementId="org.eclipse.e4.primaryDataStack">
+      <children xsi:type="basic:PartStack" xmi:id="_tFN-AcdxEeSqFLpHo9Lmnw" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_2Bgp8Md5EeS2frS2zoYXOQ">
         <tags>newtablook</tags>
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
+        <tags>active</tags>
+        <children xsi:type="basic:Part" xmi:id="_2Bgp8Md5EeS2frS2zoYXOQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="compRobots.tokens" iconURI="platform:/plugin/org.eclipse.ui.editors/icons/full/obj16/file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.ui.DefaultTextEditor&quot; name=&quot;compRobots.tokens&quot; partName=&quot;compRobots.tokens&quot; title=&quot;compRobots.tokens&quot; tooltip=&quot;compRobots/compRobots/compRobots.tokens&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/compRobots/compRobots/compRobots.tokens&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;391&quot;/>&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.ui.DefaultTextEditor</tags>
+          <tags>removeOnHide</tags>
+          <tags>active</tags>
+          <tags>activeOnClose</tags>
+        </children>
       </children>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_tFV50MdxEeSqFLpHo9Lmnw" elementId="compling.gui.grammargui.views.GrammarTreeView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Grammar Structure" iconURI="platform:/plugin/compling.gui/icons/e/jtypeassist_co.gif" closeable="true">
@@ -107,8 +117,6 @@
       <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view/>"/>
       <tags>View</tags>
       <tags>categoryTag:ECG</tags>
-      <tags>active</tags>
-      <tags>activeOnClose</tags>
       <menus xmi:id="_tIU8YMdxEeSqFLpHo9Lmnw" elementId="compling.gui.grammargui.views.Analyzer">
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
@@ -135,6 +143,16 @@
       </menus>
       <toolbar xmi:id="_wyoq8cdxEeSqFLpHo9Lmnw" elementId="org.eclipse.ui.console.ConsoleView"/>
     </sharedElements>
+    <sharedElements xsi:type="basic:Part" xmi:id="_9B2u8MdzEeSwA_ZrbGz8EQ" elementId="compling.gui.grammargui.views.tokenView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Token Adder" iconURI="platform:/plugin/compling.gui/icons/tokenTest.ico" closeable="true">
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view/>"/>
+      <tags>View</tags>
+      <tags>categoryTag:Construction</tags>
+      <menus xmi:id="_9CBHAMdzEeSwA_ZrbGz8EQ" elementId="compling.gui.grammargui.views.tokenView">
+        <tags>ViewMenu</tags>
+        <tags>menuContribution:menu</tags>
+      </menus>
+      <toolbar xmi:id="_9CBHAcdzEeSwA_ZrbGz8EQ" elementId="compling.gui.grammargui.views.tokenView" visible="false"/>
+    </sharedElements>
     <trimBars xmi:id="_soT_k8dxEeSqFLpHo9Lmnw" elementId="org.eclipse.ui.main.toolbar" contributorURI="platform:/plugin/org.eclipse.ui.workbench">
       <children xsi:type="menu:ToolBar" xmi:id="_tC638MdxEeSqFLpHo9Lmnw" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -150,6 +168,9 @@
         <tags>Draggable</tags>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_tGRt8MdxEeSqFLpHo9Lmnw" elementId="org.eclipse.ui.edit.text.actionSet.navigation">
+        <tags>Draggable</tags>
+      </children>
+      <children xsi:type="menu:ToolBar" xmi:id="_2CpSYMd5EeS2frS2zoYXOQ" elementId="org.eclipse.ui.edit.text.actionSet.presentation">
         <tags>Draggable</tags>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_zos5IMdxEeSqFLpHo9Lmnw" elementId="group.editor" toBeRendered="false">
@@ -387,10 +408,10 @@
       <tags>platform:cocoa</tags>
     </bindings>
     <bindings xmi:id="_sqlQcMdxEeSqFLpHo9Lmnw" keySequence="CTRL+H" command="_spS3AcdxEeSqFLpHo9Lmnw"/>
-    <bindings xmi:id="_squaYMdxEeSqFLpHo9Lmnw" keySequence="COMMAND+CTRL+F" command="_sqtzUcdxEeSqFLpHo9Lmnw"/>
+    <bindings xmi:id="_ssL5Ucd5EeS2frS2zoYXOQ" keySequence="COMMAND+CTRL+F" command="_sqtzUcdxEeSqFLpHo9Lmnw"/>
   </bindingTables>
   <bindingTables xmi:id="_sqvBc8dxEeSqFLpHo9Lmnw" contributorURI="platform:/fragment/org.eclipse.e4.ui.workbench.renderers.swt.cocoa" bindingContext="_soT_m8dxEeSqFLpHo9Lmnw">
-    <bindings xmi:id="_sqvBdMdxEeSqFLpHo9Lmnw" keySequence="M1+W" command="_sqvBccdxEeSqFLpHo9Lmnw"/>
+    <bindings xmi:id="_ssMgYMd5EeS2frS2zoYXOQ" keySequence="M1+W" command="_sqvBccdxEeSqFLpHo9Lmnw"/>
   </bindingTables>
   <bindingTables xmi:id="_tFPzMcdxEeSqFLpHo9Lmnw" bindingContext="_tFPzMMdxEeSqFLpHo9Lmnw"/>
   <bindingTables xmi:id="_tFQaQcdxEeSqFLpHo9Lmnw" bindingContext="_tFQaQMdxEeSqFLpHo9Lmnw"/>
