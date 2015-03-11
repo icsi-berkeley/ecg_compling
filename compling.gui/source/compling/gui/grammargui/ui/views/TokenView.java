@@ -137,6 +137,7 @@ public class TokenView extends ViewPart {
 			System.out.println(ontPaths);
 			ontFile = new File(base, ontPaths.get(0));
 			File tempFile = new File("tempFile.ont");
+			System.out.println(tempFile);
 			ontWriter = new FileWriter(tempFile.getAbsoluteFile(), true);
 			bOntWriter = new BufferedWriter(ontWriter);
 			TextFileLineIterator tfli = new TextFileLineIterator(ontFile);
@@ -155,7 +156,10 @@ public class TokenView extends ViewPart {
 			bOntWriter.write("INSTS:");
 			bOntWriter.newLine();
 			bOntWriter.close();
-			tempFile.renameTo(ontFile);
+			File pointer = new File(ontFile.getAbsolutePath());
+			ontFile.delete();
+			tempFile.renameTo(pointer);
+			System.out.println(tempFile);
 			PrefsManager.getDefault().checkGrammar();
 		} catch (IOException problem) {
 			System.out.println("Problem with ontology file.");

@@ -222,7 +222,7 @@ class RobotProblemSolver(DispatchingProblemSolver):
                     if (loc):
                         self.move(inst, loc[0], loc[1], speed=speed)    
         elif heading:
-            n = float(parameters.distance.value)
+            n = float(parameters.distance['value'])
             name = getattr(inst, 'name')
             #pos = getattr(inst, 'pos') #self.getpos(inst)
             pos = self.getpos(name)
@@ -240,7 +240,7 @@ class RobotProblemSolver(DispatchingProblemSolver):
         protagonist = self.get_described_obj(parameters.causer['objectDescriptor'])
         heading = parameters.affectedProcess.heading
         goal = parameters.affectedProcess.goal
-        distance = parameters.affectedProcess.distance.value 
+        distance = parameters.affectedProcess.distance['value']
         inst =protagonist
         if parameters.causalProcess.acted_upon == None:
             tag = ['acted_upon']
@@ -789,9 +789,12 @@ class MorseProblemSolver(RobotProblemSolver):
             else:
                 #if obj['type'] in discovered:
                 if obj['name'] in discovered:
+                    description = json.loads(obj['description'])
                     self.world.__dict__[obj['name']] = Struct(pos=Struct(x =obj['position'][0], y=obj['position'][1], z = obj['position'][2]), 
                                                               name=obj['name'],
-                                                              type=obj['type'])
+                                                              type=obj['type'],
+                                                              color=description['color'],
+                                                              size=description['size'])
                     print("I discovered a " + obj['type'] + " called " + obj['name'] 
                             + " at position (" + str(obj['position'][0]) + ", " 
                                 + str(obj['position'][1]) + ").")
