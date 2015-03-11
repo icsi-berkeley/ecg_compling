@@ -822,6 +822,5 @@ DEFS:
 
 (type large sub sizeValue)
 
-(type cherry sub colorValue red)
 
 INSTS:

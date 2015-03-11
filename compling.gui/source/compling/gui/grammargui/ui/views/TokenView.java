@@ -136,7 +136,6 @@ public class TokenView extends ViewPart {
 			List<String> ontPaths = prefs.getList(AP.ONTOLOGY_PATHS);
 			System.out.println(ontPaths);
 			ontFile = new File(base, ontPaths.get(0));
-			System.out.println(ontFile);
 			File tempFile = new File("tempFile.ont");
 			ontWriter = new FileWriter(tempFile.getAbsoluteFile(), true);
 			bOntWriter = new BufferedWriter(ontWriter);
@@ -146,17 +145,17 @@ public class TokenView extends ViewPart {
 				if (line.contains("INSTS:")) {
 					continue;
 				} 
-					
 				bOntWriter.write(line + System.getProperty("line.separator") + System.getProperty("line.separator"));
 			}
 			String toWrite = "(type " + value + " sub " + parent + ")";
-			tempFile.renameTo(ontFile);
+			System.out.println(toWrite);
 			bOntWriter.write(toWrite);
 			bOntWriter.newLine();
 			bOntWriter.newLine();
 			bOntWriter.write("INSTS:");
 			bOntWriter.newLine();
 			bOntWriter.close();
+			tempFile.renameTo(ontFile);
 			PrefsManager.getDefault().checkGrammar();
 		} catch (IOException problem) {
 			System.out.println("Problem with ontology file.");
@@ -395,7 +394,6 @@ public class TokenView extends ViewPart {
 		addConstraintButton.addSelectionListener(new SelectionAdapter() { 
 			public void widgetSelected(SelectionEvent e) {
 				String value = constraintText.getText();
-				System.out.println(value);
 				String appValue = appMappingText.getText();
 				String inputParents = "";
 				if (!constraintParents.getText().equals("")) {
@@ -413,7 +411,6 @@ public class TokenView extends ViewPart {
 				} else if (value.charAt(0) == ECGConstants.ONTOLOGYPREFIX &&
 							parentValue.charAt(0) == ECGConstants.ONTOLOGYPREFIX) {
 					if (!exists(value)) {
-						System.out.println("Value does not exist. Adding it...");
 						if (parentValue != null) {
 							parentValue += " " + inputParents;
 							addOntologyItem(value, parentValue);

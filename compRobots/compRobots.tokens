@@ -45,4 +45,3 @@ shelf :: NounType :: self.m.ontological-category <-- @shelf
 shelf1 :: ProperNPInstance :: self.m.ontological-category <-- @shelf :: self.m.referent <-- @shelf1
 pink :: ColorType :: self.m.value <-- @pink
 large :: SizeType :: self.m.value <-- @large
-cherry :: ColorType :: self.m.value <-- @cherry
