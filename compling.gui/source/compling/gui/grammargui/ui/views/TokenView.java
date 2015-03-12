@@ -50,6 +50,7 @@ import compling.gui.util.Utils;
 import compling.parser.ParserException;
 import compling.parser.ecgparser.ECGAnalyzer;
 import compling.parser.ecgparser.LCPGrammarWrapper;
+import compling.util.fileutil.FileUtils;
 import compling.util.fileutil.TextFileLineIterator;
 
 public class TokenView extends ViewPart {
@@ -156,9 +157,15 @@ public class TokenView extends ViewPart {
 			bOntWriter.write("INSTS:");
 			bOntWriter.newLine();
 			bOntWriter.close();
-			File pointer = new File(ontFile.getAbsolutePath());
+			//File pointer = new File(ontFile.getAbsolutePath());
+			String path = ontFile.getAbsolutePath();
 			ontFile.delete();
-			tempFile.renameTo(pointer);
+			// Need to rename temp-file here.
+			if (tempFile.renameTo(ontFile)) {
+				System.out.println("Success");
+			} else{
+				System.out.println("Uh oh.");
+			}
 			System.out.println(tempFile);
 			PrefsManager.getDefault().checkGrammar();
 		} catch (IOException problem) {
