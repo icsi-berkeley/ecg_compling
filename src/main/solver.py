@@ -238,17 +238,17 @@ class RobotProblemSolver(DispatchingProblemSolver):
         print('solver: begin move_to_destination')
         #for parameters in ntuple.parameters:
         protagonist = self.get_described_obj(parameters.causer['objectDescriptor'])
-        heading = parameters.affectedProcess.heading
-        goal = parameters.affectedProcess.goal
-        distance = parameters.affectedProcess.distance['value']
+        heading = parameters.affectedProcess['heading']
+        goal = parameters.affectedProcess['goal']
+        distance = parameters.affectedProcess['distance']['value']
         inst =protagonist
-        if parameters.causalProcess.acted_upon == None:
+        if parameters.causalProcess['acted_upon'] == None:
             tag = ['acted_upon']
             tagged = self.tag_ntuple(properties='', ntuple=self.ntuple, tag=tag)
             raise ClarificationError(message="push what?", ntuple=tagged, cue=True)
 
 
-        obj = self.get_described_obj(parameters.causalProcess.acted_upon['objectDescriptor'])
+        obj = self.get_described_obj(parameters.causalProcess['acted_upon']['objectDescriptor'])
         if goal:
             print("Not yet supported. Try pushing a box in a direction.")
         elif heading:
@@ -453,6 +453,34 @@ class RobotProblemSolver(DispatchingProblemSolver):
             return locations[0]
 
 
+    def get_smallest(self, objs):
+        """ Returns the smallest object of input OBJS. If there are multiple smallest, it returns multiple. """
+        smallest = objs[0]
+        returned = [smallest]
+        for i in objs:
+            if float(i.size) < smallest.size:
+                smallest = i
+                returned = [smallest]
+            elif float(i.size) == smallest.size:
+                returned.append(i)
+        print(returned)
+        return returned
+
+    def get_biggest(self, objs):
+        """ Returns the largest object of input OBJS. If there are multiple largest, it returns multiple. """
+        biggest = objs[0]
+        returned = [biggest]
+        for i in objs:
+            if float(i.size) > biggest.size:
+                biggest = i
+                returned = [biggest]
+            elif float(i.size) == biggest.size:
+                returned.append(i)
+                # DO SOMETHING HERE ***
+        return returned
+
+
+    """ This needs to be modified. It assumes "small" = 1, and "big"=2. It should really be dependent on the type of object. """
     def get_small(self, objs):
         smalls = []
         for i in objs:
@@ -471,8 +499,15 @@ class RobotProblemSolver(DispatchingProblemSolver):
     def get_described_objects(self, properties, protagonist=None, multiple=False):
         objs = []
         if 'referent' in properties:
-            return [getattr(self.world, properties['referent'])]
+            if hasattr(self.world, properties['referent']):
+                return [getattr(self.world, properties['referent'])]
+            else:
+                print("No object named " + properties['referent'] + " in the world.")
+                return None
         obj_type = properties["type"]
+        kind = None
+        if 'kind' in properties:
+            kind = properties['kind']
         if 'color' in properties:#deal with color
             color = properties['color']
             for item in self.world.__dict__.keys(): #gets all the items in the world. 
@@ -485,10 +520,16 @@ class RobotProblemSolver(DispatchingProblemSolver):
         if 'size' in properties:
             size = properties['size']
             if size[0].lower() == 's':
-                objs = self.get_small(objs)
+                if kind == 'superlative':
+                    objs = self.get_smallest(objs)
+                else:
+                    objs = self.get_small(objs)
                 #return [self.getsmallest(objs)]
             elif size[0].lower() == 'b':
-                objs = self.get_large(objs)
+                if kind == 'superlative':
+                    objs = self.get_biggest(objs)
+                else:
+                    objs = self.get_large(objs)
                 #return [self.getbiggest(objs)]
         if 'locationDescriptor' in properties:
             if protagonist is None:

@@ -44,6 +44,8 @@ IDENT = ([:letter:] | _) ([:letter:] | [:digit:] | _ | -)*
 <YYINITIAL> "fun" { return new Symbol(sym.FUN); }
 <YYINITIAL> "ind" { return new Symbol(sym.IND); }
 <YYINITIAL> "fil" { return new Symbol(sym.FIL); }
+<YYINITIAL> "package" { return new Symbol(sym.PACKAGE); }
+<YYINITIAL> "import" { return new Symbol(sym.IMPORT); }
 <YYINITIAL> "eq" { return new Symbol(sym.EQ); }
 //<YYINITIAL> "transient" { return new Symbol(sym.TRANSIENT); }
 <YYINITIAL> "persistent"  { return new Symbol(sym.PERSISTENT); }

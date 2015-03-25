@@ -703,3 +703,7 @@ Struct(predicate_type='command', parameters=[Struct(heading=None, action='move',
 Imperative 
 robot1, move to the smallest box 
 Struct(return_type='error_descriptor', predicate_type='command', parameters=[Struct(heading=None, direction=None, speed=0.5, kind='execute', control_state='ongoing', distance={'value': 4, 'units': 'square'}, goal={'objectDescriptor': {'size': 'small', 'givenness': 'uniquelyIdentifiable', 'type': 'box', 'kind': 'superlative'}}, protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, action='move')])
+
+Imperative 
+robot1, move to the smallest box 
+Struct(return_type='error_descriptor', parameters=[Struct(control_state='ongoing', goal={'objectDescriptor': {'kind': 'superlative', 'type': 'box', 'size': 'small', 'givenness': 'uniquelyIdentifiable'}}, heading=None, kind='execute', distance={'units': 'square', 'value': 4}, speed=0.5, action='move', direction=None, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}})], predicate_type='command')

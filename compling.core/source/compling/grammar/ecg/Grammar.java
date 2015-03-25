@@ -35,8 +35,9 @@ import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
 import compling.grammar.unificationgrammar.UnificationGrammar.Role;
 import compling.grammar.unificationgrammar.UnificationGrammar.SlotChain;
 import compling.grammar.unificationgrammar.UnificationGrammar.TypeConstraint;
+import compling.util.PackageHandler;
 
-public class Grammar {
+public class Grammar extends PackageHandler {
 	private HashMap<String, Construction> cxns = new LinkedHashMap<String, Construction>();
 	private HashMap<String, Schema> schemas = new LinkedHashMap<String, Schema>();
 	private HashMap<String, MapPrimitive> maps = new LinkedHashMap<String, MapPrimitive>();
@@ -53,7 +54,7 @@ public class Grammar {
 	private static ECGGrammarFormatter formatter = new SimpleGrammarPrinter();
 	private ContextModel contextModel = null;
 
-	
+	/*
 	private String pkg = "global";
 	private ArrayList<String> pkgs = new ArrayList<String>(){{
 		add("global");
@@ -63,7 +64,7 @@ public class Grammar {
 		add("global");
 	}};
 
-	/** Sets field for package. */
+
 	public String setPackage(String packageName) {
 		pkg = packageName;
 		return pkg;
@@ -84,7 +85,7 @@ public class Grammar {
 		return pkgName;
 	}
 	
-	/** Adds import to import list, returns import name. */
+
 	public String addImport(String importName) {
 		String p = getPackage();
 		if (!importRequests.contains(importName)) {
@@ -99,6 +100,7 @@ public class Grammar {
 	public ArrayList<String> getImport() {
 		return importRequests;
 	}
+	*/
 	
 	
 	public void setContextModel(ContextModel cm) {

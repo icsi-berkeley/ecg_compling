@@ -33,9 +33,10 @@ import compling.grammar.ecg.ecgreader.Location;
 import compling.grammar.unificationgrammar.TypeSystem;
 import compling.grammar.unificationgrammar.TypeSystemException;
 import compling.grammar.unificationgrammar.TypeSystemNode;
+import compling.util.PackageHandler;
 import compling.util.Pair;
 
-public class MiniOntology {
+public class MiniOntology extends PackageHandler {
 
 	// FIXME: I don't think the current MiniOntology implementation actually
 	// supports blocking.
@@ -61,9 +62,12 @@ public class MiniOntology {
 	public static final String PAIRNAME = "Pair";
 	public static final String MULTITUDENAME = "Multitude";
 	public static final String GROUPNAME = "Group";
+	
 
 	public static final String TIMESTAMP = "timestamp"; // eva
 	private int timestampCounter = 0;
+	
+	
 
 	TypeSystem<Type> typeSystem = new TypeSystem<Type>(ECGConstants.ONTOLOGY);
 
@@ -124,6 +128,16 @@ public class MiniOntology {
 	public class Individual extends Value {
 		String name;
 		String type;
+		
+		private String packageName;
+		
+		public String getPackage() {
+			return packageName;
+		}
+		
+		public void setPackage(String pkg) {
+			packageName = pkg;
+		}
 
 		Individual(String name, String type) {
 			this.name = name;
@@ -686,7 +700,7 @@ public class MiniOntology {
 			System.out.println("In type: " + type + " coindexing relations: " + reln1 + " and " + reln2);
 		}
 	}
-
+	
 	public void addIndividual(String name, String type) {
 		Type ontType = typeSystem.get(type);
 		if (ontType == null) {
@@ -695,6 +709,25 @@ public class MiniOntology {
 		}
 
 		Individual i = new Individual(name, type);
+		recentlyAccessedIndividuals.add(i);
+		getCurrentInterval().addIndividual(i);
+		String setname = SINGLETONNAME + name;
+		getCurrentInterval().addIndividual(new Individual(setname, SINGLETONNAME));
+		addRelationFiller(MEMBER, setname, name);
+		addRelationFiller(SETSIZE, name, setname);
+		addRelationFiller(TIMESTAMP, name, "\"" + String.valueOf(timestampCounter) + "\""); // eva
+		timestampCounter++; // eva
+	}
+
+	public void addIndividual(String name, String type, String pkg) {
+		Type ontType = typeSystem.get(type);
+		if (ontType == null) {
+			throw new ItemNotDefinedException("Error while adding an individual of type " + type
+					+ ". The type is not defined in the ontology.", type);
+		}
+
+		Individual i = new Individual(name, type);
+		i.setPackage(pkg);
 		recentlyAccessedIndividuals.add(i);
 		getCurrentInterval().addIndividual(i);
 		String setname = SINGLETONNAME + name;

@@ -2,6 +2,7 @@ package compling.context;
 
 import java.util.ArrayList;
 import java.util.List;
+import compling.grammar.ecg.ECGConstants;
 
 
 parser code {:
@@ -30,6 +31,7 @@ parser code {:
  */
 terminal OPENPAREN, CLOSEPAREN, SUB, REL, FUN, IND, FIL, EQ, PERSISTENT, 
          NONBLOCKING, DEFS, INSTS, TYPE, INST, CURRENTINTERVAL, REM;
+terminal PACKAGE, IMPORT;
 //terminal TRANSIENT;
 terminal String IDENTIFIER, STR;
 
@@ -46,8 +48,15 @@ non terminal List<String> parent_list, opt_parent_list, opt_rels_list,
              fil_pair_list;
 non terminal String instance_prim, inst_name;
 
+
+/** New additions: seantrott */
+non terminal String package_kinds;
+non terminal String current_package;
+non terminal String import_kind;
+non terminal String current_import;
+
 ont_list ::= 
-  DEFS defs_list INSTS insts_list ;
+  DEFS defs_list INSTS insts_list;
 
 defs_list ::= 
 	defs_list OPENPAREN def_prim CLOSEPAREN
@@ -55,7 +64,7 @@ defs_list ::=
   ;
 
 def_prim ::= 
-  fun_prim | rel_prim | sub_prim | eq_prim | type_prim;
+  fun_prim | rel_prim | sub_prim | eq_prim | type_prim | package_kinds | import_kind;
 
 insts_list ::=
 	insts_list OPENPAREN inst_prim CLOSEPAREN
@@ -219,6 +228,36 @@ rel_prim ::=
 *******************************************************************************/
 
 
+/* PACKAGE (seantrott) */
+package_kinds ::=
+   PACKAGE {:
+     RESULT = ECGConstants.PACKAGE;
+   :}
+   ;
+
+current_package ::=
+   package_kinds: k IDENTIFIER: n {:
+     RESULT = parser.m.setPackage(n);
+   :}
+   ;
+
+
+/* IMPORT (seantrott) */
+import_kind ::= 
+    IMPORT {:
+      RESULT = ECGConstants.IMPORT;
+    :}
+    ;
+
+current_import ::=
+    import_kind: k IDENTIFIER: n {:
+      RESULT = parser.m.addImport(n);
+    :}
+    ;
+    
+/* */
+
+
 sub_prim ::= 
   SUB IDENTIFIER:new_type parent_list:pl {: 
     parser.m.addType(new_type, pl); 
@@ -241,7 +280,7 @@ eq_prim ::=
 
 ind_prim ::=
 	IND IDENTIFIER:name IDENTIFIER:cat {: 
-	   parser.m.addIndividual(name, cat); 
+	   parser.m.addIndividual(name, cat, parser.m.getPackage()); 
   :}
   ;
 
@@ -277,7 +316,7 @@ instance_prim ::=
   	RESULT = name;
   :}
 	| INST IDENTIFIER:name IDENTIFIER:type opt_fil_list:ofl {:
-		parser.m.addIndividual(name, type);
+		parser.m.addIndividual(name, type, parser.m.getPackage());
 		for (String filpair : ofl){
 			String pair[] = filpair.split(":");
 			parser.m.addRelationFiller(pair[0], name, pair[1]);
@@ -287,7 +326,7 @@ instance_prim ::=
 	| INST IDENTIFIER:type opt_fil_list:ofl {:
 		String name = type + parser.counter;
 		parser.counter++;
-		parser.m.addIndividual(name, type);
+		parser.m.addIndividual(name, type, parser.m.getPackage());
 		for (String filpair : ofl) {
 			String pair[] = filpair.split(":");
 			parser.m.addRelationFiller(pair[0], name, pair[1]);

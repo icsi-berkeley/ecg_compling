@@ -164,7 +164,7 @@ public class TokenView extends ViewPart {
 			if (tempFile.renameTo(ontFile)) {
 				System.out.println("Success");
 			} else{
-				System.out.println("Uh oh.");
+				throw new IOException();
 			}
 			System.out.println(tempFile);
 			PrefsManager.getDefault().checkGrammar();

@@ -137,6 +137,7 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 
 				reader.read(file, new IErrorListener() {
 					public void notify(String errorMessage, Location location, Severity severity) {
+						System.out.println(errorMessage);
 						addMarker(file, errorMessage, location, severity);
 					}
 				});
@@ -181,16 +182,18 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 	 */
 	protected ContextModel buildContextModel(ResourceGatherer gatherer) throws CoreException {
 		SampleResourceVisitor visitor = new SampleResourceVisitor();
-		for (IResource r : gatherer.getOntologyFiles(getProject())) {
-			r.accept(visitor);
-		}
-
+//		for (IResource r : gatherer.getOntologyFiles(getProject())) {
+//			r.accept(visitor);
+//		}
+		boolean onts = true;
+		String[] exts = gatherer.getOntologyExtensions().split(" ");
 		List<File> files = gatherer.getOntologyFiles();
 		if (files.size() == 1) {
 			return new ContextModel(files.get(0).getAbsolutePath(), DEFAULT_CHARSET);
+		} else if (onts) {
+			return new ContextModel(files, exts[2], DEFAULT_CHARSET);
 		}
 		else {
-			String[] exts = gatherer.getOntologyExtensions().split(" ");
 			return new ContextModel(files, exts[0], exts[1], DEFAULT_CHARSET);
 		}
 	}
@@ -307,8 +310,6 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 
 		GrammarChecker.setErrorListener(new BasicGrammarErrorListener() {
 			public void notify(String message, Location location, Severity severity) {
-				System.out.println(location);
-				System.out.println(getProject());
 				IResource file = getProject().findMember(location.getFile());
 				if (file != null)
 					addMarker(file, message, location, severity);

@@ -32,6 +32,20 @@ construction His
       constraints
          possessor.ontological-category <-- @person
          possessor.gender <-- @male
+         
+construction HerDat
+   subcase of Pronoun, Singular, ThirdPerson
+   constructional
+    constraints
+      self.features.case <-- "dat"
+   form
+      constraints
+         self.f.orth <-- "her"
+   meaning
+      constraints
+         self.m.ontological-category <-- @person
+         self.m.number <-- @singular
+         self.m.gender <-- @female       
 
 general construction  Possessive-NP
 	subcase of NP

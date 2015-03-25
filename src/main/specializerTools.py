@@ -135,11 +135,6 @@ class UtilitySpecializer(DebuggingSpecializer):
                             #    v = self.mappings[v]
                             returned[str(filler.property.type())] = v
                             returned['kind'] = str(filler.kind.type())
-                    """
-                    if filler.type() == 'PropertyModifier':
-                        if filler.modifiedThing.index() == goal.index():
-                            returned[str(filler.property.type())] = filler.value.type()
-                    """
                     if filler.type() == "TrajectorLandmark":
                         if filler.trajector.index() == goal.index():
                             l = self.get_objectDescriptor(filler.landmark)
@@ -228,6 +223,9 @@ class UtilitySpecializer(DebuggingSpecializer):
         for k,v in n.items():
             if type(v) == dict or type(v) == Struct:
                 n[k]= self.replace_mappings(v)
+            elif type(v) == list:
+                for value in v:
+                    value = self.replace_mappings(value)
             elif v in self.mappings:
                 n[k] = self.mappings[v]
                 v = self.mappings[v]

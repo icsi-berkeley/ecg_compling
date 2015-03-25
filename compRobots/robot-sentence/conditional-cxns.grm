@@ -19,6 +19,12 @@ construction Then-Serial
    form
       constraints
         self.f.orth <-- "then"
+        
+construction Than
+	subcase of SerialConjunction
+	form
+	  constraints
+	    self.f.orth <-- "than"
 
 general construction Conditional
   subcase of Word

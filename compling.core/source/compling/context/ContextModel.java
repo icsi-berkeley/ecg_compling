@@ -19,6 +19,7 @@ import compling.grammar.unificationgrammar.TypeSystemNode;
 import compling.util.fileutil.ExtensionFileFilter;
 import compling.util.fileutil.FileReadingUtils;
 import compling.util.fileutil.FileUtils;
+import compling.util.fileutil.TextFileLineIterator;
 
 @SuppressWarnings("deprecation")
 public class ContextModel {
@@ -56,16 +57,46 @@ public class ContextModel {
 	public ContextModel(List<File> ontologySpecFiles, String defFileExtension, String instFileExtension) {
 		this(ontologySpecFiles, defFileExtension, instFileExtension, Charset.defaultCharset());
 	}
+	
+	public ContextModel(List<File> ontologySpecFiles, String ontFileExtension, Charset charSet) {
+		//try {
+			StringBuffer onts = new StringBuffer();
+			StringBuffer ontologySpec = new StringBuffer();
+			onts.insert(0, "DEFS: ");
+			for (File ontFile : ontologySpecFiles) {
+				if (ontFile.getName().endsWith("." + ontFileExtension)) {
+					TextFileLineIterator tfli = new TextFileLineIterator(ontFile);
+					while (tfli.hasNext()) {
+						String l = tfli.next();
+						if (!l.contains("INSTS:") && !l.contains("DEFS:")) {
+							onts.append("\n");
+							onts.append(l);
+						}
+					}
+					//onts.append("\n");
+					//onts.append(FileReadingUtils.ReadFileIntoStringBuffer(ontFile, charSet));
+
+				}
+			}
+			//onts.append(" INSTS: ");
+			ontologySpec.append(onts).append(" INSTS: ");
+			instantiate(new BufferedReader(new InputStreamReader(new StringBufferInputStream(ontologySpec.toString()),
+					charSet)), "ontology definitions");
+			
+//		}
+//		catch (IOException ioe) {
+//			throw new ContextException("Terminal Error: Cannot read ontology spec. ", ioe);
+//		}
+		
+	}
 
 	public ContextModel(List<File> ontologySpecFiles, String defFileExtension, String instFileExtension, Charset charSet) {
 		try {
 			StringBuffer defs = new StringBuffer();
 			StringBuffer insts = new StringBuffer();
 			StringBuffer ontologySpec = new StringBuffer();
-
 			defs.insert(0, "DEFS: ");
 			insts.append(" INSTS: ");
-
 			for (File ontFile : ontologySpecFiles) {
 				if (ontFile.getName().endsWith("." + defFileExtension)) {
 					defs.append("\n");

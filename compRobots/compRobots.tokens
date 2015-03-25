@@ -24,6 +24,10 @@ two :: NumberType :: self.m.value <-- "2"
 3 :: NumberType :: self.m.value <-- "3"
 4 :: NumberType :: self.m.value <-- "4"
 5 :: NumberType :: self.m.value <-- "5"
+6 :: NumberType :: self.m.value <-- "6"
+7 :: NumberType :: self.m.value <-- "7"
+8 :: NumberType :: self.m.value <-- "8"
+9 :: NumberType :: self.m.value <-- "9"
 -1 :: NumberType :: self.m.value <-- "-1"
 orange :: ColorType :: self.m.value <-- @orange
 magenta :: ColorType :: self.m.value <-- @magenta
@@ -45,3 +49,4 @@ shelf :: NounType :: self.m.ontological-category <-- @shelf
 shelf1 :: ProperNPInstance :: self.m.ontological-category <-- @shelf :: self.m.referent <-- @shelf1
 pink :: ColorType :: self.m.value <-- @pink
 large :: SizeType :: self.m.value <-- @large
+amble :: SelfMotionType :: self.m.speed <-- ".3" :: self.m.actionary <-- @amble
