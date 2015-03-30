@@ -744,10 +744,7 @@ DEFS:
 
 (type pencil sub entity artifact moveable)
 
-(type pizza sub entity)
 
-(type sell sub give)
 
-(type buy sub take)
 
 INSTS:

@@ -68,6 +68,8 @@ public class TokenView extends ViewPart {
 	private File base;
 	private String[] typeCxns;
 	
+	private String modifiedOnt = null;
+	
 	
 	private IAction addToken;
 	private IAction addConstraint;
@@ -129,16 +131,28 @@ public class TokenView extends ViewPart {
 	}
 	
 	
+	private String[] getOntologyFiles() {
+		List<String> ontPaths = prefs.getList(AP.ONTOLOGY_PATHS);
+		String[] onts = new String[ontPaths.size()];
+		for (int i=0; i < onts.length; i++) {
+			System.out.println(ontPaths.get(i));
+			onts[i] = ontPaths.get(i);
+		}
+		return onts;
+	}
+	
+	
 	// Adds VALUE to ontology as a subtype of PARENT. 
-	private void addOntologyItem(String value, String parent) {
+	private void addOntologyItem(String value, String parent, String ontologyFile) {
 		value = value.substring(1, value.length()).trim();
 		parent = parent.substring(1, parent.length()).trim();
 		try {
-			List<String> ontPaths = prefs.getList(AP.ONTOLOGY_PATHS);
-			System.out.println(ontPaths);
-			ontFile = new File(base, ontPaths.get(0));
+			if (ontologyFile == null) {
+				List<String> ontPaths = prefs.getList(AP.ONTOLOGY_PATHS);
+				ontologyFile = ontPaths.get(0);
+			}
+			ontFile = new File(base, ontologyFile);
 			File tempFile = new File("tempFile.ont");
-			System.out.println(tempFile);
 			ontWriter = new FileWriter(tempFile.getAbsoluteFile(), true);
 			bOntWriter = new BufferedWriter(ontWriter);
 			TextFileLineIterator tfli = new TextFileLineIterator(ontFile);
@@ -150,7 +164,6 @@ public class TokenView extends ViewPart {
 				bOntWriter.write(line + System.getProperty("line.separator") + System.getProperty("line.separator"));
 			}
 			String toWrite = "(type " + value + " sub " + parent + ")";
-			System.out.println(toWrite);
 			bOntWriter.write(toWrite);
 			bOntWriter.newLine();
 			bOntWriter.newLine();
@@ -294,6 +307,8 @@ public class TokenView extends ViewPart {
 		base = prefs.getBaseDirectory();
 		typeCxns = getTypes("\"*\"");
 		
+
+		
 		
 
 
@@ -331,6 +346,13 @@ public class TokenView extends ViewPart {
 		constraintBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
 		constraintBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(parent);
+		
+		final Label ontologyFileLabel = toolkit.createLabel(form.getBody(), "Select Ontology File:");
+		final Combo ontologyFileBox = new Combo(form.getBody(), SWT.DROP_DOWN);
+		ontologyFileBox.setItems(getOntologyFiles());
+		ontologyFileBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		ontologyFileBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
+		toolkit.paintBordersFor(ontologyFileBox);
 		
 		final Label constraintSet = toolkit.createLabel(form.getBody(), "Set Role Item:");
 		final Text constraintText = toolkit.createText(form.getBody(), "");
@@ -401,6 +423,12 @@ public class TokenView extends ViewPart {
 			}
 		});		
 
+		
+		ontologyFileBox.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				modifiedOnt = ontologyFileBox.getText();
+			}
+		});
 
 		addConstraintButton.addSelectionListener(new SelectionAdapter() { 
 			public void widgetSelected(SelectionEvent e) {
@@ -424,7 +452,7 @@ public class TokenView extends ViewPart {
 					if (!exists(value)) {
 						if (parentValue != null) {
 							parentValue += " " + inputParents;
-							addOntologyItem(value, parentValue);
+							addOntologyItem(value, parentValue, modifiedOnt);
 							constraints.add(constraintBox.getText() + " <-- " + value);
 							if (appValue.length() > 1) {
 								writeMappingFile(value, appValue);

@@ -663,7 +663,8 @@ public class ECGGrammarUtilities {
 		        contextModel = new ContextModel(ontFiles.get(0).getAbsolutePath());
 		      }
 		      else {
-		        contextModel = new ContextModel(ontFiles, extsI[0], extsI[1]);
+		    	contextModel = new ContextModel(ontFiles, extsI[2]);
+//		        contextModel = new ContextModel(ontFiles, extsI[0], extsI[1]);
 		      }
 		      tempGrammar = read(fileList, contextModel, encodingI);
 		      grammarList.add(tempGrammar);
@@ -713,7 +714,9 @@ public class ECGGrammarUtilities {
 	        contextModel = new ContextModel(ontFiles.get(0).getAbsolutePath());
 	      }
 	      else {
-	        contextModel = new ContextModel(ontFiles, extsI[0], extsI[1]);
+	    	  System.out.println("------");
+	    	  contextModel = new ContextModel(ontFiles, extsI[2]);
+//	        contextModel = new ContextModel(ontFiles, extsI[0], extsI[1]);
 	      }
 	      grammar.setContextModel(contextModel);
 	    }

@@ -58,6 +58,10 @@ public class ContextModel {
 		this(ontologySpecFiles, defFileExtension, instFileExtension, Charset.defaultCharset());
 	}
 	
+	public ContextModel(List<File> ontologySpecFiles, String ontFileExtension) {
+		this(ontologySpecFiles, ontFileExtension, Charset.defaultCharset());
+	}
+	
 	public ContextModel(List<File> ontologySpecFiles, String ontFileExtension, Charset charSet) {
 		//try {
 			StringBuffer onts = new StringBuffer();

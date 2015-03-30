@@ -2,4 +2,5 @@ pizza :: NounType :: self.m.ontological-category <-- @pizza
 give :: GiveType :: self.m.actionary <-- @give
 sell :: SellType :: self.m.actionary <-- @sell
 buy :: BuyType :: self.m.actionary <-- @buy
-purple :: ColorType :: self.m.value <-- @purple
+indigo :: ColorType :: self.m.value <-- @indigo
+
