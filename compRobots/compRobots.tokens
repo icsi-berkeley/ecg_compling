@@ -50,3 +50,6 @@ shelf1 :: ProperNPInstance :: self.m.ontological-category <-- @shelf :: self.m.r
 pink :: ColorType :: self.m.value <-- @pink
 large :: SizeType :: self.m.value <-- @large
 amble :: SelfMotionType :: self.m.speed <-- ".3" :: self.m.actionary <-- @amble
+stop :: StageVerbType :: self.m.actionary <-- @stop :: self.expectedVerbForm <-- PresentParticiple
+start :: StageVerbType :: self.m.actionary <-- @start 
+continue :: StageVerbType :: self.m.actionary <-- @continue

@@ -216,7 +216,10 @@ schema ForceApplication
 
       
 
-
+schema StagedProcess
+	subcase of Process
+	  roles
+	    stageRole: @stage
 
 
 

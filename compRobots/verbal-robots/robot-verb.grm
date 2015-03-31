@@ -2,6 +2,19 @@ package robots
 import starter
 //import transitives
 
+
+construction StageVerbType
+	subcase of StageVerb, LexicalVerbType
+	constructional
+	  constraints
+	    self.expectedVerbForm <-- PresentParticipleOrInfinitive
+	meaning
+	  constraints
+	    self.m.actionary <-- @stage
+
+
+
+
 construction CauseEffectType
 	subcase of LexicalVerbType, GeneralTypeCxn
 	meaning: CauseEffect

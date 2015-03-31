@@ -66,6 +66,8 @@ construction  S-With-Copula-Inversion-PP //special case
         	subj.m <--> self.m.profiledParticipant  // from S-With-Subj
             fin.m.protagonist <--> subj.m
             pp.m.trajector <--> subj.m
+            self.m.eventProcess <--> fin.m
+            self.fin.m.state <--> pp.m
             
 construction S-With-Copula-Inversion-Adj // tested 10/29/12
     subcase of S-With-Finite-Inversion

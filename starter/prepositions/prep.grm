@@ -65,5 +65,11 @@ construction  INTO-Path // container 11/5/13
          self.m.goal <--> bo.interior
          self.m.source <--> bo.exterior
   
-  
-
+ 
+ 
+// taken from Base, 3/30/15  
+construction TO-Infinitive-Marker
+	subcase of Word
+	form
+	  constraints
+	    self.f.orth <-- "to"

@@ -707,3 +707,15 @@ Struct(return_type='error_descriptor', predicate_type='command', parameters=[Str
 Imperative 
 robot1, move to the smallest box 
 Struct(return_type='error_descriptor', parameters=[Struct(control_state='ongoing', goal={'objectDescriptor': {'kind': 'superlative', 'type': 'box', 'size': 'small', 'givenness': 'uniquelyIdentifiable'}}, heading=None, kind='execute', distance={'units': 'square', 'value': 4}, speed=0.5, action='move', direction=None, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}})], predicate_type='command')
+
+Imperative 
+robot1, move to the blue box 
+Struct(predicate_type='command', parameters=[Struct(kind='execute', control_state='ongoing', goal={'objectDescriptor': {'kind': 'None', 'type': 'box', 'givenness': 'uniquelyIdentifiable', 'color': 'blue'}}, heading=None, protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, action='move', speed=0.5, direction=None, distance={'units': 'square', 'value': 4})], return_type='error_descriptor')
+
+Imperative 
+robot1, move to the blue box 
+Struct(return_type='error_descriptor', parameters=[Struct(heading=None, speed=0.5, direction=None, protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, distance={'units': 'square', 'value': 4}, kind='execute', control_state='ongoing', goal={'objectDescriptor': {'kind': 'None', 'givenness': 'uniquelyIdentifiable', 'color': 'blue', 'type': 'box'}}, action='move')], predicate_type='command')
+
+Imperative 
+robot1, move to the blue box 
+Struct(predicate_type='command', parameters=[Struct(distance={'value': 4, 'units': 'square'}, action='move', protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, heading=None, goal={'objectDescriptor': {'givenness': 'uniquelyIdentifiable', 'color': 'blue', 'kind': 'None', 'type': 'box'}}, speed=0.5, direction=None, kind='execute', control_state='ongoing')], return_type='error_descriptor')

@@ -1,6 +1,8 @@
 //package starter
 package motion
-     
+  
+
+             
  construction ActiveMotionPath   // he moved to the block
   subcase of IntransitiveArgumentStructure 
   constructional

@@ -40,6 +40,9 @@ def main_loop(analyzer, solver=NullProblemSolver(), specializer=RobotSpecializer
     """REPL-like thing. Should be reusable.
     """
 
+    main_loop.continuous = False
+
+
     def handle_debug():
         debugging = open('src/main/specializer_debug_output.txt', 'a')
         #debugging.truncate()
@@ -57,21 +60,24 @@ def main_loop(analyzer, solver=NullProblemSolver(), specializer=RobotSpecializer
             elif ans.lower() == 'names':
                 solver.names()
                 specialize = False
-            if ans.lower() == 'q':
+            elif ans.lower() == 'q':
                 solver.close()
-                return
+                return "quit"
+            elif ans.lower() == 'c':
+                main_loop.continuous = not main_loop.continuous
+                print("continuous input mode is " + str(main_loop.continuous))
             elif ans.lower()== 'h':
                 solver.test()
             elif ans and specialize:
                 specializer._sentence = ans
                 try:
-                    yield analyzer.parse(ans)#this is a generator
+                    return analyzer.parse(ans)#this is a generator
                 except Fault as err:
                     print('Fault', err)
                     if err.faultString == 'compling.parser.ParserException':
                         print("No parses found for '%s'" % ans)
 
-    def write_file():
+    def write_file(json_ntuple):
         sentence = specializer._sentence.replace(" ", "_").replace(",", "").replace("!", "").replace("?", "")
         t = str(time.time())
         generated = "src/main/json_tuples/" + sentence
@@ -79,6 +85,55 @@ def main_loop(analyzer, solver=NullProblemSolver(), specializer=RobotSpecializer
         f.write(json_ntuple)
 
     count = 1
+
+    def solve_loop(prompted):
+        count = 1
+        #for analyses in prompted:
+        for fs in prompted: #filter(filter_predicate, analyses):
+            try:
+                #resolve = specializer.reference_resolution(fs)          
+                ntuple = specializer.specialize(fs)
+                json_ntuple = dumps(ntuple, cls=StructJSONEncoder, indent=2)
+                if specializer.debug_mode:
+                    write_file(json_ntuple)
+                if specializer.needs_solve and ntuple != None:
+                    while True:
+                        if main_loop.continuous:
+                            print("here")
+                            update_input = input("")
+                            if update_input != "":
+                                print(update_input)
+                                main_loop.continuous = False
+                                solve_loop(analyzer.parse(update_input))
+                        try:
+                            solver.solve(json_ntuple)
+                            break
+                        except ClarificationError as ce:
+                            new_input = input(ce.message + " > ")
+                            if new_input == "q":
+                                solver.close()
+                                return
+                            specialized = specializer.specialize_np(analyzer.parse(new_input)[0], ce.ntuple, ce.cue) 
+                            json_ntuple = dumps(specialized, cls=StructJSONEncoder, indent=2)
+                            #solver.solve(json_ntuple)
+                break
+            except:
+                print('Problem solving SemSpec #: %s' % count)
+                print(fs)#[count-1])
+                #print(fs)
+                traceback.print_exc()
+                if count == len(prompted):
+                    print("Unable to solve any of the SemSpecs.")
+                count += 1
+
+    
+    while True:
+        result = prompt()
+        if result == "quit":
+            return
+        solve_loop(result)
+    """
+
     for analyses in prompt():
 
         for fs in filter(filter_predicate, analyses):
@@ -90,6 +145,10 @@ def main_loop(analyzer, solver=NullProblemSolver(), specializer=RobotSpecializer
                     write_file()
                 if specializer.needs_solve and ntuple != None:
                     while True:
+                        if continuous:
+                            update_input = input("")
+                            if update_input != "":
+
                         try:
                             solver.solve(json_ntuple)
                             break
@@ -112,12 +171,9 @@ def main_loop(analyzer, solver=NullProblemSolver(), specializer=RobotSpecializer
                 count += 1
 
             #break
+    """
 
-"""        
-def usage(args):
-    print('Usage: %s [-s <problem solver>] [-a <all server URL>]' % basename(args[0]))
-    sys.exit(-1)
-"""
+
 
 def usage(args, message):
     if message == "app":
@@ -143,7 +199,7 @@ if __name__ == '__main__':
                
     #if not all(o[1] in 'sa' for (o, _) in options.items()):
     #    usage(sys.argv)
-
+ 
     args = sys.argv[1:]
     if len(args) < 1:
         usage(args, 'app')
