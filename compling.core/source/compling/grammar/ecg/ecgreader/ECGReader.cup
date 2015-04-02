@@ -121,6 +121,7 @@ ecg_list ::=
   | ecg_list: el current_import:i {:
     if (i != null) {
       el.addImport(i);
+      el.addPackageRelation(i);
     }
     RESULT = el;
   :}

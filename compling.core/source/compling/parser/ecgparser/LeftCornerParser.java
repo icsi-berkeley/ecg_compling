@@ -328,7 +328,13 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 		        	String[] inflections = morpher.getInflections(lemma, wordform);
 		        	for (String inf : inflections) {
 		        		//int what = this.meaning_morphTable.get(inf).length - 1;
-		        		if (isCompatible2(parent, this.meaning_morphTable.get(inf).get(1))) {
+		        		String[] morphType = new String[]{};
+		        		try {
+		        			morphType = this.meaning_morphTable.get(inf).get(1);
+		        		} catch (Exception e) {
+		        			throw new ParserException("Morphology table does not contain " + inf);
+		        		}
+		        		if (isCompatible2(parent, morphType)) { //this.meaning_morphTable.get(inf).get(1))) {
 		        			constructionInput.get(i).add(parent);
 		        			morphToken.get(i).add(new MorphTokenPair(inf, token));
 		        		}
@@ -732,7 +738,12 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 	    		for (int k = 0; k < mConstraint.length - 1; k += 2) {
 	    			ultimate.addConstraint(UnificationGrammar.generateConstraint(mConstraint[k+1]), mConstraint[k]);
 	    		}
-	    		String[] con_constraint = this.constructional_morphTable.get(morph).get(0);
+	    		String[] con_constraint = new String[]{};
+	    		try {
+	    			con_constraint = this.constructional_morphTable.get(morph).get(0);
+	    		} catch (Exception e) {
+	    			throw new ParserException("Constructional morphology table does not contain morph: " + morph + ".");
+	    		}
 	        	for (int k = 0; k < con_constraint.length - 1; k += 2) {
 	        		ultimate.addConstraint(UnificationGrammar.generateConstraint(con_constraint[k+1]), con_constraint[k]);
 	        	}

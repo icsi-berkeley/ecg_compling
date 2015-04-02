@@ -719,3 +719,67 @@ Struct(return_type='error_descriptor', parameters=[Struct(heading=None, speed=0.
 Imperative 
 robot1, move to the blue box 
 Struct(predicate_type='command', parameters=[Struct(distance={'value': 4, 'units': 'square'}, action='move', protagonist={'objectDescriptor': {'referent': 'robot1_instance', 'type': 'robot'}}, heading=None, goal={'objectDescriptor': {'givenness': 'uniquelyIdentifiable', 'color': 'blue', 'kind': 'None', 'type': 'box'}}, speed=0.5, direction=None, kind='execute', control_state='ongoing')], return_type='error_descriptor')
+
+Imperative 
+robot1, move to the green box! 
+Struct(predicate_type='command', return_type='error_descriptor', parameters=[Struct(goal={'objectDescriptor': {'type': 'box', 'givenness': 'uniquelyIdentifiable', 'color': 'green', 'kind': 'None'}}, control_state='ongoing', heading=None, distance={'value': 4, 'units': 'square'}, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, action='move', kind='execute', speed=0.5, direction=None)])
+
+Imperative 
+robot1, move to the red box 
+Struct(predicate_type='command', return_type='error_descriptor', parameters=[Struct(goal={'objectDescriptor': {'type': 'box', 'givenness': 'uniquelyIdentifiable', 'color': 'red', 'kind': 'None'}}, control_state='ongoing', heading=None, distance={'value': 4, 'units': 'square'}, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, action='move', kind='execute', speed=0.5, direction=None)])
+
+Conditional_Imperative 
+robot1, if the small red box is near the green box, push the blue box north 
+Struct(predicate_type='conditional', return_type='error_descriptor', parameters=[Struct(condition=[Struct(goal=None, control_state='ongoing', heading=None, distance={'value': 4, 'units': 'square'}, protagonist={'objectDescriptor': {'size': 'small', 'kind': 'unmarked', 'locationDescriptor': {'objectDescriptor': {'type': 'box', 'givenness': 'uniquelyIdentifiable', 'color': 'green', 'kind': 'None'}, 'relation': 'near'}, 'type': 'box', 'color': 'red', 'givenness': 'uniquelyIdentifiable'}}, action='be', kind='execute', predication={'objectDescriptor': {'type': 'box', 'givenness': 'uniquelyIdentifiable', 'color': 'green', 'kind': 'None'}, 'relation': 'near'}, speed=0.5, direction=None)], kind='conditional', command=[Struct(causer={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, action='push_move', kind='cause', causalProcess={'goal': None, 'control_state': 'ongoing', 'heading': None, 'distance': {'value': 4, 'units': 'square'}, 'acted_upon': {'objectDescriptor': {'type': 'box', 'givenness': 'uniquelyIdentifiable', 'color': 'blue', 'kind': 'None'}}, 'protagonist': {'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, 'action': 'forceapplication', 'kind': 'execute', 'speed': 0.5, 'direction': None}, affectedProcess={'goal': None, 'control_state': 'ongoing', 'heading': 'north', 'distance': {'value': 4, 'units': 'square'}, 'protagonist': {'objectDescriptor': {'type': 'box', 'givenness': 'uniquelyIdentifiable', 'color': 'blue', 'kind': 'None'}}, 'action': 'move', 'kind': 'execute', 'speed': 0.5, 'direction': None})])])
+
+Imperative 
+robot1, move to the big red box 
+Struct(predicate_type='command', return_type='error_descriptor', parameters=[Struct(goal={'objectDescriptor': {'type': 'box', 'size': 'big', 'givenness': 'uniquelyIdentifiable', 'color': 'red', 'kind': 'unmarked'}}, control_state='ongoing', heading=None, distance={'value': 4, 'units': 'square'}, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, action='move', kind='execute', speed=0.5, direction=None)])
+
+Imperative 
+robot1, move south 
+Struct(predicate_type='command', return_type='error_descriptor', parameters=[Struct(goal=None, control_state='ongoing', heading='south', distance={'value': 4, 'units': 'square'}, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, action='move', kind='execute', speed=0.5, direction=None)])
+
+Imperative 
+robot1, move south 
+Struct(predicate_type='command', return_type='error_descriptor', parameters=[Struct(goal=None, control_state='ongoing', heading='south', distance={'value': 4, 'units': 'square'}, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, action='move', kind='execute', speed=0.5, direction=None)])
+
+Imperative 
+robot1, move west 
+Struct(predicate_type='command', return_type='error_descriptor', parameters=[Struct(goal=None, control_state='ongoing', heading='west', distance={'value': 4, 'units': 'square'}, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, action='move', kind='execute', speed=0.5, direction=None)])
+
+WH_Question 
+where is desk1? 
+Struct(predicate_type='query', return_type='singleton(instance_reference)', parameters=[Struct(specificWh='where', action='be', kind='query', predication=None, protagonist={'objectDescriptor': {'type': 'desk', 'referent': 'desk1'}})])
+
+Imperative 
+robot1, move to the smallest box 
+Struct(predicate_type='command', return_type='error_descriptor', parameters=[Struct(goal={'objectDescriptor': {'type': 'box', 'size': 'small', 'givenness': 'uniquelyIdentifiable', 'kind': 'superlative'}}, control_state='ongoing', heading=None, distance={'value': 4, 'units': 'square'}, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, action='move', kind='execute', speed=0.5, direction=None)])
+
+Imperative 
+robot1, move west 
+Struct(predicate_type='command', return_type='error_descriptor', parameters=[Struct(goal=None, control_state='ongoing', heading='west', distance={'value': 4, 'units': 'square'}, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, action='move', kind='execute', speed=0.5, direction=None)])
+
+Imperative 
+robot1, move to the smallest box 
+Struct(predicate_type='command', return_type='error_descriptor', parameters=[Struct(goal={'objectDescriptor': {'type': 'box', 'size': 'small', 'givenness': 'uniquelyIdentifiable', 'kind': 'superlative'}}, control_state='ongoing', heading=None, distance={'value': 4, 'units': 'square'}, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, action='move', kind='execute', speed=0.5, direction=None)])
+
+WH_Question 
+which box is smallest? 
+Struct(predicate_type='query', return_type='singleton(instance_reference)', parameters=[Struct(specificWh='which', action='be', kind='query', predication=None, protagonist={'objectDescriptor': {'type': 'box', 'size': 'small', 'givenness': 'givennessValues', 'kind': 'superlative'}})])
+
+Imperative 
+robot1, move north 6 inches 
+Struct(predicate_type='command', return_type='error_descriptor', parameters=[Struct(goal=None, control_state='ongoing', heading='north', distance={'value': 6, 'units': 'inch'}, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, action='move', kind='execute', speed=0.5, direction=None)])
+
+Imperative 
+robot1, move east 6 inches 
+Struct(predicate_type='command', return_type='error_descriptor', parameters=[Struct(goal=None, control_state='ongoing', heading='east', distance={'value': 6, 'units': 'inch'}, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}}, action='move', kind='execute', speed=0.5, direction=None)])
+
+WH_Question 
+which box is smallest? 
+Struct(predicate_type='query', return_type='singleton(instance_reference)', parameters=[Struct(specificWh='which', action='be', kind='query', predication=None, protagonist={'objectDescriptor': {'type': 'box', 'size': 'small', 'givenness': 'givennessValues', 'kind': 'superlative'}})])
+
+WH_Question 
+which box is pink? 
+Struct(predicate_type='query', return_type='singleton(instance_reference)', parameters=[Struct(specificWh='which', action='be', kind='query', predication={'color': 'pink'}, protagonist={'objectDescriptor': {'type': 'box', 'givenness': 'givennessValues', 'color': 'pink', 'kind': 'None'}})])

@@ -63,10 +63,20 @@ general construction ObjectPronoun
 	subcase of Pronoun
 	constructional
 	   constraints
-	      self.features.case <-- "acc"
-	                 
-construction HerAcc
-   subcase of ObjectPronoun, Singular, ThirdPerson
+	      //self.features.case <-- "acc"
+
+
+general construction IOPronoun
+	subcase of ObjectPronoun
+	constructional
+	   constraints
+	     self.features.case <-- "dat"
+	meaning
+	   constraints
+	      self.m.ontological-category <-- @person
+	      	                 
+construction HerDat
+   subcase of IOPronoun, Singular, ThirdPerson
    form
       constraints
          self.f.orth <-- "le"

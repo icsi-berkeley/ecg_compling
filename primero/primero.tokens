@@ -6,3 +6,4 @@ caja :: NounType :: self.features.gender <-- @female :: self.m.ontological-categ
 sala :: NounType :: self.features.gender <-- @female :: self.m.ontological-category <-- @room :: self.m.scale <-- @size
 bloque :: NounType :: self.features.gender <-- @male :: self.m.ontological-category <-- @block :: self.m.scale <-- @size
 correr :: SelfMotionType :: self.m.actionary <-- @run :: self.m.speed <-- ".7"
+

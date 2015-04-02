@@ -54,7 +54,9 @@ def main_loop(analyzer, solver=NullProblemSolver(), specializer=RobotSpecializer
         while True:
             ans = input('Press q/Q to quit, d/D for Debug mode> ') # Python 3
             specialize = True
-            if ans.lower() == 'd':
+            if ans == None:
+                specialize = False
+            elif ans.lower() == 'd':
                 specializer._output = handle_debug()
                 specialize = False
             elif ans.lower() == 'names':

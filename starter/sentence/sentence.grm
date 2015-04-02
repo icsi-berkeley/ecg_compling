@@ -25,6 +25,7 @@ general construction S-With-Subj
         constraints
 	       subj.m <--> self.m.profiledParticipant
  	
+ 	
 construction Declarative
     subcase of S-With-Subj
     constructional

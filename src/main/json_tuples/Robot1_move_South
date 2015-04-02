@@ -1,31 +1,29 @@
 {
   "__JSON_Struct__": {
+    "predicate_type": "command",
+    "return_type": "error_descriptor",
     "parameters": [
       {
         "__JSON_Struct__": {
           "goal": null,
-          "distance": {
-            "__JSON_Struct__": {
-              "units": "square",
-              "value": 8
-            }
-          },
+          "control_state": "ongoing",
           "heading": "south",
-          "direction": null,
-          "action": "move",
+          "distance": {
+            "value": 4,
+            "units": "square"
+          },
           "protagonist": {
             "objectDescriptor": {
               "type": "robot",
               "referent": "robot1_instance"
             }
           },
-          "speed": 0.5,
+          "action": "move",
           "kind": "execute",
-          "control_state": "ongoing"
+          "speed": 0.5,
+          "direction": null
         }
       }
-    ],
-    "return_type": "error_descriptor",
-    "predicate_type": "command"
+    ]
   }
 }

@@ -258,6 +258,7 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 		List<String> packageNames = manager.getPreferences().getList(AP.PACKAGE_NAME);
 		for (String name : packageNames) {
 	    	grammar.addImport(name);
+	    	grammar.addToDeclared(name);
 	    }
 		
 		if (gatherer.getImportFiles().size() > 0) {
@@ -267,9 +268,6 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 			List<String> seenPackages = new ArrayList<String>();
 			for (List<File> fileList : importList) {
 				Grammar tempGrammar = prebuildGrammar(manager);
-				// This adds all the import requests. Necessary if you want to only count an import statement if it's made
-				// during an active package.
-				//tempGrammar.getImport().addAll(packageNames);
 				for (File f : fileList) {
 					IFile grammarFile = (IFile) getProject().findMember(f.getPath());
 					buildGrammar(grammarFile, tempGrammar);
@@ -278,20 +276,26 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 				grammarList.add(tempGrammar);
 			} 
 			
+			
 			for (Grammar g : grammarList) {
+				grammar.addRelations(g.getPackageRelations());
+				grammar.sortDeclaredPackages();
 				for (String request : g.getImport()) {
 					grammar.addImport(request);
 				}
 				for (Grammar.Schema schema : g.getSchemasNoUpdate()) {
-					if (grammar.getImport().contains(schema.getPackage()) 
+					if (grammar.getDeclaredPackages().contains(schema.getPackage())
 							&& !seenPackages.contains(schema.getPackage())) {
+//					if (grammar.getImport().contains(schema.getPackage()) 
+//							&& !seenPackages.contains(schema.getPackage())) {
 						Grammar.Schema s = grammar.new Schema(schema.getName(), schema.getKind(), schema.getParents(), schema.getContents());
 						s.setLocation(schema.getLocation());
 						grammar.addSchema(s);
 					}
 				}
 				for (Grammar.Construction cxn : g.getCxnsNoUpdate()) {
-					if (grammar.getImport().contains(cxn.getPackage())
+					if (grammar.getDeclaredPackages().contains(cxn.getPackage())
+//					if (grammar.getImport().contains(cxn.getPackage())
 							&& !seenPackages.contains(cxn.getPackage())) {
 						Grammar.Construction c = grammar.new Construction(cxn.getName(), cxn.getKind(), cxn.getParents(), 
 								 cxn.getFormBlock(), cxn.getMeaningBlock(), cxn.getConstructionalBlock());

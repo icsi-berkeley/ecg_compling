@@ -630,6 +630,7 @@ public class ECGGrammarUtilities {
     Grammar grammar = new Grammar();
     for (String name : packageNames) {
     	grammar.addImport(name);
+    	grammar.addToDeclared(name);
     }
     
     List<String> importPaths = preferences.getList(AP.IMPORT_PATHS);
@@ -672,11 +673,13 @@ public class ECGGrammarUtilities {
 		}
 		
 		for (Grammar g : grammarList) {
+			grammar.addRelations(g.getPackageRelations());
+			grammar.sortDeclaredPackages();
 			for (String request : g.getImport()) {
 				grammar.addImport(request);
 			}
 			for (Grammar.Schema schema : g.getSchemasNoUpdate()) {
-				if (grammar.getImport().contains(schema.getPackage()) 
+				if (grammar.getDeclaredPackages().contains(schema.getPackage())
 						&& !seenPackages.contains(schema.getPackage())) {
 					Grammar.Schema s = grammar.new Schema(schema.getName(), schema.getKind(), schema.getParents(), schema.getContents());
 					s.setLocation(schema.getLocation());
@@ -684,8 +687,8 @@ public class ECGGrammarUtilities {
 				}
 			}
 			for (Grammar.Construction cxn : g.getCxnsNoUpdate()) {
-				if (grammar.getImport().contains(cxn.getPackage())
-						&& !seenPackages.contains(cxn.getPackage())) {
+				if (grammar.getDeclaredPackages().contains(cxn.getPackage())
+								&& !seenPackages.contains(cxn.getPackage())) {
 					Grammar.Construction c = grammar.new Construction(cxn.getName(), cxn.getKind(), cxn.getParents(), 
 							 cxn.getFormBlock(), cxn.getMeaningBlock(), cxn.getConstructionalBlock());
 					c.setLocation(cxn.getLocation());
@@ -714,7 +717,6 @@ public class ECGGrammarUtilities {
 	        contextModel = new ContextModel(ontFiles.get(0).getAbsolutePath());
 	      }
 	      else {
-	    	  System.out.println("------");
 	    	  contextModel = new ContextModel(ontFiles, extsI[2]);
 //	        contextModel = new ContextModel(ontFiles, extsI[0], extsI[1]);
 	      }

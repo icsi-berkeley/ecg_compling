@@ -180,7 +180,6 @@ class RobotProblemSolver(DispatchingProblemSolver):
         color = None
         size = None
         world = self.world
-        print('solver: begin move_to_destination')
         #for parameters in ntuple.parameters:
         protagonist = self.get_described_obj(parameters.protagonist['objectDescriptor'])
         speed = parameters.speed * 4
@@ -228,14 +227,12 @@ class RobotProblemSolver(DispatchingProblemSolver):
             pos = self.getpos(name)
             newpos = vector_add(pos, vector_mul(n, self.headings[heading]))
             self.move(inst, newpos[0], newpos[1], newpos[2], speed=speed)
-        print('solver: end move_to_destination')
 
     def solve_push_move(self, parameters):
         color = None
         size = None
         world = self.world
         home_pos = world.robot1_instance.pos
-        print('solver: begin move_to_destination')
         #for parameters in ntuple.parameters:
         protagonist = self.get_described_obj(parameters.causer['objectDescriptor'])
         heading = parameters.affectedProcess['heading']
@@ -463,7 +460,6 @@ class RobotProblemSolver(DispatchingProblemSolver):
                 returned = [smallest]
             elif float(i.size) == smallest.size:
                 returned.append(i)
-        print(returned)
         return returned
 
     def get_biggest(self, objs):
@@ -814,6 +810,7 @@ class MorseProblemSolver(RobotProblemSolver):
         #print ("collide is")
        # print (collide)
         if collide == True:
+            print("collide is set to be on. solver, line 813.")
             discovered, interrupted = inst.move(x=a, y=b, z=0,tolerance = tolerance, speed = speed)
 
         else:

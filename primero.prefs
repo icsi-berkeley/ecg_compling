@@ -19,7 +19,6 @@ IMPORT_PATHS ::==
 
 
 MORPHOLOGY_PATH ::== 
-	./primero/celex.ecgmorph
 	./primero/primero.ecgmorph
 ;
 

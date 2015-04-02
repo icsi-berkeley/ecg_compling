@@ -308,11 +308,7 @@ public class TokenView extends ViewPart {
 		typeCxns = getTypes("\"*\"");
 		
 
-		
-		
 
-
-		
 		final FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		final ScrolledForm form = toolkit.createScrolledForm(parent);
 		form.setText("Token Editor");
