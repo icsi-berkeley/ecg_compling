@@ -168,7 +168,7 @@ class RobotSpecializer(UtilitySpecializer, RobotTemplateSpecializer):
                 prop = process.state
                 #params = updated(d, action = process.actionary.type()) #process.protagonist.ontological_category.type())
                 print(prop.type())
-                if prop.type() == 'PropertyModifier':
+                if self.analyzer.issubtype('SCHEMA', prop.type(), 'PropertyModifier'):
                     a = {str(prop.property.type()): prop.value.type()}#, 'type': 'property'}
                     params.update(predication = a)
                 elif self.analyzer.issubtype('SCHEMA', prop.type(), 'TrajectorLandmark'):
