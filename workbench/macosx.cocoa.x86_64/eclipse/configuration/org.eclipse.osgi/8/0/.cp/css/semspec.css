@@ -1,0 +1,53 @@
+/*
+ *  CSS style for the SemSpec
+ */
+
+body {
+	font-family: "Segoe UI", Corbel, "Trebuchet MS", Verdana, Tahoma,
+		Helvetica, Arial, sans-serif;
+}
+
+.root-wrapper {
+	margin: 0 0 12px 0;
+}
+
+table {
+	border: 1px solid #AAAAAA;
+	color: #000000;
+	font-size: 8pt;
+	padding: 2px;
+}
+
+.content {
+	padding: 0px;
+	border: none;
+}
+
+.type-name {
+	font-style: italic;
+	font-weight: bold;
+	font-size: 10pt;
+	background-color: #E0E0E0;
+	cursor: pointer;
+	display: block;
+}
+
+td.type-name:hover {
+	color: #FFFFFF;
+	background-color: #5588DD;
+}
+
+.index {
+	border: 1px solid #606060;
+	padding: 0px 2px;
+	cursor: pointer;
+}
+
+.highlighted {
+	color: #FFFFFF;
+	background-color: #FF0000;
+}
+
+.feature-name {
+	cursor: pointer;
+}

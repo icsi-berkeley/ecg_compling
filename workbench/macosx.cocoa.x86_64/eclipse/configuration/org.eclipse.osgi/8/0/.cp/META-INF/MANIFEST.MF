@@ -1,0 +1,70 @@
+Manifest-Version: 1.0
+Export-Package: compling.gui.grammargui; uses:="org.eclipse.core.runti
+ me,  org.eclipse.jface.resource,  org.eclipse.ui.application,  org.ec
+ lipse.ui.console,  org.eclipse.ui,  org.eclipse.ui.plugin,  org.eclip
+ se.ui.forms,  org.eclipse.jface.action,  org.eclipse.equinox.app,  or
+ g.osgi.framework,  org.eclipse.swt.widgets",compling.gui.grammargui.b
+ uilder; uses:="compling.grammar.unificationgrammar,  java_cup.runtime
+ ,  org.eclipse.core.runtime,  compling.context,  org.eclipse.ui,  com
+ pling.gui.grammargui.util,  org.eclipse.jface.action,  compling.gramm
+ ar.ecg.ecgreader,  org.eclipse.core.resources,  org.eclipse.jface.vie
+ wers,  compling.grammar.ecg,  compling.gui.grammargui.model",compling
+ .gui.grammargui.model; uses:="compling.grammar.unificationgrammar,  o
+ rg.eclipse.core.runtime,  org.eclipse.jface.resource,  compling.parse
+ r.ecgparser,  org.eclipse.ui,  org.ini4j,  compling.gui.grammargui.ut
+ il,  org.eclipse.core.runtime.jobs,  org.eclipse.core.resources,  org
+ .eclipse.jface.viewers,  org.eclipse.swt.graphics,  compling.gui,  co
+ mpling.grammar.ecg",compling.gui.grammargui.ui.actions; uses:="org.ec
+ lipse.jface.action,  compling.gui.grammargui.ui.editors,  org.eclipse
+ .ui,  org.eclipse.jface.viewers,  compling.gui.grammargui.model,  com
+ pling.gui.grammargui.util",compling.gui.grammargui.ui.editors; uses:=
+ "org.eclipse.jface.text,  org.eclipse.core.runtime,  compling.parser.
+ ecgparser,  org.eclipse.core.filebuffers,  org.eclipse.jface.text.rul
+ es,  org.eclipse.ui.forms,  org.eclipse.ui.forms.widgets,  compling.g
+ ui.grammargui.util,  org.eclipse.ui.ide,  org.eclipse.jface.action,  
+ org.eclipse.ui.views.contentoutline,  org.eclipse.core.resources,  or
+ g.eclipse.jface.viewers,  compling.gui.grammargui.model,  org.eclipse
+ .jface.text.hyperlink,  compling.grammar.unificationgrammar,  org.ecl
+ ipse.ui.texteditor,  org.eclipse.jface.text.source,  org.eclipse.jfac
+ e.resource,  compling.gui.util,  org.eclipse.swt.events,  org.eclipse
+ .ui,  org.eclipse.ui.part,  org.eclipse.ui.forms.editor,  org.eclipse
+ .jface.preference,  org.eclipse.jface.text.presentation,  org.eclipse
+ .swt.graphics,  compling.gui.grammargui.ui.actions,  org.eclipse.swt.
+ widgets,  org.eclipse.ui.editors.text",compling.gui.grammargui.ui.per
+ spectives;uses:="org.eclipse.ui",compling.gui.grammargui.ui.views; us
+ es:="compling.grammar.unificationgrammar,  org.eclipse.jface.resource
+ ,  org.eclipse.ui.console,  org.eclipse.ui,  org.eclipse.ui.part,  co
+ mpling.gui.grammargui.util,  org.eclipse.jface.action,  org.eclipse.j
+ face.viewers,  org.eclipse.swt.widgets,  org.eclipse.ui.views.navigat
+ or",compling.gui.grammargui.util; uses:="compling.grammar.unification
+ grammar,  org.eclipse.core.runtime,  compling.gui.util,  compling.gra
+ mmar.ecg.ecgreader,  org.eclipse.core.commands.common,  org.eclipse.c
+ ore.resources,  org.eclipse.jface.viewers,  compling.gui,  compling.g
+ rammar.ecg,  compling.gui.grammargui.model"
+Require-Bundle: compling.core;bundle-version="1.0.0",org.jdom;bundle-v
+ ersion="1.0.0",org.ini4j;bundle-version="1.0.0",JFlex;bundle-version=
+ "1.4.1",java_cup;bundle-version="1.0.0",org.eclipse.core.runtime;bund
+ le-version="3.4.0",org.eclipse.core.resources;bundle-version="3.4.2",
+ org.eclipse.ui;bundle-version="3.4.2",org.eclipse.ui.editors;bundle-v
+ ersion="3.4.0",org.eclipse.ui.console;bundle-version="3.3.1",org.ecli
+ pse.jface.text;bundle-version="3.4.2",org.eclipse.ui.ide;bundle-versi
+ on="3.4.2",org.eclipse.ui.views;bundle-version="3.3.1",org.eclipse.ui
+ .navigator;bundle-version="3.3.102",org.eclipse.ui.navigator.resource
+ s;bundle-version="3.3.101",org.eclipse.team.core;bundle-version="3.4.
+ 2",org.eclipse.team.cvs.core;bundle-version="3.3.300",org.eclipse.tea
+ m.cvs.ui;bundle-version="3.3.100",org.eclipse.team.ui;bundle-version=
+ "3.4.1",org.eclipse.search;bundle-version="3.4.1",org.eclipse.compare
+ .core;bundle-version="3.5.0",org.eclipse.equinox.p2.core;bundle-versi
+ on="1.0.100",org.eclipse.equinox.p2.metadata;bundle-version="1.0.100"
+ ,org.eclipse.ui.forms;bundle-version="3.5.101"
+Bundle-Vendor: ICSI Berkeley
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .
+Bundle-Version: 0.6.4.201504021633
+Bundle-Name: ECG Workbench Plug-in
+Bundle-Activator: compling.gui.grammargui.EcgEditorPlugin
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: compling.gui;singleton:=true
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7,JavaSE-1.6
+
+
