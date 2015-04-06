@@ -1,0 +1,26 @@
+{
+  "__JSON_Struct__": {
+    "predicate_type": "query",
+    "return_type": "singleton(instance_reference)",
+    "parameters": [
+      {
+        "__JSON_Struct__": {
+          "specificWh": "which",
+          "action": "be",
+          "kind": "query",
+          "predication": {
+            "color": "pink"
+          },
+          "protagonist": {
+            "objectDescriptor": {
+              "type": "box",
+              "givenness": "givennessValues",
+              "color": "pink",
+              "kind": "None"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

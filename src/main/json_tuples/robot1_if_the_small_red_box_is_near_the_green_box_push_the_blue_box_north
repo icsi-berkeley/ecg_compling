@@ -1,0 +1,119 @@
+{
+  "__JSON_Struct__": {
+    "predicate_type": "conditional",
+    "return_type": "error_descriptor",
+    "parameters": [
+      {
+        "__JSON_Struct__": {
+          "condition": [
+            {
+              "__JSON_Struct__": {
+                "goal": null,
+                "control_state": "ongoing",
+                "heading": null,
+                "distance": {
+                  "value": 4,
+                  "units": "square"
+                },
+                "protagonist": {
+                  "objectDescriptor": {
+                    "size": "small",
+                    "kind": "unmarked",
+                    "locationDescriptor": {
+                      "objectDescriptor": {
+                        "type": "box",
+                        "givenness": "uniquelyIdentifiable",
+                        "color": "green",
+                        "kind": "None"
+                      },
+                      "relation": "near"
+                    },
+                    "type": "box",
+                    "color": "red",
+                    "givenness": "uniquelyIdentifiable"
+                  }
+                },
+                "action": "be",
+                "kind": "execute",
+                "predication": {
+                  "objectDescriptor": {
+                    "type": "box",
+                    "givenness": "uniquelyIdentifiable",
+                    "color": "green",
+                    "kind": "None"
+                  },
+                  "relation": "near"
+                },
+                "speed": 0.5,
+                "direction": null
+              }
+            }
+          ],
+          "kind": "conditional",
+          "command": [
+            {
+              "__JSON_Struct__": {
+                "causer": {
+                  "objectDescriptor": {
+                    "type": "robot",
+                    "referent": "robot1_instance"
+                  }
+                },
+                "action": "push_move",
+                "kind": "cause",
+                "causalProcess": {
+                  "goal": null,
+                  "control_state": "ongoing",
+                  "heading": null,
+                  "distance": {
+                    "value": 4,
+                    "units": "square"
+                  },
+                  "acted_upon": {
+                    "objectDescriptor": {
+                      "type": "box",
+                      "givenness": "uniquelyIdentifiable",
+                      "color": "blue",
+                      "kind": "None"
+                    }
+                  },
+                  "protagonist": {
+                    "objectDescriptor": {
+                      "type": "robot",
+                      "referent": "robot1_instance"
+                    }
+                  },
+                  "action": "forceapplication",
+                  "kind": "execute",
+                  "speed": 0.5,
+                  "direction": null
+                },
+                "affectedProcess": {
+                  "goal": null,
+                  "control_state": "ongoing",
+                  "heading": "north",
+                  "distance": {
+                    "value": 4,
+                    "units": "square"
+                  },
+                  "protagonist": {
+                    "objectDescriptor": {
+                      "type": "box",
+                      "givenness": "uniquelyIdentifiable",
+                      "color": "blue",
+                      "kind": "None"
+                    }
+                  },
+                  "action": "move",
+                  "kind": "execute",
+                  "speed": 0.5,
+                  "direction": null
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

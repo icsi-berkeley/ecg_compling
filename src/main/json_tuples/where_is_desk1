@@ -1,0 +1,22 @@
+{
+  "__JSON_Struct__": {
+    "predicate_type": "query",
+    "return_type": "singleton(instance_reference)",
+    "parameters": [
+      {
+        "__JSON_Struct__": {
+          "specificWh": "where",
+          "action": "be",
+          "kind": "query",
+          "predication": null,
+          "protagonist": {
+            "objectDescriptor": {
+              "type": "desk",
+              "referent": "desk1"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "__JSON_Struct__": {
+    "predicate_type": "query",
+    "return_type": "singleton(instance_reference)",
+    "parameters": [
+      {
+        "__JSON_Struct__": {
+          "specificWh": "which",
+          "action": "be",
+          "kind": "query",
+          "predication": null,
+          "protagonist": {
+            "objectDescriptor": {
+              "type": "box",
+              "size": "small",
+              "givenness": "givennessValues",
+              "kind": "superlative"
+            }
+          }
+        }
+      }
+    ]
+  }
+}
