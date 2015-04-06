@@ -288,10 +288,18 @@ class RobotProblemSolver(DispatchingProblemSolver):
                 return False
         return self.eval_condtion_one_item(item, predication)
         
+    # Needs to be reworked. Actually, grammar should just give scalar values for size.
+    def convert_sizes(self, size):
+        table = {'big': 2,
+                'small': 1}
+        return table[size]
+        
     
     def eval_condtion_one_item(self, item, prediction):
         predictions = list(prediction.keys())
         for pred_prop in predictions:
+            if pred_prop == 'size':
+                prediction[pred_prop] = self.convert_sizes(prediction[pred_prop])
             if ('relation' in prediction):
                 if prediction['relation'] =='near':
                     item2 = self.get_described_obj(prediction['objectDescriptor'])

@@ -167,7 +167,6 @@ class RobotSpecializer(UtilitySpecializer, RobotTemplateSpecializer):
             def params_for_stasis(process, params):
                 prop = process.state
                 #params = updated(d, action = process.actionary.type()) #process.protagonist.ontological_category.type())
-                print(prop.type())
                 if self.analyzer.issubtype('SCHEMA', prop.type(), 'PropertyModifier'):
                     a = {str(prop.property.type()): prop.value.type()}#, 'type': 'property'}
                     params.update(predication = a)
@@ -180,7 +179,6 @@ class RobotSpecializer(UtilitySpecializer, RobotTemplateSpecializer):
                     #print(prop.profiledArea.ontological_category.type())
                     params.update(predication=pred)
                 if not 'specificWh' in params:  # Check if it's a WH question, in which case we don't want to do "X-check"
-                    print(params)
                     params = crosscheck_params(params)
                 return params                
 
