@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
@@ -407,6 +408,41 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 		sentences.toArray(removed);
 
 		eventManager.fireModelChanged(this, new AnalyzerSentence[0], removed);
+	}
+	
+	public String getPackageAsText(String pkgName) {
+		String text = "";
+		ArrayList<String> importedByActive = new ArrayList<String>();
+		ArrayList<String> importedByInactive = new ArrayList<String>();
+		ArrayList<String> imports = new ArrayList<String>();
+		for (Entry<String, ArrayList<String>> e : getGrammar().getPackageRelations().entrySet()) {
+			if (e.getValue().contains(pkgName)) {
+				imports.add(e.getKey());
+			} else if (e.getKey().equals(pkgName)) {
+				// Check if package is part of "working grammar".
+				for (String pkg : e.getValue()) {
+					if (getGrammar().getDeclaredPackages().contains(pkg)) {
+						importedByActive.add(pkg);
+					} else {
+						importedByInactive.add(pkg);
+					}
+				}
+			}
+		}
+		String uses = imports.toString();
+		String usedBy = importedByActive.toString();
+		String usedByInactive = importedByInactive.toString();
+		if (imports.isEmpty()) {
+			uses = "None.";
+		}
+		if (importedByActive.isEmpty()) {
+			usedBy = "None.";
+		}
+		if (importedByInactive.isEmpty()) {
+			usedByInactive = "None.";
+		}
+		text = "Package: " + pkgName + "\n Imports: " + uses + "\n Imported by (active): " + usedBy + "\n Imported by (inactive): " + usedByInactive;
+		return text;
 	}
 
 	public String getContentAsText(String nodeName) {
