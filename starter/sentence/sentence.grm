@@ -64,6 +64,7 @@ construction  S-With-Copula-Inversion-PP //special case
             subj.f before pp.f
     meaning
         constraints
+        	fin.m.actionary <-- @be2
         	subj.m <--> self.m.profiledParticipant  // from S-With-Subj
             fin.m.protagonist <--> subj.m
             pp.m.trajector <--> subj.m
