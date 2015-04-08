@@ -304,7 +304,6 @@ class RobotProblemSolver(DispatchingProblemSolver):
                 if prediction['relation'] =='near':
                     item2 = self.get_described_obj(prediction['objectDescriptor'])
                     if not (self.is_near(item, self.get_described_obj(prediction['objectDescriptor']))):
-                        print ("items are not near") 
                         return False
                     else:
                         return True

@@ -375,7 +375,12 @@ class RobotSpecializer(UtilitySpecializer, RobotTemplateSpecializer):
                     if key in od.keys():
                         if od[key] == predication[key]:
                             del od[key]
+                    # Is this what we want to do??
+                    elif 'locationDescriptor' in od and key in od['locationDescriptor'].keys():
+                        if od['locationDescriptor'][key] == predication[key]:
+                            del od['locationDescriptor']
                 return p
+
 
   
 
