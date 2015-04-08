@@ -783,3 +783,11 @@ Struct(predicate_type='query', return_type='singleton(instance_reference)', para
 WH_Question 
 which box is pink? 
 Struct(predicate_type='query', return_type='singleton(instance_reference)', parameters=[Struct(specificWh='which', action='be', kind='query', predication={'color': 'pink'}, protagonist={'objectDescriptor': {'type': 'box', 'givenness': 'givennessValues', 'color': 'pink', 'kind': 'None'}})])
+
+Imperative 
+robot1, scamper to the blue box! 
+Struct(parameters=[Struct(goal={'objectDescriptor': {'color': 'blue', 'givenness': 'uniquelyIdentifiable', 'type': 'box', 'kind': 'None'}}, distance={'value': 4, 'units': 'square'}, heading=None, action='move', control_state='ongoing', kind='execute', speed=0.5, direction=None, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}})], return_type='error_descriptor', predicate_type='command')
+
+Imperative 
+robot1, scamper to the big magenta box! 
+Struct(parameters=[Struct(goal={'objectDescriptor': {'kind': 'None', 'givenness': 'uniquelyIdentifiable', 'type': 'box', 'size': 'big', 'color': 'red'}}, distance={'value': 4, 'units': 'square'}, heading=None, action='move', control_state='ongoing', kind='execute', speed=0.5, direction=None, protagonist={'objectDescriptor': {'type': 'robot', 'referent': 'robot1_instance'}})], return_type='error_descriptor', predicate_type='command')
