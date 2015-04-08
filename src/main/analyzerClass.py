@@ -25,3 +25,7 @@ class Analyzer(object):
 
     def get_mapping_path(self):
         return os.path.realpath(self.analyzer.get_mapping())
+
+    def get_mappings(self):
+
+        return self.analyzer.get_mappings()

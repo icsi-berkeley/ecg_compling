@@ -665,7 +665,6 @@ public class ECGGrammarUtilities {
 		      }
 		      else {
 		    	contextModel = new ContextModel(ontFiles, extsI[2]);
-//		        contextModel = new ContextModel(ontFiles, extsI[0], extsI[1]);
 		      }
 		      tempGrammar = read(fileList, contextModel, encodingI);
 		      grammarList.add(tempGrammar);
@@ -756,7 +755,8 @@ public class ECGGrammarUtilities {
 		List<File> filesUnder = FileUtils.getFilesUnder(base, test, new ExtensionFileFilter(
 				passage));
 		for (File f : filesUnder)
-			newFiles.add(Utils.getRelativeTo(f, base));
+			newFiles.add(f);
+			//newFiles.add(Utils.getRelativeTo(f, base));
 		fileList.add(newFiles);
 	}
 	return fileList;
@@ -904,7 +904,7 @@ public class ECGGrammarUtilities {
   private static void read(List<File> files, Grammar grammar, Charset encoding) {
     for (File file : files) {
       try {
-        Yylex scanner = new Yylex(new InputStreamReader(new FileInputStream(file), encoding));
+        Yylex scanner = new Yylex(new InputStreamReader(new FileInputStream(file.getAbsolutePath()), encoding));
 
         // Scan the grammar file (use ECG encoding for the file)
         String filename = file.getName();
@@ -945,7 +945,7 @@ public class ECGGrammarUtilities {
 
       }
       catch (FileNotFoundException e1) {
-        // e1.printStackTrace();
+    	 e1.printStackTrace();
         throw new GrammarException("Grammar File Not Found:\n", e1);
       }
       // catch (UnsupportedEncodingException e2) {

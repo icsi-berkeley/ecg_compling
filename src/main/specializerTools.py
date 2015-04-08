@@ -34,7 +34,6 @@ from os.path import basename
 from solver import NullProblemSolver, MorseProblemSolver, XnetProblemSolver,\
     MockProblemSolver
 from analyzerClass import Analyzer
-from mappingReader import MappingReader
 # from pprint import pprint, pformat
 
 
@@ -69,9 +68,9 @@ class UtilitySpecializer(DebuggingSpecializer):
         self._stacked = []
         DebuggingSpecializer.__init__(self)
         self.analyzer = Analyzer('http://localhost:8090')
-        self.mapping_reader = MappingReader()
-        self.mapping_reader.read_file(self.analyzer.get_mapping_path())
-        self.mappings = self.mapping_reader.get_mappings()
+        #self.mapping_reader = MappingReader()
+        #self.mapping_reader.read_file(self.analyzer.get_mapping_path())
+        self.mappings = self.analyzer.get_mappings()
 
     """ Input PROCESS, searches SemSpec for Adverb Modifiers. Currently just returns speed,
     but could easily be modified to return general manner information. """
@@ -226,6 +225,8 @@ class UtilitySpecializer(DebuggingSpecializer):
             elif type(v) == list:
                 for value in v:
                     value = self.replace_mappings(value)
+            elif v is None:
+                continue
             elif v in self.mappings:
                 n[k] = self.mappings[v]
                 v = self.mappings[v]

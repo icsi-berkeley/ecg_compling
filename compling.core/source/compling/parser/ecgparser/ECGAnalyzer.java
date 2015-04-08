@@ -53,6 +53,8 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	
 	private AnalyzerPrefs preferences;
 	
+	private MappingReader mappingReader;
+	
 
 	private LCPGrammarWrapper grammar;
 	
@@ -77,6 +79,8 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 		preferences = prefs;
 
 		grammar = new LCPGrammarWrapper(ecgGrammar);
+		
+		mappingReader = new MappingReader(grammar);
 		//tokenReader = new ECGTokenReader(grammar);
 		//ecgmorph = new ECGMorph(grammar, tokenReader);
 
@@ -174,6 +178,10 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 
 
 //    needs to be more code here to further process the grammar prefs
+	}
+	
+	public HashMap<String, String> getMappings() {
+		return mappingReader.getMappings();
 	}
 	
 	/** Reads token file into Parser again. Needs to be done when you want new tokens in lexicon. */

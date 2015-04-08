@@ -1,0 +1,34 @@
+{
+  "__JSON_Struct__": {
+    "return_type": "boolean",
+    "parameters": [
+      {
+        "__JSON_Struct__": {
+          "predication": {
+            "relation": "near",
+            "objectDescriptor": {
+              "type": "box",
+              "referent": "box2_instance"
+            }
+          },
+          "action": "be",
+          "kind": "query",
+          "protagonist": {
+            "objectDescriptor": {
+              "type": "box",
+              "locationDescriptor": {
+                "relation": "near",
+                "objectDescriptor": {
+                  "type": "box",
+                  "referent": "box2_instance"
+                }
+              },
+              "referent": "box1_instance"
+            }
+          }
+        }
+      }
+    ],
+    "predicate_type": "query"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "__JSON_Struct__": {
+    "return_type": "boolean",
+    "predicate_type": "query",
+    "parameters": [
+      {
+        "__JSON_Struct__": {
+          "action": "be2",
+          "predication": {
+            "color": "red"
+          },
+          "protagonist": {
+            "objectDescriptor": {
+              "kind": "None",
+              "referent": "box1_instance",
+              "type": "box"
+            }
+          },
+          "kind": "query"
+        }
+      }
+    ]
+  }
+}

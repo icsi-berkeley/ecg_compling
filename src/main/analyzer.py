@@ -47,6 +47,14 @@ class Analyzer(object):
         self.grammar = self.analyzer.grammar
         self.server = None
 
+    def get_mappings(self):
+        mappings = self.analyzer.getMappings()
+        m = dict()
+        for entry in mappings.entrySet():
+            m[entry.key] = entry.value
+        print(m)
+        return m
+
     def get_parses(self, sentence):
         try:
             return getParses(sentence, self.analyzer)
@@ -157,12 +165,7 @@ def server(obj, host='localhost', port=8090):
     server.serve_forever()
     return server  # Added
 
-def main(args):
-    display(interpreter())
-    display('Starting up Analyzer ... ', term='')
-    start = time.time()
-    analyzer = Analyzer(args[1])
-    end = time.time()
+def usage_time(start, end, analyzer):
     print("Inversion time:")
     print(end - start)
     print("Num constructions: ")
@@ -171,6 +174,14 @@ def main(args):
     print(analyzer.getSchemaSize())
     print("Total: ")
     print(analyzer.getConstructionSize() + analyzer.getSchemaSize())
+
+def main(args):
+    display(interpreter())
+    display('Starting up Analyzer ... ', term='')
+    start = time.time()
+    analyzer = Analyzer(args[1])
+    end = time.time()
+    #usage_time(start, end, analyzer)
     serve = server(analyzer)
     analyzer.server = serve
 
