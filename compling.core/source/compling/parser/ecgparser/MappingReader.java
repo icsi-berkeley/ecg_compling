@@ -15,15 +15,20 @@ public class MappingReader {
 	AnalyzerPrefs prefs;
 	File mappingPath;
 	public HashMap<String, String> mappings;
+	TextFileLineIterator tfli;
 	
 	public MappingReader(GrammarWrapper wrapper) throws IOException {
 		mappings = new HashMap<String, String>();
 		prefs = (AnalyzerPrefs) wrapper.getGrammar().getPrefs();
 		File base = prefs.getBaseDirectory();
-		mappingPath = new File(base, prefs.getSetting(AP.MAPPING_PATH));
-		
-		TextFileLineIterator tfli = new TextFileLineIterator(mappingPath);
-		
+		if (!(prefs.getSetting(AP.MAPPING_PATH) == null)) {
+			mappingPath = new File(base, prefs.getSetting(AP.MAPPING_PATH));
+			tfli = new TextFileLineIterator(mappingPath);
+			readMappings();
+		}
+	}
+
+	private void readMappings() {	
 		while (tfli.hasNext()) {
 			String l = tfli.next();
 			String[] contents = l.split(" :: ");
