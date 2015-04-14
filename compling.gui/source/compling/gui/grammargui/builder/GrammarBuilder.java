@@ -246,6 +246,7 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 	 */
 	protected void fullBuild(PrefsManager manager, final IProgressMonitor monitor) throws CoreException {
 		
+		
 		ResourceGatherer gatherer = new ResourceGatherer(manager.getPreferences());
 		List<File> files = gatherer.getImportFiles(); //new ResourceGatherer(manager.getPreferences()).getGrammarFiles();
 		

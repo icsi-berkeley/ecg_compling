@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Export-Package: com.werken.saxpath;uses:="org.saxpath",org.jaxen;uses:
+ ="org.jaxen.saxpath,org.jaxen.expr",org.jaxen.dom;uses:="org.jaxen,or
+ g.w3c.dom",org.jaxen.dom.html;uses:="org.jaxen,org.jaxen.dom,org.w3c.
+ dom",org.jaxen.dom4j;uses:="org.jaxen,org.dom4j.io",org.jaxen.expr;us
+ es:="org.jaxen,org.jaxen.expr.iter",org.jaxen.expr.iter;uses:="org.ja
+ xen",org.jaxen.function;uses:="org.jaxen",org.jaxen.function.ext;uses
+ :="org.jaxen",org.jaxen.function.xslt;uses:="org.jaxen",org.jaxen.jav
+ abean;uses:="org.jaxen",org.jaxen.jdom;uses:="org.jaxen,org.jdom",org
+ .jaxen.pattern;uses:="org.jaxen,org.jaxen.expr",org.jaxen.saxpath,org
+ .jaxen.saxpath.base;uses:="org.jaxen.saxpath",org.jaxen.saxpath.helpe
+ rs;uses:="org.jaxen.saxpath",org.jaxen.util;uses:="org.jaxen,org.jaxe
+ n.expr",org.jaxen.xom;uses:="org.jaxen",org.jdom;uses:="org.jdom.filt
+ er",org.jdom.adapters;uses:="org.jdom,org.w3c.dom",org.jdom.filter;us
+ es:="org.jdom",org.jdom.input; uses:="org.xml.sax.ext,  org.jdom,  or
+ g.xml.sax.helpers,  org.w3c.dom,  org.xml.sax",org.jdom.output; uses:
+ ="org.xml.sax.ext,  org.jdom,  org.w3c.dom,  org.xml.sax.helpers,  or
+ g.xml.sax",org.jdom.transform; uses:="org.xml.sax.ext,  org.jdom,  ja
+ vax.xml.transform.sax,  org.xml.sax",org.jdom.xpath;uses:="org.jdom",
+ org.saxpath,org.saxpath.conformance;uses:="org.saxpath",org.saxpath.h
+ elpers;uses:="org.saxpath"
+Bundle-ClassPath: lib/jdom1_0/jaxen-1.1-beta-6.jar,lib/jdom1_0/jdom.ja
+ r,lib/jdom1_0/saxpath.jar
+Bundle-Version: 1.0.0.201504141210
+Bundle-Name: jdom Plug-In
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.jdom
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+
+

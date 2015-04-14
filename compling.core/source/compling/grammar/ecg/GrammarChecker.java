@@ -27,6 +27,7 @@ import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
 import compling.grammar.unificationgrammar.UnificationGrammar.Role;
 import compling.grammar.unificationgrammar.UnificationGrammar.SlotChain;
 import compling.grammar.unificationgrammar.UnificationGrammar.TypeConstraint;
+import compling.gui.util.Utils;
 import compling.util.Arrays;
 import compling.util.Interner;
 

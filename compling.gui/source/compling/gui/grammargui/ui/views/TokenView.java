@@ -483,13 +483,16 @@ public class TokenView extends ViewPart {
 				parentCxn = parentText.getText();
 				if (!token.equals("") && !parentCxn.equals("")) {
 					write(token, parentCxn, constraints);
-					Utils.flushCaches(getAnalyzer());
-					getAnalyzer().reloadTokens();
+					//Utils.flushCaches(getAnalyzer());
+					//getAnalyzer().reloadTokens();
 					tokenText.setText("");
 					parentText.setText("");
 					constraintText.setText("");
 					constraintBox.setText("");
 					constraintParents.setText("");
+					// Check grammar instead of retrieving analyzer. Analyzer object too large for "base", etc.
+					// TODO: Check that this is proper.
+					PrefsManager.getDefault().checkGrammar();
 				} else {
 					System.out.println("Definition not complete.");
 				}

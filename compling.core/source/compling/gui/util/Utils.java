@@ -39,16 +39,21 @@ public final class Utils {
 	private static HashMap<String, String> parseCache = new HashMap<String, String>();
 	private static HashMap<String, Collection<IParse>> alterParseCache = new HashMap<String, Collection<IParse>>();
 	
-	public static void flushCaches(ECGAnalyzer analyzer) {
-		String[] keySet = parseCache.keySet().toArray(new String[parseCache.keySet().size()]);
+
+	
+	public static void flushCaches() {
+		//String[] keySet = parseCache.keySet().toArray(new String[parseCache.keySet().size()]);
+		parseCache = new HashMap<String, String>();
+		alterParseCache = new HashMap<String, Collection<IParse>>();
+		/*
 		for (String key : keySet) {
 			System.out.println("flushed " + key + " parse");
 			alterParseCache.remove(key);
-			alterParseCache.put(key, getParses(key, analyzer));
+			alterParseCache.put(key, getParses(key, utilAnalyzer));
 			parseCache.remove(key);
-			parseCache.put(key, parse(key, analyzer));
+			parseCache.put(key, parse(key, utilAnalyzer));
 			System.out.println("replaced " + key + " parse");
-		}
+		}*/
 		/*
 		for (String key : parseCache.keySet()) {
 			System.out.println("flushed " + key + " parse");

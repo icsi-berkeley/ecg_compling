@@ -138,8 +138,9 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 				project.build(IncrementalProjectBuilder.FULL_BUILD, nullProgressMonitor);
 			}
 		});
-		Utils.flushCaches(getAnalyzer());
-		getAnalyzer().reloadTokens();
+		//ECGAnalyzer analyzer = getAnalyzer();
+		Utils.flushCaches();
+		//analyzer.reloadTokens();
 	}
 
 	private void resetTables() {
