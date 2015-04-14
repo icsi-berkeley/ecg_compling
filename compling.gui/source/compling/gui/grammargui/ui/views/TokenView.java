@@ -135,7 +135,6 @@ public class TokenView extends ViewPart {
 		List<String> ontPaths = prefs.getList(AP.ONTOLOGY_PATHS);
 		String[] onts = new String[ontPaths.size()];
 		for (int i=0; i < onts.length; i++) {
-			System.out.println(ontPaths.get(i));
 			onts[i] = ontPaths.get(i);
 		}
 		return onts;
