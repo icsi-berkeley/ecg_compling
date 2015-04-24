@@ -8,21 +8,25 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import compling.context.ContextModel;
 import compling.context.ContextModelCache;
+import compling.grammar.ComplexCacheException;
 import compling.grammar.GrammarException;
 import compling.grammar.ecg.ECGConstants;
 import compling.grammar.ecg.ECGGrammarUtilities;
 import compling.grammar.ecg.Grammar;
 import compling.grammar.ecg.Grammar.Construction;
+import compling.grammar.unificationgrammar.FeatureStructureSet;
 import compling.grammar.unificationgrammar.FeatureStructureSet.Slot;
 import compling.grammar.unificationgrammar.TypeSystem;
 import compling.grammar.unificationgrammar.TypeSystemException;
 import compling.grammar.unificationgrammar.UnificationGrammar;
 import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
 import compling.grammar.unificationgrammar.UnificationGrammar.Role;
+import compling.grammar.unificationgrammar.UnificationGrammar.TypeConstraint;
 import compling.parser.ParserException;
 import compling.parser.RobustParser;
 import compling.parser.ecgparser.LeftCornerParserTablesCxn.AnalysisFactory;
@@ -56,14 +60,9 @@ import compling.parser.ecgparser.ECGTokenReader.ECGToken;
 public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 	
 	
-	public class MorphTokenPair {
-		public String morph;
-		public ECGTokenReader.ECGToken token;
-		public MorphTokenPair(String morph, ECGTokenReader.ECGToken token) {
-			this.morph = morph;
-			this.token = token;
-		}
-	}
+
+	
+	
 
   /** CONSTANTS THAT GET SET BY THE setParameters method */
   boolean DEBUG = false;
@@ -111,7 +110,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   
   /**This is intended to be a cache of type Cxns; when type-identical utterances appear, just retrieve from cache.
   Will still need to integrate MorphToken information into SemSpec effectively. */
-  private HashMap<ArrayList<ArrayList<Construction>>, PriorityQueue<List<T>>> typeCache;
+  private HashMap<TypeCacheEntry, PriorityQueue<List<T>>> typeCache;
+
   
   
 
@@ -121,7 +121,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   private Role RootCxnConstituent;
   private StringBuilder parserLog;
   
-  private HashMap<String, ArrayList<String[]>> constructional_morphTable;
+ private HashMap<String, ArrayList<String[]>> constructional_morphTable;
   private HashMap<String, ArrayList<String[]>> meaning_morphTable;
   
  
@@ -168,7 +168,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
           ConstituentExpansionCostTable cect) throws IOException {
     constructorTime = System.currentTimeMillis();
     
-    this.typeCache = new HashMap<ArrayList<ArrayList<Construction>>, PriorityQueue<List<T>>>();
+    this.typeCache = new HashMap<TypeCacheEntry, PriorityQueue<List<T>>>();
 
     this.ecgGrammar = ecgGrammar;
     this.grammar = new LCPGrammarWrapper(ecgGrammar);
@@ -289,10 +289,72 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 	  this.morpher = new ECGMorph(this.grammar, this.tokenReader);
   }
   
+  //TODO: Finish this method. Should take values from morphTokens and insert them into respective analyses.
+  public PriorityQueue<List<T>> cacheIntoAnalyses(PriorityQueue<List<T>> analyses, ArrayList<ArrayList<MorphTokenPair>> morphTokens, TypeCacheEntry tce) {
+	  PriorityQueue<List<T>> test = analyses.clone();
+	  ArrayList<String> seen = new ArrayList<String>();
+	  ArrayList<ArrayList<Construction>> cxnList = tce.getCxnList();
+	  while (test.hasNext()) {
+		  List<T> t = test.next();
+		  for (T analysis : t) {
+			  for (int spanIndex=0; spanIndex < analysis.getSpans().size(); spanIndex++) {
+				  // TODO: this method doesn't correctly assign to the right cxns.
+				  // Need a way to determine WHICH Nountype, etc.
+				  CxnalSpan cxns = analysis.getSpans().get(spanIndex);
+				//			  }
+//			  for (CxnalSpan cxns : analysis.getSpans()) {
+				  int id = cxns.getSlotID();
+				  Slot comparator = analysis.getFeatureStructure().getSlot(id);
+				  if (comparator != null) {
+					  String replaced = comparator.getTypeConstraint().toString().replace("@CONSTRUCTION", "");
+					  if (seen.contains(replaced)) {
+						 //TODO: Throw "ComplexityException" 
+						  throw new ComplexCacheException("This was too complex to cache into.");
+					  } else {
+						  seen.add(replaced);
+					  }
+					  
+					  for (int index1=0; index1 < cxnList.size(); index1++) {
+						  for (int index2=0; index2 < cxnList.get(index1).size(); index2 ++) {
+							  Construction inputCxn = cxnList.get(index1).get(index2);
+							  ECGToken token = morphTokens.get(index1).get(index2).token;
+							  if (inputCxn != null && token != null && replaced.equals(inputCxn.getName())) {
+								  for (Entry<Role, Slot> slots : comparator.getFeatures().entrySet()) {
+									  if (slots.getKey().getName().equals("m")) {
+										  //System.out.println(slots.getValue().getTypeConstraint().);
+										  for (Entry<Role, Slot> featureSlots : slots.getValue().getFeatures().entrySet()) {
+											  for (Constraint c : token.constraints) {
+												  String[] args = c.getArguments().get(0).toString().split("\\.");
+												  if (args.length > 0) {
+													  if (args[args.length-1].equals(featureSlots.getKey().toString())) {
+														  TypeSystem ts = this.ecgGrammar.getOntologyTypeSystem();
+														  if (featureSlots.getValue().hasAtomicFiller()) {
+															  featureSlots.getValue().setAtom(c.getValue());
+														  } else {
+															  String child = c.getValue().substring(1, c.getValue().length()).trim();
+															  String tsItem = ts.getInternedString(child);
+															  featureSlots.getValue().getTypeConstraint().setType(tsItem);
+														  }
+													  }
+												  }
+											  }
+										  }
+									  }
+								  }
+							  }
+						  }
+					  }
+				  }
+			  }
+		  }
+	  }
+	  return analyses.clone();
+  }
+  
 
   public PriorityQueue<List<T>> getBestPartialParses(Utterance<Word, String> utterance) {
 	  
-
+	
     lastNormalizer = 0;
     currentEntropy = 0;
     parserLog = new StringBuilder();
@@ -307,7 +369,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     }
     this.completeAnalyses = new PriorityQueue<List<T>>();
 
-    input = new Construction[utterance.size() + 1][];
+    //input = new Construction[utterance.size() + 1][];
 
     constructionInput = new ArrayList<ArrayList<Construction>>();
     morphToken = new ArrayList<ArrayList<MorphTokenPair>>();
@@ -379,14 +441,28 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     
     morphToken.add(new ArrayList<MorphTokenPair>());
     morphToken.get(utterance.size()).add(new MorphTokenPair(null, null));
+   
     
     constructionInput.add(new ArrayList<Construction>());
     constructionInput.get(utterance.size()).add(null);
-    /*
-    if (this.typeCache.containsKey(constructionInput)) {  // type cache
-    	System.out.println("Retrieving from type CACHE.");
-    	return this.typeCache.get(constructionInput);
-    }*/
+    
+    TypeCacheEntry tcEntry = new TypeCacheEntry(constructionInput, morphToken);
+
+
+    
+    for (Entry<TypeCacheEntry, PriorityQueue<List<T>>> item : typeCache.entrySet()) {
+    	if (tcEntry.compareEntry(item.getKey())) {
+    		try {
+    			PriorityQueue<List<T>> analysesReturn = cacheIntoAnalyses(item.getValue().clone(), morphToken, tcEntry);
+    			System.out.println("-------Retrieving from type cache---------");
+    			System.out.println("Retrieved from cache.");
+    			return analysesReturn;
+    		} catch (ComplexCacheException e) {
+    			System.out.println(e.getMessage());
+    			break;
+    		}
+    	}
+    }
 
 
     T root = cloneTable.get(RootCxn, 0);
@@ -403,8 +479,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
         throw new ParserException("No complete analysis found for: " + utterance.toString());
       }
       else {
-    	//System.out.println("------- Inserting into type CACHE. ---------");
-    	//this.typeCache.put((ArrayList<ArrayList<Construction>>) constructionInput.clone(), this.completeAnalyses.clone());  // typeCache
+//    	System.out.println("------- Inserting into type CACHE. ---------");
+    	typeCache.put(tcEntry, this.completeAnalyses.clone());  // typeCache
         return completeAnalyses;
       }
     }
@@ -426,8 +502,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
       }
       else {
     	PriorityQueue<List<T>> toReturn = prune(completeAnalyses, PARSESTORETURN);
-    	//System.out.println("------- Inserting into TYPE CACHE. ---------");
-    	//this.typeCache.put((ArrayList<ArrayList<Construction>>) constructionInput.clone(), toReturn.clone());
+//    	System.out.println("------- Inserting into TYPE CACHE (2). ---------");
+    	typeCache.put(tcEntry, toReturn.clone());
         return toReturn; //prune(completeAnalyses, PARSESTORETURN);
       }
     }

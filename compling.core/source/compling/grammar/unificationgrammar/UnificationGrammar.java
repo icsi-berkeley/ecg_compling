@@ -125,6 +125,10 @@ public class UnificationGrammar {
 		public String getType() {
 			return type;
 		}
+		
+		public void setType(String inputType) {
+			this.type = inputType;
+		}
 
 		public TypeSystem<?> getTypeSystem() {
 			return typeSystem;

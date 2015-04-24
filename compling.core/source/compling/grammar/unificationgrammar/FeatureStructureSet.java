@@ -226,6 +226,10 @@ public class FeatureStructureSet implements Cloneable {
 
 		public Slot() {
 		}
+		
+		public void setAtom(String at) {
+			this.atom = at;
+		}
 
 		public Slot(Slot that) {
 			this.unificationCntr = that.unificationCntr;
