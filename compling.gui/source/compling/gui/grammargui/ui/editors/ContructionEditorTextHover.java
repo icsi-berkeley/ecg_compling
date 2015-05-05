@@ -25,11 +25,12 @@ public class ContructionEditorTextHover extends DefaultTextHover {
 
 		try {
 			String symbol = textViewer.getDocument().get(hoverRegion.getOffset(), hoverRegion.getLength());
-			if (PrefsManager.getDefault().getGrammar().getDeclaredPackages().contains(symbol)) {
-				return PrefsManager.getDefault().getPackageAsText(symbol);
-			} else {
-				return PrefsManager.getDefault().getContentAsText(symbol);
-			}
+//			if (PrefsManager.getDefault().getGrammar().getDeclaredPackages().contains(symbol)) {
+//				return PrefsManager.getDefault().getPackageAsText(symbol);
+//			} else {
+			return PrefsManager.getDefault().getContentAsText(symbol);
+			// content as text now checks if it's a package
+//			}
 		}
 		catch (BadLocationException e) {
 			// TODO Auto-generated catch block

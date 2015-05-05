@@ -447,6 +447,10 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 	public String getContentAsText(String nodeName) {
 		if (grammar == null)
 			return null;
+		
+		if (getGrammar().getDeclaredPackages().contains(nodeName)) {
+			return getPackageAsText(nodeName);
+		}
 
 		if (nameToNode == null) {
 			nameToNode = new HashMap<String, TypeSystemNode>();

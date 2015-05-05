@@ -133,6 +133,14 @@
    </extension>
    
    <extension point="org.eclipse.ui.views">
+      <view
+      		allowMultiple="false"
+      		category="compling.gui.grammargui.categories.ontology"
+      		class="compling.gui.grammargui.ui.views.OntologyUtilities"
+      		icon="icons/latticeIcon.ico"
+      		id="compling.gui.grammargui.views.ontologyUtilities"
+      		name="Ontology Utilities" >
+      </view>
    	  <view
    	        allowMultiple="false"
    	        category="compling.gui.grammargui.categories.token"
@@ -141,6 +149,16 @@
             id="compling.gui.grammargui.views.tokenView"
             name="Token Adder">
       </view>
+      
+      <view
+   	        allowMultiple="false"
+   	        category="compling.gui.grammargui.categories.token"
+            class="compling.gui.grammargui.ui.views.LexiconView"
+            icon="icons/lexeme.ico"
+            id="compling.gui.grammargui.views.lexicon"
+            name="Lexicon Viewer">
+      </view>
+      <!--
       <view
          	allowMultiple="false"
    	        category="compling.gui.grammargui.categories.ontology"
@@ -149,7 +167,7 @@
             id="compling.gui.grammargui.views.ontologylatticeview"
             name="Ontology Lattice">
       </view>
-      
+      -->
       <view
             allowMultiple="false"
             category="compling.gui.grammargui.categories.construction"

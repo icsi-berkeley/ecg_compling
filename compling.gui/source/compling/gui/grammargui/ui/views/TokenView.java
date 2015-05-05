@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -127,6 +129,7 @@ public class TokenView extends ViewPart {
 		for (int i=0; i < typeNames.length; i++) {
 			typeNames[i] = cxns.get(i).getName();
 		}
+		Arrays.sort(typeNames);
 		return typeNames; 
 	}
 	
@@ -369,6 +372,9 @@ public class TokenView extends ViewPart {
 		addConstraintButton.setImage(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.ADD_SENTENCE_E).createImage());
 		addConstraintButton.setLayoutData(new GridData(SWT.FILL, 1, false, false));
 		
+
+		
+		
 		final HashMap<String, String> slotsValues = new HashMap<String, String>();
 		final ArrayList<String> slots = new ArrayList<String>();
 		
@@ -385,6 +391,8 @@ public class TokenView extends ViewPart {
 				parentCxn = parentText.getText();
 				try {
 					for (Constraint c : getGrammar().getConstruction(parentCxn).getMeaningBlock().getConstraints()) {
+						System.out.println(c.getArguments().get(0).toString());
+						System.out.println(c.getValue());
 						slots.add(c.getArguments().get(0).toString());
 						slotsValues.put(c.getArguments().get(0).toString(), c.getValue());
 						/*
@@ -412,6 +420,8 @@ public class TokenView extends ViewPart {
 		
 		constraintBox.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
+				System.out.println("there");
+				System.out.println("here " + constraintBox.getText());
 				constraintText.setText(slotsValues.get(constraintBox.getText()));
 				parentValue = slotsValues.get(constraintBox.getText());
 				appMappingText.setText("$");
@@ -501,56 +511,17 @@ public class TokenView extends ViewPart {
 			}
 		});
 		addTokenButton.setLayoutData(gd);
-		/*
-		addTokenButton.addSelectionListener(new SelectionAdapter() { 
-			public void widgetSelected(SelectionEvent e) {
-				token = tokenText.getText();
-				parentCxn = parentText.getText();
-				boolean write = true;
-				for (int i = 0; i < parents.size(); i++) {
-					write = true;
-					String p = parents.get(i);
-					String value = textList.get(i).getText();
-					if (value.charAt(0) == ECGConstants.ONTOLOGYPREFIX &&
-							p.charAt(0) == ECGConstants.ONTOLOGYPREFIX) {
-						if (!exists(value)) {
-							//write = false;
-							addOntologyItem(value, p); 
-						} else {
-							if (!isSubtype(value, p)) {
-								System.out.println("Not a proper subtype.");
-								constraints.clear();
-								parents.clear();
-								write = false;
-							}
-						}
-					}
-					if (write) {
-						constraints.add(labelText.get(i).getText() + " <-- " + textList.get(i).getText());
-					}
-					labelText.get(i).setText("Constraint " + (i+1));
-					textList.get(i).setText("");
-				}
-				if (write) {
-					write(token, parentCxn, constraints);
-					tokenText.setText("");
-					parentText.setText("");
-				}
-				parents.clear();
-			}
-		});
-		addTokenButton.setLayoutData(gd);
-		
-		Button loadTokens = toolkit.createButton(form.getBody(), "Reload tokens.", SWT.PUSH);
-		loadTokens.addSelectionListener(new SelectionAdapter() { 
-			public void widgetSelected(SelectionEvent e) {
-				getAnalyzer().reloadTokens();
-				Utils.flushCaches(getAnalyzer());
-			}
-		});
-		loadTokens.setLayoutData(gd);
-		*/
 
+		
+		Button reloadTypesButton = toolkit.createButton(form.getBody(), "Reload Type Constructions.", SWT.PUSH);
+		reloadTypesButton.setToolTipText("Reload the list of type constructions from a newly checked grammar..");
+		reloadTypesButton.setLayoutData(new GridData(SWT.FILL, 1, false, false));
+		reloadTypesButton.addSelectionListener(new SelectionAdapter() { 
+			public void widgetSelected(SelectionEvent e) {
+				System.out.println("Reloading types");
+				setTypes();
+			}
+		});
 
 		
 	}

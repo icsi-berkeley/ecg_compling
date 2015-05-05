@@ -43,6 +43,8 @@ public class Grammar extends PackageHandler {
 	private HashMap<String, MapPrimitive> maps = new LinkedHashMap<String, MapPrimitive>();
 	private HashMap<String, Situation> situations = new LinkedHashMap<String, Situation>();
 	
+	//private TypeSystem<Lexeme> lexemeTypeSy
+	
 	private TypeSystem<Construction> cxnTypeSystem = new TypeSystem<Construction>(ECGConstants.CONSTRUCTION);
 	private TypeSystem<Schema> schemaTypeSystem = new TypeSystem<Schema>(ECGConstants.SCHEMA);
 	private TypeSystem<MapPrimitive> mapTypeSystem = new TypeSystem<MapPrimitive>(ECGConstants.MAP);

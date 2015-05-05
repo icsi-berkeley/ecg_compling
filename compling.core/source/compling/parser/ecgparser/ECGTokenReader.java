@@ -27,16 +27,21 @@ import compling.util.fileutil.TextFileLineIterator;
 public class ECGTokenReader {
 
 	public class ECGToken {
-		String token_name;  // E.g. red, walk
-		Construction parent;
-		List<Constraint> constraints;
+		public String token_name;  // E.g. red, walk
+		public Construction parent;
+		public List<Constraint> constraints;
 	}
+	
 
 	GrammarWrapper grammarWrapper;
 	AnalyzerPrefs prefs;
 	File token_path;
 	
 	Map<String, ArrayList<ECGToken>> tokens;
+	
+	public Map<String, ArrayList<ECGToken>> getTokens() {
+		return tokens;
+	}
 
 	public ECGTokenReader(GrammarWrapper wrapper) throws IOException {
 		grammarWrapper = wrapper;

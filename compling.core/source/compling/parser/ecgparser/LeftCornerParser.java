@@ -294,6 +294,17 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 	  PriorityQueue<List<T>> test = analyses.clone();
 	  ArrayList<String> seen = new ArrayList<String>();
 	  ArrayList<ArrayList<Construction>> cxnList = tce.getCxnList();
+	  for (ArrayList<Construction> cxns : cxnList) {
+		  for (Construction cxn : cxns) {
+			  if (cxn != null) {
+				  if (seen.contains(cxn.getName())) {
+					  throw new ComplexCacheException("This was too complex to cache into.");
+				  } else {
+					  seen.add(cxn.getName());
+				  }
+			  }
+		  }
+	  }
 	  while (test.hasNext()) {
 		  List<T> t = test.next();
 		  for (T analysis : t) {
@@ -307,13 +318,6 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 				  Slot comparator = analysis.getFeatureStructure().getSlot(id);
 				  if (comparator != null) {
 					  String replaced = comparator.getTypeConstraint().toString().replace("@CONSTRUCTION", "");
-					  if (seen.contains(replaced)) {
-						 //TODO: Throw "ComplexityException" 
-						  throw new ComplexCacheException("This was too complex to cache into.");
-					  } else {
-						  seen.add(replaced);
-					  }
-					  
 					  for (int index1=0; index1 < cxnList.size(); index1++) {
 						  for (int index2=0; index2 < cxnList.get(index1).size(); index2 ++) {
 							  Construction inputCxn = cxnList.get(index1).get(index2);
@@ -449,7 +453,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     TypeCacheEntry tcEntry = new TypeCacheEntry(constructionInput, morphToken);
 
 
-    
+
     for (Entry<TypeCacheEntry, PriorityQueue<List<T>>> item : typeCache.entrySet()) {
     	if (tcEntry.compareEntry(item.getKey())) {
     		try {
