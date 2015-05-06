@@ -29,6 +29,7 @@ public final class Constants {
 		public static final String START_E = "icons/e/run_exc.gif";
 		public static final String START_D = "icons/d/run_exc.gif";
 		public static final String ERROR = "icons/error_co.gif";
+		public static final String TOKEN = "icons/tokenTest.ico";
 		
 	}
 	

@@ -453,7 +453,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     TypeCacheEntry tcEntry = new TypeCacheEntry(constructionInput, morphToken);
 
 
-
+    /*
     for (Entry<TypeCacheEntry, PriorityQueue<List<T>>> item : typeCache.entrySet()) {
     	if (tcEntry.compareEntry(item.getKey())) {
     		try {
@@ -466,8 +466,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     			break;
     		}
     	}
-    }
-
+    } */
 
     T root = cloneTable.get(RootCxn, 0);
     RobustParserState rootState = new RobustParserState(root, null, 0);

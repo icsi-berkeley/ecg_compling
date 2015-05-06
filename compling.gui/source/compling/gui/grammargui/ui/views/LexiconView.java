@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.eclipse.jface.dialogs.PopupDialog;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.swt.SWT;
@@ -19,18 +20,23 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import compling.grammar.ecg.Grammar;
 import compling.grammar.ecg.Grammar.Construction;
 import compling.grammar.unificationgrammar.TypeSystem;
 import compling.grammar.unificationgrammar.TypeSystemException;
 import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
+import compling.gui.grammargui.Application;
 import compling.gui.grammargui.model.PrefsManager;
+import compling.gui.grammargui.util.Constants.IImageKeys;
 import compling.parser.ecgparser.ECGTokenReader;
 import compling.parser.ecgparser.LCPGrammarWrapper;
 import compling.parser.ecgparser.ECGTokenReader.ECGToken;
@@ -188,6 +194,8 @@ public class LexiconView extends ViewPart {
 	    			ArrayList<String> tokns = typesToTokens.get(typeName);
 	    			for (String tok : tokns) {
 	    				TreeItem token = new TreeItem(type, 0);
+    					token.setImage(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.TOKEN).createImage());
+
 	    				token.setText(tok);
 	    				List<Constraint> constraints = tokensToConstraints.get(tok);
 	    				for (Constraint c : constraints) {
@@ -199,6 +207,8 @@ public class LexiconView extends ViewPart {
 	    		} else {
 	    			TreeItem lex = new TreeItem(lexicalCxns, 0);
 	    			lex.setText(typeName);
+	    			lex.setImage(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.CONSTRUCTION).createImage());
+
 	    		}
 	    	}
 	    }
@@ -215,26 +225,45 @@ public class LexiconView extends ViewPart {
 		final FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		final ScrolledForm form = toolkit.createScrolledForm(parent);
 		GridLayout layout = new GridLayout();
+		//layout.numColumns = 2;
 
 		form.getBody().setLayout(layout);
 		GridData gd = new GridData(SWT.FILL, 1, true, false);
 		
 		Button reloadButton = toolkit.createButton(form.getBody(), "Reload Lexicon", SWT.PUSH);
-		reloadButton.setToolTipText("Reload lexicon.");
+		reloadButton.setToolTipText("Press button to check grammar and reload lexicon, so new words appear in tree.");
 		reloadButton.setLayoutData(gd);
 		reloadButton.addSelectionListener(new SelectionAdapter() { 
 			public void widgetSelected(SelectionEvent e) {
-				System.out.println("Reloading types");
 				PrefsManager.getDefault().checkGrammar();
 				initializeData();
 				createTree();
 			}
 		});
 		
+
+		/*
+		Button cloneButton = toolkit.createButton(form.getBody(), "Clone Token.", SWT.PUSH);
+		cloneButton.setLayoutData(gd);
+		cloneButton.addSelectionListener(new SelectionAdapter() { 
+			public void widgetSelected(SelectionEvent e) {
+				TreeItem t = tree.getSelection()[0];
+				if (tokens.keySet().contains(t.getText())) {
+					System.out.println(t.getText()); 
+					MessageBox mb = new MessageBox(new Shell());
+					mb.setMessage("Test");
+					//mb.showOkMessage("MessageBoxTitle", "MessageBoxHeader", "MessageBoxInfo");
+				}
+				//PrefsManager.getDefault().checkGrammar();
+				//initializeData();
+				//createTree();
+			}
+		});
+		*/
 		
 		tree = toolkit.createTree(form.getBody(), SWT.BORDER | SWT.V_SCROLL
 		        | SWT.H_SCROLL);
-		GridData gdTree = new GridData(SWT.FILL, 1, true, true, 1, 2);
+		GridData gdTree = new GridData(SWT.FILL, 1, true, true);
 		gdTree.heightHint = 550;
 		tree.setLayoutData(gdTree);
 		createTree();
