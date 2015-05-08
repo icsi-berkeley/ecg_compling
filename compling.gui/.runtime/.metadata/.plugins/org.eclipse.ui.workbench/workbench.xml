@@ -29,6 +29,9 @@
 <view id="compling.gui.grammargui.views.GrammarTreeView" partName="Grammar Structure">
 <viewState/>
 </view>
+<view id="compling.gui.grammargui.views.tokenView" partName="Token Viewer">
+<viewState/>
+</view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <columnWidths org.eclipse.ui.ide.locationField="75" org.eclipse.ui.ide.markerType="75" org.eclipse.ui.ide.pathField="100" org.eclipse.ui.ide.resourceField="75" org.eclipse.ui.ide.severityAndDescriptionField="250"/>
@@ -70,6 +73,8 @@
 <show_view_action id="org.eclipse.ui.views.ProblemView"/>
 <show_view_action id="compling.gui.grammargui.views.commonExplorer"/>
 <show_view_action id="org.eclipse.ui.views.ContentOutline"/>
+<show_view_action id="compling.gui.grammargui.views.lexicon"/>
+<show_view_action id="compling.gui.grammargui.views.tokenView"/>
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <view id="compling.gui.grammargui.views.GrammarTreeView"/>
 <view id="compling.gui.grammargui.views.commonExplorer"/>

@@ -11,6 +11,7 @@ import compling.grammar.GrammarException;
 import compling.grammar.ecg.Grammar.Construction;
 import compling.grammar.ecg.ECGConstants;
 import compling.grammar.ecg.GrammarWrapper;
+import compling.grammar.ecg.ecgreader.Location;
 import compling.grammar.unificationgrammar.TypeSystem;
 import compling.grammar.unificationgrammar.TypeSystemException;
 import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
@@ -30,6 +31,15 @@ public class ECGTokenReader {
 		public String token_name;  // E.g. red, walk
 		public Construction parent;
 		public List<Constraint> constraints;
+		public Location location;
+		
+		public void setLocation(Location l) {
+			location = l;
+		}
+		
+		public Location getLocation() {
+			return location;
+		}
 	}
 	
 
@@ -72,6 +82,8 @@ public class ECGTokenReader {
 				String token_name = splitline[0].trim();
 				String parent_name = splitline[1].trim();
 				ECGToken token = new ECGToken();
+				token.setLocation(new Location("test", path, 0, 0));
+				
 				token.token_name = token_name;
 				token.parent = grammarWrapper.getGrammar().getConstruction(parent_name);
 				

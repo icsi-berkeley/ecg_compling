@@ -68,6 +68,7 @@ import compling.gui.grammargui.util.ModelChangedEventManager;
 import compling.gui.grammargui.util.SpecificationReaderBuilder;
 import compling.gui.util.Utils;
 import compling.parser.ecgparser.ECGAnalyzer;
+import compling.parser.ecgparser.ECGTokenReader.ECGToken;
 
 /**
  * PrefsManager insulates the application from the analayzer's details.
@@ -266,6 +267,12 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 
 	private IFile mapFileNameToResource(String fileName) {
 		return (IFile) project.findMember(fileName);
+	}
+	
+	public IFile getFileFor(ECGToken token) {
+		String fileName = token.getLocation().getFile();
+		Assert.isTrue(fileName != null, format("fileName for %s is null!", token));
+		return mapFileNameToResource(fileName);
 	}
 
 	public IFile getFileFor(TypeSystemNode node) {

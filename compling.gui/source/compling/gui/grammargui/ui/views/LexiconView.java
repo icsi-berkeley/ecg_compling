@@ -10,7 +10,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.PopupDialog;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.swt.SWT;
@@ -24,19 +28,36 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.ISelectionListener;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
+import org.eclipse.ui.ide.IDE;
+import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import compling.grammar.ecg.Grammar;
 import compling.grammar.ecg.Grammar.Construction;
+import compling.grammar.ecg.ecgreader.Location;
 import compling.grammar.unificationgrammar.TypeSystem;
 import compling.grammar.unificationgrammar.TypeSystemException;
+import compling.grammar.unificationgrammar.TypeSystemNode;
 import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
+import compling.gui.AnalyzerPrefs.AP;
 import compling.gui.grammargui.Application;
+import compling.gui.grammargui.EcgEditorPlugin;
 import compling.gui.grammargui.model.PrefsManager;
+import compling.gui.grammargui.model.TypeSystemEditorInput;
+import compling.gui.grammargui.ui.editors.ConstructionEditor;
+import compling.gui.grammargui.ui.editors.MultiPageConstructionEditor;
+import compling.gui.grammargui.util.Log;
 import compling.gui.grammargui.util.Constants.IImageKeys;
+import compling.ontology.OWLTypeSystemNode;
 import compling.parser.ecgparser.ECGTokenReader;
 import compling.parser.ecgparser.LCPGrammarWrapper;
 import compling.parser.ecgparser.ECGTokenReader.ECGToken;
@@ -50,6 +71,38 @@ public class LexiconView extends ViewPart {
 	protected Grammar getGrammar() {
 		Grammar grammar = PrefsManager.getDefault().getGrammar();
 		return grammar;
+	}
+	
+	protected class OpenEditorAction extends Action implements ISelectionListener {
+
+		private IStructuredSelection selection;
+
+		public OpenEditorAction() {
+			super();
+			setEnabled(false);
+			setText("Open &Editor...");
+			setToolTipText("Open a multi-page editor on the selected Type System element.");
+			setImageDescriptor(EcgEditorPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.OPEN_EDITOR_E));
+		}
+
+		@Override
+		public void run() {
+			try {
+				TypeSystemEditorInput editorInput = new TypeSystemEditorInput((TypeSystemNode) selection.getFirstElement());
+				getSite().getPage().openEditor(editorInput, MultiPageConstructionEditor.ID);
+			}
+			catch (PartInitException e) {
+				Log.logError(e);
+			}
+		}
+
+		public void selectionChanged(IWorkbenchPart part, ISelection selection) {
+			if (part == LexiconView.this) {
+				this.selection = (IStructuredSelection) selection;
+				setEnabled(this.selection.size() == 1 && !(this.selection.getFirstElement() instanceof OWLTypeSystemNode));
+			}
+		}
+
 	}
 	
 	
@@ -208,11 +261,68 @@ public class LexiconView extends ViewPart {
 	    			TreeItem lex = new TreeItem(lexicalCxns, 0);
 	    			lex.setText(typeName);
 	    			lex.setImage(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.CONSTRUCTION).createImage());
-
+	    			for (Constraint c : getGrammar().getConstruction(typeName).getMeaningBlock().getConstraints()) {
+    					TreeItem constraint = new TreeItem(lex, 0);
+    					//constraint.
+    					String text = c.getArguments().get(0).toString() + " " + c.getOperator() + " " + c.getValue();
+    					constraint.setText(text);
+	    			}
 	    		}
 	    	}
 	    }
+		tree.addSelectionListener(new SelectionAdapter() { 
+			public void widgetSelected(SelectionEvent e) {
+				TreeItem t = tree.getSelection()[0];
+				if (tokens.keySet().contains(t.getText())) {
+					String parent = t.getParentItem().getText();
+					ArrayList<ECGToken> values = tokens.get(t.getText());
+					for (ECGToken token : values) {
+						if (token.parent.getName().equals(parent)) {
+							try {
+								openEditorForToken(token);
+							} catch (PartInitException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}
+					}
+				} else if (wrapper.getAllConcreteLexicalConstructions().contains(getGrammar().getConstruction(t.getText()))) {
+					Construction l = getGrammar().getConstruction(t.getText());
+					try {
+						openEditorFor((TypeSystemNode) l);
+					} catch (PartInitException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					//l.
+				}
+			}
+		});
 		
+	}
+	
+	protected void openEditorForToken(ECGToken t) throws PartInitException {
+		final IEditorInput input = new FileEditorInput(PrefsManager.getDefault().getFileFor(t));
+		final IWorkbenchPage page = getSite().getPage();
+		IEditorPart activeEditor = page.getActiveEditor();
+		if (activeEditor != null && activeEditor.equals(page.findEditor(input)))
+			return;
+
+		IDE.openEditor(page, input, ConstructionEditor.ID, false);
+	}
+
+	protected void openEditorFor(TypeSystemNode node) throws PartInitException {
+		if (! getSite().getPage().isEditorAreaVisible())
+			return;
+
+		// final IEditorInput input = new TypeSystemEditorInput(node);
+		final IEditorInput input = new FileEditorInput(PrefsManager.getDefault().getFileFor(node));
+		final IWorkbenchPage page = getSite().getPage();
+		IEditorPart activeEditor = page.getActiveEditor();
+		if (activeEditor != null && activeEditor.equals(page.findEditor(input)))
+			return;
+
+		IDE.openEditor(page, input, ConstructionEditor.ID, false);
 	}
 
 	
