@@ -5,15 +5,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import compling.grammar.ecg.ECGGrammarUtilities;
 import compling.grammar.ecg.Grammar;
+import compling.grammar.ecg.Grammar.Construction;
 import compling.grammar.ecg.GrammarWrapper;
 import compling.grammar.unificationgrammar.FeatureStructureUtilities.DefaultStructureFormatter;
+import compling.grammar.unificationgrammar.TypeSystem;
+import compling.grammar.unificationgrammar.TypeSystemException;
+import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
 import compling.gui.AnalyzerPrefs;
 import compling.gui.AnalyzerPrefs.AP;
 import compling.parser.ParserException;
+import compling.parser.ecgparser.ECGTokenReader.ECGToken;
 import compling.parser.ecgparser.LeftCornerParserTablesCxn.AnalysisFactory;
 import compling.parser.ecgparser.LeftCornerParserTablesCxn.AnalysisInContextFactory;
 import compling.parser.ecgparser.LeftCornerParserTablesCxn.BasicAnalysisFactory;
@@ -171,6 +177,7 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 		}
 
 		parser.setParameters(robust, debug, beamSize, numAnalysesReturned, multiRootPenalty);
+		getLexicon();
 		
 
 		
@@ -182,6 +189,37 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	
 	public HashMap<String, String> getMappings() {
 		return mappingReader.getMappings();
+	}
+	
+	public ArrayList<String> getLexicon() {
+		TypeSystem ts = grammar.getGrammar().getCxnTypeSystem();
+		ArrayList<String> lexicon = new ArrayList<String>();
+		
+		for (String t : this.parser.getMorphInflections().keySet()) {
+			lexicon.add(t);
+		}
+		Map<String, ArrayList<ECGToken>> tokens = this.parser.getTokens();
+		for (String t : tokens.keySet()) {
+			lexicon.add(t);
+		}
+		for (Construction cxn : grammar.getAllConcreteLexicalConstructions()) {
+			try {
+				if (!ts.subtype(ts.getInternedString(cxn.getName()), ts.getInternedString("GeneralTypeCxn"))) {
+					for (Constraint c : cxn.getFormBlock().getConstraints()) {
+						//System.out.println(c.getArguments().get(index));
+						if (c.getArguments().get(0).toString().equals("self.f.orth")) {
+							lexicon.add(c.getValue().replace("\"", ""));
+						}
+					}
+				}
+			} catch (TypeSystemException e) {
+				// TODO Bad thing
+				e.printStackTrace();
+			}
+		}
+		
+		//return this.parser.getTokens();
+		return lexicon;
 	}
 	
 	/** Reads token file into Parser again. Needs to be done when you want new tokens in lexicon. */

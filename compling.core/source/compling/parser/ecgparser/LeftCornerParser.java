@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -29,6 +30,7 @@ import compling.grammar.unificationgrammar.UnificationGrammar.Role;
 import compling.grammar.unificationgrammar.UnificationGrammar.TypeConstraint;
 import compling.parser.ParserException;
 import compling.parser.RobustParser;
+import compling.parser.ecgparser.ECGMorph.MorphEntry;
 import compling.parser.ecgparser.LeftCornerParserTablesCxn.AnalysisFactory;
 import compling.parser.ecgparser.LeftCornerParserTablesCxn.AnalysisInContextFactory;
 import compling.parser.ecgparser.LeftCornerParserTablesCxn.CloneTable;
@@ -289,6 +291,14 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 	  this.morpher = new ECGMorph(this.grammar, this.tokenReader);
   }
   
+  public Map<String, ArrayList<ECGToken>> getTokens() {
+	  return tokenReader.getTokens();
+  }
+  
+  public HashMap<String, List<MorphEntry>> getMorphInflections() {
+	  return morpher.morphs;
+  }
+  
   //TODO: Finish this method. Should take values from morphTokens and insert them into respective analyses.
   public PriorityQueue<List<T>> cacheIntoAnalyses(PriorityQueue<List<T>> analyses, ArrayList<ArrayList<MorphTokenPair>> morphTokens, TypeCacheEntry tce) {
 	  PriorityQueue<List<T>> test = analyses.clone();
@@ -401,6 +411,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 		        			throw new ParserException("Morphology table does not contain " + inf);
 		        		}
 		        		if (isCompatible2(parent, morphType)) { //this.meaning_morphTable.get(inf).get(1))) {
+		        			
 		        			constructionInput.get(i).add(parent);
 		        			morphToken.get(i).add(new MorphTokenPair(inf, token));
 		        		}
