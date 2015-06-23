@@ -413,6 +413,15 @@ public class Grammar extends PackageHandler {
 			this.kind = kind;
 			this.type = type;
 		}
+		
+		
+		public String toString() {
+			StringBuffer formatted = new StringBuffer();
+			for (Constraint c : constraints) {
+				formatted.append(c.toString() + "\n");
+			}
+			return formatted.toString();
+		}
 
 		public Block clone() {
 			return clone(true);
