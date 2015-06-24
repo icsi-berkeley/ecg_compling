@@ -230,27 +230,33 @@ public class Analysis implements Cloneable {
   
   public boolean constraintInCxn(Construction cxn, Constraint c) {
 	  boolean found = false;
+	  if (!c.isAssign()) {
+		  return false;
+	  }
 	  // Meaning Block, check for constraint.
 	  for (Constraint constraint : cxn.getMeaningBlock().getConstraints()) {
 		  String cxnConstraint = constraint.getArguments().get(0).toString().replace("self.", "").replace("m.", "");
-		  if (cxnConstraint.equals(c.getArguments().get(0).toString())) {
+		  if (cxnConstraint.equals(c.getArguments().get(0).toString())
+				  && constraint.isAssign() && c.isAssign()) {
 			  return true;
 		  }
 	  }
-	  // Constructional Block: might be unnecessary
+	  /* Constructional Block: might be unnecessary
 	  for (Constraint constraint : cxn.getConstructionalBlock().getConstraints()) {
 		  String cxnConstraint = constraint.getArguments().get(0).toString().replace("self.", "").replace("m.", "");
-		  if (cxnConstraint.equals(c.getArguments().get(0).toString())) {
+		  if (cxnConstraint.equals(c.getArguments().get(0).toString())
+				  && constraint.isAssign() && c.isAssign()) {
 			  return true;
 		  }
 	  }
 	  // Form Block: might be unnecessary
 	  for (Constraint constraint : cxn.getFormBlock().getConstraints()) {
 		  String cxnConstraint = constraint.getArguments().get(0).toString().replace("self.", "").replace("f.", "");
-		  if (cxnConstraint.equals(c.getArguments().get(0).toString())) {
+		  if (cxnConstraint.equals(c.getArguments().get(0).toString())
+				  && constraint.isAssign() && c.isAssign()) {
 			  return true;
 		  }
-	  }
+	  } */
 	  return false;
   }
 
