@@ -822,6 +822,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   		MorphTokenPair extra_info = morphToken.get(iter).get(second);
 	    if (reachabilityCost > Double.NEGATIVE_INFINITY && cxn != null) {
 	    	T lex_analysis = cloneTable.get(cxn, index);
+	    	//System.out.println(lex_analysis);
 	    	T ultimate = (T) lex_analysis.clone(); 	    	
 	    	if (extra_info.morph != null) {
 	    		String morph = extra_info.morph;

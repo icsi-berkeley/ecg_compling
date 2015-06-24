@@ -132,6 +132,7 @@ public class Analysis implements Cloneable {
     }
     featureStructure.getSlot(new ECGSlotChain(m)).setRealFiller(true);
 
+    
     // constructional block constituents
     for (Role r : headCxn.getConstructionalBlock().getElements()) {
       featureStructure.addSlot(new ECGSlotChain(r));
@@ -154,7 +155,8 @@ public class Analysis implements Cloneable {
         }
       }
     }
-
+    
+    
     // meaning block constraints
     for (Constraint constraint : headCxn.getMeaningBlock().getConstraints()) {
       if (!constraint.overridden()) {
@@ -211,7 +213,8 @@ public class Analysis implements Cloneable {
       for (Constraint constraint : headCxn.getSchemaTypeSystem().get(headCxn.getMeaningBlock().getType()).getContents()
               .getConstraints()) {
         // addConstraint(constraint, m, "");
-        if (!constraint.overridden()) {
+    	  
+        if (!constraint.overridden() && !constraintInCxn(headCxn, constraint)) {
           if (addConstraint(constraint, m, "") == false) {
             logger.warning("problem with " + constraint);
             return false;
@@ -223,6 +226,32 @@ public class Analysis implements Cloneable {
     return addAdditionalConstraints();
 
     // return true;
+  }
+  
+  public boolean constraintInCxn(Construction cxn, Constraint c) {
+	  boolean found = false;
+	  // Meaning Block, check for constraint.
+	  for (Constraint constraint : cxn.getMeaningBlock().getConstraints()) {
+		  String cxnConstraint = constraint.getArguments().get(0).toString().replace("self.", "").replace("m.", "");
+		  if (cxnConstraint.equals(c.getArguments().get(0).toString())) {
+			  return true;
+		  }
+	  }
+	  // Constructional Block: might be unnecessary
+	  for (Constraint constraint : cxn.getConstructionalBlock().getConstraints()) {
+		  String cxnConstraint = constraint.getArguments().get(0).toString().replace("self.", "").replace("m.", "");
+		  if (cxnConstraint.equals(c.getArguments().get(0).toString())) {
+			  return true;
+		  }
+	  }
+	  // Form Block: might be unnecessary
+	  for (Constraint constraint : cxn.getFormBlock().getConstraints()) {
+		  String cxnConstraint = constraint.getArguments().get(0).toString().replace("self.", "").replace("f.", "");
+		  if (cxnConstraint.equals(c.getArguments().get(0).toString())) {
+			  return true;
+		  }
+	  }
+	  return false;
   }
 
   public boolean addAdditionalConstraints() {
