@@ -612,8 +612,10 @@ public class GrammarChecker {
 			//if (!newConstraint.get)
 			boolean found = true;
 			// seantrott: added check for constraints
+			// Only override if both are "assign" constraints.
 			for (Constraint c2 : child.getConstraints()) {
-				if (c2.getArguments().get(0).toString().equals(c.getArguments().get(0).toString())) {
+				if (c2.getArguments().get(0).toString().equals(c.getArguments().get(0).toString())
+						&& c.isAssign() && c2.isAssign()) {
 					found = false;
 				}
 			}
