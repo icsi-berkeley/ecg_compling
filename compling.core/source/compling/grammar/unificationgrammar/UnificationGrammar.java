@@ -251,6 +251,7 @@ public class UnificationGrammar {
 			this.operator = operator;
 			this.arguments = arguments;
 		}
+	
 
 		public Constraint(String operator, SlotChain arg1, SlotChain arg2) {
 			arguments = new ArrayList<SlotChain>();

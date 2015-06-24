@@ -608,9 +608,20 @@ public class GrammarChecker {
 			for (SlotChain sc : c.getArguments()) {
 				newArgs.add(new ECGSlotChain(sc.toString()));
 			}
+			Constraint newConstraint = new Constraint(c.getOperator(), c.getSource(), c.getValue(), c.overridden(), newArgs);
+			//if (!newConstraint.get)
+			boolean found = true;
+			// seantrott: added check for constraints
+			for (Constraint c2 : child.getConstraints()) {
+				if (c2.getArguments().get(0).toString().equals(c.getArguments().get(0).toString())) {
+					found = false;
+				}
+			}
+			if (found) {
 			child.getConstraints().add(
 					new Constraint(c.getOperator(), c.getSource(), c.getValue(), c.overridden(),
 							newArgs));
+			}
 		}
 		// =======
 		// private static void addParentInfo(Block child, Block parent, String
@@ -624,7 +635,8 @@ public class GrammarChecker {
 		// c.getSource(), c.getValue(), c.overridden(), newArgs));
 		// }
 		// >>>>>>> 1.29
-		child.getConstraints().addAll(parent.getConstraints());
+		// TODO: This is a big thing to comment out. Check.
+		//child.getConstraints().addAll(parent.getConstraints());
 		addInheritedRoles(child.getElements(), parent.getElements(), childPrimitive, errorListener);
 		addInheritedRoles(child.getEvokedElements(), parent.getEvokedElements(), childPrimitive,
 				errorListener);
@@ -648,6 +660,7 @@ public class GrammarChecker {
 			Grammar g, IErrorListener errorListener) {
 		String source = primitive.getName();
 		for (Role r : roles) {
+
 			r.setSource(source);
 			if (r.getName().equals(ECGConstants.FORM_POLE)
 					|| r.getName().equals(ECGConstants.MEANING_POLE)) {
