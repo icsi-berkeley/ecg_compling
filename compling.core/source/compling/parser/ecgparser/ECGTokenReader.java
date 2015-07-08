@@ -18,6 +18,7 @@ import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
 import compling.grammar.unificationgrammar.UnificationGrammar.SlotChain;
 import compling.gui.AnalyzerPrefs;
 import compling.gui.AnalyzerPrefs.AP;
+import compling.parser.ParserException;
 import compling.util.fileutil.TextFileLineIterator;
 
 /**
@@ -77,7 +78,7 @@ public class ECGTokenReader {
 				String splitline[] = line.split("\\s*::\\s*");
 				if (splitline.length < 3) {
 					// TODO: Create a TokenException class and throw that instead
-					throw new IOException("Improperly formatted entry in token file " + token_path + ", line " + lineNum);
+					throw new ParserException("Improperly formatted entry in token file " + token_path + ", line " + lineNum);
 				}
 				String token_name = splitline[0].trim();
 				String parent_name = splitline[1].trim();
@@ -89,7 +90,7 @@ public class ECGTokenReader {
 				
 				if (token.parent == null) {
 					// TODO: Create a TokenException class and throw that instead
-					throw new IOException("Parent construction \"" + parent_name + "\" is not defined (token \"" + token_name + "\" in token file \"" + token_path + "\" line " + lineNum + ")");
+					throw new ParserException("Parent construction \"" + parent_name + "\" is not defined (token \"" + token_name + "\" in token file \"" + token_path + "\" line " + lineNum + ")");
 				}
 				// TODO: Other checks of parent (non-general, has orth="*", etc)		
 				token.constraints = new ArrayList<Constraint>();
@@ -98,7 +99,7 @@ public class ECGTokenReader {
 					String split_constraint[] = constraint_str.split("\\s*<--\\s*");
 					if (split_constraint.length != 2) {
 						// TODO: Create a TokenException class and throw that instead
-						throw new IOException("Improperly formatted constraint in token file " + token_path + ", line " + lineNum + ", constraint " + constraint_str);
+						throw new ParserException("Improperly formatted constraint in token file " + token_path + ", line " + lineNum + ", constraint " + constraint_str);
 					}
 					String slotchain_str = split_constraint[0];
 					String value_str = split_constraint[1];
@@ -107,7 +108,7 @@ public class ECGTokenReader {
 					
 					// This iterates through parent's constraints; if it doesn't find the Slotchain, no Exception is thrown.
 					if (!slotMatch(token.parent, slotchain_str, value_str)) {
-						throw new IOException("Either slot chain " + slotchain_str + " not found in parent " + token.parent.getName() 
+						throw new ParserException("Error with token " + token.token_name + " on line " + lineNum + ". Either slot chain " + slotchain_str + " not found in parent " + token.parent.getName() 
 								+ " or value " + value_str + " not a proper subcase.");
 					}
 	

@@ -11,9 +11,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -24,9 +27,11 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.part.ViewPart;
@@ -219,67 +224,6 @@ public class TokenView extends ViewPart {
 	}
 	
 
-	private class AddConstraintAction extends Action implements IModelChangedListener {
-		public AddConstraintAction() {
-			super();
-			setText("Add Constraint");
-			setToolTipText("Add a new constraint.");
-			setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.ADD_SENTENCE_E));
-			setDisabledImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.ADD_SENTENCE_D));
-			setEnabled(PrefsManager.getDefault().getGrammar() != null);
-		}
-		
-		public void run() {
-			final String text = "test";
-		}
-		
-		public void modelChanged(ModelChangedEvent event) {
-			setEnabled(isEnabled());
-		}
-	}
-
-	private class AddTokenAction extends Action implements IModelChangedListener {
-		public AddTokenAction() {
-			super();
-
-			setText("Add Token");
-			setToolTipText("Add a new token.");
-			setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.ADD_SENTENCE_E));
-			setDisabledImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.ADD_SENTENCE_D));
-
-			setEnabled(PrefsManager.getDefault().getGrammar() != null);
-		}
-
-		@Override
-		public void run() {
-			final String text = "<new sentence>";
-			/*
-			Combo combo = getViewer().getCombo();
-			combo.setText(text);
-			combo.setSelection(new Point(0, text.length()));
-			*/
-		}
-
-		public void modelChanged(ModelChangedEvent event) {
-			setEnabled(isEnabled());
-		}
-	}
-	
-	protected void updateActionBars() {
-		IActionBars actionBars = getViewSite().getActionBars();
-		IToolBarManager toolBarManager = actionBars.getToolBarManager();
-		addToken = new AddTokenAction();
-		addConstraint = new AddConstraintAction();
-		toolBarManager.add(addToken);
-		toolBarManager.add(addConstraint);
-	}
-	
-	
-	/**
-	 * This is a callback that will allow us to create the viewer and initialize
-	 * it.
-	 */
-	
 	public void setTypes() {
 		String t = parentText.getText();
 		parentText.setItems(getTypes("\"*\""));
@@ -302,7 +246,10 @@ public class TokenView extends ViewPart {
 		}
 	}
 	
+	
 	public void createPartControl(Composite parent) {
+		
+		
 
 		constraints = new ArrayList<String>();
 		prefs =  (AnalyzerPrefs) getGrammar().getPrefs();
@@ -391,10 +338,10 @@ public class TokenView extends ViewPart {
 				parentCxn = parentText.getText();
 				try {
 					for (Constraint c : getGrammar().getConstruction(parentCxn).getMeaningBlock().getConstraints()) {
-						System.out.println(c.getArguments().get(0).toString());
-						System.out.println(c.getValue());
-						slots.add(c.getArguments().get(0).toString());
-						slotsValues.put(c.getArguments().get(0).toString(), c.getValue());
+						if (c.isAssign()) {
+							slots.add(c.getArguments().get(0).toString());
+							slotsValues.put(c.getArguments().get(0).toString(), c.getValue());
+						}
 						/*
 						if (labelText.size() > i && c.getOperator().equals("<--")) {
 							labelText.get(i).setText(c.getArguments().get(0).toString());
@@ -404,8 +351,10 @@ public class TokenView extends ViewPart {
 						*/
 					}
 					for (Constraint c : getGrammar().getConstruction(parentCxn).getConstructionalBlock().getConstraints()) {
-						slots.add(c.getArguments().get(0).toString());
-						slotsValues.put(c.getArguments().get(0).toString(), c.getValue());
+						if (c.isAssign()) {
+							slots.add(c.getArguments().get(0).toString());
+							slotsValues.put(c.getArguments().get(0).toString(), c.getValue());
+						}
 					}
 					String[] slotArray = new String[slots.size()];
 					for (int i=0; i < slotArray.length; i++) {
@@ -420,8 +369,6 @@ public class TokenView extends ViewPart {
 		
 		constraintBox.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				System.out.println("there");
-				System.out.println("here " + constraintBox.getText());
 				constraintText.setText(slotsValues.get(constraintBox.getText()));
 				parentValue = slotsValues.get(constraintBox.getText());
 				appMappingText.setText("$");
@@ -445,8 +392,8 @@ public class TokenView extends ViewPart {
 					String[] inputParents2 = constraintParents.getText().split(",");
 					for (String parent : inputParents2) {
 						if (!exists("@" + parent)) {
-							System.out.println(parent + " does not exist in the ontology lattice. You should add it.");
-							throw new GrammarException(parent + " does not exist in the ontology.");
+							//System.out.println(parent + " does not exist in the ontology lattice. You should add it.");
+							throw new GrammarException(parent + " does not exist in the ontology. You should add it.");
 						}
 					}
 				}
@@ -468,7 +415,11 @@ public class TokenView extends ViewPart {
 					} else {
 						if (!isSubtype(value, parentValue)) {
 							constraints.clear();
-							System.out.println(value + " already exists in Ontology, and is not a subtype of " + parentValue + " .");
+							constraintText.setText("");
+							final IStatus status = new Status(IStatus.ERROR, Application.PLUGIN_ID, "test");
+							ErrorDialog.openError(null, "Problem with token", null, status);
+							throw new GrammarException(value + " already exists in Ontology, and is not a subtype of " + parentValue + " .");
+							//System.out.println(value + " already exists in Ontology, and is not a subtype of " + parentValue + " .");
 						} else {
 							constraints.add(constraintBox.getText() + " <-- " + value);
 							if (appValue.length() > 1) {
@@ -493,8 +444,6 @@ public class TokenView extends ViewPart {
 				parentCxn = parentText.getText();
 				if (!token.equals("") && !parentCxn.equals("")) {
 					write(token, parentCxn, constraints);
-					//Utils.flushCaches(getAnalyzer());
-					//getAnalyzer().reloadTokens();
 					tokenText.setText("");
 					parentText.setText("");
 					constraintText.setText("");
@@ -504,7 +453,8 @@ public class TokenView extends ViewPart {
 					// TODO: Check that this is proper.
 					PrefsManager.getDefault().checkGrammar();
 				} else {
-					System.out.println("Definition not complete.");
+					//System.out.println("Definition not complete.");
+					throw new GrammarException("Token definition not complete.");
 				}
 
 				
@@ -518,7 +468,7 @@ public class TokenView extends ViewPart {
 		reloadTypesButton.setLayoutData(new GridData(SWT.FILL, 1, false, false));
 		reloadTypesButton.addSelectionListener(new SelectionAdapter() { 
 			public void widgetSelected(SelectionEvent e) {
-				System.out.println("Reloading types");
+				//System.out.println("Reloading types");
 				setTypes();
 			}
 		});

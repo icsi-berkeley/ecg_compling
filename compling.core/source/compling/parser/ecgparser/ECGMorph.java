@@ -16,6 +16,7 @@ import compling.grammar.ecg.Grammar;
 import compling.grammar.ecg.GrammarWrapper;
 import compling.gui.AnalyzerPrefs;
 import compling.gui.AnalyzerPrefs.AP;
+import compling.parser.ParserException;
 import compling.util.StringUtilities;
 import compling.util.fileutil.TextFileLineIterator;
 
@@ -120,7 +121,7 @@ public class ECGMorph {
 				String splitline[] = line.split("\\s+");
 				if (splitline.length < 3) {
 					// TODO: Create a MorphException class and throw that instead
-					throw new IOException("Improperly formatted entry in morph file " + ecgmorph_path + ", line " + lineNum);
+					throw new ParserException("Improperly formatted entry in morph file " + ecgmorph_path + ", line " + lineNum);
 				}
 				if (entryInGrammar(splitline)) {
 					// System.out.println("Found morph for \"" + entrystr[0] + "\"");
@@ -202,7 +203,7 @@ public class ECGMorph {
 			}
 			return lemmaStrs;
 		} else {
-			throw new GrammarException("Cannot find wordform in lemma base");
+			throw new ParserException("Cannot find wordform in lemma base");
 		}
 
 	}  // getLemmas()
