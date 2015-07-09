@@ -135,7 +135,12 @@ public class ECGMorph {
 						morphlist = morphs.get(splitline[0]);
 					}
 					for (int ii = 1; ii < splitline.length; ii+=2) {
-						morphlist.add(new MorphEntry(splitline[ii], splitline[ii+1]));
+						try {
+							morphlist.add(new MorphEntry(splitline[ii], splitline[ii+1]));
+						} catch (ArrayIndexOutOfBoundsException e) {
+							throw new ParserException("Array index out of bounds in .ecgmorph file on line " + lineNum + " for entry '"
+									+ splitline[0] + "'.");
+						}
 					}
 				}
 			}
@@ -216,10 +221,14 @@ public class ECGMorph {
 	private boolean spec_match(String spec, Set<String> flects) {
 		String[] specs = spec.split("\\s*[,/]\\s*");
 		for (int ii = 0; ii < specs.length; ii++) {
-			if (specs[ii].charAt(0) == '!' && flects.contains(specs[ii].substring(1))) {
-				return false;
-			} else if (specs[ii].charAt(0) != '!' && !flects.contains(specs[ii])) {
-				return false;
+			try {
+				if (specs[ii].charAt(0) == '!' && flects.contains(specs[ii].substring(1))) {
+					return false;
+				} else if (specs[ii].charAt(0) != '!' && !flects.contains(specs[ii])) {
+					return false;
+				}
+			} catch (ArrayIndexOutOfBoundsException e) {
+				throw new ParserException("Array index out of bounds in .ecgmorph file for spec " + spec + ".");
 			}
 		}
 		return true;

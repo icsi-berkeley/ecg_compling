@@ -10,6 +10,7 @@ import java.util.HashMap;
 import compling.grammar.ecg.GrammarWrapper;
 import compling.gui.AnalyzerPrefs;
 import compling.gui.AnalyzerPrefs.AP;
+import compling.parser.ParserException;
 import compling.util.fileutil.TextFileLineIterator;
 
 
@@ -50,16 +51,25 @@ public class ECGMorphTableReader {
 		table_path = new File(base, prefs.getSetting(AP.TABLE_PATH));
 		TextFileLineIterator tfli = new TextFileLineIterator(table_path);
 		
+		int lineNum = 1;
 		// This loop fills in constructional_morphTable
 		while (tfli.hasNext()) {
 			String l = tfli.next();
 			if (l.equals("Constructional")) {
 				continue;
 			}
+			if (l.startsWith("#")) {
+				continue;
+			}
 			if (l.equals("Meaning")) {
 				break;
 			}
 			String[] s = l.split("\\s*::\\s*");
+			if (s.length < 3) {
+				throw new ParserException("Improperly formatted morph entry on line " + lineNum 
+						+ " of table in file " + table_path + 
+						". Entry must be of the form: \n 'FlectType :: constraints :: compatible_constructions'.");
+			}
 			String key = s[0];
 			String[] constraints = s[1].split(",\\s");
 			String[] parents = s[2].split(",\\s");
@@ -67,12 +77,21 @@ public class ECGMorphTableReader {
 			values.add(constraints);
 			values.add(parents);
 			constructional_morphTable.put(key, values);
+			lineNum += 1;
 		}
 		
 		// This loop fills in meaning_morphTable.
 		while (tfli.hasNext()) {
 			String l = tfli.next();
+			if (l.startsWith("#")) {
+				continue;
+			}
 			String[] array = l.split("\\s*::\\s*");
+			if (array.length < 3) {
+				throw new ParserException("Improperly formatted morph entry on line " + lineNum 
+						+ " of table in file " + table_path + 
+						". Entry must be of the form: \n 'FlectType :: constraints :: compatible_constructions'.");
+			}
 			String key = array[0];
 			String[] constraints = array[1].split(",\\s");
 			String[] parents = array[2].split(",\\s");
@@ -80,6 +99,7 @@ public class ECGMorphTableReader {
 			values.add(constraints);
 			values.add(parents);
 			meaning_morphTable.put(key, values);
+			lineNum += 1;
 		}
 
 	}

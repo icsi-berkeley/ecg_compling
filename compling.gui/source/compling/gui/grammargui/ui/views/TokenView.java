@@ -189,7 +189,8 @@ public class TokenView extends ViewPart {
 			System.out.println(tempFile);
 			PrefsManager.getDefault().checkGrammar();
 		} catch (IOException problem) {
-			System.out.println("Problem with ontology file.");
+			broadcastError("Something went wrong with modifying the ontology file " + ontologyFile + " with type " + value 
+					+ "and parent " + parent + ".");
 		}
 	}
 	
@@ -201,7 +202,7 @@ public class TokenView extends ViewPart {
 			String ancestor = parent.substring(1, parent.length()).trim();
 			return ts.subtype(ts.getInternedString(child), ts.getInternedString(ancestor));
 		} catch(TypeSystemException type) {
-			System.out.println("Either " + child + " or " + parent + " doesn't exist.");
+			//System.out.println("Either " + child + " or " + parent + " doesn't exist.");
 			return false;
 		}
 	}
@@ -242,8 +243,16 @@ public class TokenView extends ViewPart {
 			bmw.write(language + " :: " + application);
 			bmw.close();
 		} catch(IOException e) {
-			System.out.println("There was a problem opening the mapping file.");
+			broadcastError("There was a problem opening the mapping file. Check to make sure there is actually a file at " 
+					+ mapping_path + ".");
 		}
+	}
+	
+	public void broadcastError(String message) {
+		String newMessage = "WARNING: \n \n" + message;
+		final IStatus status = new Status(IStatus.ERROR, Application.PLUGIN_ID, newMessage);
+		ErrorDialog.openError(null, "Token Editor Error", null, status);
+		throw new GrammarException(message);
 	}
 	
 	
@@ -362,7 +371,7 @@ public class TokenView extends ViewPart {
 					}
 					constraintBox.setItems(slotArray);
 				} catch(NullPointerException problem) {
-					throw new GrammarException("That doesn't exist.");
+					broadcastError("Problem: '" + parentCxn + "' doesn't exist in the grammar. You must add a type construction before you make a token of it.");
 				}
 			}
 		});
@@ -393,12 +402,14 @@ public class TokenView extends ViewPart {
 					for (String parent : inputParents2) {
 						if (!exists("@" + parent)) {
 							//System.out.println(parent + " does not exist in the ontology lattice. You should add it.");
-							throw new GrammarException(parent + " does not exist in the ontology. You should add it.");
+							broadcastError("Value '@" + parent + "' does not exist in the ontology. You must add it before you create a subtype of it.");
 						}
 					}
 				}
 				if (value.equals("")) {
-					System.out.println("No values to add.");
+					String message = "There are no constraint values to add; you need to fill in the role item slot.";
+					broadcastError(message);
+
 				} else if (value.charAt(0) == ECGConstants.ONTOLOGYPREFIX &&
 							parentValue.charAt(0) == ECGConstants.ONTOLOGYPREFIX) {
 					if (!exists(value)) {
@@ -410,15 +421,16 @@ public class TokenView extends ViewPart {
 								writeMappingFile(value, appValue);
 							}
 						} else {
-							System.out.println("No parent assigned.");
+							String message = "No parent assigned; you must choose a parent type for the token.";
+							broadcastError(message);
 						}
 					} else {
 						if (!isSubtype(value, parentValue)) {
 							constraints.clear();
 							constraintText.setText("");
-							final IStatus status = new Status(IStatus.ERROR, Application.PLUGIN_ID, "test");
-							ErrorDialog.openError(null, "Problem with token", null, status);
-							throw new GrammarException(value + " already exists in Ontology, and is not a subtype of " + parentValue + " .");
+							String message = "@" + value + "' already exists in Ontology, and is not a subtype of @" + parentValue 
+									+ " . This will cause errors and prevent proper unification of the token's constraints.";
+							broadcastError(message);
 							//System.out.println(value + " already exists in Ontology, and is not a subtype of " + parentValue + " .");
 						} else {
 							constraints.add(constraintBox.getText() + " <-- " + value);
@@ -442,7 +454,7 @@ public class TokenView extends ViewPart {
 			public void widgetSelected(SelectionEvent e) {
 				token = tokenText.getText();
 				parentCxn = parentText.getText();
-				if (!token.equals("") && !parentCxn.equals("")) {
+				if (!token.equals("") && !parentCxn.equals("") && constraints.size() > 0) {
 					write(token, parentCxn, constraints);
 					tokenText.setText("");
 					parentText.setText("");
@@ -454,7 +466,9 @@ public class TokenView extends ViewPart {
 					PrefsManager.getDefault().checkGrammar();
 				} else {
 					//System.out.println("Definition not complete.");
-					throw new GrammarException("Token definition not complete.");
+					broadcastError("This token definition is not complete; you must make sure you select a parentCxn (currently set to '" + parentCxn + "'), "
+							+ "fill in the box for the token's value (currently: '" + token
+							+ "'), and add at least one constraint (currently " + constraints.size() + " constraints added).");
 				}
 
 				

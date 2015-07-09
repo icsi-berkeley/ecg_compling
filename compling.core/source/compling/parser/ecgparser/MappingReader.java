@@ -8,6 +8,7 @@ import java.util.HashMap;
 import compling.grammar.ecg.GrammarWrapper;
 import compling.gui.AnalyzerPrefs;
 import compling.gui.AnalyzerPrefs.AP;
+import compling.parser.ParserException;
 import compling.util.fileutil.TextFileLineIterator;
 
 public class MappingReader {
@@ -28,19 +29,25 @@ public class MappingReader {
 		}
 	}
 
-	private void readMappings() {	
+	private void readMappings() {
+		int lineNum = 1;
 		while (tfli.hasNext()) {
 			String l = tfli.next();
 			String[] contents = l.split(" :: ");
-			String lingValue = contents[0];
-			String appValue = contents[1];
-			if (lingValue.contains("@")) {
-				lingValue = lingValue.replace("@", "");
+			try {
+				String lingValue = contents[0];
+				String appValue = contents[1];
+				if (lingValue.contains("@")) {
+					lingValue = lingValue.replace("@", "");
+				}
+				if (appValue.contains("$")) {
+					appValue = appValue.replace("$", "");
+				}
+				mappings.put(lingValue, appValue);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				throw new ParserException("Mapping file " + mappingPath.getAbsolutePath() + " has an error on line " + lineNum + ".");
 			}
-			if (appValue.contains("$")) {
-				appValue = appValue.replace("$", "");
-			}
-			mappings.put(lingValue, appValue);
+			lineNum += 1;
 		}
 		
 	}
