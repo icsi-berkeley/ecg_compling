@@ -208,7 +208,7 @@ public class ECGMorph {
 			}
 			return lemmaStrs;
 		} else {
-			throw new ParserException("Cannot find wordform in lemma base");
+			throw new GrammarException("Cannot find wordform in lemma base");
 		}
 
 	}  // getLemmas()
