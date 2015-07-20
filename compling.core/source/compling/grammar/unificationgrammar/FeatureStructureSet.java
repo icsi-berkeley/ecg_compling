@@ -110,7 +110,6 @@ public class FeatureStructureSet implements Cloneable {
 		if (chain2.getChain().size() == 0) {
 			roots.remove(thatRootCopy);
 		}
-
 		Slot chain1Slot = getSlot(chain1);
 		Slot chain2Slot = getSlot(thatRootCopy, chain2);
 		if (coindex(chain1Slot, chain2Slot)) {
