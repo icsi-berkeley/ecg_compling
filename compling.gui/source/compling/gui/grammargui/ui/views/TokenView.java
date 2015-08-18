@@ -278,7 +278,7 @@ public class TokenView extends ViewPart {
 		gd.horizontalSpan = 1;
 		//gd.horizontalSpan = 2;
 
-		final Label tokenLabel = toolkit.createLabel(form.getBody(), "Enter Token:");
+		final Label tokenLabel = toolkit.createLabel(form.getBody(), "Enter Lemma:");
 		final Text tokenText = toolkit.createText(form.getBody(), "");
 		tokenText.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
 		
@@ -294,13 +294,6 @@ public class TokenView extends ViewPart {
 		parentText.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(parent);
 		
-		final Label constraintSelect = toolkit.createLabel(form.getBody(), "Select Role:");
-		final Combo constraintBox = new Combo(form.getBody(), SWT.DROP_DOWN);
-		constraintBox.setItems(new String[0]);
-		constraintBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
-		constraintBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
-		toolkit.paintBordersFor(parent);
-		
 		final Label ontologyFileLabel = toolkit.createLabel(form.getBody(), "Select Ontology File:");
 		final Combo ontologyFileBox = new Combo(form.getBody(), SWT.DROP_DOWN);
 		ontologyFileBox.setItems(getOntologyFiles());
@@ -308,11 +301,20 @@ public class TokenView extends ViewPart {
 		ontologyFileBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(ontologyFileBox);
 		
+		final Label constraintSelect = toolkit.createLabel(form.getBody(), "Select Role to Modify:");
+		final Combo constraintBox = new Combo(form.getBody(), SWT.DROP_DOWN);
+		constraintBox.setItems(new String[0]);
+		constraintBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		constraintBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
+		toolkit.paintBordersFor(parent);
+		
+
+		
 		final Label constraintSet = toolkit.createLabel(form.getBody(), "Set Role Item:");
 		final Text constraintText = toolkit.createText(form.getBody(), "");
 		constraintText.setLayoutData(gd);
 		
-		final Label constraintParentsLabel = toolkit.createLabel(form.getBody(), "Constraint parents (optional):");
+		final Label constraintParentsLabel = toolkit.createLabel(form.getBody(), "Additional ontology parents (optional):");
 		final Text constraintParents = toolkit.createText(form.getBody(), "");
 		constraintParents.setToolTipText("Enter a comma-separated list of ontology super-types for the new constraint. E.g., \" entity, artifact, moveable \"");
 		constraintParents.setLayoutData(gd);
@@ -323,20 +325,14 @@ public class TokenView extends ViewPart {
 		appMappingText.setLayoutData(gd);
 		
 		
-		Button addConstraintButton = toolkit.createButton(form.getBody(), "", SWT.PUSH);
-		addConstraintButton.setToolTipText("Add constraint to list of constraints.");
-		addConstraintButton.setImage(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.ADD_SENTENCE_E).createImage());
-		addConstraintButton.setLayoutData(new GridData(SWT.FILL, 1, false, false));
-		
+		Button addConstraintButton = toolkit.createButton(form.getBody(), "Enter constraint", SWT.PUSH);
+		addConstraintButton.setToolTipText("Add constraint to list of constraints for this token.");
 
-		
-		
 		final HashMap<String, String> slotsValues = new HashMap<String, String>();
 		final ArrayList<String> slots = new ArrayList<String>();
 		
 		final ArrayList<String> parents = new ArrayList<String>();
 		
-
 		parentText.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				constraintText.setText("");

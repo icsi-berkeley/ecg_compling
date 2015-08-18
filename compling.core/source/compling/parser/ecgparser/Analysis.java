@@ -41,6 +41,8 @@ import compling.util.Pair;
 import compling.util.math.SloppyMath;
 
 public class Analysis implements Cloneable {
+	
+	protected boolean DEBUG = false;
 
   protected static BasicScorer semSpecScorer = null;
   protected static AnalysisFormatter formatter = new DefaultAnalysisFormatter();
@@ -363,6 +365,24 @@ public class Analysis implements Cloneable {
       }
       return true;
     }
+    else if (constraint.getOperator().equals(ECGConstants.NEGATE)) {
+        TypeConstraint typeConstraint = null;
+        if (constraint.getValue().charAt(0) == ECGConstants.ONTOLOGYPREFIX) {
+          typeConstraint = getExternalTypeSystem().getCanonicalTypeConstraint(constraint.getValue().substring(1));
+        }
+        else {
+          // XXX: Only Schemas can be literal fillers! (lucag)
+          typeConstraint = getSchemaTypeSystem().getCanonicalTypeConstraint(constraint.getValue());
+        }
+        if (typeConstraint == null) {
+          throw new ParserException("Type " + constraint.getValue() + " in constraint " + constraint + " is undefined");
+        }
+        TypeConstraint tc = typeConstraint.clone();
+        tc.setNegated(true);
+        featureStructure.getSlot(new ECGSlotChain(prefix, constraint.getArguments().get(0))).setTypeConstraint(
+                tc);
+    	return true;
+    }
     else if (constraint.getOperator().equals(ECGConstants.IDENTIFY)) {
       SlotChain sc0 = constraint.getArguments().get(0);
       SlotChain sc1 = constraint.getArguments().get(1);
@@ -480,8 +500,11 @@ public class Analysis implements Cloneable {
         gapFillerPSS = that.getPossibleSemSpecs();
         gapFillerType = that.getHeadCxn();
         gapFillerChain = ecgsc;
-        System.out.println("binding to extraposed role. role name is: " + role.getName() + " rootslotid:"
-                + getFeatureStructure().getMainRoot().getID());
+        String message = "binding to extraposed role. role name is: " + role.getName() + " rootslotid:"
+                + getFeatureStructure().getMainRoot().getID();
+        debugPrint(message);
+//        System.out.println("binding to extraposed role. role name is: " + role.getName() + " rootslotid:"
+//                + getFeatureStructure().getMainRoot().getID());
       }
       else if (this.hasGapFiller()) {
         for (CxnalSpan span : that.gappedSpans) {
@@ -512,7 +535,14 @@ public class Analysis implements Cloneable {
     }
   }
 
-  public boolean hasGapFiller() {
+  private void debugPrint(String message) {
+	if (DEBUG) {
+		System.out.println(message);
+	}
+	
+}
+
+public boolean hasGapFiller() {
     return gapFillerPSS != null;
   }
 

@@ -47,6 +47,7 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	private LeftCornerParser<Analysis> parser;
 
 	private int beamSize;
+	private int beamWidth;
 	private int numAnalysesReturned;
 	private double multiRootPenalty;
 
@@ -95,6 +96,8 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 		}
 
 		beamSize = prefs.getSetting(AP.BEAM_SIZE) == null ? 3 : Integer.valueOf(prefs.getSetting(AP.BEAM_SIZE));
+		
+		beamWidth = prefs.getSetting(AP.BEAM_WIDTH) == null ? 3 : Integer.valueOf(prefs.getSetting(AP.BEAM_WIDTH));
 
 		numAnalysesReturned = prefs.getSetting(AP.NUM_ANALYSES_RETURNED) == null ? 3 : Integer.valueOf(prefs
 				.getSetting(AP.NUM_ANALYSES_RETURNED));
@@ -159,9 +162,7 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 
 			List<File> semParamFiles = FileUtils.getFilesUnder(prefs.getBaseDirectory(),
 					prefs.getList(AP.GRAMMAR_PARAMS_PATHS), new ExtensionFileFilter(grammarParamsSemExt));
-
 			if (!semParamFiles.isEmpty()) {
-				// System.out.println(semParamFiles);
 				BasicTableScorer scorer = new BasicTableScorer(semParamFiles.get(0).getAbsoluteFile().getAbsolutePath(),
 						grammar.getSchemaTypeSystem(), ecgGrammar.getOntologyTypeSystem());
 				// ParamFileScorerFromCounts scorer = new ParamFileScorerFromCounts(ecgGrammar,
@@ -176,7 +177,7 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 			parser = new LeftCornerParser<Analysis>(ecgGrammar, factory);
 		}
 
-		parser.setParameters(robust, debug, beamSize, numAnalysesReturned, multiRootPenalty);
+		parser.setParameters(robust, debug, beamSize, numAnalysesReturned, multiRootPenalty, beamWidth);
 		getLexicon();
 		
 
@@ -185,6 +186,10 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 
 
 //    needs to be more code here to further process the grammar prefs
+	}
+	
+	public boolean isDebug() {
+		return debug;
 	}
 	
 	public HashMap<String, String> getMappings() {
@@ -275,7 +280,7 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 		}
 
 		parser = new LeftCornerParser<Analysis>(ecgGrammar, factory, cect);
-		parser.setParameters(robust, debug, beamSize, numAnalysesReturned, multiRootPenalty);
+		parser.setParameters(robust, debug, beamSize, numAnalysesReturned, multiRootPenalty, beamSize);
 	}
 
 	public Grammar getGrammar() {
@@ -299,6 +304,8 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 			parses.add(a, priority);
 		}
 		return parses;
+		 
+		
 	}
 
 	public Analysis getBestParse(Utterance<Word, String> utterance) {

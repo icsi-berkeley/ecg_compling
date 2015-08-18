@@ -76,6 +76,7 @@ public class AnalyzerPrefs implements Prefs {
 		MULTI_ROOT_PENALTY(Datatype.DOUBLE),
 		ANALYZE_IN_CONTEXT(Datatype.BOOL),
 		BEAM_SIZE(Datatype.INTEGER),
+		BEAM_WIDTH(Datatype.INTEGER),
 		NUM_ANALYSES_RETURNED(Datatype.INTEGER),
 //      ANALYSIS_COSTDIFFERENCE_CUTOFF(Datatype.DOUBLE),
 

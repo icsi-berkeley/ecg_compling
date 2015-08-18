@@ -519,7 +519,7 @@ public class LeftCornerParserTablesCxn {
 					String special = role.getSpecialField();
 					if (special.indexOf("[") >= 0) {
 						String[] probs = special.substring(special.indexOf("[") + 1, special.indexOf("]")).split("\\s");
-
+						
 						// for (int i = 0; i < probs.length; i++){
 						// System.out.print("probs |");
 						// System.out.print(probs[i]);
@@ -560,6 +560,7 @@ public class LeftCornerParserTablesCxn {
 					// System.out.print("\t"+role.getName());
 					String special = role.getSpecialField();
 					if (special.indexOf("[") >= 0) {
+						//System.out.println(special);
 						String probs[] = special.substring(special.indexOf("[") + 1, special.indexOf("]")).split(" |,");
 						double probability = Double.parseDouble(probs[1]);
 						tablePutter(localCostTable, role, probability);

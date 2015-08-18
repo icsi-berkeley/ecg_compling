@@ -460,6 +460,7 @@ public class LeftCornerParserTablesSem {
     }
 
     // XXX: This has horrible performance
+    // TODO
     public SlotConnectionTracker(LCPGrammarWrapper g, CloneTable ct, UnifyTable ut, SlotChainTables sct,
             ConstituentsToSatisfyCostTable ctsct, ConstituentExpansionCostTable cect, ConstituentLocalityCostTable clct) {
       final int MAXDIST = 10;

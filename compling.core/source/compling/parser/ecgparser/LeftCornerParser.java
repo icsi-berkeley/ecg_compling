@@ -60,15 +60,11 @@ import compling.parser.ecgparser.ECGTokenReader;
 import compling.parser.ecgparser.ECGTokenReader.ECGToken;
 
 public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
-	
-	
-
-	
-	
 
   /** CONSTANTS THAT GET SET BY THE setParameters method */
   boolean DEBUG = false;
   private int MAXBEAMWIDTH = 3;
+  private int BEAMSIZE = 3;
   private int PARSESTORETURN = 3;
   private boolean ROBUST = true;
   private double EXTRAROOTPENALTY = -3;
@@ -137,10 +133,11 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   
 
 
-  public void setParameters(boolean robust, boolean debug, int maxBeamWidth, int parsesToReturn, double extraRootPenalty) {
+  public void setParameters(boolean robust, boolean debug, int maxBeamWidth, int parsesToReturn, double extraRootPenalty, int beamSize) {
     this.ROBUST = robust;
     this.DEBUG = debug;
     this.MAXBEAMWIDTH = maxBeamWidth;
+    this.BEAMSIZE = beamSize;
     this.PARSESTORETURN = parsesToReturn;
     if (extraRootPenalty > 0) {
       extraRootPenalty = 0 - extraRootPenalty;
@@ -365,6 +362,10 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 	  return analyses.clone();
   }
   
+  public void setBeamWidth(int width) {
+	  this.MAXBEAMWIDTH = width;
+  }
+  
 
   public PriorityQueue<List<T>> getBestPartialParses(Utterance<Word, String> utterance) {
 	  
@@ -423,11 +424,11 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 		        	}
 		        }		        
 	    	} catch (GrammarException g) {
-	    		System.out.println("Unknown input lemma: " + lemma);
+	    		debugPrint("Unknown input lemma: " + lemma);
 	    	}	    	
     	} 	
       } catch (GrammarException g) {
-      		System.out.println("Unknown input lemma: " + utterance.getElement(i).getOrthography());  	  
+    	  debugPrint("Unknown input lemma: " + utterance.getElement(i).getOrthography());  	  
       }
       try { 
           if (i >= constructionInput.size()) {
@@ -444,7 +445,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
         	  morphToken.get(i).add(new MorphTokenPair(null, null));
           }          
         } catch (GrammarException g) {
-        	System.out.println("Unknown input lexeme: " + utterance.getElement(i).getOrthography());
+        	debugPrint("Unknown input lexeme: " + utterance.getElement(i).getOrthography());
         	List<Construction> lexicalCxns = grammar.getLexicalConstruction(StringUtilities
 	                .addQuotes(ECGConstants.UNKNOWN_ITEM));
         	if (constructionInput.get(i).isEmpty()) {
@@ -505,9 +506,9 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
       addStatesToQ(pushLexicalState(rootState, 0), true);
 
       workingQ = nextIterationQ;
-      workingQ = prune(workingQ, MAXBEAMWIDTH);
+      workingQ = prune(workingQ, MAXBEAMWIDTH, BEAMSIZE);
       for (int i = 1; i <= utterance.size(); i++) {
-        workingQ = prune(makeNewCandidates(utterance, i), MAXBEAMWIDTH);
+        workingQ = prune(makeNewCandidates(utterance, i), MAXBEAMWIDTH, BEAMSIZE);
       }
       debugPrint("\nNumber of states created: " + statecounter + "; Number of states processed: " + processedStates);
       if (completeAnalyses.size() == 0) {
@@ -516,7 +517,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
         throw new ParserException("No complete analysis found for: " + utterance.toString());
       }
       else {
-    	PriorityQueue<List<T>> toReturn = prune(completeAnalyses, PARSESTORETURN);
+    	PriorityQueue<List<T>> toReturn = prune(completeAnalyses, PARSESTORETURN, BEAMSIZE);
 //    	System.out.println("------- Inserting into TYPE CACHE (2). ---------");
     	typeCache.put(tcEntry, toReturn.clone());
         return toReturn; //prune(completeAnalyses, PARSESTORETURN);
@@ -859,7 +860,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 	    }
     }
     if (results.size() == 0) {
-    	System.out.println("no results");
+    	debugPrint("no results");
+    	//System.out.println("no results");
     }
     return results;	    	
   }
@@ -1494,21 +1496,45 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     }
   }
 
-  private <T> PriorityQueue<T> prune(PriorityQueue<T> queue, int maxBeamWidth) {
+  private <T> PriorityQueue<T> prune(PriorityQueue<T> queue, int maxBeamWidth, int beamSize) {
     PriorityQueue<T> prunedQueue = new PriorityQueue<T>();
+    if (queue.size() == 0) {
+    	return prunedQueue;
+    }
+    double bestScore = queue.getPriority();
+    // if i >= maxBeamWidth or score > bestScore + beamSize, break
     int i = 0;
     while (queue.size() > 0) {
       double score = queue.getPriority();
       T p = queue.next();
       prunedQueue.add(p, score);
       i++;
-      if (i >= maxBeamWidth) {
+      if (i >= maxBeamWidth || score > bestScore + beamSize) {
         break;
       }
     }
-
     return prunedQueue;
   }
+  
+  private <T> PriorityQueue<T> prune(PriorityQueue<T> queue, int maxBeamWidth) {
+	    PriorityQueue<T> prunedQueue = new PriorityQueue<T>();
+	    if (queue.size() == 0) {
+	    	return prunedQueue;
+	    }
+	    double bestScore = queue.getPriority();
+	    // if i >= maxBeamWidth or score > bestScore + beamSize, break
+	    int i = 0;
+	    while (queue.size() > 0) {
+	      double score = queue.getPriority();
+	      T p = queue.next();
+	      prunedQueue.add(p, score);
+	      i++;
+	      if (i >= maxBeamWidth) {
+	        break;
+	      }
+	    }
+	    return prunedQueue;
+	  }
 
   private void addToCompletedQ(List<T> completeAnalysis, double logLikelihood) {
     completeAnalyses.add(completeAnalysis, logLikelihood);

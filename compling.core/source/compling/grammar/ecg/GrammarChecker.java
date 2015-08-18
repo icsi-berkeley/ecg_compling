@@ -622,7 +622,7 @@ public class GrammarChecker {
 			if (found) {
 			child.getConstraints().add(
 					new Constraint(c.getOperator(), c.getSource(), c.getValue(), c.overridden(),
-							newArgs));
+							newArgs, false));
 			}
 		}
 		// =======

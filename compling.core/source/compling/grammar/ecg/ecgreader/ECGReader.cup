@@ -57,6 +57,7 @@ parser code {:
 terminal  CONSTRUCTION, SUBCASE, CONSTRUCTIONAL, SCHEMA, ABSTRACT, PACKAGE, IMPORT;
 terminal  FORM, MEANING, BEFORE, MEETS, COLON, COMMA, OPENBRACKET, CLOSEBRACKET, OPTIONAL, EXTRAPOSED;
 terminal  ASSIGN, IDENTIFY, EVOKES, AS, OF, ROLES;
+terminal  NEGATE;
 terminal  CONSTITUENTS, CONSTRAINTS, FEATURE, SEMANTIC, IGNORE;
 
 terminal  MAP, SITUATION;
@@ -522,6 +523,9 @@ constraint ::=
       RESULT = new Constraint(ECGConstants.ASSIGN, new ECGSlotChain(arg1), arg2);
     else
       RESULT = new Constraint(ECGConstants.ASSIGN, new ECGSlotChain(arg1), new ECGSlotChain(arg2)); 
+  :}
+  | slot_chain:arg1 NEGATE:op ident_or_str:arg2 {:
+  	RESULT = new Constraint(ECGConstants.NEGATE, new ECGSlotChain(arg1), arg2);
   :}
   ;
 

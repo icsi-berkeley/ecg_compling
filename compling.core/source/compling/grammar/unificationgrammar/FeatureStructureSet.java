@@ -372,6 +372,36 @@ public class FeatureStructureSet implements Cloneable {
 				return false;
 			}
 		}
+		
+		private boolean negatedTypes(TypeConstraint thatType) {
+			TypeConstraint thisType = typeConstraint;
+			String t1 = thisType.typeSystem.getInternedString(thisType.type);
+			String t2 = thisType.typeSystem.getInternedString(thatType.type);
+			try {
+//				if (thisType.typeSystem.subtype(thisType.type, thatType.type)) {
+				if (thisType.typeSystem.subtype(t1, t2)) {
+					// this type is more specific
+					System.out.println(thisType.type + " is more specific than " + thatType.type);
+					return false;
+				//} else if (thisType.typeSystem.subtype(thatType.type, thisType.type)) {
+				} else if (thisType.typeSystem.subtype(t2, t1)) {
+					// that type is more specific
+					System.out.println(thisType.type + " is less specific than " + thatType.type);
+					//typeConstraint = thatType;
+					//System.out.println("This: " + thisType);
+					//System.out.println("That: " + thatType);
+					return true;
+				} else {
+					System.out.println("Everything is okay...");
+					System.out.println("This: " + thisType);
+					System.out.println("That: " + thatType);
+					return true;
+				}
+			} catch (TypeSystemException tse) {
+				throw new GrammarException(tse + ".\nThis.typeSystem=" + thisType.getTypeSystem().getName()
+						+ " and thatType.typeSystem=" + thatType.getTypeSystem().getName());
+			}
+		}
 
 		private boolean compatibleTypes(TypeConstraint thatType) {
 			TypeConstraint thisType = typeConstraint;
@@ -384,7 +414,13 @@ public class FeatureStructureSet implements Cloneable {
 				return true;
 			} else if (thisType.typeSystem != thatType.typeSystem) {
 				return false;
-			} else { // now that both slots have compatible type systems
+			}
+			else { // now that both slots have compatible type systems
+				// Check if either slot is "negated" type: e.g., slot constrained to be anything BUT a type
+				if (thatType.negated() || thisType.negated()) {
+					System.out.println("Negated...");
+					return negatedTypes(thatType);
+				}
 				try {
 					if (thisType.typeSystem.subtype(thisType.type, thatType.type)) {
 						// this type is more specific

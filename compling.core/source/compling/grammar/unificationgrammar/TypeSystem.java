@@ -150,6 +150,10 @@ public class TypeSystem<N extends TypeSystemNode> {
 		String type = parent.getType();
 		return children.containsKey(type) ? children.get(type) : new HashSet<N>();
 	}
+	
+	public Set<N> getChildren(String type) {
+		return children.containsKey(type) ? children.get(type) : new HashSet<N>();
+	}
 
 	public Set<N> getParents(TypeSystemNode typeSystemNode) {
 		HashSet<N> parents = new HashSet<N>();

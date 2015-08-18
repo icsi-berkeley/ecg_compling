@@ -1,5 +1,6 @@
 package compling.gui.grammargui.util;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +13,10 @@ import compling.gui.util.TypeSystemNodeType;
 public class HtmlFeatureStructureFormatter {
 
   protected final TextEmitter emitter;
+  
+  
+  //TODO:
+  private ArrayList<Role> inherited = new ArrayList<Role>();
 
   public HtmlFeatureStructureFormatter() {
     this(new TextEmitter(1));
@@ -23,18 +28,37 @@ public class HtmlFeatureStructureFormatter {
 
   public void format(FeatureStructureSet fss) {
     Set<FeatureStructureSet.Slot> alreadyDone = new HashSet<FeatureStructureSet.Slot>();
-
+    /*
+    for (FeatureStructureSet.Slot root : fss.getRootSlots()) {
+        emitter.sayln(0, "<div class='root-wrapper'>");
+        testIt(root, alreadyDone, new HashSet<Integer>(), 1);
+        emitter.sayln(0, "</div>");
+      } */
+    
     for (FeatureStructureSet.Slot root : fss.getRootSlots()) {
       emitter.sayln(0, "<div class='root-wrapper'>");
       formatHelper(root, alreadyDone, new HashSet<Integer>(), 1);
       emitter.sayln(0, "</div>");
-    }
+    } 
     emitter.getOutput();
   }
 
   private final String slotType(Slot slot) {
     final TypeConstraint t = slot.getTypeConstraint();
     return t != null ? t.getType() : "<untyped>";
+  }
+  
+  
+  private void nonLocalTable(int level) {
+	  emitter.sayln(level, "<tr><td class='collapsible-content'><div class='%s'>", "test");
+  }
+  
+  private void testIt(FeatureStructureSet.Slot slot, Set<FeatureStructureSet.Slot> alreadyDone,
+          Set<Integer> foundInd, int level) {
+	  emitter.sayln(level++, "<table>");
+	  emitter.sayln(level, "<tr><td class='type-name %s'>", "Test");
+	  emitter.sayln(level + 1, "<img src='%s' height=16 width=16 style='float: left;'/>", 15);
+	  emitter.sayln(level, "%s</td></tr>", "test2");
   }
 
   private void formatHelper(FeatureStructureSet.Slot slot, Set<FeatureStructureSet.Slot> alreadyDone,
@@ -63,6 +87,12 @@ public class HtmlFeatureStructureFormatter {
     for (Role role : slot.getFeatures().keySet()) {
       if (role.getName().equals("features"))
         continue;
+      
+      if (!role.isLocal()) {
+    	  inherited.add(role);
+    	  continue;
+      }
+      
       emitter.sayln(level++, "<tr>");
       emitter.sayln(level, "<td>%s:</td>", role);
 
@@ -91,10 +121,24 @@ public class HtmlFeatureStructureFormatter {
     emitter.sayln(--level, "</table>");
     emitter.sayln(--level, "</div></td></tr>");
 
+    //fillInInherited(level);
+    
     emitter.sayln(--level, "</table>");
   }
 
-  public void format(Slot slot) {
+  private void fillInInherited(int level) {
+	emitter.sayln(level++, "</table>");
+	emitter.sayln(level++, "<tr><td class='collapsible-content'><div class='%s'>", "INHERITED");
+	emitter.sayln(level, "<tr><td class='type-name %s'>", "INHERITED");
+	emitter.sayln(level++, "<tr>");
+	emitter.sayln(level++, "<table class='content'>");
+	for (Role r : inherited) {
+		emitter.sayln(level, "<td>%s:</td>", r);
+	}
+	
+}
+
+public void format(Slot slot) {
     throw new RuntimeException("shouldn't be calling this.");
   }
 
