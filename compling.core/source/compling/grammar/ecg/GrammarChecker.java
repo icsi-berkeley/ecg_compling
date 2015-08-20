@@ -7,6 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+
 import compling.grammar.GrammarException;
 import compling.grammar.ecg.Grammar.Block;
 import compling.grammar.ecg.Grammar.Construction;
@@ -28,6 +29,7 @@ import compling.grammar.unificationgrammar.UnificationGrammar.Role;
 import compling.grammar.unificationgrammar.UnificationGrammar.SlotChain;
 import compling.grammar.unificationgrammar.UnificationGrammar.TypeConstraint;
 import compling.gui.util.Utils;
+import compling.parser.ParserException;
 import compling.util.Arrays;
 import compling.util.Interner;
 
@@ -51,6 +53,7 @@ public class GrammarChecker {
 			checkSchemas(g, errorListener);
 			checkMaps(g, errorListener);
 			checkConstructions(g, errorListener);
+			checkTokensAndMorphs(g, errorListener);
 		} catch (TypeSystemException x) {
 			for (GrammarError e : x.getErrors()) 
 				errorListener.notify(e.getMessage(), e.getLocation(), e.getSeverity()); 
@@ -61,6 +64,16 @@ public class GrammarChecker {
 	public static void setErrorListener(ILoggingErrorListener errorListener) {
 		GrammarChecker.errorListener = errorListener;
 	}
+	
+	private static void checkTokensAndMorphs(Grammar g, IErrorListener errorListener) {
+		try {
+			g.readTokens();
+			g.readMorpher();
+		} catch (ParserException e) {
+			errorListener.notify(e.getMessage(), Severity.EXCEPTION); 
+		}
+	}
+	
 
 	private static void checkSchemas(Grammar g, IErrorListener errorListener)
 			throws TypeSystemException {

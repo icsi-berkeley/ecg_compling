@@ -30,11 +30,15 @@ import compling.grammar.ecg.ECGGrammarUtilities.SimpleGrammarPrinter;
 import compling.grammar.ecg.ecgreader.ILocatable;
 import compling.grammar.ecg.ecgreader.Location;
 import compling.grammar.unificationgrammar.TypeSystem;
+import compling.grammar.unificationgrammar.TypeSystemException;
 import compling.grammar.unificationgrammar.TypeSystemNode;
 import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
 import compling.grammar.unificationgrammar.UnificationGrammar.Role;
 import compling.grammar.unificationgrammar.UnificationGrammar.SlotChain;
 import compling.grammar.unificationgrammar.UnificationGrammar.TypeConstraint;
+import compling.parser.ParserException;
+import compling.parser.ecgparser.ECGMorph;
+import compling.parser.ecgparser.ECGTokenReader;
 import compling.util.PackageHandler;
 
 public class Grammar extends PackageHandler {
@@ -55,55 +59,31 @@ public class Grammar extends PackageHandler {
 	
 	private static ECGGrammarFormatter formatter = new SimpleGrammarPrinter();
 	private ContextModel contextModel = null;
+	
+	
+	private ECGTokenReader tokenReader;
+	private ECGMorph ecgMorpher;
+	
+	public void buildTokenAndMorpher() {
+		readTokens();
+		readMorpher();
+	}
+	
+	public void readMorpher() {
+		ecgMorpher = new ECGMorph(this, tokenReader);
+	}
+	
+	public ECGMorph getMorpher() {
+		return ecgMorpher;
+	}
 
-	/*
-	private String pkg = "global";
-	private ArrayList<String> pkgs = new ArrayList<String>(){{
-		add("global");
-	}};
-	private String importRequest = "global";
-	private ArrayList<String> importRequests = new ArrayList<String>(){{
-		add("global");
-	}};
-
-
-	public String setPackage(String packageName) {
-		pkg = packageName;
-		return pkg;
+	public void readTokens() {
+		tokenReader = new ECGTokenReader(this);
 	}
-	
-	public String getPackage() {
-		return pkg;
+		
+	public ECGTokenReader getTokenReader() {
+		return tokenReader;
 	}
-	
-	public List<String> getPackages() {
-		return pkgs;
-	}
-	
-	public String addPackage(String pkgName) {
-		if (!pkgs.contains(pkgName)) {
-			pkgs.add(pkgName);
-		}
-		return pkgName;
-	}
-	
-
-	public String addImport(String importName) {
-		String p = getPackage();
-		if (!importRequests.contains(importName)) {
-				//&& getImport().contains(getPackage())) {   // also check if it has current package?
-			importRequests.add(importName);
-		}
-		//importRequest.add(importName);
-		importRequest = importName;
-		return importRequest;
-	}
-	
-	public ArrayList<String> getImport() {
-		return importRequests;
-	}
-	*/
-	
 	
 	public void setContextModel(ContextModel cm) {
 		this.contextModel = cm;

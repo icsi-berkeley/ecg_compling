@@ -137,8 +137,8 @@ public class LexiconView extends ViewPart {
 	}
 	
 	private void initializeTokens() throws IOException {
-		ECGTokenReader reader = new ECGTokenReader(wrapper);
-		tokens = reader.getTokens();
+		//ECGTokenReader reader = new ECGTokenReader(getGrammar());
+		tokens = getGrammar().getTokenReader().getTokens();
 	}
 	
 	private void typesToTokens() {
@@ -350,26 +350,6 @@ public class LexiconView extends ViewPart {
 				createTree();
 			}
 		});
-		
-
-		/*
-		Button cloneButton = toolkit.createButton(form.getBody(), "Clone Token.", SWT.PUSH);
-		cloneButton.setLayoutData(gd);
-		cloneButton.addSelectionListener(new SelectionAdapter() { 
-			public void widgetSelected(SelectionEvent e) {
-				TreeItem t = tree.getSelection()[0];
-				if (tokens.keySet().contains(t.getText())) {
-					System.out.println(t.getText()); 
-					MessageBox mb = new MessageBox(new Shell());
-					mb.setMessage("Test");
-					//mb.showOkMessage("MessageBoxTitle", "MessageBoxHeader", "MessageBoxInfo");
-				}
-				//PrefsManager.getDefault().checkGrammar();
-				//initializeData();
-				//createTree();
-			}
-		});
-		*/
 		
 		tree = toolkit.createTree(form.getBody(), SWT.BORDER | SWT.V_SCROLL
 		        | SWT.H_SCROLL);

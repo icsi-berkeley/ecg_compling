@@ -5,12 +5,16 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceVisitor;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.action.Action;
@@ -37,6 +41,7 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
+import compling.context.ContextModel;
 import compling.grammar.GrammarException;
 import compling.grammar.ecg.ECGConstants;
 import compling.grammar.ecg.Grammar;
@@ -49,9 +54,11 @@ import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
 import compling.gui.AnalyzerPrefs;
 import compling.gui.AnalyzerPrefs.AP;
 import compling.gui.grammargui.Application;
+import compling.gui.grammargui.builder.GrammarBuilder;
 import compling.gui.grammargui.model.IModelChangedListener;
 import compling.gui.grammargui.model.PrefsManager;
 import compling.gui.grammargui.util.ModelChangedEvent;
+import compling.gui.grammargui.util.ResourceGatherer;
 import compling.gui.grammargui.util.Constants.IImageKeys;
 import compling.gui.util.Utils;
 import compling.parser.ParserException;
@@ -74,6 +81,7 @@ public class TokenView extends ViewPart {
 	private AnalyzerPrefs prefs;
 	private File base;
 	private String[] typeCxns;
+	private static final Charset DEFAULT_CHARSET = Charset.forName(ECGConstants.DEFAULT_ENCODING);
 	
 	private String modifiedOnt = null;
 	
@@ -115,6 +123,12 @@ public class TokenView extends ViewPart {
 			token = "";
 			parentCxn = "";
 			constraints.clear();
+			try {
+				getGrammar().buildTokenAndMorpher();
+			} catch (ParserException e) {
+				broadcastError(e.getMessage());
+			}
+			Utils.flushCaches();
 		} catch(IOException ex) {
 			ex.printStackTrace();
 		}
@@ -146,6 +160,39 @@ public class TokenView extends ViewPart {
 			onts[i] = ontPaths.get(i);
 		}
 		return onts;
+	}
+	
+	private void rebuildOntology() {
+		ResourceGatherer gatherer = new ResourceGatherer(prefs);
+		ContextModel contextModel;
+		try {
+			contextModel = buildContextModel(gatherer);
+			getGrammar().setContextModel(contextModel);
+		} catch (CoreException e) {
+			e.printStackTrace();
+			broadcastError("Problem rebuilding ontology...");
+		}
+		
+	}
+	
+
+	
+	public ContextModel buildContextModel(ResourceGatherer gatherer) throws CoreException {
+		//SampleResourceVisitor visitor = new SampleResourceVisitor();
+//		for (IResource r : gatherer.getOntologyFiles(getProject())) {
+//			r.accept(visitor);
+//		}
+		boolean onts = true;
+		String[] exts = gatherer.getOntologyExtensions().split(" ");
+		List<File> files = gatherer.getOntologyFiles();
+		if (files.size() == 1) {
+			return new ContextModel(files.get(0).getAbsolutePath(), DEFAULT_CHARSET);
+		} else if (onts) {
+			return new ContextModel(files, exts[2], DEFAULT_CHARSET);
+		}
+		else {
+			return new ContextModel(files, exts[0], exts[1], DEFAULT_CHARSET);
+		}
 	}
 	
 	
@@ -187,7 +234,8 @@ public class TokenView extends ViewPart {
 				throw new IOException();
 			}
 			System.out.println(tempFile);
-			PrefsManager.getDefault().checkGrammar();
+			//PrefsManager.getDefault().checkGrammar();
+			//rebuildOntology();
 		} catch (IOException problem) {
 			broadcastError("Something went wrong with modifying the ontology file " + ontologyFile + " with type " + value 
 					+ "and parent " + parent + ".");
@@ -410,7 +458,7 @@ public class TokenView extends ViewPart {
 							parentValue.charAt(0) == ECGConstants.ONTOLOGYPREFIX) {
 					if (!exists(value)) {
 						if (parentValue != null) {
-							parentValue += " " + inputParents;
+							parentValue += " " + inputParents + " shared";
 							addOntologyItem(value, parentValue, modifiedOnt);
 							constraints.add(constraintBox.getText() + " <-- " + value);
 							if (appValue.length() > 1) {
@@ -459,7 +507,7 @@ public class TokenView extends ViewPart {
 					constraintParents.setText("");
 					// Check grammar instead of retrieving analyzer. Analyzer object too large for "base", etc.
 					// TODO: Check that this is proper.
-					PrefsManager.getDefault().checkGrammar();
+					//PrefsManager.getDefault().checkGrammar();
 				} else {
 					//System.out.println("Definition not complete.");
 					broadcastError("This token definition is not complete; you must make sure you select a parentCxn (currently set to '" + parentCxn + "'), "

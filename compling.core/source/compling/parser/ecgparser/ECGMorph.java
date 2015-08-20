@@ -89,17 +89,18 @@ public class ECGMorph {
 	 * @param analyzer_arg
 	 * @throws IOException
 	 */
-	public ECGMorph(GrammarWrapper wrapper, ECGTokenReader tokener) throws IOException { //ECGAnalyzer analyzer_arg) throws IOException {
+	public ECGMorph(Grammar g, ECGTokenReader tokener) { //ECGAnalyzer analyzer_arg) throws IOException {
 		//analyzer = analyzer_arg;
 		//grammar = analyzer.getGrammar();
-		grammarWrapper = wrapper;
+		grammarWrapper = new LCPGrammarWrapper(g);
 		//grammarWrapper = analyzer.getGrammarWrapper();
 		// prefs = (AnalyzerPrefs) grammar.getPrefs();
 		tokenReader = tokener;
+		grammar = g;
 		
 		morphs = new HashMap<String, List<MorphEntry>>();
 		
-		prefs = (AnalyzerPrefs) grammarWrapper.getGrammar().getPrefs();
+		prefs = (AnalyzerPrefs) grammar.getPrefs();
 		
 		File base = prefs.getBaseDirectory();	
 

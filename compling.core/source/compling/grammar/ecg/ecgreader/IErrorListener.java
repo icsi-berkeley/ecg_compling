@@ -23,5 +23,7 @@ public interface IErrorListener {
 	};
 
 	void notify(String errorMessage, Location location, Severity severity);
+	
+	void notify(String errorMessage, Severity severity);
 
 }

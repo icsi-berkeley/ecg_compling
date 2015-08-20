@@ -15,6 +15,11 @@ public class BasicGrammarErrorListener implements ILoggingErrorListener {
 		if (severity == Severity.EXCEPTION)
 			throw new GrammarException(message);
 	}
+	
+	public void notify(String message, Severity severity) {
+		if (severity == Severity.EXCEPTION)
+			throw new GrammarException(message);
+	}
 
 	public StringBuffer asStringBuffer() {
 		StringBuffer b = new StringBuffer();

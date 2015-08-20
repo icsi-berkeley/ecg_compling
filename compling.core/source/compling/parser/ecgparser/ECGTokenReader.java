@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import compling.grammar.GrammarException;
+import compling.grammar.ecg.Grammar;
 import compling.grammar.ecg.Grammar.Construction;
 import compling.grammar.ecg.ECGConstants;
 import compling.grammar.ecg.GrammarWrapper;
@@ -43,8 +44,8 @@ public class ECGTokenReader {
 		}
 	}
 	
-
-	GrammarWrapper grammarWrapper;
+	Grammar grammar; 
+	//GrammarWrapper grammarWrapper;
 	AnalyzerPrefs prefs;
 	File token_path;
 	
@@ -54,10 +55,9 @@ public class ECGTokenReader {
 		return tokens;
 	}
 
-	public ECGTokenReader(GrammarWrapper wrapper) throws IOException {
-		grammarWrapper = wrapper;
-
-		prefs = (AnalyzerPrefs) grammarWrapper.getGrammar().getPrefs();
+	public ECGTokenReader(Grammar inputGrammar) {
+		grammar = inputGrammar;
+		prefs = (AnalyzerPrefs) grammar.getPrefs();
 		File base = prefs.getBaseDirectory();
 		//token_path = new File(base, prefs.getSetting(AP.TOKEN_PATHS));
 		List<String> token_paths = prefs.getList(AP.TOKEN_PATH);
@@ -86,7 +86,7 @@ public class ECGTokenReader {
 				token.setLocation(new Location("test", path, 0, 0));
 				
 				token.token_name = token_name;
-				token.parent = grammarWrapper.getGrammar().getConstruction(parent_name);
+				token.parent = grammar.getConstruction(parent_name);
 				
 				if (token.parent == null) {
 					// TODO: Create a TokenException class and throw that instead
@@ -140,7 +140,7 @@ public class ECGTokenReader {
 				if (constraint.getValue().charAt(0) == ECGConstants.ONTOLOGYPREFIX &&
 						value.charAt(0) == ECGConstants.ONTOLOGYPREFIX) {
 					try {
-						TypeSystem ts = grammarWrapper.getGrammar().getOntologyTypeSystem();
+						TypeSystem ts = grammar.getOntologyTypeSystem();
 						String child = value.substring(1, value.length()).trim();
 						String ancestor = constraint.getValue().substring(1, constraint.getValue().length()).trim();
 						found = ts.subtype(ts.getInternedString(child), ts.getInternedString(ancestor));
@@ -158,7 +158,7 @@ public class ECGTokenReader {
 				if (constraint.getValue().charAt(0) == ECGConstants.ONTOLOGYPREFIX &&
 						value.charAt(0) == ECGConstants.ONTOLOGYPREFIX) {
 					try {
-						TypeSystem ts = grammarWrapper.getGrammar().getOntologyTypeSystem();
+						TypeSystem ts = grammar.getOntologyTypeSystem();
 						String child = value.substring(1, value.length()).trim();
 						String ancestor = constraint.getValue().substring(1, constraint.getValue().length()).trim();
 						found = ts.subtype(ts.getInternedString(child), ts.getInternedString(ancestor));

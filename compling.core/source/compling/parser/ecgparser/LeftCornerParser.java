@@ -172,10 +172,9 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     this.ecgGrammar = ecgGrammar;
     this.grammar = new LCPGrammarWrapper(ecgGrammar);
     
-
+    this.tokenReader = this.ecgGrammar.getTokenReader();
+	this.morpher = this.ecgGrammar.getMorpher();
     
-    this.tokenReader = new ECGTokenReader(new LCPGrammarWrapper(this.ecgGrammar));
-    this.morpher = new ECGMorph(this.grammar, this.tokenReader);
     this.morphTable = new ECGMorphTableReader(this.grammar);
     
 
@@ -284,8 +283,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   /** Reloads tokens and morphology instances. 
  * @throws IOException */
   public void reloadTokens() throws IOException {
-	  this.tokenReader = new ECGTokenReader(new LCPGrammarWrapper(this.ecgGrammar));
-	  this.morpher = new ECGMorph(this.grammar, this.tokenReader);
+	  this.tokenReader = this.ecgGrammar.getTokenReader();
+	  this.morpher = new ECGMorph(this.ecgGrammar, this.tokenReader);
   }
   
   public Map<String, ArrayList<ECGToken>> getTokens() {
@@ -369,6 +368,11 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
   public PriorityQueue<List<T>> getBestPartialParses(Utterance<Word, String> utterance) {
 	  
+	
+	//this.ecgGrammar.readTokens();
+	this.tokenReader = this.ecgGrammar.getTokenReader();
+	    //this.tokenReader = new ECGTokenReader(new LCPGrammarWrapper(this.ecgGrammar));
+	this.morpher = this.ecgGrammar.getMorpher();
 	
     lastNormalizer = 0;
     currentEntropy = 0;

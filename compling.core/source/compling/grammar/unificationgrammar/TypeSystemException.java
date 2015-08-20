@@ -38,6 +38,8 @@ public class TypeSystemException extends Exception {
 	TypeSystemException(String error) {
 		super(error);
 	}
+	
+
 
 	public TypeSystemException(List<GrammarError> errors) {
 		super(Arrays.join(errors.toArray(), "\n"));

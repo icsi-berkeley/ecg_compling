@@ -140,6 +140,12 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 						System.out.println(errorMessage);
 						addMarker(file, errorMessage, location, severity);
 					}
+
+					@Override
+					public void notify(String errorMessage, Severity severity) {
+						System.out.println(errorMessage);
+						
+					}
 				});
 			}
 			catch (Exception e) {
@@ -157,6 +163,12 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 			new GrammarReader(grammar).read(file, new IErrorListener() {
 				public void notify(String message, Location location, Severity severity) {
 					addMarker(file, message, location, severity);
+				}
+
+				@Override
+				public void notify(String errorMessage, Severity severity) {
+					System.out.println(errorMessage);
+					
 				}
 			});
 		}
@@ -180,7 +192,7 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 	 * @param gatherer
 	 * @return
 	 */
-	protected ContextModel buildContextModel(ResourceGatherer gatherer) throws CoreException {
+	public ContextModel buildContextModel(ResourceGatherer gatherer) throws CoreException {
 		SampleResourceVisitor visitor = new SampleResourceVisitor();
 //		for (IResource r : gatherer.getOntologyFiles(getProject())) {
 //			r.accept(visitor);
@@ -202,6 +214,9 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 				throws TypeSystemException, CoreException, IOException {
 		return OWLOntology.fromPreferences(manager.getPreferences()).getTypeSystem();
 	}
+	
+	
+		
 
 	// Setup grammar with a ContextModel or just an ontology
 	protected Grammar prebuildGrammar(PrefsManager manager) {
@@ -309,6 +324,8 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 			
 		
 		}
+		
+		
 
 
 		updateLocality(grammar);
@@ -325,6 +342,7 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 			}
 		});
 		try {
+			grammar.setPrefs(manager.getPreferences());
 			grammar.update();
 			monitor.worked(1);
 		}
@@ -346,6 +364,8 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 		GrammarChecker.setErrorListener(GrammarChecker.DEFAULT_ERROR_LISTENER);
 		manager.setGrammar(grammar);
 		updateDecorators();
+		
+		//grammar.buildTokenAndMorpher();
 
 	}
 
