@@ -84,6 +84,8 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	public ECGAnalyzer(Grammar ecgGrammar, AnalyzerPrefs prefs) throws IOException {
 		
 		preferences = prefs;
+		
+		//ecgGrammar.buildTokenAndMorpher();
 
 		grammar = new LCPGrammarWrapper(ecgGrammar);
 		

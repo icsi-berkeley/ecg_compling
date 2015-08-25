@@ -254,19 +254,25 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   private boolean isCompatible2(Construction cxn, String[] type) {
 	  Set<String> parents = cxn.getParents();
 	  List<String> types = Arrays.asList(type);
+	  TypeSystem ts = this.ecgGrammar.getConstructionTypeSystem();
+	  for (String t : type) {
+		  try {
+			if (ts.subtype(ts.getInternedString(cxn.getName()), ts.getInternedString(t))) {
+				  return true;
+			  }
+		} catch (TypeSystemException e) {
+			throw new ParserException("Either " + cxn.getName() + " or " + t 
+					+ " not found in the construction lattice. Check .morph file for inconsistencies.");
+		}
+	  } return false;
+	  /*
 	  if (types.contains(cxn.getName())) {
 		  return true;
 	  }
 	  if (!Collections.disjoint(parents, types)) {
 		  return true;
 	  }
-	  /*
-	  if (!new HashSet<String>(parents).retainAll(types).isEmpty()) {
-		  return false;
-	  }
-	  if (parents.contains(type)) {
-		  return true;
-	  } */
+
 	  else if (parents.contains("RootType")) {
 		  return false;
 	  } else {
@@ -278,6 +284,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 		  }
 		  return false;
 	  }
+	  */
   }
   
   /** Reloads tokens and morphology instances. 
@@ -499,7 +506,6 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
         throw new ParserException("No complete analysis found for: " + utterance.toString());
       }
       else {
-//    	System.out.println("------- Inserting into type CACHE. ---------");
     	typeCache.put(tcEntry, this.completeAnalyses.clone());  // typeCache
         return completeAnalyses;
       }

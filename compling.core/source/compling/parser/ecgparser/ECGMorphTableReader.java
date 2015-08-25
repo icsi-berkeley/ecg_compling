@@ -17,10 +17,10 @@ import compling.util.fileutil.TextFileLineIterator;
 /**
  * This class reads in a text file containing morphological specifications.
  * Specifically, the text file represents a matching between certain "FlectTypes" (Celex output)
- * and the ECG constraints.
+ * and the ECG constraints, as well as the compatible cxn types.
  * 
  * Example:
- * "Plural :: self.m.number <-- @plural, self.m.bounding <-- @indeterminate".
+ * "Plural :: self.m.number <-- @plural, self.m.bounding <-- @indeterminate :: NounType".
  *                       
  * The text file must be formatted with the "constructional block" of constraints at the top,
  * and the "meaning block" of constraints following it - with each section clearly marked "constructional"

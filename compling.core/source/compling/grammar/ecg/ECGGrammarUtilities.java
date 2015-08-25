@@ -633,6 +633,8 @@ public class ECGGrammarUtilities {
     	grammar.addToDeclared(name);
     }
     
+    grammar.setPrefs(preferences);
+    
     List<String> importPaths = preferences.getList(AP.IMPORT_PATHS);
     List<File> importFiles = FileUtils.getFilesUnder(base, importPaths, new ExtensionFileFilter(ext));
     Grammar grammarImport = new Grammar();

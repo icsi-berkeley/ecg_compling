@@ -67,8 +67,7 @@ public class GrammarChecker {
 	
 	private static void checkTokensAndMorphs(Grammar g, IErrorListener errorListener) {
 		try {
-			g.readTokens();
-			g.readMorpher();
+			g.buildTokenAndMorpher();
 		} catch (ParserException e) {
 			errorListener.notify(e.getMessage(), Severity.EXCEPTION); 
 		}

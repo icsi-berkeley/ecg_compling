@@ -42,6 +42,7 @@ import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import compling.context.ContextModel;
+import compling.context.MiniOntology;
 import compling.grammar.GrammarException;
 import compling.grammar.ecg.ECGConstants;
 import compling.grammar.ecg.Grammar;
@@ -162,6 +163,7 @@ public class TokenView extends ViewPart {
 		return onts;
 	}
 	
+	
 	private void rebuildOntology() {
 		ResourceGatherer gatherer = new ResourceGatherer(prefs);
 		ContextModel contextModel;
@@ -194,6 +196,7 @@ public class TokenView extends ViewPart {
 			return new ContextModel(files, exts[0], exts[1], DEFAULT_CHARSET);
 		}
 	}
+	
 	
 	
 	// Adds VALUE to ontology as a subtype of PARENT. 
@@ -234,7 +237,7 @@ public class TokenView extends ViewPart {
 				throw new IOException();
 			}
 			System.out.println(tempFile);
-			//PrefsManager.getDefault().checkGrammar();
+			PrefsManager.getDefault().checkGrammar();
 			//rebuildOntology();
 		} catch (IOException problem) {
 			broadcastError("Something went wrong with modifying the ontology file " + ontologyFile + " with type " + value 

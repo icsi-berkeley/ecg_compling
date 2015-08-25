@@ -69,6 +69,10 @@ public class Grammar extends PackageHandler {
 		readMorpher();
 	}
 	
+	public TypeSystem<Construction> getConstructionTypeSystem() {
+		return cxnTypeSystem;
+	}
+	
 	public void readMorpher() {
 		ecgMorpher = new ECGMorph(this, tokenReader);
 	}

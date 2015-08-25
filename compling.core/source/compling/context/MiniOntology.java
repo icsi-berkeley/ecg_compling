@@ -460,7 +460,7 @@ public class MiniOntology extends PackageHandler {
 		HashMap<Relation, Set<Relation>> relnToCoindexationSet;
 		Location location;
 
-		Type(String typeName, List<String> parentNames) {
+		public Type(String typeName, List<String> parentNames) {
 			this.typeName = typeName;
 			if (parentNames.size() > 0) {
 				this.parentNames.addAll(parentNames);
