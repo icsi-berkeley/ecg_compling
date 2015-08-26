@@ -252,8 +252,9 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   
   // TODO: Returns a boolean if "cxn" is compatible with type. Noun-Block is compatible with "noun", etc.
   private boolean isCompatible2(Construction cxn, String[] type) {
-	  Set<String> parents = cxn.getParents();
-	  List<String> types = Arrays.asList(type);
+	  //Set<String> parents = cxn.getParents();
+	  //List<String> types = Arrays.asList(type);
+	  
 	  TypeSystem ts = this.ecgGrammar.getConstructionTypeSystem();
 	  for (String t : type) {
 		  try {
@@ -266,6 +267,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 		}
 	  } return false;
 	  /*
+	  
 	  if (types.contains(cxn.getName())) {
 		  return true;
 	  }
@@ -285,6 +287,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 		  return false;
 	  }
 	  */
+	  
   }
   
   /** Reloads tokens and morphology instances. 
