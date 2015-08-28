@@ -50,6 +50,7 @@ public class ContextModel {
 
 		}
 		catch (IOException ioe) {
+			//System.out.p
 			throw new ContextException("Terminal Error: Cannot read ontology spec. ", ioe);
 		}
 	}
@@ -83,7 +84,7 @@ public class ContextModel {
 				}
 			}
 			//onts.append(" INSTS: ");
-			ontologySpec.append(onts).append(" INSTS: ");
+			ontologySpec.append(onts).append(" \n ").append(" INSTS: ");
 			instantiate(new BufferedReader(new InputStreamReader(new StringBufferInputStream(ontologySpec.toString()),
 					charSet)), "ontology definitions");
 			
@@ -151,7 +152,7 @@ public class ContextModel {
 			cache.situationUpdate(miniOntology.getRecentlyAccessedIndividuals());
 		}
 		catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			throw new ContextException("Terminal Error: Cannot read ontology spec. ", e);
 		}
 	}
