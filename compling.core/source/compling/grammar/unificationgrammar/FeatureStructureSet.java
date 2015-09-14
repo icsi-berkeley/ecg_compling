@@ -412,9 +412,13 @@ public class FeatureStructureSet implements Cloneable {
 				return true;
 			} else if (thisType != null && thatType == null) {
 				return true;
-			} else if (thisType.typeSystem != thatType.typeSystem) {
+			} else if (! thisType.typeSystem.getName().equals(thatType.typeSystem.getName())) { 
 				return false;
 			}
+			//else if (thisType.typeSystem != thatType.typeSystem) {
+//				System.out.println("Type systems featurestructureset line 416-----------------");
+//				return false;
+//			}
 			else { // now that both slots have compatible type systems
 				// Check if either slot is "negated" type: e.g., slot constrained to be anything BUT a type
 				if (thatType.negated() || thisType.negated()) {
@@ -433,8 +437,21 @@ public class FeatureStructureSet implements Cloneable {
 						return false;
 					}
 				} catch (TypeSystemException tse) {
-					throw new GrammarException(tse + ".\nThis.typeSystem=" + thisType.getTypeSystem().getName()
-							+ " and thatType.typeSystem=" + thatType.getTypeSystem().getName());
+					try {
+						if (thatType.typeSystem.subtype(thisType.type, thatType.type)) {
+							// this type is more specific
+							return true;
+						} else if (thatType.typeSystem.subtype(thatType.type, thisType.type)) {
+							// that type is more specific
+							typeConstraint = thatType;
+							return true;
+						} else {
+							return false;
+						}
+					} catch (TypeSystemException e) {
+						throw new GrammarException(tse + ".\n" + thisType.getType() +".typeSystem=" + thisType.getTypeSystem().getName()
+								+ " and " + thatType.getType() + ".typeSystem=" + thatType.getTypeSystem().getName());
+					}
 				}
 			}
 		}

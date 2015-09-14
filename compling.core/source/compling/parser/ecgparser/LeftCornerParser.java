@@ -402,6 +402,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
     constructionInput = new ArrayList<ArrayList<Construction>>();
     morphToken = new ArrayList<ArrayList<MorphTokenPair>>();
+    
 
     for (int i = 0; i < utterance.size(); i++) {
       try {
@@ -1522,7 +1523,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
       T p = queue.next();
       prunedQueue.add(p, score);
       i++;
-      if (i >= maxBeamWidth || score > bestScore + beamSize) {
+      if (i >= maxBeamWidth || score > (bestScore + beamSize)) {
         break;
       }
     }

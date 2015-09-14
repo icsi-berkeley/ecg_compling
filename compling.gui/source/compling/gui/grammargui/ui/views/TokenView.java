@@ -170,11 +170,13 @@ public class TokenView extends ViewPart {
 		try {
 			contextModel = buildContextModel(gatherer);
 			getGrammar().setContextModel(contextModel);
+			//getGrammar().update();
+			TypeSystem ts = getGrammar().getOntologyTypeSystem();
+			System.out.println(getGrammar().getOntologyTypeSystem().getCanonicalTypeConstraint("green"));
 		} catch (CoreException e) {
 			e.printStackTrace();
 			broadcastError("Problem rebuilding ontology...");
 		}
-		
 	}
 	
 
@@ -237,8 +239,8 @@ public class TokenView extends ViewPart {
 				throw new IOException();
 			}
 			System.out.println(tempFile);
-			PrefsManager.getDefault().checkGrammar();
-			//rebuildOntology();
+			//PrefsManager.getDefault().checkGrammar();
+			rebuildOntology();
 		} catch (IOException problem) {
 			broadcastError("Something went wrong with modifying the ontology file " + ontologyFile + " with type " + value 
 					+ "and parent " + parent + ".");

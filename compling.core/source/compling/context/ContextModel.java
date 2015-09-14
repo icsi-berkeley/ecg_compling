@@ -113,6 +113,7 @@ public class ContextModel {
 				}
 			}
 			ontologySpec.append(defs).append(insts);
+			System.out.println(ontologySpec.toString());
 			instantiate(new BufferedReader(new InputStreamReader(new StringBufferInputStream(ontologySpec.toString()),
 					charSet)), "ontology definitions");
 
