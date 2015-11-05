@@ -3,6 +3,7 @@ package compling.parser.ecgparser;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,12 +122,29 @@ public class ECGTokenReader {
 					tokens.put(token_name, new ArrayList<ECGToken>());
 				}
 				boolean add = true;
+				boolean parentFound = false;
+				// TODO: only parentFound=True if they're ALL the same...
 				for (ECGToken t : tokens.get(token_name)) {
 					if (t.parent.equals(token.parent)) {
-						add = false;
+						parentFound = true;
+						//t.constraints.
+						Collections.sort(t.constraints);
+						Collections.sort(token.constraints);
+						if (t.constraints.equals(token.constraints)) {
+							add = false;
+						}
 					}
 				}
-				if (add) { tokens.get(token_name).add(token); }
+				if (parentFound) {
+					//TODO: Issue warning if they're the same, but with different constraints
+					if (!add) {
+						throw new ParserException("Two tokens with lemma " + token_name + " and type " + parent_name + ", as well as shared constraints.");
+					}
+					//throw new GrammarException("Two tokens with lemma " + token_name + " and type " + parent_name + ". This is allowed, but unusual.");
+				}
+				if (add) { 
+					tokens.get(token_name).add(token); 
+				}
 			}
 		}
 	} // ECGTokenReader()

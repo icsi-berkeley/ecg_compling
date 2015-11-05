@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+
 import compling.grammar.ecg.ECGGrammarUtilities;
 import compling.grammar.ecg.Grammar;
 import compling.grammar.ecg.Prefs;
@@ -27,6 +30,8 @@ public class AnalyzerPrefs implements Prefs {
 	public static final String OWL_TYPE = "OWL";
 	
 	protected File base = null;
+	
+	String baseDirectory = null;
 
 	HashMap<Property, List<String>> listsTable = new HashMap<Property, List<String>>();
 	HashMap<Property, String> settingsTable = new HashMap<Property, String>();
@@ -128,14 +133,16 @@ public class AnalyzerPrefs implements Prefs {
 
 		return ap;
 	}
+	
+	public String baseDirectory() {
+		return baseDirectory;
+	}
 
 	public AnalyzerPrefs(String prefsFilesPath) throws IOException {
 		this(prefsFilesPath, Charset.defaultCharset());
 	}
-
-	public AnalyzerPrefs(String prefsFilesPath, Charset encoding) throws IOException {
-		this(encoding);
-		processFile(prefsFilesPath);
+	
+	public void setBase(String prefsFilesPath) {
 		if (settingsTable.get(AP.BASE) != null) {
 			base = new File(settingsTable.get(AP.BASE));
 		}
@@ -144,9 +151,28 @@ public class AnalyzerPrefs implements Prefs {
 		}
 	}
 
-	protected void processFile(String prefsFilesPath) throws IOException {
+	public AnalyzerPrefs(String prefsFilesPath, Charset encoding) throws IOException {
+		this(encoding);
+		
+		setBase(prefsFilesPath);
+
+		processFile(prefsFilesPath, false, null);
+		
+		setBase(prefsFilesPath);
+		
+	}
+
+	protected void processFile(String prefsFilesPath, boolean included, String includedPath) throws IOException {
+		
+//		System.out.println("-------------------");
+//		System.out.println(prefsFilesPath);
+//		System.out.println(includedPath);
 		TextFileLineIterator tfli = new TextFileLineIterator(prefsFilesPath, encoding.name());
 		// this method is written with extension to the AnalyzerPref class in mind
+
+		//TODO
+		//base = new File(prefsFilesPath).getParentFile();
+		
 
 		int lineNum = 0;
 		AP currentBlock = null;
@@ -154,7 +180,31 @@ public class AnalyzerPrefs implements Prefs {
 		while (tfli.hasNext()) {
 			lineNum++;
 			String line = tfli.next();
-			if (line.indexOf("::==") >= 0) {
+			if (line.contains("include")) {
+				if (line.split(" ").length <= 1) {
+					throw new GUIException("Error with includes statement. No prefs file specified.");
+				}
+				
+				
+				String newPath = line.split(" ")[1];
+				
+				if (includedPath != null) {
+					String[] finalSplit = includedPath.split("/");
+					String finalPath = "";
+					for (int i=0; i<finalSplit.length-1; i+=1) {
+						finalPath += finalSplit[i] + "/";
+					}
+					newPath = finalPath + newPath;
+				}
+				
+				File file = new File(newPath);
+				if (file.isAbsolute()) {
+					processFile(newPath, true, newPath);
+				} else {
+					processFile(getBaseDirectory() + "/" + newPath, true, newPath);
+				}
+			}
+			else if (line.indexOf("::==") >= 0) {
 				if (currentBlock != null) {
 					throw new GUIException("Block " + line.split("::==")[0] + " is beginning in the middle of the block "
 							+ currentBlock);
@@ -176,14 +226,25 @@ public class AnalyzerPrefs implements Prefs {
 				line = line.replaceAll("\"", "");
 				if (line.indexOf("=") >= 0) {
 					String[] pair = line.split("=");
+					String p1 = pair[1].trim();
+					if (included && includedPath != null && pair[0].trim().equals("TABLE_PATH")) {// && pair[0].trim() == AP.TABLE_PATH) {
+						String[] s = includedPath.split("/");
+						String s2 = "";
+						for (int i=0; i<s.length-1; i+=1) {
+							s2 += s[i] + "/";
+						}
+						p1 = s2 + p1;
+					}
 					AP setting = null;
 					try {
 						setting = AP.valueOf(pair[0].trim());
+						//AP.values
 					}
 					catch (IllegalArgumentException iae) {
 					}
 					if (setting != null) {
-						settingsTable.put(setting, pair[1].trim());
+						//settingsTable.put(setting, pair[1].trim());
+						settingsTable.put(setting, p1);
 					}
 				}
 				else {
@@ -193,6 +254,28 @@ public class AnalyzerPrefs implements Prefs {
 							|| currentBlock == AP.TOKEN_PATH
 							|| currentBlock == AP.MORPHOLOGY_PATH
 							|| currentBlock == AP.PACKAGE_NAME) {
+						if (included && includedPath != null) {// && false) {
+							if (currentBlock != AP.PACKAGE_NAME && currentBlock != AP.EXAMPLE_SENTENCES) {
+								/*
+								System.out.println("----------------------");
+								File prefsFile = new File(prefsFilesPath);
+								File prefsBase = new File(base, includedPath);
+								System.out.println(prefsFilesPath);
+								System.out.println(prefsBase.getParent() + "/" + line);
+								System.out.println(includedPath + "/" + line);
+								line = prefsBase.getParent() + "/" + line;
+								*/
+								//System.out.println(includedPath);
+								String[] s = includedPath.split("/");
+								String s2 = "";
+								for (int i=0; i<s.length-1; i+=1) {
+									s2 += s[i] + "/";
+								}
+								
+								line = s2 + line;
+								
+							}
+						}
 						listsTable.get(currentBlock).add(line);
 					}
 				}

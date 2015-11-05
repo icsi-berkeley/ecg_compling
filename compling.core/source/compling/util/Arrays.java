@@ -93,11 +93,19 @@ public class Arrays {
 	 */
 	public static List<String> split(String text) {
 		ArrayList<String> words = new ArrayList<String>();
-		StringTokenizer t = new StringTokenizer(text, "!?., \n\r", true);
+		//StringTokenizer t = new StringTokenizer(text, "!?., \n\r", true);
+		StringTokenizer t = new StringTokenizer(text, "!?, \n\r", true);
 		while (t.hasMoreTokens()) {
 			String token = t.nextToken();
-			if (!Character.isWhitespace(token.charAt(0)))
-				words.add(token);
+			
+			if (!Character.isWhitespace(token.charAt(0))) {
+				if (token.charAt(token.length()-1) == '.') {
+					words.add(token.substring(0, token.length()-1));
+					words.add(".");
+				} else{
+					words.add(token);
+				}
+			}
 		}
 		return words;
 	}

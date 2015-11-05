@@ -145,3 +145,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: ICSI Berkeley
 Bundle-ClassPath: .
+Import-Package: org.eclipse.core.runtime

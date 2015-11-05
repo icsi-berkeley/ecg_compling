@@ -6,6 +6,7 @@ package compling.gui.grammargui.builder;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
@@ -48,11 +49,29 @@ public class GrammarFileLabelDecorator extends BaseLabelProvider implements ILig
 				IMarker[] markers = resource.findMarkers(GrammarBuilder.MARKER_TYPE, false, IResource.DEPTH_ZERO);
 				if (markers.length > 0) {
 					decoration.addOverlay(errorOverlay, IDecoration.TOP_RIGHT);
+					//propagateError(resource);
+					//decoration.addOverlay(errorOverlay, IDecoration.UNDERLAY);
+					//IContainer c = resource.getParent();
+					//c.createMarker("compling.gui.grammarProblem");
 				}
 			}
 			catch (CoreException e) { /* do nothing */
 			}
 		}
+	}
+	
+	public void propagateError(IResource resource) {
+		IContainer c = resource.getParent();
+		try {
+			if (c.exists()) {
+	 			c.createMarker("compling.gui.grammarProblem");
+				propagateError(c);
+			}
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	public boolean isLabelProperty(Object element, String property) {

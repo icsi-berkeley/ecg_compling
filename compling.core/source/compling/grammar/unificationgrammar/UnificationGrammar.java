@@ -259,7 +259,7 @@ public class UnificationGrammar {
 		}
 	}
 
-	public static class Constraint {
+	public static class Constraint implements Comparable {
 		
 		private boolean local = true;
 
@@ -412,6 +412,15 @@ public class UnificationGrammar {
 				}
 			}
 			return sb.toString();
+		}
+
+		@Override
+		public int compareTo(Object arg0) {
+			if (this.equals(arg0)) {
+				return 0;
+			}
+			Constraint that = (Constraint) arg0;
+			return this.getArguments().get(0).toString().compareTo(that.getArguments().get(0).toString());
 		}
 	}
 

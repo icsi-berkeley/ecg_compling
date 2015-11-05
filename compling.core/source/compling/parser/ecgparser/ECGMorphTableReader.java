@@ -47,7 +47,7 @@ public class ECGMorphTableReader {
 		grammarWrapper = wrapper;
 		prefs = (AnalyzerPrefs) grammarWrapper.getGrammar().getPrefs();
 		//BufferedReader in = new BufferedReader(new FileReader("compling/first/first.morph"));
-		File base = prefs.getBaseDirectory();	
+		File base = prefs.getBaseDirectory();
 		table_path = new File(base, prefs.getSetting(AP.TABLE_PATH));
 		TextFileLineIterator tfli = new TextFileLineIterator(table_path);
 		

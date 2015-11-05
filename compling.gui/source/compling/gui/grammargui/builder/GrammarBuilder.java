@@ -180,6 +180,8 @@ public class GrammarBuilder extends IncrementalProjectBuilder {
 	private void deleteMarkers(IFile file) {
 		try {
 			file.deleteMarkers(MARKER_TYPE, false, IResource.DEPTH_ZERO);
+			//file.getParent().deleteMarkers(type, includeSubtypes, depth);
+			//file.getParent().deleteMarkers("compling.gui.grammarProblem", true, 0);
 		}
 		catch (CoreException e) {
 			Log.logError(e, "Can't delete marker for file %s: exception: %s\n", file.getName(), e);

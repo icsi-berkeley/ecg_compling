@@ -12,6 +12,7 @@ import compling.gui.grammargui.ui.views.MapTreeView;
 import compling.gui.grammargui.ui.views.OntologyTreeView;
 import compling.gui.grammargui.ui.views.SchemaTreeView;
 import compling.gui.grammargui.ui.views.SituationTreeView;
+import compling.gui.grammargui.ui.views.TokenView;
 import compling.gui.grammargui.ui.views.TypeSystemNodeView;
 
 public class AnalysisPerspective implements IPerspectiveFactory {
@@ -46,6 +47,7 @@ public class AnalysisPerspective implements IPerspectiveFactory {
 		layout.addShowViewShortcut(IConsoleConstants.ID_CONSOLE_VIEW);
 		layout.addShowViewShortcut(IPageLayout.ID_BOOKMARKS);
 		layout.addShowViewShortcut(IPageLayout.ID_PROBLEM_VIEW);
+		//layout.addShowViewShortcut(TokenView.ID);
 //		layout.addShowViewShortcut(LOG_VIEW_ID);
 		layout.addShowViewShortcut(COMMON_EXPLORER_ID);
 		layout.addShowViewShortcut(CONTENT_OUTLINE_ID);

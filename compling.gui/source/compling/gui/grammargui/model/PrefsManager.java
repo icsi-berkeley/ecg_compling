@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.eclipse.core.internal.resources.ResourceException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -612,11 +613,53 @@ public class PrefsManager implements IResourceChangeListener, ISaveParticipant {
 				if (!folder.exists())
 					folder.createLink(prefsBase.append(p).makeAbsolute(), IResource.NONE, nullProgressMonitor);
 			}  */
+			
+			IFolder base = project.getFolder(prefsBase);
 			for (String p : prefs.getList(AP.IMPORT_PATHS)) {
 				IFolder folder = project.getFolder(p);
-				if (!folder.exists())
-					folder.createLink(prefsBase.append(p).makeAbsolute(), IResource.NONE, nullProgressMonitor);
+				if (!folder.exists()) {
+					//folder.createLink(prefsBase.append(p).makeAbsolute(), IResource.NONE, nullProgressMonitor);
+					IPath newPath = prefsBase.append(p).makeAbsolute();
+					
+
+					
+//					System.out.println(p1);
+//					
+//					
+//					System.out.println("++++++++++++++++++");
+//					System.out.println("Import path: " + p);
+//					System.out.println("Folder path:" + folder.getFullPath());
+//					System.out.println("Base: " + prefsBase);
+//					System.out.println("NewPath: " + newPath);
+//					//base.createLink(newPath, IResource.FOLDER, nullProgressMonitor);
+//					System.out.println(folder.getLocationURI());
+					//IFolder f2 = project.getFolder(folder.getLocationURI());
+					folder.createLink(newPath, IResource.NONE, nullProgressMonitor);
+					//folder.
+//					try {
+//					
+//					}
+//					catch (ResourceException e) {
+//						
+//					}
+					//prefsFolder.createLink(newPath, IResource.NONE, nullProgressMonitor);
+				}
 			}
+			
+			// Create links for token files
+			for (String p : prefs.getList(AP.TOKEN_PATH)) {
+				IFile tokenFile = project.getFile(p);
+				if (!tokenFile.exists()) {
+					tokenFile.createLink(prefsBase.append(p), IResource.NONE, nullProgressMonitor);
+				}
+			}
+			for (String p : prefs.getList(AP.ONTOLOGY_PATHS)) {
+				IFile ontFile = project.getFile(p);
+				if (!ontFile.exists()) {
+					ontFile.createLink(prefsBase.append(p), IResource.NONE, nullProgressMonitor);
+				}
+			}
+			
 		}
 		catch (CoreException e) {
 			Log.logError(e, "Problem setting up project");

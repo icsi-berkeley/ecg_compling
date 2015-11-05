@@ -32,6 +32,8 @@ import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
@@ -39,6 +41,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -110,8 +113,14 @@ public class TestRunnerView extends ViewPart implements IModelChangedListener /*
 		protected IStatus run(IProgressMonitor monitor) {
 			int step = 0;
 			int failures = 0;
+			long startTime = System.nanoTime();
+			long analyzerTime = 0;
 			try {
+				long startupTimeOne = System.nanoTime();
 				ECGAnalyzer analyzer = new ECGAnalyzer(PrefsManager.getDefault().getGrammar());
+				long startupTimeTwo = System.nanoTime();
+				analyzerTime = (startupTimeTwo - startupTimeOne) / 1000000000;
+				
 				List<Boolean> results = new ArrayList<Boolean>();
 				beginProgress(monitor, sentences.length);
 				for (AnalyzerSentence s : sentences) {
@@ -133,8 +142,12 @@ public class TestRunnerView extends ViewPart implements IModelChangedListener /*
 				Log.logError(e, "Major problem while instantiating Analyzer");
 				return new JobStatus(IStatus.ERROR, this, "Problem initializing Analyzer object.");
 			}
+			long endTime = System.nanoTime();
+			
+			long duration = (endTime - startTime) / 1000000000;
+			//duration
 
-			reportFinal(monitor, getElements().length, step, failures);
+			reportFinal(monitor, getElements().length, step, failures, duration, analyzerTime);
 			
 			return JobStatus.OK_STATUS;
 		}
@@ -162,13 +175,13 @@ public class TestRunnerView extends ViewPart implements IModelChangedListener /*
 			});
 		}
 		
-		protected void reportFinal(final IProgressMonitor monitor, final int total, final int done, final int failures) {
+		protected void reportFinal(final IProgressMonitor monitor, final int total, final int done, final int failures, final long time, final long analyzerTime) {
 			Display.getDefault().asyncExec(new Runnable() {
 				@Override
 				public void run() {
 					if (monitor != null)
 						monitor.done();
-					counterPanel.setLabels(total, done, failures);
+					counterPanel.setLabels(total, done, failures, time, analyzerTime);
 					viewer.refresh();
 				}
 			});
@@ -366,7 +379,10 @@ public class TestRunnerView extends ViewPart implements IModelChangedListener /*
 		protected Text numberOfErrors;
 		protected Text numberFailed;
 		protected Text numberTested;
+		protected Text totalTime;
+		protected Text startupTime;
 		protected int total;
+		protected float time;
 		protected int ignoredCount;
 		protected int assumptionFailedCount;
 
@@ -387,6 +403,9 @@ public class TestRunnerView extends ViewPart implements IModelChangedListener /*
 
 			numberTested = createLabel("Tested:", null, " 0/0  ");
 			numberFailed = createLabel("Failures:", failureIcon, " 0 ");
+			totalTime = createLabel("Total time:", null, " ");
+			startupTime = createLabel("Startup Time:", null, " ");
+			
 
 			addDisposeListener(new DisposeListener() {
 				public void widgetDisposed(DisposeEvent e) {
@@ -422,26 +441,37 @@ public class TestRunnerView extends ViewPart implements IModelChangedListener /*
 		}
 
 		public void reset() {
-			setLabels(0, 0, 0);
+			setLabels(0, 0, 0, 0, 0);
 
 			total = 0;
 		}
 
-		public void setLabels(int total, int tested, int failures) {
-			String runString = String.format(" %s/%d ", total, tested);
-			String runStringTooltip = "Total number of sentences / number of sentences tested.";
-
+		public void setLabels(int total, int tested, int failures, long time, long analyzerTime) {
+			String runString = String.format(" %s/%d ", tested, total);
+			String runStringTooltip = "Number of sentences tested / total number of sentences.";
+			
+			String timeString = String.format(" %s seconds", time);
+			String analyzerString = String.format(" %s seconds", analyzerTime);
+			
 			numberTested.setText(runString);
 			numberTested.setToolTipText(runStringTooltip);
 
 			numberFailed.setText(String.format(" %d ", failures));
 			numberFailed.setToolTipText("Number of failed parses.");
 			
+			totalTime.setText(timeString);
+			
+			startupTime.setText(analyzerString);
+			
 			numberTested.redraw();
 			numberFailed.redraw();
+			
+			totalTime.redraw();
+			
 
 			redraw();
 		}
+
 	}
 
 	class NameSorter extends ViewerSorter {
@@ -463,6 +493,22 @@ public class TestRunnerView extends ViewPart implements IModelChangedListener /*
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
 		parent.setLayout(gridLayout);
+		
+		Button selectAll = new Button(parent, SWT.PUSH);
+		selectAll.setText("Select/Deselect All Sentences");
+		
+		selectAll.addSelectionListener(new SelectionAdapter() { 
+			public void widgetSelected(SelectionEvent e) {
+				//System.out.println("Reloading types");
+				//viewer.setAllGrayed(true);
+				if (viewer.getCheckedElements().length > 0) {
+					viewer.setAllChecked(false);
+				} else {
+					viewer.setAllChecked(true);
+				}
+			}
+		});
+
 
 		counterComposite = createProgressCountPanel(parent);
 		counterComposite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));

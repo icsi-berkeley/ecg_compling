@@ -153,6 +153,15 @@
       <view
    	        allowMultiple="false"
    	        category="compling.gui.grammargui.categories.token"
+            class="compling.gui.grammargui.ui.views.GrammarGrapher"
+            icon="icons/tokenTest.ico"
+            id="compling.gui.grammargui.views.grammarGrapher"
+            name="Grapher">
+      </view>
+      
+      <view
+   	        allowMultiple="false"
+   	        category="compling.gui.grammargui.categories.token"
             class="compling.gui.grammargui.ui.views.LexiconView"
             icon="icons/lexeme.ico"
             id="compling.gui.grammargui.views.lexicon"

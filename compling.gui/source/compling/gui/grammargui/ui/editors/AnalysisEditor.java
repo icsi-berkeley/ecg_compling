@@ -34,7 +34,7 @@ public class AnalysisEditor extends MultiPageEditorPart  implements IModelChange
 	
 	private Text annotationText;
 	
-	private AnnotatedAnalysis annotationTool;
+	//private AnnotatedAnalysis annotationTool;
 	
 	private interface IViewType {
 		public int TRANSCRIPT = 0;
@@ -64,7 +64,7 @@ public class AnalysisEditor extends MultiPageEditorPart  implements IModelChange
 		if (0 <= b && b < browsers.size())
 			browsers.get(b).execute("javascript:print()");
 	}
-	
+	/*
 	protected void createAnnotationPage() {
 		Browser b = new Browser(getContainer(), SWT.NONE);
 		annotationTool = new AnnotatedAnalysis();
@@ -77,7 +77,7 @@ public class AnalysisEditor extends MultiPageEditorPart  implements IModelChange
 		b.setText(text);
 		//addPage(IViewType.ANNOTATION, b);
 		setPageText(IViewType.ANNOTATION, "Annotation");
-	}
+	} */
 
 	protected void createRawTextViewPage() {
 		transcript = new Text(getContainer(), SWT.BORDER | SWT.READ_ONLY | SWT.MULTI | SWT.WRAP | SWT.H_SCROLL

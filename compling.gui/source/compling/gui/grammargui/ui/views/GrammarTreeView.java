@@ -12,6 +12,8 @@ public class GrammarTreeView extends TypeSystemTreeView {
 	public GrammarTreeView() {
 		super();
 	}
+	
+
 
 	@Override
 	public String getId() {

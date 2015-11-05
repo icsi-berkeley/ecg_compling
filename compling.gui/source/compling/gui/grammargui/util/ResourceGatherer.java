@@ -82,8 +82,9 @@ public class ResourceGatherer {
 		ArrayList<File> files = new ArrayList<File>();
 		List<File> filesUnder = FileUtils.getFilesUnder(base, importPaths, new ExtensionFileFilter(
 				getGrammarExtensions()));
-		for (File f : filesUnder)
+		for (File f : filesUnder) {
 			files.add(Utils.getRelativeTo(f, base));
+		}
 		return files;
 	}
 	

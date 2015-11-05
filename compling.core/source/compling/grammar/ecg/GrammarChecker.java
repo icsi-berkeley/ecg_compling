@@ -70,7 +70,7 @@ public class GrammarChecker {
 			g.buildTokenAndMorpher();
 		} catch (ParserException e) {
 			errorListener.notify(e.getMessage(), Severity.EXCEPTION); 
-		}
+		} 
 	}
 	
 

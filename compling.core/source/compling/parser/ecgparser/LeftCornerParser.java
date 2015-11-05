@@ -27,6 +27,7 @@ import compling.grammar.unificationgrammar.TypeSystemException;
 import compling.grammar.unificationgrammar.UnificationGrammar;
 import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
 import compling.grammar.unificationgrammar.UnificationGrammar.Role;
+import compling.grammar.unificationgrammar.UnificationGrammar.SlotChain;
 import compling.grammar.unificationgrammar.UnificationGrammar.TypeConstraint;
 import compling.parser.ParserException;
 import compling.parser.RobustParser;
@@ -445,6 +446,38 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
       } catch (GrammarException g) {
     	  debugPrint("Unknown input lemma: " + utterance.getElement(i).getOrthography());  	  
       }
+      // This block will handle numbers
+      try {
+    	  String potentialNumber = utterance.getElement(i).getOrthography();
+    	  try {
+    		  double value = Double.parseDouble(potentialNumber);
+    		  Construction cxn = grammar.getConstruction("NumberType");
+              if (i >= constructionInput.size()) {
+            	  constructionInput.add(new ArrayList<Construction>());  
+              }
+              if (i >= morphToken.size()) {
+            	  morphToken.add(new ArrayList<MorphTokenPair>());
+              }
+              constructionInput.get(i).add(cxn);
+              ECGTokenReader.ECGToken tok = this.tokenReader.new ECGToken(); //new ECGTokenReader.ECGToken();
+              tok.constraints = new ArrayList<Constraint>();
+              tok.constraints.add(new Constraint("<--", new SlotChain("self.m.value"), StringUtilities.addQuotes(potentialNumber)));
+              String morph = "Singular";
+              if (value != 1) {
+            	  morph = "Plural";
+              }
+              
+              MorphTokenPair mtp = new MorphTokenPair(morph, tok);
+              morphToken.get(i).add(mtp);
+    	  } catch (NumberFormatException e) {
+    		  throw new GrammarException("Number not found.");
+    	  }
+    	  //long n = potentialNumber
+      } catch (GrammarException g) {
+    	  debugPrint("Could not identify number in " + utterance.getElement(i).getOrthography() + 
+    			  " or construction NumberType not found in grammar.");
+      }
+      // This block will handle lexical constructions
       try { 
           if (i >= constructionInput.size()) {
         	  constructionInput.add(new ArrayList<Construction>());  

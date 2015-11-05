@@ -84,7 +84,7 @@ public class LearnerPrefs extends AnalyzerPrefs implements Prefs {
 	}
 
 	protected void processFile(String prefsFilesPath) throws IOException {
-		super.processFile(prefsFilesPath);
+		super.processFile(prefsFilesPath, false, null);
 		TextFileLineIterator tfli = new TextFileLineIterator(prefsFilesPath);
 
 		int lineNum = 0;
