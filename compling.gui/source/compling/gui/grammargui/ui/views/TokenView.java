@@ -188,7 +188,7 @@ public class TokenView extends ViewPart {
 			getGrammar().setContextModel(contextModel);
 			//getGrammar().update();
 			TypeSystem ts = getGrammar().getOntologyTypeSystem();
-			System.out.println(getGrammar().getOntologyTypeSystem().getCanonicalTypeConstraint("green"));
+			
 		} catch (CoreException e) {
 			e.printStackTrace();
 			broadcastError("Problem rebuilding ontology...");
@@ -254,7 +254,7 @@ public class TokenView extends ViewPart {
 			} else{
 				throw new IOException();
 			}
-			System.out.println(tempFile);
+			//System.out.println(tempFile);
 			//PrefsManager.getDefault().checkGrammar();
 			rebuildOntology();
 		} catch (IOException problem) {

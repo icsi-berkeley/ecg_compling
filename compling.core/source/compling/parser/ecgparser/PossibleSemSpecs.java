@@ -380,7 +380,7 @@ public class PossibleSemSpecs implements Cloneable {
               badUni = true;
               break;
             }
-            // System.out.println("in incorp child "+ancChain.toString()+"  "+descChain.toString()+" pid:"+id+" cid:"+child.id);
+             //System.out.println("in incorp child "+ancChain.toString()+"  "+descChain.toString()+" pid:"+id+" cid:"+child.id);
             remainingChildSlots.remove(descChain);
           }
           // System.out.println(remainingChildSlots);

@@ -134,3 +134,4 @@ Export-Package: compling.gui.grammargui;
    compling.gui.grammargui.model"
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
+Import-Package: org.openjena.atlas.json

@@ -14,6 +14,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.openjena.atlas.json.JsonObject;
 
 import compling.gui.grammargui.model.IAnalyzerEditorInput;
 import compling.gui.grammargui.model.IModelChangedListener;
@@ -34,7 +35,7 @@ public class AnalysisEditor extends MultiPageEditorPart  implements IModelChange
 	
 	private Text annotationText;
 	
-	//private AnnotatedAnalysis annotationTool;
+	private AnnotatedAnalysis annotationTool;
 	
 	private interface IViewType {
 		public int TRANSCRIPT = 0;
@@ -64,20 +65,28 @@ public class AnalysisEditor extends MultiPageEditorPart  implements IModelChange
 		if (0 <= b && b < browsers.size())
 			browsers.get(b).execute("javascript:print()");
 	}
-	/*
+	
 	protected void createAnnotationPage() {
-		Browser b = new Browser(getContainer(), SWT.NONE);
+		
 		annotationTool = new AnnotatedAnalysis();
 		annotationText = new Text(getContainer(), SWT.BORDER | SWT.READ_ONLY | SWT.H_SCROLL | SWT.V_SCROLL);
 		IAnalyzerEditorInput input = (IAnalyzerEditorInput) getEditorInput();
-		Analysis first = input.getParses().iterator().next().getAnalyses().iterator().next();
-		String text = annotationTool.getAnnotatedText(input.getSentence().getText(), first);
-		annotationText.setText(text);
-		addPage(IViewType.ANNOTATION, annotationText);
-		b.setText(text);
-		//addPage(IViewType.ANNOTATION, b);
-		setPageText(IViewType.ANNOTATION, "Annotation");
-	} */
+		for (IParse p : input.getParses()) {
+			for (Analysis a : p.getAnalyses()) {
+				Browser b = new Browser(getContainer(), SWT.NONE);
+				String text = annotationTool.getAnnotatedText(input.getSentence().getText(), a);
+				b.setText(text);
+				annotationText.setText(text);
+				browsers.add(b);
+				addPage(IViewType.ANNOTATION, b);
+				
+				//addPage(IViewType.ANNOTATION, b);
+				setPageText(IViewType.ANNOTATION, "Annotation: " + p.getCost());
+			}
+		}
+		//Analysis first = input.getParses().iterator().next().getAnalyses().iterator().next();
+
+	} 
 
 	protected void createRawTextViewPage() {
 		transcript = new Text(getContainer(), SWT.BORDER | SWT.READ_ONLY | SWT.MULTI | SWT.WRAP | SWT.H_SCROLL
@@ -101,6 +110,8 @@ public class AnalysisEditor extends MultiPageEditorPart  implements IModelChange
 		int page = IViewType.HTML;
 		for (IParse p : input.getParses()) {
 			for (Analysis a : p.getAnalyses()) {
+				JsonObject jo = a.produceJson();
+				
 				Browser b = new Browser(getContainer(), SWT.NONE);
 				b.setText(htmlBuilder.getHtmlText(input.getSentence().getText(), a));
 				browsers.add(b);

@@ -93,8 +93,14 @@ public class HtmlFeatureStructureFormatter {
     	  continue;
       }
       
+      String roleString = role.toString();
+      
+      if (role.getSource() != null && !role.getSource().equals(slot.toString())) {
+    	  roleString += " \n (inherited from " + role.getSource() + ") ";
+      }
+      
       emitter.sayln(level++, "<tr>");
-      emitter.sayln(level, "<td>%s:</td>", role);
+      emitter.sayln(level, "<td>%s:</td>", roleString);
 
       FeatureStructureSet.Slot childSlot = slot.getSlot(role);
       emitter.say(level, "<td><span class='index' title='%s'>%d</span></td>", slotType(childSlot), childSlot.getSlotIndex());

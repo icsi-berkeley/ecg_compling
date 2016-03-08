@@ -404,6 +404,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     constructionInput = new ArrayList<ArrayList<Construction>>();
     morphToken = new ArrayList<ArrayList<MorphTokenPair>>();
     
+    ArrayList<String> unknowns = new ArrayList<String>();
 
     for (int i = 0; i < utterance.size(); i++) {
       try {
@@ -494,14 +495,22 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
           }          
         } catch (GrammarException g) {
         	debugPrint("Unknown input lexeme: " + utterance.getElement(i).getOrthography());
+        	
         	List<Construction> lexicalCxns = grammar.getLexicalConstruction(StringUtilities
-	                .addQuotes(ECGConstants.UNKNOWN_ITEM));
+	               .addQuotes(ECGConstants.UNKNOWN_ITEM));
+        	//Construction lexicalCxns = grammar.getConstruction("NounType");
         	if (constructionInput.get(i).isEmpty()) {
+        		//constructionInput.get(i).add(lexicalCxns);
+        		unknowns.add(utterance.getElement(i).getOrthography());
         		constructionInput.get(i).add(lexicalCxns.get(0));
         		morphToken.get(i).add(new MorphTokenPair(null, null));
         	}
         }
     }   
+    
+    if ((unknowns.size() > 0) && (!ROBUST)) {
+    	 throw new ParserException("Analysis not possible, unknown words identified: " + unknowns.toString() + ".");
+    }
     
     
     morphToken.add(new ArrayList<MorphTokenPair>());
