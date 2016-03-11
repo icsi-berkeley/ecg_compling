@@ -43,6 +43,10 @@ public class ECGTokenReader {
 		public Location getLocation() {
 			return location;
 		}
+		
+		public String toString() {
+			return token_name + " :: " + parent.getName() + " :: " + constraints.toString();
+		}
 	}
 	
 	Grammar grammar; 

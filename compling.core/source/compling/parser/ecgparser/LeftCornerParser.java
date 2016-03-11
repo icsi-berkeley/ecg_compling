@@ -229,33 +229,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   }
   
   
-  // TODO: Returns a boolean if "cxn" is compatible with type. Noun-Block is compatible with "noun", etc.
-  private boolean isCompatible(Construction cxn, String type) {
-	  Set<String> parents = cxn.getParents();
-	  if (cxn.getName().equals(type)) {
-		  return true;
-	  }
-	  if (parents.contains(type)) {
-		  return true;
-	  } 
-	  else if (parents.contains("RootType")) {
-		  return false;
-	  } else {
-		  for (String p : parents) {
-			  Construction c = this.grammar.getConstruction(p);
-			  if (isCompatible(c, type)) {
-				  return true;
-			  }
-		  }
-		  return false;
-	  }
-  }
-  
-  // TODO: Returns a boolean if "cxn" is compatible with type. Noun-Block is compatible with "noun", etc.
-  private boolean isCompatible2(Construction cxn, String[] type) {
-	  //Set<String> parents = cxn.getParents();
-	  //List<String> types = Arrays.asList(type);
-	  
+  private boolean isCompatible2(Construction cxn, String[] type) {	  
 	  TypeSystem ts = this.ecgGrammar.getConstructionTypeSystem();
 	  for (String t : type) {
 		  try {
@@ -267,28 +241,6 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 					+ " not found in the construction lattice. Check .morph file for inconsistencies.");
 		}
 	  } return false;
-	  /*
-	  
-	  if (types.contains(cxn.getName())) {
-		  return true;
-	  }
-	  if (!Collections.disjoint(parents, types)) {
-		  return true;
-	  }
-
-	  else if (parents.contains("RootType")) {
-		  return false;
-	  } else {
-		  for (String p : parents) {
-			  Construction c = this.grammar.getConstruction(p);
-			  if (isCompatible2(c, type)) {
-				  return true;
-			  }
-		  }
-		  return false;
-	  }
-	  */
-	  
   }
   
   /** Reloads tokens and morphology instances. 
@@ -304,72 +256,6 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   
   public HashMap<String, List<MorphEntry>> getMorphInflections() {
 	  return morpher.morphs;
-  }
-  
-  //TODO: Finish this method. Should take values from morphTokens and insert them into respective analyses.
-  public PriorityQueue<List<T>> cacheIntoAnalyses(PriorityQueue<List<T>> analyses, ArrayList<ArrayList<MorphTokenPair>> morphTokens, TypeCacheEntry tce) {
-	  PriorityQueue<List<T>> test = analyses.clone();
-	  ArrayList<String> seen = new ArrayList<String>();
-	  ArrayList<ArrayList<Construction>> cxnList = tce.getCxnList();
-	  for (ArrayList<Construction> cxns : cxnList) {
-		  for (Construction cxn : cxns) {
-			  if (cxn != null) {
-				  if (seen.contains(cxn.getName())) {
-					  throw new ComplexCacheException("This was too complex to cache into.");
-				  } else {
-					  seen.add(cxn.getName());
-				  }
-			  }
-		  }
-	  }
-	  while (test.hasNext()) {
-		  List<T> t = test.next();
-		  for (T analysis : t) {
-			  for (int spanIndex=0; spanIndex < analysis.getSpans().size(); spanIndex++) {
-				  // TODO: this method doesn't correctly assign to the right cxns.
-				  // Need a way to determine WHICH Nountype, etc.
-				  CxnalSpan cxns = analysis.getSpans().get(spanIndex);
-				//			  }
-//			  for (CxnalSpan cxns : analysis.getSpans()) {
-				  int id = cxns.getSlotID();
-				  Slot comparator = analysis.getFeatureStructure().getSlot(id);
-				  if (comparator != null) {
-					  String replaced = comparator.getTypeConstraint().toString().replace("@CONSTRUCTION", "");
-					  for (int index1=0; index1 < cxnList.size(); index1++) {
-						  for (int index2=0; index2 < cxnList.get(index1).size(); index2 ++) {
-							  Construction inputCxn = cxnList.get(index1).get(index2);
-							  ECGToken token = morphTokens.get(index1).get(index2).token;
-							  if (inputCxn != null && token != null && replaced.equals(inputCxn.getName())) {
-								  for (Entry<Role, Slot> slots : comparator.getFeatures().entrySet()) {
-									  if (slots.getKey().getName().equals("m")) {
-										  //System.out.println(slots.getValue().getTypeConstraint().);
-										  for (Entry<Role, Slot> featureSlots : slots.getValue().getFeatures().entrySet()) {
-											  for (Constraint c : token.constraints) {
-												  String[] args = c.getArguments().get(0).toString().split("\\.");
-												  if (args.length > 0) {
-													  if (args[args.length-1].equals(featureSlots.getKey().toString())) {
-														  TypeSystem ts = this.ecgGrammar.getOntologyTypeSystem();
-														  if (featureSlots.getValue().hasAtomicFiller()) {
-															  featureSlots.getValue().setAtom(c.getValue());
-														  } else {
-															  String child = c.getValue().substring(1, c.getValue().length()).trim();
-															  String tsItem = ts.getInternedString(child);
-															  featureSlots.getValue().getTypeConstraint().setType(tsItem);
-														  }
-													  }
-												  }
-											  }
-										  }
-									  }
-								  }
-							  }
-						  }
-					  }
-				  }
-			  }
-		  }
-	  }
-	  return analyses.clone();
   }
   
   public void setBeamWidth(int width) {
@@ -399,21 +285,21 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     }
     this.completeAnalyses = new PriorityQueue<List<T>>();
 
-    //input = new Construction[utterance.size() + 1][];
-
     constructionInput = new ArrayList<ArrayList<Construction>>();
     morphToken = new ArrayList<ArrayList<MorphTokenPair>>();
     
     ArrayList<String> unknowns = new ArrayList<String>();
 
     for (int i = 0; i < utterance.size(); i++) {
+    	
+      // try to match orth with tokens/morphology (Celex)
       try {
     	String wordform = utterance.getElement(i).getOrthography();
 
     	Set<String> lems = this.morpher.getLemmas(wordform);
     	constructionInput.add(new ArrayList<Construction>());
     	morphToken.add(new ArrayList<MorphTokenPair>());
-
+    	
     	for (String lemma : lems) {
 	    	try {
 		        List<ECGToken> tokens = this.tokenReader.getToken(lemma);
@@ -421,7 +307,10 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 		        	Construction parent = token.parent;
 		        	
 		        	String[] inflections = morpher.getInflections(lemma, wordform);
+		        	
+		        	//System.out.println
 		        	for (String inf : inflections) {
+		        		
 		        		//int what = this.meaning_morphTable.get(inf).length - 1;
 		        		String[] morphType = new String[]{};
 		        		try {
@@ -430,14 +319,9 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 		        			throw new ParserException("Morphology table does not contain " + inf);
 		        		}
 		        		if (isCompatible2(parent, morphType)) { //this.meaning_morphTable.get(inf).get(1))) {
-		        			
 		        			constructionInput.get(i).add(parent);
 		        			morphToken.get(i).add(new MorphTokenPair(inf, token));
 		        		}
-		        		/*
-		        		if (isCompatible(parent, this.meaning_morphTable.get(inf)[what])) {
-
-		        		} */
 		        	}
 		        }		        
 	    	} catch (GrammarException g) {
@@ -512,6 +396,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     	 throw new ParserException("Analysis not possible, unknown words identified: " + unknowns.toString() + ".");
     }
     
+    
+
     
     morphToken.add(new ArrayList<MorphTokenPair>());
     morphToken.get(utterance.size()).add(new MorphTokenPair(null, null));

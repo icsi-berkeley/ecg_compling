@@ -1,6 +1,7 @@
 package compling.gui.grammargui.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,12 +22,12 @@ public class HtmlFeatureStructureFormatter {
   public HtmlFeatureStructureFormatter() {
     this(new TextEmitter(1));
   }
-
+  
   public HtmlFeatureStructureFormatter(TextEmitter emitter) {
     this.emitter = emitter;
   }
 
-  public void format(FeatureStructureSet fss) {
+  public void format(FeatureStructureSet fss, HashMap<String, String> spansToText) {
     Set<FeatureStructureSet.Slot> alreadyDone = new HashSet<FeatureStructureSet.Slot>();
     /*
     for (FeatureStructureSet.Slot root : fss.getRootSlots()) {
@@ -37,7 +38,7 @@ public class HtmlFeatureStructureFormatter {
     
     for (FeatureStructureSet.Slot root : fss.getRootSlots()) {
       emitter.sayln(0, "<div class='root-wrapper'>");
-      formatHelper(root, alreadyDone, new HashSet<Integer>(), 1);
+      formatHelper(root, alreadyDone, new HashSet<Integer>(), 1, spansToText);
       emitter.sayln(0, "</div>");
     } 
     emitter.getOutput();
@@ -62,7 +63,7 @@ public class HtmlFeatureStructureFormatter {
   }
 
   private void formatHelper(FeatureStructureSet.Slot slot, Set<FeatureStructureSet.Slot> alreadyDone,
-          Set<Integer> foundInd, int level) {
+          Set<Integer> foundInd, int level, HashMap<String, String> spansToText) {
 
     if (!slot.hasFiller() || alreadyDone.contains(slot))
       return;
@@ -77,6 +78,17 @@ public class HtmlFeatureStructureFormatter {
     if (typeConstraint != null) {
       type = typeConstraint.getType();
       typeName = typeConstraint.getTypeSystem().getName();
+      
+      //seantrott: testing, adding in span/text information to constructions..
+      if (typeName.equals("CONSTRUCTION")) {
+    	  String text = spansToText.get(type + "[" + slot.getID() + "]");
+    	  System.out.println(text);
+    	  if (text != null) {
+    		  type += "   (" + text + ")";
+    	  }
+      }
+      
+      
       String key = Constants.nodeToKey(TypeSystemNodeType.fromString(typeName));
       emitter.sayln(level, "<tr><td class='type-name %s'>", typeName);
       emitter.sayln(level + 1, "<img src='%s' height=16 width=16 style='float: left;'/>", key);
@@ -117,7 +129,7 @@ public class HtmlFeatureStructureFormatter {
       }
       else if (childSlot.hasFiller() && childSlot.hasStructuredFiller() && !alreadyDone.contains(childSlot)) {
         emitter.sayln(level, "<td><div class='collapsible-content'>");
-        formatHelper(childSlot, alreadyDone, foundInd, level + 1);
+        formatHelper(childSlot, alreadyDone, foundInd, level + 1, spansToText);
         emitter.sayln(level, "</div></td>");
       }
       else

@@ -77,6 +77,19 @@ public class ECGMorph {
 				inflections.add(inflect);			
 			}
 		} // MorphEntry()
+		
+		public String toString() {
+			return this.lemma + " " + this.inflections.toString();
+		}
+		
+		public boolean equals(MorphEntry other) {
+			return other.lemma.equals(this.lemma) && other.inflections.equals(this.inflections);
+		}
+		
+		public int hashCode() {
+			int resultSeed = 42;
+			return resultSeed * this.lemma.hashCode() * this.inflections.hashCode();
+		}
 	} // class MorphEntry
 	
 	/**
@@ -121,11 +134,9 @@ public class ECGMorph {
 				}
 				String splitline[] = line.split("\\s+");
 				if (splitline.length < 3) {
-					// TODO: Create a MorphException class and throw that instead
 					throw new ParserException("Improperly formatted entry in morph file " + ecgmorph_path + ", line " + lineNum);
 				}
 				if (entryInGrammar(splitline)) {
-					// System.out.println("Found morph for \"" + entrystr[0] + "\"");
 					List<MorphEntry> morphlist;
 					// Create data structure. Since every wordform should only occur once,
 					// this could probably be hoisted, but better safe...
@@ -137,7 +148,16 @@ public class ECGMorph {
 					}
 					for (int ii = 1; ii < splitline.length; ii+=2) {
 						try {
-							morphlist.add(new MorphEntry(splitline[ii], splitline[ii+1]));
+							MorphEntry newEntry = new MorphEntry(splitline[ii], splitline[ii+1]);
+							boolean add = true;
+							for (MorphEntry me : morphlist) {
+								if (me.lemma.equals(newEntry.lemma) && me.inflections.equals(newEntry.inflections)) {
+									add = false;
+								}
+							}
+							if (add) {
+								morphlist.add(new MorphEntry(splitline[ii], splitline[ii+1]));
+							}
 						} catch (ArrayIndexOutOfBoundsException e) {
 							throw new ParserException("Array index out of bounds in .ecgmorph file on line " + lineNum + " for entry '"
 									+ splitline[0] + "'.");
