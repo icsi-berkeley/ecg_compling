@@ -82,9 +82,9 @@ public class HtmlFeatureStructureFormatter {
       //seantrott: testing, adding in span/text information to constructions..
       if (typeName.equals("CONSTRUCTION")) {
     	  String text = spansToText.get(type + "[" + slot.getID() + "]");
-    	  System.out.println(text);
+//    	  System.out.println(text);
     	  if (text != null) {
-    		  type += "   (" + text + ")";
+    		  type += "   ('" + text + "')";
     	  }
       }
       

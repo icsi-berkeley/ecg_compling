@@ -167,6 +167,14 @@
             id="compling.gui.grammargui.views.lexicon"
             name="Lexicon Viewer">
       </view>
+      <view
+   	        allowMultiple="false"
+   	        category="compling.gui.grammargui.categories.token"
+            class="compling.gui.grammargui.views.PackageView"
+            icon="icons/lexeme.ico"
+            id="compling.gui.grammargui.views.package"
+            name="Package Viewer">
+      </view>
       <!--
       <view
          	allowMultiple="false"

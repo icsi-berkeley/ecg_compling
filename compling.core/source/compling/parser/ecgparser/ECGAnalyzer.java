@@ -54,6 +54,10 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	private boolean robust;
 	private boolean debug;
 	private boolean analyzeInContext;
+	
+	// if this is true, use a built-in method for incrementing beam size
+	// according to length of input, etc.
+	private boolean variableBeam;
 
 	private String paramsType;
 	private boolean useBackoff;
@@ -109,6 +113,9 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 
 		robust = prefs.getSetting(AP.ROBUST) == null ? false : Boolean.valueOf(prefs.getSetting(AP.ROBUST));
 
+		variableBeam = prefs.getSetting(AP.VARIABLE_BEAM) == null ? false : Boolean.valueOf(prefs.getSetting(AP.VARIABLE_BEAM));
+
+		
 		debug = prefs.getSetting(AP.DEBUG) == null ? false : Boolean.valueOf(prefs.getSetting(AP.DEBUG));
 
 		analyzeInContext = prefs.getSetting(AP.ANALYZE_IN_CONTEXT) == null ? false : Boolean.valueOf(prefs
@@ -292,8 +299,8 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	public GrammarWrapper getGrammarWrapper() {
 		return grammar;
 	}
-
-	public PriorityQueue<Analysis> getBestParses(Utterance<Word, String> utterance) {
+	
+	private PriorityQueue<Analysis> getParsesForUtterance(Utterance<Word, String> utterance) {
 		PriorityQueue<List<Analysis>> pqa = parser.getBestPartialParses(utterance);
 		PriorityQueue<Analysis> parses = new PriorityQueue<Analysis>();
 		while (pqa.size() > 0) {
@@ -306,6 +313,35 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 			parses.add(a, priority);
 		}
 		return parses;
+	}
+
+	// will probably separate this method into non-variable and variable versions eventually
+	public PriorityQueue<Analysis> getBestParses(Utterance<Word, String> utterance) {
+		
+		System.out.println("Variable beam search set to " + this.variableBeam + ".");
+		
+		if (this.variableBeam) {
+			System.out.println("Utterance length is " + utterance.size());
+			int maxBeam = 80; // make this a function of utterance length
+			// maybe utterance.size() * 10?
+			int index = 5;
+			while (index <= maxBeam) {
+				System.out.println(index);
+				try {
+					parser.setBeamWidth(index);
+					PriorityQueue<Analysis> parses = getParsesForUtterance(utterance);
+					return parses;
+				} catch (ParserException p) {
+					System.out.println(index);
+					index = index * 2;	
+				}
+			}
+			throw new ParserException("No complete analysis for: '" + utterance.toString() + "'.");
+		} else {
+			return getParsesForUtterance(utterance);
+		}
+
+		
 		 
 		
 	}

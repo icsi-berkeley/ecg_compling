@@ -110,7 +110,6 @@ public class AnalysisHtmlBuilder {
 		emitter.reset();
 		
 		HashMap<String, String> spansToText = matchSpansToText(sentence, a);
-		System.out.println(spansToText);
 	
 		emitHtmlPrologue(sentence);
 		formatter.format(a.getFeatureStructure(), spansToText);

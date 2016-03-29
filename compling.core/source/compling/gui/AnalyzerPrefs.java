@@ -75,6 +75,10 @@ public class AnalyzerPrefs implements Prefs {
 		TEST_SENTENCES(Datatype.LISTSTRING),
 
 		PARSER_SETTINGS(Datatype.STRING),
+		
+		// if true, use built-in implementation of variable beam size
+		// if false, just proceed as normally
+		VARIABLE_BEAM(Datatype.BOOL),
 
 		ROBUST(Datatype.BOOL),
 		DEBUG(Datatype.BOOL),

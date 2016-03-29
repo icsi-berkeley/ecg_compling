@@ -265,9 +265,6 @@ public class ECGMorph {
 		if (grammarWrapper.hasLexicalConstruction(StringUtilities.addQuotes(splitline[0]))) {
 			return true;
 		}
-		if (grammarWrapper.hasLemmaConstruction(StringUtilities.addQuotes(splitline[0]))) {
-			return true;
-		} 
 		if (tokenReader.tokens.keySet().contains(splitline[0])) {
 			return true;
 		}
@@ -277,9 +274,6 @@ public class ECGMorph {
 		// Now check for all the possible lemmas.
 		for (int ii = 1; ii < splitline.length; ii+=2) {
 			if (grammarWrapper.hasLexicalConstruction(StringUtilities.addQuotes(splitline[ii]))) {
-				return true;
-			}
-			if (grammarWrapper.hasLemmaConstruction(StringUtilities.addQuotes(splitline[ii]))) {
 				return true;
 			}
 			if (tokenReader.hasToken(StringUtilities.addQuotes(splitline[ii]))) {
