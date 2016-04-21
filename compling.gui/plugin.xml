@@ -170,7 +170,7 @@
       <view
    	        allowMultiple="false"
    	        category="compling.gui.grammargui.categories.token"
-            class="compling.gui.grammargui.views.PackageView"
+            class="compling.gui.grammargui.ui.views.PackageView"
             icon="icons/lexeme.ico"
             id="compling.gui.grammargui.views.package"
             name="Package Viewer">

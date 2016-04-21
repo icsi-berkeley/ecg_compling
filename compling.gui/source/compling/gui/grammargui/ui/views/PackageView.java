@@ -21,6 +21,7 @@ import compling.gui.grammargui.model.PrefsManager;
 
 public class PackageView extends ViewPart {
 	
+	
 	public static final String ID = "compling.gui.grammargui.views.package";
 	
 
@@ -75,14 +76,30 @@ public class PackageView extends ViewPart {
 
 	protected void createTree() {
 		tree.removeAll();
+		ArrayList<String> observed = new ArrayList<String>();
 		System.out.println(relations);
+		TreeItem active = new TreeItem(tree, 0);
+		active.setText("Active Packages");
 		for (String pkg : declared) {
-			TreeItem dec = new TreeItem(tree, 0);
-			dec.setText(pkg);
-			if (relations.containsKey(pkg)) {
-				for (String imports : relations.get(pkg)) {
-					TreeItem imp = new TreeItem(tree, 0);
-					imp.setText(imports);
+			if (!observed.contains(pkg)) {
+				
+				ArrayList<String> observed2 = new ArrayList<String>();
+				TreeItem dec = new TreeItem(active, 0);
+				dec.setText(pkg);
+				observed.add(pkg);
+				System.out.println(pkg);
+				System.out.println(observed);
+				if (relations.containsKey(pkg)) {
+					for (String imports : relations.get(pkg)) {
+						if (!observed2.contains(imports)) {
+							TreeItem imp = new TreeItem(dec, 0);
+							if (declared.contains(imports)) {
+								imports += " (active)";
+							}
+							imp.setText(imports);
+							observed2.add(imports);
+						}
+					}
 				}
 			}
 		}

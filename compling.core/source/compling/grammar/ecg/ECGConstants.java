@@ -65,6 +65,12 @@ public class ECGConstants {
 	 * "<--"
 	 */
 	public static final String NEGATE = "#";
+	
+	/**
+	 * 	 * The constant for assignment that should be passed into the operator role of the constraint constructor. ASSIGN =
+	 * "<="
+	 */
+	//public static final String NEGATE = "#";
 
 /**
     * The constant for form constraint 'before' that should be passed into the

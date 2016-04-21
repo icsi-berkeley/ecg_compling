@@ -64,6 +64,7 @@ import compling.parser.ecgparser.ECGTokenReader.ECGToken;
 
 
 public class LexiconView extends ViewPart {
+
 	
 	public static final String ID = "compling.gui.grammargui.views.lexicon";
 	

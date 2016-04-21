@@ -108,7 +108,7 @@ public class HtmlFeatureStructureFormatter {
       String roleString = role.toString();
       
       if (role.getSource() != null && !role.getSource().equals(slot.toString())) {
-    	  roleString += " \n (inherited from " + role.getSource() + ") ";
+    	  //roleString += " \n (inherited from " + role.getSource() + ") ";
       }
       
       emitter.sayln(level++, "<tr>");
