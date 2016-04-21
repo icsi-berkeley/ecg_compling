@@ -115,6 +115,7 @@ public class UnificationGrammar {
 		public String type;
 		public TypeSystem<? extends TypeSystemNode> typeSystem;
 		public boolean negated = false;
+		public boolean unidirectional = false;
 
 		public TypeConstraint(String type, TypeSystem<? extends TypeSystemNode> typeSystem) {
 			this.type = type;
@@ -123,6 +124,14 @@ public class UnificationGrammar {
 		
 		public void setNegated(boolean negate) {
 			negated = negate;
+		}
+		
+		public void setUnidirectional(boolean uni) {
+			unidirectional = uni;
+		}
+		
+		public boolean unidirectional() {
+			return unidirectional;
 		}
 		
 		public boolean negated() {

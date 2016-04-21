@@ -317,8 +317,7 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 
 	// will probably separate this method into non-variable and variable versions eventually
 	public PriorityQueue<Analysis> getBestParses(Utterance<Word, String> utterance) {
-		
-		System.out.println("Variable beam search set to " + this.variableBeam + ".");
+	
 		
 		if (this.variableBeam) {
 			System.out.println("Utterance length is " + utterance.size());

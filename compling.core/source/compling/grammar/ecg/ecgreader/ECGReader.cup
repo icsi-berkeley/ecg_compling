@@ -58,6 +58,7 @@ terminal  CONSTRUCTION, SUBCASE, CONSTRUCTIONAL, SCHEMA, ABSTRACT, PACKAGE, IMPO
 terminal  FORM, MEANING, BEFORE, MEETS, COLON, COMMA, OPENBRACKET, CLOSEBRACKET, OPTIONAL, EXTRAPOSED;
 terminal  ASSIGN, IDENTIFY, EVOKES, AS, OF, ROLES;
 terminal  NEGATE;
+terminal UNIDIRECTIONAL_ASSIGN;
 terminal  CONSTITUENTS, CONSTRAINTS, FEATURE, SEMANTIC, IGNORE;
 
 terminal  MAP, SITUATION;
@@ -526,6 +527,9 @@ constraint ::=
   :}
   | slot_chain:arg1 NEGATE:op ident_or_str:arg2 {:
   	RESULT = new Constraint(ECGConstants.NEGATE, new ECGSlotChain(arg1), arg2);
+  :}
+  | slot_chain:arg1 UNIDIRECTIONAL_ASSIGN:op ident_or_str:arg2 {:
+  	RESULT = new Constraint(ECGConstants.UNIDIRECTIONAL_ASSIGN, new ECGSlotChain(arg1), arg2);
   :}
   ;
 

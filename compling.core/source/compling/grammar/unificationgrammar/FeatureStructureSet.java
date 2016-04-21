@@ -373,6 +373,8 @@ public class FeatureStructureSet implements Cloneable {
 			}
 		}
 		
+
+		
 		private boolean negatedTypes(TypeConstraint thatType) {
 			TypeConstraint thisType = typeConstraint;
 			String t1 = thisType.typeSystem.getInternedString(thisType.type);
@@ -380,16 +382,11 @@ public class FeatureStructureSet implements Cloneable {
 			try {
 //				if (thisType.typeSystem.subtype(thisType.type, thatType.type)) {
 				if (thisType.typeSystem.subtype(t1, t2)) {
-					// this type is more specific
 					System.out.println(thisType.type + " is more specific than " + thatType.type);
 					return false;
 				//} else if (thisType.typeSystem.subtype(thatType.type, thisType.type)) {
 				} else if (thisType.typeSystem.subtype(t2, t1)) {
-					// that type is more specific
 					System.out.println(thisType.type + " is less specific than " + thatType.type);
-					//typeConstraint = thatType;
-					//System.out.println("This: " + thisType);
-					//System.out.println("That: " + thatType);
 					return true;
 				} else {
 					System.out.println("Everything is okay...");
@@ -400,6 +397,34 @@ public class FeatureStructureSet implements Cloneable {
 			} catch (TypeSystemException tse) {
 				throw new GrammarException(tse + ".\nThis.typeSystem=" + thisType.getTypeSystem().getName()
 						+ " and thatType.typeSystem=" + thatType.getTypeSystem().getName());
+			}
+		}
+		
+		// ST, 4/21/16
+		// This method is for a new constraint type ("r1 <= @filler"), which constrains that eventual filler of r1
+		// be at least as specific as the @filler specified.
+		private boolean unidirectionalTypes(TypeConstraint thisType, TypeConstraint thatType) {
+			try {
+				if (thisType.unidirectional() && thatType.unidirectional()) {
+					System.out.println("Both...");
+					return thisType.type.equals(thatType.type);
+				}
+				else if (thisType.unidirectional()) {
+					System.out.println("is " + thatType.type + " a subtype of " + thisType.type);
+					return (thisType.typeSystem.subtype(thatType.type, thisType.type));
+				}
+				 else if (thatType.unidirectional()) {
+					System.out.println("+++++++");
+					System.out.println("is " + thisType.type + " a subtype of " + thatType.type);
+//					System.out.println((thatType.typeSystem.subtype(thatType.type, thisType.type)));
+					return (thatType.typeSystem.subtype(thisType.type, thatType.type)); 
+				} else {
+					System.out.println("this shouldn't get called"); 
+					return false; // this shouldn't get called
+				}
+			} catch (TypeSystemException tse) {
+				throw new GrammarException(tse + ".\n" + thisType.getType() +".typeSystem=" + thisType.getTypeSystem().getName()
+						+ " and " + thatType.getType() + ".typeSystem=" + thatType.getTypeSystem().getName());
 			}
 		}
 
@@ -424,6 +449,9 @@ public class FeatureStructureSet implements Cloneable {
 				if (thatType.negated() || thisType.negated()) {
 					System.out.println("Negated...");
 					return negatedTypes(thatType);
+				}
+				else if (thisType.unidirectional() || thatType.unidirectional()) {
+					return unidirectionalTypes(thisType, thatType);
 				}
 				try {
 					if (thisType.typeSystem.subtype(thisType.type, thatType.type)) {

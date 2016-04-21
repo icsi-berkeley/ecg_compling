@@ -67,10 +67,10 @@ public class ECGConstants {
 	public static final String NEGATE = "#";
 	
 	/**
-	 * 	 * The constant for assignment that should be passed into the operator role of the constraint constructor. ASSIGN =
-	 * "<="
+	 * 	 * The constant for assignment that should be passed into the operator role of the constraint.
+	 * This imposes a unidirectional assignment.
 	 */
-	//public static final String NEGATE = "#";
+	public static final String UNIDIRECTIONAL_ASSIGN = "<=";
 
 /**
     * The constant for form constraint 'before' that should be passed into the

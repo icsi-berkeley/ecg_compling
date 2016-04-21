@@ -342,11 +342,10 @@ public class Analysis implements Cloneable {
 
   public boolean addConstraint(Constraint constraint, String prefix) {
     if (constraint.getOperator().equals(ECGConstants.ASSIGN)) {
-      if (constraint.getValue().charAt(0) == ECGConstants.CONSTANTFILLERPREFIX) {
-    	  
-        return featureStructure.fill(new ECGSlotChain(prefix, constraint.getArguments().get(0)), constraint.getValue());
-      }
-      else if (constraint.getValue().charAt(0) != ECGConstants.CONSTANTFILLERPREFIX) { // then
+    	if (constraint.getValue().charAt(0) == ECGConstants.CONSTANTFILLERPREFIX) {
+    		return featureStructure.fill(new ECGSlotChain(prefix, constraint.getArguments().get(0)), constraint.getValue());
+    	}
+    	else if (constraint.getValue().charAt(0) != ECGConstants.CONSTANTFILLERPREFIX) { // then
                                                                                        // this
                                                                                        // is
                                                                                        // a
@@ -367,6 +366,7 @@ public class Analysis implements Cloneable {
       }
       return true;
     }
+    
     else if (constraint.getOperator().equals(ECGConstants.NEGATE)) {
         TypeConstraint typeConstraint = null;
         if (constraint.getValue().charAt(0) == ECGConstants.ONTOLOGYPREFIX) {
@@ -384,6 +384,23 @@ public class Analysis implements Cloneable {
         featureStructure.getSlot(new ECGSlotChain(prefix, constraint.getArguments().get(0))).setTypeConstraint(
                 tc);
     	return true;
+    }
+    	
+    else if (constraint.getOperator().equals(ECGConstants.UNIDIRECTIONAL_ASSIGN)) {
+        TypeConstraint typeConstraint = null;
+        if (!(constraint.getValue().charAt(0) == ECGConstants.ONTOLOGYPREFIX)) {
+        	throw new ParserException("Unidirectional assignment operator " + constraint.getOperator() + " in '" + constraint + "' requires an ontology constraint."); 
+        }
+        typeConstraint = getExternalTypeSystem().getCanonicalTypeConstraint(constraint.getValue().substring(1));
+        if (typeConstraint == null) {
+            throw new ParserException("Type " + constraint.getValue() + " in constraint " + constraint + " is undefined");
+          }
+        TypeConstraint tc = typeConstraint.clone();
+        tc.setUnidirectional(true);
+        featureStructure.getSlot(new ECGSlotChain(prefix, constraint.getArguments().get(0))).setTypeConstraint(
+                  tc);
+        
+        return true;
     }
     else if (constraint.getOperator().equals(ECGConstants.IDENTIFY)) {
       SlotChain sc0 = constraint.getArguments().get(0);
@@ -413,6 +430,14 @@ public class Analysis implements Cloneable {
       // TypeConstraint tc1 = featureStructure.getSlot(sc1).getTypeConstraint();
 
       boolean success = featureStructure.coindex(sc0, sc1);
+      
+      //System.out.println("======");
+      //System.out.println(success); 
+      if (!success) {
+    	  System.out.println("----------------");
+    	  System.out.println(sc0);
+    	  System.out.println(sc1);
+      }
 
       return success;
     }
