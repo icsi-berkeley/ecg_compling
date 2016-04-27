@@ -406,16 +406,16 @@ public class FeatureStructureSet implements Cloneable {
 		private boolean unidirectionalTypes(TypeConstraint thisType, TypeConstraint thatType) {
 			try {
 				if (thisType.unidirectional() && thatType.unidirectional()) {
-					System.out.println("Both...");
+					//System.out.println("Both...");
 					return thisType.type.equals(thatType.type);
 				}
 				else if (thisType.unidirectional()) {
-					System.out.println("is " + thatType.type + " a subtype of " + thisType.type);
+					//System.out.println("is " + thatType.type + " a subtype of " + thisType.type);
 					return (thisType.typeSystem.subtype(thatType.type, thisType.type));
 				}
 				 else if (thatType.unidirectional()) {
-					System.out.println("+++++++");
-					System.out.println("is " + thisType.type + " a subtype of " + thatType.type);
+//					System.out.println("+++++++");
+//					System.out.println("is " + thisType.type + " a subtype of " + thatType.type);
 //					System.out.println((thatType.typeSystem.subtype(thatType.type, thisType.type)));
 					return (thatType.typeSystem.subtype(thisType.type, thatType.type)); 
 				} else {

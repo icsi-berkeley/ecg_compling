@@ -19,6 +19,7 @@ import compling.grammar.unificationgrammar.UnificationGrammar.Constraint;
 import compling.gui.AnalyzerPrefs;
 import compling.gui.AnalyzerPrefs.AP;
 import compling.parser.ParserException;
+import compling.parser.UnknownWordException;
 import compling.parser.ecgparser.ECGTokenReader.ECGToken;
 import compling.parser.ecgparser.LeftCornerParserTablesCxn.AnalysisFactory;
 import compling.parser.ecgparser.LeftCornerParserTablesCxn.AnalysisInContextFactory;
@@ -320,18 +321,22 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 	
 		
 		if (this.variableBeam) {
-			System.out.println("Utterance length is " + utterance.size());
-			int maxBeam = 80; // make this a function of utterance length
+			//System.out.println("Utterance length is " + utterance.size());
+			int maxBeam = utterance.size() * 10; // make this a function of utterance length
 			// maybe utterance.size() * 10?
 			int index = 5;
 			while (index <= maxBeam) {
-				System.out.println(index);
+				//System.out.println(index);
+
 				try {
 					parser.setBeamWidth(index);
 					PriorityQueue<Analysis> parses = getParsesForUtterance(utterance);
 					return parses;
-				} catch (ParserException p) {
-					System.out.println(index);
+				} catch (ParserException e) {
+					if (e.isUnknown()) {
+						//System.out.println("Beam size on");
+						throw new ParserException(e.getMessage());
+					}
 					index = index * 2;	
 				}
 			}

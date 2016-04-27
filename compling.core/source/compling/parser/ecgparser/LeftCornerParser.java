@@ -31,6 +31,7 @@ import compling.grammar.unificationgrammar.UnificationGrammar.SlotChain;
 import compling.grammar.unificationgrammar.UnificationGrammar.TypeConstraint;
 import compling.parser.ParserException;
 import compling.parser.RobustParser;
+import compling.parser.UnknownWordException;
 import compling.parser.ecgparser.ECGMorph.MorphEntry;
 import compling.parser.ecgparser.LeftCornerParserTablesCxn.AnalysisFactory;
 import compling.parser.ecgparser.LeftCornerParserTablesCxn.AnalysisInContextFactory;
@@ -393,7 +394,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     }   
     
     if ((unknowns.size() > 0) && (!ROBUST)) {
-    	 throw new ParserException("Analysis not possible, unknown words identified: " + unknowns.toString() + ".");
+    	 throw new UnknownWordException("Analysis not possible, unknown words identified: " + unknowns.toString() + ".");
     }
     
     

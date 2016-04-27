@@ -14,7 +14,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.openjena.atlas.json.JsonObject;
+
 
 import compling.gui.grammargui.model.IAnalyzerEditorInput;
 import compling.gui.grammargui.model.IModelChangedListener;
@@ -110,7 +110,6 @@ public class AnalysisEditor extends MultiPageEditorPart  implements IModelChange
 		int page = IViewType.HTML;
 		for (IParse p : input.getParses()) {
 			for (Analysis a : p.getAnalyses()) {
-				JsonObject jo = a.produceJson();
 				
 				Browser b = new Browser(getContainer(), SWT.NONE);
 				b.setText(htmlBuilder.getHtmlText(input.getSentence().getText(), a));

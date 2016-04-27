@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import org.openjena.atlas.json.JsonObject;
+
 
 import compling.grammar.ecg.ECGConstants;
 import compling.grammar.ecg.ECGGrammarUtilities;
@@ -775,11 +775,7 @@ public boolean hasGapFiller() {
     }
   }
   
-  public static JsonObject produceJson() {
-	  JsonObject jsonAnalysis = new JsonObject();
-	  //jsonAnalysis.
-	  return jsonAnalysis;
-  }
+
 
   public static void main(String[] args) throws IOException, TypeSystemException {
     String ontFile = null;

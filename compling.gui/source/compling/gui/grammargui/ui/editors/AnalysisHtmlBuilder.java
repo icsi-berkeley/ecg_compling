@@ -14,6 +14,7 @@ import compling.gui.grammargui.util.Log;
 import compling.gui.grammargui.util.TextEmitter;
 import compling.parser.ecgparser.Analysis;
 import compling.parser.ecgparser.CxnalSpan;
+import compling.util.Arrays;
 
 public class AnalysisHtmlBuilder {
 	protected static final String CSS_ENTRY = "css";
@@ -86,16 +87,23 @@ public class AnalysisHtmlBuilder {
 		HashMap<String, String> spansToText = new HashMap<String, String>();
 		List<CxnalSpan> spans = a.getSpans();
 		
-		String[] split = sentence.replace("?", " ? ").replace("!", " ! ").replace(".", " . ").replace(",", " , ").split(" ");
+		List<String> split_test = Arrays.split(sentence);
+		//System.out.println(split_test);
 		
+		//String[] split = sentence.replace("?", " ? ").replace("!", " ! ").replace(".", " . ").replace(",", " , ").trim().split(" ");
+		
+		//String[] split = sentence.replace("", " ").trim().split(" ");
+
 		for (CxnalSpan span : spans) {
 			if (span.getType() != null) {
 				String text = "";
 				String type = span.getType().getName() + "[" + span.getSlotID()+ "]";
+				//System.out.println(type);
 				int left = span.left;
 				int right = span.right;
 				for (int index=left; index<right; index++) {
-					text += split[index] + " ";
+					text += split_test.get(index) + " ";
+					//System.out.println(text);
 				}
 				spansToText.put(type, text);
 			}

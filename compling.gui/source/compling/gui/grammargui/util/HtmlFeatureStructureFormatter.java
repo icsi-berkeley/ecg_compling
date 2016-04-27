@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import compling.grammar.ecg.ECGConstants;
 import compling.grammar.unificationgrammar.FeatureStructureSet;
 import compling.grammar.unificationgrammar.FeatureStructureSet.Slot;
 import compling.grammar.unificationgrammar.UnificationGrammar.Role;
@@ -80,7 +81,7 @@ public class HtmlFeatureStructureFormatter {
       typeName = typeConstraint.getTypeSystem().getName();
       
       //seantrott: testing, adding in span/text information to constructions..
-      if (typeName.equals("CONSTRUCTION")) {
+      if (typeName.equals(ECGConstants.CONSTRUCTION)) { 
     	  String text = spansToText.get(type + "[" + slot.getID() + "]");
 //    	  System.out.println(text);
     	  if (text != null) {
