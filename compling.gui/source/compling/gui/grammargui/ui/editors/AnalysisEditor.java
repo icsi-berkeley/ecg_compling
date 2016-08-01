@@ -15,7 +15,6 @@ import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
-
 import compling.gui.grammargui.model.IAnalyzerEditorInput;
 import compling.gui.grammargui.model.IModelChangedListener;
 import compling.gui.grammargui.ui.actions.PrintAction;
@@ -96,8 +95,15 @@ public class AnalysisEditor extends MultiPageEditorPart  implements IModelChange
 		transcript.setForeground(transcript.getDisplay().getSystemColor(SWT.COLOR_BLACK));
 
 		IAnalyzerEditorInput input = (IAnalyzerEditorInput) getEditorInput();
-
-		transcript.setText(input.getText());
+		long startTime = System.nanoTime();
+		String parseText = input.getText();
+		long endTime = System.nanoTime();
+		long duration = (endTime - startTime) / 1000000000;
+		String timeString = String.format("Time: %s second(s)", duration);
+		String finalTranscript = timeString + "\n" + parseText;
+		//transcript.setText(input.getText());
+		transcript.setText(finalTranscript);
+		
 		addPage(IViewType.TRANSCRIPT, transcript);
 		setPageText(IViewType.TRANSCRIPT, "Text Output");
 	}

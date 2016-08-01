@@ -115,9 +115,10 @@ public class TestRunnerView extends ViewPart implements IModelChangedListener /*
 			int failures = 0;
 			long startTime = System.nanoTime();
 			long analyzerTime = 0;
-			try {
+			//try {
 				long startupTimeOne = System.nanoTime();
-				ECGAnalyzer analyzer = new ECGAnalyzer(PrefsManager.getDefault().getGrammar());
+				
+				ECGAnalyzer analyzer = PrefsManager.getDefault().getAnalyzer();//new ECGAnalyzer(PrefsManager.getDefault().getGrammar());
 				long startupTimeTwo = System.nanoTime();
 				analyzerTime = (startupTimeTwo - startupTimeOne) / 1000000000;
 				
@@ -137,11 +138,12 @@ public class TestRunnerView extends ViewPart implements IModelChangedListener /*
 					}
 					reportProgress(monitor, ++step, failures);
 				}
-			} 
+			//} 
+			/*
 			catch (IOException e) {
 				Log.logError(e, "Major problem while instantiating Analyzer");
 				return new JobStatus(IStatus.ERROR, this, "Problem initializing Analyzer object.");
-			}
+			} */
 			long endTime = System.nanoTime();
 			
 			long duration = (endTime - startTime) / 1000000000;

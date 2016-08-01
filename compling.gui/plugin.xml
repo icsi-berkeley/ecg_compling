@@ -149,15 +149,7 @@
             id="compling.gui.grammargui.views.tokenView"
             name="Token Adder">
       </view>
-      
-      <view
-   	        allowMultiple="false"
-   	        category="compling.gui.grammargui.categories.token"
-            class="compling.gui.grammargui.ui.views.GrammarGrapher"
-            icon="icons/latticeIcon.ico"
-            id="compling.gui.grammargui.views.grammarGrapher"
-            name="Grapher">
-      </view>
+     
       
       <view
    	        allowMultiple="false"

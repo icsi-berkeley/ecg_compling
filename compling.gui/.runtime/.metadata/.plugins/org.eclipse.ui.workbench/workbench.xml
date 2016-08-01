@@ -61,6 +61,8 @@
 <alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo"/>
 <alwaysOnActionSet id="compling.gui.grammargui.actions.fileActionSet"/>
 <show_view_action id="compling.gui.grammargui.views.GrammarTreeView"/>
+<show_view_action id="compling.gui.grammargui.views.lexicon"/>
+<show_view_action id="compling.gui.grammargui.views.tokenView"/>
 <show_view_action id="compling.gui.grammargui.views.contentView"/>
 <show_view_action id="compling.gui.grammargui.views.constructionHierarchy"/>
 <show_view_action id="compling.gui.grammargui.views.schemaHierarchy"/>
@@ -69,12 +71,9 @@
 <show_view_action id="compling.gui.grammargui.views.ontologyHierarchy"/>
 <show_view_action id="compling.gui.grammargui.views.Analyzer"/>
 <show_view_action id="org.eclipse.ui.console.ConsoleView"/>
-<show_view_action id="org.eclipse.ui.views.BookmarkView"/>
 <show_view_action id="org.eclipse.ui.views.ProblemView"/>
 <show_view_action id="compling.gui.grammargui.views.commonExplorer"/>
 <show_view_action id="org.eclipse.ui.views.ContentOutline"/>
-<show_view_action id="compling.gui.grammargui.views.lexicon"/>
-<show_view_action id="compling.gui.grammargui.views.tokenView"/>
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <view id="compling.gui.grammargui.views.GrammarTreeView"/>
 <view id="compling.gui.grammargui.views.commonExplorer"/>
@@ -82,6 +81,7 @@
 <view id="compling.gui.grammargui.views.analyzer2"/>
 <view id="org.eclipse.ui.views.ProblemView"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
+<view id="compling.gui.grammargui.views.lexicon"/>
 <fastViewBars/>
 <layout>
 <mainWindow>
