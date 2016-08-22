@@ -60,7 +60,6 @@ import compling.gui.grammargui.util.Constants.IImageKeys;
 import compling.ontology.OWLTypeSystemNode;
 import compling.parser.ecgparser.ECGTokenReader;
 import compling.parser.ecgparser.LCPGrammarWrapper;
-import compling.parser.ecgparser.UtteranceGenerator;
 import compling.parser.ecgparser.ECGTokenReader.ECGToken;
 
 

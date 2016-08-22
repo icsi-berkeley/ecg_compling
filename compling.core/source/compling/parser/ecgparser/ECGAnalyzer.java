@@ -243,16 +243,6 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 		return lexicon;
 	}
 	
-	public ArrayList<String> getUtterances() {
-		UtteranceGenerator generator = new UtteranceGenerator(grammar);
-		return generator.generateUtterances("Utterance");
-	}
-	
-	public ArrayList<String> getUtterances(String type) {
-		UtteranceGenerator generator = new UtteranceGenerator(grammar);
-		return generator.generateUtterances(type);
-	}
-	
 	
 	/** Reads token file into Parser again. Needs to be done when you want new tokens in lexicon. */
 	public void reloadTokens() {
