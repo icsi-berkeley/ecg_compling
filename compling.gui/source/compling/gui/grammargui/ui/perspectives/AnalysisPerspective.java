@@ -30,10 +30,10 @@ public class AnalysisPerspective implements IPerspectiveFactory {
 		String editorArea = layout.getEditorArea();
 		layout.setEditorAreaVisible(true);
 
-		createLeftFolder(layout, editorArea);
+		//createLeftFolder(layout, editorArea);
 		createRightFolder(layout, editorArea);
 		createTopFolder(layout, editorArea);
-		createBottomFolder(layout, editorArea);
+		//createBottomFolder(layout, editorArea);
 
 		// Add shortcuts to menu
 		layout.addShowViewShortcut(GrammarTreeView.ID);
