@@ -80,7 +80,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   private Utterance<Word, String> lastUtteranceProcessed = null;
   private PriorityQueue<List<T>> completeAnalyses;
   private TypeSystem<Construction> cxnTypeSystem;
-  
+
   private ECGMorph morpher;
   private ECGTokenReader tokenReader;
   private ECGMorphTableReader morphTable;
@@ -102,37 +102,37 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   private SlotConnectionTracker slotConnectionTracker;
   private int statecounter = 0;
   private int processedStates = 0;
-  
 
-  
-  private ArrayList<ArrayList<Construction>> constructionInput; 
+
+
+  private ArrayList<ArrayList<Construction>> constructionInput;
   private ArrayList<ArrayList<MorphTokenPair>> morphToken;
-  
+
   /**This is intended to be a cache of type Cxns; when type-identical utterances appear, just retrieve from cache.
   Will still need to integrate MorphToken information into SemSpec effectively. */
   private HashMap<TypeCacheEntry, PriorityQueue<List<T>>> typeCache;
 
-  
-  
 
-  
+
+
+
   private Construction[][] input;
   private Construction RootCxn;
   private Role RootCxnConstituent;
   private StringBuilder parserLog;
-  
+
  private HashMap<String, ArrayList<String[]>> constructional_morphTable;
   private HashMap<String, ArrayList<String[]>> meaning_morphTable;
-  
- 
- 
+
+
+
 
   private long constructorTime;
   private double currentEntropy = 0;
   private double lnTwo = Math.log(2);
   private double lastNormalizer = 0;
-  
-  
+
+
 
 
   public void setParameters(boolean robust, boolean debug, int maxBeamWidth, int parsesToReturn, double extraRootPenalty, int beamSize) {
@@ -168,19 +168,19 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   public LeftCornerParser(compling.grammar.ecg.Grammar ecgGrammar, AnalysisFactory analysisFactory,
           ConstituentExpansionCostTable cect) throws IOException {
     constructorTime = System.currentTimeMillis();
-    
+
     this.typeCache = new HashMap<TypeCacheEntry, PriorityQueue<List<T>>>();
 
     this.ecgGrammar = ecgGrammar;
     this.grammar = new LCPGrammarWrapper(ecgGrammar);
-    
+
     this.tokenReader = this.ecgGrammar.getTokenReader();
 	this.morpher = this.ecgGrammar.getMorpher();
-    
-    this.morphTable = new ECGMorphTableReader(this.grammar);
-    
 
-    
+    this.morphTable = new ECGMorphTableReader(this.grammar);
+
+
+
     this.analysisFactory = analysisFactory;
     this.cxnTypeSystem = grammar.getCxnTypeSystem();
     this.contextModel = grammar.getContextModel();
@@ -211,8 +211,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     RootCxn = grammar.getConstruction(ECGConstants.ROOT);
     RootCxnConstituent = (Role) RootCxn.getConstructionalBlock().getElements().toArray()[0];
 
-			
-			
+
+
 	this.constructional_morphTable = this.morphTable.getConstructionalTable();
 	this.meaning_morphTable = this.morphTable.getMeaningTable();
   }
@@ -228,9 +228,9 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
   public int getNumberOfStatesProcessedForLastUtterance() {
     return processedStates;
   }
-  
-  
-  private boolean isCompatible2(Construction cxn, String[] type) {	  
+
+
+  private boolean isCompatible2(Construction cxn, String[] type) {
 	  TypeSystem ts = this.ecgGrammar.getConstructionTypeSystem();
 	  for (String t : type) {
 		  try {
@@ -238,40 +238,40 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 				  return true;
 			  }
 		} catch (TypeSystemException e) {
-			throw new ParserException("Either " + cxn.getName() + " or " + t 
+			throw new ParserException("Either " + cxn.getName() + " or " + t
 					+ " not found in the construction lattice. Check .morph file for inconsistencies.");
 		}
 	  } return false;
   }
-  
-  /** Reloads tokens and morphology instances. 
+
+  /** Reloads tokens and morphology instances.
  * @throws IOException */
   public void reloadTokens() throws IOException {
 	  this.tokenReader = this.ecgGrammar.getTokenReader();
 	  this.morpher = new ECGMorph(this.ecgGrammar, this.tokenReader);
   }
-  
+
   public Map<String, ArrayList<ECGToken>> getTokens() {
 	  return tokenReader.getTokens();
   }
-  
+
   public HashMap<String, List<MorphEntry>> getMorphInflections() {
 	  return morpher.morphs;
   }
-  
+
   public void setBeamWidth(int width) {
 	  this.MAXBEAMWIDTH = width;
   }
-  
+
 
   public PriorityQueue<List<T>> getBestPartialParses(Utterance<Word, String> utterance) {
-	  
-	
+
+
 	//this.ecgGrammar.readTokens();
 	this.tokenReader = this.ecgGrammar.getTokenReader();
 	    //this.tokenReader = new ECGTokenReader(new LCPGrammarWrapper(this.ecgGrammar));
 	this.morpher = this.ecgGrammar.getMorpher();
-	
+
     lastNormalizer = 0;
     currentEntropy = 0;
     parserLog = new StringBuilder();
@@ -288,11 +288,11 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
     constructionInput = new ArrayList<ArrayList<Construction>>();
     morphToken = new ArrayList<ArrayList<MorphTokenPair>>();
-    
+
     ArrayList<String> unknowns = new ArrayList<String>();
 
     for (int i = 0; i < utterance.size(); i++) {
-    	
+
       // try to match orth with tokens/morphology (Celex)
       try {
     	String wordform = utterance.getElement(i).getOrthography();
@@ -300,18 +300,19 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     	Set<String> lems = this.morpher.getLemmas(wordform);
     	constructionInput.add(new ArrayList<Construction>());
     	morphToken.add(new ArrayList<MorphTokenPair>());
-    	
+
     	for (String lemma : lems) {
+        // TODO: the multiword expression stuff
 	    	try {
 		        List<ECGToken> tokens = this.tokenReader.getToken(lemma);
 		        for (ECGToken token : tokens) {
 		        	Construction parent = token.parent;
-		        	
+
 		        	String[] inflections = morpher.getInflections(lemma, wordform);
-		        	
+
 		        	//System.out.println
 		        	for (String inf : inflections) {
-		        		
+
 		        		//int what = this.meaning_morphTable.get(inf).length - 1;
 		        		String[] morphType = new String[]{};
 		        		try {
@@ -324,13 +325,13 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 		        			morphToken.get(i).add(new MorphTokenPair(inf, token));
 		        		}
 		        	}
-		        }		        
+		        }
 	    	} catch (GrammarException g) {
 	    		debugPrint("Unknown input lemma: " + lemma);
-	    	}	    	
-    	} 	
+	    	}
+    	}
       } catch (GrammarException g) {
-    	  debugPrint("Unknown input lemma: " + utterance.getElement(i).getOrthography());  	  
+    	  debugPrint("Unknown input lemma: " + utterance.getElement(i).getOrthography());
       }
       // This block will handle numbers
       try {
@@ -339,7 +340,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     		  double value = Double.parseDouble(potentialNumber);
     		  Construction cxn = grammar.getConstruction("NumberType");
               if (i >= constructionInput.size()) {
-            	  constructionInput.add(new ArrayList<Construction>());  
+            	  constructionInput.add(new ArrayList<Construction>());
               }
               if (i >= morphToken.size()) {
             	  morphToken.add(new ArrayList<MorphTokenPair>());
@@ -352,7 +353,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
               if (value != 1) {
             	  morph = "Plural";
               }
-              
+
               MorphTokenPair mtp = new MorphTokenPair(morph, tok);
               morphToken.get(i).add(mtp);
     	  } catch (NumberFormatException e) {
@@ -360,13 +361,13 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     	  }
     	  //long n = potentialNumber
       } catch (GrammarException g) {
-    	  debugPrint("Could not identify number in " + utterance.getElement(i).getOrthography() + 
+    	  debugPrint("Could not identify number in " + utterance.getElement(i).getOrthography() +
     			  " or construction NumberType not found in grammar.");
       }
       // This block will handle lexical constructions
-      try { 
+      try {
           if (i >= constructionInput.size()) {
-        	  constructionInput.add(new ArrayList<Construction>());  
+        	  constructionInput.add(new ArrayList<Construction>());
           }
           if (i >= morphToken.size()) {
         	  morphToken.add(new ArrayList<MorphTokenPair>());
@@ -377,10 +378,10 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
           for (int k = 0; k < lexicalCxns.size(); k++) {
         	  //morphToken.get(i).add(mt);
         	  morphToken.get(i).add(new MorphTokenPair(null, null));
-          }          
+          }
         } catch (GrammarException g) {
         	debugPrint("Unknown input lexeme: " + utterance.getElement(i).getOrthography());
-        	
+
         	List<Construction> lexicalCxns = grammar.getLexicalConstruction(StringUtilities
 	               .addQuotes(ECGConstants.UNKNOWN_ITEM));
         	//Construction lexicalCxns = grammar.getConstruction("NounType");
@@ -391,22 +392,22 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
         		morphToken.get(i).add(new MorphTokenPair(null, null));
         	}
         }
-    }   
-    
+    }
+
     if ((unknowns.size() > 0) && (!ROBUST)) {
     	 throw new UnknownWordException("Analysis not possible, unknown words identified: " + unknowns.toString() + ".");
     }
-    
-    
 
-    
+
+
+
     morphToken.add(new ArrayList<MorphTokenPair>());
     morphToken.get(utterance.size()).add(new MorphTokenPair(null, null));
-   
-    
+
+
     constructionInput.add(new ArrayList<Construction>());
     constructionInput.get(utterance.size()).add(null);
-    
+
     TypeCacheEntry tcEntry = new TypeCacheEntry(constructionInput, morphToken);
 
 
@@ -539,7 +540,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     }
 
     // PriorityQueue<RobustParserState> safetyQ = workingQ.clone();
-    
+
     // only used when we out of stuff on the workingQ and there is nothing on the nextIterationQ
 
     while (workingQ.size() > 0) {
@@ -567,8 +568,8 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
             completedAnalysis.addAll(current.rightSiblings);
           }
           // it's an analysis that covers and has no ancestors
-          addToCompletedQ(completedAnalysis, current.getLogLikelihood()); 
-          
+          addToCompletedQ(completedAnalysis, current.getLogLikelihood());
+
           // System.out.println("\tFound Complete Analysis "+current.getLogLikelihood());
           debugPrint("\tFound Complete Analysis");
 
@@ -625,7 +626,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 
         }
         else {
-          if (ROBUST && current.ancestor == null && current.leftSibling != null) { 
+          if (ROBUST && current.ancestor == null && current.leftSibling != null) {
             // gotta switch back to the leftsib stack
             RobustParserState ls = current.leftSibling;
             RobustParserState newCurrent = new RobustParserState((T) ls.primaryAnalysis.clone(), ls.ancestor,
@@ -738,7 +739,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     }
     return results;
   }
-  
+
 
   private List<RobustParserState> pushLexicalState(RobustParserState ancestor, int index) {
     List<RobustParserState> results = new LinkedList<RobustParserState>();
@@ -753,7 +754,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 	    if (reachabilityCost > Double.NEGATIVE_INFINITY && cxn != null) {
 	    	T lex_analysis = cloneTable.get(cxn, index);
 	    	//System.out.println(lex_analysis);
-	    	T ultimate = (T) lex_analysis.clone(); 	    	
+	    	T ultimate = (T) lex_analysis.clone();
 	    	if (extra_info.morph != null) {
 	    		String morph = extra_info.morph;
 	    		String[] mConstraint = this.meaning_morphTable.get(morph).get(0);
@@ -792,11 +793,11 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     	debugPrint("no results");
     	//System.out.println("no results");
     }
-    return results;	    	
+    return results;
   }
 
 
-    
+
   private List<RobustParserState> finishIncompleteState(RobustParserState p) {
     // System.out.println("finish");
     List<Pair<T, Double>> results;
@@ -1444,7 +1445,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     }
     return prunedQueue;
   }
-  
+
   private <T> PriorityQueue<T> prune(PriorityQueue<T> queue, int maxBeamWidth) {
 	    PriorityQueue<T> prunedQueue = new PriorityQueue<T>();
 	    if (queue.size() == 0) {
@@ -1510,10 +1511,10 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     LeftCornerParser<AnalysisInContext> parser = new LeftCornerParser<AnalysisInContext>(grammar,
             new AnalysisInContextFactory(new LCPGrammarWrapper(grammar), grammar.getContextModel()
                     .getContextModelCache()));
-    
 
-    
-    
+
+
+
     List<String> words = new ArrayList<String>();
     for (int i = 2; i < args.length; i++) {
       words.add(args[i]);
