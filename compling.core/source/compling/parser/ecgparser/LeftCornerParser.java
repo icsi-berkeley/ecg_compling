@@ -290,14 +290,31 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     morphToken = new ArrayList<ArrayList<MorphTokenPair>>();
 
     ArrayList<String> unknowns = new ArrayList<String>();
+    int i_mod = 0;
 
     for (int i = 0; i < utterance.size(); i++) {
 
       // try to match orth with tokens/morphology (Celex)
       try {
-    	String wordform = utterance.getElement(i).getOrthography();
-
+    	String wordform = utterance.getElement(i + i_mod).getOrthography();
     	Set<String> lems = this.morpher.getLemmas(wordform);
+    	if (i + 1 < utterance.size()) {
+    		String wordform1 = wordform;
+    		String wordform2 = utterance.getElement(i + i_mod + 1).getOrthography();
+    		
+    		try {
+	    		Set<String> lems2 = this.morpher.getLemmas(wordform1 + "_" + wordform2);
+	    		if (lems2.size() > 0 ) {
+	    			wordform = wordform1 + "_" + wordform2;
+	    			lems = lems2;
+	    			List<Word> elements = utterance.getElements();
+	    			elements.remove(i + 1);
+	    			elements.set(i, new Word(wordform));
+	    			utterance.setElements(elements);
+	    		}
+    		} catch (GrammarException g) {}
+    	}
+    	
     	constructionInput.add(new ArrayList<Construction>());
     	morphToken.add(new ArrayList<MorphTokenPair>());
 
@@ -331,11 +348,11 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
 	    	}
     	}
       } catch (GrammarException g) {
-    	  debugPrint("Unknown input lemma: " + utterance.getElement(i).getOrthography());
+    	  debugPrint("Unknown input lemma: " + utterance.getElement(i + i_mod).getOrthography());
       }
       // This block will handle numbers
       try {
-    	  String potentialNumber = utterance.getElement(i).getOrthography();
+    	  String potentialNumber = utterance.getElement(i + i_mod).getOrthography();
     	  try {
     		  double value = Double.parseDouble(potentialNumber);
     		  Construction cxn = grammar.getConstruction("NumberType");
@@ -361,7 +378,7 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
     	  }
     	  //long n = potentialNumber
       } catch (GrammarException g) {
-    	  debugPrint("Could not identify number in " + utterance.getElement(i).getOrthography() +
+    	  debugPrint("Could not identify number in " + utterance.getElement(i + i_mod).getOrthography() +
     			  " or construction NumberType not found in grammar.");
       }
       // This block will handle lexical constructions
@@ -373,21 +390,21 @@ public class LeftCornerParser<T extends Analysis> implements RobustParser<T> {
         	  morphToken.add(new ArrayList<MorphTokenPair>());
           }
           List<Construction> lexicalCxns = grammar.getLexicalConstruction(StringUtilities.addQuotes(utterance.getElement(
-                  i).getOrthography()));
+                  i + i_mod).getOrthography()));
           constructionInput.get(i).addAll(lexicalCxns);
           for (int k = 0; k < lexicalCxns.size(); k++) {
         	  //morphToken.get(i).add(mt);
         	  morphToken.get(i).add(new MorphTokenPair(null, null));
           }
         } catch (GrammarException g) {
-        	debugPrint("Unknown input lexeme: " + utterance.getElement(i).getOrthography());
+        	debugPrint("Unknown input lexeme: " + utterance.getElement(i + i_mod).getOrthography());
 
         	List<Construction> lexicalCxns = grammar.getLexicalConstruction(StringUtilities
 	               .addQuotes(ECGConstants.UNKNOWN_ITEM));
         	//Construction lexicalCxns = grammar.getConstruction("NounType");
         	if (constructionInput.get(i).isEmpty()) {
         		//constructionInput.get(i).add(lexicalCxns);
-        		unknowns.add(utterance.getElement(i).getOrthography());
+        		unknowns.add(utterance.getElement(i + i_mod).getOrthography());
         		constructionInput.get(i).add(lexicalCxns.get(0));
         		morphToken.get(i).add(new MorphTokenPair(null, null));
         	}
