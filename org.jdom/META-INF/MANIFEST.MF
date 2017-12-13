@@ -48,4 +48,4 @@ Export-Package: com.werken.saxpath;uses:="org.saxpath",
  org.saxpath,
  org.saxpath.conformance;uses:="org.saxpath",
  org.saxpath.helpers;uses:="org.saxpath"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

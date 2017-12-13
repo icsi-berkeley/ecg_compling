@@ -644,10 +644,6 @@
                name="windowImages"
                value="icons/constr16.png,icons/constr32.png">
          </property>
-         <property
-               name="preferenceCustomization"
-               value="plugin_customization.ini">
-         </property>
       </product>
    </extension>
    <!--

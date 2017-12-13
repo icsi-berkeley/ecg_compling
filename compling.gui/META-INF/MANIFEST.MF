@@ -19,8 +19,6 @@ Require-Bundle: compling.core;bundle-version="1.0.0",
  org.eclipse.ui.navigator;bundle-version="3.3.102",
  org.eclipse.ui.navigator.resources;bundle-version="3.3.101",
  org.eclipse.team.core;bundle-version="3.4.2",
- org.eclipse.team.cvs.core;bundle-version="3.3.300",
- org.eclipse.team.cvs.ui;bundle-version="3.3.100",
  org.eclipse.team.ui;bundle-version="3.4.1",
  org.eclipse.search;bundle-version="3.4.1",
  org.eclipse.compare.core;bundle-version="3.5.0",
@@ -30,7 +28,7 @@ Require-Bundle: compling.core;bundle-version="1.0.0",
  org.eclipse.draw2d;bundle-version="3.9.101"
 Bundle-Activator: compling.gui.grammargui.EcgEditorPlugin
 Bundle-Vendor: ICSI Berkeley
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: compling.gui.grammargui;
   uses:="org.eclipse.core.runtime,
    org.eclipse.jface.resource,

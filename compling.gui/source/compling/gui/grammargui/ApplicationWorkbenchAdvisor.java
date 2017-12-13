@@ -24,7 +24,6 @@ import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.internal.ide.IDEInternalWorkbenchImages;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
-import org.eclipse.ui.internal.ide.model.WorkbenchAdapterBuilder;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.Bundle;
 
@@ -92,7 +91,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 		PlatformUI.getPreferenceStore().setValue(IWorkbenchPreferenceConstants.EDITOR_MINIMUM_CHARACTERS, 13);
 		PlatformUI.getPreferenceStore().setValue(IWorkbenchPreferenceConstants.VIEW_MINIMUM_CHARACTERS, 13);
 
-		WorkbenchAdapterBuilder.registerAdapters();
+		IDE.registerAdapters();
 
 		// Display.getDefault().asyncExec(new Runnable() {
 		// public void run() {

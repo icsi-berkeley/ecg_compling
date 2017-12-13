@@ -28,6 +28,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
+import org.eclipse.ui.forms.widgets.FormText;
 import org.eclipse.ui.part.ViewPart;
 
 import compling.context.ContextModel;
@@ -379,6 +380,13 @@ public class TokenView extends ViewPart {
 		final Text constraintText = toolkit.createText(form.getBody(), "");
 		constraintText.setLayoutData(gd);
 		
+		final FormText enteredConstraints = toolkit.createFormText(form.getBody(), false);
+		enteredConstraints.setText("default", false, false);
+		String enteredConstraintsStr = "";
+		Button addConstraintButton = toolkit.createButton(form.getBody(), "Enter constraint", SWT.PUSH);
+		addConstraintButton.setToolTipText("Add constraint to list of constraints for this token.");
+		addConstraintButton.setLayoutData(gd);
+		
 		final Label constraintParentsLabel = toolkit.createLabel(form.getBody(), "Additional ontology parents (optional):");
 		final Text constraintParents = toolkit.createText(form.getBody(), "");
 		constraintParents.setToolTipText("Enter a comma-separated list of ontology super-types for the new constraint. E.g., \" entity, artifact, moveable \"");
@@ -388,10 +396,6 @@ public class TokenView extends ViewPart {
 		final Text appMappingText = toolkit.createText(form.getBody(), "$");
 		appMappingText.setToolTipText("Enter the value you want this constrain value to be translated to in the application domain. E.g., red-adj might become just red.");	
 		appMappingText.setLayoutData(gd);
-		
-		
-		Button addConstraintButton = toolkit.createButton(form.getBody(), "Enter constraint", SWT.PUSH);
-		addConstraintButton.setToolTipText("Add constraint to list of constraints for this token.");
 
 		final HashMap<String, String> slotsValues = new HashMap<String, String>();
 		final ArrayList<String> slots = new ArrayList<String>();
@@ -484,6 +488,7 @@ public class TokenView extends ViewPart {
 							parentValue += " " + inputParents + " shared";
 							addOntologyItem(value, parentValue, modifiedOnt);
 							constraints.add(constraintBox.getText() + " <-- " + value);
+							enteredConstraints.setText(constraintBox.getText() + " <-- " + value, false, false);
 							if (appValue.length() > 1) {
 								writeMappingFile(value, appValue);
 							}
@@ -501,6 +506,7 @@ public class TokenView extends ViewPart {
 							//System.out.println(value + " already exists in Ontology, and is not a subtype of " + parentValue + " .");
 						} else {
 							constraints.add(constraintBox.getText() + " <-- " + value);
+							enteredConstraints.setText(constraintBox.getText() + " <-- " + value, false, false);
 							if (appValue.length() > 1) {
 								writeMappingFile(value, appValue);
 							}
@@ -508,6 +514,7 @@ public class TokenView extends ViewPart {
 					}
 				} else {
 					constraints.add(constraintBox.getText() + " <-- " + value);
+					enteredConstraints.setText(constraintBox.getText() + " <-- " + value, false, false);
 				}
 				appMappingText.setText("$");
 				constraintText.setText("");

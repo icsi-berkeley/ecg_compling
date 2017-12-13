@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry excluding="compling/gui/ComplingUI.java|compling/util/ngram/|**/*.cup|compling/gui/grammargui/|compling/util/wordnet/|compling/annotation/metaphor/|compling/parser/spanishMorph/|compling/gui/dialoggui/|compling/parser/treebank/maxentparser/|compling/learner/featurestructure/XmlLCA.java|compling/util/aspect/|**/*.lex" kind="src" path="source"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -5,6 +5,6 @@ Bundle-SymbolicName: org.ini4j;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Export-Package: org.ini4j;uses:="new org.ini4j,org.ini4j.spi",
  org.ini4j.spi;uses:="org.ini4j"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: ICSI Berkeley
 Bundle-ClassPath: ini4j-0.5.2.jar
