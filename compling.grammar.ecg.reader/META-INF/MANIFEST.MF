@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Reader
-Bundle-SymbolicName: compling.grammar.ecg.reader
-Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: compling.grammar.ecg.reader.Activator
-Require-Bundle: org.eclipse.core.runtime
-Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6

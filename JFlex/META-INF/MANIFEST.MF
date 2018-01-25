@@ -8,6 +8,6 @@ Export-Package: JFlex,
  JFlex.anttask,
  JFlex.gui,
  JFlex.tests
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: java_cup;bundle-version="1.0.0"
 Bundle-ClassPath: .

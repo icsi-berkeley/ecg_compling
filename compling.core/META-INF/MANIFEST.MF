@@ -141,7 +141,7 @@ Export-Package: compling.annotation,
  compling.util.math,
  compling.util.probability,
  compling.utterance;uses:="compling.util.fileutil"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: ICSI Berkeley
 Bundle-ClassPath: .
