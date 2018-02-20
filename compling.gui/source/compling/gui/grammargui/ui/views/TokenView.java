@@ -96,6 +96,9 @@ public class TokenView extends ViewPart {
 	private IAction addConstraint;
 	
 	private String parentValue;
+	
+	/* Ethan */
+	private TableViewer constraintsTable;
 
 	/** Opens up token file from TOKEN_PATH. */
 	private void openFile() {
@@ -419,7 +422,7 @@ public class TokenView extends ViewPart {
 		
 		final Composite tableComposite = new Composite(form.getBody(), SWT.NONE);
 		
-		TableViewer constraintsTable = new TableViewer(tableComposite, SWT.SINGLE | SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.V_SCROLL);
+		constraintsTable = new TableViewer(tableComposite, SWT.SINGLE | SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.V_SCROLL);
 		constraintsTable.getTable().setLinesVisible(true);
 		constraintsTable.getTable().setHeaderVisible(true);
 		TableViewerColumn roleColumn = new TableViewerColumn(constraintsTable, SWT.NONE);
@@ -431,11 +434,10 @@ public class TokenView extends ViewPart {
 		TableColumnLayout tableLayout = new TableColumnLayout();
 		tableComposite.setLayout(tableLayout);
 
-	    // Set stylesheet column to fill 100% and concept column to fit 0%, but with their packed widths as minimums
 	    tableLayout.setColumnData(roleColumn.getColumn(), new ColumnWeightData(50));
 	    tableLayout.setColumnData(itemColumn.getColumn(), new ColumnWeightData(50));
-		
 	    tableComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+	    
 //	    tableComposite.setData(too lkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 //		tableComposite.setSize(tableComposite.getSize().x, 500);
 //	    toolkit.paintBordersFor(tableComposite);
@@ -468,14 +470,7 @@ public class TokenView extends ViewPart {
 //		
 //		column1.setWidth(tableSize.x / 2);
 //		
-		TableItem item0 = new TableItem(constraintsTable.getTable(), SWT.NONE);
-		item0.setText(0, "self.m.number");
-		item0.setText(1, ".5");
-		
-		TableItem item1 = new TableItem(constraintsTable.getTable(), SWT.NONE);
-		item1.setText(0, "self.m.gender");
-		item1.setText(1, "@male");
-		
+
 		/* ETHAN - Done */
 		
 		
