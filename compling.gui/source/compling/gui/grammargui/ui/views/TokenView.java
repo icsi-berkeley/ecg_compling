@@ -26,6 +26,18 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+
+/* Ethan */
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.jface.layout.TableColumnLayout;
+import org.eclipse.jface.viewers.ColumnWeightData;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
+
+
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.FormText;
@@ -121,6 +133,10 @@ public class TokenView extends ViewPart {
 			token = "";
 			parentCxn = "";
 			constraints.clear();
+			
+			/* Ethan */
+			constraintsTable.getTable().removeAll();
+			
 			try {
 				getGrammar().buildTokenAndMorpher();
 			} catch (ParserException e) {
@@ -253,6 +269,15 @@ public class TokenView extends ViewPart {
 		}
 	}
 	
+	/* Ethan */
+	/** Adds a pair of values to the the constraint table. */
+	private void addConstraintTableEntry(Table table, String constraint, String value) {
+		TableItem newItem = new TableItem(table, SWT.NONE);
+		newItem.setText(0, constraint);
+		newItem.setText(1, value);	
+	}
+	/* */
+	
 	/** Checks if CHILD is a subtype of PARENT. */
 	private boolean isSubtype(String child, String parent) {
 		try {
@@ -374,7 +399,6 @@ public class TokenView extends ViewPart {
 		constraintBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(parent);
 		
-
 		
 		final Label constraintSet = toolkit.createLabel(form.getBody(), "Set Role Item:");
 		final Text constraintText = toolkit.createText(form.getBody(), "");
@@ -386,6 +410,74 @@ public class TokenView extends ViewPart {
 		Button addConstraintButton = toolkit.createButton(form.getBody(), "Enter constraint", SWT.PUSH);
 		addConstraintButton.setToolTipText("Add constraint to list of constraints for this token.");
 		addConstraintButton.setLayoutData(gd);
+		
+		
+		/* ETHAN CHANGES */
+		
+		final Label constraintView = toolkit.createLabel(form.getBody(), "");
+		
+		
+		final Composite tableComposite = new Composite(form.getBody(), SWT.NONE);
+		
+		TableViewer constraintsTable = new TableViewer(tableComposite, SWT.SINGLE | SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.V_SCROLL);
+		constraintsTable.getTable().setLinesVisible(true);
+		constraintsTable.getTable().setHeaderVisible(true);
+		TableViewerColumn roleColumn = new TableViewerColumn(constraintsTable, SWT.NONE);
+		roleColumn.getColumn().setText("Role");
+		roleColumn.getColumn().setResizable(false);
+		TableViewerColumn itemColumn = new TableViewerColumn(constraintsTable, SWT.NONE);
+		itemColumn.getColumn().setText("Item");
+		itemColumn.getColumn().setResizable(false);
+		TableColumnLayout tableLayout = new TableColumnLayout();
+		tableComposite.setLayout(tableLayout);
+
+	    // Set stylesheet column to fill 100% and concept column to fit 0%, but with their packed widths as minimums
+	    tableLayout.setColumnData(roleColumn.getColumn(), new ColumnWeightData(50));
+	    tableLayout.setColumnData(itemColumn.getColumn(), new ColumnWeightData(50));
+		
+	    tableComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+//	    tableComposite.setData(too lkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
+//		tableComposite.setSize(tableComposite.getSize().x, 500);
+//	    toolkit.paintBordersFor(tableComposite);
+	    
+	    
+//		final Table constraintsTable = new Table(form.getBody(), SWT.SINGLE | SWT.BORDER | SWT.FULL_SELECTION);
+//		constraintsTable.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+//		constraintsTable.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
+//		
+//		
+//		/* Altering size of table */
+//		Point tableSize = constraintsTable.getSize();
+//		tableSize.x = 100;
+//		tableSize.y = constraintSet.getSize().y;
+//		constraintsTable.setSize(tableSize);
+//		toolkit.paintBordersFor(constraintsTable);
+//		
+//		constraintsTable.setLinesVisible(true);
+//		constraintsTable.setHeaderVisible(true);
+//		
+//		/* Create columns, label them, set width to half the size of the table */
+//		TableColumn column0 = new TableColumn(constraintsTable, SWT.NONE);
+//		column0.setText("Constraint");
+//		column0.setResizable(false);
+//		
+//		column0.setWidth(tableSize.x / 2);
+//		TableColumn column1 = new TableColumn(constraintsTable, SWT.NONE);
+//		column1.setText("Value");
+//		column1.setResizable(false);
+//		
+//		column1.setWidth(tableSize.x / 2);
+//		
+		TableItem item0 = new TableItem(constraintsTable.getTable(), SWT.NONE);
+		item0.setText(0, "self.m.number");
+		item0.setText(1, ".5");
+		
+		TableItem item1 = new TableItem(constraintsTable.getTable(), SWT.NONE);
+		item1.setText(0, "self.m.gender");
+		item1.setText(1, "@male");
+		
+		/* ETHAN - Done */
+		
 		
 		final Label constraintParentsLabel = toolkit.createLabel(form.getBody(), "Additional ontology parents (optional):");
 		final Text constraintParents = toolkit.createText(form.getBody(), "");
@@ -409,6 +501,10 @@ public class TokenView extends ViewPart {
 				slotsValues.clear();
 				parents.clear();
 				constraints.clear();
+				
+				/* Ethan */
+				constraintsTable.getTable().removeAll();
+				
 				parentCxn = parentText.getText();
 				try {
 					for (Constraint c : getGrammar().getConstruction(parentCxn).getMeaningBlock().getConstraints()) {
@@ -489,6 +585,10 @@ public class TokenView extends ViewPart {
 							addOntologyItem(value, parentValue, modifiedOnt);
 							constraints.add(constraintBox.getText() + " <-- " + value);
 							enteredConstraints.setText(constraintBox.getText() + " <-- " + value, false, false);
+							
+							/* Ethan */
+							addConstraintTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
+							
 							if (appValue.length() > 1) {
 								writeMappingFile(value, appValue);
 							}
@@ -499,6 +599,10 @@ public class TokenView extends ViewPart {
 					} else {
 						if (!isSubtype(value, parentValue)) {
 							constraints.clear();
+							
+							/* Ethan */
+							constraintsTable.getTable().removeAll();
+							
 							constraintText.setText("");
 							String message = "@" + value + "' already exists in Ontology, and is not a subtype of @" + parentValue 
 									+ " . This will cause errors and prevent proper unification of the token's constraints.";
@@ -507,6 +611,10 @@ public class TokenView extends ViewPart {
 						} else {
 							constraints.add(constraintBox.getText() + " <-- " + value);
 							enteredConstraints.setText(constraintBox.getText() + " <-- " + value, false, false);
+							
+							/* Ethan */
+							addConstraintTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
+							
 							if (appValue.length() > 1) {
 								writeMappingFile(value, appValue);
 							}
@@ -515,6 +623,10 @@ public class TokenView extends ViewPart {
 				} else {
 					constraints.add(constraintBox.getText() + " <-- " + value);
 					enteredConstraints.setText(constraintBox.getText() + " <-- " + value, false, false);
+					
+					/* Ethan */
+					addConstraintTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
+					
 				}
 				appMappingText.setText("$");
 				constraintText.setText("");
