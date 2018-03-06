@@ -407,8 +407,7 @@ public class TokenView extends ViewPart {
 		final Text constraintText = toolkit.createText(form.getBody(), "");
 		constraintText.setLayoutData(gd);
 		
-		final FormText enteredConstraints = toolkit.createFormText(form.getBody(), false);
-		enteredConstraints.setText("default", false, false);
+		final Label emptyEnterLabel = toolkit.createLabel(form.getBody(), "");
 		String enteredConstraintsStr = "";
 		Button addConstraintButton = toolkit.createButton(form.getBody(), "Enter constraint", SWT.PUSH);
 		addConstraintButton.setToolTipText("Add constraint to list of constraints for this token.");
@@ -417,8 +416,7 @@ public class TokenView extends ViewPart {
 		
 		/* ETHAN CHANGES */
 		
-		final Label constraintView = toolkit.createLabel(form.getBody(), "");
-		
+		final Label emptyConstraintLabel = toolkit.createLabel(form.getBody(), "");
 		
 		final Composite tableComposite = new Composite(form.getBody(), SWT.NONE);
 		
@@ -436,41 +434,22 @@ public class TokenView extends ViewPart {
 
 	    tableLayout.setColumnData(roleColumn.getColumn(), new ColumnWeightData(50));
 	    tableLayout.setColumnData(itemColumn.getColumn(), new ColumnWeightData(50));
-	    tableComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+	    GridData tableGd = new GridData(SWT.FILL, SWT.FILL, true, false);
+	    tableGd.verticalSpan = 5;
+	    tableComposite.setLayoutData(tableGd);
 	    
-//	    tableComposite.setData(too lkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
-//		tableComposite.setSize(tableComposite.getSize().x, 500);
-//	    toolkit.paintBordersFor(tableComposite);
+	    for (int i = 0; i < tableGd.verticalSpan; i++) {
+    			toolkit.createLabel(form.getBody(), "");
+	    }
 	    
-	    
-//		final Table constraintsTable = new Table(form.getBody(), SWT.SINGLE | SWT.BORDER | SWT.FULL_SELECTION);
-//		constraintsTable.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-//		constraintsTable.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
-//		
-//		
-//		/* Altering size of table */
-//		Point tableSize = constraintsTable.getSize();
-//		tableSize.x = 100;
-//		tableSize.y = constraintSet.getSize().y;
-//		constraintsTable.setSize(tableSize);
-//		toolkit.paintBordersFor(constraintsTable);
-//		
-//		constraintsTable.setLinesVisible(true);
-//		constraintsTable.setHeaderVisible(true);
-//		
-//		/* Create columns, label them, set width to half the size of the table */
-//		TableColumn column0 = new TableColumn(constraintsTable, SWT.NONE);
-//		column0.setText("Constraint");
-//		column0.setResizable(false);
-//		
-//		column0.setWidth(tableSize.x / 2);
-//		TableColumn column1 = new TableColumn(constraintsTable, SWT.NONE);
-//		column1.setText("Value");
-//		column1.setResizable(false);
-//		
-//		column1.setWidth(tableSize.x / 2);
-//		
+//	    final Label emptyRemoveConstraintLabel = toolkit.createLabel(form.getBody(), "");
+	    Button removeConstraintButton = toolkit.createButton(form.getBody(), "Remove constraint", SWT.PUSH);
+	    removeConstraintButton.setToolTipText("Remove highlighted constraint from list of constraints for this token.");
+	    removeConstraintButton.setLayoutData(gd);
 
+	    
+	    
+	    
 		/* ETHAN - Done */
 		
 		
@@ -579,7 +558,6 @@ public class TokenView extends ViewPart {
 							parentValue += " " + inputParents + " shared";
 							addOntologyItem(value, parentValue, modifiedOnt);
 							constraints.add(constraintBox.getText() + " <-- " + value);
-							enteredConstraints.setText(constraintBox.getText() + " <-- " + value, false, false);
 							
 							/* Ethan */
 							addConstraintTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
@@ -605,7 +583,6 @@ public class TokenView extends ViewPart {
 							//System.out.println(value + " already exists in Ontology, and is not a subtype of " + parentValue + " .");
 						} else {
 							constraints.add(constraintBox.getText() + " <-- " + value);
-							enteredConstraints.setText(constraintBox.getText() + " <-- " + value, false, false);
 							
 							/* Ethan */
 							addConstraintTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
@@ -617,7 +594,6 @@ public class TokenView extends ViewPart {
 					}
 				} else {
 					constraints.add(constraintBox.getText() + " <-- " + value);
-					enteredConstraints.setText(constraintBox.getText() + " <-- " + value, false, false);
 					
 					/* Ethan */
 					addConstraintTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
@@ -629,6 +605,50 @@ public class TokenView extends ViewPart {
 			}
 		});
 		addConstraintButton.setLayoutData(gd);
+		
+		
+		/* Ethan */
+		removeConstraintButton.addSelectionListener(new SelectionAdapter() { 
+			public void widgetSelected(SelectionEvent e) {
+				Table cTable = constraintsTable.getTable();
+				int selected = cTable.getSelectionIndex();
+				if (selected == -1) {
+					
+					/* ETHAN - TODO TESTING Morphology*/
+//					try {
+//						getGrammar().buildTokenAndMorpher();
+//					} catch (ParserException pe) {
+//						broadcastError(pe.getMessage());
+//					}
+					
+					String message;
+					String tokText = tokenText.getText();
+					try {
+						String lemmas = String.join(" ", getGrammar().getMorpher().getLemmas(tokText));
+						message = tokText + " = True -- " + lemmas;
+					} catch(GrammarException ge) {
+						message = tokText + " = " + "False";
+					}
+					
+//					String message = "Please select a constraint to remove.";
+					
+					broadcastError(message);
+				} else {
+					cTable.deselectAll();
+					cTable.remove(selected);
+					constraints.remove(selected);
+					
+				}
+				
+				
+				
+				
+					
+			}
+		});
+		removeConstraintButton.setLayoutData(gd);
+		
+		
 		
 		Button addTokenButton = toolkit.createButton(form.getBody(), "Add token.", SWT.PUSH);
 		addTokenButton.addSelectionListener(new SelectionAdapter() { 
