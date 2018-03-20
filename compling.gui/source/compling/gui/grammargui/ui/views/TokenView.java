@@ -9,6 +9,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
@@ -17,6 +18,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -66,7 +68,9 @@ import compling.gui.grammargui.util.Constants.IImageKeys;
 import compling.gui.util.Utils;
 import compling.parser.ParserException;
 import compling.parser.ecgparser.ECGAnalyzer;
+import compling.parser.ecgparser.ECGTokenReader;
 import compling.parser.ecgparser.LCPGrammarWrapper;
+import compling.parser.ecgparser.ECGMorph.MorphEntry;
 import compling.util.fileutil.FileUtils;
 import compling.util.fileutil.TextFileLineIterator;
 
@@ -91,6 +95,8 @@ public class TokenView extends ViewPart {
 	
 	private String modifiedOnt = null;
 	
+	private String modifiedMorph = null;
+	
 	
 	private IAction addToken;
 	private IAction addConstraint;
@@ -98,7 +104,9 @@ public class TokenView extends ViewPart {
 	private String parentValue;
 	
 	/* Ethan */
+	private HashMap<String, HashSet<String>> inflections;
 	private TableViewer constraintsTable;
+	private TableViewer inflectionTable;
 
 	/** Opens up token file from TOKEN_PATH. */
 	private void openFile() {
@@ -184,6 +192,15 @@ public class TokenView extends ViewPart {
 		String[] toks = new String[token_paths.size()];
 		for (int i=0; i < toks.length; i++) {
 			toks[i] = token_paths.get(i);
+		}
+		return toks;
+	}
+	
+	private String[] getMorphFiles() {
+		List<String> morph_paths = prefs.getList(AP.MORPHOLOGY_PATH);
+		String[] toks = new String[morph_paths.size()];
+		for (int i=0; i < toks.length; i++) {
+			toks[i] = morph_paths.get(i);
 		}
 		return toks;
 	}
@@ -274,7 +291,7 @@ public class TokenView extends ViewPart {
 	
 	/* Ethan */
 	/** Adds a pair of values to the the constraint table. */
-	private void addConstraintTableEntry(Table table, String constraint, String value) {
+	private void addTableEntry(Table table, String constraint, String value) {
 		TableItem newItem = new TableItem(table, SWT.NONE);
 		newItem.setText(0, constraint);
 		newItem.setText(1, value);	
@@ -345,17 +362,19 @@ public class TokenView extends ViewPart {
 	
 	public void createPartControl(Composite parent) {
 		
-		
 
 		constraints = new ArrayList<String>();
+		inflections = new HashMap<String, HashSet<String>>();
+		
 		prefs =  (AnalyzerPrefs) getGrammar().getPrefs();
 		base = prefs.getBaseDirectory();
 		typeCxns = getTypes("\"*\"");
 		
-
-
 		final FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		final ScrolledForm form = toolkit.createScrolledForm(parent);
+//		form.setExpandVertical(true);
+//		form.setMinHeight(10);
+		
 		form.setText("Token Editor");
 		GridLayout layout = new GridLayout();
 		form.getBody().setLayout(layout);
@@ -369,8 +388,7 @@ public class TokenView extends ViewPart {
 		final Text tokenText = toolkit.createText(form.getBody(), "");
 		tokenText.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
 		
-	
-
+		
 		final Label parentLabel = toolkit.createLabel(form.getBody(), "Select Parent Type:");
 		//final Combo parentText = new Combo(form.getBody(), SWT.DROP_DOWN);
 		parentText = new Combo(form.getBody(), SWT.DROP_DOWN);
@@ -447,11 +465,7 @@ public class TokenView extends ViewPart {
 	    removeConstraintButton.setToolTipText("Remove highlighted constraint from list of constraints for this token.");
 	    removeConstraintButton.setLayoutData(gd);
 
-	    
-	    
-	    
 		/* ETHAN - Done */
-		
 		
 		final Label constraintParentsLabel = toolkit.createLabel(form.getBody(), "Additional ontology parents (optional):");
 		final Text constraintParents = toolkit.createText(form.getBody(), "");
@@ -467,6 +481,75 @@ public class TokenView extends ViewPart {
 		final ArrayList<String> slots = new ArrayList<String>();
 		
 		final ArrayList<String> parents = new ArrayList<String>();
+	
+		Button addTokenButton = toolkit.createButton(form.getBody(), "Add token.", SWT.PUSH);
+		Button reloadTypesButton = toolkit.createButton(form.getBody(), "Reload Type Constructions.", SWT.PUSH);
+		
+		
+		/* Ethan Start */
+		/* inflection -> 'past/present', wordform -> 'blocked' */
+		
+		/* Empty label for spacing */
+		toolkit.createLabel(form.getBody(), "");
+		toolkit.createLabel(form.getBody(), "");
+		
+		final Label morphFileLabel = toolkit.createLabel(form.getBody(), "Select Morphology File:");
+		final Combo morphFileBox = new Combo(form.getBody(), SWT.DROP_DOWN);
+		morphFileBox.setItems(getMorphFiles());
+		morphFileBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		morphFileBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
+		toolkit.paintBordersFor(morphFileBox);
+		
+		/* NEEDS TO SHOW LIST OF INFLECTIONS */
+		final Label inflectionSelect = toolkit.createLabel(form.getBody(), "Select Inflection to Modify:");
+		final Combo inflectionBox = new Combo(form.getBody(), SWT.DROP_DOWN);
+		inflectionBox.setItems(new String[0]);
+		inflectionBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		inflectionBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
+		toolkit.paintBordersFor(inflectionBox);
+		
+		final Label wordformSelect = toolkit.createLabel(form.getBody(), "Set Wordform:");
+		final Text wordformText = toolkit.createText(form.getBody(), "");
+		wordformText.setLayoutData(gd);
+		
+		/* Empty label for spacing */
+		toolkit.createLabel(form.getBody(), "");
+		
+		Button addInflectionButton = toolkit.createButton(form.getBody(), "Enter inflection", SWT.PUSH);
+		addInflectionButton.setToolTipText("Add constraint to list of constraints for this token.");
+		addInflectionButton.setLayoutData(gd);
+		
+		/* Empty label for spacing */
+		toolkit.createLabel(form.getBody(), "");
+		
+		final Composite inflectionTableComposite = new Composite(form.getBody(), SWT.NONE);
+		inflectionTable = new TableViewer(inflectionTableComposite, SWT.SINGLE | SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.V_SCROLL);
+		inflectionTable.getTable().setLinesVisible(true);
+		inflectionTable.getTable().setHeaderVisible(true);
+		TableViewerColumn inflectionColumn = new TableViewerColumn(inflectionTable, SWT.NONE);
+		inflectionColumn.getColumn().setText("Inflection");
+		inflectionColumn.getColumn().setResizable(false);
+		TableViewerColumn wordformColumn = new TableViewerColumn(inflectionTable, SWT.NONE);
+		wordformColumn.getColumn().setText("Wordform");
+		wordformColumn.getColumn().setResizable(false);
+		TableColumnLayout inflectionTableLayout = new TableColumnLayout();
+		inflectionTableComposite.setLayout(inflectionTableLayout);
+
+		inflectionTableLayout.setColumnData(inflectionColumn.getColumn(), new ColumnWeightData(50));
+		inflectionTableLayout.setColumnData(wordformColumn.getColumn(), new ColumnWeightData(50));
+	    inflectionTableComposite.setLayoutData(tableGd);
+	    
+	    for (int i = 0; i < tableGd.verticalSpan; i++) {
+    			toolkit.createLabel(form.getBody(), "");
+	    }
+
+	    Button removeInflectionButton = toolkit.createButton(form.getBody(), "Remove inflection", SWT.PUSH);
+	    removeInflectionButton.setToolTipText("Remove highlighted inflection from list of inflections for this token.");
+	    removeInflectionButton.setLayoutData(gd);
+		
+	    Button addMorphButton = toolkit.createButton(form.getBody(), "Add morphology entry.", SWT.PUSH);
+	    
+		/* Ethan - Done */
 		
 		parentText.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
@@ -477,7 +560,11 @@ public class TokenView extends ViewPart {
 				constraints.clear();
 				
 				/* Ethan */
+//				wordformText.setText("");
+				inflections.clear();
 				constraintsTable.getTable().removeAll();
+				inflectionTable.getTable().removeAll();
+				
 				
 				parentCxn = parentText.getText();
 				try {
@@ -517,9 +604,19 @@ public class TokenView extends ViewPart {
 				parentValue = slotsValues.get(constraintBox.getText());
 				appMappingText.setText("$");
 			}
-		});		
-
+		});
 		
+		
+		/* TODO */
+//		inflectionBox.addSelectionListener(new SelectionAdapter() {
+//			public void widgetSelected(SelectionEvent e) {
+//				/* What does any of this do? */
+////				inflectionText.setText(slotsValues.get(inflectionBox.getText()));
+////				what does this do? - parentValue = slotsValues.get(inflectionBox.getText());
+////				what does this do? - appMappingText.setText("$");
+//			}
+//		});	
+
 		ontologyFileBox.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				modifiedOnt = ontologyFileBox.getText();
@@ -531,12 +628,19 @@ public class TokenView extends ViewPart {
 				modifiedTok = tokenFileBox.getText();
 			}
 		});
+		
+		morphFileBox.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				modifiedMorph = morphFileBox.getText();
+			}
+		});
 
 		addConstraintButton.addSelectionListener(new SelectionAdapter() { 
 			public void widgetSelected(SelectionEvent e) {
 				String value = constraintText.getText();
 				String appValue = appMappingText.getText();
 				String inputParents = "";
+				
 				if (!constraintParents.getText().equals("")) {
 					inputParents = constraintParents.getText().replace(",", "");
 					String[] inputParents2 = constraintParents.getText().split(",");
@@ -560,7 +664,7 @@ public class TokenView extends ViewPart {
 							constraints.add(constraintBox.getText() + " <-- " + value);
 							
 							/* Ethan */
-							addConstraintTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
+							addTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
 							
 							if (appValue.length() > 1) {
 								writeMappingFile(value, appValue);
@@ -585,7 +689,7 @@ public class TokenView extends ViewPart {
 							constraints.add(constraintBox.getText() + " <-- " + value);
 							
 							/* Ethan */
-							addConstraintTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
+							addTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
 							
 							if (appValue.length() > 1) {
 								writeMappingFile(value, appValue);
@@ -596,7 +700,7 @@ public class TokenView extends ViewPart {
 					constraints.add(constraintBox.getText() + " <-- " + value);
 					
 					/* Ethan */
-					addConstraintTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
+					addTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
 					
 				}
 				appMappingText.setText("$");
@@ -614,48 +718,99 @@ public class TokenView extends ViewPart {
 				int selected = cTable.getSelectionIndex();
 				if (selected == -1) {
 					
-					/* ETHAN - TODO TESTING Morphology*/
-//					try {
-//						getGrammar().buildTokenAndMorpher();
-//					} catch (ParserException pe) {
-//						broadcastError(pe.getMessage());
+//					/* ETHAN - TODO TESTING Morphology*/
+//					String message;
+//					String tokText = tokenText.getText();
+//					
+//					if (entryInMorph(tokText)) {
+//						message = tokText + " = True";
+//					} else {
+//						message = tokText + " = False";
 //					}
-					
-					String message;
-					String tokText = tokenText.getText();
-					try {
-						String lemmas = String.join(" ", getGrammar().getMorpher().getLemmas(tokText));
-						message = tokText + " = True -- " + lemmas;
-					} catch(GrammarException ge) {
-						message = tokText + " = " + "False";
-					}
-					
-//					String message = "Please select a constraint to remove.";
-					
+
+					String message = "Please select a constraint to remove.";
 					broadcastError(message);
 				} else {
 					cTable.deselectAll();
 					cTable.remove(selected);
 					constraints.remove(selected);
 					
-				}
-				
-				
-				
-				
-					
+				}	
 			}
 		});
 		removeConstraintButton.setLayoutData(gd);
 		
+		/* TODO - DONE?*/
+		addInflectionButton.addSelectionListener(new SelectionAdapter() { 
+			public void widgetSelected(SelectionEvent e) {
+				String wordform = wordformText.getText();
+
+				if (wordform.equals("")) {
+					String message = "There are no inflection values to add; you need to fill in the wordform value slot.";
+					broadcastError(message);
+				} 
+				
+				else {
+					/* Maps a wordform to all inflections for ease of use */
+					HashSet<String> inflectionVals;
+					if (inflections.containsKey(wordform)) {
+						inflectionVals = inflections.get(wordform);
+						inflectionVals.add(inflectionBox.getText());
+					} else {
+						inflectionVals = new HashSet<String>();
+						inflectionVals.add(inflectionBox.getText());
+						inflections.put(wordform, inflectionVals);
+					}
+					
+//					inflections.add(wordform + "\t" + tokenText.getText() + " " + inflectionBox.getText());
+					addTableEntry(inflectionTable.getTable(), inflectionBox.getText(), wordform);
+					inflectionBox.setText("");
+				}
+			}
+		});
+		addInflectionButton.setLayoutData(gd);
 		
 		
-		Button addTokenButton = toolkit.createButton(form.getBody(), "Add token.", SWT.PUSH);
+		/* TODO - DONE? */
+		removeInflectionButton.addSelectionListener(new SelectionAdapter() { 
+			public void widgetSelected(SelectionEvent e) {
+				Table iTable = inflectionTable.getTable();
+				int selected = iTable.getSelectionIndex();
+				if (selected == -1) {
+					String message = "Please select a constraint to remove.";
+					broadcastError(message);
+				} else {
+					TableItem row = iTable.getItem(selected);
+					String inflection = row.getText(0);
+					String wordform = row.getText(1);
+					
+					if (inflections.containsKey(wordform)) {
+						HashSet<String> inflectionVals = inflections.get(wordform);
+						if (inflectionVals.size() <= 1) {
+							inflections.remove(wordform);
+						} else {
+							inflectionVals.remove(inflection);
+						}
+					}
+					
+					iTable.deselectAll();
+					iTable.remove(selected);
+				}	
+			}
+		});
+		removeInflectionButton.setLayoutData(gd);
+		
+		
 		addTokenButton.addSelectionListener(new SelectionAdapter() { 
 			public void widgetSelected(SelectionEvent e) {
 				token = tokenText.getText();
 				parentCxn = parentText.getText();
-				if (!token.equals("") && !parentCxn.equals("") && constraints.size() > 0) {
+				
+				if (!entryInMorph(token)) {
+					broadcastError("This token definition does not contain a corresponding definition in the morphology. "
+							+ "Please add a morphology entry for this token.");
+				}
+				else if (!token.equals("") && !parentCxn.equals("") && constraints.size() > 0) {
 					write(token, parentCxn, constraints);
 					tokenText.setText("");
 					parentText.setText("");
@@ -676,9 +831,73 @@ public class TokenView extends ViewPart {
 			}
 		});
 		addTokenButton.setLayoutData(gd);
-
 		
-		Button reloadTypesButton = toolkit.createButton(form.getBody(), "Reload Type Constructions.", SWT.PUSH);
+		/* TODO */
+		addMorphButton.addSelectionListener(new SelectionAdapter() { 
+			public void widgetSelected(SelectionEvent e) {
+				token = tokenText.getText();
+//				parentCxn = parentText.getText();
+				
+				if (entryInMorph(token)) {
+					broadcastError("Token is already in the morphology.");
+				}
+				else if (!token.equals("") && !parentCxn.equals("") && inflections.size() > 0) {
+					FileWriter morph_fw;
+					BufferedWriter morph_bw;
+					
+					try {
+						if (modifiedMorph == null) {
+							broadcastError("Please select a morphology file.");
+							return;
+						}
+						
+						File morph_file = new File(base, modifiedMorph);
+						morph_fw = new FileWriter(morph_file.getAbsoluteFile(), true);
+						morph_bw = new BufferedWriter(morph_fw);
+						
+						String wordformString;
+						boolean isFirst;
+						for (String wordform : inflections.keySet()) {
+							wordformString = wordform + "\t";
+							isFirst = true;
+							for (String inflection : inflections.get(wordform)) {
+								if (!isFirst) {
+									wordformString += " ";
+								}
+								wordformString += token + " " + inflection;
+								isFirst = false;
+							}	
+							morph_bw.write(wordformString);
+							morph_bw.newLine();
+						}
+						morph_bw.close();
+	
+						inflections.clear();
+						inflectionTable.getTable().removeAll();
+						wordformText.setText("");
+						inflectionBox.setText("");
+						
+						try {
+							getGrammar().buildTokenAndMorpher();
+						} catch (ParserException pe) {
+							broadcastError(pe.getMessage());
+						}
+						Utils.flushCaches();
+					} catch(IOException ex) {
+						ex.printStackTrace();
+					}	
+				} else {
+					//System.out.println("Definition not complete.");
+					broadcastError("This inflection definition is not complete; you must make sure you select a parentCxn (currently set to '" + parentCxn + "'), "
+							+ "fill in the box for the token's value (currently: '" + token
+							+ "'), and add at least one inflection (currently " + inflections.size() + " inflections added).");
+				}
+
+				
+			}
+		});
+		addMorphButton.setLayoutData(gd);
+
 		reloadTypesButton.setToolTipText("Reload the list of type constructions from a newly checked grammar..");
 		reloadTypesButton.setLayoutData(new GridData(SWT.FILL, 1, false, false));
 		reloadTypesButton.addSelectionListener(new SelectionAdapter() { 
@@ -687,9 +906,48 @@ public class TokenView extends ViewPart {
 				setTypes();
 			}
 		});
-
-		
 	}
+	
+	/* Check if string exists in morphology */
+	private boolean entryInMorph(String entry) {
+		File base = prefs.getBaseDirectory();
+		File ecgmorph_path;
+
+		List<String> morph_paths = prefs.getList(AP.MORPHOLOGY_PATH);
+		for (String path : morph_paths) {
+			ecgmorph_path = new File(base, path);
+			
+			TextFileLineIterator tfli = new TextFileLineIterator(ecgmorph_path);
+			
+			int lineNum = 0;
+									
+			while (tfli.hasNext()) {
+				lineNum++;
+				String line = tfli.next();
+				// Skip blank lines or lines with just a comment
+				if (line.matches("\\s*#.*") || line.matches("\\s*")) {
+					continue;
+				}
+				String splitline[] = line.split("\\s+");
+				if (splitline.length < 3) {
+					throw new ParserException("Improperly formatted entry in morph file " + ecgmorph_path + ", line " + lineNum);
+				}
+				
+				if (entry.equals(splitline[0])) {
+					return true;
+				}
+				
+				for (int ii = 1; ii+1 < splitline.length; ii+=2) {
+					if (entry.equals(splitline[ii])) {
+						return true;
+					}
+				}
+			}
+		}
+		
+		return false;
+	}
+	
 
 	/**
 	 * Passing the focus request to the viewer's control.
