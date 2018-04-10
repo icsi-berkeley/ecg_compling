@@ -547,6 +547,7 @@ public class TokenView extends ViewPart {
 	    removeInflectionButton.setToolTipText("Remove highlighted inflection from list of inflections for this token.");
 	    removeInflectionButton.setLayoutData(gd);
 		
+	    toolkit.createLabel(form.getBody(), "");
 	    Button addMorphButton = toolkit.createButton(form.getBody(), "Add morphology entry.", SWT.PUSH);
 	    
 		/* Ethan - Done */
