@@ -83,7 +83,6 @@ public class MorphView extends ViewPart {
 	private String modifiedTok = null;
 	
 	private File token_file;
-	private File ontFile;
 	private FileWriter fw;
 	private BufferedWriter bw;
 	private FileWriter ontWriter;
@@ -93,82 +92,21 @@ public class MorphView extends ViewPart {
 	private String[] typeCxns;
 	private static final Charset DEFAULT_CHARSET = Charset.forName(ECGConstants.DEFAULT_ENCODING);
 	
-	private String modifiedOnt = null;
 	
 	private String modifiedMorph = null;
-	
-	
-	private IAction addToken;
-	private IAction addConstraint;
 	
 	private String parentValue;
 	
 	/* Ethan */
 	private HashMap<String, HashSet<String>> inflections;
-	private TableViewer constraintsTable;
 	private TableViewer inflectionTable;
 
-	/** Opens up token file from TOKEN_PATH. */
-	private void openFile() {
-		try {
-			if (modifiedTok == null) {
-				List<String> token_paths = prefs.getList(AP.TOKEN_PATH);
-				token_file = new File(base, token_paths.get(0));  // writes to the first token path listed
-				if (!token_file.exists()) {
-					token_file.createNewFile();
-				}
-			} else {
-				token_file = new File(base, modifiedTok);
-			}
-			fw = new FileWriter(token_file.getAbsoluteFile(), true);
-			bw = new BufferedWriter(fw);
-		} catch(IOException ex) {
-			ex.printStackTrace();
-		}
-	}
-	
-	/** Writes new token to Token File. */
-	private void write(String tok, String par, ArrayList<String> cons) {
-		try {
-			openFile();
-			String constraintString = "";
-			for (int i = 0; i < cons.size(); i++) {
-				constraintString += cons.get(i);
-				if (i < cons.size() - 1) {
-					constraintString += " :: ";
-				}
-			}
-			bw.write(tok + " :: " + par + " :: " + constraintString);
-			bw.newLine();
-			bw.close();
-			token = "";
-			parentCxn = "";
-			constraints.clear();
-			
-			/* Ethan */
-			constraintsTable.getTable().removeAll();
-			
-			try {
-				getGrammar().buildTokenAndMorpher();
-			} catch (ParserException e) {
-				broadcastError(e.getMessage());
-			}
-			Utils.flushCaches();
-		} catch(IOException ex) {
-			ex.printStackTrace();
-		}
-	}
-	
-	
-	/** Checks if VALUE exists in ontology. Uses method from Grammar object. Assumes value has "@ in it". */
-	private boolean exists(String value) {
-		return getGrammar().getOntologyTypeSystem().get(value.substring(1, value.length()).trim()) != null;
-	}
 	
 	/** Returns a list of constructions using the grammar object's method for "getting constructions" based on orthography. */
 	private String[] getTypes(String orth) {
 		LCPGrammarWrapper lcp = new LCPGrammarWrapper(getGrammar());
 		List<Construction> cxns = lcp.getLexicalConstruction(orth);
+		
 		String[] typeNames= new String[cxns.size()];
 		for (int i=0; i < typeNames.length; i++) {
 			typeNames[i] = cxns.get(i).getName();
@@ -177,24 +115,20 @@ public class MorphView extends ViewPart {
 		return typeNames; 
 	}
 	
-	
-	private String[] getOntologyFiles() {
-		List<String> ontPaths = prefs.getList(AP.ONTOLOGY_PATHS);
-		String[] onts = new String[ontPaths.size()];
-		for (int i=0; i < onts.length; i++) {
-			onts[i] = ontPaths.get(i);
+	/** Checks if CHILD is a subtype of PARENT.  - NOTE: not the same as version in TokenView */
+	private boolean isSubtype2(String child, String parent) {
+		TypeSystem ts = getGrammar().getConstructionTypeSystem();
+		try {
+			if (ts.subtype(ts.getInternedString(child), ts.getInternedString(parent))) {
+				return true;
+			}
+		} catch (TypeSystemException e) {
+			System.out.println("Either " + child + " or " + parent + " doesn't exist.");
+			return false;
 		}
-		return onts;
+		return false;
 	}
 	
-	private String[] getTokenFiles() {
-		List<String> token_paths = prefs.getList(AP.TOKEN_PATH);
-		String[] toks = new String[token_paths.size()];
-		for (int i=0; i < toks.length; i++) {
-			toks[i] = token_paths.get(i);
-		}
-		return toks;
-	}
 	
 	private String[] getMorphFiles() {
 		List<String> morph_paths = prefs.getList(AP.MORPHOLOGY_PATH);
@@ -205,88 +139,58 @@ public class MorphView extends ViewPart {
 		return toks;
 	}
 	
-	
-	private void rebuildOntology() {
-		ResourceGatherer gatherer = new ResourceGatherer(prefs);
-		ContextModel contextModel;
-		try {
-			contextModel = buildContextModel(gatherer);
-			getGrammar().setContextModel(contextModel);
-			//getGrammar().update();
-			TypeSystem ts = getGrammar().getOntologyTypeSystem();
+	/* Ethan */
+	private String[] getInflectionsForParentType(String parent) {
+		HashSet<String> inflections = new HashSet<String>();
+		
+		File base = prefs.getBaseDirectory();
+		File table_path = new File(base, prefs.getSetting(AP.TABLE_PATH));
+		TextFileLineIterator tfli = new TextFileLineIterator(table_path);
+		
+		int lineNum = 1;
+		while (tfli.hasNext()) {
+			String l = tfli.next();
+			if (l.equals("Constructional")) {
+				continue;
+			}
+			if (l.startsWith("#")) {
+				continue;
+			}
+			if (l.equals("Meaning")) {
+				continue;
+			}
+			String[] s = l.split("\\s*::\\s*");
+			if (s.length < 3) {
+				throw new ParserException("Improperly formatted morph entry on line " + lineNum 
+						+ " of table in file " + table_path + 
+						". Entry must be of the form: \n 'FlectType :: constraints :: compatible_constructions'.");
+			}
+			String flectType = s[0];
+			String[] compatible_cxns = s[2].split(",\\s");
 			
-		} catch (CoreException e) {
-			e.printStackTrace();
-			broadcastError("Problem rebuilding ontology...");
-		}
-	}
-	
-
-	
-	public ContextModel buildContextModel(ResourceGatherer gatherer) throws CoreException {
-		//SampleResourceVisitor visitor = new SampleResourceVisitor();
-//		for (IResource r : gatherer.getOntologyFiles(getProject())) {
-//			r.accept(visitor);
-//		}
-		boolean onts = true;
-		String[] exts = gatherer.getOntologyExtensions().split(" ");
-		List<File> files = gatherer.getOntologyFiles();
-		if (files.size() == 1) {
-			return new ContextModel(files.get(0).getAbsolutePath(), DEFAULT_CHARSET);
-		} else if (onts) {
-			return new ContextModel(files, exts[2], DEFAULT_CHARSET);
-		}
-		else {
-			return new ContextModel(files, exts[0], exts[1], DEFAULT_CHARSET);
-		}
-	}
-	
-	
-	
-	// Adds VALUE to ontology as a subtype of PARENT. 
-	private void addOntologyItem(String value, String parent, String ontologyFile) {
-		value = value.substring(1, value.length()).trim();
-		parent = parent.substring(1, parent.length()).trim();
-		try {
-			if (ontologyFile == null) {
-				List<String> ontPaths = prefs.getList(AP.ONTOLOGY_PATHS);
-				ontologyFile = ontPaths.get(0);
+			for (String cxn : compatible_cxns) {
+				if (isSubtype2(parent, cxn)) {
+					
+//					String[] inflection = flectType.split(",");
+//					/* Format correctly for morphology - NOT NECESSARY */
+//					if (inflection.length > 1) {
+//						String temp = inflection[0];
+//						inflection[0] = inflection[1];
+//						inflection[1] = temp;
+//					}
+//					inflections.add(String.join("/", inflection));
+					
+					inflections.add(flectType.replace(',', '/'));
+					break;
+				}
 			}
-			ontFile = new File(base, ontologyFile);
-			File tempFile = new File("tempFile.ont");
-			ontWriter = new FileWriter(tempFile.getAbsoluteFile(), true);
-			bOntWriter = new BufferedWriter(ontWriter);
-			TextFileLineIterator tfli = new TextFileLineIterator(ontFile);
-			while (tfli.hasNext()) {
-				String line = tfli.next();
-				if (line.contains("INSTS:")) {
-					continue;
-				} 
-				bOntWriter.write(line + System.getProperty("line.separator") + System.getProperty("line.separator"));
-			}
-			String toWrite = "(type " + value + " sub " + parent + ")";
-			bOntWriter.write(toWrite);
-			bOntWriter.newLine();
-			bOntWriter.newLine();
-			bOntWriter.write("INSTS:");
-			bOntWriter.newLine();
-			bOntWriter.close();
-			//File pointer = new File(ontFile.getAbsolutePath());
-			String path = ontFile.getAbsolutePath();
-			ontFile.delete();
-			// Need to rename temp-file here.
-			if (tempFile.renameTo(ontFile)) {
-				System.out.println("Success");
-			} else{
-				throw new IOException();
-			}
-			//System.out.println(tempFile);
-			//PrefsManager.getDefault().checkGrammar();
-			rebuildOntology();
-		} catch (IOException problem) {
-			broadcastError("Something went wrong with modifying the ontology file " + ontologyFile + " with type " + value 
-					+ "and parent " + parent + ".");
+			
+			lineNum += 1;
 		}
+		
+		String[] inflectionsArray = inflections.toArray(new String[inflections.size()]);
+		Arrays.sort(inflectionsArray);
+		return inflectionsArray;
 	}
 	
 	/* Ethan */
@@ -296,20 +200,20 @@ public class MorphView extends ViewPart {
 		newItem.setText(0, constraint);
 		newItem.setText(1, value);	
 	}
-	/* */
 	
-	/** Checks if CHILD is a subtype of PARENT. */
-	private boolean isSubtype(String child, String parent) {
-		try {
-			TypeSystem ts = getGrammar().getOntologyTypeSystem();
-			child = child.substring(1, child.length()).trim();
-			String ancestor = parent.substring(1, parent.length()).trim();
-			return ts.subtype(ts.getInternedString(child), ts.getInternedString(ancestor));
-		} catch(TypeSystemException type) {
-			//System.out.println("Either " + child + " or " + parent + " doesn't exist.");
-			return false;
-		}
-	}
+	
+//	/** Checks if CHILD is a subtype of PARENT. */
+//	private boolean isSubtype(String child, String parent) {
+//		try {
+//			TypeSystem ts = getGrammar().getOntologyTypeSystem();
+//			child = child.substring(1, child.length()).trim();
+//			String ancestor = parent.substring(1, parent.length()).trim();
+//			return ts.subtype(ts.getInternedString(child), ts.getInternedString(ancestor));
+//		} catch(TypeSystemException type) {
+//			//System.out.println("Either " + child + " or " + parent + " doesn't exist.");
+//			return false;
+//		}
+//	}
 	
 	/** Returns type system. */
 	protected TypeSystem<? extends TypeSystemNode> getTypeSystem() {
@@ -337,21 +241,6 @@ public class MorphView extends ViewPart {
 	
 	static Combo parentText; // = new Combo(form.getBody(), SWT.DROP_DOWN);
 	
-	/** This is a method to map a language ontology value to the app ontology value. This is written to the mapping file. */
-	public void writeMappingFile(String language, String application) {
-		String mapping_path = prefs.getSetting(AP.MAPPING_PATH);
-		File mapping_file = new File(base, mapping_path);
-		try {
-			FileWriter mw = new FileWriter(mapping_file.getAbsoluteFile(), true);
-			BufferedWriter bmw = new BufferedWriter(mw);
-			bmw.write(language + " :: " + application);
-			bmw.close();
-		} catch(IOException e) {
-			broadcastError("There was a problem opening the mapping file. Check to make sure there is actually a file at " 
-					+ mapping_path + ".");
-		}
-	}
-	
 	public void broadcastError(String message) {
 		String newMessage = "WARNING: \n \n" + message;
 		final IStatus status = new Status(IStatus.ERROR, Application.PLUGIN_ID, newMessage);
@@ -361,9 +250,6 @@ public class MorphView extends ViewPart {
 	
 	
 	public void createPartControl(Composite parent) {
-		
-
-		constraints = new ArrayList<String>();
 		inflections = new HashMap<String, HashSet<String>>();
 		
 		prefs =  (AnalyzerPrefs) getGrammar().getPrefs();
@@ -372,9 +258,7 @@ public class MorphView extends ViewPart {
 		
 		final FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		final ScrolledForm form = toolkit.createScrolledForm(parent);
-//		form.setExpandVertical(true);
-//		form.setMinHeight(10);
-		
+
 		form.setText("Morphology Editor");
 		GridLayout layout = new GridLayout();
 		form.getBody().setLayout(layout);
@@ -382,116 +266,27 @@ public class MorphView extends ViewPart {
 		layout.numColumns = 2;
 		GridData gd = new GridData(SWT.FILL, 1, true, false);
 		gd.horizontalSpan = 1;
-		//gd.horizontalSpan = 2;
 
 		final Label tokenLabel = toolkit.createLabel(form.getBody(), "Enter Lemma:");
 		final Text tokenText = toolkit.createText(form.getBody(), "");
-		tokenText.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		tokenText.setLayoutData(gd);
 		
 		
 		final Label parentLabel = toolkit.createLabel(form.getBody(), "Select Parent Type:");
-		//final Combo parentText = new Combo(form.getBody(), SWT.DROP_DOWN);
 		parentText = new Combo(form.getBody(), SWT.DROP_DOWN);
-		//parentText.setItems(typeCxns);
 		setTypes();
-		//toolkit.adapt(parentText);
-		parentText.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		parentText.setLayoutData(gd);
 		parentText.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(parent);
 		
-		final Label ontologyFileLabel = toolkit.createLabel(form.getBody(), "Select Ontology File:");
-		final Combo ontologyFileBox = new Combo(form.getBody(), SWT.DROP_DOWN);
-		ontologyFileBox.setItems(getOntologyFiles());
-		ontologyFileBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
-		ontologyFileBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
-		toolkit.paintBordersFor(ontologyFileBox);
+//		final HashMap<String, String> slotsValues = new HashMap<String, String>();
+//		final ArrayList<String> slots = new ArrayList<String>();
 		
-		final Label tokenFileLabel = toolkit.createLabel(form.getBody(), "Select Token File:");
-		final Combo tokenFileBox = new Combo(form.getBody(), SWT.DROP_DOWN);
-		tokenFileBox.setItems(getTokenFiles());
-		tokenFileBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
-		tokenFileBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
-		toolkit.paintBordersFor(tokenFileBox);
-		
-		final Label constraintSelect = toolkit.createLabel(form.getBody(), "Select Role to Modify:");
-		final Combo constraintBox = new Combo(form.getBody(), SWT.DROP_DOWN);
-		constraintBox.setItems(new String[0]);
-		constraintBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
-		constraintBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
-		toolkit.paintBordersFor(parent);
-		
-		
-		final Label constraintSet = toolkit.createLabel(form.getBody(), "Set Role Item:");
-		final Text constraintText = toolkit.createText(form.getBody(), "");
-		constraintText.setLayoutData(gd);
-		
-		final Label emptyEnterLabel = toolkit.createLabel(form.getBody(), "");
-		String enteredConstraintsStr = "";
-		Button addConstraintButton = toolkit.createButton(form.getBody(), "Enter constraint", SWT.PUSH);
-		addConstraintButton.setToolTipText("Add constraint to list of constraints for this token.");
-		addConstraintButton.setLayoutData(gd);
-		
-		
-		/* ETHAN CHANGES */
-		
-		final Label emptyConstraintLabel = toolkit.createLabel(form.getBody(), "");
-		
-		final Composite tableComposite = new Composite(form.getBody(), SWT.NONE);
-		
-		constraintsTable = new TableViewer(tableComposite, SWT.SINGLE | SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.V_SCROLL);
-		constraintsTable.getTable().setLinesVisible(true);
-		constraintsTable.getTable().setHeaderVisible(true);
-		TableViewerColumn roleColumn = new TableViewerColumn(constraintsTable, SWT.NONE);
-		roleColumn.getColumn().setText("Role");
-		roleColumn.getColumn().setResizable(false);
-		TableViewerColumn itemColumn = new TableViewerColumn(constraintsTable, SWT.NONE);
-		itemColumn.getColumn().setText("Item");
-		itemColumn.getColumn().setResizable(false);
-		TableColumnLayout tableLayout = new TableColumnLayout();
-		tableComposite.setLayout(tableLayout);
-
-	    tableLayout.setColumnData(roleColumn.getColumn(), new ColumnWeightData(50));
-	    tableLayout.setColumnData(itemColumn.getColumn(), new ColumnWeightData(50));
-	    GridData tableGd = new GridData(SWT.FILL, SWT.FILL, true, false);
+		GridData tableGd = new GridData(SWT.FILL, SWT.FILL, true, false);
 	    tableGd.verticalSpan = 5;
-	    tableComposite.setLayoutData(tableGd);
-	    
-	    for (int i = 0; i < tableGd.verticalSpan; i++) {
-    			toolkit.createLabel(form.getBody(), "");
-	    }
-	    
-//	    final Label emptyRemoveConstraintLabel = toolkit.createLabel(form.getBody(), "");
-	    Button removeConstraintButton = toolkit.createButton(form.getBody(), "Remove constraint", SWT.PUSH);
-	    removeConstraintButton.setToolTipText("Remove highlighted constraint from list of constraints for this token.");
-	    removeConstraintButton.setLayoutData(gd);
-
-		/* ETHAN - Done */
-		
-		final Label constraintParentsLabel = toolkit.createLabel(form.getBody(), "Additional ontology parents (optional):");
-		final Text constraintParents = toolkit.createText(form.getBody(), "");
-		constraintParents.setToolTipText("Enter a comma-separated list of ontology super-types for the new constraint. E.g., \" entity, artifact, moveable \"");
-		constraintParents.setLayoutData(gd);
-		
-		final Label appMappingLabel = toolkit.createLabel(form.getBody(), "Application mapping (optional):");
-		final Text appMappingText = toolkit.createText(form.getBody(), "$");
-		appMappingText.setToolTipText("Enter the value you want this constrain value to be translated to in the application domain. E.g., red-adj might become just red.");	
-		appMappingText.setLayoutData(gd);
-
-		final HashMap<String, String> slotsValues = new HashMap<String, String>();
-		final ArrayList<String> slots = new ArrayList<String>();
-		
-		final ArrayList<String> parents = new ArrayList<String>();
-	
-		Button addTokenButton = toolkit.createButton(form.getBody(), "Add token.", SWT.PUSH);
-		Button reloadTypesButton = toolkit.createButton(form.getBody(), "Reload Type Constructions.", SWT.PUSH);
-		
 		
 		/* Ethan Start */
 		/* inflection -> 'past/present', wordform -> 'blocked' */
-		
-		/* Empty label for spacing */
-		toolkit.createLabel(form.getBody(), "");
-		toolkit.createLabel(form.getBody(), "");
 		
 		final Label morphFileLabel = toolkit.createLabel(form.getBody(), "Select Morphology File:");
 		final Combo morphFileBox = new Combo(form.getBody(), SWT.DROP_DOWN);
@@ -500,10 +295,10 @@ public class MorphView extends ViewPart {
 		morphFileBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(morphFileBox);
 		
-		/* NEEDS TO SHOW LIST OF INFLECTIONS */
+		/* TO DO - NEEDS TO SHOW LIST OF INFLECTIONS */
 		final Label inflectionSelect = toolkit.createLabel(form.getBody(), "Select Inflection to Modify:");
 		final Combo inflectionBox = new Combo(form.getBody(), SWT.DROP_DOWN);
-		inflectionBox.setItems(new String[0]);
+//		inflectionBox.setItems(new String[0]);
 		inflectionBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
 		inflectionBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(inflectionBox);
@@ -550,60 +345,20 @@ public class MorphView extends ViewPart {
 	    toolkit.createLabel(form.getBody(), "");
 	    Button addMorphButton = toolkit.createButton(form.getBody(), "Add morphology entry.", SWT.PUSH);
 	    
-		/* Ethan - Done */
 		
 		parentText.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				constraintText.setText("");
-				slots.clear();
-				slotsValues.clear();
-				parents.clear();
-				constraints.clear();
+//				slots.clear();
+//				slotsValues.clear();
 				
 				/* Ethan */
 //				wordformText.setText("");
 				inflections.clear();
-				constraintsTable.getTable().removeAll();
 				inflectionTable.getTable().removeAll();
 				
-				
 				parentCxn = parentText.getText();
-				try {
-					for (Constraint c : getGrammar().getConstruction(parentCxn).getMeaningBlock().getConstraints()) {
-						if (c.isAssign()) {
-							slots.add(c.getArguments().get(0).toString());
-							slotsValues.put(c.getArguments().get(0).toString(), c.getValue());
-						}
-						/*
-						if (labelText.size() > i && c.getOperator().equals("<--")) {
-							labelText.get(i).setText(c.getArguments().get(0).toString());
-							textList.get(i).setText(c.getValue());
-							parents.add(textList.get(i).getText());
-						}
-						*/
-					}
-					for (Constraint c : getGrammar().getConstruction(parentCxn).getConstructionalBlock().getConstraints()) {
-						if (c.isAssign()) {
-							slots.add(c.getArguments().get(0).toString());
-							slotsValues.put(c.getArguments().get(0).toString(), c.getValue());
-						}
-					}
-					String[] slotArray = new String[slots.size()];
-					for (int i=0; i < slotArray.length; i++) {
-						slotArray[i] = slots.get(i);
-					}
-					constraintBox.setItems(slotArray);
-				} catch(NullPointerException problem) {
-					broadcastError("Problem: '" + parentCxn + "' doesn't exist in the grammar. You must add a type construction before you make a token of it.");
-				}
-			}
-		});
-		
-		constraintBox.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				constraintText.setText(slotsValues.get(constraintBox.getText()));
-				parentValue = slotsValues.get(constraintBox.getText());
-				appMappingText.setText("$");
+				inflectionBox.setItems(getInflectionsForParentType(parentCxn));
+					
 			}
 		});
 		
@@ -618,128 +373,12 @@ public class MorphView extends ViewPart {
 //			}
 //		});	
 
-		ontologyFileBox.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				modifiedOnt = ontologyFileBox.getText();
-			}
-		});
-		
-		tokenFileBox.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				modifiedTok = tokenFileBox.getText();
-			}
-		});
 		
 		morphFileBox.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				modifiedMorph = morphFileBox.getText();
 			}
 		});
-
-		addConstraintButton.addSelectionListener(new SelectionAdapter() { 
-			public void widgetSelected(SelectionEvent e) {
-				String value = constraintText.getText();
-				String appValue = appMappingText.getText();
-				String inputParents = "";
-				
-				if (!constraintParents.getText().equals("")) {
-					inputParents = constraintParents.getText().replace(",", "");
-					String[] inputParents2 = constraintParents.getText().split(",");
-					for (String parent : inputParents2) {
-						if (!exists("@" + parent)) {
-							//System.out.println(parent + " does not exist in the ontology lattice. You should add it.");
-							broadcastError("Value '@" + parent + "' does not exist in the ontology. You must add it before you create a subtype of it.");
-						}
-					}
-				}
-				if (value.equals("")) {
-					String message = "There are no constraint values to add; you need to fill in the role item slot.";
-					broadcastError(message);
-
-				} else if (value.charAt(0) == ECGConstants.ONTOLOGYPREFIX &&
-							parentValue.charAt(0) == ECGConstants.ONTOLOGYPREFIX) {
-					if (!exists(value)) {
-						if (parentValue != null) {
-							parentValue += " " + inputParents + " shared";
-							addOntologyItem(value, parentValue, modifiedOnt);
-							constraints.add(constraintBox.getText() + " <-- " + value);
-							
-							/* Ethan */
-							addTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
-							
-							if (appValue.length() > 1) {
-								writeMappingFile(value, appValue);
-							}
-						} else {
-							String message = "No parent assigned; you must choose a parent type for the token.";
-							broadcastError(message);
-						}
-					} else {
-						if (!isSubtype(value, parentValue)) {
-							constraints.clear();
-							
-							/* Ethan */
-							constraintsTable.getTable().removeAll();
-							
-							constraintText.setText("");
-							String message = "@" + value + "' already exists in Ontology, and is not a subtype of @" + parentValue 
-									+ " . This will cause errors and prevent proper unification of the token's constraints.";
-							broadcastError(message);
-							//System.out.println(value + " already exists in Ontology, and is not a subtype of " + parentValue + " .");
-						} else {
-							constraints.add(constraintBox.getText() + " <-- " + value);
-							
-							/* Ethan */
-							addTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
-							
-							if (appValue.length() > 1) {
-								writeMappingFile(value, appValue);
-							}
-						}
-					}
-				} else {
-					constraints.add(constraintBox.getText() + " <-- " + value);
-					
-					/* Ethan */
-					addTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
-					
-				}
-				appMappingText.setText("$");
-				constraintText.setText("");
-				constraintParents.setText("");
-			}
-		});
-		addConstraintButton.setLayoutData(gd);
-		
-		
-		/* Ethan */
-		removeConstraintButton.addSelectionListener(new SelectionAdapter() { 
-			public void widgetSelected(SelectionEvent e) {
-				Table cTable = constraintsTable.getTable();
-				int selected = cTable.getSelectionIndex();
-				if (selected == -1) {
-					
-//					/* ETHAN - TODO TESTING Morphology*/
-//					String message;
-//					String tokText = tokenText.getText();
-//					
-//					if (entryInMorph(tokText)) {
-//						message = tokText + " = True";
-//					} else {
-//						message = tokText + " = False";
-//					}
-
-					String message = "Please select a constraint to remove.";
-					broadcastError(message);
-				} else {
-					cTable.deselectAll();
-					cTable.remove(selected);
-					constraints.remove(selected);
-					
-				}	
-			}
-		});
-		removeConstraintButton.setLayoutData(gd);
 		
 		/* TODO - DONE?*/
 		addInflectionButton.addSelectionListener(new SelectionAdapter() { 
@@ -801,37 +440,6 @@ public class MorphView extends ViewPart {
 		});
 		removeInflectionButton.setLayoutData(gd);
 		
-		
-		addTokenButton.addSelectionListener(new SelectionAdapter() { 
-			public void widgetSelected(SelectionEvent e) {
-				token = tokenText.getText();
-				parentCxn = parentText.getText();
-				
-				if (!entryInMorph(token)) {
-					broadcastError("This token definition does not contain a corresponding definition in the morphology. "
-							+ "Please add a morphology entry for this token.");
-				}
-				else if (!token.equals("") && !parentCxn.equals("") && constraints.size() > 0) {
-					write(token, parentCxn, constraints);
-					tokenText.setText("");
-					parentText.setText("");
-					constraintText.setText("");
-					constraintBox.setText("");
-					constraintParents.setText("");
-					// Check grammar instead of retrieving analyzer. Analyzer object too large for "base", etc.
-					// TODO: Check that this is proper.
-					//PrefsManager.getDefault().checkGrammar();
-				} else {
-					//System.out.println("Definition not complete.");
-					broadcastError("This token definition is not complete; you must make sure you select a parentCxn (currently set to '" + parentCxn + "'), "
-							+ "fill in the box for the token's value (currently: '" + token
-							+ "'), and add at least one constraint (currently " + constraints.size() + " constraints added).");
-				}
-
-				
-			}
-		});
-		addTokenButton.setLayoutData(gd);
 		
 		/* TODO */
 		addMorphButton.addSelectionListener(new SelectionAdapter() { 
@@ -898,15 +506,6 @@ public class MorphView extends ViewPart {
 			}
 		});
 		addMorphButton.setLayoutData(gd);
-
-		reloadTypesButton.setToolTipText("Reload the list of type constructions from a newly checked grammar..");
-		reloadTypesButton.setLayoutData(new GridData(SWT.FILL, 1, false, false));
-		reloadTypesButton.addSelectionListener(new SelectionAdapter() { 
-			public void widgetSelected(SelectionEvent e) {
-				//System.out.println("Reloading types");
-				setTypes();
-			}
-		});
 	}
 	
 	/* Check if string exists in morphology */
