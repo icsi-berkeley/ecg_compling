@@ -29,7 +29,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-/* Ethan */
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -100,7 +99,6 @@ public class TokenView extends ViewPart {
 	
 	private String parentValue;
 	
-	/* Ethan */
 	private TableViewer constraintsTable;
 
 	/** Opens up token file from TOKEN_PATH. */
@@ -140,7 +138,6 @@ public class TokenView extends ViewPart {
 			parentCxn = "";
 			constraints.clear();
 			
-			/* Ethan */
 			constraintsTable.getTable().removeAll();
 			
 			try {
@@ -228,7 +225,6 @@ public class TokenView extends ViewPart {
 	}
 	
 	
-	
 	// Adds VALUE to ontology as a subtype of PARENT. 
 	private void addOntologyItem(String value, String parent, String ontologyFile) {
 		value = value.substring(1, value.length()).trim();
@@ -275,7 +271,6 @@ public class TokenView extends ViewPart {
 		}
 	}
 	
-	/* Ethan */
 	/** Adds a pair of values to the the constraint table. */
 	private void addTableEntry(Table table, String constraint, String value) {
 		TableItem newItem = new TableItem(table, SWT.NONE);
@@ -372,28 +367,28 @@ public class TokenView extends ViewPart {
 		final Label parentLabel = toolkit.createLabel(form.getBody(), "Select Parent Type:");
 		parentText = new Combo(form.getBody(), SWT.DROP_DOWN);
 		setTypes();
-		parentText.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		parentText.setLayoutData(gd);
 		parentText.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(parent);
 		
 		final Label ontologyFileLabel = toolkit.createLabel(form.getBody(), "Select Ontology File:");
 		final Combo ontologyFileBox = new Combo(form.getBody(), SWT.DROP_DOWN);
 		ontologyFileBox.setItems(getOntologyFiles());
-		ontologyFileBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		ontologyFileBox.setLayoutData(gd);
 		ontologyFileBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(ontologyFileBox);
 		
 		final Label tokenFileLabel = toolkit.createLabel(form.getBody(), "Select Token File:");
 		final Combo tokenFileBox = new Combo(form.getBody(), SWT.DROP_DOWN);
 		tokenFileBox.setItems(getTokenFiles());
-		tokenFileBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		tokenFileBox.setLayoutData(gd);
 		tokenFileBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(tokenFileBox);
 		
 		final Label constraintSelect = toolkit.createLabel(form.getBody(), "Select Role to Modify:");
 		final Combo constraintBox = new Combo(form.getBody(), SWT.DROP_DOWN);
 		constraintBox.setItems(new String[0]);
-		constraintBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		constraintBox.setLayoutData(gd);
 		constraintBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(parent);
 		
@@ -407,9 +402,6 @@ public class TokenView extends ViewPart {
 		Button addConstraintButton = toolkit.createButton(form.getBody(), "Enter constraint", SWT.PUSH);
 		addConstraintButton.setToolTipText("Add constraint to list of constraints for this token.");
 		addConstraintButton.setLayoutData(gd);
-		
-		
-		/* ETHAN CHANGES */
 		
 		final Label emptyConstraintLabel = toolkit.createLabel(form.getBody(), "");
 		
@@ -437,12 +429,10 @@ public class TokenView extends ViewPart {
     			toolkit.createLabel(form.getBody(), "");
 	    }
 	    
-//	    final Label emptyRemoveConstraintLabel = toolkit.createLabel(form.getBody(), "");
 	    Button removeConstraintButton = toolkit.createButton(form.getBody(), "Remove constraint", SWT.PUSH);
 	    removeConstraintButton.setToolTipText("Remove highlighted constraint from list of constraints for this token.");
 	    removeConstraintButton.setLayoutData(gd);
 
-		/* ETHAN - Done */
 		
 		final Label constraintParentsLabel = toolkit.createLabel(form.getBody(), "Additional ontology parents (optional):");
 		final Text constraintParents = toolkit.createText(form.getBody(), "");
@@ -471,8 +461,7 @@ public class TokenView extends ViewPart {
 				parents.clear();
 				constraints.clear();
 				
-				/* Ethan */
-//				wordformText.setText("");
+
 				constraintsTable.getTable().removeAll();
 				
 				parentCxn = parentText.getText();
@@ -482,13 +471,7 @@ public class TokenView extends ViewPart {
 							slots.add(c.getArguments().get(0).toString());
 							slotsValues.put(c.getArguments().get(0).toString(), c.getValue());
 						}
-						/*
-						if (labelText.size() > i && c.getOperator().equals("<--")) {
-							labelText.get(i).setText(c.getArguments().get(0).toString());
-							textList.get(i).setText(c.getValue());
-							parents.add(textList.get(i).getText());
-						}
-						*/
+
 					}
 					for (Constraint c : getGrammar().getConstruction(parentCxn).getConstructionalBlock().getConstraints()) {
 						if (c.isAssign()) {
@@ -515,16 +498,6 @@ public class TokenView extends ViewPart {
 			}
 		});
 		
-		
-		/* TODO */
-//		inflectionBox.addSelectionListener(new SelectionAdapter() {
-//			public void widgetSelected(SelectionEvent e) {
-//				/* What does any of this do? */
-////				inflectionText.setText(slotsValues.get(inflectionBox.getText()));
-////				what does this do? - parentValue = slotsValues.get(inflectionBox.getText());
-////				what does this do? - appMappingText.setText("$");
-//			}
-//		});	
 
 		ontologyFileBox.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
@@ -567,7 +540,6 @@ public class TokenView extends ViewPart {
 							addOntologyItem(value, parentValue, modifiedOnt);
 							constraints.add(constraintBox.getText() + " <-- " + value);
 							
-							/* Ethan */
 							addTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
 							
 							if (appValue.length() > 1) {
@@ -581,7 +553,6 @@ public class TokenView extends ViewPart {
 						if (!isSubtype(value, parentValue)) {
 							constraints.clear();
 							
-							/* Ethan */
 							constraintsTable.getTable().removeAll();
 							
 							constraintText.setText("");
@@ -592,7 +563,6 @@ public class TokenView extends ViewPart {
 						} else {
 							constraints.add(constraintBox.getText() + " <-- " + value);
 							
-							/* Ethan */
 							addTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
 							
 							if (appValue.length() > 1) {
@@ -603,7 +573,6 @@ public class TokenView extends ViewPart {
 				} else {
 					constraints.add(constraintBox.getText() + " <-- " + value);
 					
-					/* Ethan */
 					addTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
 					
 				}
@@ -615,22 +584,12 @@ public class TokenView extends ViewPart {
 		addConstraintButton.setLayoutData(gd);
 		
 		
-		/* Ethan */
 		removeConstraintButton.addSelectionListener(new SelectionAdapter() { 
 			public void widgetSelected(SelectionEvent e) {
 				Table cTable = constraintsTable.getTable();
 				int selected = cTable.getSelectionIndex();
 				if (selected == -1) {
 					
-//					/* ETHAN - TODO TESTING Morphology*/
-//					String message;
-//					String tokText = tokenText.getText();
-//					
-//					if (entryInMorph(tokText)) {
-//						message = tokText + " = True";
-//					} else {
-//						message = tokText + " = False";
-//					}
 
 					String message = "Please select a constraint to remove.";
 					broadcastError(message);

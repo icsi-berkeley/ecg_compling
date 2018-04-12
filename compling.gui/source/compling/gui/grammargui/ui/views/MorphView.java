@@ -29,7 +29,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-/* Ethan */
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -96,8 +95,7 @@ public class MorphView extends ViewPart {
 	private String modifiedMorph = null;
 	
 	private String parentValue;
-	
-	/* Ethan */
+
 	private HashMap<String, HashSet<String>> inflections;
 	private TableViewer inflectionTable;
 
@@ -139,7 +137,6 @@ public class MorphView extends ViewPart {
 		return toks;
 	}
 	
-	/* Ethan */
 	private String[] getInflectionsForParentType(String parent) {
 		HashSet<String> inflections = new HashSet<String>();
 		
@@ -171,15 +168,6 @@ public class MorphView extends ViewPart {
 			for (String cxn : compatible_cxns) {
 				if (isSubtype2(parent, cxn)) {
 					
-//					String[] inflection = flectType.split(",");
-//					/* Format correctly for morphology - NOT NECESSARY */
-//					if (inflection.length > 1) {
-//						String temp = inflection[0];
-//						inflection[0] = inflection[1];
-//						inflection[1] = temp;
-//					}
-//					inflections.add(String.join("/", inflection));
-					
 					inflections.add(flectType.replace(',', '/'));
 					break;
 				}
@@ -193,7 +181,6 @@ public class MorphView extends ViewPart {
 		return inflectionsArray;
 	}
 	
-	/* Ethan */
 	/** Adds a pair of values to the the constraint table. */
 	private void addTableEntry(Table table, String constraint, String value) {
 		TableItem newItem = new TableItem(table, SWT.NONE);
@@ -201,19 +188,6 @@ public class MorphView extends ViewPart {
 		newItem.setText(1, value);	
 	}
 	
-	
-//	/** Checks if CHILD is a subtype of PARENT. */
-//	private boolean isSubtype(String child, String parent) {
-//		try {
-//			TypeSystem ts = getGrammar().getOntologyTypeSystem();
-//			child = child.substring(1, child.length()).trim();
-//			String ancestor = parent.substring(1, parent.length()).trim();
-//			return ts.subtype(ts.getInternedString(child), ts.getInternedString(ancestor));
-//		} catch(TypeSystemException type) {
-//			//System.out.println("Either " + child + " or " + parent + " doesn't exist.");
-//			return false;
-//		}
-//	}
 	
 	/** Returns type system. */
 	protected TypeSystem<? extends TypeSystemNode> getTypeSystem() {
@@ -239,7 +213,7 @@ public class MorphView extends ViewPart {
 		parentText.setText(t);
 	}
 	
-	static Combo parentText; // = new Combo(form.getBody(), SWT.DROP_DOWN);
+	static Combo parentText;
 	
 	public void broadcastError(String message) {
 		String newMessage = "WARNING: \n \n" + message;
@@ -279,27 +253,21 @@ public class MorphView extends ViewPart {
 		parentText.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(parent);
 		
-//		final HashMap<String, String> slotsValues = new HashMap<String, String>();
-//		final ArrayList<String> slots = new ArrayList<String>();
-		
 		GridData tableGd = new GridData(SWT.FILL, SWT.FILL, true, false);
 	    tableGd.verticalSpan = 5;
 		
-		/* Ethan Start */
 		/* inflection -> 'past/present', wordform -> 'blocked' */
 		
 		final Label morphFileLabel = toolkit.createLabel(form.getBody(), "Select Morphology File:");
 		final Combo morphFileBox = new Combo(form.getBody(), SWT.DROP_DOWN);
 		morphFileBox.setItems(getMorphFiles());
-		morphFileBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		morphFileBox.setLayoutData(gd);
 		morphFileBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(morphFileBox);
 		
-		/* TO DO - NEEDS TO SHOW LIST OF INFLECTIONS */
 		final Label inflectionSelect = toolkit.createLabel(form.getBody(), "Select Inflection to Modify:");
 		final Combo inflectionBox = new Combo(form.getBody(), SWT.DROP_DOWN);
-//		inflectionBox.setItems(new String[0]);
-		inflectionBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		inflectionBox.setLayoutData(gd);
 		inflectionBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(inflectionBox);
 		
@@ -348,11 +316,6 @@ public class MorphView extends ViewPart {
 		
 		parentText.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-//				slots.clear();
-//				slotsValues.clear();
-				
-				/* Ethan */
-//				wordformText.setText("");
 				inflections.clear();
 				inflectionTable.getTable().removeAll();
 				
@@ -363,24 +326,12 @@ public class MorphView extends ViewPart {
 		});
 		
 		
-		/* TODO */
-//		inflectionBox.addSelectionListener(new SelectionAdapter() {
-//			public void widgetSelected(SelectionEvent e) {
-//				/* What does any of this do? */
-////				inflectionText.setText(slotsValues.get(inflectionBox.getText()));
-////				what does this do? - parentValue = slotsValues.get(inflectionBox.getText());
-////				what does this do? - appMappingText.setText("$");
-//			}
-//		});	
-
-		
 		morphFileBox.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				modifiedMorph = morphFileBox.getText();
 			}
 		});
 		
-		/* TODO - DONE?*/
 		addInflectionButton.addSelectionListener(new SelectionAdapter() { 
 			public void widgetSelected(SelectionEvent e) {
 				String wordform = wordformText.getText();
@@ -402,7 +353,6 @@ public class MorphView extends ViewPart {
 						inflections.put(wordform, inflectionVals);
 					}
 					
-//					inflections.add(wordform + "\t" + tokenText.getText() + " " + inflectionBox.getText());
 					addTableEntry(inflectionTable.getTable(), inflectionBox.getText(), wordform);
 					inflectionBox.setText("");
 				}
@@ -410,8 +360,6 @@ public class MorphView extends ViewPart {
 		});
 		addInflectionButton.setLayoutData(gd);
 		
-		
-		/* TODO - DONE? */
 		removeInflectionButton.addSelectionListener(new SelectionAdapter() { 
 			public void widgetSelected(SelectionEvent e) {
 				Table iTable = inflectionTable.getTable();
@@ -440,8 +388,6 @@ public class MorphView extends ViewPart {
 		});
 		removeInflectionButton.setLayoutData(gd);
 		
-		
-		/* TODO */
 		addMorphButton.addSelectionListener(new SelectionAdapter() { 
 			public void widgetSelected(SelectionEvent e) {
 				token = tokenText.getText();
