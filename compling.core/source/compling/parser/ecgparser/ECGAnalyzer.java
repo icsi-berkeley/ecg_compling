@@ -328,6 +328,14 @@ public class ECGAnalyzer implements compling.parser.Parser<Analysis> {
 				throw new ParserException("shouldn't have more than one root.");
 			}
 			Analysis a = al.get(0);
+
+			// Associate the actual text of the utterance parsed with the analysis. Used for multiword token stuff.
+			String txt = "";
+			for (Word word : utterance.getElements()) {
+				txt = txt + " " + word.getOrthography();
+			}
+
+			a.setText(txt);
 			parses.add(a, priority);
 		}
 		return parses;

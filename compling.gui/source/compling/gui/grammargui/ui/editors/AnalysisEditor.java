@@ -118,7 +118,7 @@ public class AnalysisEditor extends MultiPageEditorPart  implements IModelChange
 			for (Analysis a : p.getAnalyses()) {
 				
 				Browser b = new Browser(getContainer(), SWT.NONE);
-				b.setText(htmlBuilder.getHtmlText(input.getSentence().getText(), a));
+				b.setText(htmlBuilder.getHtmlText(a.getText(), a)); // Use the actual text used in the analysis to construct the view
 				browsers.add(b);
 				addPage(page, b);
 				setPageText(page, String.format("SemSpec %d, cost %f", page, p.getCost()));
