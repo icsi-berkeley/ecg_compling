@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="com.clarkparsia.pellet" default="build.jars" basedir=".">
+
+	<property name="p2.build.repo" value="file:${buildDirectory}/buildRepo"/>
+	<property name="basews" value="${ws}"/>
+	<property name="baseos" value="${os}"/>
+	<property name="basearch" value="${arch}"/>
+	<property name="basenl" value="${nl}"/>
+	<property name="bundleId" value="com.clarkparsia.pellet"/>
+	<property name="bundleVersion" value="2.3.0.201804141949"/>
+	<property name="p2.publishonerror" value="false"/>
+
+	<!-- Compiler settings. -->
+	<property name="javacFailOnError" value="false"/>
+	<property name="javacDebugInfo" value="on"/>
+	<property name="javacVerbose" value="false"/>
+	<property name="logExtension" value=".log"/>
+	<property name="compilerArg" value=""/>
+	<property name="compilation.prereq.log" value="${buildDirectory}/prereqErrors.log"/>
+	<property name="javacSource" value="1.3"/>
+	<property name="javacTarget" value="1.2"/>
+	<condition property="dir_bootclasspath" value="${java.home}/../Classes">
+		<and>
+			<os family="mac"/>
+			<available file="${java.home}/../Classes" type="dir"/>
+		</and>
+	</condition>
+	<property name="dir_bootclasspath" value="${java.home}/lib"/>
+	<path id="path_bootclasspath">
+		<fileset dir="${dir_bootclasspath}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	<property name="bootclasspath" refid="path_bootclasspath"/>
+	<condition property="bundleBootClasspath" value="${JavaSE-1.8}"	>
+		<isset property="JavaSE-1.8"/>
+	</condition>
+	<condition property="bundleJavacSource" value="1.8"	>
+		<isset property="JavaSE-1.8"/>
+	</condition>
+	<condition property="bundleJavacTarget" value="1.8"	>
+		<isset property="JavaSE-1.8"/>
+	</condition>
+	<property name="bundleJavacSource" value="${javacSource}"/>
+	<property name="bundleJavacTarget" value="${javacTarget}"/>
+	<property name="bundleBootClasspath" value="${bootclasspath}"/>
+
+	<target name="init" depends="properties">
+		<condition property="pluginTemp" value="${buildTempFolder}/plugins"		>
+			<isset property="buildTempFolder"/>
+		</condition>
+		<property name="pluginTemp" value="${basedir}"/>
+		<condition property="build.result.folder" value="${pluginTemp}/com.clarkparsia.pellet_2.3.0.201804141949"		>
+			<isset property="buildTempFolder"/>
+		</condition>
+		<property name="build.result.folder" value="${basedir}"/>
+		<property name="temp.folder" value="${basedir}/temp.folder"/>
+		<property name="plugin.destination" value="${basedir}"/>
+		<condition property="p2.publish.parts" value="true"		>
+			<istrue value="${p2.gathering}"/>
+		</condition>
+		<property name="compilation.problem.marker" value="${build.result.folder}/compilation.problem"/>
+		<condition property="compilation.problem.marker.exists" value="true"		>
+			<and>
+			<available file="${compilation.problem.marker}"/>
+			<isfalse value="${p2.publishonerror}"/>
+			</and>
+		</condition>
+	</target>
+
+	<target name="properties" if="eclipse.running">
+		<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+
+	</target>
+
+	<target name="build.update.jar" depends="init" description="Build the plug-in: com.clarkparsia.pellet for an update site.">
+		<delete dir="${temp.folder}"/>
+		<mkdir dir="${temp.folder}"/>
+		<antcall target="build.jars"/>
+		<antcall target="gather.bin.parts">
+			<param name="destination.temp.folder" value="${temp.folder}/"/>
+		</antcall>
+		<jar destfile="${plugin.destination}/com.clarkparsia.pellet_2.3.0.201804141949.jar" basedir="${temp.folder}/com.clarkparsia.pellet_2.3.0.201804141949" filesetmanifest="merge"/>
+		<delete dir="${temp.folder}"/>
+	</target>
+
+	<target name="@dot.nestedJars">
+	</target>
+	<target name="@dot" depends="init,@dot.nestedJars" unless="@dot" description="Create jar: com.clarkparsia.pellet @dot.">
+		<delete dir="${build.result.folder}/@dot"/>
+		<mkdir dir="${build.result.folder}/@dot"/>
+		<path id="@dot.classpath">
+			<pathelement path="lib/antlr/antlr-runtime-3.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/antlr/antlr-runtime-3.2.jar"/>
+			<pathelement path="lib/aterm-java-1.6.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/aterm-java-1.6.jar"/>
+			<pathelement path="lib/jaxb/jaxb-api.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/jaxb/jaxb-api.jar"/>
+			<pathelement path="lib/jena/arq-2.8.7.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/jena/arq-2.8.7.jar"/>
+			<pathelement path="lib/jena/icu4j-3.4.4.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/jena/icu4j-3.4.4.jar"/>
+			<pathelement path="lib/jena/iri-0.8.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/jena/iri-0.8.jar"/>
+			<pathelement path="lib/jena/jena-2.6.4.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/jena/jena-2.6.4.jar"/>
+			<pathelement path="lib/jena/junit-4.5.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/jena/junit-4.5.jar"/>
+			<pathelement path="lib/jena/log4j-1.2.13.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/jena/log4j-1.2.13.jar"/>
+			<pathelement path="lib/jena/lucene-core-2.3.1.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/jena/lucene-core-2.3.1.jar"/>
+			<pathelement path="lib/jena/slf4j-api-1.5.8.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/jena/slf4j-api-1.5.8.jar"/>
+			<pathelement path="lib/jena/slf4j-log4j12-1.5.8.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/jena/slf4j-log4j12-1.5.8.jar"/>
+			<pathelement path="lib/jena/stax-api-1.0.1.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/jena/stax-api-1.0.1.jar"/>
+			<pathelement path="lib/jena/wstx-asl-3.2.9.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/jena/wstx-asl-3.2.9.jar"/>
+			<pathelement path="lib/jena/xercesImpl-2.7.1.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/jena/xercesImpl-2.7.1.jar"/>
+			<pathelement path="lib/jetty/commons-logging-api.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/jetty/commons-logging-api.jar"/>
+			<pathelement path="lib/jetty/jetty.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/jetty/jetty.jar"/>
+			<pathelement path="lib/jgrapht/jgrapht-jdk1.5.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/jgrapht/jgrapht-jdk1.5.jar"/>
+			<pathelement path="lib/junit/junit.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/junit/junit.jar"/>
+			<pathelement path="lib/owlapi/owlapi-bin.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/owlapi/owlapi-bin.jar"/>
+			<pathelement path="lib/owlapiv3/owlapi-bin.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/owlapiv3/owlapi-bin.jar"/>
+			<pathelement path="lib/servlet.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/servlet.jar"/>
+			<pathelement path="lib/xsdlib/relaxngDatatype.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/xsdlib/relaxngDatatype.jar"/>
+			<pathelement path="lib/xsdlib/xsdlib.jar"/>
+			<pathelement path="${build.result.folder}/../com.clarkparsia.pellet_2.3.0.201804141949/lib/xsdlib/xsdlib.jar"/>
+		</path>
+		<!-- compile the source code -->
+		<javac destdir="${build.result.folder}/@dot" failonerror="${javacFailOnError}" verbose="${javacVerbose}" debug="${javacDebugInfo}" includeAntRuntime="no" bootclasspath="${bundleBootClasspath}" source="${bundleJavacSource}" target="${bundleJavacTarget}"		>
+			<compilerarg line="${compilerArg}" compiler="${build.compiler}"/>
+			<classpath refid="@dot.classpath" />
+			<src path="examples/src/"			/>
+			<src path="src/"			/>
+			<compilerarg line="-log &apos;${build.result.folder}/@dot${logExtension}&apos;" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"			/>
+		</javac>
+		<antcall target="checkCompilationResults"/>
+		<!-- Copy necessary resources -->
+		<copy todir="${build.result.folder}/@dot" failonerror="true" overwrite="false">
+			<fileset dir="examples/src/">
+				<exclude name="**/*.java"/>
+				<exclude name="**/package.htm*"/>
+			</fileset>
+			<fileset dir="src/">
+				<exclude name="**/*.java"/>
+				<exclude name="**/package.htm*"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="src.zip" depends="init" unless="src.zip">
+		<mkdir dir="${build.result.folder}"/>
+		<antcall target="zip.src.zip"/>
+	</target>
+	<target name="zip.src.zip">
+		<zip destfile="${build.result.folder}/src.zip" filesonly="false" whenempty="skip" update="false">
+			<fileset dir="examples/src/">
+				<include name="**/*.java"/>
+			</fileset>
+			<fileset dir="src/">
+				<include name="**/*.java"/>
+			</fileset>
+		</zip>
+	</target>
+	<target name="copy.src.zip">
+		<copy todir="${source.destination.folder}/" failonerror="true" overwrite="true">
+			<fileset dir="examples/src/">
+				<include name="**/*.java"/>
+			</fileset>
+			<fileset dir="src/">
+				<include name="**/*.java"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="build.jars" depends="init" description="Compile classes and build nested jars for the plug-in: com.clarkparsia.pellet.">
+		<delete file="${compilation.problem.marker}" quiet="true"/>
+		<available property="@dot" file="${build.result.folder}/@dot"/>
+		<antcall target="@dot"/>
+	</target>
+
+	<target name="checkCompilationResults" if="compilation.error.occured">
+		<echo file="${compilation.problem.marker}" message="com.clarkparsia.pellet_2.3.0.201804141949${line.separator}compilation.error.occured=${compilation.error.occured}"/>
+		<eclipse.logCompileError log="${compilation.prereq.log}" bundle="com.clarkparsia.pellet_2.3.0.201804141949">
+		</eclipse.logCompileError>
+	</target>
+
+	<target name="build.sources" depends="init">
+		<available property="src.zip" file="${build.result.folder}/src.zip"/>
+		<antcall target="src.zip"/>
+	</target>
+
+	<target name="publish.bin.parts" depends="init" if="p2.publish.parts" unless="compilation.problem.marker.exists">
+		<mkdir dir="${build.result.folder}/com.clarkparsia.pellet_2.3.0.201804141949"/>
+		<copy todir="${build.result.folder}" failonerror="true" overwrite="true">
+			<fileset dir="${basedir}">
+				<include name="META-INF/MANIFEST.MF"/>
+				<include name="plugin.xml"/>
+				<include name="fragment.xml"/>
+			</fileset>
+		</copy>
+		<eclipse.versionReplacer path="${build.result.folder}" version="2.3.0.201804141949"/>
+		<antcall target="apitools.generation">
+			<param name="projectLocation" value="${basedir}"/>
+			<param name="binary.folders" value="${build.result.folder}/@dot:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/lucene-core-2.3.1.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jaxb/jaxb-api.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/aterm-java-1.6.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/wstx-asl-3.2.9.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jetty/jetty.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/owlapi/owlapi-bin.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/servlet.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jgrapht/jgrapht-jdk1.5.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/iri-0.8.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/stax-api-1.0.1.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/owlapiv3/owlapi-bin.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/icu4j-3.4.4.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/antlr/antlr-runtime-3.2.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/junit/junit.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jetty/commons-logging-api.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/arq-2.8.7.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/xsdlib/xsdlib.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/slf4j-api-1.5.8.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/xsdlib/relaxngDatatype.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/jena-2.6.4.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/log4j-1.2.13.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/slf4j-log4j12-1.5.8.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/junit-4.5.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/xercesImpl-2.7.1.jar"/>
+			<param name="projectName" value="${bundleId}_${bundleVersion}"/>
+			<param name="target.folder" value="${build.result.folder}"/>
+		</antcall>
+		<eclipse.gatherBundle 
+		   metadataRepository="${p2.build.repo}"
+		   artifactRepository="${p2.build.repo}"
+		   buildResultFolder="${build.result.folder}"
+		   unpack="false"
+		   baseDirectory="${basedir}"
+		/>
+	</target>
+
+	<target name="gather.bin.parts" depends="init" if="destination.temp.folder">
+		<mkdir dir="${destination.temp.folder}/com.clarkparsia.pellet_2.3.0.201804141949"/>
+		<copy todir="${destination.temp.folder}/com.clarkparsia.pellet_2.3.0.201804141949" failonerror="true" overwrite="false">
+			<fileset dir="${build.result.folder}/@dot">
+				<include name="**"/>
+			</fileset>
+		</copy>
+		<copy todir="${destination.temp.folder}/com.clarkparsia.pellet_2.3.0.201804141949" failonerror="true" overwrite="true">
+			<fileset dir="${basedir}">
+				<include name="META-INF/"/>
+				<include name="lib/antlr/antlr-runtime-3.2.jar"/>
+				<include name="lib/aterm-java-1.6.jar"/>
+				<include name="lib/jaxb/jaxb-api.jar"/>
+				<include name="lib/jena/arq-2.8.7.jar"/>
+				<include name="lib/jena/icu4j-3.4.4.jar"/>
+				<include name="lib/jena/iri-0.8.jar"/>
+				<include name="lib/jena/jena-2.6.4.jar"/>
+				<include name="lib/jena/junit-4.5.jar"/>
+				<include name="lib/jena/log4j-1.2.13.jar"/>
+				<include name="lib/jena/lucene-core-2.3.1.jar"/>
+				<include name="lib/jena/slf4j-api-1.5.8.jar"/>
+				<include name="lib/jena/slf4j-log4j12-1.5.8.jar"/>
+				<include name="lib/jena/stax-api-1.0.1.jar"/>
+				<include name="lib/jena/wstx-asl-3.2.9.jar"/>
+				<include name="lib/jena/xercesImpl-2.7.1.jar"/>
+				<include name="lib/jetty/commons-logging-api.jar"/>
+				<include name="lib/jetty/jetty.jar"/>
+				<include name="lib/jgrapht/jgrapht-jdk1.5.jar"/>
+				<include name="lib/junit/junit.jar"/>
+				<include name="lib/owlapi/owlapi-bin.jar"/>
+				<include name="lib/owlapiv3/owlapi-bin.jar"/>
+				<include name="lib/servlet.jar"/>
+				<include name="lib/xsdlib/relaxngDatatype.jar"/>
+				<include name="lib/xsdlib/xsdlib.jar"/>
+			</fileset>
+		</copy>
+		<eclipse.versionReplacer path="${destination.temp.folder}/com.clarkparsia.pellet_2.3.0.201804141949" version="2.3.0.201804141949"/>
+		<antcall target="apitools.generation">
+			<param name="projectLocation" value="${basedir}"/>
+			<param name="binary.folders" value="${build.result.folder}/@dot:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/lucene-core-2.3.1.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jaxb/jaxb-api.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/aterm-java-1.6.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/wstx-asl-3.2.9.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jetty/jetty.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/owlapi/owlapi-bin.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/servlet.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jgrapht/jgrapht-jdk1.5.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/iri-0.8.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/stax-api-1.0.1.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/owlapiv3/owlapi-bin.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/icu4j-3.4.4.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/antlr/antlr-runtime-3.2.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/junit/junit.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jetty/commons-logging-api.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/arq-2.8.7.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/xsdlib/xsdlib.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/slf4j-api-1.5.8.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/xsdlib/relaxngDatatype.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/jena-2.6.4.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/log4j-1.2.13.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/slf4j-log4j12-1.5.8.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/junit-4.5.jar:/Users/vivek/Projects/compling/com.clarkparsia.pellet/lib/jena/xercesImpl-2.7.1.jar"/>
+			<param name="projectName" value="${bundleId}_${bundleVersion}"/>
+			<param name="target.folder" value="${destination.temp.folder}/com.clarkparsia.pellet_2.3.0.201804141949"/>
+		</antcall>
+	</target>
+
+	<target name="build.zips" depends="init">
+	</target>
+
+	<target name="gather.sources" depends="init" if="destination.temp.folder">
+		<mkdir dir="${destination.temp.folder}/com.clarkparsia.pellet_2.3.0.201804141949"/>
+		<copy file="${build.result.folder}/src.zip" todir="${destination.temp.folder}/com.clarkparsia.pellet_2.3.0.201804141949" failonerror="false" overwrite="false"/>
+		<antcall target="copy.src.includes">
+			<param name="source.destination.folder" value="${destination.temp.folder}/com.clarkparsia.pellet_2.3.0.201804141949"/>
+		</antcall>
+	</target>
+
+	<target name="gather.individual.sources" depends="init">
+		<antcall target="copy.src.zip">
+			<param name="source.destination.folder" value="${destination.temp.folder}"/>
+		</antcall>
+		<antcall target="copy.src.includes">
+			<param name="source.destination.folder" value="${destination.temp.folder}"/>
+		</antcall>
+	</target>
+
+	<target name="copy.src.includes" depends="init">
+	</target>
+
+	<target name="gather.logs" depends="init" if="destination.temp.folder">
+		<mkdir dir="${destination.temp.folder}/com.clarkparsia.pellet_2.3.0.201804141949"/>
+		<copy todir="${destination.temp.folder}/com.clarkparsia.pellet_2.3.0.201804141949" failonerror="false" overwrite="false">
+			<fileset dir="${build.result.folder}">
+				<include name="@dot${logExtension}"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="clean" depends="init" description="Clean the plug-in: com.clarkparsia.pellet of all the zips, jars and logs created.">
+		<delete dir="${build.result.folder}/@dot"/>
+		<delete file="${build.result.folder}/src.zip"/>
+		<delete file="${plugin.destination}/com.clarkparsia.pellet_2.3.0.201804141949.jar"/>
+		<delete file="${plugin.destination}/com.clarkparsia.pellet_2.3.0.201804141949.zip"/>
+		<delete dir="${temp.folder}"/>
+		<delete file="${compilation.problem.marker}" quiet="true"/>
+	</target>
+
+	<target name="refresh" depends="init" if="eclipse.running" description="Refresh this folder.">
+		<eclipse.convertPath fileSystemPath="/Users/vivek/Projects/compling/com.clarkparsia.pellet" property="resourcePath"/>
+		<eclipse.refreshLocal resource="${resourcePath}" depth="infinite"/>
+	</target>
+
+	<target name="zip.plugin" depends="init" description="Create a zip containing all the elements for the plug-in: com.clarkparsia.pellet.">
+		<delete dir="${temp.folder}"/>
+		<mkdir dir="${temp.folder}"/>
+		<antcall target="build.jars"/>
+		<antcall target="build.sources"/>
+		<antcall target="gather.bin.parts">
+			<param name="destination.temp.folder" value="${temp.folder}/"/>
+		</antcall>
+		<antcall target="gather.sources">
+			<param name="destination.temp.folder" value="${temp.folder}/"/>
+		</antcall>
+		<delete>
+			<fileset dir="${temp.folder}">
+				<include name="**/*.bin${logExtension}"/>
+			</fileset>
+		</delete>
+		<zip destfile="${plugin.destination}/com.clarkparsia.pellet_2.3.0.201804141949.zip" basedir="${temp.folder}" filesonly="true" whenempty="skip" update="false"/>
+		<delete dir="${temp.folder}"/>
+	</target>
+
+	<target name="apitools.generation" if="generateAPIDescription">
+		<apitooling.apigeneration  projectName="${projectName}" project="${projectLocation}" binary="${binary.folders}" target="${target.folder}" extramanifests="${extraManifests}" allownonapiproject="${allowNonApiProject}"		/>
+	</target>
+
+</project>

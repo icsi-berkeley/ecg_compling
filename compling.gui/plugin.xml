@@ -149,6 +149,15 @@
             id="compling.gui.grammargui.views.tokenView"
             name="Token Adder">
       </view>
+      
+      <view
+   	        allowMultiple="false"
+   	        category="compling.gui.grammargui.categories.token"
+            class="compling.gui.grammargui.ui.views.MorphView"
+            icon="icons/tokenTest.ico"
+            id="compling.gui.grammargui.views.morphView"
+            name="Morphology Adder">
+      </view>
      
       
       <view

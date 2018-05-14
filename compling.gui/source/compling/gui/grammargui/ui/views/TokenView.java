@@ -9,6 +9,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
@@ -17,6 +18,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -26,6 +28,17 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.jface.layout.TableColumnLayout;
+import org.eclipse.jface.viewers.ColumnWeightData;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
+
+
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.FormText;
@@ -54,7 +67,9 @@ import compling.gui.grammargui.util.Constants.IImageKeys;
 import compling.gui.util.Utils;
 import compling.parser.ParserException;
 import compling.parser.ecgparser.ECGAnalyzer;
+import compling.parser.ecgparser.ECGTokenReader;
 import compling.parser.ecgparser.LCPGrammarWrapper;
+import compling.parser.ecgparser.ECGMorph.MorphEntry;
 import compling.util.fileutil.FileUtils;
 import compling.util.fileutil.TextFileLineIterator;
 
@@ -79,11 +94,12 @@ public class TokenView extends ViewPart {
 	
 	private String modifiedOnt = null;
 	
-	
 	private IAction addToken;
 	private IAction addConstraint;
 	
 	private String parentValue;
+	
+	private TableViewer constraintsTable;
 
 	/** Opens up token file from TOKEN_PATH. */
 	private void openFile() {
@@ -121,6 +137,9 @@ public class TokenView extends ViewPart {
 			token = "";
 			parentCxn = "";
 			constraints.clear();
+			
+			constraintsTable.getTable().removeAll();
+			
 			try {
 				getGrammar().buildTokenAndMorpher();
 			} catch (ParserException e) {
@@ -206,7 +225,6 @@ public class TokenView extends ViewPart {
 	}
 	
 	
-	
 	// Adds VALUE to ontology as a subtype of PARENT. 
 	private void addOntologyItem(String value, String parent, String ontologyFile) {
 		value = value.substring(1, value.length()).trim();
@@ -252,6 +270,14 @@ public class TokenView extends ViewPart {
 					+ "and parent " + parent + ".");
 		}
 	}
+	
+	/** Adds a pair of values to the the constraint table. */
+	private void addTableEntry(Table table, String constraint, String value) {
+		TableItem newItem = new TableItem(table, SWT.NONE);
+		newItem.setText(0, constraint);
+		newItem.setText(1, value);	
+	}
+	/* */
 	
 	/** Checks if CHILD is a subtype of PARENT. */
 	private boolean isSubtype(String child, String parent) {
@@ -316,18 +342,15 @@ public class TokenView extends ViewPart {
 	
 	
 	public void createPartControl(Composite parent) {
-		
-		
-
 		constraints = new ArrayList<String>();
+		
 		prefs =  (AnalyzerPrefs) getGrammar().getPrefs();
 		base = prefs.getBaseDirectory();
 		typeCxns = getTypes("\"*\"");
 		
-
-
 		final FormToolkit toolkit = new FormToolkit(parent.getDisplay());
 		final ScrolledForm form = toolkit.createScrolledForm(parent);
+		
 		form.setText("Token Editor");
 		GridLayout layout = new GridLayout();
 		form.getBody().setLayout(layout);
@@ -335,57 +358,81 @@ public class TokenView extends ViewPart {
 		layout.numColumns = 2;
 		GridData gd = new GridData(SWT.FILL, 1, true, false);
 		gd.horizontalSpan = 1;
-		//gd.horizontalSpan = 2;
 
 		final Label tokenLabel = toolkit.createLabel(form.getBody(), "Enter Lemma:");
 		final Text tokenText = toolkit.createText(form.getBody(), "");
-		tokenText.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		tokenText.setLayoutData(gd);
 		
-	
-
+		
 		final Label parentLabel = toolkit.createLabel(form.getBody(), "Select Parent Type:");
-		//final Combo parentText = new Combo(form.getBody(), SWT.DROP_DOWN);
 		parentText = new Combo(form.getBody(), SWT.DROP_DOWN);
-		//parentText.setItems(typeCxns);
 		setTypes();
-		//toolkit.adapt(parentText);
-		parentText.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		parentText.setLayoutData(gd);
 		parentText.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(parent);
 		
 		final Label ontologyFileLabel = toolkit.createLabel(form.getBody(), "Select Ontology File:");
 		final Combo ontologyFileBox = new Combo(form.getBody(), SWT.DROP_DOWN);
 		ontologyFileBox.setItems(getOntologyFiles());
-		ontologyFileBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		ontologyFileBox.setLayoutData(gd);
 		ontologyFileBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(ontologyFileBox);
 		
 		final Label tokenFileLabel = toolkit.createLabel(form.getBody(), "Select Token File:");
 		final Combo tokenFileBox = new Combo(form.getBody(), SWT.DROP_DOWN);
 		tokenFileBox.setItems(getTokenFiles());
-		tokenFileBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		tokenFileBox.setLayoutData(gd);
 		tokenFileBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(tokenFileBox);
 		
 		final Label constraintSelect = toolkit.createLabel(form.getBody(), "Select Role to Modify:");
 		final Combo constraintBox = new Combo(form.getBody(), SWT.DROP_DOWN);
 		constraintBox.setItems(new String[0]);
-		constraintBox.setLayoutData(gd); //new GridData(GridData.FILL_HORIZONTAL));
+		constraintBox.setLayoutData(gd);
 		constraintBox.setData(toolkit.KEY_DRAW_BORDER, toolkit.TEXT_BORDER);
 		toolkit.paintBordersFor(parent);
 		
-
 		
 		final Label constraintSet = toolkit.createLabel(form.getBody(), "Set Role Item:");
 		final Text constraintText = toolkit.createText(form.getBody(), "");
 		constraintText.setLayoutData(gd);
 		
-		final FormText enteredConstraints = toolkit.createFormText(form.getBody(), false);
-		enteredConstraints.setText("default", false, false);
+		final Label emptyEnterLabel = toolkit.createLabel(form.getBody(), "");
 		String enteredConstraintsStr = "";
 		Button addConstraintButton = toolkit.createButton(form.getBody(), "Enter constraint", SWT.PUSH);
 		addConstraintButton.setToolTipText("Add constraint to list of constraints for this token.");
 		addConstraintButton.setLayoutData(gd);
+		
+		final Label emptyConstraintLabel = toolkit.createLabel(form.getBody(), "");
+		
+		final Composite tableComposite = new Composite(form.getBody(), SWT.NONE);
+		
+		constraintsTable = new TableViewer(tableComposite, SWT.SINGLE | SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.V_SCROLL);
+		constraintsTable.getTable().setLinesVisible(true);
+		constraintsTable.getTable().setHeaderVisible(true);
+		TableViewerColumn roleColumn = new TableViewerColumn(constraintsTable, SWT.NONE);
+		roleColumn.getColumn().setText("Role");
+		roleColumn.getColumn().setResizable(false);
+		TableViewerColumn itemColumn = new TableViewerColumn(constraintsTable, SWT.NONE);
+		itemColumn.getColumn().setText("Item");
+		itemColumn.getColumn().setResizable(false);
+		TableColumnLayout tableLayout = new TableColumnLayout();
+		tableComposite.setLayout(tableLayout);
+
+	    tableLayout.setColumnData(roleColumn.getColumn(), new ColumnWeightData(50));
+	    tableLayout.setColumnData(itemColumn.getColumn(), new ColumnWeightData(50));
+	    GridData tableGd = new GridData(SWT.FILL, SWT.FILL, true, false);
+	    tableGd.verticalSpan = 5;
+	    tableComposite.setLayoutData(tableGd);
+	    
+	    for (int i = 0; i < tableGd.verticalSpan; i++) {
+    			toolkit.createLabel(form.getBody(), "");
+	    }
+	    
+	    Button removeConstraintButton = toolkit.createButton(form.getBody(), "Remove constraint", SWT.PUSH);
+	    removeConstraintButton.setToolTipText("Remove highlighted constraint from list of constraints for this token.");
+	    removeConstraintButton.setLayoutData(gd);
+
 		
 		final Label constraintParentsLabel = toolkit.createLabel(form.getBody(), "Additional ontology parents (optional):");
 		final Text constraintParents = toolkit.createText(form.getBody(), "");
@@ -401,6 +448,10 @@ public class TokenView extends ViewPart {
 		final ArrayList<String> slots = new ArrayList<String>();
 		
 		final ArrayList<String> parents = new ArrayList<String>();
+	
+		Button addTokenButton = toolkit.createButton(form.getBody(), "Add token.", SWT.PUSH);
+		Button reloadTypesButton = toolkit.createButton(form.getBody(), "Reload Type Constructions.", SWT.PUSH);
+		
 		
 		parentText.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
@@ -409,6 +460,10 @@ public class TokenView extends ViewPart {
 				slotsValues.clear();
 				parents.clear();
 				constraints.clear();
+				
+
+				constraintsTable.getTable().removeAll();
+				
 				parentCxn = parentText.getText();
 				try {
 					for (Constraint c : getGrammar().getConstruction(parentCxn).getMeaningBlock().getConstraints()) {
@@ -416,13 +471,7 @@ public class TokenView extends ViewPart {
 							slots.add(c.getArguments().get(0).toString());
 							slotsValues.put(c.getArguments().get(0).toString(), c.getValue());
 						}
-						/*
-						if (labelText.size() > i && c.getOperator().equals("<--")) {
-							labelText.get(i).setText(c.getArguments().get(0).toString());
-							textList.get(i).setText(c.getValue());
-							parents.add(textList.get(i).getText());
-						}
-						*/
+
 					}
 					for (Constraint c : getGrammar().getConstruction(parentCxn).getConstructionalBlock().getConstraints()) {
 						if (c.isAssign()) {
@@ -447,9 +496,9 @@ public class TokenView extends ViewPart {
 				parentValue = slotsValues.get(constraintBox.getText());
 				appMappingText.setText("$");
 			}
-		});		
-
+		});
 		
+
 		ontologyFileBox.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				modifiedOnt = ontologyFileBox.getText();
@@ -462,11 +511,13 @@ public class TokenView extends ViewPart {
 			}
 		});
 
+
 		addConstraintButton.addSelectionListener(new SelectionAdapter() { 
 			public void widgetSelected(SelectionEvent e) {
 				String value = constraintText.getText();
 				String appValue = appMappingText.getText();
 				String inputParents = "";
+				
 				if (!constraintParents.getText().equals("")) {
 					inputParents = constraintParents.getText().replace(",", "");
 					String[] inputParents2 = constraintParents.getText().split(",");
@@ -488,7 +539,9 @@ public class TokenView extends ViewPart {
 							parentValue += " " + inputParents + " shared";
 							addOntologyItem(value, parentValue, modifiedOnt);
 							constraints.add(constraintBox.getText() + " <-- " + value);
-							enteredConstraints.setText(constraintBox.getText() + " <-- " + value, false, false);
+							
+							addTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
+							
 							if (appValue.length() > 1) {
 								writeMappingFile(value, appValue);
 							}
@@ -499,6 +552,9 @@ public class TokenView extends ViewPart {
 					} else {
 						if (!isSubtype(value, parentValue)) {
 							constraints.clear();
+							
+							constraintsTable.getTable().removeAll();
+							
 							constraintText.setText("");
 							String message = "@" + value + "' already exists in Ontology, and is not a subtype of @" + parentValue 
 									+ " . This will cause errors and prevent proper unification of the token's constraints.";
@@ -506,7 +562,9 @@ public class TokenView extends ViewPart {
 							//System.out.println(value + " already exists in Ontology, and is not a subtype of " + parentValue + " .");
 						} else {
 							constraints.add(constraintBox.getText() + " <-- " + value);
-							enteredConstraints.setText(constraintBox.getText() + " <-- " + value, false, false);
+							
+							addTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
+							
 							if (appValue.length() > 1) {
 								writeMappingFile(value, appValue);
 							}
@@ -514,7 +572,9 @@ public class TokenView extends ViewPart {
 					}
 				} else {
 					constraints.add(constraintBox.getText() + " <-- " + value);
-					enteredConstraints.setText(constraintBox.getText() + " <-- " + value, false, false);
+					
+					addTableEntry(constraintsTable.getTable(), constraintBox.getText(), value);
+					
 				}
 				appMappingText.setText("$");
 				constraintText.setText("");
@@ -523,12 +583,36 @@ public class TokenView extends ViewPart {
 		});
 		addConstraintButton.setLayoutData(gd);
 		
-		Button addTokenButton = toolkit.createButton(form.getBody(), "Add token.", SWT.PUSH);
+		
+		removeConstraintButton.addSelectionListener(new SelectionAdapter() { 
+			public void widgetSelected(SelectionEvent e) {
+				Table cTable = constraintsTable.getTable();
+				int selected = cTable.getSelectionIndex();
+				if (selected == -1) {
+					
+
+					String message = "Please select a constraint to remove.";
+					broadcastError(message);
+				} else {
+					cTable.deselectAll();
+					cTable.remove(selected);
+					constraints.remove(selected);
+					
+				}	
+			}
+		});
+		removeConstraintButton.setLayoutData(gd);
+		
 		addTokenButton.addSelectionListener(new SelectionAdapter() { 
 			public void widgetSelected(SelectionEvent e) {
 				token = tokenText.getText();
 				parentCxn = parentText.getText();
-				if (!token.equals("") && !parentCxn.equals("") && constraints.size() > 0) {
+				
+				if (!entryInMorph(token)) {
+					broadcastError("This token definition does not contain a corresponding definition in the morphology. "
+							+ "Please add a morphology entry for this token using the Morphology Adder tool.");
+				}
+				else if (!token.equals("") && !parentCxn.equals("") && constraints.size() > 0) {
 					write(token, parentCxn, constraints);
 					tokenText.setText("");
 					parentText.setText("");
@@ -549,9 +633,8 @@ public class TokenView extends ViewPart {
 			}
 		});
 		addTokenButton.setLayoutData(gd);
-
 		
-		Button reloadTypesButton = toolkit.createButton(form.getBody(), "Reload Type Constructions.", SWT.PUSH);
+
 		reloadTypesButton.setToolTipText("Reload the list of type constructions from a newly checked grammar..");
 		reloadTypesButton.setLayoutData(new GridData(SWT.FILL, 1, false, false));
 		reloadTypesButton.addSelectionListener(new SelectionAdapter() { 
@@ -560,9 +643,48 @@ public class TokenView extends ViewPart {
 				setTypes();
 			}
 		});
-
-		
 	}
+	
+	/* Check if string exists in morphology */
+	private boolean entryInMorph(String entry) {
+		File base = prefs.getBaseDirectory();
+		File ecgmorph_path;
+
+		List<String> morph_paths = prefs.getList(AP.MORPHOLOGY_PATH);
+		for (String path : morph_paths) {
+			ecgmorph_path = new File(base, path);
+			
+			TextFileLineIterator tfli = new TextFileLineIterator(ecgmorph_path);
+			
+			int lineNum = 0;
+									
+			while (tfli.hasNext()) {
+				lineNum++;
+				String line = tfli.next();
+				// Skip blank lines or lines with just a comment
+				if (line.matches("\\s*#.*") || line.matches("\\s*")) {
+					continue;
+				}
+				String splitline[] = line.split("\\s+");
+				if (splitline.length < 3) {
+					throw new ParserException("Improperly formatted entry in morph file " + ecgmorph_path + ", line " + lineNum);
+				}
+				
+				if (entry.equals(splitline[0])) {
+					return true;
+				}
+				
+				for (int ii = 1; ii+1 < splitline.length; ii+=2) {
+					if (entry.equals(splitline[ii])) {
+						return true;
+					}
+				}
+			}
+		}
+		
+		return false;
+	}
+	
 
 	/**
 	 * Passing the focus request to the viewer's control.

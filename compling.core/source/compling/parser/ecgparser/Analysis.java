@@ -69,6 +69,8 @@ public class Analysis implements Cloneable {
   private SlotChain gapFillerChain = null;
   private List<CxnalSpan> gappedSpans = new LinkedList<CxnalSpan>();
   private boolean foundGap = false;
+  
+  protected String text = null; // Used by multiword tokens to keep track of the actual text used for the parse
 
   protected static Logger logger = Logger.getLogger(Analysis.class.getName());
 
@@ -775,7 +777,13 @@ public boolean hasGapFiller() {
     }
   }
   
-
+  public void setText(String txt) {
+	  text = txt;
+  }
+  
+  public String getText() {
+	  return text;
+  }
 
   public static void main(String[] args) throws IOException, TypeSystemException {
     String ontFile = null;
